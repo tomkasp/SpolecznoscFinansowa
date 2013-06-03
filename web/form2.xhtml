@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/formTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup></h:form>
+    </ui:define>
+
+    <ui:define name="info1">
+        Informacje o Kredycie
+    </ui:define>
+
+    <ui:define name="personal">
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nazwa Banku" styleClass="absoluteR" /><h:inputText/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Umowy Posrednictwa" styleClass="absoluteR" /><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Kwota Kredytu Brutto" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Prowizja Banku w Procentach" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="prowizja Banku w PLN" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Ubezpieczenie w PLN" styleClass="absoluteR" /><h:inputText/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Kaszta w PLN" styleClass="absoluteR" /><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Swot w Procentach" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Swot w PLN" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Kwota Konsolidacji" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Okres Kredytowania w Mc" styleClass="absoluteR" /><h:inputText/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Rata w PLN" styleClass="absoluteR" /><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Oprocentowanie w Procentach" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Wolna Gotowka" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Miejsce Podpisania Dokumentow" styleClass="absoluteR"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Mozliwego Uruchomentow" styleClass="absoluteR" /><h:inputText/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Dodania Kredytu" styleClass="absoluteR" /><h:inputText /></h:panelGroup>
+        <h:panelGroup styleClass="cent"><h:commandButton value="Submit"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
+    </ui:define>    
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>
