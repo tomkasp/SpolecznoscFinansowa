@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/formTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="content">
+        Hello world
+    </ui:define>
+    <ui:define name="personal">
+        <h:panelGroup style="display: block" styleClass="centmain borderlines"><h:outputLabel value="Name" styleClass="relativeR" /><h:inputText styleClass="relativeL" /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain borderlines"><h:outputLabel value="Surname" styleClass="absoluteR borderlines" /><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain borderlines"><h:outputLabel value="Age" styleClass="absoluteR borderlines"/><h:inputText /></h:panelGroup>
+        <h:panelGroup style="display: block">Sex<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Others<h:inputText></h:inputText></h:panelGroup>        
+    </ui:define>
+    <ui:define name="address">
+        <h:panelGroup style="display: block">Name<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sur<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Age<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sex<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Others<h:inputText></h:inputText></h:panelGroup>
+    </ui:define>
+    <ui:define name="business">
+        <h:panelGroup style="display: block">Name<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sur<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Age<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sex<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Others<h:inputText></h:inputText></h:panelGroup>
+    </ui:define>
+    <ui:define name="others">
+        <h:panelGroup style="display: block">Name<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sur<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Age<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Sex<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup style="display: block">Others<h:inputText></h:inputText></h:panelGroup>
+        <h:panelGroup styleClass="cent"><h:commandButton value="Submit"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>

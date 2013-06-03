@@ -1,0 +1,35 @@
+/* 
+    Document   : cssForm
+    Created on : 2013-05-29, 14:08:54
+    Author     : EI GLOBAL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.borderlines{border: 2px solid gold;}
+.vmargin{
+    background-color: white;
+    margin: 10px; width: 796px; margin-left: auto; margin-right: auto;
+}
+.cent{
+    position: relative; left: 40%;
+}
+.topimage{background:url("../../resources/photo/zm1.jpg") no-repeat; width: auto; height: 90px;
+         position: relative;
+}
+.relativeR{
+    position: relative; right: 0px; margin-left: auto; margin-right: 60%;
+}
+.relativeL{
+    position: relative; left: 0px; text-align: left; margin-left: 0px; margin-right: auto;
+}
+.centmain{
+    width: 250px; margin-left: auto; margin-right: auto;
+}
+.absoluteR{
+    position: absolute; right: 0px; left: auto; margin-right: 60%; text-align: right;
+}
+
