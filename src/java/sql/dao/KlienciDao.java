@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
+import sql.entity.Kredyty;
 import sql.util.NewHibernateUtil;
 
 public class KlienciDao {

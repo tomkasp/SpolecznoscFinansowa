@@ -16,20 +16,19 @@ public class NewMain {
      */
     public static void main(String[] args) {
         
-        GeneratorPDF.generuj(5);
-        KlienciDao kdao=new KlienciDao();
-        kdao.readKlient(5);
-        
+        GeneratorPDF.generuj(1);
+        //KlienciDao kdao=new KlienciDao();
+        //kdao.readKlient(5);
         
         
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
 //        session.beginTransaction().begin();
 //        
-////        Klienci k=new Klienci();
-////        k.setImie("test1");
-////        session.save(k);
+//        Klienci k=new Klienci();
+//        k.setImie("test1");
+//        session.save(k);
 //        
-////        session.load(Klienci.class,5);
+//        session.load(Klienci.class,5);
 //        
 //        session.getTransaction().commit();
 //        session.close();
