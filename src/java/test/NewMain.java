@@ -1,6 +1,8 @@
 package test;
 
-import generatorPDF.core.GeneratorPDF;
+import java.util.List;
+import sql.dao.KlienciDao;
+import sql.entity.Klienci;
 
 /**
  *
@@ -13,8 +15,17 @@ public class NewMain {
      */
     public static void main(String[] args) {
         
-        GeneratorPDF.generuj(1);
-        //KlienciDao kdao=new KlienciDao();
+       //GeneratorPDF.generuj(1);
+        
+        
+        
+        
+        KlienciDao kdao=new KlienciDao();
+        List<Klienci> l = kdao.getKlientList();
+        System.out.println("P: "+ l.get(0).getImie() );
+        
+       // System.out.println("QQQQQQQQQQ");
+        
         //kdao.readKlient(5);
         
         

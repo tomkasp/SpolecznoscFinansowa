@@ -1,10 +1,9 @@
 package sql.dao;
 
 import java.util.List;
-import javax.persistence.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
-import sql.entity.Kredyty;
 import sql.util.NewHibernateUtil;
 
 public class KlienciDao {
@@ -69,7 +68,7 @@ public class KlienciDao {
        
         Query q=(Query) session.createQuery("from Klienci");
         List<Klienci> list;
-        list = (List<Klienci>) q.getResultList();
+        list = (List<Klienci>) q.list();
         
         session.getTransaction().commit();
         

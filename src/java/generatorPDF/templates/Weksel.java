@@ -12,7 +12,6 @@ import generatorPDF.core.GeneratorPDF;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
@@ -37,11 +36,20 @@ public class Weksel  {
                 content.beginText();
                 content.setFontAndSize(bf, 12);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 30, 740, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 30, 725, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta() , 30, 710, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: "+klient.getPesel() , 30, 695, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 180, 760, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 360, 760, 0);
                 
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 80, 660, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 260, 660, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 460, 660, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 80, 630, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 180, 385, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 180, 340, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()+" "+klient.getNrDowodu(), 180, 295, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 360, 120, 0);
                 
                 content.endText();   
         } catch (DocumentException ex) {
