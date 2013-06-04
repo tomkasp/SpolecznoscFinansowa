@@ -18,16 +18,14 @@ public class NewMain {
         KlienciDao kdao=new KlienciDao();
         List<Klienci> l = kdao.getKlientList();
         System.out.println("P: "+ l.get(0).getImie() );
-        
-        
+    
         //KlienciDao kdao=new KlienciDao();
         //List<Klienci> l = kdao.getKlientList();
-        //System.out.println("P: "+ l.get(0).getImie() );
+        //System.out.println("P: "+ l.get(0).getImie() );     
         
-       // System.out.println("QQQQQQQQQQ");
+        //System.out.println("QQQQQQQQQQ");
         
         //kdao.readKlient(5);
-        
         
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
 //        session.beginTransaction().begin();

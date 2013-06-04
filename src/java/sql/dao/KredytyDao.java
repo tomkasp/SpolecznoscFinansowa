@@ -16,7 +16,8 @@ public class KredytyDao {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
-            session.save(klient);
+            kredyt.setKlienci(klient);
+            session.save(kredyt);
 
             session.getTransaction().commit();
 
@@ -37,7 +38,7 @@ public class KredytyDao {
         return kredyt;
     }
     
-        public void updateClient(Kredyty kredyt) {
+        public void updateKredyty(Kredyty kredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
@@ -48,7 +49,7 @@ public class KredytyDao {
         session.close();
     }
     
-    public void deleteClient(Integer idKredyt) {
+    public void deleteKredyty(Integer idKredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
@@ -66,7 +67,7 @@ public class KredytyDao {
     }
    
     @SuppressWarnings("unchecked")
-    public List<Kredyty> getAllClients() {
+    public List<Kredyty> getAllKredyty() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
