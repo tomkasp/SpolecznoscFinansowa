@@ -20,6 +20,10 @@ root {
    border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
    margin-bottom: 0px;
 }
+.borderdesign2{
+   border-bottom: 1px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
+   margin-bottom: 0px;
+}
 .borderbeau{
     border-bottom: 3px solid #3333ff; border-left: 1px solid #3399ff; border-right: 3px solid #3333ff; border-top: 1px solid #3399ff;
     margin: 10px;
@@ -31,7 +35,7 @@ root {
     width: 800px; margin-left: auto; margin-right: auto;
 }
 .cent{
-    position: relative; left: 40%;
+    position: relative; left: 50%;
 }
 .topimage{
     background:url("../../resources/photo/zm1.jpg") no-repeat; width: auto; height: 90px;

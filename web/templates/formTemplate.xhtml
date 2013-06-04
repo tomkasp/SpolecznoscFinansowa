@@ -18,22 +18,26 @@
             <div class="centmain-img"><ui:insert name="top">Poprzedni || Następny</ui:insert></div>
         </div>
 
-        <div class="borderlines bodydesign centmain-img borderdesign">
+        <div class="borderlines bodydesign centmain-img borderdesign2">
         <!--<div id="content" class="center_content">-->
             <!--<ui:insert name="content">Content</ui:insert>-->
             <h:form>
-                <div class="vmargin borderbeau"><h3><ui:insert name="info1">Dane podstawowe</ui:insert></h3><ui:insert name="personal"></ui:insert><br /></div>
-                <div class="vmargin borderbeau"><h3><ui:insert name="info2"></ui:insert></h3><ui:insert name="address"></ui:insert></div>
-                <div class="vmargin"><ui:insert name="business"></ui:insert></div>
-                <div class="vmargin"><ui:insert name="others"></ui:insert></div>
+                <div class="vmargin borderbeau"><ui:insert name="info1"><br/><h:panelGroup style="font-size: larger; font-weight: bold">Dane podstawowe</h:panelGroup></ui:insert><ui:insert name="personal"></ui:insert><br /></div>
+                <ui:insert name="address"></ui:insert>
+                <ui:insert name="business"></ui:insert>
+                <ui:insert name="others"></ui:insert>
+                <!--<div class="vmargin borderbeau"><h3><ui:insert name="info2"></ui:insert></h3><ui:insert name="address"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="address"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="business"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="others"></ui:insert></div>-->
                 <br />
                 <br />
                 <br />
             </h:form>
         </div>
 
-        <div class="centmain-img">
-            <ui:insert name="bottom">Bottom</ui:insert>
+        <div class="centmain-img borderdesign" style=" background-color: #33ccff">
+            <ui:insert name="bottom"></ui:insert>
         </div>
 
     </h:body>
