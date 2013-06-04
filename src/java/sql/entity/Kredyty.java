@@ -1,15 +1,15 @@
 package sql.entity;
-// Generated 2013-06-03 09:57:46 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-03 12:17:33 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 public class Kredyty  implements java.io.Serializable {
 
 
-     private KredytyId id;
+     private Integer idkredyty;
      private Klienci klienci;
      private String nazwaBanku;
      private String nrUmowyPosrednictwa;
@@ -50,12 +50,10 @@ public class Kredyty  implements java.io.Serializable {
     }
 
 	
-    public Kredyty(KredytyId id, Klienci klienci) {
-        this.id = id;
+    public Kredyty(Klienci klienci) {
         this.klienci = klienci;
     }
-    public Kredyty(KredytyId id, Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu) {
-       this.id = id;
+    public Kredyty(Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu) {
        this.klienci = klienci;
        this.nazwaBanku = nazwaBanku;
        this.nrUmowyPosrednictwa = nrUmowyPosrednictwa;
@@ -76,20 +74,18 @@ public class Kredyty  implements java.io.Serializable {
        this.dataDodaniaKredytu = dataDodaniaKredytu;
     }
    
-     @EmbeddedId
+     @Id @GeneratedValue(strategy=IDENTITY)
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="idkredyty", column=@Column(name="idkredyty", nullable=false) ), 
-        @AttributeOverride(name="klienciIdKlienci", column=@Column(name="klienci_idKlienci", nullable=false) ) } )
-    public KredytyId getId() {
-        return this.id;
+    @Column(name="idkredyty", unique=true, nullable=false)
+    public Integer getIdkredyty() {
+        return this.idkredyty;
     }
     
-    public void setId(KredytyId id) {
-        this.id = id;
+    public void setIdkredyty(Integer idkredyty) {
+        this.idkredyty = idkredyty;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="klienci_idKlienci", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="klienci_idKlienci", nullable=false)
     public Klienci getKlienci() {
         return this.klienci;
     }

@@ -24,15 +24,17 @@ public class KredytyDao {
     }
     
     
-    public void readClient(Integer idKredyt) {
+    public Kredyty readKredyty(Integer idKredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        session.load(idKredyt.toString(),Kredyty.class);
+        Kredyty kredyt=(Kredyty) session.load(Kredyty.class,idKredyt);
         
         session.getTransaction().commit();
 
-        session.close();
+        //session.close();
+        
+        return kredyt;
     }
     
         public void updateClient(Kredyty kredyt) {
