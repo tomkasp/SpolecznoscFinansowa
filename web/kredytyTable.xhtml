@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/formTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="top">
+        <h:form><h:panelGroup><h:commandLink action="form2">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="klienciTable">Następny</h:commandLink></h:panelGroup>
+            <h:panelGroup  class="absoluteRE"><h:commandLink action="index">Home |</h:commandLink><h:commandLink action="klienciTable"> Table1 |</h:commandLink>
+                <h:commandLink action="kredytyTable"> Table2 </h:commandLink>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="personal">
+        <h:panelGroup style=" font-weight: bold; font-size: larger">Table</h:panelGroup>
+        <h:panelGroup style=" display: block">
+            <h:dataTable styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                <h:column><f:facet name="header">Imie</f:facet></h:column>
+                <h:column><f:facet name="header">Nazwisko</f:facet></h:column>
+                <h:column><f:facet name="header">Pesel</f:facet></h:column>
+                <h:column><f:facet name="header">Seria Dowodu</f:facet></h:column>
+                <h:column><f:facet name="header">Nr Dowodu</f:facet></h:column>
+                <h:column><f:facet name="header">Miejscowosc</f:facet></h:column>
+                <h:column><f:facet name="header">Kodpocztowy</f:facet></h:column>
+                <h:column><f:facet name="header">Ulica</f:facet></h:column>
+                <h:column><f:facet name="header">Nr Domu</f:facet></h:column>
+                <h:column><f:facet name="header">Nr Mieszkania</f:facet></h:column>
+                <h:column><f:facet name="header">Poczta</f:facet></h:column>
+            </h:dataTable>
+        </h:panelGroup>
+    </ui:define>
+
+    <ui:define name="bottom">
+        Help
+    </ui:define>
+
+</ui:composition>

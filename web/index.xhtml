@@ -6,7 +6,9 @@
 
     <ui:define name="top">
         <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup>
-            <h:panelGroup  class="absoluteRE"><h:commandLink action="klienciTable">Table</h:commandLink></h:panelGroup>
+            <h:panelGroup  class="absoluteRE"><h:commandLink action="index">Home |</h:commandLink><h:commandLink action="klienciTable"> Table1 |</h:commandLink>
+                <h:commandLink action="kredytyTable"> Table2 </h:commandLink>
+            </h:panelGroup>
         </h:form>
     </ui:define>
 
@@ -31,6 +33,7 @@
             <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.poczta}" /></h:panelGroup>
         <h:panelGroup styleClass="cent"><h:commandButton value="Submit" action="#{klienciMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
         </h:panelGroup>
+        <h:panelGroup style=" font-weight: bold; font-size: larger; color: red" styleClass="cent">#{klienciMB.datanow}</h:panelGroup>
     </ui:define>
     <ui:define name="business">
         
