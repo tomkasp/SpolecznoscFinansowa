@@ -1,0 +1,68 @@
+/* 
+    Document   : cssForm
+    Created on : 2013-05-29, 14:08:54
+    Author     : EI GLOBAL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.bodydesign{
+    width: 1200px;
+}
+.borderlines{
+    border: 2px solid gold;
+    margin: 10px;
+}
+.borderdesign{
+   border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
+   margin-bottom: 0px;
+}
+.borderdesign2{
+   border-bottom: 1px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
+   margin-bottom: 0px;
+}
+.borderbeau{
+    border-bottom: 3px solid #3333ff; border-left: 1px solid #3399ff; border-right: 3px solid #3333ff; border-top: 1px solid #3399ff;
+    margin: 10px;
+}
+.vmargin{
+    background-color: white;
+    /*margin: 10px;*/
+    /*width: 796px; margin-left: auto; margin-right: auto;*/
+    width: 800px; margin-left: auto; margin-right: auto;
+}
+.cent{
+    position: relative; left: 50%;
+}
+.topimage{
+    background:url("../../resources/photo/zm1.jpg") no-repeat; width: auto; height: 90px;
+    position: relative;
+}
+.relativeR{
+    position: relative; right: 0px; margin-left: auto; margin-right: 30%;
+}
+.relativeL{
+    position: relative; left: 150px; margin-right: auto;
+}
+.centmain{
+    width: 250px; margin-left: auto; margin-right: auto; 
+    /*margin: 10px;*/ 
+    /*border: 2px solid gold;*/
+}
+.centmain-img{
+    width: 1200px; margin-right: auto; margin-left: auto;
+}
+.absoluteR{
+    position: absolute; right: 0px; left: auto; margin-right: 60%; text-align: right;
+}
+.absoluteL{
+    position: absolute; left: 0px; right: auto; margin-left: 60%;
+}
+.floatR{
+    float: right;
+}
+
+
