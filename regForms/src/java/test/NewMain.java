@@ -19,7 +19,8 @@ public class NewMain {
         GeneratorPDF.generuj(1);
         //KlienciDao kdao=new KlienciDao();
         //kdao.readKlient(5);
-        
+        //bbbbhbbla
+        System.out.println("h");
         
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
 //        session.beginTransaction().begin();
