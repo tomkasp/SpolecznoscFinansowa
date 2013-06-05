@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="resources/css/cssForm.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top"><div class="topimage centmain-img"></div><br />
+            <div class="centmain-img"><ui:insert name="top">Poprzedni || Następny</ui:insert></div>
+        </div>
+
+        <div class="borderlines bodydesign centmain-img borderdesign2">
+        <!--<div id="content" class="center_content">-->
+            <!--<ui:insert name="content">Content</ui:insert>-->
+            <h:form>
+                <div class="vmargin borderbeau"><ui:insert name="info1"><br/><h:panelGroup style="font-size: larger; font-weight: bold">Dane podstawowe</h:panelGroup></ui:insert><ui:insert name="personal"></ui:insert><br /></div>
+                <ui:insert name="address"></ui:insert>
+                <ui:insert name="business"></ui:insert>
+                <ui:insert name="others"></ui:insert>
+                <!--<div class="vmargin borderbeau"><h3><ui:insert name="info2"></ui:insert></h3><ui:insert name="address"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="address"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="business"></ui:insert></div>-->
+                <!--<div class="vmargin"><ui:insert name="others"></ui:insert></div>-->
+                <br />
+                <br />
+                <br />
+            </h:form>
+        </div>
+
+        <div class="centmain-img borderdesign" style=" background-color: #33ccff">
+            <ui:insert name="bottom"></ui:insert>
+        </div>
+
+    </h:body>
+
+</html>
