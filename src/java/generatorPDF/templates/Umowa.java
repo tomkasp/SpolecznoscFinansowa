@@ -35,34 +35,16 @@ public class Umowa  {
             
                 PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
                 content.beginText();
-                content.setFontAndSize(bf, 10);
+
+                content.setFontAndSize(bf, 12);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 80, 783, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 30, 740, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 30, 725, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta() , 30, 710, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: "+klient.getPesel() , 30, 695, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 80, 773, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 380, 773, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPoczta()  , 80, 761, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 300, 761, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()  , 210, 750, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu()  , 280, 750, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 400, 750, 0);
-              
                 
                 content.endText();   
-                
-                
-                content = pdfStamper.getOverContent(2);//pierwsza stronka
-                content.beginText();
-                content.setFontAndSize(bf, 10);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 200, 794, 0);
-                
-                content.endText();   
-                
-                
-                
         } catch (DocumentException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

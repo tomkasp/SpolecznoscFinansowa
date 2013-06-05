@@ -5,7 +5,10 @@
                 xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="top">
-        <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup></h:form>
+
+        <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup>
+            <h:panelGroup  class="absoluteRE"><h:commandLink action="klienciTable">Table</h:commandLink></h:panelGroup>
+        </h:form>
     </ui:define>
 
     <ui:define name="content">

@@ -1,7 +1,8 @@
 package sql.dao;
 
 import java.util.List;
-import org.hibernate.Query;
+
+import javax.persistence.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.util.NewHibernateUtil;
@@ -68,7 +69,7 @@ public class KlienciDao {
        
         Query q=(Query) session.createQuery("from Klienci");
         List<Klienci> list;
-        list = (List<Klienci>) q.list();
+        list = (List<Klienci>) q.getResultList();
         
         session.getTransaction().commit();
         

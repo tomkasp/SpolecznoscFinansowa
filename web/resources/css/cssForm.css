@@ -58,6 +58,12 @@ root {
 .absoluteR{
     position: absolute; right: 0px; left: auto; margin-right: 60%; text-align: right;
 }
+
+.absoluteRE{
+    position: absolute; right: 21%; left: auto; 
+    /*margin-right: 100%; text-align: right;*/
+}
+
 .absoluteL{
     position: absolute; left: 0px; right: auto; margin-left: 60%;
 }

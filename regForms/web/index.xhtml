@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./templates/formTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup>
+            <h:panelGroup  class="absoluteRE"><h:commandLink action="klienciTable">Table</h:commandLink></h:panelGroup>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+    </ui:define>
+    <ui:define name="personal">
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText value="#{klienciMB.klient.imie}"/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText value="#{klienciMB.klient.nazwisko}"/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Pesel" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.pesel}" /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.seriaDowodu}" /></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.nrDowodu}" /></h:panelGroup>
+    </ui:define>
+    <ui:define name="address">
+        <h:panelGroup style="display: block" styleClass="borderbeau vmargin">
+            <h:panelGroup style=" font-weight: bold; font-size: larger">Adres</h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Miejscowosc" styleClass="absoluteR" /><h:inputText value="#{klienciMB.klient.miejscowosc}" /></h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Kodpocztowy" styleClass="absoluteR" /><h:inputText value="#{klienciMB.klient.kodPocztowy}" /></h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Ulica" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.ulica}" /></h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Domu" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.nrDomu}" /></h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Mieszkania" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.nrMieszkania}" /></h:panelGroup>
+            <!--<h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Dodania Klienta" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.dataDodaniaKlienta}" /></h:panelGroup>-->
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText value="#{klienciMB.klient.poczta}" /></h:panelGroup>
+        <h:panelGroup styleClass="cent"><h:commandButton value="Submit" action="#{klienciMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="business">
+        
+    </ui:define>
+    <ui:define name="others">
+        
+    </ui:define>
+
+    <ui:define name="bottom">
+        <h:panelGroup style=" color: white; font-weight: bold" styleClass="cent">Help</h:panelGroup>
+    </ui:define>
+
+</ui:composition>

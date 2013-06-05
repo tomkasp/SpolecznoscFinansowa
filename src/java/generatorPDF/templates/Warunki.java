@@ -35,23 +35,14 @@ public class Warunki  {
             
                 PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
                 content.beginText();
+
+                content.setFontAndSize(bf, 12);
                 
-                content.setFontAndSize(bf, 11);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 275 , 704 , 0);
-                
-                content.setFontAndSize(bf, 14);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 270 , 660 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKonsolidacji().toString() , 270 , 625 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getWolnaGotowka().toString() , 270 , 590 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getRataWpln().toString() , 270 , 555 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getOkresKredytowaniaWmc().toString() , 270 , 520 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKosztaWpln().toString() , 270 , 485 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getProwizjaBankuWpln().toString() , 270 , 450 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getUbezpieczenieWpln().toString() , 270 , 415 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 270 , 380 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getOprocentowanieWprocentach().toString() , 270 , 345 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 270 , 310 , 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 30, 740, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 30, 725, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta() , 30, 710, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: "+klient.getPesel() , 30, 695, 0);
+
                 
                 
                 content.endText();   

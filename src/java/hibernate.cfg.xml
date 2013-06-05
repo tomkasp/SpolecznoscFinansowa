@@ -9,7 +9,10 @@
     <property name="hibernate.connection.password"/>
     <mapping class="sql.entity.Kredyty"/>
     <mapping class="sql.entity.Klienci"/>
+<<<<<<< HEAD
     <mapping class="sql.entity.Kredyty"/>
     <mapping class="sql.entity.Klienci"/>
+=======
+>>>>>>> branch 'System4(2)' of https://github.com/madejson/System4.git
   </session-factory>
 </hibernate-configuration>

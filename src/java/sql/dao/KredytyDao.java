@@ -1,7 +1,7 @@
 package sql.dao;
 
 import java.util.List;
-import org.hibernate.Query;
+import javax.persistence.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
@@ -16,8 +16,7 @@ public class KredytyDao {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
-            kredyt.setKlienci(klient);
-            session.save(kredyt);
+            session.save(klient);
 
             session.getTransaction().commit();
 
@@ -38,7 +37,7 @@ public class KredytyDao {
         return kredyt;
     }
     
-        public void updateKredyty(Kredyty kredyt) {
+        public void updateClient(Kredyty kredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
@@ -49,7 +48,7 @@ public class KredytyDao {
         session.close();
     }
     
-    public void deleteKredyty(Integer idKredyt) {
+    public void deleteClient(Integer idKredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
@@ -67,13 +66,13 @@ public class KredytyDao {
     }
    
     @SuppressWarnings("unchecked")
-    public List<Kredyty> getAllKredyty() {
+    public List<Kredyty> getAllClients() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Query q=(Query) session.createQuery("from Kredyty");
         List<Kredyty> list;
-        list = (List<Kredyty>) q.list();
+        list = (List<Kredyty>) q.getResultList();
         
         session.getTransaction().commit();
         

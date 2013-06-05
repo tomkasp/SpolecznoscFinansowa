@@ -26,7 +26,7 @@ public class NewMain {
         System.out.println("QQQQQQQQQQ");
         
         //kdao.readKlient(5);
-        
+
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
 //        session.beginTransaction().begin();
 //        
