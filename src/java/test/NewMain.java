@@ -15,7 +15,7 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) { 
-       GeneratorPDF.generuj(1);
+       //GeneratorPDF.generuj(1);
         KlienciDao kdao=new KlienciDao();
         List<Klienci> l = kdao.getKlientList();
         System.out.println("P: "+ l.get(0).getImie() );
@@ -24,7 +24,7 @@ public class NewMain {
         //List<Klienci> l = kdao.getKlientList();
         //System.out.println("P: "+ l.get(0).getImie() );     
         
-        System.out.println("AKTUALNA");
+        System.out.println("dupa");
         
         //kdao.readKlient(5);
         
