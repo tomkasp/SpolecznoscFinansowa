@@ -19,7 +19,15 @@ import sql.entity.Klienci;
 @SessionScoped
 //@RequestScoped
 public class KlienciMB {
-    private static int count = 0; int datanow;
+    private int count = 0; String datanow;
+
+    public String getDatanow() {
+        return datanow;
+    }
+
+    public void setDatanow(String datanow) {
+        this.datanow = datanow;
+    }
     private String hello;
 
     public String getHello() {
@@ -39,6 +47,10 @@ public class KlienciMB {
     
     public void submit(){
         kdao.createKlient(klient);
+        count = 1;
+        if(count == 1){
+            datanow = "Hello "+this.klient.getImie()+", one record created.";
+        }
     }
     
     public void callmeklienci(){
@@ -60,7 +72,7 @@ public class KlienciMB {
     } 
 
     public List<Klienci> getKlientList() {
-        return (List<Klienci>) kdao.getKlientList();
+        return kdao.getKlientList();
     }
 
     public void setKlientList(List<Klienci> KlientList) {

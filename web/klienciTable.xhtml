@@ -7,29 +7,31 @@
 
     <ui:define name="top">
         <h:form><h:panelGroup><h:commandLink action="form2">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="klienciTable">Następny</h:commandLink></h:panelGroup>
-            <h:panelGroup  styleClass="absoluteRE"><h:commandLink action="klienciTable">Table</h:commandLink></h:panelGroup>
+            <h:panelGroup  class="absoluteRE"><h:commandLink action="index">Home |</h:commandLink><h:commandLink action="klienciTable"> Table1 |</h:commandLink>
+                <h:commandLink action="kredytyTable"> Table2 |</h:commandLink>
+            </h:panelGroup>
         </h:form>
     </ui:define>
 
     <ui:define name="personal">
         <h:panelGroup style=" font-weight: bold; font-size: larger">Table</h:panelGroup>
-        <h:panelGroup style=" display: block"><h:commandButton value="View Klienci" action="#{klienciMB.hello()}" /></h:panelGroup>
+        <!--<h:panelGroup style=" display: block"><h:commandButton value="View Klienci" action="#{klienciMB.hello()}" /></h:panelGroup>-->
         <h:panelGroup style=" display: block">
-            <h:dataTable value="#{klienciMB.klient}" var="klientdata">
-                <h:column><f:facet name="Header">Imie</f:facet>#{klientdata.imie}</h:column>
-                <h:column><f:facet name="Header">Nazwisko</f:facet>#{klientdata.nazwisko}</h:column>
-                <h:column><f:facet name="Header">Pesel</f:facet>#{klientdata.pesel}</h:column>
-                <h:column><f:facet name="Header">Seria Dowodu</f:facet>#{klientdata.seriaDowodu}</h:column>
-                <h:column><f:facet name="Header">Nr Dowodu</f:facet>#{klientdata.nrDowodu}</h:column>
-                <h:column><f:facet name="Header">Miejscowosc</f:facet>#{klientdata.miejscowosc}</h:column>
-                <h:column><f:facet name="Header">Kodpocztowy</f:facet>#{klientdata.kodPocztowy}</h:column>
-                <h:column><f:facet name="Header">Ulica</f:facet>#{klientdata.ulica}</h:column>
-                <h:column><f:facet name="Header">Nr Domu</f:facet>#{klientdata.nrDomu}</h:column>
-                <h:column><f:facet name="Header">Nr Mieszkania</f:facet>#{klientdata.nrMieszkania}</h:column>
-                <h:column><f:facet name="Header">Poczta</f:facet>#{klientdata.poczta}</h:column>
+            <h:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                <h:column><f:facet name="header">Imie</f:facet>#{data.imie}</h:column>
+                <h:column><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</h:column>
+                <h:column><f:facet name="header">Pesel</f:facet>#{data.pesel}</h:column>
+                <h:column><f:facet name="header">Seria Dowodu</f:facet>#{data.seriaDowodu}</h:column>
+                <h:column><f:facet name="header">Nr Dowodu</f:facet>#{data.nrDowodu}</h:column>
+                <h:column><f:facet name="header">Miejscowosc</f:facet>#{data.miejscowosc}</h:column>
+                <h:column><f:facet name="header">Kodpocztowy</f:facet>#{data.kodPocztowy}</h:column>
+                <h:column><f:facet name="header">Ulica</f:facet>#{data.ulica}</h:column>
+                <h:column><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu}</h:column>
+                <h:column><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania}</h:column>
+                <h:column><f:facet name="header">Poczta</f:facet>#{data.poczta}</h:column>
+                <h:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" /></h:column>
             </h:dataTable>
         </h:panelGroup>
-        <h:panelGroup style="font-weight: bold; font-size: x-large">#{klienciMB.hello}</h:panelGroup>
     </ui:define>
 
     <ui:define name="bottom">
