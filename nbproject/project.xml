@@ -19,7 +19,7 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-<<<<<<< HEAD
+
                     <file>${libs.IText.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -29,13 +29,7 @@
                 </library>
                 <library dirs="200">
                     <file>${libs.jpa20-persistence.classpath}</file>
-=======
-                    <file>${libs.jpa20-persistence.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${libs.IText.classpath}</file>
->>>>>>> branch 'System4(2)' of https://github.com/madejson/System4.git
+
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
