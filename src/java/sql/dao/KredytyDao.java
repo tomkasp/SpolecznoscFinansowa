@@ -81,4 +81,19 @@ public class KredytyDao {
         return list;
     }
     
+    
+    public List<Kredyty> getKredytyOneKlient(int idKlienta) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+        Query q=(Query) session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
+        List<Kredyty> list;
+        list = (List<Kredyty>) q.list();
+        
+        session.getTransaction().commit();
+        
+        session.close();
+        return list;
+    }
+    
 }

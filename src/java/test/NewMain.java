@@ -1,9 +1,8 @@
 package test;
 
-import generatorPDF.core.GeneratorPDF;
 import java.util.List;
-import sql.dao.KlienciDao;
-import sql.entity.Klienci;
+import sql.dao.KredytyDao;
+import sql.entity.Kredyty;
 
 /**
  *
@@ -16,18 +15,23 @@ public class NewMain {
      */
     public static void main(String[] args) { 
        //GeneratorPDF.generuj(1);
-        KlienciDao kdao=new KlienciDao();
-        List<Klienci> l = kdao.getKlientList();
-        System.out.println("P: "+ l.get(0).getImie() );
+        
+//        KlienciDao kdao=new KlienciDao();
+//        List<Klienci> l = kdao.getKlientList();
+//        System.out.println("P: "+ l.get(0).getImie() );
     
+        KredytyDao kredytDao=new KredytyDao();
+         List<Kredyty> l = kredytDao.getKredytyOneKlient(5);
+        System.out.println("P: "+ l.get(0).getNrUmowyPosrednictwa() );
+        
         //KlienciDao kdao=new KlienciDao();
         //List<Klienci> l = kdao.getKlientList();
         //System.out.println("P: "+ l.get(0).getImie() );     
         
-        System.out.println("dupa");
-        
-        //kdao.readKlient(5);
-        
+        System.out.println("all is OK ;) ");
+//        
+//        kdao.readKlient(5);
+//        
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
 //        session.beginTransaction().begin();
 //        
@@ -39,7 +43,7 @@ public class NewMain {
 //        
 //        session.getTransaction().commit();
 //        session.close();
-        
+//        
     }
     
 }
