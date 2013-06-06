@@ -4,8 +4,12 @@
  */
 package MBeans;
 
+import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
@@ -15,11 +19,27 @@ import sql.entity.Kredyty;
  * @author EI GLOBAL
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class KredytyMB {
 
     Kredyty kredyty = new Kredyty();
     Klienci klienci2 = new Klienci();
+    KredytyDao kredytydeo2 = new KredytyDao();
+    List<Kredyty> kredytylist;
+    Date datenow = new Date();
+
+    public List<Kredyty> getKredytylist() {
+        return kredytylist;
+    }
+    public List<Kredyty> getKredytylists(int datax) {
+        
+        return kredytydeo2.getKredytyOneKlient(datax);
+    }
+
+    public void setKredytylist(List<Kredyty> kredytylist) {
+        this.kredytylist = kredytylist;
+    }
+    
 
     public Klienci getKlienci2() {
         return klienci2;
@@ -40,9 +60,19 @@ public class KredytyMB {
     public KredytyMB() {
     }
     
-    public void submit(){
+    public String submit(){
         KredytyDao kredytydao = new KredytyDao();
         kredytydao.createKredyt(kredyty, klienci2);
+        kredytylist=kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
+        return "xxx";
     }
+    public String callAllKredyty(int xdata){
+        kredytylist=kredytydeo2.getKredytyOneKlient(xdata);
+        KlienciDao kdao=new KlienciDao();
+        klienci2=kdao.readKlient(xdata);
+        return "xxx";
+    }
+    
+ 
 
 }

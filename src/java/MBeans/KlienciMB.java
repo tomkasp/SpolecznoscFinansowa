@@ -45,12 +45,14 @@ public class KlienciMB {
     public KlienciMB() {
     }
     
-    public void submit(){
+    public String submit(){
         kdao.createKlient(klient);
         count = 1;
         if(count == 1){
             datanow = "Hello "+this.klient.getImie()+", one record created.";
         }
+        
+        return "klienciTable";
     }
     
     public void callmeklienci(){

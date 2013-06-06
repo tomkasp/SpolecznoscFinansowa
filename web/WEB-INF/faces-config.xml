@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+<navigation-rule>
+    
+	<from-view-id>klienciTable.xhtml</from-view-id>
+	<navigation-case>
+            <from-outcome>xxx</from-outcome>
+            <to-view-id>kredytyTable.xhtml</to-view-id>                    
+	</navigation-case>
+        
+        
+</navigation-rule>
+    
+ <navigation-rule>   
+    <from-view-id>kredytyTable.xhtml</from-view-id>
+	<navigation-case>
+            <from-outcome>form2</from-outcome>
+            <to-view-id>form2.xhtml</to-view-id>                    
+	</navigation-case>
+</navigation-rule>   
+
+ <navigation-rule>   
+    <from-view-id>form2.xhtml</from-view-id>
+	<navigation-case>
+            <from-outcome>xxx</from-outcome>
+            <to-view-id>kredytyTable.xhtml</to-view-id>          
+	</navigation-case>
+</navigation-rule>  
+
+<navigation-rule>   
+    <from-view-id>klienciTable.xhtml</from-view-id>
+	<navigation-case>
+            <from-outcome>indexstart</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>          
+	</navigation-case>
+</navigation-rule> 
+ 
+
+</faces-config>

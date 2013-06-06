@@ -18,6 +18,7 @@
         <!--<h:panelGroup style=" display: block"><h:commandButton value="View Klienci" action="#{klienciMB.hello()}" /></h:panelGroup>-->
         <h:panelGroup style=" display: block">
             <h:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
+                <h:column><f:facet name="header">Id</f:facet>#{data.idKlienci}</h:column>
                 <h:column><f:facet name="header">Imie</f:facet>#{data.imie}</h:column>
                 <h:column><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</h:column>
                 <h:column><f:facet name="header">Pesel</f:facet>#{data.pesel}</h:column>
@@ -29,10 +30,12 @@
                 <h:column><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu}</h:column>
                 <h:column><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania}</h:column>
                 <h:column><f:facet name="header">Poczta</f:facet>#{data.poczta}</h:column>
-                <h:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" /></h:column>
-                
+                <h:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></h:column>
             </h:dataTable>
         </h:panelGroup>
+    </ui:define>
+    <ui:define name="address">
+        <h:panelGroup><h:button outcome="indexstart" value="create new record"></h:button></h:panelGroup>
     </ui:define>
 
     <ui:define name="bottom">
