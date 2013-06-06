@@ -2,7 +2,9 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./templates/formTemplate.xhtml"
-                xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="top">
         <h:form><h:panelGroup><h:commandLink action="index">Poprzedni</h:commandLink></h:panelGroup> || <h:panelGroup><h:commandLink action="form2">Następny</h:commandLink></h:panelGroup>
@@ -33,8 +35,9 @@
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Oprocentowanie w Procentach" styleClass="absoluteR"/><h:inputText value="#{kredytyMB.kredyty.oprocentowanieWprocentach}"/></h:panelGroup>
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Wolna Gotowka" styleClass="absoluteR"/><h:inputText value="#{kredytyMB.kredyty.wolnaGotowka}"/></h:panelGroup>
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Miejsce Podpisania Dokumentow" styleClass="absoluteR"/><h:inputText value="#{kredytyMB.kredyty.miejscePodpisaniaDokumentow}"/></h:panelGroup>
-        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Mozliwego Uruchomentow" styleClass="absoluteR" /><h:inputText value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"/></h:panelGroup>
-        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Dodania Kredytu" styleClass="absoluteR" /><h:inputText value="#{kredytyMB.kredyty.dataDodaniaKredytu}"/></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Data Mozliwego Uruchomentow" styleClass="absoluteR" />
+            <p:calendar  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"></p:calendar>
+        </h:panelGroup>
         <h:panelGroup styleClass="cent"><h:commandButton value="Submit" action="#{kredytyMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
     </ui:define>    
 
