@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfStamper;
 import generatorPDF.core.GeneratorPDF;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sql.dao.KredytyDao;
@@ -31,7 +32,8 @@ public class Weksel  {
                 Klienci klient=kredyt.getKlienci();
             
                 BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA , BaseFont.CP1250, BaseFont.CACHED);
-            
+           
+                
                 PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
                 content.beginText();
                 content.setFontAndSize(bf, 12);
