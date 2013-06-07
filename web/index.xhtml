@@ -30,8 +30,8 @@
             <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Ulica" styleClass="absoluteR"/><h:inputText id="ulica" value="#{klienciMB.klient.ulica}" required="true"><f:validateLength maximum="45" /></h:inputText><h:message for="ulica" style="color: red" /></h:panelGroup>
             <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Domu" styleClass="absoluteR"/><h:inputText id="nrdomu" value="#{klienciMB.klient.nrDomu}" required="true"><f:validateLength minimum="1" maximum="5" /></h:inputText><h:message for="nrdomu" style="color: red" /></h:panelGroup>
             <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Mieszkania" styleClass="absoluteR"/><h:inputText id="nrmiesz" value="#{klienciMB.klient.nrMieszkania}" required="true"><f:validateLength maximum="5" /></h:inputText><h:message for="nrmiesz" style="color: red" /></h:panelGroup>            
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" value="#{klienciMB.klient.poczta}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="pocz" style="color: red" /></h:panelGroup>
-        <h:panelGroup styleClass="cent"><h:commandButton value="Submit" action="#{klienciMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
+            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" value="#{klienciMB.klient.poczta}"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="pocz" style="color: red" /></h:panelGroup>
+            <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value="Submit" action="#{klienciMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
         </h:panelGroup>
         <!--<h:panelGroup style=" font-weight: bold; font-size: larger; color: red" styleClass="cent">#{klienciMB.datanow}</h:panelGroup>-->
     </ui:define>
