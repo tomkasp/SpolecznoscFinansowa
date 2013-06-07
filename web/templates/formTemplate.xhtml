@@ -18,22 +18,19 @@
             <div class="centmain-img"><ui:insert name="top">Poprzedni || Następny</ui:insert></div>
         </div>
         
-        <div class="bodydesign centmain-img borderdesign2">
-        <!--<div id="content" class="center_content">-->
-            <!--<ui:insert name="content">Content</ui:insert>-->
-            <h:form>
-                <!--<div class="vmargin borderbeau"><ui:insert name="info1"><br/><h:panelGroup style="font-size: larger; font-weight: bold">Dane podstawowe</h:panelGroup></ui:insert><ui:insert name="personal"></ui:insert><br /></div>-->
-                <div class="vmargin borderbeau"><ui:insert name="info1"><h:panelGroup style="font-size: larger; font-weight: bold">Dane podstawowe</h:panelGroup></ui:insert><ui:insert name="personal"></ui:insert></div>
+        <div class="centmain-img borderdesign2 bodyimage">
+            <ui:insert name="block1"></ui:insert>
+            <ui:insert name="block2"></ui:insert>
+            <ui:insert name="block3"></ui:insert>
+            <h:form>               
+                <ui:insert name="personal"></ui:insert>
+                <ui:insert name="break1"></ui:insert>
                 <ui:insert name="address"></ui:insert>
+                <ui:insert name="break2"></ui:insert>
                 <ui:insert name="business"></ui:insert>
+                <ui:insert name="break3"></ui:insert>
                 <ui:insert name="others"></ui:insert>
-                <!--<div class="vmargin borderbeau"><h3><ui:insert name="info2"></ui:insert></h3><ui:insert name="address"></ui:insert></div>-->
-                <!--<div class="vmargin"><ui:insert name="address"></ui:insert></div>-->
-                <!--<div class="vmargin"><ui:insert name="business"></ui:insert></div>-->
-                <!--<div class="vmargin"><ui:insert name="others"></ui:insert></div>-->
-                <br />
-                <br />
-                <br />
+                <ui:insert name="break4"></ui:insert>
             </h:form>
         </div>
 
