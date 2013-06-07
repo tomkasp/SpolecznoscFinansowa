@@ -15,6 +15,7 @@
 
     <ui:define name="content">
     </ui:define>
+    
     <ui:define name="personal">
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" /></h:panelGroup>
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz" value="#{klienciMB.klient.nazwisko}" required="true"><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" /></h:panelGroup>
@@ -22,6 +23,7 @@
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText id="seria" value="#{klienciMB.klient.seriaDowodu}" required="true"><f:validateLength maximum="3" /></h:inputText><h:message for="seria" style="color: red" /></h:panelGroup>
         <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText id="nrdowo" value="#{klienciMB.klient.nrDowodu}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="6" maximum="6" /></h:inputText><h:message for="nrdowo" style="color: red" /></h:panelGroup>
     </ui:define>
+    
     <ui:define name="address">
         <h:panelGroup style="display: block" styleClass="borderbeau vmargin">
             <h:panelGroup style=" font-weight: bold; font-size: larger">Adres</h:panelGroup>
