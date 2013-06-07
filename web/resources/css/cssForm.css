@@ -16,6 +16,9 @@ root {
     border: 2px solid gold;
     margin: 10px;
 }
+.bordertop{
+    border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid #3333ff;
+}
 .borderdesign{
    border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
    margin-bottom: 0px;
