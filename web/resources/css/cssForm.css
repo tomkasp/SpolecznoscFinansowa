@@ -16,9 +16,10 @@ root {
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: #3399ff;
+  /*color: #3399ff;*/
   font-weight : bold;
-  text-decoration : underline;
+  /*text-decoration : underline;*/
+  border-top: 5px solid gold;
 }
 #borderlines{
     border: 20px solid gold;
@@ -29,7 +30,13 @@ root {
     padding-top: 50px;
 }
 .bodyheadbuttom{
-    padding-bottom: 25px;
+    padding-bottom: 50px;
+}
+.bodytextbutton{
+    padding-bottom: 20px;
+}
+.bodytexttop{
+    padding-top: 15px;
 }
 
 .bordertop{
@@ -43,7 +50,7 @@ root {
    border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff;
 }
 .borderdesign2{
-   border-bottom: 1px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
+   border-bottom: 1px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid gold;
    margin-bottom: 0px;
 }
 .borderbeau{
@@ -64,6 +71,7 @@ root {
     /*margin: 10px;*/
     /*width: 796px; margin-left: auto; margin-right: auto;*/
     width: 90%; margin-left: auto; margin-right: auto;
+    position: relative;
 }
 .cent{
     position: relative; left: 50%;
@@ -76,11 +84,25 @@ root {
     background:url("../../resources/photo/bg1.png") repeat-y; width: auto; height: auto;
     position: relative;
 }
+.menuimg{
+    
+    background:url("../../resources/photo/klienci.jpg") no-repeat; width: auto; height: auto;
+    position: relative;
+}
+.menuimg:hover{
+    
+    background:url("../../resources/photo/klienci2.jpg") no-repeat; width: auto; height: auto;
+    position: relative;
+}
+link:hover{
+    background:url("../../resources/photo/klienci2.jpg") no-repeat; width: auto; height: auto;
+    position: relative;
+}
 .relativeR{
     position: relative; right: 0px; margin-left: 40%; margin-right: auto;
 }
 .relativeRR{
-    position: relative; right: 0px; margin-left: 70%; margin-right: auto;
+    position: relative; right: 0px; margin-left: 52%; margin-right: auto;
 }
 .relativeL{
     position: relative; left: 150px; margin-right: auto;
@@ -111,6 +133,11 @@ root {
 .employeeTable{   
    border-collapse:collapse;
    border:1px solid #000000;
+   width: 100%; display: block;
+   position: relative;
+   overflow-x: scroll;
+ 
+   
 }
 
 .employeeTableHeader{

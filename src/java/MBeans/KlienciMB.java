@@ -19,7 +19,7 @@ import sql.entity.Klienci;
 @SessionScoped
 //@RequestScoped
 public class KlienciMB {
-    private int count = 0; String datanow;
+    private int count = 0; String datanow = "resources/photo/klienci.jpg";
 
     public String getDatanow() {
         return datanow;
@@ -51,8 +51,17 @@ public class KlienciMB {
         if(count == 1){
             datanow = "Hello "+this.klient.getImie()+", one record created.";
         }
-        
+        klient = null;
+        this.setKlient(klient);
         return "klienciTable";
+    }
+    public String previous(){
+        return "index";
+    }
+    public String inputImg(){    
+//        this.setDatanow("/resources/photo/klienci.jpg");
+//        return this.getDatanow();
+        return "/resources/photo/klienci2.jpg";
     }
     
     public void callmeklienci(){
@@ -81,7 +90,15 @@ public class KlienciMB {
         this.KlientList = KlientList;
     }
     
-    
-    
+    public void clearAll(){
+        hello = "God loves you all";
+        //Klienci k2 = null;
+        //klient = null;
+        //this.setKlient(klient);
+        //this.klient.setImie("hello to you all");
+        //this.setKlient(x) ;//= "hello";
+        this.setHello("Know you are there");
+//        return this.klient.getImie()+" hello and welcome";
+    }
     
 }

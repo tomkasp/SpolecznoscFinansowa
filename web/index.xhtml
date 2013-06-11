@@ -1,58 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./templates/formTemplate.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="top">
-        <h:form><h:panelGroup><h:commandLink action="index"> Klienci </h:commandLink></h:panelGroup> | <h:panelGroup><h:commandLink action="klienciTable"> Klienci Table</h:commandLink></h:panelGroup>            
-        </h:form>
-    </ui:define>
-
-    <ui:define name="block1">
+    <ui:define name="headtitle">
         <h:panelGroup style="display:block" styleClass="bodyheadtop"></h:panelGroup>
-    </ui:define>
-    <ui:define name="block2">
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Registration Form</h:panelGroup>
-    </ui:define>
-    <ui:define name="block3">
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Formularz rejestracyjny</h:panelGroup>   
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
-    <ui:define name="personal">
+    
+    <ui:define name="maincenter">
+        <h:form>
         <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin">
-            <h:panelGroup style=" font-weight: bold; font-size: larger">Dane podstawowe</h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz" styleClass="relativeR" value="#{klienciMB.klient.nazwisko}" required="true"><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Pesel" styleClass="absoluteR"/><h:inputText id="pes" styleClass="relativeR" value="#{klienciMB.klient.pesel}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="11" maximum="11" /></h:inputText><h:message for="pes" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText id="seria" styleClass="relativeR" value="#{klienciMB.klient.seriaDowodu}" required="true"><f:validateLength maximum="3" /></h:inputText><h:message for="seria" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText id="nrdowo" styleClass="relativeR" value="#{klienciMB.klient.nrDowodu}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="6" maximum="6" /></h:inputText><h:message for="nrdowo" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-        </h:panelGroup>
-    </ui:define>
-    <ui:define name="break1">
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
-    <ui:define name="address">
+            <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop">Dane podstawowe</h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz" styleClass="relativeR" value="#{klienciMB.klient.nazwisko}" required="true"><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Pesel" styleClass="absoluteR"/><h:inputText id="pes" styleClass="relativeR" value="#{klienciMB.klient.pesel}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="11" maximum="11" /></h:inputText><h:message for="pes" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText id="seria" styleClass="relativeR" value="#{klienciMB.klient.seriaDowodu}" required="true"><f:validateLength maximum="3" /></h:inputText><h:message for="seria" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText id="nrdowo" styleClass="relativeR" value="#{klienciMB.klient.nrDowodu}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="6" maximum="6" /></h:inputText><h:message for="nrdowo" style="color: red" styleClass="floatR" /></h:panelGroup>                              
+        </h:panelGroup>      
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>     
         <h:panelGroup style="display: block" styleClass="borderbeau vmargin">
-            <h:panelGroup style=" font-weight: bold; font-size: larger">Adres</h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Miejscowosc" styleClass="absoluteR" /><h:inputText id="miej" styleClass="relativeR" value="#{klienciMB.klient.miejscowosc}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="miej" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Kodpocztowy" styleClass="absoluteR" /><h:inputText id="kodpo" styleClass="relativeR" value="#{klienciMB.klient.kodPocztowy}" required="true"><f:validateLength minimum="5" maximum="6" /></h:inputText><h:message for="kodpo" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Ulica" styleClass="absoluteR"/><h:inputText id="ulica" styleClass="relativeR" value="#{klienciMB.klient.ulica}" required="true"><f:validateLength maximum="45" /></h:inputText><h:message for="ulica" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Domu" styleClass="absoluteR"/><h:inputText id="nrdomu" styleClass="relativeR" value="#{klienciMB.klient.nrDomu}" required="true"><f:validateLength minimum="1" maximum="5" /></h:inputText><h:message for="nrdomu" style="color: red" styleClass="floatR" /></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Nr Mieszkania" styleClass="absoluteR"/><h:inputText id="nrmiesz" styleClass="relativeR" value="#{klienciMB.klient.nrMieszkania}" required="true"><f:validateLength maximum="5" /></h:inputText><h:message for="nrmiesz" style="color: red" styleClass="floatR" /></h:panelGroup>            
-            <h:panelGroup style="display: block" styleClass="centmain"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" styleClass="relativeR" value="#{klienciMB.klient.poczta}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="posz" style="color: red" styleClass="floatR"/></h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-            <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value="Submit" action="#{klienciMB.submit()}"></h:commandButton><h:commandButton value="Cancel"></h:commandButton></h:panelGroup>
-        </h:panelGroup>
-        <!--<h:panelGroup style=" font-weight: bold; font-size: larger; color: red" styleClass="cent">#{klienciMB.datanow}</h:panelGroup>-->
-    </ui:define>
-    <ui:define name="break2">
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
-
-    <ui:define name="bottom">
-        <h:panelGroup style=" color: white; font-weight: bold" styleClass="cent">Help</h:panelGroup>
-    </ui:define>
+            <h:panelGroup style="display:block; font-weight: bold; font-size: larger" styleClass="bodytexttop">Adres</h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Miejscowosc" styleClass="absoluteR" /><h:inputText id="miej" styleClass="relativeR" value="#{klienciMB.klient.miejscowosc}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="miej" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kodpocztowy" styleClass="absoluteR" /><h:inputText id="kodpo" styleClass="relativeR" value="#{klienciMB.klient.kodPocztowy}" required="true"><f:validateLength minimum="5" maximum="6" /></h:inputText><h:message for="kodpo" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Ulica" styleClass="absoluteR"/><h:inputText id="ulica" styleClass="relativeR" value="#{klienciMB.klient.ulica}" required="true"><f:validateLength maximum="45" /></h:inputText><h:message for="ulica" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Domu" styleClass="absoluteR"/><h:inputText id="nrdomu" styleClass="relativeR" value="#{klienciMB.klient.nrDomu}" required="true"><f:validateLength minimum="1" maximum="5" /></h:inputText><h:message for="nrdomu" style="color: red" styleClass="floatR" /></h:panelGroup>            
+            <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Mieszkania" styleClass="absoluteR"/><h:inputText id="nrmiesz" styleClass="relativeR" value="#{klienciMB.klient.nrMieszkania}" required="true"><f:validateLength maximum="5" /></h:inputText><h:message for="nrmiesz" style="color: red" styleClass="floatR" /></h:panelGroup>                        
+            <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" styleClass="relativeR" value="#{klienciMB.klient.poczta}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="posz" style="color: red" styleClass="floatR"/></h:panelGroup>                        
+            <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value="  Submit  " action="#{klienciMB.submit()}" /></h:panelGroup>
+        </h:panelGroup>            
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>  
+        </h:form>
+    </ui:define>    
 
 </ui:composition>
