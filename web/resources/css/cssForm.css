@@ -77,6 +77,9 @@ root {
 .right{
     position: relative; left: 75%;
 }
+.paraleft{
+    position: relative; left: 3%;
+}
 .topimage{
     background:url("../../resources/photo/zm1.jpg") no-repeat; width: auto; height: 90px;
     position: relative;
