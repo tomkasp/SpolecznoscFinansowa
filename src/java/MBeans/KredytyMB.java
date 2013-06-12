@@ -73,6 +73,7 @@ public class KredytyMB {
         return "xxx";
     }
     
- 
-
+    public void callGeneruujPDF(){
+        
+    }
 }
