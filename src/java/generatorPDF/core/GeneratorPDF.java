@@ -21,16 +21,16 @@ public class GeneratorPDF {
 
     private static int licznik=0;
     
-    public static String generuj(int idKlienta) {      
+    public static String generuj(int idKredytu) {      
        
        licznik=0;
        
        try {
             DecyzjaOstateczna tds = new DecyzjaOstateczna();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\decyzja ostateczna.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\decyzja ostateczna_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\decyzja ostateczna_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            tds.wypelnij(pdfStamper , idKlienta);          
+            tds.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -40,9 +40,9 @@ public class GeneratorPDF {
        try {
             DeklaracjaWekslowa2 dw2=new DeklaracjaWekslowa2();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\deklaracja wekslowa2.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\deklaracja wekslowa2_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\deklaracja wekslowa2_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            dw2.wypelnij(pdfStamper , idKlienta);          
+            dw2.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -52,9 +52,9 @@ public class GeneratorPDF {
         try {
             Oswiadczenie osw=new Oswiadczenie();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\oswiadczenie.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\oswiadczenie_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\oswiadczenie_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            osw.wypelnij(pdfStamper , idKlienta);          
+            osw.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -64,9 +64,9 @@ public class GeneratorPDF {
         try {
             Polecenie pol=new Polecenie();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\polecenie.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\polecenie_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\polecenie_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            pol.wypelnij(pdfStamper , idKlienta);          
+            pol.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -77,9 +77,9 @@ public class GeneratorPDF {
         try {
             Porozumienie por=new Porozumienie();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\porozumienie.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\porozumienie_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\porozumienie_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            por.wypelnij(pdfStamper , idKlienta);          
+            por.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -90,9 +90,9 @@ public class GeneratorPDF {
         try {
             Prowizja prow=new Prowizja();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\prowizje.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\prowizje_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\prowizje_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            prow.wypelnij(pdfStamper , idKlienta);          
+            prow.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -103,9 +103,9 @@ public class GeneratorPDF {
         try {
             Umowa umo=new Umowa();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\umowa.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\umowa_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\umowa_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            umo.wypelnij(pdfStamper , idKlienta);          
+            umo.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -116,9 +116,9 @@ public class GeneratorPDF {
         try {
             Warunki war=new Warunki();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\warunki.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\warunki_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\warunki_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper( pdfReader, new FileOutputStream(sciezka) );         
-            war.wypelnij(pdfStamper , idKlienta);          
+            war.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
@@ -129,9 +129,9 @@ public class GeneratorPDF {
         try {
             Weksel wek=new Weksel();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\weksel wlasny.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\weksel wlasny_nr"+idKlienta+".pdf";
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\weksel wlasny_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            wek.wypelnij(pdfStamper , idKlienta);          
+            wek.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
             licznik++;
         } catch (DocumentException | IOException ex) {
