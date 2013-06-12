@@ -24,6 +24,7 @@ public class GeneratorPDF {
     public static String generuj(int idKlienta) {      
        
        licznik=0;
+       
        try {
             DecyzjaOstateczna tds = new DecyzjaOstateczna();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\decyzja ostateczna.pdf");         
