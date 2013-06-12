@@ -9,7 +9,7 @@
 
     
     <ui:define name="headtitle">      
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Table</h:panelGroup>    
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Wyświetl Klientów</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
 
@@ -17,10 +17,9 @@
         <h:form prependId="false">
         <!--<p:panelGroup style=" display: block" styleClass=" borderbeau vmargintable"> -->
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">            
-            <p:dataTable value="#{klienciMB.klientList}" tableStyleClass="table12"  var="data" styleClass="employeeTable" paginator="true" rows="20"  
+            <p:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="20"  
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-                 rowsPerPageTemplate="5,10,15">
-                <p:column><f:facet name="header">Id</f:facet>#{data.idKlienci}</p:column>
+                 rowsPerPageTemplate="5,10,15">               
                 <p:column><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
                 <p:column><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</p:column>
                 <p:column><f:facet name="header">Pesel</f:facet>#{data.pesel}</p:column>
@@ -35,7 +34,7 @@
                 <p:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></p:column>            
             </p:dataTable>
         </h:panelGroup>                
-            <h:panelGroup style="display: block" styleClass="cent bodyheadtop bodyheadbuttom"><h:button outcome="indexstart" value="create new record"></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
+            <h:panelGroup style="display: block" styleClass="cent bodyheadtop bodyheadbuttom"><h:button outcome="indexstart" value="Dodaj nowego klienta"></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
         </h:form>
     </ui:define>
 

@@ -1,0 +1,12 @@
+
+
+.ui-widget-content.ui-datatable-even{
+   background: none repeat scroll 0 0 #ffffff;	
+}
+
+.ui-widget-content {
+    background:none;
+}
+.ui-widget{
+    font-size: small;
+}
