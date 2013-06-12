@@ -73,6 +73,7 @@ public class KredytyMB {
     
     public String submit(){
         KredytyDao kredytydao = new KredytyDao();
+        kredyty.setDataDodaniaKredytu(new Date());
         kredytydao.createKredyt(kredyty, klienci2);
         kredytylist=kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
         return "xxx";
