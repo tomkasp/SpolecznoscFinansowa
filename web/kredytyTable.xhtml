@@ -4,15 +4,15 @@
                 template="./templates/formTemplate.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-
-    <ui:define name="top">
-        <h:form><h:panelGroup><h:commandLink action="index"> Klienci </h:commandLink></h:panelGroup> | <h:panelGroup><h:commandLink action="klienciTable"> Klienci Table</h:commandLink></h:panelGroup>            
-        </h:form>
+    
+    <ui:define name="headtitle">          
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Tablefor Kredyty</h:panelGroup>    
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
 
-    <ui:define name="personal">
-        <h:panelGroup style=" font-weight: bold; font-size: larger">Tablefor Kredyty</h:panelGroup>
-        <h:panelGroup style=" display: block" styleClass="borderbeau vmargin">
+
+    <ui:define name="maincenter">        
+        <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
             <h:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
                 <h:column><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</h:column>
                 <h:column><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</h:column>
@@ -29,20 +29,12 @@
                 <h:column><f:facet name="header">Oprocentowanie w Procentach</f:facet>#{data2.oprocentowanieWprocentach}</h:column>
                 <h:column><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</h:column>
                 <h:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</h:column>
-                <h:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</h:column>
-                <!--<h:column><f:facet name="header">Data Dodania Kredytu</f:facet>#{data2.dataDodaniaKredytu}</h:column>-->
+                <h:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</h:column>                
             </h:dataTable>
         </h:panelGroup>
-    </ui:define>
-    <ui:define name="address">
-        <h:form>
-            <h:panelGroup><h:button value="add new Kredyty" outcome="form2"/></h:panelGroup>
-            
+        <h:form styleClass="bodyheadtop bodyheadbuttom">
+            <h:panelGroup styleClass="cent "><h:button value="add new Kredyty" outcome="form2"/></h:panelGroup>            
         </h:form>        
-    </ui:define>
-
-    <ui:define name="bottom">
-        Help
     </ui:define>
 
 </ui:composition>

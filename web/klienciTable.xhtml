@@ -5,23 +5,15 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="top">
-        <h:form><h:panelGroup><h:commandLink action="index"> Klienci </h:commandLink></h:panelGroup> | <h:panelGroup><h:commandLink action="klienciTable"> Klienci Table</h:commandLink></h:panelGroup>            
-        </h:form>
-    </ui:define>
+
     
-    <ui:define name="block1">
-        <h:panelGroup style="display:block" styleClass="bodyheadtop"></h:panelGroup>
-    </ui:define>
-    <ui:define name="block2">
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Table</h:panelGroup>
-    </ui:define>
-    <ui:define name="block3">
+    <ui:define name="headtitle">      
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Table</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
 
-    <ui:define name="personal">
-        <!--<h:panelGroup style=" font-weight: bold; font-size: larger">Table</h:panelGroup>-->        
+    <ui:define name="maincenter">        
+        <h:form>
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">
             <h:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
                 <h:column><f:facet name="header">Id</f:facet>#{data.idKlienci}</h:column>
@@ -38,20 +30,9 @@
                 <h:column><f:facet name="header">Poczta</f:facet>#{data.poczta}</h:column>
                 <h:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></h:column>
             </h:dataTable>
-        </h:panelGroup>
-    </ui:define>
-    <ui:define name="break1">
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
-    <ui:define name="address">
-        <h:panelGroup><h:button styleClass="cent" outcome="indexstart" value="create new record"></h:button></h:panelGroup>
-    </ui:define>
-    <ui:define name="break2">
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
-
-    <ui:define name="bottom">
-        Help
+        </h:panelGroup>                
+            <h:panelGroup style="display: block" styleClass="cent bodyheadtop bodyheadbuttom"><h:button outcome="indexstart" value="create new record"></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
+        </h:form>
     </ui:define>
 
 </ui:composition>

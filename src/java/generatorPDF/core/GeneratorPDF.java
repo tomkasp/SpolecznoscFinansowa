@@ -19,9 +19,11 @@ import java.util.logging.Logger;
 
 public class GeneratorPDF {
 
-    public static int generuj(int idKlienta) {      
-       int idAdresu=0;
-
+    private static int licznik=0;
+    
+    public static String generuj(int idKlienta) {      
+       
+       licznik=0;
        try {
             DecyzjaOstateczna tds = new DecyzjaOstateczna();
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\decyzja ostateczna.pdf");         
@@ -29,6 +31,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             tds.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -40,6 +43,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             dw2.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -51,6 +55,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             osw.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -62,6 +67,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             pol.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -74,6 +80,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             por.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -86,6 +93,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             prow.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -98,6 +106,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             umo.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -110,6 +119,7 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper( pdfReader, new FileOutputStream(sciezka) );         
             war.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -122,11 +132,20 @@ public class GeneratorPDF {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             wek.wypelnij(pdfStamper , idKlienta);          
             pdfStamper.close();
+            licznik++;
         } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
-       return idAdresu; 
+       return "success"; 
+    }
+
+    public static int getLicznik() {
+        return licznik;
+    }
+
+    public static void setLicznik(int licznik) {
+        GeneratorPDF.licznik = licznik;
     }
     
 }

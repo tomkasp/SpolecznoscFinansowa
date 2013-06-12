@@ -15,27 +15,21 @@
     <h:body>
 
         <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />
-            <div class="centmain-img"><ui:insert name="top">Poprzedni || Następny</ui:insert></div>
+            <div class="centmain-img">
+                <ui:insert name="top">
+                    <h:form><h:panelGroup id="testX"><h:commandLink action="index"> Klienci </h:commandLink></h:panelGroup> | <h:panelGroup><h:commandLink action="klienciTable">Lista Klientów</h:commandLink></h:panelGroup>            
+                    </h:form>
+                </ui:insert>
+            </div>
         </div>
         
-        <div class="centmain-img borderdesign2 bodyimage">
-            <ui:insert name="block1"></ui:insert>
-            <ui:insert name="block2"></ui:insert>
-            <ui:insert name="block3"></ui:insert>
-            <h:form>               
-                <ui:insert name="personal"></ui:insert>
-                <ui:insert name="break1"></ui:insert>
-                <ui:insert name="address"></ui:insert>
-                <ui:insert name="break2"></ui:insert>
-                <ui:insert name="business"></ui:insert>
-                <ui:insert name="break3"></ui:insert>
-                <ui:insert name="others"></ui:insert>
-                <ui:insert name="break4"></ui:insert>
-            </h:form>
+        <div id="maincenter" class="centmain-img borderdesign2 bodyimage">            
+            <ui:insert name="headtitle"></ui:insert>                    
+            <ui:insert name="maincenter"></ui:insert>                   
         </div>
 
-        <div class="centmain-img borderdesign" style=" background-color: #33ccff">
-            <ui:insert name="bottom"></ui:insert>
+        <div class="centmain-img borderdesign bodyheadtop2" style=" background-color: #f7fefe">
+            <ui:insert name="bottom"><h:panelGroup style=" color:black; font-weight: bold; font-size: small" styleClass="right">Wszelkie prawa zastrzeżone © EI Global 2013</h:panelGroup></ui:insert>
         </div>
 
     </h:body>
