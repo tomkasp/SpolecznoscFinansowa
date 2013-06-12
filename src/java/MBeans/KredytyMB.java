@@ -4,6 +4,7 @@
  */
 package MBeans;
 
+import generatorPDF.core.GeneratorPDF;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +27,17 @@ public class KredytyMB {
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
-    Date datenow = new Date();
+    Date datenow = new Date();    
+    
+    private String dataPdf;
+
+    public String getDataPdf() {
+        return dataPdf;
+    }
+
+    public void setDataPdf(String dataPdf) {
+        this.dataPdf = dataPdf;
+    }
 
     public List<Kredyty> getKredytylist() {
         return kredytylist;
@@ -72,8 +83,7 @@ public class KredytyMB {
         klienci2=kdao.readKlient(xdata);
         return "xxx";
     }
-    
-    public void callGeneruujPDF(){
-        
+    public void callPdf(int ydata){           
+        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());       
     }
-}
+ }
