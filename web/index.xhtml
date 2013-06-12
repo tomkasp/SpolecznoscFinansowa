@@ -6,9 +6,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="headtitle">
-        <h:panelGroup style="display:block" styleClass="bodyheadtop"></h:panelGroup>
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Formularz rejestracyjny</h:panelGroup>   
+    <ui:define name="headtitle">        
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Formularz rejestracyjny</h:panelGroup>
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
     
@@ -22,8 +21,7 @@
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText id="seria" styleClass="relativeR" value="#{klienciMB.klient.seriaDowodu}" required="true"><f:validateLength maximum="3" /></h:inputText><h:message for="seria" style="color: red" styleClass="floatR" /></h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText id="nrdowo" styleClass="relativeR" value="#{klienciMB.klient.nrDowodu}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="6" maximum="6" /></h:inputText><h:message for="nrdowo" style="color: red" styleClass="floatR" /></h:panelGroup>                              
         </h:panelGroup>      
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>     
-        <h:panelGroup style="display: block" styleClass="borderbeau vmargin">
+        <h:panelGroup style="display: block" styleClass="borderbeau2 vmargin bodyheadbuttom">
             <h:panelGroup style="display:block; font-weight: bold; font-size: larger" styleClass="bodytexttop">Adres</h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Miejscowosc" styleClass="absoluteR" /><h:inputText id="miej" styleClass="relativeR" value="#{klienciMB.klient.miejscowosc}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="miej" style="color: red" styleClass="floatR" /></h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kodpocztowy" styleClass="absoluteR" /><h:inputText id="kodpo" styleClass="relativeR" value="#{klienciMB.klient.kodPocztowy}" required="true"><f:validateLength minimum="5" maximum="6" /></h:inputText><h:message for="kodpo" style="color: red" styleClass="floatR" /></h:panelGroup>            
@@ -33,7 +31,6 @@
             <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" styleClass="relativeR" value="#{klienciMB.klient.poczta}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="posz" style="color: red" styleClass="floatR"/></h:panelGroup>                        
             <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value="  Submit  " action="#{klienciMB.submit()}" /></h:panelGroup>
         </h:panelGroup>            
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>  
         </h:form>
     </ui:define>    
 

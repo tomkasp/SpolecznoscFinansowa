@@ -5,9 +5,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
     
-    <ui:define name="headtitle">
-        <h:panelGroup style="display:block" styleClass="bodyheadtop"></h:panelGroup>    
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Tablefor Kredyty</h:panelGroup>    
+    <ui:define name="headtitle">          
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Tablefor Kredyty</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
 
@@ -30,13 +29,11 @@
                 <h:column><f:facet name="header">Oprocentowanie w Procentach</f:facet>#{data2.oprocentowanieWprocentach}</h:column>
                 <h:column><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</h:column>
                 <h:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</h:column>
-                <h:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</h:column>
-                <!--<h:column><f:facet name="header">Data Dodania Kredytu</f:facet>#{data2.dataDodaniaKredytu}</h:column>-->
+                <h:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</h:column>                
             </h:dataTable>
         </h:panelGroup>
-        <h:form>
-            <h:panelGroup><h:button value="add new Kredyty" outcome="form2"/></h:panelGroup>
-            
+        <h:form styleClass="bodyheadtop bodyheadbuttom">
+            <h:panelGroup styleClass="cent "><h:button value="add new Kredyty" outcome="form2"/></h:panelGroup>            
         </h:form>        
     </ui:define>
 

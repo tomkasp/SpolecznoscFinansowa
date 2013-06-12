@@ -16,14 +16,11 @@ root {
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  /*color: #3399ff;*/
   font-weight : bold;
-  /*text-decoration : underline;*/
   border-top: 5px solid gold;
 }
 #borderlines{
     border: 20px solid gold;
-/*    margin: 10px;*/
 }
 
 .bodyheadtop{
@@ -31,6 +28,9 @@ root {
 }
 .bodyheadbuttom{
     padding-bottom: 50px;
+}
+.bodyheadtop2{
+    padding-top:  50px;
 }
 .bodytextbutton{
     padding-bottom: 20px;
@@ -50,31 +50,32 @@ root {
    border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff;
 }
 .borderdesign2{
-   border-bottom: 1px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid gold;
+   border-bottom: 1px solid gold; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid gold;
    margin-bottom: 0px;
 }
 .borderbeau{
     border-bottom: 3px solid #3333ff; border-left: 1px solid #3399ff; border-right: 3px solid #3333ff; border-top: 1px solid #3399ff;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+.borderbeau2{
+    border-bottom: 3px solid #3333ff; border-left: 1px solid #3399ff; border-right: 3px solid #3333ff; border-top: 1px solid #3399ff;
+    margin-bottom: 50px;
 }
 .borderbeauhead{
     border-bottom: 3px solid #3333ff; margin-bottom: 10px;
 }
 .vmargin{
-    /*background-color: white;*/
-    /*margin: 10px;*/
-    /*width: 796px; margin-left: auto; margin-right: auto;*/
     width: 800px; margin-left: auto; margin-right: auto;
 }
 .vmargintable{
-    /*background-color: white;*/
-    /*margin: 10px;*/
-    /*width: 796px; margin-left: auto; margin-right: auto;*/
     width: 90%; margin-left: auto; margin-right: auto;
     position: relative;
 }
 .cent{
     position: relative; left: 50%;
+}
+.right{
+    position: relative; left: 75%;
 }
 .topimage{
     background:url("../../resources/photo/zm1.jpg") no-repeat; width: auto; height: 90px;
@@ -82,20 +83,6 @@ root {
 }
 .bodyimage{
     background:url("../../resources/photo/bg1.png") repeat-y; width: auto; height: auto;
-    position: relative;
-}
-.menuimg{
-    
-    background:url("../../resources/photo/klienci.jpg") no-repeat; width: auto; height: auto;
-    position: relative;
-}
-.menuimg:hover{
-    
-    background:url("../../resources/photo/klienci2.jpg") no-repeat; width: auto; height: auto;
-    position: relative;
-}
-link:hover{
-    background:url("../../resources/photo/klienci2.jpg") no-repeat; width: auto; height: auto;
     position: relative;
 }
 .relativeR{
@@ -109,8 +96,6 @@ link:hover{
 }
 .centmain{
     width: 700px; margin-left: auto; margin-right: auto; 
-    /*margin: 10px;*/ 
-    /*border: 2px solid gold;*/
 }
 .centmain-img{
     width: 1200px; margin-right: auto; margin-left: auto;
@@ -120,7 +105,6 @@ link:hover{
 }
 .absoluteRE{
     position: absolute; right: 21%; left: auto; 
-    /*margin-right: 100%; text-align: right;*/
 }
 .absoluteL{
     position: absolute; left: 0px; right: auto; margin-left: 60%;
@@ -136,7 +120,6 @@ link:hover{
    width: 100%; display: block;
    position: relative;
    overflow-x: scroll;
- 
    
 }
 

@@ -7,14 +7,12 @@
 
 
     
-    <ui:define name="headtitle">
-        <h:panelGroup style="display:block" styleClass="bodyheadtop"></h:panelGroup>    
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin">Table</h:panelGroup>    
+    <ui:define name="headtitle">      
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Table</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
     </ui:define>
 
-    <ui:define name="maincenter">
-        <!--<h:panelGroup style=" font-weight: bold; font-size: larger">Table</h:panelGroup>-->  
+    <ui:define name="maincenter">        
         <h:form>
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">
             <h:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable" headerClass="employeeTableHeader" rowClasses="employeeTableOddRow,employeeTableEvenRow">
@@ -32,10 +30,8 @@
                 <h:column><f:facet name="header">Poczta</f:facet>#{data.poczta}</h:column>
                 <h:column><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></h:column>
             </h:dataTable>
-        </h:panelGroup>
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>          
-        <h:panelGroup><h:button styleClass="cent" outcome="indexstart" value="create new record"></h:button><h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>       
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+        </h:panelGroup>                
+            <h:panelGroup style="display: block" styleClass="cent bodyheadtop bodyheadbuttom"><h:button outcome="indexstart" value="create new record"></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
         </h:form>
     </ui:define>
 
