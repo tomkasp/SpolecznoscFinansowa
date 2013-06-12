@@ -29,8 +29,8 @@ public class KlienciDao {
         Klienci klient = (Klienci) session.load(Klienci.class,idKlient);
         
         session.getTransaction().commit();
-        //session.close();
         
+        //session.close();
         return klient;
     }
     
