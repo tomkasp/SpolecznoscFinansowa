@@ -20,7 +20,7 @@
                     <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="15"  
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">                
                         <p:column width="120"><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
-                        <p:column ><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
+                        <p:column filterBy="#{data2.nrUmowyPosrednictwa}"><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
                         <p:column width="30"><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
                         <p:column width="30"><f:facet name="header">Prowizja Banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
                         <p:column width="30"><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
