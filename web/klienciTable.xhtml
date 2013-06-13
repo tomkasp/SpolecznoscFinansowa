@@ -18,10 +18,10 @@
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false" style="height:632px">
                     <p:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable"  paginator="true" rows="15"  
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">               
-                    <p:column><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
-                    <p:column><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</p:column>
-                    <p:column><f:facet name="header">Pesel</f:facet>#{data.pesel}</p:column>
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">               
+                    <p:column filterBy="#{data.imie}"><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
+                    <p:column filterBy="#{data.nazwisko}"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</p:column>
+                    <p:column filterBy="#{data.pesel}"><f:facet name="header">Pesel</f:facet>#{data.pesel}</p:column>
                     <p:column><f:facet name="header">Seria Dowodu</f:facet>#{data.seriaDowodu}</p:column>
                     <p:column><f:facet name="header">Nr Dowodu</f:facet>#{data.nrDowodu}</p:column>
                     <p:column><f:facet name="header">Miejscowosc</f:facet>#{data.miejscowosc}</p:column>
