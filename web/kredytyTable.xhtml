@@ -13,33 +13,33 @@
 
 
     <ui:define name="maincenter">
-        <h:form>
+        
         <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
             <p:scrollPanel style="height: 70%">
-            <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="20"  
-                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
-                
-                <p:column><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
-                <p:column><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
-                <p:column><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
-                <p:column><f:facet name="header">Prowizja Banku w Procentach</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
-                <p:column><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
-                <p:column><f:facet name="header">Ubezpieczenie w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
-                <p:column><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
-                <p:column><f:facet name="header">Swot w Procentach</f:facet>#{data2.swotWprocentach}</p:column>
-                <p:column><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
-                <p:column><f:facet name="header">Kwota Konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
-                <p:column><f:facet name="header">Okres Kredytowania w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
-                <p:column><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
-                <p:column><f:facet name="header">Oprocentowanie w Procentach</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
-                <p:column><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</p:column>
-                <p:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
-                <p:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
-                <p:column><f:facet name="header">Generuj PDF</f:facet><h:commandButton value=" Generuj " action="#{kredytyMB.callPdf(data2.idkredyty)}" /></p:column>
-            </p:dataTable>
+                <h:form prependId="false" style="height:632px">
+                    <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="15"  
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">                
+                    <p:column><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
+                    <p:column><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
+                    <p:column><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
+                    <p:column><f:facet name="header">Prowizja Banku w Procentach</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
+                    <p:column><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
+                    <p:column><f:facet name="header">Ubezpieczenie w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
+                    <p:column><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
+                    <p:column><f:facet name="header">Swot w Procentach</f:facet>#{data2.swotWprocentach}</p:column>
+                    <p:column><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
+                    <p:column><f:facet name="header">Kwota Konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
+                    <p:column><f:facet name="header">Okres Kredytowania w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
+                    <p:column><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
+                    <p:column><f:facet name="header">Oprocentowanie w Procentach</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
+                    <p:column><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</p:column>
+                    <p:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
+                    <p:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
+                    <p:column><f:facet name="header">Generuj PDF</f:facet><h:commandButton value=" Generuj " action="#{kredytyMB.callPdf(data2.idkredyty)}" /></p:column>
+                    </p:dataTable>
+                </h:form>
             </p:scrollPanel>
-        </h:panelGroup>
-        </h:form>
+        </h:panelGroup>       
         <h:form styleClass="bodyheadtop bodyheadbuttom">
             <h:panelGroup styleClass="cent "><h:button value="dodaj nowy kredyt" outcome="form2"/></h:panelGroup>            
         </h:form>        
