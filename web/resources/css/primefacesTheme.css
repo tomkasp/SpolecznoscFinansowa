@@ -10,3 +10,19 @@
 .ui-widget{
     font-size: small;
 }
+
+.ui-datatable thead th{   
+    white-space: pre-wrap;
+    border:1px solid #757575; 
+    padding-left: 3px;
+    padding-right: 1px;
+    font-size: 10px;
+    text-align: left;
+}
+
+.ui-datatable tbody td, .ui-datatable tfoot td {
+    white-space: pre-wrap;
+    padding: 0px;
+    padding-left: 3px;
+    padding-right: 3px;
+}

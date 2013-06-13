@@ -5,7 +5,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
-    
+
     <ui:define name="headtitle">          
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"><h:outputLabel style="font-weight: bold" styleClass="cent" value="#{kredytyMB.dataPdf}" /></h:panelGroup>
@@ -13,29 +13,33 @@
 
 
     <ui:define name="maincenter">
-        
+
         <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false" style="height:632px">
                     <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="15"  
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">                
-                    <p:column><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
-                    <p:column><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
-                    <p:column><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
-                    <p:column><f:facet name="header">Prowizja Banku w Procentach</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
-                    <p:column><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
-                    <p:column><f:facet name="header">Ubezpieczenie w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
-                    <p:column><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
-                    <p:column><f:facet name="header">Swot w Procentach</f:facet>#{data2.swotWprocentach}</p:column>
-                    <p:column><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
-                    <p:column><f:facet name="header">Kwota Konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
-                    <p:column><f:facet name="header">Okres Kredytowania w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
-                    <p:column><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
-                    <p:column><f:facet name="header">Oprocentowanie w Procentach</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
-                    <p:column><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</p:column>
-                    <p:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
-                    <p:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
-                    <p:column><f:facet name="header">Generuj PDF</f:facet><h:commandButton value=" Generuj " action="#{kredytyMB.callPdf(data2.idkredyty)}" /></p:column>
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">                
+                        <p:column width="120"><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
+                        <p:column ><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
+                        <p:column width="30"><f:facet name="header">Prowizja Banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Ubezp. w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Swot w %</f:facet>#{data2.swotWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota Konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
+                        <p:column width="30"><f:facet name="header">Okres Kredyt. w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
+                        <p:column width="30"><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">%</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</p:column>
+                        <p:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
+                        <p:column width="85"><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
+                        <p:column width="10" style="white-space: nowrap; padding: 5px 5px" ><f:facet name="header">PDF</f:facet>
+                            <h:commandLink action="#{kredytyMB.callPdf(data2.idkredyty)}" >  
+                                <p:graphicImage height="32" value="/resources/photo/pdf.png" />  
+                            </h:commandLink>  
+                        </p:column>
                     </p:dataTable>
                 </h:form>
             </p:scrollPanel>
