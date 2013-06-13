@@ -15,6 +15,7 @@
     <ui:define name="maincenter">
         <h:form>
         <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
+            <p:scrollPanel style="height: 70%">
             <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="20"  
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
                 
@@ -36,6 +37,7 @@
                 <p:column><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
                 <p:column><f:facet name="header">Generuj PDF</f:facet><h:commandButton value=" Generuj " action="#{kredytyMB.callPdf(data2.idkredyty)}" /></p:column>
             </p:dataTable>
+            </p:scrollPanel>
         </h:panelGroup>
         </h:form>
         <h:form styleClass="bodyheadtop bodyheadbuttom">
