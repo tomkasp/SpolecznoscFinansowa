@@ -8,7 +8,6 @@ import generatorPDF.core.GeneratorPDF;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
