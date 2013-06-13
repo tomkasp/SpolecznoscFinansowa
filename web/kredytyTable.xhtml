@@ -16,7 +16,7 @@
 
         <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
             <p:scrollPanel style="height: 70%">
-                <h:form prependId="false" style="height:632px">
+                <h:form prependId="false">
                     <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" styleClass="employeeTable" rowStyleClass="employeeTableOddRow,employeeTableEvenRow"  paginator="true" rows="15"  
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">                
                         <p:column width="120"><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
