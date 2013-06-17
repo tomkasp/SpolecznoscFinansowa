@@ -28,7 +28,7 @@ public class NewMain {
         //System.out.println("P: "+ l.get(0).getImie() );     
         
         System.out.println("all is OK ;) ");
-//        
+        
 //        kdao.readKlient(5);
 //        
 //        Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -42,7 +42,7 @@ public class NewMain {
 //        
 //        session.getTransaction().commit();
 //        session.close();
-//        
+       
     }
     
 }
