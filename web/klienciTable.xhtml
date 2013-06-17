@@ -17,7 +17,7 @@
         
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
-                <h:form prependId="false" style="height:632px">
+                <h:form prependId="false">
                     <p:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable"  paginator="true" rows="15"  
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">               
                     <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
