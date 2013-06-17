@@ -17,8 +17,8 @@
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
-                    <p:dataTable value="#{klienciMB.klientList}" var="data" styleClass="employeeTable"  paginator="true" rows="15"  
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">               
+                    <p:dataTable value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">               
                     <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
                     <p:column filterBy="#{data.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</p:column>
                     <p:column filterBy="#{data.pesel}" width="110"><f:facet name="header">Pesel</f:facet>#{data.pesel}</p:column>
@@ -30,7 +30,7 @@
                     <p:column><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu}</p:column>
                     <p:column><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania}</p:column>
                     <p:column><f:facet name="header">Poczta</f:facet>#{data.poczta}</p:column>
-                    <p:column width="60"><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Klienci" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></p:column>            
+                    <p:column width="60"><f:facet name="header">Klient Kredyty</f:facet><h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" /></p:column>            
                     </p:dataTable>
                 </h:form>
             </p:scrollPanel>

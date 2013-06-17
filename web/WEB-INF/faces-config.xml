@@ -44,7 +44,15 @@
         <from-view-id>klienciTable.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>indexstart</from-outcome>
-            <to-view-id>index.xhtml</to-view-id>          
+            <to-view-id>form1.xhtml</to-view-id>          
+        </navigation-case>
+    </navigation-rule> 
+    
+    <navigation-rule>   
+        <from-view-id>index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>indexstart</from-outcome>
+            <to-view-id>form1.xhtml</to-view-id>          
         </navigation-case>
     </navigation-rule> 
  
