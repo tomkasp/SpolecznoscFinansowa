@@ -5,6 +5,7 @@
 package MBeans;
 
 import generatorPDF.core.GeneratorPDF;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +21,7 @@ import sql.entity.Kredyty;
  */
 @ManagedBean
 @SessionScoped
-public class KredytyMB {
+public class KredytyMB implements Serializable{
 
     Kredyty kredyty = new Kredyty();
     Klienci klienci2 = new Klienci();

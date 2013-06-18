@@ -48,16 +48,7 @@ public class Umowa  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu()  , 280, 750, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 400, 750, 0);
               
-                
-                content.endText();   
-                
-                
-                content = pdfStamper.getOverContent(2);//pierwsza stronka
-                content.beginText();
-                content.setFontAndSize(bf, 10);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 200, 794, 0);
-                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 200, 205, 0);
                 content.endText();   
                 
                 

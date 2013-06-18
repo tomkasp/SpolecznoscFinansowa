@@ -37,29 +37,26 @@ public class DeklaracjaWekslowa2  {
                 content.setFontAndSize(bf, 12);
                 
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow()+", dn. "+kredyt.getDataDodaniaKredytu().toString() , 365, 815, 0);
-               
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow()+", dn. "+kredyt.getDataDodaniaKredytu().toString() , 365, 816, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 250, 589, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 100, 574, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 300, 574, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 250, 590, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 100, 575, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 300, 575, 0);
                 
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() +" "+klient.getNazwisko() , 25, 383, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() +" "+klient.getNazwisko() , 25, 382, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 360, 382, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 360, 383, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() , 125, 352, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() , 325, 352, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() , 125, 353, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 325, 353, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu() , 240, 321, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu() , 360, 321, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu() , 240, 322, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu() , 360, 322, 0);
                 
                 
                 
                 content.endText();   
-        } catch (DocumentException ex) {
-            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
         

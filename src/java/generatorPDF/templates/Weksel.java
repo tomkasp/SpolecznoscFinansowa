@@ -38,18 +38,18 @@ public class Weksel  {
                 content.beginText();
                 content.setFontAndSize(bf, 12);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 180, 760, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 160, 760, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 360, 760, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 80, 660, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 260, 660, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 460, 660, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 30, 660, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 215, 660, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 420, 660, 0);
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 80, 630, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 180, 385, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 180, 340, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()+" "+klient.getNrDowodu(), 180, 295, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 210, 385, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 210, 340, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()+" "+klient.getNrDowodu(), 210, 295, 0);
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 360, 120, 0);
                 
