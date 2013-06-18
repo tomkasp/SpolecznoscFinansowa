@@ -27,9 +27,25 @@ public class KredytyMB implements Serializable{
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
-    Date datenow = new Date();    
+    Date datenow = new Date();  
     
+        
     private String dataPdf;
+    
+    int intdata = 0;
+
+    public int getIntdata() {
+        return intdata;
+    }
+
+    public void setIntdata(int intdata) {
+        this.intdata = intdata;
+    }
+    public int callInidata(){
+        
+        return 1;
+    }
+
 
     public String getDataPdf() {
         return dataPdf;
@@ -84,7 +100,10 @@ public class KredytyMB implements Serializable{
         klienci2=kdao.readKlient(xdata);
         return "xxx";
     }
-    public void callPdf(int ydata){           
-        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());       
+    public void callPdf(int ydata){                   
+        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());           
+        this.setIntdata(1);
+//        return "alert('hello cooll')";
+//        return getDataPdf();
     }
  }

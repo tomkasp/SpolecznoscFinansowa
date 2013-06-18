@@ -2,11 +2,12 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
+        <Node id="ktable.xhtml" x="150" y="300" zoom="true"/>
         <Node id="index.xhtml" x="676" y="110" zoom="true"/>
         <Node id="form2.xhtml" x="400" y="300" zoom="true"/>
         <Node id="form1.xhtml" x="440" y="175" zoom="true"/>
-        <Node id="templates/formTemplate.xhtml" x="150" y="150" zoom="true"/>
         <Node id="klienciTable.xhtml" x="50" y="278" zoom="true"/>
+        <Node id="templates/formTemplate.xhtml" x="150" y="150" zoom="true"/>
         <Node id="kredytyTable.xhtml" x="150" y="450" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
