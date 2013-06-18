@@ -43,7 +43,7 @@ public class KredytyMB implements Serializable{
     }
     public int callInidata(){
         
-        return 1;
+        return 0;
     }
 
 
@@ -101,8 +101,12 @@ public class KredytyMB implements Serializable{
         return "xxx";
     }
     public void callPdf(int ydata){                   
-        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());           
-        this.setIntdata(1);
+        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik()); 
+        this.intdata++;
+//        this.setIntdata(1);
+        if(this.getIntdata() >= 2){
+            this.setIntdata(1);
+        }
 //        return "alert('hello cooll')";
 //        return getDataPdf();
     }
