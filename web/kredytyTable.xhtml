@@ -7,6 +7,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     
+    
     <ui:define name="headtitle">          
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
@@ -17,7 +18,7 @@
         
         <h:panelGroup style=" display: block" styleClass="borderbeau vmargintable">
             <p:scrollPanel style="height: 70%">
-                <h:form prependId="false" onsubmit="return alert('help me Lord....... ')">
+                <h:form prependId="false">
                     <p:dataTable value="#{kredytyMB.kredytylist}" var="data2" paginator="true" rows="20"  
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">                
                         <p:column width="120"><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
@@ -50,14 +51,14 @@
             <h:panelGroup styleClass="cent "><h:button value="dodaj nowy kredyt" outcome="form2"/></h:panelGroup>            
         </h:form> 
        
-       <c:if test="${kredytyMB.intdata == 1}">
-                   <script type="text/javascript">
-                       if(window.window){
-                           alert('#{kredytyMB.dataPdf}');
+        <c:if test="${kredytyMB.intdata == 1}">                      
+                   <script type="text/javascript">                       
+                       if(window.window){                          
+                          alert('#{kredytyMB.dataPdf}');                          
                        }
-                   </script>  
-                   <c:set var="intdata" scope="session" value="${0}" />
-            </c:if> 
+                   </script>                                
+       </c:if> 
+        
         
     </ui:define>
     
