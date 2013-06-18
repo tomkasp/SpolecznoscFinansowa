@@ -13,7 +13,9 @@
     padding-bottom: 50px;
 }
 .bodytextbutton{
+    width: 700px; margin-left: auto; margin-right: auto;
     padding-bottom: 20px;
+    display: block;
 }
 .bodytexttop{
     padding-top: 15px;
@@ -51,23 +53,8 @@
 .relativeR{
     position: relative; right: 0px; margin-left: 40%; margin-right: auto;
 }
-.relativeRR{
-    position: relative; right: 0px; margin-left: 52%; margin-right: auto;
-}
-.relativeL{
-    position: relative; left: 150px; margin-right: auto;
-}
-.centmain{
-    width: 700px; margin-left: auto; margin-right: auto; 
-}
 .absoluteR{
     position: absolute; right: 0px; left: auto; margin-right: 60%; text-align: right;
-}
-.absoluteRE{
-    position: absolute; right: 21%; left: auto; 
-}
-.absoluteL{
-    position: absolute; left: 0px; right: auto; margin-left: 60%;
 }
 .floatR{
     float: right; margin-right: 10%;
