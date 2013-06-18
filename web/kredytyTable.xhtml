@@ -10,7 +10,7 @@
     
     <ui:define name="headtitle">          
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"><h:outputLabel value="#{kredytyMB.dataPdf}"  style="font-size: large"/><h:outputLabel value="#{kredytyMB.intdata}"  style="font-size:large; color: red"/></h:panelGroup>
     </ui:define>
     
     <ui:define name="maincenter">
@@ -51,12 +51,13 @@
             <h:panelGroup styleClass="cent "><h:button value="dodaj nowy kredyt" outcome="form2"/></h:panelGroup>            
         </h:form> 
        
-        <c:if test="${kredytyMB.intdata == 1}">                      
+        <c:if test="${kredytyMB.intdata == 1 || kredytyMB.intdata == 2}">                      
                    <script type="text/javascript">                       
                        if(window.window){                          
                           alert('#{kredytyMB.dataPdf}');                          
                        }
-                   </script>                                
+                   </script>             
+                   <h:outputLabel value="#{kredytyMB.intdata}"  style="font-size: x-large"/>
        </c:if> 
         
         
