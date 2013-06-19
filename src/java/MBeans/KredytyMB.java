@@ -30,17 +30,17 @@ public class KredytyMB implements Serializable{
     Date datenow = new Date();  
     
         
-    private String dataPdf;
+    private String dataPdf;       
+    Boolean knowpdf = true;
+
+    public Boolean getKnowpdf() {
+        return knowpdf;
+    }
+
+    public void setKnowpdf(Boolean knowpdf) {
+        this.knowpdf = knowpdf;
+    }
     
-    int intdata = 0;
-
-    public int getIntdata() {
-        return intdata;
-    }
-
-    public void setIntdata(int intdata) {
-        this.intdata = intdata;
-    }
     public int callInidata(){
         
         return 0;
@@ -101,7 +101,7 @@ public class KredytyMB implements Serializable{
         return "xxx";
     }
     public void callPdf(int ydata){                   
-        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik()); 
-        this.intdata++;
+        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());         
+        this.setKnowpdf(false);
     }
  }

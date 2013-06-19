@@ -48,16 +48,14 @@
         </h:panelGroup>       
         <h:form styleClass="bodyheadtop bodyheadbuttom">
             <h:panelGroup styleClass="cent "><h:button value="dodaj nowy kredyt" outcome="form2"/></h:panelGroup>            
-        </h:form> 
-       
-       <c:if test="${kredytyMB.intdata == 1}">
+        </h:form>               
+        <c:if test="${kredytyMB.knowpdf == false}">
                    <script type="text/javascript">
                        if(window.window){
                            alert('#{kredytyMB.dataPdf}');
                            
                        }
                    </script>  
-                   <c:set var="kredytyMB.intdata" scope="session" value="${0}" />
             </c:if> 
         
     </ui:define>
