@@ -103,9 +103,9 @@ public class KredytyMB {
         this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik()); 
         this.intdata++;
 //        this.setIntdata(1);
-        if(this.getIntdata() >= 3){
-            this.setIntdata(1);
-        }
+//        if(this.getIntdata() >= 3){
+//            this.setIntdata(1);
+//        }
 //        return "alert('hello cooll')";
 //        return getDataPdf();
     }
