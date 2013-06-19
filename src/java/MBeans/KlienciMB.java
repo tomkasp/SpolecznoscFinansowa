@@ -4,6 +4,7 @@
  */
 package MBeans;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.RequestScoped;
@@ -18,7 +19,7 @@ import sql.entity.Klienci;
 @ManagedBean
 @SessionScoped
 //@RequestScoped
-public class KlienciMB {
+public class KlienciMB implements Serializable{
     private int count = 0; String datanow = "resources/photo/klienci.jpg";
 
     public String getDatanow() {

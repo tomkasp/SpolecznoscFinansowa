@@ -43,7 +43,7 @@ public class Prowizja  {
                 
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 330, 318, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 110, 268, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 110, 269, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta()+" "+klient.getUlica()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 110, 248, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 170, 223, 0);
                 

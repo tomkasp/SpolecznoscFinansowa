@@ -5,6 +5,7 @@
 package MBeans;
 
 import generatorPDF.core.GeneratorPDF;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +21,7 @@ import sql.entity.Kredyty;
  */
 @ManagedBean
 @SessionScoped
-public class KredytyMB {
+public class KredytyMB implements Serializable{
 
     Kredyty kredyty = new Kredyty();
     Klienci klienci2 = new Klienci();
@@ -29,17 +30,17 @@ public class KredytyMB {
     Date datenow = new Date();  
     
         
-    private String dataPdf;
+    private String dataPdf;       
+    Boolean knowpdf = true;
+
+    public Boolean getKnowpdf() {
+        return knowpdf;
+    }
+
+    public void setKnowpdf(Boolean knowpdf) {
+        this.knowpdf = knowpdf;
+    }
     
-    int intdata = 0;
-
-    public int getIntdata() {
-        return intdata;
-    }
-
-    public void setIntdata(int intdata) {
-        this.intdata = intdata;
-    }
     public int callInidata(){
         
         return 0;
@@ -100,13 +101,7 @@ public class KredytyMB {
         return "xxx";
     }
     public void callPdf(int ydata){                   
-        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik()); 
-        this.intdata++;
-//        this.setIntdata(1);
-//        if(this.getIntdata() >= 3){
-//            this.setIntdata(1);
-//        }
-//        return "alert('hello cooll')";
-//        return getDataPdf();
+        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());         
+        this.setKnowpdf(false);
     }
  }

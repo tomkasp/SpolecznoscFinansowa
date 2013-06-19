@@ -28,6 +28,9 @@ a:link:hover, a:visited:hover  {
   text-decoration : underline;
 }*/
 
+root { 
+    display: block;
+}
 #top a:link, #top a:visited {
   color: black;
   font-weight : bold;

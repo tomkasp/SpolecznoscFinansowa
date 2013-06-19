@@ -11,6 +11,10 @@
     font-size: small;
 }
 
+.ui-datepicker-calendar{
+    background: #ffffff;
+}
+
 .ui-datatable thead th{   
     white-space: pre-wrap;
     border:1px solid #757575; 
