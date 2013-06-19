@@ -103,11 +103,5 @@ public class KredytyMB implements Serializable{
     public void callPdf(int ydata){                   
         this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik()); 
         this.intdata++;
-//        this.setIntdata(1);
-        if(this.getIntdata() >= 2){
-            this.setIntdata(1);
-        }
-//        return "alert('hello cooll')";
-//        return getDataPdf();
     }
  }
