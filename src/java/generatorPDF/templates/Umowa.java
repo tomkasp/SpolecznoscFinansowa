@@ -47,8 +47,10 @@ public class Umowa  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()  , 210, 750, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu()  , 280, 750, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 400, 750, 0);
-              
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 200, 205, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 319, 360, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 193, 154, 0);
                 content.endText();   
                 
                 
