@@ -9,5 +9,9 @@
     <property name="hibernate.connection.password"/>
     <mapping class="sql.entity.Kredyty"/>
     <mapping class="sql.entity.Klienci"/>
+    <mapping class="sql.entity.Klienci"/>
+    <mapping class="sql.entity.Kredyty"/>
+    <mapping class="sql.entity.Klienci"/>
+    <mapping class="sql.entity.Kredyty"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,12 @@
 package sql.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
@@ -82,11 +88,12 @@ public class KredytyDao {
     }
     
     
+    @SuppressWarnings("unchecked")
     public List<Kredyty> getKredytyOneKlient(int idKlienta) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        Query q=(Query) session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
+        Query q=session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
         List<Kredyty> list;
         list = (List<Kredyty>) q.list();
         
@@ -96,4 +103,5 @@ public class KredytyDao {
         return list;
     }
     
+ 
 }

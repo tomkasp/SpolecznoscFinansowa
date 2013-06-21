@@ -5,11 +5,22 @@
 package MBeans;
 
 import generatorPDF.core.GeneratorPDF;
+import inne.PdfDownloader;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -22,44 +33,26 @@ import sql.entity.Kredyty;
 @ManagedBean
 @SessionScoped
 public class KredytyMB implements Serializable{
-
+    
+    private static final long serialVersionUID = 1L;
     Kredyty kredyty = new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
     Date datenow = new Date();  
     
-        
-    private String dataPdf;       
-    Boolean knowpdf = true;
-
-    public Boolean getKnowpdf() {
-        return knowpdf;
-    }
-
-    public void setKnowpdf(Boolean knowpdf) {
-        this.knowpdf = knowpdf;
-    }
+    Boolean showDialog = false;
+    Boolean pdfSuccess = false;
     
-    public int callInidata(){
-        
+
+    public int callInidata(){   
         return 0;
     }
-
-
-    public String getDataPdf() {
-        return dataPdf;
-    }
-
-    public void setDataPdf(String dataPdf) {
-        this.dataPdf = dataPdf;
-    }
-
+   
     public List<Kredyty> getKredytylist() {
-        return kredytylist;
+        return kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
     }
     public List<Kredyty> getKredytylists(int datax) {
-        
         return kredytydeo2.getKredytyOneKlient(datax);
     }
 
@@ -101,7 +94,34 @@ public class KredytyMB implements Serializable{
         return "xxx";
     }
     public void callPdf(int ydata){                   
-        this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());         
-        this.setKnowpdf(false);
+        GeneratorPDF.generuj(ydata);     
+        pdfSuccess=GeneratorPDF.isPdfGenerated();
+        showDialog=true;
     }
+
+    public Boolean getPdfSuccess() {
+        return pdfSuccess;
+    }
+
+    public void setPdfSuccess(Boolean pdfSuccess) {
+        this.pdfSuccess = pdfSuccess;
+    }
+
+    public Boolean getShowDialog() {
+        return showDialog;
+    }
+
+    public void setShowDialog(Boolean showDialog) {
+        this.showDialog = showDialog;
+    }
+
+    public void downLoad(int nrklienta,int nrkredytu) throws IOException {        
+        PdfDownloader loader=new PdfDownloader();
+        loader.downLoad(nrklienta, nrkredytu);     
+      }  
+       
+        
+        
+        
+        
  }

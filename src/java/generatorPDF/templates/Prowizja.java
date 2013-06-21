@@ -36,21 +36,18 @@ public class Prowizja  {
                 content.beginText();
                 content.setFontAndSize(bf, 12);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 330, 615, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 330, 615, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 110, 565, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta()+" "+klient.getUlica()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 110, 545, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 170, 520, 0);
                 
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 330, 318, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 330, 318, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 110, 269, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy()+" "+klient.getPoczta()+" "+klient.getUlica()+" "+klient.getNrDomu()+"/"+klient.getNrMieszkania() , 110, 248, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 170, 223, 0);
                 
                 content.endText();   
-        } catch (DocumentException ex) {
-            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
         
