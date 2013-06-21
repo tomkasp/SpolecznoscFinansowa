@@ -19,8 +19,18 @@ import sql.entity.Klienci;
 @SessionScoped
 //@RequestScoped
 public class KlienciMB implements Serializable{
-    private int count = 0; String datanow = "resources/photo/klienci.jpg";
+    
+    private Klienci selectedClient;
+    
+    private int count = 0; 
+    String datanow = "resources/photo/klienci.jpg";
+    Klienci klient=new Klienci();
+    KlienciDao kdao=new KlienciDao();
+    List<Klienci> KlientList;
 
+    public KlienciMB() {
+    }
+    
     public String getDatanow() {
         return datanow;
     }
@@ -38,13 +48,6 @@ public class KlienciMB implements Serializable{
         this.hello = hello;
     }
 
-    Klienci klient=new Klienci();
-    KlienciDao kdao=new KlienciDao();
-    List<Klienci> KlientList;
-    
-    public KlienciMB() {
-    }
-    
     public String submit(){
         kdao.createKlient(klient);
         count = 1;
@@ -55,9 +58,11 @@ public class KlienciMB implements Serializable{
         this.setKlient(klient);
         return "klienciTable";
     }
+    
     public String previous(){
         return "index";
     }
+    
     public String inputImg(){    
 //        this.setDatanow("/resources/photo/klienci.jpg");
 //        return this.getDatanow();
@@ -67,8 +72,6 @@ public class KlienciMB implements Serializable{
     public void callmeklienci(){
         klient = (Klienci) kdao.getKlientList();
     }
-    
-
     
     public void hello(){
         hello = "Hello";
@@ -100,5 +103,15 @@ public class KlienciMB implements Serializable{
         this.setHello("Know you are there");
 //        return this.klient.getImie()+" hello and welcome";
     }
+
+    public Klienci getSelectedClient() {
+        return selectedClient;
+    }
+
+    public void setSelectedClient(Klienci selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+    
+    
     
 }

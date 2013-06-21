@@ -18,7 +18,8 @@
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
-                    <p:dataTable value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  
+                    <p:dataTable value="#{klienciMB.klientList}" var="data" paginator="true" rows="20" 
+                                 rowKey="#{data}"  selection="#{klienciMB.selectedClient}"  selectionMode="single"
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">               
                     <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie}</p:column>
                     <p:column filterBy="#{data.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko}</p:column>
