@@ -1,12 +1,14 @@
 package sql.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.util.NewHibernateUtil;
 
-public class KlienciDao {
+public class KlienciDao implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public KlienciDao() {
     }

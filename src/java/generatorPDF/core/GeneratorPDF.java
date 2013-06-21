@@ -17,8 +17,9 @@ public class GeneratorPDF {
     private static boolean pdfGenerated;
     
     public static String generuj(int idKredytu) {   
+        
+            pdfGenerated=false;
        
-       pdfGenerated=false;    
        int idKlietna = getIdKlienta(idKredytu);
        
        new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();

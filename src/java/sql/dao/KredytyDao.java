@@ -1,19 +1,15 @@
 package sql.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.Serializable;
 import java.util.List;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
 import sql.util.NewHibernateUtil;
 
-public class KredytyDao {
+public class KredytyDao  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public KredytyDao() {
     }
