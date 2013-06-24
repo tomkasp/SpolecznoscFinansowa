@@ -4,9 +4,17 @@
     background: none repeat scroll 0 0 #ffffff;	
 }
 
-.ui-widget-content {
+
+ui-dialog-content ui-widget-content {
     background:none;
 }
+
+
+.ui-widget-overlay {
+    background: url("/regForms/faces/javax.faces.resource/images/ui-bg_flat_0_2d5972_40x100.png?ln=primefaces-aristo") repeat-x scroll 50% 50% rgb(45, 89, 114);
+    opacity: 0.3;
+}
+
 .ui-widget{
     font-size: small;
 }
