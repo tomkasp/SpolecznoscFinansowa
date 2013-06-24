@@ -1,5 +1,6 @@
 package sql.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -7,7 +8,8 @@ import sql.entity.Klienci;
 import sql.entity.Kredyty;
 import sql.util.NewHibernateUtil;
 
-public class KredytyDao {
+public class KredytyDao  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public KredytyDao() {
     }
@@ -82,11 +84,12 @@ public class KredytyDao {
     }
     
     
+    @SuppressWarnings("unchecked")
     public List<Kredyty> getKredytyOneKlient(int idKlienta) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        Query q=(Query) session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
+        Query q=session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
         List<Kredyty> list;
         list = (List<Kredyty>) q.list();
         
@@ -96,4 +99,5 @@ public class KredytyDao {
         return list;
     }
     
+ 
 }

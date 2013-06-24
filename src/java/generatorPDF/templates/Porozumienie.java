@@ -10,6 +10,9 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfStamper;
 import generatorPDF.core.GeneratorPDF;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sql.dao.KredytyDao;
@@ -37,7 +40,7 @@ public class Porozumienie  {
                 
                 
                 content.setFontAndSize(bf, 17);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 348, 674, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "P."+kredyt.getNrUmowyPosrednictwa() , 337, 674, 0);
                 
                 content.setFontAndSize(bf, 12);
                 
@@ -80,12 +83,16 @@ public class Porozumienie  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 100, 474, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 330, 474, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKonsolidacji().toString() , 60, 430, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 60, 430, 0);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "........................." , 400, 415, 0);
+                Calendar c = Calendar.getInstance();
+                c.setTime(kredyt.getDataDodaniaKredytu());
+                c.add(Calendar.DATE, 7);
+                Date plus7dni=c.getTime();
+                SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
                 
-                
-                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, dt1.format( plus7dni ) , 400, 415, 0);
+              
                 content.endText();   
         } catch (DocumentException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);

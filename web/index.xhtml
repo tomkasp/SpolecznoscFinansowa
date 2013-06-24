@@ -30,9 +30,9 @@
             <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin bodyimage2">
 
                 <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft ">Login</h:panelGroup>            
-                <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton "><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
-                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Haslo" styleClass="absoluteR" /><h:inputText id="naz" styleClass="relativeR" value="#{klienciMB.klient.nazwisko}" required="true"><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>            
-                <h:panelGroup style="display: block" styleClass="cent bodyheadbuttom"><h:button outcome="indexstart" value=" login "></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
+                <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton "><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" ><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Haslo" styleClass="absoluteR" /><h:inputText id="naz" styleClass="relativeR" ><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="cent bodyheadbuttom"><h:button outcome="klienciTable" value="zaloguj" ></h:button></h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
             </h:panelGroup>
             </h:form>
         </div>

@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-04 13:18:45 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-24 11:55:43 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="kredyty"
-    ,catalog="system4"
+    ,catalog="System4"
 )
 public class Kredyty  implements java.io.Serializable {
 
@@ -45,6 +45,7 @@ public class Kredyty  implements java.io.Serializable {
      private String miejscePodpisaniaDokumentow;
      private Date dataMozliwegoUruchomienia;
      private Date dataDodaniaKredytu;
+     private Boolean czyWygenerowanoDokumenty;
 
     public Kredyty() {
     }
@@ -53,7 +54,7 @@ public class Kredyty  implements java.io.Serializable {
     public Kredyty(Klienci klienci) {
         this.klienci = klienci;
     }
-    public Kredyty(Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu) {
+    public Kredyty(Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty) {
        this.klienci = klienci;
        this.nazwaBanku = nazwaBanku;
        this.nrUmowyPosrednictwa = nrUmowyPosrednictwa;
@@ -72,6 +73,7 @@ public class Kredyty  implements java.io.Serializable {
        this.miejscePodpisaniaDokumentow = miejscePodpisaniaDokumentow;
        this.dataMozliwegoUruchomienia = dataMozliwegoUruchomienia;
        this.dataDodaniaKredytu = dataDodaniaKredytu;
+       this.czyWygenerowanoDokumenty = czyWygenerowanoDokumenty;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -245,6 +247,15 @@ public class Kredyty  implements java.io.Serializable {
     
     public void setDataDodaniaKredytu(Date dataDodaniaKredytu) {
         this.dataDodaniaKredytu = dataDodaniaKredytu;
+    }
+    
+    @Column(name="czyWygenerowanoDokumenty")
+    public Boolean getCzyWygenerowanoDokumenty() {
+        return this.czyWygenerowanoDokumenty;
+    }
+    
+    public void setCzyWygenerowanoDokumenty(Boolean czyWygenerowanoDokumenty) {
+        this.czyWygenerowanoDokumenty = czyWygenerowanoDokumenty;
     }
 
 

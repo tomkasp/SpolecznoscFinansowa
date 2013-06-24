@@ -36,6 +36,8 @@ public class Umowa  {
                 content.beginText();
                 content.setFontAndSize(bf, 10);
                 
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 385, 816, 0);
+                
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 80, 783, 0);
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 80, 773, 0);
@@ -47,11 +49,11 @@ public class Umowa  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()  , 210, 750, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu()  , 280, 750, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 400, 750, 0);
-              
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 200, 205, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 318, 361, 0);
+                
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 193, 155, 0);
                 content.endText();   
-                
-                
                 
         } catch (DocumentException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);

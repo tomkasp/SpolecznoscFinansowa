@@ -36,7 +36,11 @@ public class Warunki  {
                 PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
                 content.beginText();
                 
+                content.setFontAndSize(bf, 13);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNazwaBanku() , 353 , 760 , 0);
+                
                 content.setFontAndSize(bf, 11);
+                
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 275 , 704 , 0);
                 
                 content.setFontAndSize(bf, 14);
@@ -49,7 +53,7 @@ public class Warunki  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKosztaWpln().toString() , 270 , 485 , 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getProwizjaBankuWpln().toString() , 270 , 450 , 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getUbezpieczenieWpln().toString() , 270 , 415 , 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 270 , 380 , 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "0" , 270 , 380 , 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getOprocentowanieWprocentach().toString() , 270 , 345 , 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 270 , 310 , 0);
                 

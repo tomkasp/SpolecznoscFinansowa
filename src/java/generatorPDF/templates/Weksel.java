@@ -38,20 +38,20 @@ public class Weksel  {
                 content.beginText();
                 content.setFontAndSize(bf, 12);
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 160, 760, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 360, 760, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 30, 660, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 215, 660, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 420, 660, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 80, 630, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 210, 385, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 210, 340, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()+" "+klient.getNrDowodu(), 210, 295, 0);
-                
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 360, 120, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 160, 760, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 360, 760, 0);
+//                
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() , 30, 660, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString() , 215, 660, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 420, 660, 0);
+//                
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "???" , 80, 630, 0);
+//                
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie()+" "+klient.getNazwisko() , 210, 385, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc() , 210, 340, 0);
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu()+" "+klient.getNrDowodu(), 210, 295, 0);
+//                
+//                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel() , 360, 120, 0);
                 
                 content.endText();   
         } catch (DocumentException ex) {

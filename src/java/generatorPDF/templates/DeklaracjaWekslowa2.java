@@ -41,7 +41,7 @@ public class DeklaracjaWekslowa2  {
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 250, 590, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 100, 575, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() , 300, 575, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() , 300, 575, 0);
                 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() +" "+klient.getNazwisko() , 25, 383, 0);
                 

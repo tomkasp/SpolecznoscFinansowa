@@ -55,7 +55,7 @@ public class Polecenie  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: "+klient.getPesel() , 30, 680, 0);
                 }
                 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 20, 495, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa() , 370, 513, 0);
                 
                 
                 content.endText();   

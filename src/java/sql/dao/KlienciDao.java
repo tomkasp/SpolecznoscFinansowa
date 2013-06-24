@@ -1,28 +1,31 @@
 package sql.dao;
-
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.util.NewHibernateUtil;
 
-public class KlienciDao {
+public class KlienciDao implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public KlienciDao() {
     }
     
-    public void createKlient(Klienci klient) {
+    public void createOrUpdateKlient(Klienci klient) 
+    {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        session.save(klient);
+        session.saveOrUpdate(klient);
         
         session.getTransaction().commit();
         
         session.close();
     }
     
-    public Klienci readKlient(Integer idKlient) {
+    public Klienci readKlient(Integer idKlient) 
+    {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
      
@@ -45,11 +48,11 @@ public class KlienciDao {
         session.close();
     }
     
-    public void deleteKlient(Integer idKlient) {
+    public void deleteKlient(Klienci klient) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        session.delete(idKlient.toString(),Klienci.class);
+        session.delete(klient);
         
         session.getTransaction().commit();
 //        Query query = session.createQuery("delete from Klienci where idKlientci=" + idKlient);

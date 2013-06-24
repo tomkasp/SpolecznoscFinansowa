@@ -60,9 +60,7 @@ public class Oswiadczenie  {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString() , 183, 485, 0);
                 
                 content.endText();   
-        } catch (DocumentException ex) {
-            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
         
