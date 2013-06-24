@@ -6,10 +6,12 @@ package MBeans;
 
 import generatorPDF.core.GeneratorPDF;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -31,8 +33,46 @@ public class KredytyMB implements Serializable{
     
         
     private String dataPdf;       
-    Boolean knowpdf = true;
+    Boolean knowpdf = true;    
+    BigDecimal calc, calc2, calc3, calc4;    
+    
+    
+    double test1; double test2; double test3; double num1;    
+    int num2, num3;
 
+    public double getTest3() {       
+        return test3;
+    }
+
+    public void setTest3(double test3) {
+        this.test3 = test3;
+    }
+
+    public double getTest2() {
+        return test2;
+    }
+
+    public void setTest2(double test2) {
+        this.test2 = test2;
+    }
+
+    public double getTest1() {
+        return test1;
+    }
+
+    public void setTest1(double test1) {
+        this.test1 = test1;
+    }
+    
+
+    public BigDecimal getCalc() {
+        return calc;
+    }
+
+    public void setCalc(BigDecimal calc) {
+        this.calc = calc;
+    }
+    
     public Boolean getKnowpdf() {
         return knowpdf;
     }
@@ -103,5 +143,44 @@ public class KredytyMB implements Serializable{
     public void callPdf(int ydata){                   
         this.setDataPdf(GeneratorPDF.generuj(ydata)+" "+GeneratorPDF.getLicznik());         
         this.setKnowpdf(false);
+    }
+
+    public double updateAll(){
+      this.num3 = (int)this.test2;
+      this.kredyty.setProwizjaBankuWprocentach(num3);
+      this.test2 = this.test2/100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
+      calc = new BigDecimal(this.test2);
+      this.kredyty.setProwizjaBankuWpln(calc);
+      updataAll2();
+      if(this.num2==1){
+          updateAll3();
+      }
+      return this.test2;      
+    }    
+    
+    public double updataAll2(){
+        this.num3 = (int)this.test1;
+        this.kredyty.setSwotWprocentach(num3);
+        this.test1 = this.test1/100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();  
+        calc2 = new BigDecimal(this.test1);
+        this.kredyty.setSwotWpln(calc);
+        
+        return this.test1;
+    }
+    
+    public double updateAll3(){
+        
+        this.num1 = this.test3;
+//        this.num3 = (int)this.test3;
+        calc3 = new BigDecimal(this.test3);
+        this.kredyty.setKwotaKonsolidacji(calc3);
+        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
+        
+        this.test3 = this.test3 - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.num1;
+        this.num2=1;
+        
+        calc4 = new BigDecimal(this.test3);
+        this.kredyty.setWolnaGotowka(calc4);
+        return this.test3;
     }
  }
