@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-20 12:11:05 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-24 11:55:43 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,12 +24,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="klienci"
-    ,catalog="system4"
+    ,catalog="System4"
 )
 public class Klienci  implements java.io.Serializable {
 
 
      private Integer idKlienci;
+     private Uzytkownik uzytkownik;
      private String imie;
      private String nazwisko;
      private String pesel;
@@ -45,7 +48,12 @@ public class Klienci  implements java.io.Serializable {
     public Klienci() {
     }
 
-    public Klienci(String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<Kredyty> kredyties) {
+	
+    public Klienci(Uzytkownik uzytkownik) {
+        this.uzytkownik = uzytkownik;
+    }
+    public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<Kredyty> kredyties) {
+       this.uzytkownik = uzytkownik;
        this.imie = imie;
        this.nazwisko = nazwisko;
        this.pesel = pesel;
@@ -70,6 +78,15 @@ public class Klienci  implements java.io.Serializable {
     
     public void setIdKlienci(Integer idKlienci) {
         this.idKlienci = idKlienci;
+    }
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fk_uzytkownik", nullable=false)
+    public Uzytkownik getUzytkownik() {
+        return this.uzytkownik;
+    }
+    
+    public void setUzytkownik(Uzytkownik uzytkownik) {
+        this.uzytkownik = uzytkownik;
     }
     
     @Column(name="imie", length=20)

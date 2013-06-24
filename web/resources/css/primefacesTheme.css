@@ -1,7 +1,7 @@
 
 
 .ui-widget-content.ui-datatable-even{
-   background: none repeat scroll 0 0 #ffffff;	
+    background: none repeat scroll 0 0 #ffffff;	
 }
 
 .ui-widget-content {
@@ -32,7 +32,7 @@
 }
 
 TR.ui-widget-content.ui-datatable-odd.ui-state-highlight{   
-       background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
 }
 
 TR.ui-widget-content.ui-datatable-even.ui-state-highlight{   
@@ -40,10 +40,10 @@ TR.ui-widget-content.ui-datatable-even.ui-state-highlight{
 }
 
 TR.ui-widget-content.ui-datatable-even.ui-state-hover{   
-     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);
 }
 
 
 TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
-     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
+    background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
 }

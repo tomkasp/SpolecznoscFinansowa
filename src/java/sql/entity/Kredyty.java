@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-20 12:11:05 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-24 11:55:43 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="kredyty"
-    ,catalog="system4"
+    ,catalog="System4"
 )
 public class Kredyty  implements java.io.Serializable {
 

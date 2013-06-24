@@ -26,7 +26,7 @@
         <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />
             <div class="centmain-img">
                 <ui:insert name="top">
-                    <h:form><h:panelGroup styleClass="borderofgold"><h:link outcome="index" value="&nbsp;&nbsp;Logout &nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold"><h:link outcome="form1" value="&nbsp;&nbsp;Dodaj Klienta&nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold">  <h:link outcome="klienciTable" value="&nbsp;&nbsp;Lista Klientów&nbsp;&nbsp;"/></h:panelGroup>
+                    <h:form><h:panelGroup styleClass="borderofgold"><h:link outcome="index" value="&nbsp;&nbsp;Logout &nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold"><h:commandLink action="#{klienciMB.newClient()}"  value="&nbsp;&nbsp;Dodaj Klienta&nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold">  <h:link outcome="klienciTable" value="&nbsp;&nbsp;Lista Klientów&nbsp;&nbsp;"/></h:panelGroup>
                     </h:form>
                 </ui:insert>
             </div>

@@ -5,11 +5,16 @@
 package MBeans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.hibernate.Session;
 import sql.dao.KlienciDao;
+import sql.dao.KredytyDao;
 import sql.entity.Klienci;
+import sql.entity.Uzytkownik;
+import sql.util.NewHibernateUtil;
 
 /**
  *
@@ -44,12 +49,22 @@ public class KlienciMB implements Serializable{
         return hello;
     }
 
+    
     public void setHello(String hello) {
         this.hello = hello;
     }
+    
 
     public String submit(){
-        kdao.createKlient(klient);
+        //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 3 );
+        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
+        
+        
+        klient.setUzytkownik(u);
+        kdao.createOrUpdateKlient(klient);
         count = 1;
         if(count == 1){
             datanow = "Hello "+this.klient.getImie()+", one record created.";
@@ -58,6 +73,18 @@ public class KlienciMB implements Serializable{
         this.setKlient(klient);
         return "klienciTable";
     }
+    
+    
+    public String selectedClientRedirect(){
+        klient=selectedClient;
+    return "indexstart";
+    }
+    
+    
+    public void deleteClient(){
+    kdao.deleteKlient(  this.selectedClient );
+    }
+    
     
     public String previous(){
         return "index";
@@ -113,5 +140,9 @@ public class KlienciMB implements Serializable{
     }
     
     
+    public String newClient(){
+        klient=new Klienci();
+        return "indexstart";
+    }
     
 }

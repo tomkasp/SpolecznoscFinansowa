@@ -14,15 +14,12 @@
     </application>    
     
     <navigation-rule>
-    
-        <from-view-id>klienciTable.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
-            <from-outcome>xxx</from-outcome>
-            <to-view-id>kredytyTable.xhtml</to-view-id>  
+            <from-outcome>klienciTable</from-outcome>
+            <to-view-id>klienciTable.xhtml</to-view-id>  
             <redirect />                  
-        </navigation-case>
-        
-        
+        </navigation-case>      
     </navigation-rule>
     
     <navigation-rule>   
@@ -35,7 +32,7 @@
     </navigation-rule>   
 
     <navigation-rule>   
-        <from-view-id>form2.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>xxx</from-outcome>
             <to-view-id>kredytyTable.xhtml</to-view-id>       
@@ -44,7 +41,7 @@
     </navigation-rule>  
 
     <navigation-rule>   
-        <from-view-id>klienciTable.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>indexstart</from-outcome>
             <to-view-id>form1.xhtml</to-view-id>        
@@ -52,13 +49,4 @@
         </navigation-case>
     </navigation-rule> 
     
-    <navigation-rule>   
-        <from-view-id>index.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>indexstart</from-outcome>
-            <to-view-id>form1.xhtml</to-view-id>
-            <redirect />          
-        </navigation-case>
-    </navigation-rule> 
- 
 </faces-config>
