@@ -19,7 +19,6 @@ public class KredytyDao  implements Serializable {
             session.beginTransaction().begin();
             
             kredyt.setKlienci(klient);
-            
             session.save(kredyt);
 
             session.getTransaction().commit();

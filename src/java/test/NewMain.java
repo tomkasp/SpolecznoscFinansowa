@@ -41,12 +41,6 @@ public class NewMain {
         user.getAktywne();
         
         
-        
-        KredytyDao kdao=new KredytyDao();
-        
-        
-        
-        
 //        Uzytkownik u=new Uzytkownik();
 //        u.setAktywne(Boolean.TRUE);
 //        u.setDataUtworzenia(new Date());
