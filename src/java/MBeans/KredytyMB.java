@@ -8,10 +8,13 @@ import generatorPDF.core.GeneratorPDF;
 import inne.PdfDownloader;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -23,27 +26,74 @@ import sql.entity.Kredyty;
  */
 @ManagedBean
 @SessionScoped
-public class KredytyMB implements Serializable{
-    
+public class KredytyMB implements Serializable {
+
     private static final long serialVersionUID = 1L;
     Kredyty kredyty = new Kredyty();
-    Kredyty selectedKredyt =new Kredyty();
+    Kredyty selectedKredyt = new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
-    Date datenow = new Date();  
-    
+    Date datenow = new Date();
+    private String dataPdf;
+    Boolean knowpdf = true;
+    BigDecimal calc, calc2, calc3, calc4;
+    double test1;
+    double test2;
+    double test3;
+    double num1;
+    int num2, num3;
+
+    public double getTest3() {
+        return test3;
+    }
+
+    public void setTest3(double test3) {
+        this.test3 = test3;
+    }
+
+    public double getTest2() {
+        return test2;
+    }
+
+    public void setTest2(double test2) {
+        this.test2 = test2;
+    }
+
+    public double getTest1() {
+        return test1;
+    }
+
+    public void setTest1(double test1) {
+        this.test1 = test1;
+    }
+
+    public BigDecimal getCalc() {
+        return calc;
+    }
+
+    public void setCalc(BigDecimal calc) {
+        this.calc = calc;
+    }
+
+    public Boolean getKnowpdf() {
+        return knowpdf;
+    }
+
+    public void setKnowpdf(Boolean knowpdf) {
+        this.knowpdf = knowpdf;
+    }
     Boolean showDialog = false;
     Boolean pdfSuccess = false;
-    
 
-    public int callInidata(){   
+    public int callInidata() {
         return 0;
     }
-   
+
     public List<Kredyty> getKredytylist() {
         return kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
     }
+
     public List<Kredyty> getKredytylists(int datax) {
         return kredytydeo2.getKredytyOneKlient(datax);
     }
@@ -51,7 +101,6 @@ public class KredytyMB implements Serializable{
     public void setKredytylist(List<Kredyty> kredytylist) {
         this.kredytylist = kredytylist;
     }
-    
 
     public Klienci getKlienci2() {
         return klienci2;
@@ -68,27 +117,68 @@ public class KredytyMB implements Serializable{
     public void setKredyty(Kredyty kredyty) {
         this.kredyty = kredyty;
     }
-    
+
     public KredytyMB() {
     }
-    
-    public String submit(){
+
+    public String submit() {
         KredytyDao kredytydao = new KredytyDao();
         kredyty.setDataDodaniaKredytu(new Date());
         kredytydao.createKredyt(kredyty, klienci2);
-        kredytylist=kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
         return "xxx";
     }
-    public String callAllKredyty(int xdata){
-        kredytylist=kredytydeo2.getKredytyOneKlient(xdata);
-        KlienciDao kdao=new KlienciDao();
-        klienci2=kdao.readKlient(xdata);
+
+    public String callAllKredyty(int xdata) {
+        kredytylist = kredytydeo2.getKredytyOneKlient(xdata);
+        KlienciDao kdao = new KlienciDao();
+        klienci2 = kdao.readKlient(xdata);
         return "xxx";
     }
-    public void callPdf(int ydata){                   
-        GeneratorPDF.generuj(ydata);     
-        pdfSuccess=GeneratorPDF.isPdfGenerated();
-        showDialog=true;
+
+    public void callPdf(int ydata) {
+        GeneratorPDF.generuj(ydata);
+        pdfSuccess = GeneratorPDF.isPdfGenerated();
+        showDialog = true;
+    }
+
+    public double updateAll() {
+        this.num3 = (int) this.test2;
+        this.kredyty.setProwizjaBankuWprocentach(num3);
+        this.test2 = this.test2 / 100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
+        calc = new BigDecimal(this.test2);
+        this.kredyty.setProwizjaBankuWpln(calc);
+        updataAll2();
+        if (this.num2 == 1) {
+            updateAll3();
+        }
+        return this.test2;
+    }
+
+    public double updataAll2() {
+        this.num3 = (int) this.test1;
+        this.kredyty.setSwotWprocentach(num3);
+        this.test1 = this.test1 / 100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
+        calc2 = new BigDecimal(this.test1);
+        this.kredyty.setSwotWpln(calc);
+
+        return this.test1;
+    }
+
+    public double updateAll3() {
+
+        this.num1 = this.test3;
+//        this.num3 = (int)this.test3;
+        calc3 = new BigDecimal(this.test3);
+        this.kredyty.setKwotaKonsolidacji(calc3);
+        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
+
+        this.test3 = this.test3 - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.num1;
+        this.num2 = 1;
+
+        calc4 = new BigDecimal(this.test3);
+        this.kredyty.setWolnaGotowka(calc4);
+        return this.test3;
     }
 
     public Boolean getPdfSuccess() {
@@ -107,10 +197,10 @@ public class KredytyMB implements Serializable{
         this.showDialog = showDialog;
     }
 
-    public void downLoad(int nrklienta,int nrkredytu) throws IOException {        
-        PdfDownloader loader=new PdfDownloader();
-        loader.downLoad(nrklienta, nrkredytu);     
-      }  
+    public void downLoad(int nrklienta, int nrkredytu) throws IOException {
+        PdfDownloader loader = new PdfDownloader();
+        loader.downLoad(nrklienta, nrkredytu);
+    }
 
     public Kredyty getSelectedKredyt() {
         return selectedKredyt;
@@ -119,9 +209,9 @@ public class KredytyMB implements Serializable{
     public void setSelectedKredyt(Kredyty selectedKredyt) {
         this.selectedKredyt = selectedKredyt;
     }
-       
-        
-        
-        
-        
- }
+
+    public String selectedClientRedirect() {
+        kredyty = selectedKredyt;
+        return "form2";
+    }
+}

@@ -2,6 +2,7 @@ package MBeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import sql.dao.UzytkownikDao;
 
 @ManagedBean
 @SessionScoped
@@ -12,7 +13,14 @@ public class LogowanieMB {
     public LogowanieMB() {
     }
 
-    public void logowanie(){   
+    public boolean logowanie(){
+        
+        UzytkownikDao user = new UzytkownikDao();
+        if(user.logowanie(this.login, this.haslo)){
+            System.out.println("zalogowany=========== MadejsoN 0.1");
+            return true;
+        }
+        return false;
     }
     
     public String getLogin() {
