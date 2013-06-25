@@ -15,11 +15,17 @@
         var newinput = null;var newinput1 = null;var newinput2 = null;var newinput3 = null;var newinput4 = null;var newinput5 = null;var newinput6 = null;var newinput7 = null;var newinput8 = null;
         var newtext = null;var newtext1 = null;var newtext2 = null;var newtext3 = null;var newtext4 = null;var newtext5 = null;var newtext6 = null;var newtext7 = null;var newtext8 = null;
         var parentx = null;
-        var animate = null;     
+        var animate1 = null;var animate2 = null;
+        
+        function deletepanel(){
+            alert('on construction...');
+        }
         
         function createpanel(){ 
             
-            mpanel = document.getElementById('putelement'); 
+            if(document.getElementById('boxcall').checked){               
+                
+                mpanel = document.getElementById('putelement'); 
             mpanel1 = document.getElementById('formcell');
             
             newdiv = document.createElement('div');
@@ -121,42 +127,51 @@
             newp9.appendChild(newtext8);
            
             newdiv.setAttribute("class", "centmain bodytextbutton");
+            newdiv.setAttribute("id", "d1");
             newdiv.appendChild(newp1);
             newdiv.appendChild(newinput); 
             
             newdiv1.setAttribute("class", "centmain bodytextbutton");
+            newdiv1.setAttribute("id", "d2");
             newdiv1.appendChild(newp2);
             newdiv1.appendChild(newinput1);
             
             newdiv2.setAttribute("class", "centmain bodytextbutton");
+            newdiv2.setAttribute("id", "d3");
             newdiv2.appendChild(newp3);
             newdiv2.appendChild(newinput2);
             
             newdiv3.setAttribute("class", "centmain bodytextbutton");
+            newdiv3.setAttribute("id", "d4");
             newdiv3.appendChild(newp4);
             newdiv3.appendChild(newinput3);
             
             newdiv4.setAttribute("class", "centmain bodytextbutton");
+            newdiv4.setAttribute("id", "d5");
             newdiv4.appendChild(newp5);
             newdiv4.appendChild(newinput4);
             
             newdiv5.setAttribute("class", "centmain bodytextbutton");
+            newdiv5.setAttribute("id", "d6");
             newdiv5.appendChild(newp6);
             newdiv5.appendChild(newinput5);
             
             newdiv6.setAttribute("class", "centmain bodytextbutton");
+            newdiv6.setAttribute("id", "d7");
             newdiv6.appendChild(newp7);
             newdiv6.appendChild(newinput6);
             
             newdiv7.setAttribute("class", "centmain bodytextbutton");
+            newdiv7.setAttribute("id", "d8");
             newdiv7.appendChild(newp8);
             newdiv7.appendChild(newinput7);
             
             newdiv8.setAttribute("class", "centmain bodytextbutton");
+            newdiv8.setAttribute("id", "d9");
             newdiv8.appendChild(newp9);
             newdiv8.appendChild(newinput8);  
             //alert('success 6'); 
-            parentx.insertBefore(newdiv, mpanel);
+            //parentx.insertBefore(newdiv, mpanel);
             parentx.insertBefore(newdiv, mpanel); 
             parentx.insertBefore(newdiv1, mpanel); 
             parentx.insertBefore(newdiv2, mpanel); 
@@ -170,7 +185,31 @@
             
             document.getElementById('formcell').appendChild(parentx);
             //alert('success 1');
-        }
+                
+            }else {                
+                animate1 = document.getElementById('formcell');
+                newdiv = document.getElementById('d1');
+                newdiv1 = document.getElementById('d2');
+                newdiv2 = document.getElementById('d3');
+                newdiv3 = document.getElementById('d4');
+                newdiv4 = document.getElementById('d5');
+                newdiv5 = document.getElementById('d6');
+                newdiv6 = document.getElementById('d7');
+                newdiv7 = document.getElementById('d8');
+                newdiv8 = document.getElementById('d9');
+                //animate1.removeChild(animate2);
+                animate1.parentNode.removeChild(newdiv);
+                animate1.parentNode.removeChild(newdiv1);
+                animate1.parentNode.removeChild(newdiv2);
+                animate1.parentNode.removeChild(newdiv3);
+                animate1.parentNode.removeChild(newdiv4);
+                animate1.parentNode.removeChild(newdiv5);
+                animate1.parentNode.removeChild(newdiv6);
+                animate1.parentNode.removeChild(newdiv7);
+                animate1.parentNode.removeChild(newdiv8);
+            }                        
+                        
+        }                
 
       </script>
     </ui:define>
@@ -207,9 +246,7 @@
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Data Mozliwego Uruchomentow" styleClass="absoluteR" />
                     <p:calendar styleClass="relativeR"  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"></p:calendar>
                 </h:panelGroup>   
-                <h:panelGroup><h:button value="create parteners" onclick="createpanel()" /></h:panelGroup>
-                
-                <!--<h:panelGroup id="putelement" styleClass="cent"><h:commandButton value=" Dodaj " action="#{kredytyMB.submit()}"></h:commandButton></h:panelGroup>-->
+                <h:panelGroup><p>Create Parterners<input id="boxcall" type="checkbox" onclick="createpanel()" /></p></h:panelGroup>
             <!--</h:panelGroup>-->
             </div>
             <div id="putelement" class="cent"><h:commandButton value=" Dodaj " action="#{kredytyMB.submit()}"></h:commandButton></div>
