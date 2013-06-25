@@ -6,24 +6,14 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class LogowanieMB {
-
     private String login;
     private String haslo;
-    
-    
     
     public LogowanieMB() {
     }
 
-    public void logowanie(){
-        
-        
+    public void logowanie(){   
     }
-    
-    
-    
-    
-    
     
     public String getLogin() {
         return login;

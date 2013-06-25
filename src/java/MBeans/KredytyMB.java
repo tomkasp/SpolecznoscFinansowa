@@ -6,21 +6,12 @@ package MBeans;
 
 import generatorPDF.core.GeneratorPDF;
 import inne.PdfDownloader;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -36,6 +27,7 @@ public class KredytyMB implements Serializable{
     
     private static final long serialVersionUID = 1L;
     Kredyty kredyty = new Kredyty();
+    Kredyty selectedKredyt =new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
@@ -119,6 +111,14 @@ public class KredytyMB implements Serializable{
         PdfDownloader loader=new PdfDownloader();
         loader.downLoad(nrklienta, nrkredytu);     
       }  
+
+    public Kredyty getSelectedKredyt() {
+        return selectedKredyt;
+    }
+
+    public void setSelectedKredyt(Kredyty selectedKredyt) {
+        this.selectedKredyt = selectedKredyt;
+    }
        
         
         

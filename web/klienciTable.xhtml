@@ -19,7 +19,7 @@
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
-                    <p:dataTable id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20" 
+                    <p:dataTable id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientów!"
                                  rowKey="#{data.idKlienci}"  selection="#{klienciMB.selectedClient}" selectionMode="single"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">   
 
@@ -39,26 +39,25 @@
                         <p:column><f:facet name="header">Poczta</f:facet>#{data.poczta }</p:column>
                         <p:column width="60"><f:facet name="header">Klient Kredyty </f:facet>
 
-                            <h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" />
-
+                        <h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.idKlienci)}" />
+                        
                         </p:column>
 
                         <f:facet name="footer"> 
-
                             <c:if test="#{klienciMB.selectedClient!=null}" var="costam">
-                                <h:commandButton id="viewButton" value="Edytuj" action="#{klienciMB.selectedClientRedirect()}" />
-                                <h:commandButton id="viewButton2" value="Usuń" action="#{klienciMB.deleteClient()}" />
-
-                                <h:commandButton id="modalDialogButton" value="Modal" onclick="dlg2.show();" type="button"/>  
-
+                                <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />
+                                <h:commandButton id="modalDialogButton" value="usuń" onclick="dlg2.show();" type="button"/>
                             </c:if>
-
                         </f:facet>  
 
                     </p:dataTable>
 
-                    <p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">  
-                        <h:outputText value="This is a Modal Dialog." />  
+                    <p:dialog id="modalDialog" header="usuń klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                        <h:outputText value="Czy napewno chcesz usunąć klienta?" />  
+                        <div style="text-align: center;"> 
+                        <h:commandButton id="viewButton2" value="usuń" action="#{klienciMB.deleteClient()}" />
+                        <h:button onclick="dlg2.hide();" value="anuluj"/>
+                        </div>
                     </p:dialog>  
 
                 </h:form>
