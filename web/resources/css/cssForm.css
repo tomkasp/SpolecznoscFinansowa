@@ -32,6 +32,9 @@
 .borderbeauhead{
     border-bottom: 3px solid #3333ff; margin-bottom: 10px;
 }
+.borderbuttononly{
+    border-bottom: 1px solid #3399ff;
+}
 .vmargin{
     width: 800px; margin-left: auto; margin-right: auto;
 }
