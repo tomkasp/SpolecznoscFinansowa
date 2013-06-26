@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="headtop">
+        <script type="text/javascript">
+        var control1 = 'false';
+        var mpanel = null;var mpanel1 = null;
+        var newdiv = null;var newdiv1 = null;var newdiv2 = null;var newdiv3 = null;var newdiv4 = null;var newdiv5 = null;var newdiv6 = null;var newdiv7 = null;var newdiv8 = null;
+        var newinput = null;var newinput1 = null;var newinput2 = null;var newinput3 = null;var newinput4 = null;var newinput5 = null;var newinput6 = null;var newinput7 = null;var newinput8 = null;
+        var newtext = null;var newtext1 = null;var newtext2 = null;var newtext3 = null;var newtext4 = null;var newtext5 = null;var newtext6 = null;var newtext7 = null;var newtext8 = null;
+        var parentx = null;
+        var animate1 = null;var animate2 = null;
+        
+        function deletepanel(){
+            alert('on construction...');
+        }
+        
+        function createpanel(){ 
+            
+            if(document.getElementById('boxcall').checked){               
+                
+                mpanel = document.getElementById('putelement'); 
+                mpanel1 = document.getElementById('formcell');
+            
+                newdiv = document.createElement('div');
+                newdiv1 = document.createElement('div');
+                newdiv2 = document.createElement('div');
+                newdiv3 = document.createElement('div');
+                newdiv4 = document.createElement('div');
+                newdiv5 = document.createElement('div');
+                newdiv6 = document.createElement('div');
+                newdiv7 = document.createElement('div');
+                newdiv8 = document.createElement('div');
+            
+                newp1 = document.createElement('p');
+                newp2 = document.createElement('p');
+                newp3 = document.createElement('p');
+                newp4 = document.createElement('p');
+                newp5 = document.createElement('p');
+                newp6 = document.createElement('p');
+                newp7 = document.createElement('p');
+                newp8 = document.createElement('p');
+                newp9 = document.createElement('p');
+            
+                newp1.setAttribute("class", "absoluteR");
+                newp2.setAttribute("class", "absoluteR");
+                newp3.setAttribute("class", "absoluteR");
+                newp4.setAttribute("class", "absoluteR");
+                newp5.setAttribute("class", "absoluteR");
+                newp6.setAttribute("class", "absoluteR");
+                newp7.setAttribute("class", "absoluteR");
+                newp8.setAttribute("class", "absoluteR");
+                newp9.setAttribute("class", "absoluteR");
+            
+                newtext = document.createTextNode('Imie');            
+                newtext1 = document.createTextNode('Nazwisko');
+                newtext2 = document.createTextNode('Pesel');
+                newtext3 = document.createTextNode('Seria Dowodu');
+                newtext4 = document.createTextNode('Nr Dowodu');
+                newtext5 = document.createTextNode('Miejscowosc');
+                newtext6 = document.createTextNode('Kod Pocztowy');
+                newtext7 = document.createTextNode('Ulica');
+                newtext8 = document.createTextNode('Nr Domu');
+                //alert('success 9');
+                newinput = document.createElement('input');            
+                newinput.setAttribute('type',"text");
+                newinput.setAttribute('name', "username");
+                newinput.setAttribute("class", "relativeR");
+            
+                newinput1 = document.createElement('input');            
+                newinput1.setAttribute('type',"text");
+                newinput1.setAttribute('name', "username1");
+                newinput1.setAttribute("class", "relativeR");
+            
+                newinput2 = document.createElement('input');            
+                newinput2.setAttribute('type',"text");
+                newinput2.setAttribute('name', "username2");
+                newinput2.setAttribute("class", "relativeR");
+            
+                newinput3 = document.createElement('input');            
+                newinput3.setAttribute('type',"text");
+                newinput3.setAttribute('name', "username3");
+                newinput3.setAttribute("class", "relativeR");
+            
+                newinput4 = document.createElement('input');            
+                newinput4.setAttribute('type',"text");
+                newinput4.setAttribute('name', "username4");
+                newinput4.setAttribute("class", "relativeR");
+            
+                newinput5 = document.createElement('input');            
+                newinput5.setAttribute('type',"text");
+                newinput5.setAttribute('name', "username5");
+                newinput5.setAttribute("class", "relativeR");
+            
+                newinput6 = document.createElement('input');            
+                newinput6.setAttribute('type',"text");
+                newinput6.setAttribute('name', "username6");
+                newinput6.setAttribute("class", "relativeR");
+            
+                newinput7 = document.createElement('input');            
+                newinput7.setAttribute('type',"text");
+                newinput7.setAttribute('name', "username7");
+                newinput7.setAttribute("class", "relativeR");
+            
+                newinput8 = document.createElement('input');            
+                newinput8.setAttribute('type',"text");
+                newinput8.setAttribute('name', "username8");
+                newinput8.setAttribute("class", "relativeR");
+                //alert('success 8');
+                parentx = mpanel1.parentNode;    
+                // alert('success 7');
+           
+                newp1.appendChild(newtext);
+                newp2.appendChild(newtext1);
+                newp3.appendChild(newtext2);
+                newp4.appendChild(newtext3);
+                newp5.appendChild(newtext4);
+                newp6.appendChild(newtext5);
+                newp7.appendChild(newtext6);
+                newp8.appendChild(newtext7);
+                newp9.appendChild(newtext8);
+           
+                newdiv.setAttribute("class", "centmain bodytextbutton");
+                newdiv.setAttribute("id", "d1");
+                newdiv.appendChild(newp1);
+                newdiv.appendChild(newinput); 
+            
+                newdiv1.setAttribute("class", "centmain bodytextbutton");
+                newdiv1.setAttribute("id", "d2");
+                newdiv1.appendChild(newp2);
+                newdiv1.appendChild(newinput1);
+            
+                newdiv2.setAttribute("class", "centmain bodytextbutton");
+                newdiv2.setAttribute("id", "d3");
+                newdiv2.appendChild(newp3);
+                newdiv2.appendChild(newinput2);
+            
+                newdiv3.setAttribute("class", "centmain bodytextbutton");
+                newdiv3.setAttribute("id", "d4");
+                newdiv3.appendChild(newp4);
+                newdiv3.appendChild(newinput3);
+            
+                newdiv4.setAttribute("class", "centmain bodytextbutton");
+                newdiv4.setAttribute("id", "d5");
+                newdiv4.appendChild(newp5);
+                newdiv4.appendChild(newinput4);
+            
+                newdiv5.setAttribute("class", "centmain bodytextbutton");
+                newdiv5.setAttribute("id", "d6");
+                newdiv5.appendChild(newp6);
+                newdiv5.appendChild(newinput5);
+            
+                newdiv6.setAttribute("class", "centmain bodytextbutton");
+                newdiv6.setAttribute("id", "d7");
+                newdiv6.appendChild(newp7);
+                newdiv6.appendChild(newinput6);
+            
+                newdiv7.setAttribute("class", "centmain bodytextbutton");
+                newdiv7.setAttribute("id", "d8");
+                newdiv7.appendChild(newp8);
+                newdiv7.appendChild(newinput7);
+            
+                newdiv8.setAttribute("class", "centmain bodytextbutton");
+                newdiv8.setAttribute("id", "d9");
+                newdiv8.appendChild(newp9);
+                newdiv8.appendChild(newinput8);  
+                //alert('success 6'); 
+                //parentx.insertBefore(newdiv, mpanel);
+                parentx.insertBefore(newdiv, mpanel); 
+                parentx.insertBefore(newdiv1, mpanel); 
+                parentx.insertBefore(newdiv2, mpanel); 
+                parentx.insertBefore(newdiv3, mpanel); 
+                parentx.insertBefore(newdiv4, mpanel); 
+                parentx.insertBefore(newdiv5, mpanel); 
+                parentx.insertBefore(newdiv6, mpanel); 
+                parentx.insertBefore(newdiv7, mpanel); 
+                parentx.insertBefore(newdiv8, mpanel); 
+                //alert('success 5');
+            
+                document.getElementById('formcell').appendChild(parentx);
+                //alert('success 1');
+                
+            }else {                
+                mpanel1 = document.getElementById('formcell');
+                newdiv = document.getElementById('d1');
+                newdiv1 = document.getElementById('d2');
+                newdiv2 = document.getElementById('d3');
+                newdiv3 = document.getElementById('d4');
+                newdiv4 = document.getElementById('d5');
+                newdiv5 = document.getElementById('d6');
+                newdiv6 = document.getElementById('d7');
+                newdiv7 = document.getElementById('d8');
+                newdiv8 = document.getElementById('d9');
+                //animate1.removeChild(animate2);
+                mpanel1.parentNode.removeChild(newdiv);
+                mpanel1.parentNode.removeChild(newdiv1);
+                mpanel1.parentNode.removeChild(newdiv2);
+                mpanel1.parentNode.removeChild(newdiv3);
+                mpanel1.parentNode.removeChild(newdiv4);
+                mpanel1.parentNode.removeChild(newdiv5);
+                mpanel1.parentNode.removeChild(newdiv6);
+                mpanel1.parentNode.removeChild(newdiv7);
+                mpanel1.parentNode.removeChild(newdiv8);
+            }                        
+                        
+        }                
+
+      </script>
+    </ui:define>
+    
+    <ui:define name="headtitle">            
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+    </ui:define>
+
+    <ui:define name="maincenter">
+        <h:form id="form1" styleClass="borderbeau2 vmargin bodyheadbuttom" style="display: block">
+            <div id="formcell"  class="vmargin bodyheadbuttom" style="display: block">
+            <!--<h:panelGroup id="formcell" style="display: block" styleClass=" borderbeau2 vmargin bodyheadbuttom">-->
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadtop bodytextbutton"><h:outputLabel value="Nazwa Banku" styleClass="absoluteR" /><h:inputText id="Nazwa" styleClass="relativeR" value="#{kredytyMB.kredyty.nazwaBanku}" required="true"><f:validateLength minimum="1" maximum="30" /></h:inputText><h:message for="Nazwa" style="color: red" styleClass="floatR" /></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Umowy Posrednictwa" styleClass="absoluteR" /><h:inputText id="NrUmowy" styleClass="relativeR" value="#{kredytyMB.kredyty.nrUmowyPosrednictwa}" required="true"><f:validateLength minimum="1" maximum="30" /></h:inputText><h:message for="NrUmowy" style="color: red" styleClass="floatR" /></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kwota Kredytu Brutto" styleClass="absoluteR"/><h:inputText id="KwotaKredytu" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKredytuBrutto}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" />
+                        <f:ajax execute="ProwizjaBankuwPro SwotwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPLN KwotaKonsolidacji" listener="#{kredytyMB.updateAll()}" event="keyup" render="prowizjaBankuwPLN SwotwPLN WolnaGotowka" /></h:inputText> zł<h:message for="KwotaKredytu" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Prowizja Banku w Procentach" styleClass="absoluteR"/><h:inputText id="ProwizjaBankuwPro" styleClass="relativeR" value="#{kredytyMB.test2}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="1" maximum="3" />
+                        <f:ajax execute="KwotaKredytu" listener="#{kredytyMB.updateAll()}" event="keyup"   render="prowizjaBankuwPLN"/></h:inputText><h:message for="ProwizjaBankuwPro" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="prowizja Banku w PLN" styleClass="absoluteR"/><h:inputText disabled="true" id="prowizjaBankuwPLN" styleClass="relativeR" value="#{kredytyMB.test2}"  required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" /></h:inputText> zł<h:message for="prowizjaBankuwPLN" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Ubezpieczenie w PLN" styleClass="absoluteR" /><h:inputText id="Ubezpieczenie" styleClass="relativeR" value="#{kredytyMB.kredyty.ubezpieczenieWpln}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" /></h:inputText> zł<h:message for="Ubezpieczenie" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kaszta w PLN" styleClass="absoluteR" /><h:inputText id="KasztawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.kosztaWpln}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" /></h:inputText> zł<h:message for="KasztawPLN" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Swot w Procentach" styleClass="absoluteR"/><h:inputText id="SwotwPro" styleClass="relativeR" value="#{kredytyMB.test1}" required="true"><f:validateLength minimum="1" maximum="3"/><f:convertNumber integerOnly="true"/>
+                        <f:ajax execute="KwotaKredytu" listener="#{kredytyMB.updataAll2()}" event="keyup" render="SwotwPLN" /></h:inputText><h:message for="SwotwPro" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Swot w PLN" styleClass="absoluteR"/><h:inputText id="SwotwPLN" disabled="true" styleClass="relativeR" value="#{kredytyMB.test1}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" /></h:inputText> zł<h:message for="SwotwPLN" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kwota Konsolidacji" styleClass="absoluteR"/><h:inputText id="KwotaKonsolidacji" styleClass="relativeR" value="#{kredytyMB.test3}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" />
+                        <f:ajax execute="KwotaKredytu prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPLN" listener="#{kredytyMB.updateAll3()}" event="keyup" render="WolnaGotowka" /></h:inputText> zł<h:message for="KwotaKonsolidacji" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Okres Kredytowania w Mc" styleClass="absoluteR" /><h:inputText id="OkresKredyto" styleClass="relativeR" value="#{kredytyMB.kredyty.okresKredytowaniaWmc}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength  maximum="3" /></h:inputText><h:message for="OkresKredyto" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Rata w PLN" styleClass="absoluteR" /><h:inputText id="RatawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.rataWpln}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" /></h:inputText> zł<h:message for="RatawPLN" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Oprocentowanie w Procentach" styleClass="absoluteR"/><h:inputText id="Oprocentowanie" styleClass="relativeR" value="#{kredytyMB.kredyty.oprocentowanieWprocentach}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="1" maximum="3" /></h:inputText><h:message for="Oprocentowanie" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Wolna Gotowka" styleClass="absoluteR"/><h:inputText id="WolnaGotowka" disabled="true" styleClass="relativeR" value="#{kredytyMB.test3}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" />
+                        </h:inputText> zł<h:message for="WolnaGotowka" style="color: red" styleClass="floatR"/></h:panelGroup>
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Miejsce Podpisania Dokumentow" styleClass="absoluteR"/><h:inputText id="MiejscePodpisania" styleClass="relativeR" value="#{kredytyMB.kredyty.miejscePodpisaniaDokumentow}" required="true"><f:validateLength minimum="1" maximum="20" /></h:inputText><h:message for="MiejscePodpisania" style="color: red" styleClass="floatR"/></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton borderbuttononly"><h:outputLabel value="Data Mozliwego Uruchomentow" styleClass="absoluteR" />
+                    <p:calendar styleClass="relativeR"  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"></p:calendar>
+                </h:panelGroup>   
+                <h:panelGroup styleClass="centmain"><p class="absoluteR">Create Parterners<input id="boxcall" type="checkbox" onclick="createpanel()" /></p></h:panelGroup>
+            <!--</h:panelGroup>-->
+            </div>
+            <div id="putelement" class="cent"><h:commandButton value=" Dodaj " action="#{kredytyMB.submit()}"></h:commandButton></div>
+        </h:form>        
+        
+    </ui:define>
+
+</ui:composition>
