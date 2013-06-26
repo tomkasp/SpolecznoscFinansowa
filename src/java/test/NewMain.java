@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import sql.dao.KredytyDao;
+import sql.dao.UzytkownikDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
 import sql.entity.Uzytkownik;
@@ -31,14 +32,12 @@ public class NewMain {
         //KlienciDao kdao=new KlienciDao();
         //List<Klienci> l = kdao.getKlientList();
         //System.out.println("P: "+ l.get(0).getImie() );     
+              
         
-        System.out.println("all is OK ;) ");        
         
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-        
-        Uzytkownik user=(Uzytkownik) session.load( Uzytkownik.class , 3 );
-        user.getAktywne();
+        UzytkownikDao userDAO=new UzytkownikDao();
+        Boolean b=userDAO.logowanie("ktosik", "dupa");
+        System.out.println(b);
         
         
 //        Uzytkownik u=new Uzytkownik();

@@ -9,18 +9,26 @@ import sql.dao.UzytkownikDao;
 public class LogowanieMB {
     private String login;
     private String haslo;
+    private boolean zalogowany=false;
     
     public LogowanieMB() {
     }
 
-    public boolean logowanie(){
-        
-        UzytkownikDao user = new UzytkownikDao();
-        if(user.logowanie(this.login, this.haslo)){
+    public String logowanie(){
+        UzytkownikDao userDao = new UzytkownikDao();
+        if(userDao.logowanie(this.login, this.haslo)){
             System.out.println("zalogowany=========== MadejsoN 0.1");
-            return true;
+            zalogowany=true;
+            System.out.println(zalogowany);
+            return "klienciTable";
         }
-        return false;
+        return "index";
+    }
+    
+    public String wyloguj(){
+        zalogowany=false; 
+        System.out.println(zalogowany);
+        return "index";
     }
     
     public String getLogin() {
@@ -37,6 +45,14 @@ public class LogowanieMB {
 
     public void setHaslo(String haslo) {
         this.haslo = haslo;
+    }
+
+    public boolean isZalogowany() {
+        return zalogowany;
+    }
+
+    public void setZalogowany(boolean zalogowany) {
+        this.zalogowany = zalogowany;
     }
     
     

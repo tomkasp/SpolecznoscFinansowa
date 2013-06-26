@@ -3,6 +3,9 @@ package sql.entity;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +43,7 @@ public class Klienci  implements java.io.Serializable {
      private String nrDomu;
      private String nrMieszkania;
      private Date dataDodaniaKlienta;
+     private Set<Kredyty> kredyties = new HashSet<Kredyty>(0);
 
     public Klienci() {
     }
@@ -47,7 +52,7 @@ public class Klienci  implements java.io.Serializable {
     public Klienci(Uzytkownik uzytkownik) {
         this.uzytkownik = uzytkownik;
     }
-    public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta) {
+    public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<Kredyty> kredyties) {
        this.uzytkownik = uzytkownik;
        this.imie = imie;
        this.nazwisko = nazwisko;
@@ -61,6 +66,7 @@ public class Klienci  implements java.io.Serializable {
        this.nrDomu = nrDomu;
        this.nrMieszkania = nrMieszkania;
        this.dataDodaniaKlienta = dataDodaniaKlienta;
+       this.kredyties = kredyties;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -189,6 +195,14 @@ public class Klienci  implements java.io.Serializable {
     
     public void setDataDodaniaKlienta(Date dataDodaniaKlienta) {
         this.dataDodaniaKlienta = dataDodaniaKlienta;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="klienci")
+    public Set<Kredyty> getKredyties() {
+        return this.kredyties;
+    }
+    
+    public void setKredyties(Set<Kredyty> kredyties) {
+        this.kredyties = kredyties;
     }
 
 

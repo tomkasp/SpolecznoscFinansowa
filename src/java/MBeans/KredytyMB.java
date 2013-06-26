@@ -26,25 +26,30 @@ import sql.entity.Kredyty;
  */
 @ManagedBean
 @SessionScoped
-public class KredytyMB implements Serializable {
-
+public class KredytyMB implements Serializable{
+    
+    //--------Objects and Data Definations
+    
     private static final long serialVersionUID = 1L;
     Kredyty kredyty = new Kredyty();
     Kredyty selectedKredyt = new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
-    Date datenow = new Date();
-    private String dataPdf;
-    Boolean knowpdf = true;
-    BigDecimal calc, calc2, calc3, calc4;
-    double test1;
-    double test2;
-    double test3;
-    double num1;
+
+    //Date datenow = new Date();              
+    //private String dataPdf;       
+    Boolean knowpdf = true; 
+    Boolean showDialog = false;
+    Boolean pdfSuccess = false;
+    
+    BigDecimal calc, calc2, calc3, calc4;            
+    double test1; double test2; double test3; double num1;    
     int num2, num3;
 
-    public double getTest3() {
+    //---------Getters and Seters Methods
+    
+    public double getTest3() {       
         return test3;
     }
 
@@ -82,14 +87,12 @@ public class KredytyMB implements Serializable {
 
     public void setKnowpdf(Boolean knowpdf) {
         this.knowpdf = knowpdf;
-    }
-    Boolean showDialog = false;
-    Boolean pdfSuccess = false;
 
-    public int callInidata() {
-        return 0;
-    }
-
+    }  
+//    public int callInidata(){   
+//        return 0;
+//    }
+//   
     public List<Kredyty> getKredytylist() {
         return kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
     }
@@ -117,7 +120,25 @@ public class KredytyMB implements Serializable {
     public void setKredyty(Kredyty kredyty) {
         this.kredyty = kredyty;
     }
+    
+        public Boolean getPdfSuccess() {
+        return pdfSuccess;
+    }
 
+    public void setPdfSuccess(Boolean pdfSuccess) {
+        this.pdfSuccess = pdfSuccess;
+    }
+
+    public Boolean getShowDialog() {
+        return showDialog;
+    }
+
+    public void setShowDialog(Boolean showDialog) {
+        this.showDialog = showDialog;
+    }
+    
+    //-------------Constructors and Methods
+    
     public KredytyMB() {
     }
 
@@ -142,18 +163,6 @@ public class KredytyMB implements Serializable {
         showDialog = true;
     }
 
-    public double updateAll() {
-        this.num3 = (int) this.test2;
-        this.kredyty.setProwizjaBankuWprocentach(num3);
-        this.test2 = this.test2 / 100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
-        calc = new BigDecimal(this.test2);
-        this.kredyty.setProwizjaBankuWpln(calc);
-        updataAll2();
-        if (this.num2 == 1) {
-            updateAll3();
-        }
-        return this.test2;
-    }
 
     public double updataAll2() {
         this.num3 = (int) this.test1;
@@ -179,22 +188,6 @@ public class KredytyMB implements Serializable {
         calc4 = new BigDecimal(this.test3);
         this.kredyty.setWolnaGotowka(calc4);
         return this.test3;
-    }
-
-    public Boolean getPdfSuccess() {
-        return pdfSuccess;
-    }
-
-    public void setPdfSuccess(Boolean pdfSuccess) {
-        this.pdfSuccess = pdfSuccess;
-    }
-
-    public Boolean getShowDialog() {
-        return showDialog;
-    }
-
-    public void setShowDialog(Boolean showDialog) {
-        this.showDialog = showDialog;
     }
 
     public void downLoad(int nrklienta, int nrkredytu) throws IOException {

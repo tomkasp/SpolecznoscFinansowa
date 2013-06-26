@@ -3,6 +3,6 @@
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="System4"/>
   <table-filter match-name="kredyty"/>
-  <table-filter match-name="klienci"/>
   <table-filter match-name="uzytkownik"/>
+  <table-filter match-name="klienci"/>
 </hibernate-reverse-engineering>

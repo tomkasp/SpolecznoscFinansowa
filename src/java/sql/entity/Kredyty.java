@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +27,7 @@ public class Kredyty  implements java.io.Serializable {
 
 
      private Integer idkredyty;
-     private int klienciIdKlienci;
+     private Klienci klienci;
      private String nazwaBanku;
      private String nrUmowyPosrednictwa;
      private BigDecimal kwotaKredytuBrutto;
@@ -48,11 +51,11 @@ public class Kredyty  implements java.io.Serializable {
     }
 
 	
-    public Kredyty(int klienciIdKlienci) {
-        this.klienciIdKlienci = klienciIdKlienci;
+    public Kredyty(Klienci klienci) {
+        this.klienci = klienci;
     }
-    public Kredyty(int klienciIdKlienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty) {
-       this.klienciIdKlienci = klienciIdKlienci;
+    public Kredyty(Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty) {
+       this.klienci = klienci;
        this.nazwaBanku = nazwaBanku;
        this.nrUmowyPosrednictwa = nrUmowyPosrednictwa;
        this.kwotaKredytuBrutto = kwotaKredytuBrutto;
@@ -83,14 +86,14 @@ public class Kredyty  implements java.io.Serializable {
     public void setIdkredyty(Integer idkredyty) {
         this.idkredyty = idkredyty;
     }
-    
-    @Column(name="klienci_idKlienci", nullable=false)
-    public int getKlienciIdKlienci() {
-        return this.klienciIdKlienci;
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="klienci_idKlienci", nullable=false)
+    public Klienci getKlienci() {
+        return this.klienci;
     }
     
-    public void setKlienciIdKlienci(int klienciIdKlienci) {
-        this.klienciIdKlienci = klienciIdKlienci;
+    public void setKlienci(Klienci klienci) {
+        this.klienci = klienci;
     }
     
     @Column(name="nazwaBanku", length=60)

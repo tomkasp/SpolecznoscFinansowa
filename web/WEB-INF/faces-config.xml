@@ -47,6 +47,13 @@
             <to-view-id>form1.xhtml</to-view-id>        
             <redirect />  
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>        
+            <redirect />  
+        </navigation-case>
+        
     </navigation-rule> 
     
 </faces-config>

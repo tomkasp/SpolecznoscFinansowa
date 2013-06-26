@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Security {
 
-    public static String sha512(String plaintext) throws NoSuchAlgorithmException {
+    public static String sha1(String plaintext) throws NoSuchAlgorithmException {
         String salt = "984se%^#$$4[]2@#.;'9fSD9_+=#@#$hjft4763{}][3";
         String text = salt + plaintext;
         MessageDigest m = MessageDigest.getInstance("SHA-1");//Alternatywnie można wybrać: SHA, SHA-1,SHA-256,SHA-384,SHA-512,MD2,MD5
@@ -20,4 +20,5 @@ public class Security {
         }
         return hashtext;
     }
+    
 }

@@ -12,7 +12,7 @@ public class UzytkownikDao {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
 
             System.out.println("probuje logowac");
-            Query q = session.createQuery("FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + Security.sha512(haslo) + "' ");
+            Query q = session.createQuery("FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + Security.sha1(haslo) + "' ");
 
             System.out.println(q);
             if (q.list().isEmpty()) {
