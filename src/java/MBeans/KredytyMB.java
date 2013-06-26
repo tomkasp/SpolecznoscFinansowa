@@ -177,6 +177,7 @@ public class KredytyMB implements Serializable{
     
     public double updateAll3(){ // calculation of wolnagotowka
         
+        //this.num1 = 0;
         this.num1 = this.test3;
 //        calc3 = new BigDecimal(this.test3);
         calc = new BigDecimal(this.test3);
