@@ -1,5 +1,6 @@
 package sql.entity;
-// Generated 2013-06-24 11:55:43 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-25 09:57:55 by Hibernate Tools 3.2.1.GA
+
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ import javax.persistence.TemporalType;
     ,catalog="System4"
 )
 public class Uzytkownik  implements java.io.Serializable {
+
 
      private Integer iduzytkownik;
      private String login;

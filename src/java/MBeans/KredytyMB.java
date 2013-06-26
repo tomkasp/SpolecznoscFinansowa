@@ -32,6 +32,7 @@ public class KredytyMB implements Serializable{
     
     private static final long serialVersionUID = 1L;
     Kredyty kredyty = new Kredyty();
+    Kredyty selectedKredyt = new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;
@@ -45,7 +46,6 @@ public class KredytyMB implements Serializable{
     double test1; double test2; double test3; double num1; // used in current form for calcuations
     int num3; //counter and control variable
 
-    
     //---------Getters and Seters Methods
     
     public double getTest3() {       
@@ -71,7 +71,6 @@ public class KredytyMB implements Serializable{
     public void setTest1(double test1) {
         this.test1 = test1;
     }
-    
 
     public BigDecimal getCalc() {
         return calc;
@@ -84,6 +83,7 @@ public class KredytyMB implements Serializable{
     public List<Kredyty> getKredytylist() {
         return kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
     }
+
     public List<Kredyty> getKredytylists(int datax) {
         return kredytydeo2.getKredytyOneKlient(datax);
     }
@@ -91,7 +91,6 @@ public class KredytyMB implements Serializable{
     public void setKredytylist(List<Kredyty> kredytylist) {
         this.kredytylist = kredytylist;
     }
-    
 
     public Klienci getKlienci2() {
         return klienci2;
@@ -134,7 +133,7 @@ public class KredytyMB implements Serializable{
         KredytyDao kredytydao = new KredytyDao();
         kredyty.setDataDodaniaKredytu(new Date());
         kredytydao.createKredyt(kredyty, klienci2);
-        kredytylist=kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
         return "xxx";
     }
     public String callAllKredyty(int xdata){ // action method to call all credit of a client into one data table
@@ -183,7 +182,7 @@ public class KredytyMB implements Serializable{
         calc = new BigDecimal(this.test3);
         this.kredyty.setKwotaKonsolidacji(calc);        
         this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
-        
+
         this.test3 = this.test3 - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.num1;
         this.step1 = true;
                 
@@ -195,10 +194,21 @@ public class KredytyMB implements Serializable{
         return this.test3;
     }
 
-    public void downLoad(int nrklienta,int nrkredytu) throws IOException {        
-        PdfDownloader loader=new PdfDownloader();
-        loader.downLoad(nrklienta, nrkredytu);     
-      }  
-       
-        
+    public void downLoad(int nrklienta, int nrkredytu) throws IOException {
+        PdfDownloader loader = new PdfDownloader();
+        loader.downLoad(nrklienta, nrkredytu);
+    }
+
+    public Kredyty getSelectedKredyt() {
+        return selectedKredyt;
+    }
+
+    public void setSelectedKredyt(Kredyty selectedKredyt) {
+        this.selectedKredyt = selectedKredyt;
+    }
+
+    public String selectedClientRedirect() {
+        kredyty = selectedKredyt;
+        return "form2";
+    }
 }
