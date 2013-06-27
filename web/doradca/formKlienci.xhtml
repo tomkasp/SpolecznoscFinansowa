@@ -13,7 +13,7 @@
     
     <ui:define name="maincenter">
         <h:form>
-        <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin">
+        <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin" rendered="#{logowanieMB.zalogowany}">
 
             <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Dane podstawowe</h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
@@ -22,7 +22,7 @@
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Seria Dowodu" styleClass="absoluteR"/><h:inputText id="seria" styleClass="relativeR" value="#{klienciMB.klient.seriaDowodu}" required="true"><f:validateLength maximum="3" /></h:inputText><h:message for="seria" style="color: red" styleClass="floatR" /></h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:outputLabel value="Nr Dowodu" styleClass="absoluteR"/><h:inputText id="nrdowo" styleClass="relativeR" value="#{klienciMB.klient.nrDowodu}" required="true"><f:convertNumber integerOnly="true"/><f:validateLength minimum="6" maximum="6" /></h:inputText><h:message for="nrdowo" style="color: red" styleClass="floatR" /></h:panelGroup>                              
         </h:panelGroup>      
-        <h:panelGroup style="display: block" styleClass="borderbeau2 vmargin bodyheadbuttom">
+        <h:panelGroup style="display: block" styleClass="borderbeau2 vmargin bodyheadbuttom" rendered="#{logowanieMB.zalogowany}">
             <h:panelGroup style="display:block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Adres</h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Miejscowosc" styleClass="absoluteR" /><h:inputText id="miej" styleClass="relativeR" value="#{klienciMB.klient.miejscowosc}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="miej" style="color: red" styleClass="floatR" /></h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kod Pocztowy" styleClass="absoluteR" /><h:inputText id="kodpo" styleClass="relativeR" value="#{klienciMB.klient.kodPocztowy}" required="true"><f:validateLength minimum="5" maximum="6" /></h:inputText><h:message for="kodpo" style="color: red" styleClass="floatR" /></h:panelGroup>            

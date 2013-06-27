@@ -13,8 +13,6 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -81,7 +79,7 @@ public class KredytyMB implements Serializable{
     }
  
     public List<Kredyty> getKredytylist() {
-        return kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
+        return kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
     }
 
     public List<Kredyty> getKredytylists(int datax) {
@@ -133,7 +131,7 @@ public class KredytyMB implements Serializable{
         KredytyDao kredytydao = new KredytyDao();
         kredyty.setDataDodaniaKredytu(new Date());
         kredytydao.createKredyt(kredyty, klienci2);
-        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getIdKlienci());
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
         return "xxx";
     }
     public String callAllKredyty(int xdata){ // action method to call all credit of a client into one data table

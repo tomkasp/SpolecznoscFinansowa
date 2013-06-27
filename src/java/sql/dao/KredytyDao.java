@@ -20,9 +20,9 @@ public class KredytyDao  implements Serializable {
             
             kredyt.setKlienci(klient);
             session.save(kredyt);
-
+                
             session.getTransaction().commit();
-
+            
             session.close();
     }
     
@@ -89,7 +89,7 @@ public class KredytyDao  implements Serializable {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        Query q=session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
+        Query q=session.createQuery("from Kredyty where klienci_Klienci_id="+idKlienta+" ");
         List<Kredyty> list;
         list = (List<Kredyty>) q.list();
         

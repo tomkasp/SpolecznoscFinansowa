@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-25 09:57:55 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 08:43:49 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -22,12 +22,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="uzytkownik"
-    ,catalog="System4"
+    ,catalog="system4"
 )
 public class Uzytkownik  implements java.io.Serializable {
 
 
-     private Integer iduzytkownik;
+     private Integer uzytkownikId;
      private String login;
      private String haslo;
      private String imie;
@@ -60,13 +60,13 @@ public class Uzytkownik  implements java.io.Serializable {
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
-    @Column(name="iduzytkownik", unique=true, nullable=false)
-    public Integer getIduzytkownik() {
-        return this.iduzytkownik;
+    @Column(name="uzytkownik_id", unique=true, nullable=false)
+    public Integer getUzytkownikId() {
+        return this.uzytkownikId;
     }
     
-    public void setIduzytkownik(Integer iduzytkownik) {
-        this.iduzytkownik = iduzytkownik;
+    public void setUzytkownikId(Integer uzytkownikId) {
+        this.uzytkownikId = uzytkownikId;
     }
     
     @Column(name="login", nullable=false, length=30)

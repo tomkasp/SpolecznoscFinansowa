@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-25 09:57:55 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 08:43:49 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="kredyty"
-    ,catalog="System4"
+    ,catalog="system4"
 )
 public class Kredyty  implements java.io.Serializable {
 
 
-     private Integer idkredyty;
+     private Integer kredytyId;
      private Klienci klienci;
      private String nazwaBanku;
      private String nrUmowyPosrednictwa;
@@ -78,16 +78,16 @@ public class Kredyty  implements java.io.Serializable {
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
-    @Column(name="idkredyty", unique=true, nullable=false)
-    public Integer getIdkredyty() {
-        return this.idkredyty;
+    @Column(name="kredyty_id", unique=true, nullable=false)
+    public Integer getKredytyId() {
+        return this.kredytyId;
     }
     
-    public void setIdkredyty(Integer idkredyty) {
-        this.idkredyty = idkredyty;
+    public void setKredytyId(Integer kredytyId) {
+        this.kredytyId = kredytyId;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="klienci_idKlienci", nullable=false)
+    @JoinColumn(name="klienci_klienci_id", nullable=false)
     public Klienci getKlienci() {
         return this.klienci;
     }

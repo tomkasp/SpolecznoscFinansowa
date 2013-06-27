@@ -1,5 +1,7 @@
 package sql.dao;
 
+import java.security.NoSuchAlgorithmException;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.util.NewHibernateUtil;
@@ -20,7 +22,8 @@ public class UzytkownikDao {
             } else {
                 return true;
             }
-        } catch (Exception e) {
+        } catch (HibernateException | NoSuchAlgorithmException
+                e) {
         }
 
         //session.close();    

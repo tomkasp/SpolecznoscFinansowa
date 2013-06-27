@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-25 09:57:55 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 08:43:49 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -24,12 +24,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="klienci"
-    ,catalog="System4"
+    ,catalog="system4"
 )
 public class Klienci  implements java.io.Serializable {
 
 
-     private Integer idKlienci;
+     private Integer klienciId;
      private Uzytkownik uzytkownik;
      private String imie;
      private String nazwisko;
@@ -48,10 +48,6 @@ public class Klienci  implements java.io.Serializable {
     public Klienci() {
     }
 
-	
-    public Klienci(Uzytkownik uzytkownik) {
-        this.uzytkownik = uzytkownik;
-    }
     public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<Kredyty> kredyties) {
        this.uzytkownik = uzytkownik;
        this.imie = imie;
@@ -71,16 +67,16 @@ public class Klienci  implements java.io.Serializable {
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
-    @Column(name="idKlienci", unique=true, nullable=false)
-    public Integer getIdKlienci() {
-        return this.idKlienci;
+    @Column(name="klienci_id", unique=true, nullable=false)
+    public Integer getKlienciId() {
+        return this.klienciId;
     }
     
-    public void setIdKlienci(Integer idKlienci) {
-        this.idKlienci = idKlienci;
+    public void setKlienciId(Integer klienciId) {
+        this.klienciId = klienciId;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_uzytkownik", nullable=false)
+    @JoinColumn(name="fk_uzytkownik")
     public Uzytkownik getUzytkownik() {
         return this.uzytkownik;
     }
