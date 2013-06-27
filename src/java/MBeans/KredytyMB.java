@@ -42,6 +42,14 @@ public class KredytyMB implements Serializable{
     
     BigDecimal calc, calc2;//, calc3, calc4;    // used to set form fields from another class with sends data to database        
     double test1; double test2; double test3; double num1; // used in current form for calcuations
+
+    public double getNum1() {
+        return num1;
+    }
+
+    public void setNum1(double num1) {
+        this.num1 = num1;
+    }
     int num3; //counter and control variable
 
     //---------Getters and Seters Methods
@@ -147,16 +155,24 @@ public class KredytyMB implements Serializable{
     }
 
     public double updateAll(){ // to calculate the percentage of prowizjabankuwpln
+      updateAll1();
+      updataAll2();
+      updateAll3();
+      return 0;
+    } 
+    
+    public double updateAll1(){ // to calculate the percentage of prowizjabankuwpln
       this.num3 = (int)this.test2;
       this.kredyty.setProwizjaBankuWprocentach(num3);
       this.test2 = this.test2/100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
       calc = new BigDecimal(this.test2);      
       this.kredyty.setProwizjaBankuWpln(calc);
       calc = BigDecimal.ZERO;
-      updataAll2();
-//      if(this.step1==true){
-//          updateAll3();
-//      }
+//      updataAll2();
+      if(this.step1==true){
+          updateAll3();
+      }
+      System.out.println("t2 "+this.test2);
       return this.test2;      
     }    
     
@@ -174,15 +190,16 @@ public class KredytyMB implements Serializable{
     
     public double updateAll3(){ // calculation of wolnagotowka
         
-        //this.num1 = 0;
-        this.num1 = this.test3;
+        this.num1 = 0;
+        //this.num1 = this.test3;
 //        calc3 = new BigDecimal(this.test3);
         calc = new BigDecimal(this.test3);
-        this.kredyty.setKwotaKonsolidacji(calc);        
+        this.kredyty.setKwotaKonsolidacji(calc);         
         //this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
 
+        this.num1 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
         this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
-//        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - 200;
+//      this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - 200;
         this.step1 = true;
                 
         calc2 = new BigDecimal(this.test3);        
@@ -194,9 +211,43 @@ public class KredytyMB implements Serializable{
 //            return 0.0;
 //        }
         
-        return this.test3;
+        System.out.println(this.test3);
+        return this.num1;
     }
-
+    
+    
+//     public void updateAll(){ // to calculate the percentage of prowizjabankuwpln
+//      this.num3 = (int)this.test2;
+//      this.kredyty.setProwizjaBankuWprocentach(num3);
+//      this.num3 = 0;
+//      this.test2 = this.test2/100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
+//      calc = new BigDecimal(this.test2);      
+//      this.kredyty.setProwizjaBankuWpln(calc);
+//      calc = BigDecimal.ZERO;
+//      
+//      this.num3 = (int)this.test1;
+//      this.kredyty.setSwotWprocentach(num3);
+//      this.num3 = 0;
+//      this.test1 = this.test1/100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();  
+//      calc = new BigDecimal(this.test1);
+//      this.kredyty.setSwotWpln(calc);
+//      calc = BigDecimal.ZERO;
+//      
+//       this.num1 = 0;
+//        calc = new BigDecimal(this.test3);
+//        this.kredyty.setKwotaKonsolidacji(calc);                 
+//
+//        this.num1 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
+//        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;      
+//        this.step1 = true;
+//                
+//        calc2 = new BigDecimal(this.test3);        
+//        this.kredyty.setWolnaGotowka(calc2);
+//        calc = BigDecimal.ZERO;
+//        calc2 = BigDecimal.ZERO;
+//     
+//    } 
+    
     public void downLoad(int nrklienta, int nrkredytu) throws IOException {
         PdfDownloader loader = new PdfDownloader();
         loader.downLoad(nrklienta, nrkredytu);
