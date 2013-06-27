@@ -154,9 +154,9 @@ public class KredytyMB implements Serializable{
       this.kredyty.setProwizjaBankuWpln(calc);
       calc = BigDecimal.ZERO;
       updataAll2();
-      if(this.step1==true){
-          updateAll3();
-      }
+//      if(this.step1==true){
+//          updateAll3();
+//      }
       return this.test2;      
     }    
     
@@ -174,19 +174,25 @@ public class KredytyMB implements Serializable{
     
     public double updateAll3(){ // calculation of wolnagotowka
         
+        //this.num1 = 0;
         this.num1 = this.test3;
 //        calc3 = new BigDecimal(this.test3);
         calc = new BigDecimal(this.test3);
         this.kredyty.setKwotaKonsolidacji(calc);        
-        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
+        //this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
 
-        this.test3 = this.test3 - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.num1;
+        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
+//        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - 200;
         this.step1 = true;
                 
         calc2 = new BigDecimal(this.test3);        
         this.kredyty.setWolnaGotowka(calc2);
         calc = BigDecimal.ZERO;
         calc2 = BigDecimal.ZERO;
+        
+//        if(this.test3 == 0){
+//            return 0.0;
+//        }
         
         return this.test3;
     }
