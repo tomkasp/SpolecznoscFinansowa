@@ -77,6 +77,10 @@ public class KredytyMB implements Serializable{
     public void setCalc(BigDecimal calc) {
         this.calc = calc;
     }
+    
+    public void deleteKredyt(){
+    kredytydeo2.deleteKredyty(this.selectedKredyt);
+    }
  
     public List<Kredyty> getKredytylist() {
         return kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
@@ -130,7 +134,7 @@ public class KredytyMB implements Serializable{
     public String submit(){  // action method to data to the database
         KredytyDao kredytydao = new KredytyDao();
         kredyty.setDataDodaniaKredytu(new Date());
-        kredytydao.createKredyt(kredyty, klienci2);
+        kredytydao.createOrUpdateKredyt(kredyty, klienci2);
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
         return "xxx";
     }
@@ -214,4 +218,10 @@ public class KredytyMB implements Serializable{
         kredyty = selectedKredyt;
         return "form2";
     }
+    
+    public String newKredyt(){
+        kredyty=new Kredyty();
+        return "form2";
+    }
+    
 }

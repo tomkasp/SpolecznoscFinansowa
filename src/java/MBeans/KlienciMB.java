@@ -49,19 +49,17 @@ public class KlienciMB implements Serializable{
         return hello;
     }
 
-    
     public void setHello(String hello) {
         this.hello = hello;
     }
     
-
-    public String submit(){
-        //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
+    public String submit() {
+        //CZTERY PONIZSZE LINIJKI SĄ TYMCZASOWE...
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 3 );
+        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 1 );
+        u.getAktywne();
         //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
-        
         
         klient.setUzytkownik(u);
         kdao.createOrUpdateKlient(klient);
