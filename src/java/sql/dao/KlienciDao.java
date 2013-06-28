@@ -4,7 +4,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
-import sql.util.NewHibernateUtil;
+import sql.util.HibernateUtil;
 
 public class KlienciDao implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class KlienciDao implements Serializable {
     
     public void createOrUpdateKlient(Klienci klient) 
     {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.saveOrUpdate(klient);
@@ -26,7 +26,7 @@ public class KlienciDao implements Serializable {
     
     public Klienci readKlient(Integer idKlient) 
     {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
      
         Klienci klient = (Klienci) session.load(Klienci.class,idKlient);
@@ -38,7 +38,7 @@ public class KlienciDao implements Serializable {
     }
     
     public void updateKlient(Klienci klient) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.saveOrUpdate(klient);
@@ -49,7 +49,7 @@ public class KlienciDao implements Serializable {
     }
     
     public void deleteKlient(Klienci klient) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.delete(klient);
@@ -66,7 +66,7 @@ public class KlienciDao implements Serializable {
     
     @SuppressWarnings("unchecked")
     public List<Klienci> getKlientList() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Query q=(Query) session.createQuery("from Klienci");

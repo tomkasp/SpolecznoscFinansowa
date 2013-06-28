@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-24 11:55:43 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 14:28:15 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
 public class Klienci  implements java.io.Serializable {
 
 
-     private Integer idKlienci;
+     private Integer klienciId;
      private Uzytkownik uzytkownik;
      private String imie;
      private String nazwisko;
@@ -43,16 +43,12 @@ public class Klienci  implements java.io.Serializable {
      private String nrDomu;
      private String nrMieszkania;
      private Date dataDodaniaKlienta;
-     private Set<Kredyty> kredyties = new HashSet<Kredyty>(0);
+     private Set<KlienciKredyty> klienciKredyties = new HashSet<KlienciKredyty>(0);
 
     public Klienci() {
     }
 
-	
-    public Klienci(Uzytkownik uzytkownik) {
-        this.uzytkownik = uzytkownik;
-    }
-    public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<Kredyty> kredyties) {
+    public Klienci(Uzytkownik uzytkownik, String imie, String nazwisko, String pesel, String seriaDowodu, String nrDowodu, String miejscowosc, String kodPocztowy, String poczta, String ulica, String nrDomu, String nrMieszkania, Date dataDodaniaKlienta, Set<KlienciKredyty> klienciKredyties) {
        this.uzytkownik = uzytkownik;
        this.imie = imie;
        this.nazwisko = nazwisko;
@@ -66,21 +62,21 @@ public class Klienci  implements java.io.Serializable {
        this.nrDomu = nrDomu;
        this.nrMieszkania = nrMieszkania;
        this.dataDodaniaKlienta = dataDodaniaKlienta;
-       this.kredyties = kredyties;
+       this.klienciKredyties = klienciKredyties;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
-    @Column(name="idKlienci", unique=true, nullable=false)
-    public Integer getIdKlienci() {
-        return this.idKlienci;
+    @Column(name="klienci_id", unique=true, nullable=false)
+    public Integer getKlienciId() {
+        return this.klienciId;
     }
     
-    public void setIdKlienci(Integer idKlienci) {
-        this.idKlienci = idKlienci;
+    public void setKlienciId(Integer klienciId) {
+        this.klienciId = klienciId;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_uzytkownik", nullable=false)
+    @JoinColumn(name="fk_uzytkownik")
     public Uzytkownik getUzytkownik() {
         return this.uzytkownik;
     }
@@ -196,13 +192,13 @@ public class Klienci  implements java.io.Serializable {
     public void setDataDodaniaKlienta(Date dataDodaniaKlienta) {
         this.dataDodaniaKlienta = dataDodaniaKlienta;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="klienci")
-    public Set<Kredyty> getKredyties() {
-        return this.kredyties;
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="id.klienci")
+    public Set<KlienciKredyty> getKlienciKredyties() {
+        return this.klienciKredyties;
     }
     
-    public void setKredyties(Set<Kredyty> kredyties) {
-        this.kredyties = kredyties;
+    public void setKlienciKredyties(Set<KlienciKredyty> klienciKredyties) {
+        this.klienciKredyties = klienciKredyties;
     }
 
 

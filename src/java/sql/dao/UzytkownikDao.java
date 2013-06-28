@@ -2,14 +2,14 @@ package sql.dao;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import sql.util.NewHibernateUtil;
+import sql.util.HibernateUtil;
 import sql.util.Security;
 
 public class UzytkownikDao {
 
     public Boolean logowanie(String login, String haslo) {
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
 
             System.out.println("probuje logowac");
             Query q = session.createQuery("FROM Uzytkownik WHERE login='" + login + "' AND haslo='" + Security.sha512(haslo) + "' ");

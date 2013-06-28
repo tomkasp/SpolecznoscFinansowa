@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
-import sql.util.NewHibernateUtil;
+import sql.util.HibernateUtil;
 
 public class KredytyDao  implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,10 +15,10 @@ public class KredytyDao  implements Serializable {
     }
 
     public void createKredyt(Kredyty kredyt,Klienci klient) {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
-            kredyt.setKlienci(klient);
+            //kredyt.setKlienci(klient);
             session.save(kredyt);
 
             session.getTransaction().commit();
@@ -28,7 +28,7 @@ public class KredytyDao  implements Serializable {
     
     
     public Kredyty readKredyty(Integer idKredyt) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Kredyty kredyt=(Kredyty) session.load(Kredyty.class,idKredyt);
@@ -41,7 +41,7 @@ public class KredytyDao  implements Serializable {
     }
     
         public void updateKredyty(Kredyty kredyt) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.saveOrUpdate(kredyt);
@@ -52,7 +52,7 @@ public class KredytyDao  implements Serializable {
     }
     
     public void deleteKredyty(Integer idKredyt) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.delete(idKredyt.toString(),Kredyty.class);
@@ -70,7 +70,7 @@ public class KredytyDao  implements Serializable {
    
     @SuppressWarnings("unchecked")
     public List<Kredyty> getAllKredyty() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Query q=(Query) session.createQuery("from Kredyty");
@@ -86,7 +86,7 @@ public class KredytyDao  implements Serializable {
     
     @SuppressWarnings("unchecked")
     public List<Kredyty> getKredytyOneKlient(int idKlienta) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Query q=session.createQuery("from Kredyty where klienci_idKlienci="+idKlienta+" ");
