@@ -175,7 +175,8 @@ public class GeneratorPDF {
     public static int getIdKlienta(int idKredytu){
         KredytyDao kredytyDAO=new KredytyDao();
         Kredyty kredyt=kredytyDAO.readKredyty(idKredytu);
-        int idKlienta=kredyt.getKlienci().getKlienciId();
+        int idKlienta=0;//kredyt.getKlienci().getKlienciId();
+        
         return idKlienta;
     }
 

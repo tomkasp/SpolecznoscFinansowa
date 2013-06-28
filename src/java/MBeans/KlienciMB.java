@@ -58,7 +58,7 @@ public class KlienciMB implements Serializable{
         //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 1 );
+        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 4 );
         u.getAktywne();
         //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
         
