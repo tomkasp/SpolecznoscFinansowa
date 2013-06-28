@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="uzytkownik"
-    ,catalog="System4"
+    ,catalog="system4"
 )
 public class Uzytkownik  implements java.io.Serializable {
 

@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="kredyty"
-    ,catalog="System4"
+    ,catalog="system4"
 )
 public class Kredyty  implements java.io.Serializable {
 

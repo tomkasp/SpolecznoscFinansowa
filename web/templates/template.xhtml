@@ -6,19 +6,19 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
         <link href="resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link href="resources/css/cssForm.css" rel="stylesheet" type="text/css" />
         <link href="resources/css/primefacesTheme.css" rel="stylesheet" type="text/css" />
-        <title>Facelets Template</title>
-        
-     <script type="text/javascript">
-        function callGood(){
-            alert('One Record Generated...');           
-        }
-     </script>
-        
-            
+        <link href="../../resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="../../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="../../resources/css/cssForm.css" rel="stylesheet" type="text/css" />
+        <link href="../../resources/css/primefacesTheme.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>    
+        <ui:insert name="headtop"></ui:insert>
+     
+                    
     </h:head>
 
     <h:body>
@@ -26,7 +26,7 @@
         <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />
             <div class="centmain-img">
                 <ui:insert name="top">
-                    <h:form><h:panelGroup styleClass="borderofgold"><h:link outcome="index" value="&nbsp;&nbsp;Logout &nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold"><h:commandLink action="#{klienciMB.newClient()}"  value="&nbsp;&nbsp;Dodaj Klienta&nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold">  <h:link outcome="klienciTable" value="&nbsp;&nbsp;Lista Klientów&nbsp;&nbsp;"/></h:panelGroup>
+                    <h:form><h:panelGroup styleClass="borderofgold"><h:commandLink value="Logout" action="#{logowanieMB.wyloguj()}"/></h:panelGroup><h:panelGroup styleClass="borderofgold"><h:commandLink action="#{klienciMB.newClient()}"  value="&nbsp;&nbsp;Dodaj Klienta&nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold">  <h:link outcome="klienciTable" value="&nbsp;&nbsp;Lista Klientów&nbsp;&nbsp;"/></h:panelGroup>
                     </h:form>
                 </ui:insert>
             </div>
@@ -34,7 +34,7 @@
         
         <div id="maincenter" class="centmain-img borderdesign2 bodyimage">            
             <ui:insert name="headtitle"></ui:insert>                    
-            <ui:insert name="maincenter"></ui:insert>                   
+            <ui:insert name="maincenter" rendered="#{logowanieMB.zalogowany}"></ui:insert>                   
         </div>
 
         <div class="centmain-img borderdesign bodyheadtop2" style=" background-color: #f7fefe">

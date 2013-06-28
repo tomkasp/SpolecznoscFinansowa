@@ -49,7 +49,6 @@ public class KlienciMB implements Serializable{
         return hello;
     }
 
-    
     public void setHello(String hello) {
         this.hello = hello;
     }
@@ -59,9 +58,9 @@ public class KlienciMB implements Serializable{
         //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 3 );
+        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 1 );
+        u.getAktywne();
         //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
-        
         
         klient.setUzytkownik(u);
         kdao.createOrUpdateKlient(klient);

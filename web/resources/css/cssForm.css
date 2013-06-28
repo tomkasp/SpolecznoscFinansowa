@@ -32,6 +32,9 @@
 .borderbeauhead{
     border-bottom: 3px solid #3333ff; margin-bottom: 10px;
 }
+.borderbuttononly{
+    border-bottom: 1px solid #3399ff;
+}
 .vmargin{
     width: 800px; margin-left: auto; margin-right: auto;
 }
@@ -40,7 +43,7 @@
     position: relative;
 }
 .cent{
-    position: relative; left: 50%;
+    position: relative; left: 45%;
 }
 .right{
     position: relative; left: 75%;

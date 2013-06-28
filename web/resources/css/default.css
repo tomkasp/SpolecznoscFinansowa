@@ -41,3 +41,8 @@ root {
   font-weight : bold;
   border-top: 5px solid gold;
 }
+
+.alert{
+    font-style: oblique;
+    color: firebrick;
+}
