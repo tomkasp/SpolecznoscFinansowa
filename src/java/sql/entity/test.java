@@ -21,7 +21,8 @@ public class test {
         
         Uzytkownik uzyt = new Uzytkownik();
         uzyt.setLogin("admin");
-        uzyt.setHaslo("admin");
+        uzyt.setHaslo("admi");
+        uzyt.setImie("Grzegorz");
         session.save(uzyt);
         
         
