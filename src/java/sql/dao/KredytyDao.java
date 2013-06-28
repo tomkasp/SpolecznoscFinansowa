@@ -1,9 +1,12 @@
 package sql.dao;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
+import sql.entity.KlienciKredyty;
 import sql.entity.Kredyty;
 import sql.util.HibernateUtil;
 
@@ -17,7 +20,15 @@ public class KredytyDao  implements Serializable {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
-//            kredyt.setKlienci(klient);
+            session.saveOrUpdate(klient);
+            
+            KlienciKredyty kkw = new KlienciKredyty();
+            kkw.setKlienci(klient);
+            kkw.setKredyty(kredyt);
+            kkw.setWspolkredytobiorca(false);
+        
+            klient.getKlienciKredyties().add(kkw);
+            
             session.saveOrUpdate(kredyt);
                 
             session.getTransaction().commit();
@@ -88,14 +99,24 @@ public class KredytyDao  implements Serializable {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        Query q=session.createQuery("from Kredyty where klienci_Klienci_id="+idKlienta+" ");
-        List<Kredyty> list;
-        list = (List<Kredyty>) q.list();
+        Query q=session.createQuery("from KlienciKredyty where klienci_id="+idKlienta+" ");
+        
+        List<Kredyty> kredyty=new LinkedList<>();
+        
+        List l = q.list();
+            Iterator it = l.iterator();
+            while (it.hasNext()) {
+                
+                KlienciKredyty kk=(KlienciKredyty) it.next();
+                
+                kredyty.add(kk.getKredyty());
+                
+            }
         
         session.getTransaction().commit();
-        
         session.close();
-        return list;
+        
+        return kredyty;
     }
     
  
