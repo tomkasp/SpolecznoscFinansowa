@@ -14,10 +14,10 @@ public class KredytyDao  implements Serializable {
     }
 
     public void createOrUpdateKredyt(Kredyty kredyt,Klienci klient) {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
-            kredyt.setKlienci(klient);
+//            kredyt.setKlienci(klient);
             session.saveOrUpdate(kredyt);
                 
             session.getTransaction().commit();
@@ -51,7 +51,7 @@ public class KredytyDao  implements Serializable {
     }
     
     public void deleteKredyty(Kredyty kredyt) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         session.delete(kredyt);

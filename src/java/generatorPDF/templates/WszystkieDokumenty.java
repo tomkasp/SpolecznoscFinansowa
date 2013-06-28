@@ -31,7 +31,7 @@ public class WszystkieDokumenty  {
         
          KredytyDao kredytyDAO=new KredytyDao();
          Kredyty kredyt=kredytyDAO.readKredyty(idKredytu);
-         Klienci klient=kredyt.getKlienci();
+         Klienci klient=(Klienci) kredyt.getKlienciKredyties().toArray()[0];
          
         try {
                 BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA , BaseFont.CP1250, BaseFont.CACHED);

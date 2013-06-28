@@ -9,7 +9,6 @@ import sql.dao.UzytkownikDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
 import sql.entity.Uzytkownik;
-import sql.util.NewHibernateUtil;
 
 /**
  *
