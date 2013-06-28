@@ -20,7 +20,6 @@ public class Pobieranie {
         Uzytkownik uzytkownik = (Uzytkownik)klient.getUzytkownik();
         
         
-        
         System.out.println("uzytkownik: " + uzytkownik.getLogin());
         
         
