@@ -41,11 +41,13 @@ public class UzytkownikDao {
                 message="logowanie przebiegli poprawnie";
                 return true;
             }
+            
+            
         } catch (HibernateException | NoSuchAlgorithmException e) {
             message="Błąd połączenia z bazą";
             System.out.println("test");
         }
-        finally{
+        finally {
                 System.out.println(message);
         }
 
