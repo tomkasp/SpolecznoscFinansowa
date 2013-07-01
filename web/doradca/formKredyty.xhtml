@@ -11,64 +11,37 @@
         <script type="text/javascript">
         var control1 = 'false';
         var mpanel = null;var mpanel1 = null;var mpanel2 = null;
-        var newdiv = null;var newdiv1 = null;var newdiv2 = null;var newdiv3 = null;var newdiv4 = null;var newdiv5 = null;var newdiv6 = null;var newdiv7 = null;var newdiv8 = null;
-        var newinput = null;var newinput1 = null;var newinput2 = null;var newinput3 = null;var newinput4 = null;var newinput5 = null;var newinput6 = null;var newinput7 = null;var newinput8 = null;
-        var newtext = null;var newtext1 = null;var newtext2 = null;var newtext3 = null;var newtext4 = null;var newtext5 = null;var newtext6 = null;var newtext7 = null;var newtext8 = null;
         var parentx = null;
-        var animate1 = null;var animate2 = null;
         
         function deletepanel(){
             alert('on construction...');
         }
         
-        function createpanel(){ 
-            
+        function disableall(){            
+            mpanel2 = document.getElementById('putelement2');            
+            mpanel2.setAttribute('style','display:none');            
+        }
+        
+        function createpanel(){             
             if(document.getElementById('boxcall').checked){               
                 
                 mpanel = document.getElementById('putelement'); 
                 mpanel1 = document.getElementById('formcell');
                 mpanel2 = document.getElementById('putelement2');
-            
-                /*newdiv = document.createElement('div');
-                newp1 = document.createElement('p');                    
-                newp1.setAttribute("class", "absoluteR");
-               
-                newinput = document.createElement('input');            
-                newinput.setAttribute('type',"button");
-                newinput.setAttribute('name', "submit1");
-                newinput.setAttribute('value', "Add New Klienci");
-                newinput.setAttribute("class", "relativeR");*/
-                //newinput.setAttribute("onclick", "formKlienci.xhtml");
-                       
-                /*parentx = mpanel1.parentNode;    
-           
-                newdiv.setAttribute("class", "centmain bodytextbutton");
-                newdiv.setAttribute("id", "d1");
-                newdiv.appendChild(newp1);
-                newdiv.appendChild(newinput); 
-                            
-                parentx.insertBefore(newdiv, mpanel);  */             
-            
+      
                 mpanel.setAttribute('style','display:none');                 
                 mpanel2.removeAttribute('style');
                 mpanel2.setAttribute('style','display:block');
-                /*document.getElementById('formcell').appendChild(parentx);*/
-                
-                //alert('success 1');
-                
+
             }else {                
-                //mpanel1 = document.getElementById('formcell');
                 mpanel = document.getElementById('putelement');
                 mpanel2 = document.getElementById('putelement2');
-                //newdiv = document.getElementById('d1');
-               
-                //mpanel1.parentNode.removeChild(newdiv);
+ 
                 mpanel.setAttribute('style','display:block');
                 mpanel2.setAttribute('style','display:none');
-            }                        
-                        
-        }                
-
+            }                                                
+        }         
+        window.onload = disableall;
       </script>
     </ui:define>
     
@@ -108,7 +81,7 @@
             <!--</h:panelGroup>-->
             </div>
             <div id="putelement" class="cent"><h:commandButton value=" Dodaj " action="#{kredytyMB.submit()}"></h:commandButton></div>
-            <div id="putelement2" class="cent"><h:commandButton value=" add new partener " action="indexstart"></h:commandButton></div>
+            <div id="putelement2" class="cent"><h:commandButton value=" add new partener " action="#{kredytyMB.addPart()}"></h:commandButton></div>
         </h:form>        
         
     </ui:define>

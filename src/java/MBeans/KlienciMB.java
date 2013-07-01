@@ -23,7 +23,7 @@ import sql.util.HibernateUtil;
 @ManagedBean
 @SessionScoped
 //@RequestScoped
-public class KlienciMB implements Serializable{
+public class KlienciMB extends KredytyMB implements Serializable{
     
     private Klienci selectedClient;
     
@@ -32,6 +32,7 @@ public class KlienciMB implements Serializable{
     Klienci klient=new Klienci();
     KlienciDao kdao=new KlienciDao();
     List<Klienci> KlientList;
+    KredytyMB kredytypart = new KredytyMB();
 
     public KlienciMB() {
     }
@@ -60,7 +61,34 @@ public class KlienciMB implements Serializable{
         session.beginTransaction().begin();
         Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 4 );
         u.getAktywne();
-        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
+        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!                
+        
+        if(KredytyMB.client == 1){
+            
+//            kredytypart.callAllKredyty(count)           
+            
+            
+            klient.setUzytkownik(u);
+            kdao.createOrUpdateKlient(klient);
+            count = 1;
+            if(count == 1){
+                datanow = "Hello "+this.klient.getImie()+", one record created.";
+            }
+            
+            System.out.println("whatz up suger........");
+            System.out.println("klienci ID "+KredytyMB.part);
+            System.out.println("name "+klienci2.getImie());
+            System.out.println("surname "+klienci2.getNazwisko());
+            System.out.println("klienci ID "+klient.getKlienciId());
+            System.out.println("partener name "+klient.getImie());
+            System.out.println("partener surname "+klient.getNazwisko());
+            System.out.println("Wolna Gotowaka"+kredyty.getWolnaGotowka());
+            
+            klient = null;
+            this.setKlient(klient);
+            
+            return "formKredyty";
+        }
         
         klient.setUzytkownik(u);
         kdao.createOrUpdateKlient(klient);
@@ -119,16 +147,6 @@ public class KlienciMB implements Serializable{
         this.KlientList = KlientList;
     }
     
-    public void clearAll(){
-        hello = "God loves you all";
-        //Klienci k2 = null;
-        //klient = null;
-        //this.setKlient(klient);
-        //this.klient.setImie("hello to you all");
-        //this.setKlient(x) ;//= "hello";
-        this.setHello("Know you are there");
-//        return this.klient.getImie()+" hello and welcome";
-    }
 
     public Klienci getSelectedClient() {
         return selectedClient;

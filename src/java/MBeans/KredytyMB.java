@@ -19,7 +19,6 @@ import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
 import sql.entity.Uzytkownik;
-import sql.util.NewHibernateUtil;
 
 /**
  *
@@ -36,22 +35,23 @@ public class KredytyMB implements Serializable{
     Kredyty selectedKredyt = new Kredyty();
     Klienci klienci2 = new Klienci();
     KredytyDao kredytydeo2 = new KredytyDao();
-    List<Kredyty> kredytylist;
-
+    List<Kredyty> kredytylist;    
+   
     Boolean showDialog = false; // display dialog test
     Boolean pdfSuccess = false; // display dialog for printing a successful pdf printout
     boolean step1 = false;
     boolean give = false;
+//    boolean part = false;
         
     BigDecimal calc, calc2;    // used to set form fields from another class with sends data to database        
     double test0, test1, test2, test3, num1; // used in current form for calcuations
 
     int num3; //counter and control variable
-    int client = 0; int part = 0; // count for client and partenrs
+    static int client = 0; static int part = 0; // count for client and partenrs  
     
     
     //---------Getters and Seters Methods
-    
+       
     public double getTest0() {
         return test0;
     }
@@ -160,7 +160,7 @@ public class KredytyMB implements Serializable{
     
     //-------------Constructors and Methods
     
-    public KredytyMB() {  // class constructor        
+    public KredytyMB() {  // class constructor          
     }
     
     public String submit(){  // action method to data to the database
@@ -168,13 +168,18 @@ public class KredytyMB implements Serializable{
         kredyty.setDataDodaniaKredytu(new Date());
               
         kredytydao.createOrUpdateKredyt(kredyty, klienci2);
-        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());                
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());                 
         
         return "xxx";
     }
-    
-    public String callpart(){
-        return "formKlienci.xhtml";
+    public void displaywords(){
+        System.out.println("whatz up");
+    }
+    public String addPart(){
+        
+        part = klienci2.getKlienciId();
+        client = 1;
+        return "indexstart";
     }
     public String callAllKredyty(int xdata){ // action method to call all credit of a client into one data table
         kredytylist=kredytydeo2.getKredytyOneKlient(xdata);
