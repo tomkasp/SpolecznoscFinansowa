@@ -14,7 +14,7 @@ import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.Uzytkownik;
-import sql.util.NewHibernateUtil;
+import sql.util.HibernateUtil;
 
 /**
  *
@@ -53,11 +53,12 @@ public class KlienciMB implements Serializable{
         this.hello = hello;
     }
     
-    public String submit() {
-        //CZTERY PONIZSZE LINIJKI SĄ TYMCZASOWE...
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
+
+    public String submit(){
+        //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 1 );
+        Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 4 );
         u.getAktywne();
         //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
         

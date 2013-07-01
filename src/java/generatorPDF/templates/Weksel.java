@@ -29,7 +29,7 @@ public class Weksel  {
         int idDokumentu=0;
         try {
                 Kredyty kredyt=kredytyDAO.readKredyty(idKredytu);
-                Klienci klient=kredyt.getKlienci();
+                Klienci klient=(Klienci) kredyt.getKlienciKredyties().toArray()[0];
             
                 BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA , BaseFont.CP1250, BaseFont.CACHED);
            

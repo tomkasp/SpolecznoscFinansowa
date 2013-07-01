@@ -1,5 +1,5 @@
 package sql.entity;
-// Generated 2013-06-27 08:43:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 14:28:15 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="uzytkownik"
-    ,catalog="system4"
+    ,catalog="System4"
 )
 public class Uzytkownik  implements java.io.Serializable {
 

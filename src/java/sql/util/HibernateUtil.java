@@ -1,9 +1,19 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sql.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-public class NewHibernateUtil {
+/**
+ * Hibernate Utility class with a convenient method to get Session Factory
+ * object.
+ *
+ * @author Admin
+ */
+public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
     
@@ -22,5 +32,4 @@ public class NewHibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-    
 }

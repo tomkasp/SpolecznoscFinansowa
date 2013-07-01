@@ -4,20 +4,13 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.4:3306/system4?characterEncoding=UTF-8</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"/>
-    <mapping class="sql.entity.Uzytkownik"/>
-    <mapping class="sql.entity.Klienci"/>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/System4?characterEncoding=UTF-8</property>
+    <property name="hibernate.connection.username">userrice</property>
+    <property name="hibernate.connection.password">userrice123</property>
+    <mapping class="sql.entity.KlienciKredyty"/>
     <mapping class="sql.entity.Kredyty"/>
-    <mapping class="sql.entity.Uzytkownik"/>
     <mapping class="sql.entity.Klienci"/>
-    <mapping class="sql.entity.Kredyty"/>
+    <mapping class="sql.entity.KlienciKredytyId"/>
     <mapping class="sql.entity.Uzytkownik"/>
-    <mapping class="sql.entity.Klienci"/>
-    <mapping class="sql.entity.Kredyty"/>
-    <mapping class="sql.entity.Uzytkownik"/>
-    <mapping class="sql.entity.Klienci"/>
-    <mapping class="sql.entity.Kredyty"/>
   </session-factory>
 </hibernate-configuration>

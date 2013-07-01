@@ -1,17 +1,19 @@
 package sql.entity;
-// Generated 2013-06-27 08:43:49 by Hibernate Tools 3.2.1.GA
+// Generated 2013-06-27 14:28:15 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,13 +23,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="kredyty"
-    ,catalog="system4"
+    ,catalog="System4"
 )
 public class Kredyty  implements java.io.Serializable {
 
 
      private Integer kredytyId;
-     private Klienci klienci;
      private String nazwaBanku;
      private String nrUmowyPosrednictwa;
      private BigDecimal kwotaKredytuBrutto;
@@ -46,16 +47,12 @@ public class Kredyty  implements java.io.Serializable {
      private Date dataMozliwegoUruchomienia;
      private Date dataDodaniaKredytu;
      private Boolean czyWygenerowanoDokumenty;
+     private Set<KlienciKredyty> klienciKredyties = new HashSet<KlienciKredyty>(0);
 
     public Kredyty() {
     }
 
-	
-    public Kredyty(Klienci klienci) {
-        this.klienci = klienci;
-    }
-    public Kredyty(Klienci klienci, String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty) {
-       this.klienci = klienci;
+    public Kredyty(String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty, Set<KlienciKredyty> klienciKredyties) {
        this.nazwaBanku = nazwaBanku;
        this.nrUmowyPosrednictwa = nrUmowyPosrednictwa;
        this.kwotaKredytuBrutto = kwotaKredytuBrutto;
@@ -74,6 +71,7 @@ public class Kredyty  implements java.io.Serializable {
        this.dataMozliwegoUruchomienia = dataMozliwegoUruchomienia;
        this.dataDodaniaKredytu = dataDodaniaKredytu;
        this.czyWygenerowanoDokumenty = czyWygenerowanoDokumenty;
+       this.klienciKredyties = klienciKredyties;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -85,15 +83,6 @@ public class Kredyty  implements java.io.Serializable {
     
     public void setKredytyId(Integer kredytyId) {
         this.kredytyId = kredytyId;
-    }
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="klienci_klienci_id", nullable=false)
-    public Klienci getKlienci() {
-        return this.klienci;
-    }
-    
-    public void setKlienci(Klienci klienci) {
-        this.klienci = klienci;
     }
     
     @Column(name="nazwaBanku", length=60)
@@ -256,6 +245,14 @@ public class Kredyty  implements java.io.Serializable {
     
     public void setCzyWygenerowanoDokumenty(Boolean czyWygenerowanoDokumenty) {
         this.czyWygenerowanoDokumenty = czyWygenerowanoDokumenty;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="id.kredyty")
+    public Set<KlienciKredyty> getKlienciKredyties() {
+        return this.klienciKredyties;
+    }
+    
+    public void setKlienciKredyties(Set<KlienciKredyty> klienciKredyties) {
+        this.klienciKredyties = klienciKredyties;
     }
 
 
