@@ -2,6 +2,7 @@ package MBeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import sql.dao.UzytkownikDao;
 
 
 @ManagedBean(name="uzytkownik")
@@ -20,6 +21,15 @@ public class UzytkownikMB {
     /**
      * Creates a new instance of UzytkownikMB
      */
+    
+    public void dodajUzytkownika(){
+        UzytkownikDao usrDao = new UzytkownikDao();
+        usrDao.dodajUzytkownika(login, haslo, imie, nazwisko, oddzial);
+    }
+    
+    
+    
+    
     public UzytkownikMB() {
     }
 
