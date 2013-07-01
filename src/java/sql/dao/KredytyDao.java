@@ -58,14 +58,16 @@ public class KredytyDao implements Serializable {
 
         //POWIĄZANIE PARTNER - KREDYT
         if (partner != null) {
+            
             KlienciKredyty kkw2 = new KlienciKredyty();
-            kkw2.setKlienci(partner);
+            kkw2.setKlienci(klient);
             kkw2.setKredyty(kredyt);
             kkw2.setWspolkredytobiorca(true);
             try {
                 kredyt.getKlienciKredyties().add(kkw2);
             } catch (org.hibernate.LazyInitializationException e) {
             }
+            
         }
 
         session.save(kredyt);

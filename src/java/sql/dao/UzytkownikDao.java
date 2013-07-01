@@ -76,7 +76,8 @@ public class UzytkownikDao {
     }
 
     
-    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial){
+    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial) {
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
@@ -91,7 +92,7 @@ public class UzytkownikDao {
         session.save(uzytkownik);
         session.getTransaction().commit();
         session.close();
-    
+        
     }
     
     

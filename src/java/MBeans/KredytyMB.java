@@ -12,13 +12,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.Session;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.Kredyty;
-import sql.entity.Uzytkownik;
 
 /**
  *
@@ -36,6 +35,8 @@ public class KredytyMB implements Serializable{
     Kredyty selectedKredyt = new Kredyty();
     
     Klienci klienci2 = new Klienci();
+    
+    @ManagedProperty(value="#{klienciMB.klient}")
     Klienci partner;
     
     KredytyDao kredytydeo2 = new KredytyDao();

@@ -31,14 +31,11 @@ public class NewMain {
         //KlienciDao kdao=new KlienciDao();
         //List<Klienci> l = kdao.getKlientList();
         //System.out.println("P: "+ l.get(0).getImie() );     
-              
-        
-        
+                      
         UzytkownikDao userDAO=new UzytkownikDao();
         Boolean b=userDAO.logowanie("ktosik", "dupa");
         System.out.println(b);
-        
-        
+               
 //        Uzytkownik u=new Uzytkownik();
 //        u.setAktywne(Boolean.TRUE);
 //        u.setDataUtworzenia(new Date());
