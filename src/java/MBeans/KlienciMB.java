@@ -62,6 +62,10 @@ public class KlienciMB implements Serializable{
         u.getAktywne();
         //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
         
+        // masz juz w UzytkownikDao metode pobierz uzytkownik
+        //pobiera ID, zwraca obiekt, nara! MG
+        
+        
         klient.setUzytkownik(u);
         kdao.createOrUpdateKlient(klient);
         count = 1;
