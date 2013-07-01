@@ -51,11 +51,17 @@ public class UzytkownikDao {
     }
 
     
-    public void dodajUzytkownika(Uzytkownik user){
+    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Uzytkownik uzytkownik = user;
+        Uzytkownik uzytkownik = new Uzytkownik();
+        uzytkownik.setLogin(imie);
+        uzytkownik.setImie(imie);
+        uzytkownik.setHaslo(haslo);
+        uzytkownik.setNazwisko(nazwisko);
+        uzytkownik.setOddzial(oddzial);
+        uzytkownik.setAktywne(true);
         
         session.save(uzytkownik);
         session.getTransaction().commit();
