@@ -23,7 +23,7 @@ import sql.util.HibernateUtil;
 @ManagedBean
 @SessionScoped
 //@RequestScoped
-public class KlienciMB extends KredytyMB implements Serializable{
+public class KlienciMB implements Serializable{
     
     private Klienci selectedClient;
     
@@ -76,13 +76,10 @@ public class KlienciMB extends KredytyMB implements Serializable{
             }
             
             System.out.println("whatz up suger........");
-            System.out.println("klienci ID "+KredytyMB.part);
-            System.out.println("name "+klienci2.getImie());
-            System.out.println("surname "+klienci2.getNazwisko());
+            System.out.println("klienci ID "+KredytyMB.part);            
             System.out.println("klienci ID "+klient.getKlienciId());
             System.out.println("partener name "+klient.getImie());
-            System.out.println("partener surname "+klient.getNazwisko());
-            System.out.println("Wolna Gotowaka"+kredyty.getWolnaGotowka());
+            System.out.println("partener surname "+klient.getNazwisko());           
             
             klient = null;
             this.setKlient(klient);
