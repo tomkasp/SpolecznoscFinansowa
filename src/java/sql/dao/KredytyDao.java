@@ -1,5 +1,4 @@
 package sql.dao;
-
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
@@ -14,12 +13,12 @@ public class KredytyDao  implements Serializable {
     public KredytyDao() {
     }
 
-    public void createKredyt(Kredyty kredyt,Klienci klient) {
+    public void createOrUpdateKredyt(Kredyty kredyt,Klienci klient) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             session.beginTransaction().begin();
             
             kredyt.setKlienci(klient);
-            session.save(kredyt);
+            session.saveOrUpdate(kredyt);
                 
             session.getTransaction().commit();
             
@@ -44,18 +43,18 @@ public class KredytyDao  implements Serializable {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        session.saveOrUpdate(kredyt);
+        session.saveOrUpdate(kredyt);   
         
         session.getTransaction().commit();
         
         session.close();
     }
     
-    public void deleteKredyty(Integer idKredyt) {
+    public void deleteKredyty(Kredyty kredyt) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        session.delete(idKredyt.toString(),Kredyty.class);
+        session.delete(kredyt);
         
         session.getTransaction().commit();
         
@@ -73,7 +72,7 @@ public class KredytyDao  implements Serializable {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
-        Query q=(Query) session.createQuery("from Kredyty");
+        Query q=session.createQuery("from Kredyty");
         List<Kredyty> list;
         list = (List<Kredyty>) q.list();
         

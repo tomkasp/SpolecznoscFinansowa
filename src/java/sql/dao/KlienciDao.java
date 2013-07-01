@@ -37,7 +37,8 @@ public class KlienciDao implements Serializable {
         return klient;
     }
     
-    public void updateKlient(Klienci klient) {
+    public void updateKlient(Klienci klient) 
+    {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
@@ -48,7 +49,8 @@ public class KlienciDao implements Serializable {
         session.close();
     }
     
-    public void deleteKlient(Klienci klient) {
+    public void deleteKlient(Klienci klient) 
+    {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        

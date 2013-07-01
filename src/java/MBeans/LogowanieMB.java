@@ -10,6 +10,7 @@ public class LogowanieMB {
     private String login;
     private String haslo;
     private boolean zalogowany=false;
+    private String message;
     
     public LogowanieMB() {
     }
@@ -54,12 +55,14 @@ public class LogowanieMB {
     public void setZalogowany(boolean zalogowany) {
         this.zalogowany = zalogowany;
     }
-    
-    
-    
-    
-    
-    
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     
 }
