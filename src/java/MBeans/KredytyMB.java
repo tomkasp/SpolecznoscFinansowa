@@ -29,16 +29,20 @@ public class KredytyMB implements Serializable{
     //--------Objects and Data Definations
     
     private static final long serialVersionUID = 1L;
+    
     Kredyty kredyty = new Kredyty();
     Kredyty selectedKredyt = new Kredyty();
+    
     Klienci klienci2 = new Klienci();
+    Klienci partner;
+    
     KredytyDao kredytydeo2 = new KredytyDao();
+    
     List<Kredyty> kredytylist;
 
     Boolean showDialog = false; // display dialog test
     Boolean pdfSuccess = false; // display dialog for printing a successful pdf printout
     boolean step1 = false;
-    
     
     BigDecimal calc, calc2;//, calc3, calc4;    // used to set form fields from another class with sends data to database        
     double test1; double test2; double test3; double num1; // used in current form for calcuations
@@ -131,19 +135,43 @@ public class KredytyMB implements Serializable{
     public KredytyMB() {  // class constructor        
     }
     
-    public String submit(){  // action method to data to the database
+    public String createKredyt() 
+    {
+       
         KredytyDao kredytydao = new KredytyDao();
+        
         kredyty.setDataDodaniaKredytu(new Date());
-        kredytydao.createOrUpdateKredyt(kredyty, klienci2);
+        
+        kredytydao.createKredyt(kredyty, klienci2, partner);
+        
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
+        
         return "xxx";
     }
+    
+    public String submit(){  // action method to data to the database
+        
+        KredytyDao kredytydao = new KredytyDao();
+        kredyty.setDataDodaniaKredytu(new Date());
+        
+        //kredytydao.createOrUpdateKredyt(kredyty, klienci2);
+        
+        kredytydao.createKredyt(kredyty, klienci2, partner);
+        
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
+        
+        return "xxx";
+    }
+    
+  
+    
     public String callAllKredyty(int xdata){ // action method to call all credit of a client into one data table
         kredytylist=kredytydeo2.getKredytyOneKlient(xdata);
         KlienciDao kdao=new KlienciDao();
         klienci2=kdao.readKlient(xdata);
         return "xxx";
     }
+    
     public void callPdf(int ydata){  //  action method to display a successful pdf generation               
         GeneratorPDF.generuj(ydata);     
         pdfSuccess=GeneratorPDF.isPdfGenerated();
@@ -180,13 +208,13 @@ public class KredytyMB implements Serializable{
         
         //this.num1 = 0;
         this.num1 = this.test3;
-//        calc3 = new BigDecimal(this.test3);
+        //calc3 = new BigDecimal(this.test3);
         calc = new BigDecimal(this.test3);
         this.kredyty.setKwotaKonsolidacji(calc);        
         //this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue();
 
         this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
-//        this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - 200;
+        //this.test3 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - 200;
         this.step1 = true;
                 
         calc2 = new BigDecimal(this.test3);        
@@ -223,5 +251,15 @@ public class KredytyMB implements Serializable{
         kredyty=new Kredyty();
         return "form2";
     }
+
+    public Klienci getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Klienci partner) {
+        this.partner = partner;
+    }
+    
+    
     
 }

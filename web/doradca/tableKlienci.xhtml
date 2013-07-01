@@ -8,60 +8,67 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core" 
                 xmlns="http://www.w3.org/1999/xhtml">
 
-    <ui:define name="headtitle">      
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Wyświetl Klientów</h:panelGroup>    
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
+
 
     <ui:define name="maincenter" >  
-    <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable" rendered="#{logowanieMB.zalogowany}">   
-            <p:scrollPanel style="height: 70%">
-                <h:form prependId="false">
-                    <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientów!"
-                                  rowKey="#{data.klienciId}"  selection="#{klienciMB.selectedClient}" selectionMode="single"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">   
 
-                        <p:ajax event="rowSelect" update="dataTable1"/>
-                        <p:ajax event="rowUnselect" update="dataTable1"/>
+        <c:if test="#{logowanieMB.zalogowany==true}" var="x">
 
-                        <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie} </p:column>
-                        <p:column filterBy="#{data.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko} </p:column>
-                        <p:column filterBy="#{data.pesel}" filterStyle="width: 75px;" style="width: 20px;"><f:facet name="header">Pesel</f:facet> #{data.pesel}</p:column>
-                        <p:column width="30"><f:facet name="header">Seria Dowodu</f:facet>#{data.seriaDowodu} </p:column>
-                        <p:column width="30"><f:facet name="header">Nr Dowodu</f:facet>#{data.nrDowodu} </p:column>
-                        <p:column><f:facet name="header">Miejscowosc</f:facet>#{data.miejscowosc} </p:column>
-                        <p:column style="width: 50px;"><f:facet name="header" >Kod pocztowy</f:facet>#{data.kodPocztowy} </p:column>
-                        <p:column><f:facet name="header">Ulica</f:facet>#{data.ulica} </p:column>
-                        <p:column style="width: 50px;"><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu} </p:column>
-                        <p:column style="width: 50px;"><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania} </p:column>
-                        <p:column><f:facet name="header">Poczta</f:facet>#{data.poczta }</p:column>
-                        <p:column width="60"><f:facet name="header">Klient Kredyty </f:facet>
+            <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Wyświetl Klientów</h:panelGroup>    
+            <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>     
 
-                        <h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.klienciId)}" />
-                        
-                        </p:column>
+            <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
+                <p:scrollPanel style="height: 70%">
+                    <h:form prependId="false">
+                        <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientów!"
+                                      rowKey="#{data.klienciId}"  selection="#{klienciMB.selectedClient}" selectionMode="single"
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">   
 
-                        <f:facet name="footer"> 
-                            <c:if test="#{klienciMB.selectedClient!=null}" var="costam">
-                                <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />
-                                <h:commandButton id="modalDialogButton" value="usuń" onclick="dlg2.show();" type="button"/>
-                            </c:if>
-                        </f:facet>  
+                            <p:ajax event="rowSelect" update="dataTable1"/>
+                            <p:ajax event="rowUnselect" update="dataTable1"/>
 
-                    </p:dataTable>
+                            <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie} </p:column>
+                            <p:column filterBy="#{data.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko} </p:column>
+                            <p:column filterBy="#{data.pesel}" filterStyle="width: 75px;" style="width: 20px;"><f:facet name="header">Pesel</f:facet> #{data.pesel}</p:column>
+                            <p:column width="30"><f:facet name="header">Seria Dowodu</f:facet>#{data.seriaDowodu} </p:column>
+                            <p:column width="30"><f:facet name="header">Nr Dowodu</f:facet>#{data.nrDowodu} </p:column>
+                            <p:column><f:facet name="header">Miejscowosc</f:facet>#{data.miejscowosc} </p:column>
+                            <p:column style="width: 50px;"><f:facet name="header" >Kod pocztowy</f:facet>#{data.kodPocztowy} </p:column>
+                            <p:column><f:facet name="header">Ulica</f:facet>#{data.ulica} </p:column>
+                            <p:column style="width: 50px;"><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu} </p:column>
+                            <p:column style="width: 50px;"><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania} </p:column>
+                            <p:column><f:facet name="header">Poczta</f:facet>#{data.poczta }</p:column>
+                            <p:column width="60"><f:facet name="header">Klient Kredyty </f:facet>
 
-                    <p:dialog id="modalDialog" header="usuń klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
-                        <h:outputText value="Czy napewno chcesz usunąć klienta?" />  
-                        <div style="text-align: center;"> 
-                        <h:commandButton id="viewButton2" value="usuń" action="#{klienciMB.deleteClient()}" />
-                        <h:button onclick="dlg2.hide();" value="anuluj"/>
-                        </div>
-                    </p:dialog>  
+                                <h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.klienciId)}" />
 
-                </h:form>
-            </p:scrollPanel>
-        </h:panelGroup>                  
+                            </p:column>
+
+                            <f:facet name="footer"> 
+                                <c:if test="#{klienciMB.selectedClient!=null}" var="costam">
+                                    <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />
+                                    <h:commandButton id="modalDialogButton" value="usuń" onclick="dlg2.show();" type="button"/>
+                                </c:if>
+                            </f:facet>  
+
+                        </p:dataTable>
+
+                        <p:dialog id="modalDialog" header="usuń klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                            <h:outputText value="Czy napewno chcesz usunąć klienta?" />  
+                            <div style="text-align: center;"> 
+                                <h:commandButton id="viewButton2" value="usuń" action="#{klienciMB.deleteClient()}" />
+                                <h:button onclick="dlg2.hide();" value="anuluj"/>
+                            </div>
+                        </p:dialog>  
+
+                    </h:form>
+                </p:scrollPanel>
+            </h:panelGroup>                  
+
+        </c:if>      
 
     </ui:define>
+
+
 
 </ui:composition>

@@ -24,6 +24,7 @@ public class KlienciDao implements Serializable {
         session.close();
     }
     
+    
     public Klienci readKlient(Integer idKlient) 
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,12 +56,7 @@ public class KlienciDao implements Serializable {
         session.delete(klient);
         
         session.getTransaction().commit();
-//        Query query = session.createQuery("delete from Klienci where idKlientci=" + idKlient);
-//        int row = query.executeUpdate();
-//        if (row == 0) {
-//            System.out.println("nie usunieto nikogo!");
-//        }
-//        
+
         session.close();
     }
     
