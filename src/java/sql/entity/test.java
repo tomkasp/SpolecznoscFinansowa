@@ -29,15 +29,17 @@ public class test {
         klient.setNazwisko("madej");
         klient.setUzytkownik(uzyt);
         
-        Kredyty kredyt = new Kredyty();
-        kredyt.setKwotaKonsolidacji(BigDecimal.valueOf(1234.12));
-        kredyt.setNazwaBanku("testowa32");
-        session.save(kredyt);
+        //Kredyty kredyt = new Kredyty();
+        //kredyt.setKwotaKonsolidacji(BigDecimal.valueOf(1234.12));
+        //kredyt.setNazwaBanku("testowa32");
+        //session.save(kredyt);
+        
+        Kredyty kredyt = (Kredyty)session.load(Kredyty.class, 8);
         
         KlienciKredyty kkw = new KlienciKredyty();
         kkw.setKlienci(klient);
         kkw.setKredyty(kredyt);
-        kkw.setWspolkredytobiorca(true);
+        kkw.setWspolkredytobiorca(false);
          
         klient.getKlienciKredyties().add(kkw);
   

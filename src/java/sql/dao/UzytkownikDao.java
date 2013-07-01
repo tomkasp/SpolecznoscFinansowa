@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.QueryException;
 import org.hibernate.Session;
 import org.hibernate.exception.JDBCConnectionException;
+import sql.entity.Uzytkownik;
 import sql.util.HibernateUtil;
 import sql.util.Security;
 
@@ -19,6 +20,7 @@ public class UzytkownikDao {
 
     public Boolean logowanie(String login, String haslo) {
 
+        
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -48,6 +50,7 @@ public class UzytkownikDao {
                     ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
                     message = bundle.getString("failed2");
                 }
+
                 return false;
             } else {
                 String message = "";
@@ -65,12 +68,34 @@ public class UzytkownikDao {
         } catch (QueryException exp) {
         } finally {
             System.out.println(message);
+            
         }
-
-        //session.close();    
+        
+           
         return false;
     }
 
+    
+    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Uzytkownik uzytkownik = new Uzytkownik();
+        uzytkownik.setLogin(imie);
+        uzytkownik.setImie(imie);
+        uzytkownik.setHaslo(haslo);
+        uzytkownik.setNazwisko(nazwisko);
+        uzytkownik.setOddzial(oddzial);
+        uzytkownik.setAktywne(true);
+        
+        session.save(uzytkownik);
+        session.getTransaction().commit();
+        session.close();
+    
+    }
+    
+    
+    
     public String getMessage() {
         return message;
     }
