@@ -19,10 +19,11 @@ public class UzytkownikDao {
     private String message = "";
 
     public Boolean logowanie(String login, String haslo) {
-
+        
+        Session session = null ;
         
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
 
             Query q = null;
             try {
@@ -68,7 +69,7 @@ public class UzytkownikDao {
         } catch (QueryException exp) {
         } finally {
             System.out.println(message);
-            
+            session.close();
         }
         
            
@@ -76,7 +77,8 @@ public class UzytkownikDao {
     }
 
     
-    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial){
+    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial) {
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
@@ -91,7 +93,7 @@ public class UzytkownikDao {
         session.save(uzytkownik);
         session.getTransaction().commit();
         session.close();
-    
+        
     }
     
     

@@ -26,6 +26,7 @@ import sql.util.HibernateUtil;
 //@RequestScoped
 public class KlienciMB implements Serializable{
     
+    
     private Klienci selectedClient;
     
     private int count = 0; 

@@ -8,9 +8,7 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
     <application>
-        <message-bundle>
-            inne.messages_pl
-        </message-bundle>
+        <message-bundle> inne.messages_pl </message-bundle>
     </application>    
     
    <application>

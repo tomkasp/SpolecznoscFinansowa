@@ -8,7 +8,6 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 rendered="true">
     
-    
     <ui:define name="maincenter">
         
         <c:if test="#{logowanieMB.zalogowany==true}" var="x">
@@ -35,6 +34,10 @@
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Mieszkania" styleClass="absoluteR"/><h:inputText id="nrmiesz" styleClass="relativeR" value="#{klienciMB.klient.nrMieszkania}" required="true"><f:validateLength maximum="5" /></h:inputText><h:message for="nrmiesz" style="color: red" styleClass="floatR" /></h:panelGroup>                        
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Poczta" styleClass="absoluteR"/><h:inputText id="posz" styleClass="relativeR" value="#{klienciMB.klient.poczta}" required="true"><f:validateLength minimum="2" maximum="45" /></h:inputText><h:message for="posz" style="color: red" styleClass="floatR"/></h:panelGroup>                        
             <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value=" Zapisz " action="#{klienciMB.submit()}" /></h:panelGroup>
+ 
+            <h:panelGroup styleClass="cent" style="display: block"><h:commandButton value=" Zapisz KREDYT " action="#{ kredytyMB.createKredyt() }" /></h:panelGroup>
+       
+        
         </h:panelGroup>            
         </h:form>
               

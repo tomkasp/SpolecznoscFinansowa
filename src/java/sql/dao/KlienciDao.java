@@ -34,7 +34,7 @@ public class KlienciDao implements Serializable {
         
         session.getTransaction().commit();
         
-        //session.close();
+        session.close();
         return klient;
     }
     
