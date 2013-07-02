@@ -25,6 +25,21 @@ import sql.util.HibernateUtil;
 //@RequestScoped
 public class KlienciMB implements Serializable{
     
+    
+//    @ManagedProperty(value="#{kredytymbean}")
+//	private KredytyMB kredytyBean;
+// 
+//	//must povide the setter method
+////	public void setMessageBean(MessageBean messageBean) {
+////		this.messageBean = messageBean;
+////	}
+//
+//    public void setKredytyBean(KredytyMB kredytyBean) {
+//        this.kredytyBean = kredytyBean;
+//    }
+//    
+    
+    
     private Klienci selectedClient;
     
     private int count = 0; 

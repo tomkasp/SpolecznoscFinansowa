@@ -190,7 +190,7 @@ public class KredytyMB implements Serializable{
         
         part = klienci2.getKlienciId();
         client = 1;
-        return "indexstart";
+        return "tableKlienci";
     }
     
     public String submit(){  // action method to data to the database
