@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 //import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.hibernate.Session;
@@ -21,11 +22,11 @@ import sql.util.HibernateUtil;
  *
  * @author EI GLOBAL
  */
-@ManagedBean
+@ManagedBean(name="klienciMB")
 @SessionScoped
 //@RequestScoped
 public class KlienciMB implements Serializable{
-    
+//    @ManagedProperty(value = "kredytyMB")
     
     private Klienci selectedClient;
     
@@ -34,7 +35,7 @@ public class KlienciMB implements Serializable{
     Klienci klient=new Klienci();
     KlienciDao kdao=new KlienciDao();
     List<Klienci> KlientList;
-    KredytyMB kredytypart = new KredytyMB();
+//    KredytyMB kredytypart = new KredytyMB();
     
     //getter and setter methods
 

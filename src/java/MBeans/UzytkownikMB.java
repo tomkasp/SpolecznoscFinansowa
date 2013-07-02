@@ -84,7 +84,12 @@ public class UzytkownikMB {
         this.message = message;
     }
  
+    //methods and  constructors
     
+    public String createAcc(){
+        
+        return "zzz";
+    }
     
     
 }

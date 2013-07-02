@@ -56,6 +56,14 @@
             <redirect />   
         </navigation-case>
     </navigation-rule>  
+    <navigation-rule>   
+        <from-view-id>doradca/*</from-view-id>
+        <navigation-case>
+            <from-outcome>zzz</from-outcome>
+            <to-view-id>/doradca/createAcc.xhtml</to-view-id>       
+            <redirect />   
+        </navigation-case>
+    </navigation-rule>  
 
     <navigation-rule>   
         <from-view-id>doradca/*</from-view-id>
