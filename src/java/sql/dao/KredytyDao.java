@@ -5,11 +5,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.QueryException;
 import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.KlienciKredyty;
 import sql.entity.Kredyty;
 import sql.util.HibernateUtil;
+import sql.util.Security;
 
 public class KredytyDao implements Serializable {
 
@@ -58,14 +60,16 @@ public class KredytyDao implements Serializable {
 
         //POWIĄZANIE PARTNER - KREDYT
         if (partner != null) {
+            
             KlienciKredyty kkw2 = new KlienciKredyty();
-            kkw2.setKlienci(partner);
+            kkw2.setKlienci(klient);
             kkw2.setKredyty(kredyt);
             kkw2.setWspolkredytobiorca(true);
             try {
                 kredyt.getKlienciKredyties().add(kkw2);
             } catch (org.hibernate.LazyInitializationException e) {
             }
+            
         }
 
         session.save(kredyt);
@@ -147,15 +151,54 @@ public class KredytyDao implements Serializable {
     
     public Kredyty readKredyty(Integer idKredyt) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        
         session.beginTransaction().begin();
-
-        Kredyty kredyt = (Kredyty) session.load(Kredyty.class, idKredyt);
+        
+        Query q = null;
+            try {
+                q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id ");
+                q.setParameter("id", idKredyt);
+            } catch (QueryException exp) {
+            }
+        
+        KlienciKredyty kk=(KlienciKredyty) q.list().get(0);
+          
+        Kredyty kredyt = kk.getKredyty();
+        
+        kredyt.getKlienciKredyties().add(kk);
         
         session.getTransaction().commit();
 
-        //session.close();
+        session.close();
 
         return kredyt;
+    }
+    
+       public KlienciKredyty readKlienciKredyty(Integer idKredyt) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        session.beginTransaction().begin();
+        
+        Query q = null;
+            try {
+                q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id ");
+                q.setParameter("id", idKredyt);
+            } catch (QueryException exp) {
+            }
+        
+        KlienciKredyty kk=(KlienciKredyty) q.list().get(0);
+        
+        kk.setKlienci(kk.getKlienci());
+            
+        Kredyty kredyt = kk.getKredyty();
+        
+        kredyt.getKlienciKredyties().add(kk);
+        
+        session.getTransaction().commit();
+
+        session.close();
+
+        return kk;
     }
 
     public void updateKredyty(Kredyty kredyt) {

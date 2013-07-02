@@ -15,7 +15,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
 import sql.entity.KlienciKredyty;
@@ -31,16 +30,16 @@ public class WszystkieDokumenty {
         
         int idDokumentu = 0 ;
         KredytyDao kredytyDAO = new KredytyDao();
-        Kredyty kredyt = kredytyDAO.readKredyty(idKredytu);
-        KlienciKredyty kk = (KlienciKredyty) kredyt.getKlienciKredyties().toArray()[0];
+        KlienciKredyty kk = kredytyDAO.readKlienciKredyty(idKredytu);
         Klienci klient = kk.getKlienci();
+        Kredyty kredyt = kk.getKredyty();
 
         try {
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
             PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
             content.beginText();
-            content.setFontAndSize(bf, 12);
+            content.setFontAndSize( bf, 12 );
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 255, 573, 0);
 
