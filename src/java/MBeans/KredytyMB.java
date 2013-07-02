@@ -31,9 +31,13 @@ public class KredytyMB implements Serializable{
     //--------Objects and Data Definations
     
     private static final long serialVersionUID = 1L;
+    
     Kredyty kredyty = new Kredyty();
     Kredyty selectedKredyt = new Kredyty();
+    
     Klienci klienci2 = new Klienci();
+    Klienci partner;
+    
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;    
    
@@ -163,15 +167,21 @@ public class KredytyMB implements Serializable{
     public KredytyMB() {  // class constructor          
     }
     
-    public String submit(){  // action method to data to the database
+    public String createKredyt() 
+    {
+       
         KredytyDao kredytydao = new KredytyDao();
+        
         kredyty.setDataDodaniaKredytu(new Date());
-              
-        kredytydao.createOrUpdateKredyt(kredyty, klienci2);
-        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());                 
+        
+        kredytydao.createKredyt(kredyty, klienci2, partner);
+        
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
         
         return "xxx";
     }
+    
+    
     public void displaywords(){
         System.out.println("whatz up");
     }
@@ -179,14 +189,32 @@ public class KredytyMB implements Serializable{
         
         part = klienci2.getKlienciId();
         client = 1;
-        return "indexstart";
+        return "tableKlienci";
     }
+    
+    public String submit(){  // action method to data to the database
+        
+        KredytyDao kredytydao = new KredytyDao();
+        kredyty.setDataDodaniaKredytu(new Date());
+        
+        //kredytydao.createOrUpdateKredyt(kredyty, klienci2);
+        
+        kredytydao.createKredyt(kredyty, klienci2, partner);
+        
+        kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
+        
+        return "xxx";
+    }
+    
+  
+    
     public String callAllKredyty(int xdata){ // action method to call all credit of a client into one data table
         kredytylist=kredytydeo2.getKredytyOneKlient(xdata);
         KlienciDao kdao=new KlienciDao();
         klienci2=kdao.readKlient(xdata);
         return "xxx";
     }
+    
     public void callPdf(int ydata){  //  action method to display a successful pdf generation               
         GeneratorPDF.generuj(ydata);     
         pdfSuccess=GeneratorPDF.isPdfGenerated();
@@ -278,5 +306,15 @@ public class KredytyMB implements Serializable{
         kredyty=new Kredyty();
         return "form2";
     }
+
+    public Klienci getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Klienci partner) {
+        this.partner = partner;
+    }
+    
+    
     
 }

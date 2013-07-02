@@ -16,36 +16,37 @@
 
     <h:body>
 
-        
-        <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />
-            <div class="centmain-img">                
-                <h:form><h:panelGroup id="testX" styleClass="borderofgold"><h:link outcome="index" value="Home"/></h:panelGroup>
-                </h:form>                
-            </div>
+        <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />  
         </div>
 
         <div id="maincenter" class="centmain-img borderdesign2 bodyimage bodyheadbuttom">
-  
+
             <h:panelGroup style="  font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">EI Global</h:panelGroup>
             <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
             <h:form>
                 <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin bodyimage2">
 
                     <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Login</h:panelGroup>            
-                    <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" value="#{logowanieMB.login}" styleClass="relativeR" ><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Haslo" styleClass="absoluteR" /><h:inputSecret id="naz" value="#{logowanieMB.haslo}" styleClass="relativeR" ><f:validateLength minimum="3" maximum="40" /></h:inputSecret><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>            
-             
-                    <h:outputText class="alert" id="message1" title="${logowanieMB.message}" rendered="true" value="${logowanieMB.message}"></h:outputText>
-                     <h:panelGroup style="display: block" styleClass="cent bodyheadbuttom"> <h:commandButton  value="zaloguj" action="#{logowanieMB.logowanie()}"/> </h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
+                    <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="login" value="#{logowanieMB.login}" styleClass="relativeR"> <f:validateLength minimum="2" maximum="20" /></h:inputText> <h:message for="login" class="alert" ></h:message> </h:panelGroup>            
+                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Haslo" styleClass="absoluteR" /><h:inputSecret id="password" value="#{logowanieMB.haslo}" styleClass="relativeR" ><f:validateLength minimum="3" maximum="40" /></h:inputSecret> <h:message for="password" class="alert" ></h:message> </h:panelGroup>            
 
+                    <div> <h:outputText class="alert" id="message1" rendered="${logowanieMB.zalogowany!=true}" value="${logowanieMB.message}"></h:outputText> </div>
+                   
+                   
+                    
+                    <h:panelGroup style="display: block" styleClass="cent bodyheadbuttom"> 
+                        
+                    <h:commandButton value="zaloguj" action="#{logowanieMB.logowanie()}"/> 
+         </h:panelGroup><!--<h:commandButton value="Previous" action="#{klienciMB.previous()}" /></h:panelGroup>   -->            
                 </h:panelGroup>
             </h:form>
+            
         </div>
 
         <div class="centmain-img borderdesign bodyheadtop2" style=" background-color: #f7fefe">
             <ui:insert name="bottom"><h:panelGroup style=" color:black; font-weight: bold; font-size: small" styleClass="right">Wszelkie prawa zastrzeżone © EI Global 2013</h:panelGroup></ui:insert>
         </div>
-        
+      
     </h:body>
 
 </html>

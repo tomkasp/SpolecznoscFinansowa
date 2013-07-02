@@ -5,13 +5,16 @@
                 template="/templates/template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
     
     <ui:define name="headtop">
         <script type="text/javascript">
         var control1 = 'false';
-        var mpanel = null;var mpanel1 = null;var mpanel2 = null;
+        var mpanel = null;var mpanel1 = null;var mpanel2 = null;var mpanel3 = null;var mpanel4 = null;
         var parentx = null;
+        
+        var part=0;
         
         function deletepanel(){
             alert('on construction...');
@@ -19,7 +22,23 @@
         
         function disableall(){            
             mpanel2 = document.getElementById('putelement2');            
-            mpanel2.setAttribute('style','display:none');            
+            mpanel2.setAttribute('style','display:none');   
+            
+            if(part == 1){
+                mpanel3 = document.getElementById('klientid');            
+                mpanel3.setAttribute('style','display:block'); 
+            
+                mpanel4 = document.getElementById('partid');            
+                mpanel4.setAttribute('style','display:block'); 
+                
+            }else{
+                part = 1;
+                mpanel3 = document.getElementById('klientid');            
+                mpanel3.setAttribute('style','display:none'); 
+            
+                mpanel4 = document.getElementById('partid');            
+                mpanel4.setAttribute('style','display:none'); 
+            }
         }
         
         function createpanel(){             
@@ -45,15 +64,21 @@
       </script>
     </ui:define>
     
-    <ui:define name="headtitle">            
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
-        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-    </ui:define>
+  
+    
 
     <ui:define name="maincenter">
+        
+       
+        <c:if test="#{logowanieMB.zalogowany==true}" var="x">
+     
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+          
         <h:form id="form1" styleClass="borderbeau2 vmargin bodyheadbuttom" style="display: block">
             <div id="formcell"  class="vmargin bodyheadbuttom" style="display: block">
             <!--<h:panelGroup id="formcell" style="display: block" styleClass=" borderbeau2 vmargin bodyheadbuttom">-->
+                <h:panelGroup styleClass="centmain bodyheadtop bodytextbutton"><h:outputLabel value="Klienci ID" /><h:inputText disabled="true" id="klientid"></h:inputText></h:panelGroup><h:panelGroup styleClass="centmain bodyheadtop bodytextbutton"><h:outputLabel value="Partener ID" styleClass="absoluteRR"/><h:inputText disabled="true" id="partid" styleClass="floatR"></h:inputText></h:panelGroup>
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadtop bodytextbutton"><h:outputLabel value="Nazwa Banku" styleClass="absoluteR" /><h:inputText id="Nazwa" styleClass="relativeR" value="#{kredytyMB.kredyty.nazwaBanku}" required="true"><f:validateLength minimum="1" maximum="30" /></h:inputText><h:message for="Nazwa" style="color: red" styleClass="floatR" /></h:panelGroup>
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Umowy Posrednictwa" styleClass="absoluteR" /><h:inputText id="NrUmowy" styleClass="relativeR" value="#{kredytyMB.kredyty.nrUmowyPosrednictwa}" required="true"><f:validateLength minimum="1" maximum="30" /></h:inputText><h:message for="NrUmowy" style="color: red" styleClass="floatR" /></h:panelGroup>
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kwota Kredytu Brutto" styleClass="absoluteR"/><h:inputText id="KwotaKredytu" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKredytuBrutto}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" />
@@ -83,7 +108,11 @@
             <div id="putelement" class="cent"><h:commandButton value=" Dodaj " action="#{kredytyMB.submit()}"></h:commandButton></div>
             <div id="putelement2" class="cent"><h:commandButton value=" add new partener " action="#{kredytyMB.addPart()}"></h:commandButton></div>
         </h:form>        
-        
+      
+      </c:if>            
+            
     </ui:define>
+        
+  
 
 </ui:composition>

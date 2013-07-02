@@ -25,8 +25,9 @@ import javax.persistence.TemporalType;
 @Table(name="kredyty"
     ,catalog="System4"
 )
-public class Kredyty  implements java.io.Serializable {
-
+public class Kredyty implements java.io.Serializable {
+    
+     private static final long serialVersionUID = 1L;
 
      private Integer kredytyId;
      private String nazwaBanku;

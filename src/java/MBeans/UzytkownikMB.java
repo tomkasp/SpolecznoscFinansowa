@@ -18,6 +18,8 @@ public class UzytkownikMB {
     private String oddzial;
     private boolean aktywny;
     
+    private String message;
+    
     /**
      * Creates a new instance of UzytkownikMB
      */
@@ -25,6 +27,7 @@ public class UzytkownikMB {
     public void dodajUzytkownika(){
         UzytkownikDao usrDao = new UzytkownikDao();
         usrDao.dodajUzytkownika(login, haslo, imie, nazwisko, oddzial);
+        
     }
     
     
@@ -71,6 +74,14 @@ public class UzytkownikMB {
 
     public void setOddzial(String oddzial) {
         this.oddzial = oddzial;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
  
     
