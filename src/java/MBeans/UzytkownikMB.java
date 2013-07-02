@@ -13,9 +13,10 @@ public class UzytkownikMB {
     private Uzytkownik user = new Uzytkownik();
     private int idUzytkownika;
     
-    public void dodajUzytkownika(){
+    public String dodajUzytkownika(){
         UzytkownikDao usrDao = new UzytkownikDao();
         usrDao.dodajUzytkownika(user);
+        return "accountCreated";
     }
     
     public String edytujUzytkownika(){
