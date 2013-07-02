@@ -25,6 +25,21 @@ import sql.util.HibernateUtil;
 //@RequestScoped
 public class KlienciMB implements Serializable{
     
+    
+//    @ManagedProperty(value="#{kredytymbean}")
+//	private KredytyMB kredytyBean;
+// 
+//	//must povide the setter method
+////	public void setMessageBean(MessageBean messageBean) {
+////		this.messageBean = messageBean;
+////	}
+//
+//    public void setKredytyBean(KredytyMB kredytyBean) {
+//        this.kredytyBean = kredytyBean;
+//    }
+//    
+    
+    
     private Klienci selectedClient;
     
     private int count = 0; 
@@ -32,6 +47,7 @@ public class KlienciMB implements Serializable{
     Klienci klient=new Klienci();
     KlienciDao kdao=new KlienciDao();
     List<Klienci> KlientList;
+    KredytyMB kredytypart = new KredytyMB();
 
     public KlienciMB() {
     }
@@ -60,7 +76,31 @@ public class KlienciMB implements Serializable{
         session.beginTransaction().begin();
         Uzytkownik u=(Uzytkownik) session.load( Uzytkownik.class , 4 );
         u.getAktywne();
-        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
+        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!                
+        
+        if(KredytyMB.client == 1){
+            
+//            kredytypart.callAllKredyty(count)           
+            
+            
+            klient.setUzytkownik(u);
+            kdao.createOrUpdateKlient(klient);
+            count = 1;
+            if(count == 1){
+                datanow = "Hello "+this.klient.getImie()+", one record created.";
+            }
+            
+            System.out.println("whatz up suger........");
+            System.out.println("klienci ID "+KredytyMB.part);            
+            System.out.println("klienci ID "+klient.getKlienciId());
+            System.out.println("partener name "+klient.getImie());
+            System.out.println("partener surname "+klient.getNazwisko());           
+            
+            klient = null;
+            this.setKlient(klient);
+            
+            return "formKredyty";
+        }
         
         // masz juz w UzytkownikDao metode pobierz uzytkownik
         //pobiera ID, zwraca obiekt, nara! MG
@@ -123,16 +163,6 @@ public class KlienciMB implements Serializable{
         this.KlientList = KlientList;
     }
     
-    public void clearAll(){
-        hello = "God loves you all";
-        //Klienci k2 = null;
-        //klient = null;
-        //this.setKlient(klient);
-        //this.klient.setImie("hello to you all");
-        //this.setKlient(x) ;//= "hello";
-        this.setHello("Know you are there");
-//        return this.klient.getImie()+" hello and welcome";
-    }
 
     public Klienci getSelectedClient() {
         return selectedClient;

@@ -11,14 +11,18 @@ import sql.entity.Uzytkownik;
 public class UzytkownikMB {
 
     private Uzytkownik user = new Uzytkownik();
+    private int idUzytkownika;
     
     public void dodajUzytkownika(){
         UzytkownikDao usrDao = new UzytkownikDao();
         usrDao.dodajUzytkownika(user);
     }
     
-    public void edytujUzytkownika(Integer idUzytkownika){
+    public String edytujUzytkownika(){
+        UzytkownikDao usrDao = new UzytkownikDao();
+        user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
         
+        return "edytujPanel";
     }
     
     public UzytkownikMB() {
@@ -30,6 +34,14 @@ public class UzytkownikMB {
 
     public void setUser(Uzytkownik user) {
         this.user = user;
+    }
+
+    public int getIdUzytkownika() {
+        return idUzytkownika;
+    }
+
+    public void setIdUzytkownika(int idUzytkownika) {
+        this.idUzytkownika = idUzytkownika;
     }
 
   

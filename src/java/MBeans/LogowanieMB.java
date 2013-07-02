@@ -1,37 +1,44 @@
 package MBeans;
 
+import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import sql.dao.UzytkownikDao;
 
 @ManagedBean
 @SessionScoped
 public class LogowanieMB {
+
     private String login;
     private String haslo;
-    private boolean zalogowany=false;
+    private boolean zalogowany = false;
     private String message;
-    
+
     public LogowanieMB() {
     }
 
-    public String logowanie(){
+    public String logowanie() {
+
         UzytkownikDao userDao = new UzytkownikDao();
-        if(userDao.logowanie(this.login, this.haslo)){
+        if (userDao.logowanie(this.login, this.haslo)) {
             System.out.println("zalogowany=========== MadejsoN 0.1");
-            zalogowany=true;
+            zalogowany = true;
+            message = userDao.getMessage();
             System.out.println(zalogowany);
             return "klienciTable";
+        } else {
+            message = userDao.getMessage();
         }
         return "index";
     }
-    
-    public String wyloguj(){
-        zalogowany=false; 
+
+    public String wyloguj() {
+        zalogowany = false;
         System.out.println(zalogowany);
         return "index";
     }
-    
+
     public String getLogin() {
         return login;
     }
@@ -55,6 +62,10 @@ public class LogowanieMB {
     public void setZalogowany(boolean zalogowany) {
         this.zalogowany = zalogowany;
     }
+    
+    
+
+
 
     public String getMessage() {
         return message;
@@ -63,6 +74,4 @@ public class LogowanieMB {
     public void setMessage(String message) {
         this.message = message;
     }
-    
-    
 }
