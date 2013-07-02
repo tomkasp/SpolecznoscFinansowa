@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.hibernate.Session;
 import sql.dao.KlienciDao;
@@ -25,21 +26,6 @@ import sql.util.HibernateUtil;
 //@RequestScoped
 public class KlienciMB implements Serializable{
     
-    
-//    @ManagedProperty(value="#{kredytymbean}")
-//	private KredytyMB kredytyBean;
-// 
-//	//must povide the setter method
-////	public void setMessageBean(MessageBean messageBean) {
-////		this.messageBean = messageBean;
-////	}
-//
-//    public void setKredytyBean(KredytyMB kredytyBean) {
-//        this.kredytyBean = kredytyBean;
-//    }
-//    
-    
-    
     private Klienci selectedClient;
     
     private int count = 0; 
@@ -48,9 +34,12 @@ public class KlienciMB implements Serializable{
     KlienciDao kdao=new KlienciDao();
     List<Klienci> KlientList;
     KredytyMB kredytypart = new KredytyMB();
+    
+    //getter and setter methods
 
-    public KlienciMB() {
-    }
+//    public void setKredytypart(KredytyMB kredytypart) {
+//        this.kredytypart = kredytypart;
+//    }
     
     public String getDatanow() {
         return datanow;
@@ -69,7 +58,36 @@ public class KlienciMB implements Serializable{
         this.hello = hello;
     }
     
+    public Klienci getKlient() {
+        return klient;
+    }
 
+    public void setKlient(Klienci klient) {
+        this.klient = klient;
+    } 
+
+    public List<Klienci> getKlientList() {
+        return kdao.getKlientList();
+    }
+
+    public void setKlientList(List<Klienci> KlientList) {
+        this.KlientList = KlientList;
+    }
+    
+
+    public Klienci getSelectedClient() {
+        return selectedClient;
+    }
+
+    public void setSelectedClient(Klienci selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+    
+    //methods and constructors
+
+    public KlienciMB() {
+    }
+    
     public String submit(){
         //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -141,33 +159,7 @@ public class KlienciMB implements Serializable{
     
     public void hello(){
         hello = "Hello";
-    }
-
-    public Klienci getKlient() {
-        return klient;
-    }
-
-    public void setKlient(Klienci klient) {
-        this.klient = klient;
-    } 
-
-    public List<Klienci> getKlientList() {
-        return kdao.getKlientList();
-    }
-
-    public void setKlientList(List<Klienci> KlientList) {
-        this.KlientList = KlientList;
-    }
-    
-
-    public Klienci getSelectedClient() {
-        return selectedClient;
-    }
-
-    public void setSelectedClient(Klienci selectedClient) {
-        this.selectedClient = selectedClient;
-    }
-    
+    }     
     
     public String newClient(){
         klient=new Klienci();

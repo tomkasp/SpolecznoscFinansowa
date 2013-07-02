@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import org.hibernate.Session;
 import sql.dao.KlienciDao;
@@ -29,6 +30,7 @@ import sql.entity.Uzytkownik;
 public class KredytyMB implements Serializable{
     
     //--------Objects and Data Definations
+//    @ManagedProperty(value="kliencibean")
     
     private static final long serialVersionUID = 1L;
     
@@ -158,6 +160,14 @@ public class KredytyMB implements Serializable{
 
     public void setShowDialog(Boolean showDialog) {
         this.showDialog = showDialog;
+    }
+    
+    public Klienci getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Klienci partner) {
+        this.partner = partner;
     }
     
     
@@ -305,16 +315,6 @@ public class KredytyMB implements Serializable{
     public String newKredyt(){
         kredyty=new Kredyty();
         return "form2";
-    }
-
-    public Klienci getPartner() {
-        return partner;
-    }
-
-    public void setPartner(Klienci partner) {
-        this.partner = partner;
-    }
-    
-    
+    }    
     
 }
