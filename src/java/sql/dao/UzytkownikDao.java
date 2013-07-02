@@ -77,24 +77,40 @@ public class UzytkownikDao {
     }
 
     
-    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial) {
-        
+    public void dodajUzytkownika(Uzytkownik user){
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Uzytkownik uzytkownik = new Uzytkownik();
-        uzytkownik.setLogin(imie);
-        uzytkownik.setImie(imie);
-        uzytkownik.setHaslo(haslo);
-        uzytkownik.setNazwisko(nazwisko);
-        uzytkownik.setOddzial(oddzial);
-        uzytkownik.setAktywne(true);
+        Uzytkownik us = user;
+        session.save(us);
         
-        session.save(uzytkownik);
         session.getTransaction().commit();
         session.close();
         
     }
+    
+    public void edytujUzytkownika(Uzytkownik user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        session.saveOrUpdate(user);
+        
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public Uzytkownik pobierzUzytkownika(Integer idUzytkownika){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Uzytkownik user = (Uzytkownik)session.load(Uzytkownik.class, idUzytkownika);
+        
+        System.out.println(user.getImie());
+        session.close();
+        
+        return user;
+    }
+    
     
     
     

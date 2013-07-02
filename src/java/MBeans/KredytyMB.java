@@ -31,7 +31,7 @@ public class KredytyMB implements Serializable{
 //@ManagedProperty(value="#{klienciMB.klient}")
 //  @ManagedProperty(value = "#{klienciMB}")
 //    @ManagedProperty(value="klienciMB")
-    
+     
     
     private static final long serialVersionUID = 1L;
     
@@ -39,7 +39,7 @@ public class KredytyMB implements Serializable{
     Kredyty selectedKredyt = new Kredyty();    
     Klienci klienci2 = new Klienci();
     Klienci partner;
-    KlienciMB kkkpart = new KlienciMB();
+    private KlienciMB kkkpart = new KlienciMB();
     
     
     KredytyDao kredytydeo2 = new KredytyDao();
@@ -170,10 +170,6 @@ public class KredytyMB implements Serializable{
 
     public void setPartner(Klienci partner) {
         this.partner = partner;
-    }
-    
-    public KlienciMB getKkkpart() {
-        return kkkpart;
     }
 
     public void setKkkpart(KlienciMB kkkpart) {
