@@ -19,10 +19,11 @@ public class UzytkownikDao {
     private String message = "";
 
     public Boolean logowanie(String login, String haslo) {
-
+        
+        Session session = null ;
         
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
 
             Query q = null;
             try {
@@ -68,7 +69,7 @@ public class UzytkownikDao {
         } catch (QueryException exp) {
         } finally {
             System.out.println(message);
-            
+            session.close();
         }
         
            

@@ -50,9 +50,10 @@
                             <h:commandLink action="#{kredytyMB.callPdf(data2.kredytyId)}">                                  
                                 <p:graphicImage height="32" value="/resources/photo/generate.gif" />                                   
                             </h:commandLink>    
-                        </p:column>  
+                        </p:column> 
+                        
                         <p:column width="10" style="text-align: center; white-space: nowrap; padding: 5px 5px" > <f:facet name="header">Podgląd</f:facet> 
-                            <h:commandLink target="_blank"  action="#{kredytyMB.downLoad(data2.klienci.klienciId, data2.kredytyId)}" rendered="#{data2.czyWygenerowanoDokumenty}">
+                            <h:commandLink target="_blank"  action="#{kredytyMB.downLoad(kredytyMB.klienci2.klienciId, data2.kredytyId)}" rendered="#{data2.czyWygenerowanoDokumenty}">
                                 <p:graphicImage height="32" value="/resources/photo/pdf.png" />        
                             </h:commandLink>
                         </p:column> 

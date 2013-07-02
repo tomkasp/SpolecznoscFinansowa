@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sql.dao.KredytyDao;
+import sql.entity.KlienciKredyty;
 import sql.entity.Kredyty;
 
 public class GeneratorPDF {
@@ -174,9 +175,8 @@ public class GeneratorPDF {
 
     public static int getIdKlienta(int idKredytu){
         KredytyDao kredytyDAO=new KredytyDao();
-        Kredyty kredyt=kredytyDAO.readKredyty(idKredytu);
-        int idKlienta=0;//kredyt.getKlienci().getKlienciId();
-        
+        KlienciKredyty klienciKredyty=kredytyDAO.readKlienciKredyty(idKredytu);
+        int idKlienta=klienciKredyty.getKlienci().getKlienciId();
         return idKlienta;
     }
 
