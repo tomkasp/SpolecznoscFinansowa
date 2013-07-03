@@ -1,6 +1,7 @@
 package sql.dao;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,6 +112,19 @@ public class UzytkownikDao {
         return user;
     }
     
+    
+    public List<Uzytkownik> pobierzListeUzytkownikow() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+            Query q=(Query) session.createQuery("from Uzytkownik");
+            List<Uzytkownik> list;
+            list = (List<Uzytkownik>) q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
     
     
     
