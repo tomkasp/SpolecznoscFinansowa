@@ -4,7 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import sql.dao.UzytkownikDao;
 import sql.entity.Uzytkownik;
-
+import java.util.List;
 
 @ManagedBean(name="uzytkownik")
 @SessionScoped
@@ -25,6 +25,13 @@ public class UzytkownikMB {
         
         return "edytujPanel";
     }
+    
+    public List<Uzytkownik> pobierzListeUzytkownikow(){
+        UzytkownikDao usrDao = new UzytkownikDao();
+        List<Uzytkownik> list = usrDao.pobierzListeUzytkownikow();
+        return list;
+    }
+    
     
     public UzytkownikMB() {
     }
