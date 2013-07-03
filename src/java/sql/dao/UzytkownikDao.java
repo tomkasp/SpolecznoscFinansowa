@@ -19,6 +19,7 @@ public class UzytkownikDao {
 
     private String message = "";
     private String rola;
+    private int idUzytkownika;
     
     public Boolean logowanie(String login, String haslo) {
         
@@ -38,6 +39,7 @@ public class UzytkownikDao {
 
                 Uzytkownik u = (Uzytkownik) o;
                 this.rola = u.getRola();
+                //this.setIdUzytkownika((int) u.getUzytkownikId());
                 //u.setSurname("test22");
                 System.out.println("Sprawdzam wyswietlenie roli:"+rola);
         } 
@@ -154,4 +156,9 @@ public class UzytkownikDao {
     public void setRola(String rola) {
         this.rola = rola;
     }
+
+    public int getIdUzytkownika() {
+        return idUzytkownika;
+    }
+
 }
