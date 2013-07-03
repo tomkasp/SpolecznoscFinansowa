@@ -18,7 +18,8 @@ import sql.util.Security;
 public class UzytkownikDao {
 
     private String message = "";
-
+    private String rola;
+    
     public Boolean logowanie(String login, String haslo) {
         
         Session session = null ;
@@ -31,6 +32,16 @@ public class UzytkownikDao {
                 q = session.createQuery("FROM Uzytkownik WHERE login = :login AND haslo = :password ");
                 q.setParameter("login", login);
                 q.setParameter("password", Security.sha1(haslo));
+                
+                List resultList = q.list();
+                for(Object o : resultList){
+
+                Uzytkownik u = (Uzytkownik) o;
+                this.rola = u.getRola();
+                //u.setSurname("test22");
+                System.out.println("Sprawdzam wyswietlenie roli:"+rola);
+        } 
+                
             } catch (QueryException exp) {
             }
 
@@ -134,5 +145,13 @@ public class UzytkownikDao {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRola() {
+        return rola;
+    }
+
+    public void setRola(String rola) {
+        this.rola = rola;
     }
 }

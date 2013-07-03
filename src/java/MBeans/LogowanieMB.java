@@ -13,6 +13,7 @@ public class LogowanieMB {
     private String login;
     private String haslo;
     private boolean zalogowany = false;
+    private String rola;
     private String message;
 
     public LogowanieMB() {
@@ -24,9 +25,10 @@ public class LogowanieMB {
         if (userDao.logowanie(this.login, this.haslo)) {
             System.out.println("zalogowany=========== MadejsoN 0.1");
             zalogowany = true;
+            rola = userDao.getRola();
             message = userDao.getMessage();
-            System.out.println(zalogowany);
             return "klienciTable";
+            
         } else {
             message = userDao.getMessage();
         }
@@ -73,5 +75,13 @@ public class LogowanieMB {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRola() {
+        return rola;
+    }
+
+    public void setRola(String rola) {
+        this.rola = rola;
     }
 }

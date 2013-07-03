@@ -14,9 +14,11 @@ public class UzytkownikMB {
     private Uzytkownik selectedUser = new Uzytkownik();
     private int idUzytkownika;
     
+    
     public String dodajUzytkownika(){
         UzytkownikDao usrDao = new UzytkownikDao();
         usrDao.dodajUzytkownika(user);
+        user = null;
         return "accountCreated";
     }
     
@@ -24,6 +26,7 @@ public class UzytkownikMB {
         UzytkownikDao usrDao = new UzytkownikDao();
         user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
         
+        user = null;
         return "edytujPanel";
     }
     
@@ -61,8 +64,7 @@ public class UzytkownikMB {
         this.selectedUser = selectedUser;
     }
     
-    
-    
+    //for what is that? 
     public String createAcc(){
         return "createAcc";
     }
