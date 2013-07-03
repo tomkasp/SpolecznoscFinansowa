@@ -11,6 +11,7 @@ import java.util.List;
 public class UzytkownikMB {
 
     private Uzytkownik user = new Uzytkownik();
+    private Uzytkownik selectedUser = new Uzytkownik();
     private int idUzytkownika;
     
     public String dodajUzytkownika(){
@@ -51,6 +52,16 @@ public class UzytkownikMB {
     public void setIdUzytkownika(int idUzytkownika) {
         this.idUzytkownika = idUzytkownika;
     }
+
+    public Uzytkownik getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(Uzytkownik selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+    
+    
     
     public String createAcc(){
         return "createAcc";
