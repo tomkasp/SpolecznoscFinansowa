@@ -37,6 +37,10 @@ public class UzytkownikMB {
         return "accountForm";
     }
     
+    public void usunUzytkownika() {
+        usrDao.usunUzytkownika(user);
+    }
+    
     
 //    public String edytujUzytkownika(){
 //        

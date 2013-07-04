@@ -33,13 +33,37 @@
                             <h:commandButton value="nowy" style="float: left;" action="#{ uzytkownik.nowyUzytkownik() }"/>
                         <c:if test="#{uzytkownik.user!=null}" var="costam">
                         <h:commandButton value="edycja" action="#{ uzytkownik.edytujUzytkownik() }" />
+                        <h:commandButton id="modalDialogButton" value="usuń" style="float: right;" onclick="dlg2.show();" type="button"/>
                         </c:if>
                             
                         </f:facet>                       
                     </p:dataTable>
+                    
+                    
+                     <p:dialog id="modalDialog" header="usuń użytkownika" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                            <h:outputText value="Czy napewno chcesz usunąć użytkownika?" />  
+                            <div style="text-align: center;"> 
+
+                                <h:commandButton id="viewButton2" value="usuń" onclick="dlg2.hide();" >    
+                                    <f:ajax listener="#{uzytkownik.usunUzytkownika()}" render="dataTable3" />    
+                                </h:commandButton>
+
+                                <h:button onclick="dlg2.hide();" value="anuluj"/>
+
+
+
+                            </div>
+                    </p:dialog> 
+                    
+                    
                 </h:form>
             </p:scrollPanel>
         </h:panelGroup> 
+        
+        
+        
+        
+        
     </ui:define>
 
 </ui:composition>

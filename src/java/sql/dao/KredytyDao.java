@@ -24,47 +24,47 @@ public class KredytyDao implements Serializable {
     public void createKredyt(Kredyty kredyt, Klienci klient, Klienci partner) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        
-        session.beginTransaction().begin();       
-        
-        String hql = "delete from KlienciKredyty where kredyty_id = :classId";
-        session.createQuery(hql).setString("classId", kredyt.getKredytyId().toString() ).executeUpdate();
-        
-        session.getTransaction().commit();
-        
+
+        try {
+            session.beginTransaction().begin();
+            String hql = "delete from KlienciKredyty where kredyty_id = :classId";
+            session.createQuery(hql).setString("classId", kredyt.getKredytyId().toString()).executeUpdate();
+            session.getTransaction().commit();
+
+        } catch (java.lang.NullPointerException e) {}
+
         session.beginTransaction().begin();
-        
+
         Set<KlienciKredyty> klienciKredyties = new HashSet<>(0);
-        
+
         //POWIĄZANIE KLIENT - KREDYT
         KlienciKredyty kkw = new KlienciKredyty();
         kkw.setKlienci(klient);
         kkw.setKredyty(kredyt);
         kkw.setWspolkredytobiorca(false);
-        
+
         klienciKredyties.add(kkw);
-        
+
         //POWIĄZANIE PARTNER - KREDYT
         if (partner != null) {
-            
+
             System.out.println("DODANO TEZ PARTNERA");
 
             KlienciKredyty kkw2 = new KlienciKredyty();
             kkw2.setKlienci(partner);
             kkw2.setKredyty(kredyt);
             kkw2.setWspolkredytobiorca(true);
-            
+
             klienciKredyties.add(kkw2);
-            
-        }else{
+
+        } else {
             System.out.println("CZY NIE?");
         }
-        
-         try {
-                kredyt.setKlienciKredyties(klienciKredyties);
-            } catch (org.hibernate.LazyInitializationException e) {
-            }
+
+        try {
+            kredyt.setKlienciKredyties(klienciKredyties);
+        } catch (org.hibernate.LazyInitializationException e) {
+        }
 
         session.saveOrUpdate(kredyt);
 
@@ -178,8 +178,8 @@ public class KredytyDao implements Serializable {
 
             return partner;
         }
-        
-        
+
+
     }
 
     public void updateKredyty(Kredyty kredyt) {
@@ -216,7 +216,7 @@ public class KredytyDao implements Serializable {
 
         return list;
     }
-  
+
     @SuppressWarnings("unchecked")
     public List<Kredyty> getKredytyOneKlient(int idKlienta) {
         Session session = HibernateUtil.getSessionFactory().openSession();
