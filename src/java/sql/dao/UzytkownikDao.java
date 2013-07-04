@@ -109,6 +109,24 @@ public class UzytkownikDao {
 
     }
 
+    
+    public void zapiszUzytkownika(Uzytkownik user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Uzytkownik us = user;
+        try {
+            us.setHaslo(Security.sha1(us.getHaslo()));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UzytkownikDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        session.saveOrUpdate(us);
+        session.getTransaction().commit();
+        session.close();
+        
+        
+    }
     public void edytujUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
