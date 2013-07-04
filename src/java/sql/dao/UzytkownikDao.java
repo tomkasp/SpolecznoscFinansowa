@@ -148,6 +148,18 @@ public class UzytkownikDao {
         return user;
     }
 
+    public void usunUzytkownika(Uzytkownik user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        session.delete(user);
+        
+        session.getTransaction().commit();
+        session.close();
+        
+    }
+    
+    
     @SuppressWarnings("unchecked")
     public List<Uzytkownik> pobierzListeUzytkownikow() {
         Session session = HibernateUtil.getSessionFactory().openSession();
