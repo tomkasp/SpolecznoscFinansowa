@@ -11,8 +11,6 @@ import java.util.List;
 public class UzytkownikMB {
 
     private Uzytkownik user = new Uzytkownik();
-    private Uzytkownik selectedUser = new Uzytkownik();
-    private int idUzytkownika;
     
     
     public String dodajUzytkownika(){
@@ -24,9 +22,10 @@ public class UzytkownikMB {
     
     public String edytujUzytkownika(){
         UzytkownikDao usrDao = new UzytkownikDao();
-        user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
-        user = null;
-        return "edytujPanel";
+        int id=user.getUzytkownikId();
+        user = usrDao.pobierzUzytkownika(id);
+        user.setHaslo(null);
+        return "formAccount";
     }
     
     public List<Uzytkownik> pobierzListeUzytkownikow(){
@@ -47,22 +46,6 @@ public class UzytkownikMB {
         this.user = user;
     }
 
-    public int getIdUzytkownika() {
-        return idUzytkownika;
-    }
-
-    public void setIdUzytkownika(int idUzytkownika) {
-        this.idUzytkownika = idUzytkownika;
-    }
-
-    public Uzytkownik getSelectedUser() {
-        return selectedUser;
-    }
-
-    public void setSelectedUser(Uzytkownik selectedUser) {
-        this.selectedUser = selectedUser;
-    }
-    
     //for what is that? 
     public String createAcc(){
         return "createAcc";

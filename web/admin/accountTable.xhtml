@@ -29,10 +29,13 @@
                         <p:column width="30"><f:facet name="header">rola</f:facet>#{dataAcc.rola} </p:column>
                         <p:column><f:facet name="header">oddzial</f:facet>#{dataAcc.oddzial} </p:column>                        
                         <p:column width="60"><f:facet name="header"></f:facet>       
-                            <h:commandButton value="edycja" action="#{logowanieMB.edytujUzytkownika()}"></h:commandButton>
-                        </p:column>                         
+                           
+                        </p:column>                        
                     </p:dataTable>
-                    <h:panelGroup><h:commandButton value="new account" action="formAccount"/></h:panelGroup>
+                    <h:panelGroup>
+                        <h:commandButton value="new account" action="formAccount"/>
+                        <h:commandButton value="edycja" action="#{uzytkownik.edytujUzytkownika()}"></h:commandButton>
+                    </h:panelGroup>
                 </h:form>
             </p:scrollPanel>
         </h:panelGroup> 
