@@ -15,18 +15,25 @@ public class UzytkownikMB {
     private int idUzytkownika;
     UzytkownikDao usrDao = new UzytkownikDao();
     
-    public String dodajUzytkownika(){
-        usrDao.dodajUzytkownika(user);
-        user = null;
-        return "accountCreated";
+//    public String dodajUzytkownika(){
+//        usrDao.dodajUzytkownika(user);
+//        user = null;
+//        return "accountCreated";
+//    }
+    
+    public String zapiszUzytkownika(Uzytkownik usr){
+        usrDao.zapiszUzytkownika(usr);
+        
+        return "zapisanoUzytkownika";
     }
     
-    public String edytujUzytkownika(){
-        
-        user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
-        user = null;
-        return "edytujPanel";
-    }
+    
+//    public String edytujUzytkownika(){
+//        
+//        user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
+//        user = null;
+//        return "edytujPanel";
+//    }
     
     public List<Uzytkownik> pobierzListeUzytkownikow(){
         
