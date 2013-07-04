@@ -1,9 +1,11 @@
 package sql.dao;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.QueryException;
 import org.hibernate.Session;
@@ -47,33 +49,49 @@ public class KredytyDao implements Serializable {
     public void createKredyt(Kredyty kredyt, Klienci klient, Klienci partner) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        
+        session.beginTransaction().begin();       
+        
+        String hql = "delete from KlienciKredyty where kredyty_id = :classId";
+        session.createQuery(hql).setString("classId", kredyt.getKredytyId().toString() ).executeUpdate();
+        
+        session.getTransaction().commit();
+        
         session.beginTransaction().begin();
-
+        
+        Set<KlienciKredyty> klienciKredyties = new HashSet<>(0);
+        
         //POWIĄZANIE KLIENT - KREDYT
         KlienciKredyty kkw = new KlienciKredyty();
         kkw.setKlienci(klient);
         kkw.setKredyty(kredyt);
         kkw.setWspolkredytobiorca(false);
-        try {
-            kredyt.getKlienciKredyties().add(kkw);
-        } catch (org.hibernate.LazyInitializationException e) {
-        }
-
+        
+        klienciKredyties.add(kkw);
+        
         //POWIĄZANIE PARTNER - KREDYT
         if (partner != null) {
             
+            System.out.println("DODANO TEZ PARTNERA");
+
             KlienciKredyty kkw2 = new KlienciKredyty();
-            kkw2.setKlienci(klient);
+            kkw2.setKlienci(partner);
             kkw2.setKredyty(kredyt);
             kkw2.setWspolkredytobiorca(true);
-            try {
-                kredyt.getKlienciKredyties().add(kkw2);
+            
+            klienciKredyties.add(kkw2);
+            
+        }else{
+            System.out.println("CZY NIE?");
+        }
+        
+         try {
+                kredyt.setKlienciKredyties(klienciKredyties);
             } catch (org.hibernate.LazyInitializationException e) {
             }
-            
-        }
 
-        session.save(kredyt);
+        session.saveOrUpdate(kredyt);
 
         session.getTransaction().commit();
         session.close();
