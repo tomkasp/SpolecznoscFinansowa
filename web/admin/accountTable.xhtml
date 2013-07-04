@@ -28,14 +28,15 @@
                         
                         <p:column width="30"><f:facet name="header">rola</f:facet>#{dataAcc.rola} </p:column>
                         <p:column><f:facet name="header">oddzial</f:facet>#{dataAcc.oddzial} </p:column>                        
-                        <f:facet name="header"></f:facet>                       
-                    </p:dataTable>
-                    <h:panelGroup>
-                        <h:commandButton value="nowy" action="#{ uzytkownik.nowyUzytkownik() }"/>
+                        <f:facet name="footer">
+                            
+                            <h:commandButton value="nowy" style="float: left;" action="#{ uzytkownik.nowyUzytkownik() }"/>
                         <c:if test="#{uzytkownik.user!=null}" var="costam">
                         <h:commandButton value="edycja" action="#{ uzytkownik.edytujUzytkownik() }" />
                         </c:if>
-                    </h:panelGroup>
+                            
+                        </f:facet>                       
+                    </p:dataTable>
                 </h:form>
             </p:scrollPanel>
         </h:panelGroup> 

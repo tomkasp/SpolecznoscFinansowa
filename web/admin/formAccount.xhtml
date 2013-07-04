@@ -30,7 +30,8 @@
                     <h:message for="oddzial4" style="color: red" styleClass="floatR" />
                 </h:panelGroup>  
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
-                    <h:commandButton value="Create" styleClass="absoluteR" action="#{ uzytkownik.zapiszUzytkownika() }"/>
+                    <h:button value="Anuluj" styleClass="absoluteR" outcome="accountTable"/>
+                    <h:commandButton value="Zapisz" styleClass="absoluteR" action="#{ uzytkownik.zapiszUzytkownika() }"/>
                     <h:message for="but4" style="color: red" styleClass="floatR" />
                 </h:panelGroup>                              
             </h:panelGroup> 
