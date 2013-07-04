@@ -11,25 +11,22 @@ import java.util.List;
 public class UzytkownikMB {
 
     private Uzytkownik user = new Uzytkownik();
-    
+    UzytkownikDao usrDao = new UzytkownikDao();
     
     public String dodajUzytkownika(){
-        UzytkownikDao usrDao = new UzytkownikDao();
         usrDao.dodajUzytkownika(user);
         user = null;
         return "accountCreated";
     }
     
     public String edytujUzytkownika(){
-        UzytkownikDao usrDao = new UzytkownikDao();
-        int id=user.getUzytkownikId();
-        user = usrDao.pobierzUzytkownika(id);
-        user.setHaslo(null);
-        return "formAccount";
+        user = usrDao.pobierzUzytkownika(user.getUzytkownikId());
+        user = null;
+        return "edytujPanel";
     }
     
     public List<Uzytkownik> pobierzListeUzytkownikow(){
-        UzytkownikDao usrDao = new UzytkownikDao();
+        
         List<Uzytkownik> list = usrDao.pobierzListeUzytkownikow();
         return list;
     }
