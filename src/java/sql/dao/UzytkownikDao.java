@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.QueryException;
 import org.hibernate.Session;
@@ -19,6 +18,7 @@ public class UzytkownikDao {
 
     private String message = "";
     private String rola;
+    private int idUzytkownika;
     
     public Boolean logowanie(String login, String haslo) {
         
@@ -38,6 +38,7 @@ public class UzytkownikDao {
 
                 Uzytkownik u = (Uzytkownik) o;
                 this.rola = u.getRola();
+                //this.setIdUzytkownika((int) u.getUzytkownikId());
                 //u.setSurname("test22");
                 System.out.println("Sprawdzam wyswietlenie roli:"+rola);
         } 
@@ -95,6 +96,11 @@ public class UzytkownikDao {
         session.beginTransaction();
         
         Uzytkownik us = user;
+        try {
+            us.setHaslo(Security.sha1(us.getHaslo()));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UzytkownikDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         session.save(us);
         
         session.getTransaction().commit();
@@ -154,4 +160,9 @@ public class UzytkownikDao {
     public void setRola(String rola) {
         this.rola = rola;
     }
+
+    public int getIdUzytkownika() {
+        return idUzytkownika;
+    }
+
 }
