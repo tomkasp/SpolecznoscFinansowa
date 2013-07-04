@@ -27,6 +27,7 @@
                             <p:ajax event="rowSelect" update="dataTable1"/>
                             <p:ajax event="rowUnselect" update="dataTable1"/>
 
+                            <p:column selectionMode="single" style="width:2%" />
                             <p:column filterBy="#{data.klienciId}" width="110"><f:facet name="header">ID</f:facet>#{data.klienciId} </p:column>
                             <p:column filterBy="#{data.imie}" width="110"><f:facet name="header">Imie</f:facet>#{data.imie} </p:column>
                             <p:column filterBy="#{data.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{data.nazwisko} </p:column>

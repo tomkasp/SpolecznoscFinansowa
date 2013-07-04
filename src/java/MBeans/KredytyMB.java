@@ -51,8 +51,7 @@ public class KredytyMB implements Serializable{
     Boolean pdfSuccess = false; // display dialog for printing a successful pdf printout
     boolean step1 = false;
     boolean give = false;
-    boolean give2 = false;
-    boolean give4 = false;
+    boolean give2 = false;    
     boolean give3;
 //    boolean part = false;
         
@@ -196,18 +195,7 @@ public class KredytyMB implements Serializable{
     public void setGive3(boolean give3) {
         this.give3 = give3;
     }
-
-    public boolean isGive4() {
-        return give4;
-    }
-
-    public void setGive4(boolean give4) {
-        this.give4 = give4;
-    }
-
   
-   
-    
     
     //-------------Constructors and Methods
     
@@ -239,13 +227,9 @@ public class KredytyMB implements Serializable{
     }
     
     public boolean dynInput(){
-        String summary = give3 ? "Checked" : "Unchecked"; 
-        if(give3==true){
-            this.give4 = true;
-        }
+        String summary = give3 ? "Checked" : "Unchecked";        
         //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
-        System.out.println(summary);
-        System.out.println(give4);
+        System.out.println(summary);    
         
         return give3;
     }
