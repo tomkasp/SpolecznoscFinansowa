@@ -25,6 +25,7 @@ public class LogowanieMB {
             System.out.println("zalogowany=========== MadejsoN 0.1");
             zalogowany = true;
             rola = userDao.getRola();
+            System.out.println("Twoja rola: "+rola);
             idUzytkownika = userDao.getIdUzytkownika();
             message = userDao.getMessage();
             return "klienciTable";

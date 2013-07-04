@@ -28,7 +28,26 @@
         <div id="top" class="bordertop centmain-img"><div class="topimage centmain-img"></div><br />
             <div class="centmain-img">
                 <ui:insert name="top">
-                    <h:form><h:panelGroup styleClass="borderofgold"><h:commandLink value="Logout" action="#{logowanieMB.wyloguj()}"/></h:panelGroup><h:panelGroup styleClass="borderofgold"><h:commandLink action="#{klienciMB.newClient()}"  value="&nbsp;&nbsp;Dodaj Klienta&nbsp;&nbsp;"/></h:panelGroup><h:panelGroup styleClass="borderofgold">  <h:link outcome="klienciTable" value="&nbsp;&nbsp;Lista Klientów&nbsp;&nbsp;"/></h:panelGroup>
+                    <h:form>
+                        
+                        <h:panelGroup styleClass="borderofgold">
+                            <h:commandLink value="WYLOGUJ" action="#{logowanieMB.wyloguj()}"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup styleClass="borderofgold">
+                            <h:commandLink action="#{klienciMB.newClient()}"  value="NOWY KLIENT"/>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup styleClass="borderofgold"> 
+                            <h:link outcome="klienciTable" value="LISTA KLIENTÓW"/>
+                        </h:panelGroup>
+                        
+                        <c:if test="#{logowanieMB.rola=='admin'}" var="x">
+                         <h:panelGroup styleClass="borderofgold"> 
+                            <h:link outcome="accountTable" value="PANEL ADMINISTRATORA"/>
+                        </h:panelGroup>
+                        </c:if>
+                        
                     </h:form>
                 </ui:insert>
             </div>

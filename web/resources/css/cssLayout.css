@@ -60,6 +60,8 @@
 }
 .borderofgold{
     border-right: 1px solid gold;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .centmain-img{
     width: 1200px; margin-right: auto; margin-left: auto;

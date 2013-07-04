@@ -26,8 +26,14 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>index</from-outcome>
-            <to-view-id>index.xhtml</to-view-id>                  
+            <to-view-id>index.xhtml</to-view-id>     
+            <redirect />               
         </navigation-case>   
+        <navigation-case>
+            <from-outcome>klienciTable</from-outcome>
+            <to-view-id>/doradca/tableKlienci.xhtml</to-view-id>  
+            <redirect />                  
+        </navigation-case>
     </navigation-rule> 
       
       
@@ -62,32 +68,33 @@
         
     </navigation-rule> 
     
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    <navigation-rule>   
-        <from-view-id>*</from-view-id>
+    
+    
+    
+   <navigation-rule>   
+        
+        <from-view-id>admin/*</from-view-id>
+        <from-view-id>doradca/*</from-view-id>
+        
         <navigation-case>
             <from-outcome>accountTable</from-outcome>
-            <to-view-id>/doradca/accountTable.xhtml</to-view-id>    
+            <to-view-id>/admin/accountTable.xhtml</to-view-id>    
             <redirect />                
-        </navigation-case>            
-    </navigation-rule>  
-    
-     <navigation-rule>   
-        <from-view-id>doradca/*</from-view-id>
+        </navigation-case>  
+        
         <navigation-case>
             <from-outcome>edytujPanel</from-outcome>
-            <to-view-id>/doradca/testUser.xhtml</to-view-id>       
+            <to-view-id>/admin/testUser.xhtml</to-view-id>       
             <redirect />   
         </navigation-case>
-    </navigation-rule>  
+        
+    </navigation-rule> 
+    
+      
+      
+      
+      
+    
       
     
 </faces-config>

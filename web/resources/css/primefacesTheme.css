@@ -51,3 +51,8 @@ TR.ui-widget-content.ui-datatable-even.ui-state-hover{
 TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
 }
+
+.ui-datatable-footer.ui-widget-header.ui-corner-bottom{
+    min-height: 22px;
+    
+}

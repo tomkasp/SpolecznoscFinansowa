@@ -60,7 +60,7 @@
 
                         <f:facet name="footer"> 
                             
-                            <h:commandButton style="float: left;"  value="dodaj nowy kredyt" action="#{ kredytyMB.newKredyt() }"/>
+                            <h:commandButton style="float: left;"  value="nowy kredyt" action="#{ kredytyMB.newKredyt() }"/>
                             
                             <c:if test="#{kredytyMB.selectedKredyt!=null}" var="costam">
                                 <h:commandButton id="viewButton" value="edytuj" action="#{kredytyMB.selectedKredytEdit() }" />
