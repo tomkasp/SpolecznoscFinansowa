@@ -1,9 +1,7 @@
 package MBeans;
 
-import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import sql.dao.UzytkownikDao;
 
 @ManagedBean
@@ -13,9 +11,11 @@ public class LogowanieMB {
     private String login;
     private String haslo;
     private boolean zalogowany = false;
+    private String rola;
+    private int idUzytkownika;
     private String message;
 
-    public LogowanieMB() {
+    public LogowanieMB() {  
     }
 
     public String logowanie() {
@@ -24,9 +24,11 @@ public class LogowanieMB {
         if (userDao.logowanie(this.login, this.haslo)) {
             System.out.println("zalogowany=========== MadejsoN 0.1");
             zalogowany = true;
+            rola = userDao.getRola();
+            idUzytkownika = userDao.getIdUzytkownika();
             message = userDao.getMessage();
-            System.out.println(zalogowany);
             return "klienciTable";
+            
         } else {
             message = userDao.getMessage();
         }
@@ -34,9 +36,6 @@ public class LogowanieMB {
     }
 
     public String wyloguj() {
-        if(this.zalogowany == true){
-            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        }
         zalogowany = false;
         System.out.println(zalogowany);
         return "index";
@@ -72,5 +71,17 @@ public class LogowanieMB {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRola() {
+        return rola;
+    }
+
+    public void setRola(String rola) {
+        this.rola = rola;
+    }
+
+    public int getIdUzytkownika() {
+        return idUzytkownika;
     }
 }

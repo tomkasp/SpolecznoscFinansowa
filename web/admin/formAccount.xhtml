@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="maincenter">
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Dodaj Klienta</h:panelGroup>
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup> 
+        
+        <h:form>
+            
+            <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin">
+                <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Dane podstawowe</h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie4" styleClass="relativeR" value="#{uzytkownik.user.imie}" required="true"></h:inputText><h:message for="imie4" style="color: red" styleClass="floatR"/></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz4" styleClass="relativeR" value="#{uzytkownik.user.nazwisko}" required="true"></h:inputText><h:message for="naz4" style="color: red" styleClass="floatR" /></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="login" styleClass="absoluteR"/><h:inputText id="login4" styleClass="relativeR" value="#{uzytkownik.user.login}" required="true"></h:inputText><h:message for="login4" style="color: red" styleClass="floatR" /></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="haslou" styleClass="absoluteR"/><h:inputText id="haslou4" styleClass="relativeR" value="#{uzytkownik.user.haslo}" required="true"></h:inputText><h:message for="haslou4" style="color: red" styleClass="floatR" /></h:panelGroup>            
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+                    <h:outputLabel value="rola" styleClass="absoluteR"/>
+                    <h:inputText id="rola4" styleClass="relativeR" value="#{uzytkownik.user.rola}" required="true">
+                    </h:inputText>
+                    <h:message for="rola4" style="color: red" styleClass="floatR" />
+                </h:panelGroup>  
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+                    <h:outputLabel value="oddzial" styleClass="absoluteR"/>
+                    <h:inputText id="oddzial4" styleClass="relativeR" value="#{uzytkownik.user.oddzial}" required="true">
+                    </h:inputText>
+                    <h:message for="oddzial4" style="color: red" styleClass="floatR" />
+                </h:panelGroup>  
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:commandButton value="Create" styleClass="absoluteR" action="#{uzytkownik.dodajUzytkownika}"/><h:message for="but4" style="color: red" styleClass="floatR" /></h:panelGroup>                              
+            </h:panelGroup> 
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

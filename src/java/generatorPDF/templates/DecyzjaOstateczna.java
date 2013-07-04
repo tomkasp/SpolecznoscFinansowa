@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package generatorPDF.templates;
 
 import com.itextpdf.text.DocumentException;
@@ -17,9 +13,11 @@ import sql.entity.Klienci;
 import sql.entity.Kredyty;
 
 /**
- *
+ * 
  * @author WR1EI1
+ * 
  */
+
 public class DecyzjaOstateczna  {
 
         //KlienciDao kdao=new KlienciDao();
