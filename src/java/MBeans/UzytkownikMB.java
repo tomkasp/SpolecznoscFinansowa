@@ -1,10 +1,10 @@
 package MBeans;
 
+import java.util.List;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import sql.dao.UzytkownikDao;
 import sql.entity.Uzytkownik;
-import java.util.List;
-import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name="uzytkownik")
 @SessionScoped
