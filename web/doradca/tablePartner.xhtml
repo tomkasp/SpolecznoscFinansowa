@@ -14,6 +14,7 @@
     </ui:define>
 
     <ui:define name="maincenter" >  
+        
     <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable" rendered="#{logowanieMB.zalogowany}">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
@@ -35,12 +36,7 @@
                         <p:column style="width: 50px;"><f:facet name="header">Nr Domu</f:facet>#{data.nrDomu} </p:column>
                         <p:column style="width: 50px;"><f:facet name="header">Nr Mieszkania</f:facet>#{data.nrMieszkania} </p:column>
                         <p:column><f:facet name="header">Poczta</f:facet>#{data.poczta }</p:column>
-                        <p:column width="60"><f:facet name="header">Klient Kredyty </f:facet>
-
-                        <h:commandButton value="Kredyty" action="#{kredytyMB.callAllKredyty(data.klienciId)}" />
                         
-                        </p:column>
-
                         <f:facet name="footer"> 
                             <c:if test="#{klienciMB.selectedClient!=null}" var="costam">
                                 <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />

@@ -33,6 +33,7 @@ public class WszystkieDokumenty {
         KlienciKredyty kk = kredytyDAO.readKlienciKredyty(idKredytu);
         Klienci klient = kk.getKlienci();
         Kredyty kredyt = kk.getKredyty();
+        Klienci partner = kredytyDAO.readPartner(idKredytu);
 
         try {
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
@@ -55,6 +56,25 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 695, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 680, 0);
             }
+            
+            
+            if(partner!=null){
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 660, 0);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 30, 645, 0);
+
+            if (klient.getMiejscowosc().equals(klient.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 615, 0);
+            } else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 615, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 600, 0);
+            }
+            
+            }
+            
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString(), 255, 525, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNazwaBanku(), 255, 500, 0);
@@ -128,6 +148,24 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 695, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 680, 0);
             }
+            
+            if(partner!=null){
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 660, 0);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 30, 645, 0);
+
+            if (klient.getMiejscowosc().equals(klient.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 615, 0);
+            } else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 615, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 600, 0);
+            }
+            
+            }
+            
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNazwaBanku(), 450, 514, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 25, 485, 0);
@@ -165,6 +203,23 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 680, 0);
             }
 
+            if(partner!=null){
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 660, 0);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 30, 645, 0);
+
+            if (klient.getMiejscowosc().equals(klient.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 615, 0);
+            } else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 30, 630, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 615, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 600, 0);
+            }
+            
+            }
+            
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 370, 513, 0);
 
 
@@ -181,7 +236,6 @@ public class WszystkieDokumenty {
 
             PdfContentByte content = pdfStamper.getOverContent(5);//pierwsza stronka
             content.beginText();
-
 
             content.setFontAndSize(bf, 17);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, "P." + kredyt.getNrUmowyPosrednictwa(), 337, 674, 0);
@@ -204,18 +258,21 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 720, 0);
             }
 
+            if(partner!=null){
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 620, 0);
 
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 30, 620, 0);
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 30, 605, 0);
-
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 30, 605, 0);
 
             if (klient.getMiejscowosc().equals(klient.getPoczta())) {
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 590, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 575, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 590, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 575, 0);
             } else {
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 30, 590, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 575, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 760, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 30, 590, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 575, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 560, 0);
+            }
+            
             }
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 100, 474, 0);
@@ -275,14 +332,23 @@ public class WszystkieDokumenty {
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 80, 773, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 380, 773, 0);
-
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPoczta(), 80, 761, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 300, 761, 0);
-
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getSeriaDowodu(), 210, 750, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu(), 280, 750, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getPesel(), 400, 750, 0);
 
+             if(partner!=null){
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 80, 725, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 380, 725, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getPoczta(), 80, 712, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 300, 712, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getSeriaDowodu(), 210, 698, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getNrDowodu(), 280, 698, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getPesel(), 400, 698, 0);
+            }
+            
+            
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString(), 318, 361, 0);
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 193, 155, 0);
