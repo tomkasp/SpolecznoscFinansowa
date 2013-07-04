@@ -43,6 +43,7 @@ public class KredytyDao implements Serializable {
 //        session.getTransaction().commit();
 //        session.close();
 //    }
+    
     public void createKredyt(Kredyty kredyt, Klienci klient, Klienci partner) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
