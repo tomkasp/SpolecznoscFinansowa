@@ -28,11 +28,11 @@ public class LogowanieMB {
             idUzytkownika = userDao.getIdUzytkownika();
             message = userDao.getMessage();
             return "klienciTable";
-            
         } else {
             message = userDao.getMessage();
         }
         return "index";
+        
     }
 
     public String wyloguj() {
