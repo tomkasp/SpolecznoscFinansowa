@@ -83,8 +83,8 @@
         </navigation-case>  
         
         <navigation-case>
-            <from-outcome>edytujPanel</from-outcome>
-            <to-view-id>/admin/testUser.xhtml</to-view-id>       
+            <from-outcome>accountForm</from-outcome>
+            <to-view-id>/admin/formAccount.xhtml</to-view-id>       
             <redirect />   
         </navigation-case>
         

@@ -25,11 +25,14 @@
                 </h:panelGroup>  
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
                     <h:outputLabel value="oddzial" styleClass="absoluteR"/>
-                    <h:inputText id="oddzial4" styleClass="relativeR" value="#{uzytkownik.user.oddzial}" required="true">
+                    <h:inputText id="oddzial4" styleClass="relativeR" value="#{ uzytkownik.user.oddzial }" required="true">
                     </h:inputText>
                     <h:message for="oddzial4" style="color: red" styleClass="floatR" />
                 </h:panelGroup>  
-                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom"><h:commandButton value="Create" styleClass="absoluteR" action="#{uzytkownik.dodajUzytkownika}"/><h:message for="but4" style="color: red" styleClass="floatR" /></h:panelGroup>                              
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+                    <h:commandButton value="Create" styleClass="absoluteR" action="#{ uzytkownik.zapiszUzytkownika() }"/>
+                    <h:message for="but4" style="color: red" styleClass="floatR" />
+                </h:panelGroup>                              
             </h:panelGroup> 
             
         </h:form>
