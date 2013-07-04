@@ -73,8 +73,7 @@
     
    <navigation-rule>   
         
-        <from-view-id>admin/*</from-view-id>
-        <from-view-id>doradca/*</from-view-id>
+        <from-view-id>*</from-view-id>
         
         <navigation-case>
             <from-outcome>accountTable</from-outcome>
