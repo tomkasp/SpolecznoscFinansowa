@@ -21,8 +21,8 @@ public class UzytkownikMB {
 //        return "accountCreated";
 //    }
     
-    public String zapiszUzytkownika(Uzytkownik usr){
-        usrDao.zapiszUzytkownika(usr);
+    public String zapiszUzytkownika(){
+        usrDao.zapiszUzytkownika(user);
         
         return "zapisanoUzytkownika";
     }
