@@ -11,9 +11,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -49,6 +51,9 @@ public class KredytyMB implements Serializable{
     Boolean pdfSuccess = false; // display dialog for printing a successful pdf printout
     boolean step1 = false;
     boolean give = false;
+    boolean give2 = false;
+    boolean give4 = false;
+    boolean give3;
 //    boolean part = false;
         
     BigDecimal calc, calc2;    // used to set form fields from another class with sends data to database        
@@ -175,6 +180,33 @@ public class KredytyMB implements Serializable{
     public void setKkkpart(KlienciMB kkkpart) {
         this.kkkpart = kkkpart;
     }
+
+    public boolean isGive2() {
+        return give2;
+    }
+
+    public void setGive2(boolean give2) {
+        this.give2 = give2;
+    }
+
+    public boolean isGive3() {
+        return give3;
+    }
+
+    public void setGive3(boolean give3) {
+        this.give3 = give3;
+    }
+
+    public boolean isGive4() {
+        return give4;
+    }
+
+    public void setGive4(boolean give4) {
+        this.give4 = give4;
+    }
+
+  
+   
     
     
     //-------------Constructors and Methods
@@ -202,7 +234,20 @@ public class KredytyMB implements Serializable{
         
         part = klienci2.getKlienciId();
         client = 1;
+        setGive2(true);       
         return "tableKlienci";
+    }
+    
+    public boolean dynInput(){
+        String summary = give3 ? "Checked" : "Unchecked"; 
+        if(give3==true){
+            this.give4 = true;
+        }
+        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
+        System.out.println(summary);
+        System.out.println(give4);
+        
+        return give3;
     }
     
     public String submitdisplay(){

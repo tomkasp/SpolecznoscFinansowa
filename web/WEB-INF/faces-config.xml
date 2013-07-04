@@ -47,6 +47,15 @@
             <redirect />                
         </navigation-case>
     </navigation-rule>   
+    
+    <navigation-rule>   
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>accountTable</from-outcome>
+            <to-view-id>/doradca/accountTable.xhtml</to-view-id>    
+            <redirect />                
+        </navigation-case>        
+    </navigation-rule>  
 
     <navigation-rule>   
         <from-view-id>doradca/*</from-view-id>
