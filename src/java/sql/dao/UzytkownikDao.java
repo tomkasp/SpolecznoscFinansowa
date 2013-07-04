@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.QueryException;
 import org.hibernate.Session;
@@ -97,6 +96,11 @@ public class UzytkownikDao {
         session.beginTransaction();
         
         Uzytkownik us = user;
+        try {
+            us.setHaslo(Security.sha1(us.getHaslo()));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UzytkownikDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         session.save(us);
         
         session.getTransaction().commit();
