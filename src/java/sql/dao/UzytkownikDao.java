@@ -1,6 +1,7 @@
 package sql.dao;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,9 @@ import sql.util.Security;
 public class UzytkownikDao {
 
     private String message = "";
-
+    private String rola;
+    private int idUzytkownika;
+    
     public Boolean logowanie(String login, String haslo) {
         
         Session session = null ;
@@ -30,6 +33,17 @@ public class UzytkownikDao {
                 q = session.createQuery("FROM Uzytkownik WHERE login = :login AND haslo = :password ");
                 q.setParameter("login", login);
                 q.setParameter("password", Security.sha1(haslo));
+                
+                List resultList = q.list();
+                for(Object o : resultList){
+
+                Uzytkownik u = (Uzytkownik) o;
+                this.rola = u.getRola();
+                //this.setIdUzytkownika((int) u.getUzytkownikId());
+                //u.setSurname("test22");
+                System.out.println("Sprawdzam wyswietlenie roli:"+rola);
+        } 
+                
             } catch (QueryException exp) {
             }
 
@@ -77,23 +91,52 @@ public class UzytkownikDao {
     }
 
     
-    public void dodajUzytkownika(String login, String haslo, String imie,String nazwisko, String oddzial) {
-        
+    public void dodajUzytkownika(Uzytkownik user){
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Uzytkownik uzytkownik = new Uzytkownik();
-        uzytkownik.setLogin(imie);
-        uzytkownik.setImie(imie);
-        uzytkownik.setHaslo(haslo);
-        uzytkownik.setNazwisko(nazwisko);
-        uzytkownik.setOddzial(oddzial);
-        uzytkownik.setAktywne(true);
+        Uzytkownik us = user;
+        session.save(us);
         
-        session.save(uzytkownik);
         session.getTransaction().commit();
         session.close();
         
+    }
+    
+    public void edytujUzytkownika(Uzytkownik user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        session.saveOrUpdate(user);
+        
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public Uzytkownik pobierzUzytkownika(Integer idUzytkownika){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Uzytkownik user = (Uzytkownik)session.load(Uzytkownik.class, idUzytkownika);
+        
+        System.out.println(user.getImie());
+        session.close();
+        
+        return user;
+    }
+    
+    
+    public List<Uzytkownik> pobierzListeUzytkownikow() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+            Query q=(Query) session.createQuery("from Uzytkownik");
+            List<Uzytkownik> list;
+            list = (List<Uzytkownik>) q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        return list;
     }
     
     
@@ -105,4 +148,17 @@ public class UzytkownikDao {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public String getRola() {
+        return rola;
+    }
+
+    public void setRola(String rola) {
+        this.rola = rola;
+    }
+
+    public int getIdUzytkownika() {
+        return idUzytkownika;
+    }
+
 }

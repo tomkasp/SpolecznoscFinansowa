@@ -56,6 +56,26 @@
             <redirect />   
         </navigation-case>
     </navigation-rule>  
+    <navigation-rule>   
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>accountCreated</from-outcome>
+            <to-view-id>/doradca/index.xhtml</to-view-id>       
+            <redirect />   
+        </navigation-case>
+    </navigation-rule>  
+
+
+    <navigation-rule>   
+        <from-view-id>doradca/*</from-view-id>
+        <navigation-case>
+            <from-outcome>edytujPanel</from-outcome>
+            <to-view-id>/doradca/testUser.xhtml</to-view-id>       
+            <redirect />   
+        </navigation-case>
+    </navigation-rule>  
+
+
 
     <navigation-rule>   
         <from-view-id>doradca/*</from-view-id>

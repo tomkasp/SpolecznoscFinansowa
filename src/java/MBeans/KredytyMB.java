@@ -23,21 +23,24 @@ import sql.entity.Kredyty;
  *
  * @author EI GLOBAL
  */
-@ManagedBean
+@ManagedBean(name="kredytyMB")
 @SessionScoped
 public class KredytyMB implements Serializable{
     
     //--------Objects and Data Definations
+//@ManagedProperty(value="#{klienciMB.klient}")
+//  @ManagedProperty(value = "#{klienciMB}")
+//    @ManagedProperty(value="klienciMB")
+     
     
     private static final long serialVersionUID = 1L;
     
     Kredyty kredyty = new Kredyty();
-    Kredyty selectedKredyt = new Kredyty();
-    
+    Kredyty selectedKredyt = new Kredyty();    
     Klienci klienci2 = new Klienci();
-    
-    @ManagedProperty(value="#{klienciMB.klient}")
     Klienci partner;
+    private KlienciMB kkkpart = new KlienciMB();
+    
     
     KredytyDao kredytydeo2 = new KredytyDao();
     List<Kredyty> kredytylist;    
@@ -161,6 +164,17 @@ public class KredytyMB implements Serializable{
         this.showDialog = showDialog;
     }
     
+    public Klienci getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Klienci partner) {
+        this.partner = partner;
+    }
+
+    public void setKkkpart(KlienciMB kkkpart) {
+        this.kkkpart = kkkpart;
+    }
     
     
     //-------------Constructors and Methods
@@ -171,10 +185,8 @@ public class KredytyMB implements Serializable{
     public String createKredyt() 
     {
        
-        KredytyDao kredytydao = new KredytyDao();
-        
-        kredyty.setDataDodaniaKredytu(new Date());
-        
+        KredytyDao kredytydao = new KredytyDao();       
+        kredyty.setDataDodaniaKredytu(new Date());        
         kredytydao.createKredyt(kredyty, klienci2, partner);
         
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
@@ -191,6 +203,29 @@ public class KredytyMB implements Serializable{
         part = klienci2.getKlienciId();
         client = 1;
         return "tableKlienci";
+    }
+    
+    public String submitdisplay(){
+        
+//        KredytyDao kredytydao = new KredytyDao();
+//        kredyty.setDataDodaniaKredytu(new Date());
+        
+        //kredytydao.createOrUpdateKredyt(kredyty, klienci2);
+        
+        //kredytydao.createKredyt(kredyty, klienci2, partner);
+        
+        //kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
+        
+        if(client==1){
+            System.out.println("whatz up suger........");
+            System.out.println("klienci ID "+KredytyMB.part);            
+//            System.out.println("klienci ID "+partner.getKlienciId());
+            System.out.println("klienci ID "+kkkpart.klient.getKlienciId());
+//            System.out.println("partener name "+klient.getImie());
+//            System.out.println("partener surname "+klient.getNazwisko()); 
+        }
+        
+        return "xxx";
     }
     
     public String submit(){  // action method to data to the database
@@ -306,16 +341,6 @@ public class KredytyMB implements Serializable{
     public String newKredyt(){
         kredyty=new Kredyty();
         return "form2";
-    }
-
-    public Klienci getPartner() {
-        return partner;
-    }
-
-    public void setPartner(Klienci partner) {
-        this.partner = partner;
-    }
-    
-    
+    }    
     
 }

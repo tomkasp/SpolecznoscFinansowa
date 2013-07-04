@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="headtitle">      
+        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Wyświetl Klientów</h:panelGroup>    
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+    </ui:define>
+    <ui:define name="maincenter">
+        <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
+            <p:scrollPanel style="height: 70%">
+                <h:form prependId="false">
+                    <p:dataTable  id="dataTable3" value="#{uzytkownik.pobierzListeUzytkownikow()}"  var="dataAcc" paginator="true" rows="20"  emptyMessage="brak klientów!"
+                                  rowKey="#{dataAcc.uzytkownikId}" selection="#{uzytkownik.user}"  selectionMode="single"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="10">   
+
+                        <p:ajax event="rowSelect" update="dataTable3"/>
+                        <p:ajax event="rowUnselect" update="dataTable3"/>
+
+                        <p:column filterBy="#{dataAcc.imie}" width="110"><f:facet name="header">Imie</f:facet>#{dataAcc.imie} </p:column>
+                        <p:column filterBy="#{dataAcc.nazwisko}" width="110"><f:facet name="header">Nazwisko</f:facet>#{dataAcc.nazwisko} </p:column>
+                        <p:column filterBy="#{dataAcc.login}" filterStyle="width: 75px;" style="width: 20px;"><f:facet name="header">login</f:facet> #{dataAcc.login}</p:column>
+                        <p:column width="30"><f:facet name="header">haslo</f:facet>#{dataAcc.haslo} </p:column>
+                        <p:column width="30"><f:facet name="header">rola</f:facet>#{dataAcc.rola} </p:column>
+                        <p:column><f:facet name="header">oddzial</f:facet>#{dataAcc.oddzial} </p:column>                        
+                        <p:column width="60"><f:facet name="header">Klient Kredyty </f:facet>
+                            <h:commandButton value="Edit" />                      
+                            
+                        </p:column>
+                         
+
+                    </p:dataTable>
+                </h:form>
+            </p:scrollPanel>
+        </h:panelGroup> 
+    </ui:define>
+
+</ui:composition>
