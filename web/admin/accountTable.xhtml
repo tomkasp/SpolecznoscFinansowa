@@ -31,8 +31,10 @@
                         <f:facet name="header"></f:facet>                       
                     </p:dataTable>
                     <h:panelGroup>
-                        <h:commandButton value="nowy" action="#{uzytkownik.nowyUzytkownik()}"/>
-                        <h:commandButton value="edycja" action="accountForm" ></h:commandButton>
+                        <h:commandButton value="nowy" action="#{ uzytkownik.nowyUzytkownik() }"/>
+                        <c:if test="#{uzytkownik.user!=null}" var="costam">
+                        <h:commandButton value="edycja" action="#{ uzytkownik.edytujUzytkownik() }" />
+                        </c:if>
                     </h:panelGroup>
                 </h:form>
             </p:scrollPanel>

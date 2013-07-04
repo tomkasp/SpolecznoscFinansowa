@@ -31,6 +31,11 @@ public class UzytkownikMB {
         return "accountForm";
     }
     
+    public String edytujUzytkownik()
+    {
+        user.setHaslo(null);
+        return "accountForm";
+    }
     
     
 //    public String edytujUzytkownika(){
@@ -45,7 +50,6 @@ public class UzytkownikMB {
         List<Uzytkownik> list = usrDao.pobierzListeUzytkownikow();
         return list;
     }
-    
     
     public UzytkownikMB() {
     }
