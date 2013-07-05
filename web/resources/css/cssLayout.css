@@ -56,7 +56,7 @@
     position: relative;
 }
 .bordertop{
-    border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid #3333ff;
+     border-top: 1px solid #3333ff;
 }
 .borderofgold{
     border-right: 1px solid gold;
@@ -74,14 +74,16 @@
     margin-left: auto;
     box-shadow: 7px 7px 5px #888888;
     background: #f8f8f8;
+  
+    border: 1px solid #888888; 
 }
 
 .borderdesign2{
-   border-bottom: 1px solid gold; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid gold;
+   border-bottom: 1px solid gold;  border-top: 1px solid gold;
    margin-bottom: 0px;
 }
 .borderdesign{
-   border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 0px;
+   border-bottom: 5px solid #3333ff;  border-top: 0px;
    margin-bottom: 0px;
 }
 .bodyheadtop2{
