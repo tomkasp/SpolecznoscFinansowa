@@ -1,5 +1,6 @@
 package sql.dao;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,7 +15,7 @@ import sql.entity.Uzytkownik;
 import sql.util.HibernateUtil;
 import sql.util.Security;
 
-public class UzytkownikDao {
+public class UzytkownikDao implements Serializable {
 
     private String message = "";
     private String rola;
@@ -66,7 +67,7 @@ public class UzytkownikDao {
                     ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
                     message = bundle.getString("failed2");
                 }
-
+                session.close();
                 return false;
             } else {
                 message = "";

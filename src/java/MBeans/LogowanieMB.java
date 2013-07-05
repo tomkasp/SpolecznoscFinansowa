@@ -1,12 +1,13 @@
 package MBeans;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import sql.dao.UzytkownikDao;
 
 @ManagedBean
 @SessionScoped
-public class LogowanieMB {
+public class LogowanieMB implements Serializable {
 
     private String login;
     private String haslo;

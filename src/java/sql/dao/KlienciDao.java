@@ -4,6 +4,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import sql.entity.Klienci;
+import sql.entity.Uzytkownik;
 import sql.util.HibernateUtil;
 
 public class KlienciDao implements Serializable {
@@ -12,11 +13,16 @@ public class KlienciDao implements Serializable {
     public KlienciDao() {
     }
     
-    public void createOrUpdateKlient(Klienci klient) 
+    public void createOrUpdateKlient(Klienci klient,int idUzytkownika) 
     {
+        
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-       
+        
+        Uzytkownik u = (Uzytkownik) session.get(Uzytkownik.class, idUzytkownika);
+        klient.setUzytkownik(u);
+
         session.saveOrUpdate(klient);
         
         session.getTransaction().commit();

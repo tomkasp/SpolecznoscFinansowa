@@ -3,12 +3,10 @@ package MBeans;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.Session;
 import sql.dao.KlienciDao;
 import sql.entity.Klienci;
-import sql.entity.Uzytkownik;
-import sql.util.HibernateUtil;
 
 /**
  *
@@ -27,18 +25,15 @@ public class KlienciMB implements Serializable {
     
     private Klienci klient = new Klienci();
     
+    @ManagedProperty(value = "#{logowanieMB}")
+    private LogowanieMB logowanieMB;
+    
     public KlienciMB() {}
 
     public String submit() {
-        //TRZY PONIZSZE LINIJKI SĄ TYMCZASOWE...
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-        Uzytkownik u = (Uzytkownik) session.load(Uzytkownik.class, 4);
-        u.getAktywne();
-        //...CZYLI DO CZASU STWORZENIA UZYTKOWNICY DAO!!!!
-
-        klient.setUzytkownik(u);
-        kdao.createOrUpdateKlient(klient);
+        int idUzytkownika=logowanieMB.getIdUzytkownika();
+        
+        kdao.createOrUpdateKlient(klient,idUzytkownika);
 
         klient = null;
         return "klienciTable";
@@ -50,7 +45,7 @@ public class KlienciMB implements Serializable {
 
     public String newClient() {
         klient = new Klienci();
-        return "formKlienci";
+        return "indexstart";
     }
 
     public String selectedClientRedirect() {
@@ -85,6 +80,14 @@ public class KlienciMB implements Serializable {
 
     public void setSelectedClient(Klienci selectedClient) {
         this.selectedClient = selectedClient;
+    }
+
+    public LogowanieMB getLogowanieMB() {
+        return logowanieMB;
+    }
+
+    public void setLogowanieMB(LogowanieMB logowanieMB) {
+        this.logowanieMB = logowanieMB;
     }
     
     

@@ -65,7 +65,17 @@
 }
 .centmain-img{
     width: 1200px; margin-right: auto; margin-left: auto;
+    
 }
+
+.content{
+    width: 1200px;
+    margin-right: auto; 
+    margin-left: auto;
+    box-shadow: 7px 7px 5px #888888;
+    background: #f8f8f8;
+}
+
 .borderdesign2{
    border-bottom: 1px solid gold; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff; border-top: 1px solid gold;
    margin-bottom: 0px;

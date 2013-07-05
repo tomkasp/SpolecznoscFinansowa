@@ -1,5 +1,6 @@
 package MBeans;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -8,7 +9,7 @@ import sql.entity.Uzytkownik;
 
 @ManagedBean(name="uzytkownik")
 @SessionScoped
-public class UzytkownikMB {
+public class UzytkownikMB implements Serializable {
 
     private Uzytkownik user = new Uzytkownik();
     UzytkownikDao usrDao = new UzytkownikDao();
