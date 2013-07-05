@@ -6,6 +6,12 @@
         Purpose of the stylesheet follows.
 */
 
+body{
+        
+       background-image:url('http://blog.boxedart.com/images/main-noise.jpg');
+        background-repeat:repeat;
+}
+
 .bodyheadtop{
     padding-top: 50px;
 }

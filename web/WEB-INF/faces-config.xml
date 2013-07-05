@@ -34,6 +34,11 @@
             <to-view-id>/doradca/tableKlienci.xhtml</to-view-id>  
             <redirect />                  
         </navigation-case>
+         <navigation-case>
+            <from-outcome>indexstart</from-outcome>
+            <to-view-id>/doradca/formKlienci.xhtml</to-view-id>        
+            <redirect />  
+        </navigation-case>
     </navigation-rule> 
       
       

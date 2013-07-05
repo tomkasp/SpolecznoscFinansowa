@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../templates/template.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="maincenter">
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Dodaj Klienta</h:panelGroup>
@@ -18,19 +19,31 @@
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="login" styleClass="absoluteR"/><h:inputText id="login4" styleClass="relativeR" value="#{uzytkownik.user.login}" required="true"><f:validateLength minimum="3" maximum="30" /></h:inputText><h:message for="login4" style="color: red" styleClass="floatR" /></h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="hasło" styleClass="absoluteR"/><h:inputText id="haslou4" styleClass="relativeR" value="#{uzytkownik.user.haslo}" required="true"><f:validateLength minimum="3" maximum="30" /></h:inputText><h:message for="haslou4" style="color: red" styleClass="floatR" /></h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+                    
                     <h:outputLabel value="rola" styleClass="absoluteR"/>
-                    <h:inputText id="rola4" styleClass="relativeR" value="#{uzytkownik.user.rola}" required="true">
-                    </h:inputText>
+                    <h:selectOneMenu styleClass="relativeR" value="#{uzytkownik.user.rola}" id="rola4" required="true" >
+                                <f:selectItem itemValue="" itemLabel=""/>
+                                <f:selectItem itemValue="admin" itemLabel="admin"/>
+                                <f:selectItem itemValue="doradca" itemLabel="doradca"/>
+                    </h:selectOneMenu>
                     <h:message for="rola4" style="color: red" styleClass="floatR" />
+                    
                 </h:panelGroup>  
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+                    
                     <h:outputLabel value="oddzial" styleClass="absoluteR"/>
-                    <h:inputText id="oddzial4" styleClass="relativeR" value="#{ uzytkownik.user.oddzial }" required="true">
-                    </h:inputText>
+                    <h:selectOneMenu styleClass="relativeR" value="#{uzytkownik.user.oddzial}" id="oddzial4" required="true" >
+                                <f:selectItem itemValue="" itemLabel=""/>
+                                <f:selectItem itemValue="op" itemLabel="Opole"/>
+                                <f:selectItem itemValue="wr" itemLabel="Wroclaw"/>
+                                <f:selectItem itemValue="wl" itemLabel="Walbrzych"/>
+                    </h:selectOneMenu>
                     <h:message for="oddzial4" style="color: red" styleClass="floatR" />
+                    
                 </h:panelGroup>  
-                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
-                    <h:commandButton value="Create" styleClass="absoluteR" action="#{ uzytkownik.zapiszUzytkownika() }"/>
+                <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom ">
+                    <h:button value="Anuluj"  outcome="accountTable"/>
+                    <h:commandButton value="Zapisz" style="float: right" action="#{ uzytkownik.zapiszUzytkownika() }"/>
                     <h:message for="but4" style="color: red" styleClass="floatR" />
                 </h:panelGroup>                              
             </h:panelGroup> 
