@@ -13,22 +13,19 @@
         <h:form>
             
             <h:panelGroup style="display: block;" styleClass=" borderbeau2 vmargin">
+                
                 <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Dane podstawowe</h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie4" styleClass="relativeR" value="#{uzytkownik.user.imie}" required="true"><f:validateLength minimum="3" maximum="30" /></h:inputText><h:message for="imie4" style="color: red" styleClass="floatR"/></h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz4" styleClass="relativeR" value="#{uzytkownik.user.nazwisko}" required="true"><f:validateLength minimum="3" maximum="45" /></h:inputText><h:message for="naz4" style="color: red" styleClass="floatR" /></h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="login" styleClass="absoluteR"/><h:inputText id="login4" styleClass="relativeR" value="#{uzytkownik.user.login}" required="true"><f:validateLength minimum="3" maximum="30" /></h:inputText><h:message for="login4" style="color: red" styleClass="floatR" /></h:panelGroup>            
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="hasło" styleClass="absoluteR"/><h:inputText id="haslou4" styleClass="relativeR" value="#{uzytkownik.user.haslo}" required="true"><f:validateLength minimum="3" maximum="30" /></h:inputText><h:message for="haslou4" style="color: red" styleClass="floatR" /></h:panelGroup>            
+                
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
                     
-                    <h:outputLabel value="rola" styleClass="absoluteR"/>
-                    <h:selectOneMenu styleClass="relativeR" value="#{uzytkownik.user.rola}" id="rola4" required="true" >
-                                <f:selectItem itemValue="" itemLabel=""/>
-                                <f:selectItem itemValue="admin" itemLabel="admin"/>
-                                <f:selectItem itemValue="doradca" itemLabel="doradca"/>
-                    </h:selectOneMenu>
-                    <h:message for="rola4" style="color: red" styleClass="floatR" />
+                    <q:out2/>
                     
                 </h:panelGroup>  
+                
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
                     
                     <h:outputLabel value="oddzial" styleClass="absoluteR"/>
@@ -40,12 +37,14 @@
                     </h:selectOneMenu>
                     <h:message for="oddzial4" style="color: red" styleClass="floatR" />
                     
-                </h:panelGroup>  
+                </h:panelGroup> 
+                
                 <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom ">
                     <h:button value="Anuluj"  outcome="accountTable"/>
                     <h:commandButton value="Zapisz" style="float: right" action="#{ uzytkownik.zapiszUzytkownika() }"/>
                     <h:message for="but4" style="color: red" styleClass="floatR" />
-                </h:panelGroup>                              
+                </h:panelGroup> 
+                
             </h:panelGroup> 
             
         </h:form>

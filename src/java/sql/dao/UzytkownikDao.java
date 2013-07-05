@@ -68,7 +68,6 @@ public class UzytkownikDao implements Serializable {
                     ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
                     message = bundle.getString("failed2");
                 }
-                session.close();
                 return false;
             } else {
                 message = "";
