@@ -28,6 +28,7 @@ public class LogowanieMB implements Serializable {
             rola = userDao.getRola();
             System.out.println("Twoja rola: "+rola);
             idUzytkownika = userDao.getIdUzytkownika();
+            
             message = userDao.getMessage();
             return "klienciTable";
         } else {

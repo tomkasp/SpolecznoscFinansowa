@@ -41,6 +41,7 @@ public class UzytkownikDao implements Serializable {
 
                     Uzytkownik u = (Uzytkownik) o;
                     this.rola = u.getRola();
+                    this.idUzytkownika= u.getUzytkownikId();
                     //this.setIdUzytkownika((int) u.getUzytkownikId());
                     //u.setSurname("test22");
                     System.out.println("Sprawdzam wyswietlenie roli:" + rola);

@@ -33,6 +33,8 @@ public class KlienciMB implements Serializable {
     public String submit() {
         int idUzytkownika=logowanieMB.getIdUzytkownika();
         
+        System.out.println("idUsera: "+logowanieMB.getIdUzytkownika());
+        
         kdao.createOrUpdateKlient(klient,idUzytkownika);
 
         klient = null;
