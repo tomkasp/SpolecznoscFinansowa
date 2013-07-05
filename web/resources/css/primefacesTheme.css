@@ -41,22 +41,26 @@ ui-dialog-content ui-widget-content {
 
 TR.ui-widget-content.ui-datatable-odd.ui-state-highlight{   
     background: cadetblue;
+    background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
 }
 
 TR.ui-widget-content.ui-datatable-even.ui-state-highlight{
     background: cadetblue;
+     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);   
 }
 
 TR.ui-widget-content.ui-datatable-even.ui-state-hover{ 
     background: cadetblue;
+     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);
 }
 
 
 TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
     background: cadetblue;
+     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(133, 178, 203);  
 }
 
