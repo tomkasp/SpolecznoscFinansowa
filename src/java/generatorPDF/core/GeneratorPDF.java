@@ -22,13 +22,16 @@ public class GeneratorPDF {
        
        int idKlietna = getIdKlienta(idKredytu);
        
-       new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
-       new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
+       
+       new File("\\\\192.168.0.5\\rice\\KalkulatorDecyzji\\"+idKlietna+" Klient\\").mkdir();
+       new File("\\\\192.168.0.5\\rice\\KalkulatorDecyzji\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
+       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
+       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
        
        try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
-            PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+            PdfReader pdfReader = new PdfReader("\\\\192.168.0.5\\rice\\template\\wszystkieDokumenty.pdf");         
+            String sciezka="\\\\192.168.0.5\\rice\\KalkulatorDecyzji\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
             tds.wypelnij(pdfStamper , idKredytu);          
             pdfStamper.close();
