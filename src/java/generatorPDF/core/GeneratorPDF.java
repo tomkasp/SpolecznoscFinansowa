@@ -25,6 +25,10 @@ public class GeneratorPDF {
        //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
        //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
        
+
+       new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/").mkdir();
+       new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
+
        //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
        //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
        
