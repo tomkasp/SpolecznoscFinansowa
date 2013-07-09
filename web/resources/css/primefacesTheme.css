@@ -16,7 +16,11 @@ ui-dialog-content ui-widget-content {
 }
 
 .ui-widget{
-    font-size: small;
+    font-size: 13px;
+}
+
+.ui-datatable.ui-widget{
+    font-size: 13px;
 }
 
 .ui-datepicker-calendar{

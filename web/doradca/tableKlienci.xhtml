@@ -20,7 +20,7 @@
             <h:panelGroup style=" display: block" styleClass="vmargintable">   
                 <p:scrollPanel>
                     <h:form prependId="false">
-                        <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientów!" 
+                        <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientĂłw!" 
                                       rowKey="#{data.klienciId}"  selection="#{klienciMB.selectedClient}" selectionMode="single" 
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">   
 
@@ -55,7 +55,7 @@
                                     <c:if test="#{kredytyMB.czyKreatorAktywny==false}" var="costam">
 
                                         <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />
-                                        <h:commandButton id="modalDialogButton" value="usuń" style="float: right;" onclick="dlg2.show();" type="button"/>
+                                        <h:commandButton id="modalDialogButton" value="usuĹ„" style="float: right;" onclick="dlg2.show();" type="button"/>
 
                                     </c:if>
 
@@ -76,11 +76,11 @@
 
                         </p:dataTable>
 
-                        <p:dialog id="modalDialog" header="usuń klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
-                            <h:outputText value="Czy napewno chcesz usunąć klienta?" />  
+                        <p:dialog id="modalDialog" header="usuĹ„ klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                            <h:outputText value="Czy napewno chcesz usunÄ…Ä‡ klienta?" />  
                             <div style="text-align: center;"> 
 
-                                <h:commandButton id="viewButton2" value="usuń" onclick="dlg2.hide();" >    
+                                <h:commandButton id="viewButton2" value="usuĹ„" onclick="dlg2.hide();" >    
                                     <f:ajax listener="#{klienciMB.deleteClient()}" render="dataTable1" />    
                                 </h:commandButton>
 
