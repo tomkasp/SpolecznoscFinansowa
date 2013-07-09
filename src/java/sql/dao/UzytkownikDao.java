@@ -139,7 +139,6 @@ public class UzytkownikDao implements Serializable {
 
     public Uzytkownik pobierzUzytkownika(Integer idUzytkownika) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-
         Uzytkownik user = (Uzytkownik) session.load(Uzytkownik.class, idUzytkownika);
 
         System.out.println(user.getImie());

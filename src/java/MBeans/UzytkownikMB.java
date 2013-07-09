@@ -51,7 +51,6 @@ public class UzytkownikMB implements Serializable {
 //    }
     
     public List<Uzytkownik> pobierzListeUzytkownikow(){
-        
         List<Uzytkownik> list = usrDao.pobierzListeUzytkownikow();
         return list;
     }

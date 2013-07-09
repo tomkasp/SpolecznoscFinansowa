@@ -31,10 +31,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${libs.PRIMEFACE 3.5.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${libs.commons-net 3.2.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
