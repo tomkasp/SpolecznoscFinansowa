@@ -7,9 +7,8 @@
 */
 
 body{
-        
-       background-image:url('http://blog.boxedart.com/images/main-noise.jpg');
-        background-repeat:repeat;
+    background-image:url('http://blog.boxedart.com/images/main-noise.jpg');
+    background-repeat:repeat;
 }
 
 .bodyheadtop{
@@ -25,7 +24,7 @@ body{
     padding-top: 15px;
 }
 .borderdesignhead{
-   border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff;
+    border-bottom: 5px solid #3333ff; border-left: 1px solid #3333ff; border-right: 1px solid #3333ff;
 }
 .borderbeau{
     margin-bottom: 15px;
