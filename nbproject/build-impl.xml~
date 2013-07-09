@@ -982,9 +982,11 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.itextpdf-5.4.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
 <<<<<<< HEAD
         <copyfiles files="${libs.PRIMEFACE 3.5.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${libs.commons-net 3.2.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${libs.commons-net 3.3.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
 =======
-        <copyfiles files="${file.reference.primefaces-3.5.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${libs.CommonsNet.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${libs.Primefaces3.5.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${libs.simpleFTP.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
 >>>>>>> branch 'master' of https://github.com/madejson/rice.git
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
@@ -998,9 +1000,11 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.itextpdf-5.4.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
 <<<<<<< HEAD
         <copyfiles files="${libs.PRIMEFACE 3.5.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${libs.commons-net 3.2.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${libs.commons-net 3.3.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
 =======
-        <copyfiles files="${file.reference.primefaces-3.5.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${libs.CommonsNet.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${libs.Primefaces3.5.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${libs.simpleFTP.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
 >>>>>>> branch 'master' of https://github.com/madejson/rice.git
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
