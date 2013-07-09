@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="name"/>
+        <cc:attribute name="value"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup style="display: block" styleClass="centmain bodyheadbuttom">
+            <h:outputLabel value="#{cc.attrs.name}" styleClass="absoluteR"/>
+            <h:selectOneMenu styleClass="relativeR" value="#{cc.attrs.value}" id="#{cc.attrs.id}" required="true" >
+                <f:selectItem itemValue="" itemLabel=""/>
+                <f:selectItem itemValue="admin" itemLabel="admin"/>
+                <f:selectItem itemValue="doradca" itemLabel="doradca"/>
+            </h:selectOneMenu>
+            <h:message for="#{cc.attrs.id}" style="color: red" styleClass="floatR" />
+        </h:panelGroup>  
+    </cc:implementation>
+    
+    
+   
+
+    
+</html>

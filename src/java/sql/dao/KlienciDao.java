@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.Uzytkownik;
 import sql.util.HibernateUtil;
-import sql.util.Security;
 
 public class KlienciDao implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -82,6 +81,8 @@ public class KlienciDao implements Serializable {
         session.close();
         return list;
     }
+    
+   
     
     @SuppressWarnings("unchecked")
     public List<Klienci> getKlientList() {

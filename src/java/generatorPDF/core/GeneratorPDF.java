@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sql.dao.KredytyDao;
 import sql.entity.KlienciKredyty;
-import sql.entity.Kredyty;
 
 public class GeneratorPDF {
 

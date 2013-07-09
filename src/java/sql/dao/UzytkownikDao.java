@@ -110,7 +110,6 @@ public class UzytkownikDao implements Serializable {
 
     }
 
-    
     public void zapiszUzytkownika(Uzytkownik user){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -125,9 +124,9 @@ public class UzytkownikDao implements Serializable {
         session.saveOrUpdate(us);
         session.getTransaction().commit();
         session.close();
-        
-        
+         
     }
+    
     public void edytujUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -149,7 +148,7 @@ public class UzytkownikDao implements Serializable {
         return user;
     }
 
-    public void usunUzytkownika(Uzytkownik user){
+    public void usunUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         

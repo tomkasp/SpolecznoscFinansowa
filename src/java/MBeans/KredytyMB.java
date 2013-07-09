@@ -69,6 +69,7 @@ public class KredytyMB implements Serializable {
         KredytyDao kredytydao = new KredytyDao();
 
         kredyty.setDataDodaniaKredytu(new Date());
+        
 
         kredytydao.createKredyt(kredyty, klienci2, partner);
 

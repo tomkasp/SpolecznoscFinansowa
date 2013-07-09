@@ -1,6 +1,8 @@
 package sql.dao;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -66,6 +68,9 @@ public class KredytyDao implements Serializable {
         } catch (org.hibernate.LazyInitializationException e) {
         }
 
+        GregorianCalendar c=new GregorianCalendar();
+        c.setGregorianChange(new Date());
+        
         session.saveOrUpdate(kredyt);
 
         session.getTransaction().commit();

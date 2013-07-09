@@ -43,7 +43,7 @@ public class Klienci  implements java.io.Serializable {
      private String nrDomu;
      private String nrMieszkania;
      private Date dataDodaniaKlienta;
-     private Set<KlienciKredyty> klienciKredyties = new HashSet<KlienciKredyty>(0);
+     private Set<KlienciKredyty> klienciKredyties = new HashSet<>(0);
 
     public Klienci() {
     }
