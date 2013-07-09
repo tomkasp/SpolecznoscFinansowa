@@ -14,15 +14,13 @@ public class FileUploaderFTP {
         FileInputStream fis = null;
  
         try {
-            
            
             System.out.println("START:");
             client.connect("ftp.hp.com");
             //client.login("admin", "secret");
             
-            //
-            // Create an InputStream of the file to be uploaded
-            //
+            //Create an InputStream of the file to be uploaded
+            
             String filename = "WP_HPDM_FTP_Configuration.pdf";
             fis = new FileInputStream(filename);
  

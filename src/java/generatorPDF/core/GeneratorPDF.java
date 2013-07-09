@@ -27,6 +27,7 @@ public class GeneratorPDF {
        
        try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
+            
             PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
             String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
