@@ -16,7 +16,7 @@
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>      
              
         <h:form>
-        <h:panelGroup style="display: block;" styleClass=" borderbeau vmargin">
+        <h:panelGroup style="display: block;" styleClass=" borderbeau2 vmargin bodyheadbuttom">
             <h:panelGroup style="display: block; font-weight: bold; font-size: larger" styleClass="bodytexttop paraleft">Dane podstawowe</h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytexttop bodytextbutton"><h:outputLabel value="Imie" styleClass="absoluteR" /><h:inputText id="imie" styleClass="relativeR" value="#{klienciMB.klient.imie}" required="true"><f:validateLength minimum="2" maximum="20" /></h:inputText><h:message for="imie" style="color: red" styleClass="floatR"/></h:panelGroup>            
             <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nazwisko" styleClass="absoluteR" /><h:inputText id="naz" styleClass="relativeR" value="#{klienciMB.klient.nazwisko}" required="true"><f:validateLength minimum="3" maximum="40" /></h:inputText><h:message for="naz" style="color: red" styleClass="floatR" /></h:panelGroup>            

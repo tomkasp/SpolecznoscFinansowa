@@ -6,13 +6,15 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:c="http://java.sun.com/jsp/jstl/core">
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:cc="http://java.sun.com/jsf/ezcomp"
+                xmlns:g="http://java.sun.com/jsf/composite/ezcomp"
+                >
 
     <ui:define name="maincenter">
 
         <c:if test="#{logowanieMB.zalogowany==true}" var="x">
 
-            <h:outputText value="#{kredytyMB.partner.klienciId}"></h:outputText>
 
             <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
             <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
@@ -22,13 +24,7 @@
 
                     <!--<h:panelGroup id="formcell" style="display: block" styleClass=" borderbeau2 vmargin bodyheadbuttom">-->
                     
-                    <h:panelGroup style="display: block" styleClass="centmain bodyheadtop bodytextbutton">
-                        <h:outputLabel value="Nazwa Banku" styleClass="absoluteR" />
-                        <h:inputText id="Nazwa" styleClass="relativeR" value="#{kredytyMB.kredyty.nazwaBanku}" required="true">
-                            <f:validateLength minimum="1" maximum="30" />
-                        </h:inputText>
-                        <h:message for="Nazwa" style="color: red" styleClass="floatR" />
-                    </h:panelGroup>
+                    <g:extendedInputText/>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr Umowy Posrednictwa" styleClass="absoluteR" /><h:inputText id="NrUmowy" styleClass="relativeR" value="#{kredytyMB.kredyty.nrUmowyPosrednictwa}" required="true"><f:validateLength minimum="1" maximum="30" /></h:inputText><h:message for="NrUmowy" style="color: red" styleClass="floatR" /></h:panelGroup>
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Kwota Kredytu Brutto" styleClass="absoluteR"/><h:inputText id="KwotaKredytu" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKredytuBrutto}" required="true"><f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/><f:validateLength minimum="1" maximum="12" />

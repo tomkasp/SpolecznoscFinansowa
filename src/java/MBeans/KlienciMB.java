@@ -68,7 +68,15 @@ public class KlienciMB implements Serializable {
     }
 
     public List<Klienci> getKlientList() {
+        
+        if( logowanieMB.getRola().equals("admin") )
+        {
         klientList=kdao.getKlientList();
+        }
+        else{
+        klientList=kdao.getKlientList(logowanieMB.getIdUzytkownika());
+        }
+                
         return klientList;
     }
 

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import sql.entity.Klienci;
 import sql.entity.Uzytkownik;
 import sql.util.HibernateUtil;
+import sql.util.Security;
 
 public class KlienciDao implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -67,11 +68,28 @@ public class KlienciDao implements Serializable {
     }
     
     @SuppressWarnings("unchecked")
+    public List<Klienci> getKlientList(int idUzytkownika) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+        Query q=(Query) session.createQuery("from Klienci where fk_uzytkownik = :idUzytkownika ");
+        q.setParameter("idUzytkownika", idUzytkownika);
+        List<Klienci> list;
+        list = (List<Klienci>) q.list();
+        
+        session.getTransaction().commit();
+        
+        session.close();
+        return list;
+    }
+    
+    @SuppressWarnings("unchecked")
     public List<Klienci> getKlientList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
        
         Query q=(Query) session.createQuery("from Klienci");
+        
         List<Klienci> list;
         list = (List<Klienci>) q.list();
         
