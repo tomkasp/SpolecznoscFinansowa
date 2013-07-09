@@ -68,8 +68,6 @@ public class KredytyDao implements Serializable {
         } catch (org.hibernate.LazyInitializationException e) {
         }
 
-        GregorianCalendar c=new GregorianCalendar();
-        c.setGregorianChange(new Date());
         
         session.saveOrUpdate(kredyt);
 
