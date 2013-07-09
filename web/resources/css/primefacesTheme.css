@@ -24,6 +24,10 @@ ui-dialog-content ui-widget-content {
     font-size: 13px;
 }
 
+.ui-datatable-data.ui-widget-content{
+    font-size: 12px;
+}
+
 .ui-datepicker-calendar{
     background: #ffffff;
 }
