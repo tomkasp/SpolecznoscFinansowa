@@ -10,6 +10,7 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FileDownloaderFTP {
     public static void main(String[] args) {
+        
         FTPClient client = new FTPClient();
         FileOutputStream fos = null;
 
