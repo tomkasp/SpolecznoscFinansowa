@@ -46,7 +46,7 @@ public class GeneratorPDF {
             
             File f=new File(sciezka);
             boolean isDeleted=f.delete();
-            System.out.println(isDeleted);
+            System.out.println("is deleted?: "+isDeleted);
             
             pdfGenerated = true;
 
