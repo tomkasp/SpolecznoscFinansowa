@@ -16,21 +16,13 @@ public class FileDownloaderFTP {
 
         try {
             client.connect("ftp.hp.com");
-            client.login("anonymous", "");
-
+            client.login("anonymous","");
             
-             //ftp://ftp.hp.com/pub/hpdm/Documentation/WhitePapers/WP_HPDM_FTP_Configuration.pdf
-            
-            //
-            // The remote filename to be downloaded.
-            //
             String filename = "WP_HPDM_FTP_Configuration.pdf";
             fos = new FileOutputStream(filename);
 
-            //
-            // Download file from FTP server
-            //
             client.retrieveFile("/" + filename, fos);
+            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

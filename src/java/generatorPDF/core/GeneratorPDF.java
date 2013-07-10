@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import generatorPDF.templates.WszystkieDokumenty;
+import inne.FileUploaderFTP;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,46 +16,44 @@ import sql.entity.KlienciKredyty;
 public class GeneratorPDF {
 
     private static boolean pdfGenerated;
-    
-    public static String generuj(int idKredytu) {   
-        
-            pdfGenerated=false;
-       
-       int idKlietna = getIdKlienta(idKredytu);
-       
-       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
-       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
-       
 
-       new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/").mkdir();
-       new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
+    public static String generuj(int idKredytu) {
 
-       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
-       //new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
-       
-       try {
+        pdfGenerated = false;
+
+        FileUploaderFTP uploaderFTP = new FileUploaderFTP();
+
+        int idKlietna = getIdKlienta(idKredytu);
+
+        try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
             
-            new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/").mkdir();
-            new File("ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
-       
-            String sciezka="ftp://rice:rice123@192.168.0.5:89/rice/KalkulatorDecyzji/"+idKlietna+" Klient/"+idKredytu+" Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+            new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
+            new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
+     
+            PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
             
-            PdfReader pdfReader = new PdfReader("ftp://rice:rice123@192.168.0.5:89/rice/template/wszystkieDokumenty.pdf");      
+            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
             
-            
-            PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka) );         
-            tds.wypelnij(pdfStamper , idKredytu);          
+            PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka));
+
+            tds.wypelnij(pdfStamper, idKredytu);
             pdfStamper.close();
             
-            pdfGenerated=true;
+            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/");
+            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/");
+            uploaderFTP.Upload(sciezka, "rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf");
             
-        } catch (DocumentException | IOException ex)
-        {
+            File f=new File(sciezka);
+            boolean isDeleted=f.delete();
+            System.out.println(isDeleted);
+            
+            pdfGenerated = true;
+
+        } catch (DocumentException | IOException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-       
-       
+        }
+
 //        new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
 //        new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
 //       try {
@@ -182,14 +181,14 @@ public class GeneratorPDF {
 //            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
 //        } 
 //   
-       
-       return "success"; 
+
+        return "success";
     }
 
-    public static int getIdKlienta(int idKredytu){
-        KredytyDao kredytyDAO=new KredytyDao();
-        KlienciKredyty klienciKredyty=kredytyDAO.readKlienciKredyty(idKredytu);
-        int idKlienta=klienciKredyty.getKlienci().getKlienciId();
+    public static int getIdKlienta(int idKredytu) {
+        KredytyDao kredytyDAO = new KredytyDao();
+        KlienciKredyty klienciKredyty = kredytyDAO.readKlienciKredyty(idKredytu);
+        int idKlienta = klienciKredyty.getKlienci().getKlienciId();
         return idKlienta;
     }
 
@@ -200,6 +199,4 @@ public class GeneratorPDF {
     public static void setPdfGenerated(boolean pdfGenerated) {
         GeneratorPDF.pdfGenerated = pdfGenerated;
     }
-
-   
 }

@@ -12,9 +12,9 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
 /**
- *
  * @author WR1EI1
  */
+
 public class FileUploaderFTP {
 
       private String server = "192.168.0.5";
@@ -22,30 +22,26 @@ public class FileUploaderFTP {
       private String user = "rice";
       private String pass = "rice123";
     
-    public String Upload() {
+    public String Upload(String sourcePath,String ftpPath) {
  
         FTPClient ftpClient = new FTPClient();
+        
         try {
-            
             ftpClient.connect(server, port);
             ftpClient.login(user, pass);
+            
             
             ftpClient.enterLocalPassiveMode();
             
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
  
-            // APPROACH #1: uploads first file using an InputStream
-            File firstLocalFile = new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");
+            File firstLocalFile = new File(sourcePath);
  
-            String firstRemoteFile = "rice/ricek/u.pdf";
-            
+            String firstRemoteFile =ftpPath;
             
             InputStream inputStream = new FileInputStream(firstLocalFile);
  
             System.out.println("Start");
-            
-            ftpClient.makeDirectory("rice/"+1+" Klient/");
-            ftpClient.makeDirectory("rice/"+1+" Klient/"+1+" Kredyt/");
             
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             
@@ -69,7 +65,44 @@ public class FileUploaderFTP {
         }
         return "";
     }
-
+    
+    
+     public boolean makeDirectory(String pathname) {
+ 
+        boolean done=false;
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+            
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+ 
+            System.out.println("Start");
+            
+            done = ftpClient.makeDirectory(pathname);
+            
+            if (done) { System.out.println("Success!"); }
+            else{ System.out.println("Katalog istnieje!"); };
+            
+ 
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return done;
+    }
+    
+    
     public String getServer() {
         return server;
     }
