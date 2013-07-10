@@ -41,7 +41,7 @@ public class WszystkieDokumenty {
             PdfContentByte content = pdfStamper.getOverContent(1);//pierwsza stronka
             content.beginText();
             content.setFontAndSize( bf, 12 );
-
+            
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 255, 573, 0);
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 30, 740, 0);

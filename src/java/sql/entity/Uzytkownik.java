@@ -36,7 +36,7 @@ public class Uzytkownik  implements java.io.Serializable {
      private String oddzial;
      private Boolean aktywne;
      private Date dataUtworzenia;
-     private Set<Klienci> kliencis = new HashSet<Klienci>(0);
+     private Set<Klienci> kliencis = new HashSet<>(0);
 
     public Uzytkownik() {
     }

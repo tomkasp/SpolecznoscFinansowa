@@ -48,7 +48,7 @@ public class Kredyty implements java.io.Serializable {
      private Date dataMozliwegoUruchomienia;
      private Date dataDodaniaKredytu;
      private Boolean czyWygenerowanoDokumenty;
-     private Set<KlienciKredyty> klienciKredyties = new HashSet<KlienciKredyty>(0);
+     private Set<KlienciKredyty> klienciKredyties = new HashSet<>(0);
 
     public Kredyty() {
     }
