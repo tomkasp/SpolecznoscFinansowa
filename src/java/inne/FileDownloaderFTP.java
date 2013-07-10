@@ -4,44 +4,52 @@
  */
 package inne;
 
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class FileDownloaderFTP {
     public static void main(String[] args) {
         
         FTPClient client = new FTPClient();
-        FileOutputStream fos = null;
+        
 
         try {
-            client.connect("ftp.hp.com");
-            client.login("anonymous", "");
+            client.connect("192.168.0.5", 89);
+            client.login("rice", "rice123");
 
+            System.out.println("polaczony z " + client.getStatus() + ".");
+                    
+            client.enterLocalPassiveMode();
             
-             //ftp://ftp.hp.com/pub/hpdm/Documentation/WhitePapers/WP_HPDM_FTP_Configuration.pdf
+            System.out.println("Remote system is : " + client.getSystemType());
+            client.changeWorkingDirectory("/rice");
+            System.out.println("Current Directory is : " + client.printWorkingDirectory());
             
-            //
-            // The remote filename to be downloaded.
-            //
-            String filename = "WP_HPDM_FTP_Configuration.pdf";
-            fos = new FileOutputStream(filename);
-
-            //
-            // Download file from FTP server
-            //
-            client.retrieveFile("/" + filename, fos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            OutputStream output = new FileOutputStream("C:\\test.pdf");
+            client.retrieveFile("u.pdf",output);
+            
+            output.close();
+        
+            
+            
+        }
+        catch (IOException e) {
+           
+        } 
+        finally {
             try {
-                if (fos != null) {
-                    fos.close();
-                }
                 client.disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                Logger.getLogger(FileDownloaderFTP.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
 
     }
