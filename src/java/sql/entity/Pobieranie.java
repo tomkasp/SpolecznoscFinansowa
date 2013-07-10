@@ -17,7 +17,7 @@ public class Pobieranie {
         //System.out.println("uzytkownik: " + usr.getLogin());
         
         Klienci klient = (Klienci)session.load(Klienci.class, 7);
-        Uzytkownik uzytkownik = (Uzytkownik)klient.getUzytkownik();
+        Uzytkownik uzytkownik = klient.getUzytkownik();
         
         
         System.out.println("uzytkownik: " + uzytkownik.getLogin());

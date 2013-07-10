@@ -15,6 +15,10 @@ public class NewMain {
      */
     public static void main(String[] args) {
         FileUploaderFTP ftp=new FileUploaderFTP();
-        ftp.Upload();
+        
+        ftp.makeDirectory("rice/"+1+" Klient/");
+        ftp.makeDirectory("rice/"+1+" Klient/"+1+" Kredyt/");
+        ftp.Upload("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf" , "rice/"+1+" Klient/"+1+" Kredyt/u.pdf");
+        
     }
 }

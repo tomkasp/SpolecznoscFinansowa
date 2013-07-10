@@ -82,8 +82,6 @@ public class KlienciDao implements Serializable {
         return list;
     }
     
-   
-    
     @SuppressWarnings("unchecked")
     public List<Klienci> getKlientList() {
         Session session = HibernateUtil.getSessionFactory().openSession();

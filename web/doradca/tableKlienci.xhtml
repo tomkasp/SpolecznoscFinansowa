@@ -53,7 +53,7 @@
                                     <c:if test="#{kredytyMB.czyKreatorAktywny==false}" var="costam">
 
                                         <h:commandButton id="viewButton" value="edytuj" action="#{klienciMB.selectedClientRedirect()}" />
-                                        <h:commandButton id="modalDialogButton" value="usuĹ„" style="float: right;" onclick="dlg2.show();" type="button"/>
+                                        <h:commandButton id="modalDialogButton" value="usuń" style="float: right;" onclick="dlg2.show();" type="button"/>
 
                                     </c:if>
 
@@ -74,11 +74,11 @@
 
                         </p:dataTable>
 
-                        <p:dialog id="modalDialog" header="usuĹ„ klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
-                            <h:outputText value="Czy napewno chcesz usunÄ…Ä‡ klienta?" />  
+                        <p:dialog id="modalDialog" header="usuń„ klienta" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                            <h:outputText value="Czy napewno chcesz usunąć klienta?" />  
                             <div style="text-align: center;"> 
 
-                                <h:commandButton id="viewButton2" value="usuĹ„" onclick="dlg2.hide();" >    
+                                <h:commandButton id="viewButton2" value="usuń„" onclick="dlg2.hide();" >    
                                     <f:ajax listener="#{klienciMB.deleteClient()}" render="dataTable1" />    
                                 </h:commandButton>
 

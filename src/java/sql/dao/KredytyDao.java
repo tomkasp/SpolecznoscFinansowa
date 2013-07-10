@@ -1,8 +1,6 @@
 package sql.dao;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,9 +17,10 @@ import sql.util.HibernateUtil;
 public class KredytyDao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    public KredytyDao() {
-    }
+    
+    private static int id=1;
+    
+    public KredytyDao() {}
 
     public void createKredyt(Kredyty kredyt, Klienci klient, Klienci partner) {
 
@@ -68,7 +67,12 @@ public class KredytyDao implements Serializable {
         } catch (org.hibernate.LazyInitializationException e) {
         }
 
-        
+//        Calendar now = GregorianCalendar.getInstance();
+//        int year = now.get(Calendar.YEAR);
+//        int month = now.get(Calendar.MONTH); // Note: zero based!
+//        kredyt.setNrUmowyPosrednictwa(id+"/"+month+"/"+year+"/");        
+//        id++;
+
         session.saveOrUpdate(kredyt);
 
         session.getTransaction().commit();

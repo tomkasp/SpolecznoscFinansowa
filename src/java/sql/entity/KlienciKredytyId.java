@@ -1,8 +1,6 @@
 package sql.entity;
 // Generated 2013-06-27 14:28:15 by Hibernate Tools 3.2.1.GA
 
-
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
@@ -11,6 +9,7 @@ import javax.persistence.ManyToOne;
  */
 @Embeddable
 public class KlienciKredytyId  implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
 
      private Klienci klienci;
