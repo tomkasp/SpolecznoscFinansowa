@@ -19,7 +19,6 @@ public class FileDownloaderFTP {
         
         FTPClient client = new FTPClient();
         
-
         try {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
