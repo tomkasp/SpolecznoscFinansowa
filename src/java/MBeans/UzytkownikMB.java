@@ -10,46 +10,38 @@ import sql.entity.Uzytkownik;
 @ManagedBean(name="uzytkownik")
 @SessionScoped
 public class UzytkownikMB implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Uzytkownik user = new Uzytkownik();
     UzytkownikDao usrDao = new UzytkownikDao();
     
-//    public String dodajUzytkownika(){
-//        usrDao.dodajUzytkownika(user);
-//        user = null;
-//        return "accountCreated";
-//    }
+    boolean isEdit=false;
     
     public String zapiszUzytkownika(){
         usrDao.zapiszUzytkownika(user);
         user=null;
+        isEdit=false;
         return "accountTable";
     }
     
     public String nowyUzytkownik()
     {
         user=new Uzytkownik();
+        isEdit=false;
         return "accountForm";
     }
     
     public String edytujUzytkownik()
     {
         user.setHaslo(null);
+        isEdit=true;
         return "accountForm";
     }
     
     public void usunUzytkownika() {
         usrDao.usunUzytkownika(user);
     }
-    
-    
-//    public String edytujUzytkownika(){
-//        
-//        user = usrDao.pobierzUzytkownika(this.getIdUzytkownika());
-//        user = null;
-//        return "edytujPanel";
-//    }
-    
+ 
     public List<Uzytkownik> pobierzListeUzytkownikow(){
         List<Uzytkownik> list = usrDao.pobierzListeUzytkownikow();
         return list;
@@ -66,9 +58,14 @@ public class UzytkownikMB implements Serializable {
         this.user = user;
     }
 
-    //for what is that? 
-    public String createAcc(){
-        return "createAcc";
+    public boolean isIsEdit() {
+        return isEdit;
     }
+
+    public void setIsEdit(boolean isEdit) {
+        this.isEdit = isEdit;
+    }
+    
+    
 
 }

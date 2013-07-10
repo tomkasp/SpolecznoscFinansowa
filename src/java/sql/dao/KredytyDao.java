@@ -18,8 +18,6 @@ public class KredytyDao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private static int id=1;
-    
     public KredytyDao() {}
 
     public void createKredyt(Kredyty kredyt, Klienci klient, Klienci partner) {
@@ -64,17 +62,10 @@ public class KredytyDao implements Serializable {
 
         try {
             kredyt.setKlienciKredyties(klienciKredyties);
-        } catch (org.hibernate.LazyInitializationException e) {
-        }
-
-//        Calendar now = GregorianCalendar.getInstance();
-//        int year = now.get(Calendar.YEAR);
-//        int month = now.get(Calendar.MONTH); // Note: zero based!
-//        kredyt.setNrUmowyPosrednictwa(id+"/"+month+"/"+year+"/");        
-//        id++;
+        } catch (org.hibernate.LazyInitializationException e) {}
 
         session.saveOrUpdate(kredyt);
-
+        
         session.getTransaction().commit();
         session.close();
 

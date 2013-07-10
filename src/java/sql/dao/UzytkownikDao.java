@@ -41,7 +41,7 @@ public class UzytkownikDao implements Serializable {
 
                     Uzytkownik u = (Uzytkownik) o;
                     this.rola = u.getRola();
-                    this.idUzytkownika= u.getUzytkownikId();
+                    this.idUzytkownika = u.getUzytkownikId();
                     //this.setIdUzytkownika((int) u.getUzytkownikId());
                     //u.setSurname("test22");
                     System.out.println("Sprawdzam wyswietlenie roli:" + rola);
@@ -110,23 +110,23 @@ public class UzytkownikDao implements Serializable {
 
     }
 
-    public void zapiszUzytkownika(Uzytkownik user){
+    public void zapiszUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         Uzytkownik us = user;
         try {
             us.setHaslo(Security.sha1(us.getHaslo()));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UzytkownikDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         session.saveOrUpdate(us);
         session.getTransaction().commit();
         session.close();
-         
+
     }
-    
+
     public void edytujUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -150,15 +150,14 @@ public class UzytkownikDao implements Serializable {
     public void usunUzytkownika(Uzytkownik user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         session.delete(user);
-        
+
         session.getTransaction().commit();
         session.close();
-        
+
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     public List<Uzytkownik> pobierzListeUzytkownikow() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -171,6 +170,35 @@ public class UzytkownikDao implements Serializable {
         session.getTransaction().commit();
         session.close();
         return list;
+    }
+
+    public boolean isExistUzytkownik(String login) {
+
+        Session session = null;
+        boolean ifExist = true;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query q = null;
+            q = session.createQuery("FROM Uzytkownik WHERE login = :login");
+            q.setParameter("login", login);     
+            
+            if(q.list().isEmpty()){
+            ifExist=false;
+            }
+            
+        } catch (QueryException exp) {
+        } finally {
+            session.close();
+        }
+        
+        if(ifExist==true){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+
     }
 
     public String getMessage() {

@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 public class PdfDownloader {
     
     
-    public void downLoad(int nrklienta,int nrkredytu) throws IOException {  
+    public void downLoad(int nrklienta,int nrkredytu) throws IOException {
+        
             String filePath = "C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+nrklienta+" Klient\\"+nrkredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+nrkredytu+".pdf" ;  
             final int DEFAULT_BUFFER_SIZE = 10240;  
           
@@ -50,7 +51,8 @@ public class PdfDownloader {
                 output.close();  
            }  
             context.responseComplete();  
-      }  
+      
+    }  
     
     
     

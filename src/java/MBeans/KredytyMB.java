@@ -59,7 +59,12 @@ public class KredytyMB implements Serializable {
     //-------------Constructors and Methods
     public KredytyMB() {}
     
-    public String addPartner(Klienci partner) {      
+    public String addPartner(Klienci partner) { 
+        
+        if(partner.getKlienciId().equals(klienci2.getKlienciId())){
+        return "klienciTable";
+        }
+        
         czyKreatorAktywny=false;
         this.partner=partner;  
         return "form2";

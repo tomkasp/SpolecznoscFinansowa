@@ -6,7 +6,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:g="http://java.sun.com/jsf/composite/ezcomp"
-                >
+                
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:define name="maincenter">
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Dodaj Klienta</h:panelGroup>
@@ -36,6 +37,11 @@
                 <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                     <h:outputLabel value="login" styleClass="absoluteR"/>
                     <h:inputText id="login4" styleClass="relativeR" value="#{uzytkownik.user.login}" required="true">
+                        
+                        <c:if test="#{uzytkownik.isEdit!=true}" var="costam">
+                       <f:validator validatorId="newUserValidator" />
+                        </c:if>
+                        
                         <f:validateLength minimum="3" maximum="30" />
                     </h:inputText>
                     <h:message for="login4" style="color: red" styleClass="floatR" />

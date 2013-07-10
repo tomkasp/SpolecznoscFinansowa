@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -28,24 +29,30 @@ public class FileUploaderFTP {
         
         try {
             ftpClient.connect(server, port);
+            System.out.println(1);
             ftpClient.login(user, pass);
-            
-            
+            System.out.println(2);
+          
             ftpClient.enterLocalPassiveMode();
+            System.out.println(3);
             
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            System.out.println(4);
  
             File firstLocalFile = new File(sourcePath);
+            System.out.println(5);
  
             String firstRemoteFile =ftpPath;
+            System.out.println(6);
             
             InputStream inputStream = new FileInputStream(firstLocalFile);
- 
-            System.out.println("Start");
+            System.out.println(7);
             
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            System.out.println(8);
             
             inputStream.close();
+            System.out.println(9);
             if (done) {
                 System.out.println("Success!");
             }
@@ -62,6 +69,7 @@ public class FileUploaderFTP {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            System.out.println(10);
         }
         return "";
     }

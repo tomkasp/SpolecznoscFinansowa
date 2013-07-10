@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inne;
 
 import java.io.FileOutputStream;
@@ -9,20 +5,25 @@ import java.io.IOException;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class FileDownloaderFTP {
+
     public static void main(String[] args) {
-        
+
+        String server = "192.168.0.5";
+        int port = 89;
+        String user = "rice";
+        String pass = "rice123";
+
+
         FTPClient client = new FTPClient();
         FileOutputStream fos = null;
 
-        try {
-            client.connect("ftp.hp.com");
-            client.login("anonymous","");
-            
-            String filename = "WP_HPDM_FTP_Configuration.pdf";
-            fos = new FileOutputStream(filename);
 
+        try {
+            client.connect(server,port);
+            client.login(user, pass);
+            String filename = "rice/1 Klient/52 Kredyt/WszystkieDokumentyKredytu_nr52.pdf";
+            fos = new FileOutputStream(filename);
             client.retrieveFile("/" + filename, fos);
-            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -35,10 +36,5 @@ public class FileDownloaderFTP {
                 e.printStackTrace();
             }
         }
-
     }
 }
-
-
-    
-

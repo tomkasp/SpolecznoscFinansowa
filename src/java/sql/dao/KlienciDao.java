@@ -13,10 +13,7 @@ public class KlienciDao implements Serializable {
     public KlienciDao() {
     }
     
-    public void createOrUpdateKlient(Klienci klient,int idUzytkownika) 
-    {
-        
-        
+    public void createOrUpdateKlient(Klienci klient,int idUzytkownika){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
         
@@ -31,8 +28,7 @@ public class KlienciDao implements Serializable {
     }
     
     
-    public Klienci readKlient(Integer idKlient) 
-    {
+    public Klienci readKlient(Integer idKlient){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
      

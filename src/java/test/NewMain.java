@@ -48,6 +48,16 @@ public class NewMain {
 //        session.save(u);
 //        session.getTransaction().commit();
        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
 }
