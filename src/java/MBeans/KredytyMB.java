@@ -10,6 +10,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -75,11 +76,13 @@ public class KredytyMB implements Serializable {
 
         kredyty.setDataDodaniaKredytu(new Date());
         
-
         kredytydao.createKredyt(kredyty, klienci2, partner);
 
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
 
+        test0=test1=test2=test3=num1=num3=0;
+        
+        
         return "xxx";
     }
     
