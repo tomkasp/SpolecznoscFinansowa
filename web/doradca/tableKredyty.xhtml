@@ -14,7 +14,7 @@
 
      <c:if test="#{logowanieMB.zalogowany==true}" var="x">
         
-        <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
+        <h:panelGroup style=" font-weight: bold; font-size: larger; font-variant:small-caps;display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup> 
          
         <h:panelGroup style=" display: block" styleClass="vmargintable">
@@ -30,22 +30,22 @@
                         <p:ajax event="rowSelect" update="dataTable1"/>
                         <p:ajax event="rowUnselect" update="dataTable1"/>
 
-                        <p:column width="120"><f:facet name="header">Nazwa Banku</f:facet>#{data2.nazwaBanku}</p:column>
+                        <p:column width="120"><f:facet name="header">Nazwa banku</f:facet>#{data2.nazwaBanku}</p:column>
                         <p:column filterBy="#{data2.nrUmowyPosrednictwa}"><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
-                        <p:column width="30"><f:facet name="header">Kwota Kredytu Brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
-                        <p:column width="30"><f:facet name="header">Prowizja Banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
-                        <p:column width="30"><f:facet name="header">prowizja Banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota kredytu brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
+                        <p:column width="30"><f:facet name="header">Prowizja banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Prowizja banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Ubezp. w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Swot w %</f:facet>#{data2.swotWprocentach}</p:column>
                         <p:column width="30"><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
-                        <p:column width="30"><f:facet name="header">Kwota Konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
-                        <p:column width="30"><f:facet name="header">Okres Kredyt. w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
+                        <p:column width="30"><f:facet name="header">Okres kredyt. w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
                         <p:column width="30"><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
                         <p:column width="30"><f:facet name="header">%</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
-                        <p:column width="30"><f:facet name="header">Wolna Gotowka</f:facet>#{data2.wolnaGotowka}</p:column>
-                        <p:column><f:facet name="header">Miejsce Podpisania Dokumentow</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
-                        <p:column width="85"><f:facet name="header">Data Mozliwego Uruchomentow</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
+                        <p:column width="30"><f:facet name="header">Wolna gotówka</f:facet>#{data2.wolnaGotowka}</p:column>
+                        <p:column><f:facet name="header">Miejsce odpisania dokumentów</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
+                        <p:column width="85"><f:facet name="header">Data możliwego Uruchomienia</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
                         <p:column width="10" style="text-align: center; white-space: nowrap; padding: 5px 5px" ><f:facet name="header">Generuj</f:facet>
                             <h:commandLink action="#{kredytyMB.callPdf(data2.kredytyId)}">                                  
                                 <p:graphicImage height="32" value="/resources/photo/generate.gif" />                                   
