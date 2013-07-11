@@ -259,7 +259,7 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 720, 0);
             }
 
-            if (partner != null) {
+            //if (partner != null) {
 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 30, 620, 0);
 
@@ -274,7 +274,7 @@ public class WszystkieDokumenty {
                     content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 560, 0);
                 }
 
-            }
+            //}
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 100, 474, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 330, 474, 0);
