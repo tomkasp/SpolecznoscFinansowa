@@ -7,7 +7,6 @@ package generatorPDF.templates;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfStamper;
 import generatorPDF.core.GeneratorPDF;
@@ -260,22 +259,22 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 720, 0);
             }
 
-            if (partner != null) {
+            //if (partner != null) {
 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 620, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 30, 620, 0);
 
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 30, 605, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 30, 605, 0);
 
                 if (klient.getMiejscowosc().equals(klient.getPoczta())) {
-                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 590, 0);
-                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 575, 0);
+                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 590, 0);
+                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 575, 0);
                 } else {
-                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 30, 590, 0);
-                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 30, 575, 0);
-                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + partner.getPesel(), 30, 560, 0);
+                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 30, 590, 0);
+                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 30, 575, 0);
+                    content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 560, 0);
                 }
 
-            }
+            //}
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 100, 474, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 330, 474, 0);
@@ -350,6 +349,7 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getNrDowodu(), 280, 698, 0);
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getPesel(), 400, 698, 0);
                 System.out.println("NIE kwadrat!");
+                
             } 
 
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() + " zł", 318, 361, 0);
@@ -366,10 +366,18 @@ public class WszystkieDokumenty {
                 content.closePathStroke();
                 content.moveTo(10, 743);
                 content.lineTo(600, 743);
-                content.lineTo(600, 694);
-                content.lineTo(10, 694);
+                content.lineTo(600, 685);
+                content.lineTo(10, 685);
 
                 content.fill();
+                
+                content.setColorStroke(BaseColor.BLACK);
+                content.setColorFill(BaseColor.BLACK);
+            
+                content.beginText();
+                content.setFontAndSize(bf, 12);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "Zwany dalej zleceniodawcą:", 19, 688, 0);
+                content.endText();
                 
             }
 
