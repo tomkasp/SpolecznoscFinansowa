@@ -136,7 +136,7 @@ public class KredytyDao implements Serializable {
 
         Query q = null;
         try {
-            q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id ");
+            q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id AND wspolkredytobiorca = 0");
             q.setParameter("id", idKredyt);
         } catch (QueryException exp) {
         }
@@ -162,15 +162,15 @@ public class KredytyDao implements Serializable {
 
         Query q = null;
         try {
-            q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id ");
+            q = session.createQuery("FROM KlienciKredyty WHERE kredyty_id = :id AND wspolkredytobiorca = 1");
             q.setParameter("id", idKredyt);
         } catch (QueryException exp) {
         }
 
-        if (q.list().size() <= 1) {
+        if (q.list().size() == 0) {
             return null;
         } else {
-            KlienciKredyty kk = (KlienciKredyty) q.list().get(1);
+            KlienciKredyty kk = (KlienciKredyty) q.list().get(0);
 
             Klienci partner = kk.getKlienci();
 
