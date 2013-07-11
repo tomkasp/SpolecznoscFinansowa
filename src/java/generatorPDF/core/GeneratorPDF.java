@@ -28,14 +28,14 @@ public class GeneratorPDF {
         try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
             
-          new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
-          new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
+ //        new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
+ //        new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
 
 //          new File("/home/rice/tmp/"+idKlietna+" Klient/").mkdir();
 //          new File("/home/rice/tmp/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
      
           PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
-          String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+          String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
             
 //            PdfReader pdfReader = new PdfReader("/home/rice/wszystkieDokumenty.pdf");      
 //            String sciezka="/home/rice/tmp/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
