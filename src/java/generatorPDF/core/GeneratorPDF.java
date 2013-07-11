@@ -31,23 +31,23 @@ public class GeneratorPDF {
 //          new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\").mkdir();
 //          new File("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\").mkdir();
 
-            new File("/home/rice/tmp/"+idKlietna+" Klient/").mkdir();
-            new File("/home/rice/tmp/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
+//          new File("/home/rice/tmp/"+idKlietna+" Klient/").mkdir();
+//          new File("/home/rice/tmp/"+idKlietna+" Klient/"+idKredytu+" Kredyt/").mkdir();
      
-//          PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
-//          String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+ //         PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
+ //         String sciezka="C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji_out\\"+idKlietna+" Klient\\"+idKredytu+" Kredyt\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
             
             PdfReader pdfReader = new PdfReader("/home/rice/wszystkieDokumenty.pdf");      
-            String sciezka="/home/rice/tmp/"+idKlietna+" Klient/"+idKredytu+" Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
-            
+            String sciezka="/home/rice/tmp/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+//            
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka));
 
             tds.wypelnij(pdfStamper, idKredytu);
             pdfStamper.close();
             
-            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/");
-            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/");
-            uploaderFTP.Upload(sciezka,"rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf");
+            uploaderFTP.makeDirectory( "rice/" + idKlietna + " Klient/");
+            uploaderFTP.makeDirectory( "rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/");
+            uploaderFTP.Upload(sciezka,"rice/"+ idKlietna + " Klient/" + idKredytu + " Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf");
             
             File f=new File(sciezka);
             boolean isDeleted=f.delete();

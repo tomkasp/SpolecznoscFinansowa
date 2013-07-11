@@ -25,6 +25,7 @@ import javax.persistence.TemporalType;
     ,catalog="System4"
 )
 public class Uzytkownik  implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
 
      private Integer uzytkownikId;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package inne;
 
 import java.io.BufferedInputStream;
@@ -15,8 +11,15 @@ import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTPClient;
 
 public class FileDownloaderFTP {
+
     public static void main(String[] args) {
-        
+
+        String server = "192.168.0.5";
+        int port = 89;
+        String user = "rice";
+        String pass = "rice123";
+
+
         FTPClient client = new FTPClient();
         
         try {
@@ -50,10 +53,5 @@ public class FileDownloaderFTP {
             }
             
         }
-
     }
 }
-
-
-    
-
