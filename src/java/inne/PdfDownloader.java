@@ -37,7 +37,7 @@ public class PdfDownloader {
             //remoteFile="rice/tee.txt";
             remoteFile = "rice/" + nrklienta + " Klient/" + nrkredytu + " Kredyt/WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf";
             outStream = new FileOutputStream("WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf");
-
+            client.setBufferSize(0);
             //remoteFile = "rice/tee.txt";
             //outStream = new FileOutputStream("tee.txt");
 
