@@ -36,7 +36,8 @@ public class FileUploaderFTP {
             ftpClient.enterLocalPassiveMode();
             System.out.println(3);
             
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE,FTP.BINARY_FILE_TYPE);
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            
             System.out.println(4);
  
             File firstLocalFile = new File(sourcePath);
@@ -49,7 +50,7 @@ public class FileUploaderFTP {
             System.out.println(7);
             
             ftpClient.setBufferSize(0);
-            ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+            //ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
             
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
             System.out.println(8);
