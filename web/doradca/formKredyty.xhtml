@@ -20,7 +20,7 @@
             <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
 
             <h:form id="form1" styleClass="borderbeau2 vmargin bodyheadbuttom" style="display: block">
-                <div id="formcell"  class="vmargin bodyheadbuttom" style="display: block">
+                <div id="formcell"  class="vmargin bodyheadbuttom" style="display: block;border:1px solid black;">
 
                     <!--<h:panelGroup id="formcell" style="display: block" styleClass=" borderbeau2 vmargin bodyheadbuttom">-->
                     
@@ -58,9 +58,9 @@
                     <p class="absoluteR">
 
 
-
+                        <div style="min-height:0px;">
                         <h:panelGrid id="panelId" columns="2" >
-
+                           
                             <h:outputText value="Współkredytobiorca:"/>
                             
                             <h:selectBooleanCheckbox id="checkboxId" value="#{kredytyMB.isPartner}">
@@ -81,9 +81,9 @@
                             </h:commandButton>
                             <h:commandButton id="button1" rendered="#{kredytyMB.isPartner}" action="#{ kredytyMB.showPartnerTable() }" value="wybierz"/>  
                              
-
+                           
                         </h:panelGrid>
-
+                    </div>
                     </p>   
 
                 </div>

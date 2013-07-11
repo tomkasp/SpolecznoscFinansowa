@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import org.apache.commons.net.ftp.FTP;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,7 @@ public class PdfDownloader {
         try {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
-
+            
             //System.out.println("polaczony z " + client.getStatus() + ".");
 
             //client.enterLocalPassiveMode();
@@ -37,7 +38,9 @@ public class PdfDownloader {
             //remoteFile="rice/tee.txt";
             remoteFile = "rice/" + nrklienta + " Klient/" + nrkredytu + " Kredyt/WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf";
             //outStream = new FileOutputStream("WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf");
+            client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);
+        
             //remoteFile = "rice/tee.txt";
             //outStream = new FileOutputStream("tee.txt");
 
@@ -45,8 +48,9 @@ public class PdfDownloader {
 
             //System.out.println("test:" + client.retrieveFileStream("tee.txt").available());
             InputStream is = client.retrieveFileStream(remoteFile);
+                      
             //client.retrieveFile(remoteFile, outStream);
-
+            
             //System.out.println("test pliku:" + is.available());
             //client.retrieveFile("u.pdf");
 
@@ -54,7 +58,7 @@ public class PdfDownloader {
 
             //String filePath = "WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf";
 
-            final int DEFAULT_BUFFER_SIZE = 990240;
+            final int DEFAULT_BUFFER_SIZE = 10240;
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
 //            File file = new File(filePath);
@@ -68,7 +72,7 @@ public class PdfDownloader {
             response.reset();
             response.setBufferSize(DEFAULT_BUFFER_SIZE);
             response.setContentType("application/octet-stream");
-            response.setHeader("Content-Length", String.valueOf(is.available()));
+            //response.setHeader("Content-Length", String.valueOf(is.available()));
             response.setHeader("Content-Disposition", "attachment;filename=\"WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf\"");
 
             BufferedInputStream input = null;
