@@ -48,7 +48,6 @@ public class FileUploaderFTP {
             InputStream inputStream = new FileInputStream(firstLocalFile);
             System.out.println(7);
             
-            
             ftpClient.setBufferSize(0);
             ftpClient.setFileTransferMode(FTP.BINARY_FILE_TYPE);
             
