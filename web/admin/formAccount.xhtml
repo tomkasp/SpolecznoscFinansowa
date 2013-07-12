@@ -8,8 +8,9 @@
                 xmlns:g="http://java.sun.com/jsf/composite/ezcomp"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     
-<c:if test="#{logowanieMB.rola=='admin'}" var="x">
+
     <ui:define name="maincenter">
+        <c:if test="#{logowanieMB.rola=='admin'}" var="x">
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Dodaj Klienta</h:panelGroup>
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup> 
         
@@ -81,7 +82,7 @@
             </h:panelGroup> 
             
         </h:form>
-        
+        </c:if>
     </ui:define>
-</c:if>
+
 </ui:composition>

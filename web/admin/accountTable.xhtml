@@ -8,15 +8,17 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core" 
                 xmlns="http://www.w3.org/1999/xhtml">
 
-    <c:if test="#{logowanieMB.rola=='admin'}" var="x">
+    
     <ui:define name="headtitle">      
-        
+       <c:if test="#{logowanieMB.rola=='admin'}" var="x"> 
         
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Użytkownicy:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-     </ui:define>
+       </c:if>
+    </ui:define>
     
     <ui:define name="maincenter">
+        <c:if test="#{logowanieMB.rola=='admin'}" var="x">
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
@@ -66,7 +68,7 @@
         
         
         
-    
+    </c:if>
     </ui:define>
-</c:if>
+
 </ui:composition>
