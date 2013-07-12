@@ -352,11 +352,11 @@ public class WszystkieDokumenty {
                 
             } 
             
-            content.setFontAndSize(bf, 8);
+            content.setFontAndSize(bf, 6);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() + "zł", 318, 361, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 193, 155, 0);
             content.setFontAndSize(bf, 10);
             
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 193, 155, 0);
             content.endText();
             
              System.out.println("TESTYYY 1");
