@@ -28,7 +28,7 @@ public class GeneratorPDF {
         try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
 //          
-//            PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
+//           PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
 //            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
 
             PdfReader pdfReader = new PdfReader("/home/rice/wszystkieDokumenty.pdf");
