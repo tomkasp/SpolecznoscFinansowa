@@ -33,16 +33,16 @@ public class Kredyty implements java.io.Serializable {
      private String nazwaBanku;
      private String nrUmowyPosrednictwa;
      private BigDecimal kwotaKredytuBrutto;
-     private Integer prowizjaBankuWprocentach;
+     private BigDecimal prowizjaBankuWprocentach;
      private BigDecimal prowizjaBankuWpln;
      private BigDecimal ubezpieczenieWpln;
      private BigDecimal kosztaWpln;
-     private Integer swotWprocentach;
+     private BigDecimal swotWprocentach;
      private BigDecimal swotWpln;
      private BigDecimal kwotaKonsolidacji;
      private Integer okresKredytowaniaWmc;
      private BigDecimal rataWpln;
-     private Integer oprocentowanieWprocentach;
+     private BigDecimal oprocentowanieWprocentach;
      private BigDecimal wolnaGotowka;
      private String miejscePodpisaniaDokumentow;
      private Date dataMozliwegoUruchomienia;
@@ -53,7 +53,7 @@ public class Kredyty implements java.io.Serializable {
     public Kredyty() {
     }
 
-    public Kredyty(String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, Integer prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, Integer swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, Integer oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty, Set<KlienciKredyty> klienciKredyties) {
+    public Kredyty(String nazwaBanku, String nrUmowyPosrednictwa, BigDecimal kwotaKredytuBrutto, BigDecimal prowizjaBankuWprocentach, BigDecimal prowizjaBankuWpln, BigDecimal ubezpieczenieWpln, BigDecimal kosztaWpln, BigDecimal swotWprocentach, BigDecimal swotWpln, BigDecimal kwotaKonsolidacji, Integer okresKredytowaniaWmc, BigDecimal rataWpln, BigDecimal oprocentowanieWprocentach, BigDecimal wolnaGotowka, String miejscePodpisaniaDokumentow, Date dataMozliwegoUruchomienia, Date dataDodaniaKredytu, Boolean czyWygenerowanoDokumenty, Set<KlienciKredyty> klienciKredyties) {
        this.nazwaBanku = nazwaBanku;
        this.nrUmowyPosrednictwa = nrUmowyPosrednictwa;
        this.kwotaKredytuBrutto = kwotaKredytuBrutto;
@@ -113,12 +113,12 @@ public class Kredyty implements java.io.Serializable {
         this.kwotaKredytuBrutto = kwotaKredytuBrutto;
     }
     
-    @Column(name="prowizjaBankuWProcentach")
-    public Integer getProwizjaBankuWprocentach() {
+    @Column(name="prowizjaBankuWProcentach", precision=2)
+    public BigDecimal getProwizjaBankuWprocentach() {
         return this.prowizjaBankuWprocentach;
     }
     
-    public void setProwizjaBankuWprocentach(Integer prowizjaBankuWprocentach) {
+    public void setProwizjaBankuWprocentach(BigDecimal prowizjaBankuWprocentach) {
         this.prowizjaBankuWprocentach = prowizjaBankuWprocentach;
     }
     
@@ -149,12 +149,12 @@ public class Kredyty implements java.io.Serializable {
         this.kosztaWpln = kosztaWpln;
     }
     
-    @Column(name="swotWprocentach")
-    public Integer getSwotWprocentach() {
+    @Column(name="swotWprocentach", precision=2)
+    public BigDecimal getSwotWprocentach() {
         return this.swotWprocentach;
     }
     
-    public void setSwotWprocentach(Integer swotWprocentach) {
+    public void setSwotWprocentach(BigDecimal swotWprocentach) {
         this.swotWprocentach = swotWprocentach;
     }
     
@@ -194,12 +194,12 @@ public class Kredyty implements java.io.Serializable {
         this.rataWpln = rataWpln;
     }
     
-    @Column(name="oprocentowanieWProcentach")
-    public Integer getOprocentowanieWprocentach() {
+    @Column(name="oprocentowanieWProcentach", precision=2)
+    public BigDecimal getOprocentowanieWprocentach() {
         return this.oprocentowanieWprocentach;
     }
     
-    public void setOprocentowanieWprocentach(Integer oprocentowanieWprocentach) {
+    public void setOprocentowanieWprocentach(BigDecimal oprocentowanieWprocentach) {
         this.oprocentowanieWprocentach = oprocentowanieWprocentach;
     }
     

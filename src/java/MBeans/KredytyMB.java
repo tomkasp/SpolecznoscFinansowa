@@ -10,7 +10,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import sql.dao.KlienciDao;
 import sql.dao.KredytyDao;
 import sql.entity.Klienci;
@@ -32,6 +31,7 @@ public class KredytyMB implements Serializable {
     private boolean isPartner=false;
     Kredyty kredyty = new Kredyty();
     
+    
     @ManagedProperty(value = "#{ klienciMB }")
     private KlienciMB klienciMB;
     
@@ -49,11 +49,7 @@ public class KredytyMB implements Serializable {
     //COS TAM ROBIĄ:
     Boolean showDialog = false; // display dialog test
     Boolean pdfSuccess = false; // display dialog for printing a successful pdf printout
-    boolean step1 = false;
-    boolean give = false;
-    BigDecimal calc, calc2;    // used to set form fields from another class with sends data to database        
-    double test0, test1, test2, test3, num1; // used in current form for calcuations
-    int num3; //counter and control variable
+
     static int client = 0;
     static int part = 0; // count for client and partenrs  
 
@@ -79,10 +75,6 @@ public class KredytyMB implements Serializable {
         kredytydao.createKredyt(kredyty, klienci2, partner);
 
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
-
-        test0=test1=test2=test3=num1=num3=0;
-        step1 = false;
-        give = false;
         
         return "xxx";
     }
@@ -143,129 +135,58 @@ public class KredytyMB implements Serializable {
         kredyty = selectedKredyt;
         return "form2";
     }
-
-    public double updateAll() { // to calculate the percentage of prowizjabankuwpln    
-        updateAll1();
-        updataAll2();
-        updateAll3();
-        return 0;
+    
+    // Zerowanie zmiennych co by nie były null'ami jeśli są
+    public void zerujPola()
+    {
+        if (kredyty.getKwotaKredytuBrutto() == null)
+            kredyty.setKwotaKredytuBrutto(new BigDecimal(0));
+        if (kredyty.getProwizjaBankuWprocentach() == null)
+            kredyty.setProwizjaBankuWprocentach(new BigDecimal(0));  
+        if (kredyty.getSwotWprocentach() == null)
+            kredyty.setSwotWprocentach(new BigDecimal(0));
+        if (kredyty.getKwotaKonsolidacji() == null)
+            kredyty.setKwotaKonsolidacji(new BigDecimal(0));
+        if (kredyty.getUbezpieczenieWpln() == null)
+            kredyty.setUbezpieczenieWpln(new BigDecimal(0));
+        if (kredyty.getKosztaWpln() == null)
+            kredyty.setKosztaWpln(new BigDecimal(0));
+        if (kredyty.getProwizjaBankuWpln() == null)
+            kredyty.setProwizjaBankuWpln(new BigDecimal(0));
+        if (kredyty.getSwotWpln() == null)
+            kredyty.setSwotWpln(new BigDecimal(0));
     }
-
-    public double updateAll1() { // to calculate the percentage of prowizjabankuwpln
-        this.num3 = (int) this.test2;
-        this.kredyty.setProwizjaBankuWprocentach(num3);
-        this.test2 = this.test2 / 100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
-        calc = new BigDecimal(this.test2);
-        this.kredyty.setProwizjaBankuWpln(calc);
-        calc = BigDecimal.ZERO;
-        updataAll2();
-        if (this.step1 == true) {
-            updateAll3();
-        }
-        this.give = false;
-        if (this.test2 == 0) {
-            this.give = true;
-        }
-        System.out.println("t2 " + this.test2);
-        return this.test2;
+    
+    public void liczProwizje()
+    {
+        kredyty.setProwizjaBankuWpln(kredyty.getKwotaKredytuBrutto().multiply(kredyty.getProwizjaBankuWprocentach()).divide(new BigDecimal(100)));
     }
-
-    public double updataAll2() { // to calculate the percentage of swotwprocentach
-        this.num3 = (int) this.test1;
-        this.kredyty.setSwotWprocentach(num3);
-        this.test1 = this.test1 / 100 * this.kredyty.getKwotaKredytuBrutto().doubleValue();
-        calc = new BigDecimal(this.test1);
-        this.kredyty.setSwotWpln(calc);
-        calc = BigDecimal.ZERO;
-        this.give = false;
-        if (this.test1 == 0) {
-            this.give = true;
-        }
-        System.out.println("t1 " + this.test1);
-        return this.test1;
+    
+    public void liczSWOT()
+    {
+        kredyty.setSwotWpln(kredyty.getKwotaKredytuBrutto().multiply(kredyty.getSwotWprocentach()).divide(new BigDecimal(100)));
     }
-
-    public double updateAll3() { // calculation of wolnagotowka
-
-        this.num1 = 0;
-        calc = new BigDecimal(this.test3);
-        this.kredyty.setKwotaKonsolidacji(calc);
-        this.give = false;
-        this.num1 = this.kredyty.getKwotaKredytuBrutto().doubleValue() - this.test2 - this.kredyty.getUbezpieczenieWpln().doubleValue() - this.kredyty.getKosztaWpln().doubleValue() - this.test1 - this.test3;
-        this.step1 = true;
-
-        calc2 = new BigDecimal(this.test3);
-        this.kredyty.setWolnaGotowka(calc2);
-        calc = BigDecimal.ZERO;
-        calc2 = BigDecimal.ZERO;
-
-        if (this.num1 == 0) {
-            this.give = true;
-        }
-
-        System.out.println("t3 " + this.num1);
-        return 0;
+    
+    public void liczWolnaGotowke()
+    {
+        BigDecimal kwota = kredyty.getKwotaKredytuBrutto();
+        BigDecimal prowizja = kredyty.getProwizjaBankuWpln();
+        BigDecimal swot = kredyty.getSwotWpln();
+        BigDecimal konsolidacja = kredyty.getKwotaKonsolidacji();
+        BigDecimal ubezpieczenie = kredyty.getUbezpieczenieWpln();
+        BigDecimal inne = kredyty.getKosztaWpln();
+        
+        kredyty.setWolnaGotowka(kwota.subtract(prowizja).subtract(swot).subtract(konsolidacja).subtract(ubezpieczenie).subtract(inne));
     }
-
-   
-
-    //---------Getters and Seters Methods
-    public double getTest0() {
-        return test0;
+       
+    public void kalkuluj()
+    {   
+        zerujPola();
+        liczProwizje();
+        liczSWOT();
+        liczWolnaGotowke();
     }
-
-    public void setTest0(double test0) {
-        this.test0 = test0;
-    }
-
-    public boolean isGive() {
-        return give;
-    }
-
-    public void setGive(boolean give) {
-        this.give = give;
-    }
-
-    public double getNum1() {
-        return num1;
-    }
-
-    public void setNum1(double num1) {
-        this.num1 = num1;
-    }
-
-    public double getTest3() {
-        return test3;
-    }
-
-    public void setTest3(double test3) {
-        this.test3 = test3;
-    }
-
-    public double getTest2() {
-        return test2;
-    }
-
-    public void setTest2(double test2) {
-        this.test2 = test2;
-    }
-
-    public double getTest1() {
-        return test1;
-    }
-
-    public void setTest1(double test1) {
-        this.test1 = test1;
-    }
-
-    public BigDecimal getCalc() {
-        return calc;
-    }
-
-    public void setCalc(BigDecimal calc) {
-        this.calc = calc;
-    }
-
+    
     public List<Kredyty> getKredytylist() {
         return kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
     }
@@ -349,8 +270,5 @@ public class KredytyMB implements Serializable {
     public void setIsPartner(boolean isPartner) {
         this.isPartner = isPartner;
     }
-
-    
-    
     
 }
