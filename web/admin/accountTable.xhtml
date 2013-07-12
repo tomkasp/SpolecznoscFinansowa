@@ -15,7 +15,8 @@
     <ui:define name="headtitle">       
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Użytkownicy:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
-     </ui:define>
+       </c:if>
+    </ui:define>
     
     <ui:define name="maincenter">
       <c:if test="#{logowanieMB.rola=='admin'}" var="x"> 
