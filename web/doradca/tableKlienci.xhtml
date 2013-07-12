@@ -19,7 +19,7 @@
             <h:panelGroup style=" display: block" styleClass="vmargintable">   
                 <p:scrollPanel>
                     <h:form prependId="false">
-                        <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientĂłw!" 
+                        <p:dataTable  id="dataTable1" value="#{klienciMB.klientList}" var="data" paginator="true" rows="20"  emptyMessage="brak klientów!" 
                                       rowKey="#{data.klienciId}"  selection="#{klienciMB.selectedClient}" selectionMode="single" 
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">   
 
