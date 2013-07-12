@@ -74,6 +74,8 @@ public class KredytyMB implements Serializable {
         
         kredytydao.createKredyt(kredyty, klienci2, partner);
 
+        
+        
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
         
         return "xxx";

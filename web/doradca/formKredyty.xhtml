@@ -54,8 +54,8 @@
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Prowizja banku w procentach" styleClass="absoluteR"/>
                         <h:inputText id="ProwizjaBankuwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.prowizjaBankuWprocentach}" required="true">
-                            <f:convertNumber integerOnly="true"/>
-                            <f:validateLength minimum="1" maximum="3" />
+                            <f:validateLength minimum="1" maximum="4"/>
+                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="2"/>
                             <f:ajax execute="ProwizjaBankuwPro prowizjaBankuwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="prowizjaBankuwPLN WolnaGotowka"/>
                         </h:inputText>
                         <h:message for="ProwizjaBankuwPro" style="color: red" styleClass="floatR"/>
@@ -96,8 +96,8 @@
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Swot w %" styleClass="absoluteR"/>
                         <h:inputText id="SwotwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.swotWprocentach}" required="true">
-                            <f:validateLength minimum="1" maximum="3"/>
-                            <f:convertNumber integerOnly="true"/>
+                            <f:validateLength minimum="1" maximum="4"/>
+                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="2"/>
                             <f:ajax execute="SwotwPro SwotwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup" render="SwotwPLN WolnaGotowka" />
                         </h:inputText>
                         <h:message for="SwotwPro" style="color: red" styleClass="floatR"/>
@@ -146,8 +146,8 @@
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Oprocentowanie w %" styleClass="absoluteR"/>
                         <h:inputText id="Oprocentowanie" styleClass="relativeR" value="#{kredytyMB.kredyty.oprocentowanieWprocentach}" required="true">
-                            <f:convertNumber integerOnly="true"/>
-                            <f:validateLength minimum="1" maximum="3" />
+                            <f:validateLength minimum="1" maximum="4"/>
+                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="2"/>
                         </h:inputText>
                         <h:message for="Oprocentowanie" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
