@@ -6,216 +6,109 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:cc="http://java.sun.com/jsf/ezcomp"
-                xmlns:g="http://java.sun.com/jsf/composite/ezcomp"
-                >
+                xmlns:c="http://java.sun.com/jsp/jstl/core" >
+
+    
 
     <ui:define name="maincenter">
 
-        <c:if test="#{logowanieMB.zalogowany==true}" var="x">
+     <c:if test="#{logowanieMB.zalogowany==true}" var="x">
+        
+        <h:panelGroup style=" font-weight: bold; font-size: larger; font-variant:small-caps;display: block" styleClass="borderbeauhead vmargin bodyheadtop">Kredyty danego Klienta:</h:panelGroup>    
+        <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup> 
+         
+        <h:panelGroup style=" display: block" styleClass="vmargintable">
 
-            <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
-            <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
+            <p:scrollPanel>
 
-            <h:form id="form1" styleClass="borderbeau2 vmargin bodyheadbuttom" style="display: block">
-                <div id="formcell"  class="vmargin bodyheadbuttom" style="display: block;border:1px solid black;font-variant:small-caps;">
+               <h:form prependId="false">
 
-                    <!--<h:panelGroup id="formcell" style="display: block" styleClass=" borderbeau2 vmargin bodyheadbuttom">-->
-                    
-                     <h:panelGroup style="display: block" styleClass="centmain bodyheadtop bodytextbutton">
-                        <h:outputLabel value="Nazwa Banku" styleClass="absoluteR" />
-                        <h:inputText id="Nazwa" styleClass="relativeR" value="#{kredytyMB.kredyty.nazwaBanku}" required="true">
-                            <f:validateLength minimum="1" maximum="30" />
-                        </h:inputText>
-                        <h:message for="Nazwa" style="color: red" styleClass="floatR" />
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr umowy posrednictwa" styleClass="absoluteR" />
-                        <h:inputText id="NrUmowy" styleClass="relativeR" value="#{kredytyMB.kredyty.nrUmowyPosrednictwa}" required="true">
-                            <f:validateLength minimum="1" maximum="30" />
-                        </h:inputText>
-                        <h:message for="NrUmowy" style="color: red" styleClass="floatR" />
-                    </h:panelGroup>
+                    <p:dataTable  id="dataTable1" value="#{kredytyMB.kredytylist}" var="data2" paginator="true" rows="20" 
+                                  rowKey="#{data2.kredytyId}"  selection="#{kredytyMB.selectedKredyt}" selectionMode="single"
+                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">                
+
+                        <p:ajax event="rowSelect" update="dataTable1"/>
+                        <p:ajax event="rowUnselect" update="dataTable1"/>
+
+                        <p:column width="120"><f:facet name="header">Nazwa banku</f:facet>#{data2.nazwaBanku}</p:column>
+                        <p:column filterBy="#{data2.nrUmowyPosrednictwa}"><f:facet name="header">Nr Umowy Posrednictwa</f:facet>#{data2.nrUmowyPosrednictwa}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota kredytu brutto</f:facet>#{data2.kwotaKredytuBrutto}</p:column>
+                        <p:column width="30"><f:facet name="header">Prowizja banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Prowizja banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Ubezp. w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Swot w %</f:facet>#{data2.swotWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Kwota konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
+                        <p:column width="30"><f:facet name="header">Okres kredyt. w Mc</f:facet>#{data2.okresKredytowaniaWmc}</p:column>
+                        <p:column width="30"><f:facet name="header">Rata w PLN</f:facet>#{data2.rataWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">%</f:facet>#{data2.oprocentowanieWprocentach}</p:column>
+                        <p:column width="30"><f:facet name="header">Wolna gotówka</f:facet>#{data2.wolnaGotowka}</p:column>
+                        <p:column><f:facet name="header">Miejsce odpisania dokumentów</f:facet>#{data2.miejscePodpisaniaDokumentow}</p:column>
+                        <p:column width="85"><f:facet name="header">Data możliwego uruchomienia</f:facet>#{data2.dataMozliwegoUruchomienia}</p:column>  
+                        <p:column width="10" style="text-align: center; white-space: nowrap; padding: 5px 5px" ><f:facet name="header">Generuj</f:facet>
+                            <h:commandLink action="#{kredytyMB.callPdf(data2.kredytyId)}">                                  
+                                <p:graphicImage height="32" value="/resources/photo/generate.gif" />                                   
+                            </h:commandLink>    
+                        </p:column> 
                         
-                
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Kwota kredytu brutto" styleClass="absoluteR"/>
-                        <h:inputText id="KwotaKredytu" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKredytuBrutto}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                            <!--<f:ajax execute="ProwizjaBankuwPro SwotwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPLN KwotaKonsolidacji" listener="#{kredytyMB.updateAll1()}" event="keyup" render="prowizjaBankuwPLN SwotwPLN WolnaGotowka" />-->
-                            <f:ajax execute="KwotaKredytu" listener="#{kredytyMB.kalkuluj()}"  event="keyup" render="prowizjaBankuwPLN SwotwPLN WolnaGotowka" />
-                        </h:inputText> 
-                        zł
-                        <h:message for="KwotaKredytu" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Prowizja banku w procentach" styleClass="absoluteR"/>
-                        <h:inputText id="ProwizjaBankuwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.prowizjaBankuWprocentach}" required="true">
-                            <f:convertNumber integerOnly="true"/>
-                            <f:validateLength minimum="1" maximum="3" />
-                            <f:ajax execute="ProwizjaBankuwPro prowizjaBankuwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="prowizjaBankuwPLN WolnaGotowka"/>
-                        </h:inputText>
-                        <h:message for="ProwizjaBankuwPro" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                        
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="prowizja banku w PLN" styleClass="absoluteR"/>
-                        <h:inputText disabled="true" id="prowizjaBankuwPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.prowizjaBankuWpln}"  required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                        </h:inputText> 
-                        zł
-                        <h:message for="prowizjaBankuwPLN" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Ubezpieczenie w PLN" styleClass="absoluteR" />
-                        <h:inputText id="Ubezpieczenie" styleClass="relativeR" value="#{kredytyMB.kredyty.ubezpieczenieWpln}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="Ubezpieczenie" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
-                        </h:inputText> 
-                        zł
-                        <h:message for="Ubezpieczenie" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Koszt w PLN" styleClass="absoluteR" />
-                        <h:inputText id="KosztawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.kosztaWpln}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="@this" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
-                        </h:inputText>
-                        zł
-                        <h:message for="KosztawPLN" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Swot w %" styleClass="absoluteR"/>
-                        <h:inputText id="SwotwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.swotWprocentach}" required="true">
-                            <f:validateLength minimum="1" maximum="3"/>
-                            <f:convertNumber integerOnly="true"/>
-                            <f:ajax execute="SwotwPro SwotwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup" render="SwotwPLN WolnaGotowka" />
-                        </h:inputText>
-                        <h:message for="SwotwPro" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Swot w PLN" styleClass="absoluteR"/>
-                        <h:inputText id="SwotwPLN" disabled="true" styleClass="relativeR" value="#{kredytyMB.kredyty.swotWpln}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                        </h:inputText> 
-                        zł
-                        <h:message for="SwotwPLN" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Kwota konsolidacji" styleClass="absoluteR"/>
-                        <h:inputText id="KwotaKonsolidacji" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKonsolidacji}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="KwotaKonsolidacji" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
-                        </h:inputText>
-                        zł
-                        <h:message for="KwotaKonsolidacji" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Okres kredytowania w Mc" styleClass="absoluteR" />
-                        <h:inputText id="OkresKredyto" styleClass="relativeR" value="#{kredytyMB.kredyty.okresKredytowaniaWmc}" required="true">
-                            <f:convertNumber integerOnly="true"/>
-                            <f:validateLength  maximum="3" />
-                        </h:inputText>
-                        <h:message for="OkresKredyto" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Rata w PLN" styleClass="absoluteR" />
-                        <h:inputText id="RatawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.rataWpln}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                        </h:inputText>
-                        zł
-                        <h:message for="RatawPLN" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Oprocentowanie w %" styleClass="absoluteR"/>
-                        <h:inputText id="Oprocentowanie" styleClass="relativeR" value="#{kredytyMB.kredyty.oprocentowanieWprocentach}" required="true">
-                            <f:convertNumber integerOnly="true"/>
-                            <f:validateLength minimum="1" maximum="3" />
-                        </h:inputText>
-                        <h:message for="Oprocentowanie" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Wolna gotowka" styleClass="absoluteR"/>
-                        <h:inputText id="WolnaGotowka" disabled="true" styleClass="relativeR" value="#{kredytyMB.kredyty.wolnaGotowka}" required="true">
-                            <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
-                            <f:validateLength minimum="1" maximum="12" />
-                        </h:inputText>
-                        zł
-                        <h:message for="WolnaGotowka" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Miejsce podpisania dokumentow" styleClass="absoluteR"/>
-                        <h:inputText id="MiejscePodpisania" styleClass="relativeR" value="#{kredytyMB.kredyty.miejscePodpisaniaDokumentow}" required="true">
-                            <f:validateLength minimum="1" maximum="20" />
-                        </h:inputText>
-                        <h:message for="MiejscePodpisania" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>         
-                    
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton borderbuttononly">
-                        <h:outputLabel value="Data możliwego uruchomienia" styleClass="absoluteR" />
-                        <p:calendar styleClass="relativeR"  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}" required="true" ></p:calendar>
-                    </h:panelGroup>   
+                        <p:column width="10" style="text-align: center; white-space: nowrap; padding: 5px 5px" > <f:facet name="header">Podgląd</f:facet> 
+                            <h:commandLink target="_blank"  action="#{kredytyMB.downLoad(kredytyMB.klienci2.klienciId, data2.kredytyId)}" rendered="#{data2.czyWygenerowanoDokumenty}">
+                                <p:graphicImage height="32" value="/resources/photo/pdf.png" />        
+                            </h:commandLink>
+                        </p:column> 
 
-                    <p class="absoluteR">
-                        <div style="min-height:0px;">
-                        <h:panelGrid id="panelId" columns="2" >
-                           
-                            <h:outputText value="Współkredytobiorca:"/>
+                        <f:facet name="footer"> 
                             
-                            <h:selectBooleanCheckbox id="checkboxId" value="#{kredytyMB.isPartner}">
-                                <p:ajax event="change" update="panelId" />
-                            </h:selectBooleanCheckbox>
+                            <h:commandButton style="float: left;"  value="nowy kredyt" action="#{ kredytyMB.newKredyt() }"/>
+                            
+                            <c:if test="#{kredytyMB.selectedKredyt!=null}" var="costam">
+                                <h:commandButton id="viewButton" value="edytuj" action="#{kredytyMB.selectedKredytEdit() }" />
+                                <h:commandButton id="modalDialogButton" style="float: right;" value="usuń" onclick="dlg2.show();" type="button"/>
+                            </c:if>
+                            
+                        </f:facet>  
 
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="Imie:"/>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="#{kredytyMB.partner.imie}"></h:outputText>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="Nazwisko:"/>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="#{kredytyMB.partner.nazwisko}"></h:outputText>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="Pesel:"/>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="#{kredytyMB.partner.pesel}"></h:outputText>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="Miejscowość:"/>
-                            <h:outputText rendered="#{kredytyMB.isPartner}" value="#{kredytyMB.partner.miejscowosc}"></h:outputText>
+                    </p:dataTable>  
 
-                            <h:commandButton id="button2" rendered="#{kredytyMB.isPartner}" action="#{ kredytyMB.clearPartner() }" value="usuń"> 
-                                <f:ajax listener="#{ kredytyMB.clearPartner() }" render="panelId" />
-                            </h:commandButton>
-                            <h:commandButton id="button1" rendered="#{kredytyMB.isPartner}" action="#{ kredytyMB.showPartnerTable() }" value="wybierz"/>  
-                             
-                           
-                        </h:panelGrid>
-                    </div>
-                    </p>   
-
-                </div>
-                
-                <div id="putelement" class="cent">
+                    <p:dialog id="modalDialog" header="usuń kredyt" widgetVar="dlg2" modal="true" height="50" resizable="false">  
+                        <h:outputText value="Czy napewno chcesz usunąć kredyt?" />  
+                        <div style="text-align: center;"> 
+                        <h:commandButton id="viewButton2" value="usuń" action="#{ kredytyMB.deleteKredyt() }" />
+                        <h:button onclick="dlg2.hide();" value="anuluj"/>
+                        </div>
+                    </p:dialog>  
                     
-                    <h:button value="Anuluj" outcome="xxx" />
-                    <h:commandButton value=" Dodaj " action="#{ kredytyMB.createKredyt() }" />
-                </div>
-                
-            </h:form>        
+                </h:form> 
 
-        </c:if>            
+            </p:scrollPanel>
 
+        </h:panelGroup> 
+
+        <c:if test="${kredytyMB.showDialog == true}">
+
+            <c:if test="${kredytyMB.pdfSuccess == true}">    
+                <script type="text/javascript" >
+                    if(window.window){
+                        alert(' Dokumenty wygenerowano pomyslnie! ');                     
+                    }
+                </script>  
+            </c:if>
+
+            <c:if test="${kredytyMB.pdfSuccess == false}">    
+                <script type="text/javascript">
+                    if(window.window){ 
+                        alert(' Dokumenty nie zostaly wygenerowane! ');    
+                    }
+                </script> 
+            </c:if>   
+
+            <c:set var="kredytyMB.showDialog" scope="session" value="${false}" />
+
+        </c:if> 
+  
+      </c:if>        
+              
     </ui:define>
 
 </ui:composition>
