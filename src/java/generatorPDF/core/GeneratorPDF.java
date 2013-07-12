@@ -28,25 +28,25 @@ public class GeneratorPDF {
         try {
             WszystkieDokumenty tds = new WszystkieDokumenty();
 //          
-            PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
-            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
-            
- //         PdfReader pdfReader = new PdfReader("/home/rice/wszystkieDokumenty.pdf");      
- //         String sciezka="/home/rice/tmp/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
-            
+//            PdfReader pdfReader = new PdfReader("C:\\Documents and Settings\\user\\Pulpit\\Kalkulator decyzji\\wszystkieDokumenty.pdf");         
+//            String sciezka="C:\\Documents and Settings\\user\\Pulpit\\WszystkieDokumentyKredytu_nr"+idKredytu+".pdf";
+
+            PdfReader pdfReader = new PdfReader("/home/rice/wszystkieDokumenty.pdf");
+            String sciezka = "/home/rice/tmp/WszystkieDokumentyKredytu_nr" + idKredytu + ".pdf";
+
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(sciezka));
 
             tds.wypelnij(pdfStamper, idKredytu);
             pdfStamper.close();
-            
-            uploaderFTP.makeDirectory( "rice/" + idKlietna + " Klient/");
-            uploaderFTP.makeDirectory( "rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/");
-            uploaderFTP.Upload(sciezka,"rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/WszystkieDokumentyKredytu_nr"+idKredytu+".pdf");
-            
-            File f=new File(sciezka);
-            boolean isDeleted=f.delete();
-            System.out.println("is deleted?: "+isDeleted);
-            
+
+            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/");
+            uploaderFTP.makeDirectory("rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/");
+            uploaderFTP.Upload(sciezka, "rice/" + idKlietna + " Klient/" + idKredytu + " Kredyt/WszystkieDokumentyKredytu_nr" + idKredytu + ".pdf");
+
+            File f = new File(sciezka);
+            boolean isDeleted = f.delete();
+            System.out.println("is deleted?: " + isDeleted);
+
             pdfGenerated = true;
 
         } catch (DocumentException | IOException ex) {
