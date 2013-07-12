@@ -142,9 +142,9 @@ public class KredytyMB implements Serializable {
         if (kredyty.getKwotaKredytuBrutto() == null)
             kredyty.setKwotaKredytuBrutto(new BigDecimal(0));
         if (kredyty.getProwizjaBankuWprocentach() == null)
-            kredyty.setProwizjaBankuWprocentach(0);  
+            kredyty.setProwizjaBankuWprocentach(new BigDecimal(0));  
         if (kredyty.getSwotWprocentach() == null)
-            kredyty.setSwotWprocentach(0);
+            kredyty.setSwotWprocentach(new BigDecimal(0));
         if (kredyty.getKwotaKonsolidacji() == null)
             kredyty.setKwotaKonsolidacji(new BigDecimal(0));
         if (kredyty.getUbezpieczenieWpln() == null)
@@ -159,24 +159,24 @@ public class KredytyMB implements Serializable {
     
     public void liczProwizje()
     {
-        kredyty.setProwizjaBankuWpln(new BigDecimal((kredyty.getKwotaKredytuBrutto().doubleValue()*kredyty.getProwizjaBankuWprocentach())/100.0));
+        kredyty.setProwizjaBankuWpln(kredyty.getKwotaKredytuBrutto().multiply(kredyty.getProwizjaBankuWprocentach()).divide(new BigDecimal(100)));
     }
     
     public void liczSWOT()
     {
-        kredyty.setSwotWpln(new BigDecimal((kredyty.getKwotaKredytuBrutto().doubleValue()*kredyty.getSwotWprocentach())/100.0));
+        kredyty.setSwotWpln(kredyty.getKwotaKredytuBrutto().multiply(kredyty.getSwotWprocentach()).divide(new BigDecimal(100)));
     }
     
     public void liczWolnaGotowke()
     {
-        double kwota = kredyty.getKwotaKredytuBrutto().doubleValue();
-        double prowizja = kredyty.getProwizjaBankuWpln().doubleValue();
-        double swot = kredyty.getSwotWpln().doubleValue();
-        double konsolidacja = kredyty.getKwotaKonsolidacji().doubleValue();
-        double ubezpieczenie = kredyty.getUbezpieczenieWpln().doubleValue();
-        double inne = kredyty.getKosztaWpln().doubleValue();
+        BigDecimal kwota = kredyty.getKwotaKredytuBrutto();
+        BigDecimal prowizja = kredyty.getProwizjaBankuWpln();
+        BigDecimal swot = kredyty.getSwotWpln();
+        BigDecimal konsolidacja = kredyty.getKwotaKonsolidacji();
+        BigDecimal ubezpieczenie = kredyty.getUbezpieczenieWpln();
+        BigDecimal inne = kredyty.getKosztaWpln();
         
-        kredyty.setWolnaGotowka(new BigDecimal(kwota - prowizja - swot - konsolidacja - ubezpieczenie - inne));
+        kredyty.setWolnaGotowka(kwota.subtract(prowizja).subtract(swot).subtract(konsolidacja).subtract(ubezpieczenie).subtract(inne));
     }
        
     public void kalkuluj()
