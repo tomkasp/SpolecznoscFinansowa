@@ -35,7 +35,7 @@ public class WszystkieDokumenty {
         Klienci klient = kk.getKlienci();
         Kredyty kredyt = kk.getKredyty();
         Klienci partner = kredytyDAO.readPartner(idKredytu);
-
+       
         try {
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 

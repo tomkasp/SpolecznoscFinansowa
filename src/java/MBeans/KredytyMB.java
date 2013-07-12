@@ -81,7 +81,8 @@ public class KredytyMB implements Serializable {
         kredytylist = kredytydeo2.getKredytyOneKlient(klienci2.getKlienciId());
 
         test0=test1=test2=test3=num1=num3=0;
-        
+        step1 = false;
+        give = false;
         
         return "xxx";
     }
