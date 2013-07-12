@@ -15,7 +15,6 @@
 
         <c:if test="#{logowanieMB.zalogowany==true}" var="x">
 
-
             <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Informacje o Kredycie</h:panelGroup>
             <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
 
@@ -32,40 +31,43 @@
                         <h:message for="Nazwa" style="color: red" styleClass="floatR" />
                     </h:panelGroup>
                     
-                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Nr umowy posrednictwa" styleClass="absoluteR" />
+                    <h:panelGroup style="display: block" styleClass="centmain bodytextbutton"><h:outputLabel value="Nr umowy posrednictwa" styleClass="absoluteR" />
                         <h:inputText id="NrUmowy" styleClass="relativeR" value="#{kredytyMB.kredyty.nrUmowyPosrednictwa}" required="true">
                             <f:validateLength minimum="1" maximum="30" />
                         </h:inputText>
                         <h:message for="NrUmowy" style="color: red" styleClass="floatR" />
                     </h:panelGroup>
-                    
+                        
+                
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                       <h:outputLabel value="Kwota kredytu brutto" styleClass="absoluteR"/>
+                        <h:outputLabel value="Kwota kredytu brutto" styleClass="absoluteR"/>
                         <h:inputText id="KwotaKredytu" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKredytuBrutto}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                        </h:inputText> zł
-                       <h:message for="KwotaKredytu" style="color: red" styleClass="floatR"/>
+                            <!--<f:ajax execute="ProwizjaBankuwPro SwotwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPLN KwotaKonsolidacji" listener="#{kredytyMB.updateAll1()}" event="keyup" render="prowizjaBankuwPLN SwotwPLN WolnaGotowka" />-->
+                            <f:ajax execute="KwotaKredytu" listener="#{kredytyMB.kalkuluj()}"  event="keyup" render="prowizjaBankuwPLN SwotwPLN WolnaGotowka" />
+                        </h:inputText> 
+                        zł
+                        <h:message for="KwotaKredytu" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Prowizja banku w procentach" styleClass="absoluteR"/>
-                        <h:inputText id="ProwizjaBankuwPro" styleClass="relativeR" value="#{kredytyMB.test2}" required="true">
+                        <h:inputText id="ProwizjaBankuwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.prowizjaBankuWprocentach}" required="true">
                             <f:convertNumber integerOnly="true"/>
                             <f:validateLength minimum="1" maximum="3" />
-                             <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                       </h:inputText><h:message for="ProwizjaBankuwPro" style="color: red" styleClass="floatR"/>
+                            <f:ajax execute="ProwizjaBankuwPro prowizjaBankuwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="prowizjaBankuwPLN WolnaGotowka"/>
+                        </h:inputText>
+                        <h:message for="ProwizjaBankuwPro" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
-                    
+                        
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="prowizja banku w PLN" styleClass="absoluteR"/>
-                        <h:inputText disabled="true" id="prowizjaBankuwPLN" styleClass="relativeR" value="#{kredytyMB.give == true?'0.0':kredytyMB.test2}"  required="true">
+                        <h:inputText disabled="true" id="prowizjaBankuwPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.prowizjaBankuWpln}"  required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                        </h:inputText>zł
+                        </h:inputText> 
+                        zł
                         <h:message for="prowizjaBankuwPLN" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
@@ -74,49 +76,51 @@
                         <h:inputText id="Ubezpieczenie" styleClass="relativeR" value="#{kredytyMB.kredyty.ubezpieczenieWpln}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
- 
-                        </h:inputText> zł<h:message for="Ubezpieczenie" style="color: red" styleClass="floatR"/>
+                            <f:ajax execute="Ubezpieczenie" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
+                        </h:inputText> 
+                        zł
+                        <h:message for="Ubezpieczenie" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Kaszt w PLN" styleClass="absoluteR" />
-                        <h:inputText id="KasztawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.kosztaWpln}" required="true">
+                        <h:outputLabel value="Koszt w PLN" styleClass="absoluteR" />
+                        <h:inputText id="KosztawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.kosztaWpln}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
- 
-                        </h:inputText> zł
-                        <h:message for="KasztawPLN" style="color: red" styleClass="floatR"/>
+                            <f:ajax execute="@this" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
+                        </h:inputText>
+                        zł
+                        <h:message for="KosztawPLN" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Swot w %" styleClass="absoluteR"/>
-                        <h:inputText id="SwotwPro" styleClass="relativeR" value="#{kredytyMB.test1}" required="true">
+                        <h:inputText id="SwotwPro" styleClass="relativeR" value="#{kredytyMB.kredyty.swotWprocentach}" required="true">
                             <f:validateLength minimum="1" maximum="3"/>
                             <f:convertNumber integerOnly="true"/>
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
+                            <f:ajax execute="SwotwPro SwotwPLN" listener="#{kredytyMB.kalkuluj()}" event="keyup" render="SwotwPLN WolnaGotowka" />
                         </h:inputText>
                         <h:message for="SwotwPro" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Swot w PLN" styleClass="absoluteR"/>
-                        <h:inputText id="SwotwPLN" disabled="true" styleClass="relativeR" value="#{kredytyMB.give == true?'0.0':kredytyMB.test1}" required="true">
+                        <h:inputText id="SwotwPLN" disabled="true" styleClass="relativeR" value="#{kredytyMB.kredyty.swotWpln}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                         </h:inputText> zł
+                        </h:inputText> 
+                        zł
                         <h:message for="SwotwPLN" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Kwota konsolidacji" styleClass="absoluteR"/>
-                        <h:inputText id="KwotaKonsolidacji" styleClass="relativeR" value="#{kredytyMB.test3}" required="true">
+                        <h:inputText id="KwotaKonsolidacji" styleClass="relativeR" value="#{kredytyMB.kredyty.kwotaKonsolidacji}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                         </h:inputText> zł
+                            <f:ajax execute="KwotaKonsolidacji" listener="#{kredytyMB.kalkuluj()}" event="keyup"   render="WolnaGotowka"/>
+                        </h:inputText>
+                        zł
                         <h:message for="KwotaKonsolidacji" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
@@ -125,8 +129,8 @@
                         <h:inputText id="OkresKredyto" styleClass="relativeR" value="#{kredytyMB.kredyty.okresKredytowaniaWmc}" required="true">
                             <f:convertNumber integerOnly="true"/>
                             <f:validateLength  maximum="3" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                         </h:inputText><h:message for="OkresKredyto" style="color: red" styleClass="floatR"/>
+                        </h:inputText>
+                        <h:message for="OkresKredyto" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
@@ -134,8 +138,8 @@
                         <h:inputText id="RatawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.rataWpln}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                        </h:inputText> zł
+                        </h:inputText>
+                        zł
                         <h:message for="RatawPLN" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
@@ -144,17 +148,17 @@
                         <h:inputText id="Oprocentowanie" styleClass="relativeR" value="#{kredytyMB.kredyty.oprocentowanieWprocentach}" required="true">
                             <f:convertNumber integerOnly="true"/>
                             <f:validateLength minimum="1" maximum="3" />
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                        </h:inputText><h:message for="Oprocentowanie" style="color: red" styleClass="floatR"/>
+                        </h:inputText>
+                        <h:message for="Oprocentowanie" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
                         <h:outputLabel value="Wolna gotowka" styleClass="absoluteR"/>
-                        <h:inputText id="WolnaGotowka" disabled="true" styleClass="relativeR" value="#{kredytyMB.give == true ? '0.0' :kredytyMB.num1}" required="true">
+                        <h:inputText id="WolnaGotowka" disabled="true" styleClass="relativeR" value="#{kredytyMB.kredyty.wolnaGotowka}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
-                           <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
-                         </h:inputText> zł
+                        </h:inputText>
+                        zł
                         <h:message for="WolnaGotowka" style="color: red" styleClass="floatR"/>
                     </h:panelGroup>
                     
@@ -162,19 +166,16 @@
                         <h:outputLabel value="Miejsce podpisania dokumentow" styleClass="absoluteR"/>
                         <h:inputText id="MiejscePodpisania" styleClass="relativeR" value="#{kredytyMB.kredyty.miejscePodpisaniaDokumentow}" required="true">
                             <f:validateLength minimum="1" maximum="20" />
-                            <f:ajax execute="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" listener="#{kredytyMB.updateAll()}" event="change" render="KwotaKredytu ProwizjaBankuwPro prowizjaBankuwPLN Ubezpieczenie KasztawPLN SwotwPro SwotwPLN KwotaKonsolidacji OkresKredyto RatawPLN Oprocentowanie WolnaGotowka" />
                         </h:inputText>
                         <h:message for="MiejscePodpisania" style="color: red" styleClass="floatR"/>
-                    </h:panelGroup>  
+                    </h:panelGroup>         
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton borderbuttononly">
                         <h:outputLabel value="Data możliwego uruchomienia" styleClass="absoluteR" />
-                        <p:calendar styleClass="relativeR" value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"/>
+                        <p:calendar styleClass="relativeR"  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}" required="true" ></p:calendar>
                     </h:panelGroup>   
 
                     <p class="absoluteR">
-
-
                         <div style="min-height:0px;">
                         <h:panelGrid id="panelId" columns="2" >
                            
