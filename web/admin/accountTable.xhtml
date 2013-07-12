@@ -1,26 +1,28 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="./../templates/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:c="http://java.sun.com/jsp/jstl/core" 
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:cc="http://java.sun.com/jsf/ezcomp"
+                xmlns:g="http://java.sun.com/jsf/composite/ezcomp">
 
-    <c:if test="#{logowanieMB.rola=='admin'}" var="x">
-    <ui:define name="headtitle">      
+    
         
-        
+    <ui:define name="headtitle">       
         <h:panelGroup style=" font-weight: bold; font-size: larger; display: block" styleClass="borderbeauhead vmargin bodyheadtop">Użytkownicy:</h:panelGroup>    
         <h:panelGroup style="display: block" styleClass="bodyheadbuttom"></h:panelGroup>
      </ui:define>
     
     <ui:define name="maincenter">
+      <c:if test="#{logowanieMB.rola=='admin'}" var="x"> 
         <h:panelGroup style=" display: block" styleClass=" borderbeau vmargintable">   
             <p:scrollPanel style="height: 70%">
                 <h:form prependId="false">
-                    
+                   
                     <p:dataTable  id="dataTable3" value="#{uzytkownik.pobierzListeUzytkownikow()}"  var="dataAcc" paginator="true" rows="20"  emptyMessage="brak klientów!"
                                   rowKey="#{dataAcc.uzytkownikId}" selection="#{uzytkownik.user}"  selectionMode="single"
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="10">   
@@ -63,10 +65,8 @@
             </p:scrollPanel>
         </h:panelGroup> 
         
-        
-        
-        
+      </c:if>
     
     </ui:define>
-</c:if>
+
 </ui:composition>
