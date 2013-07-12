@@ -49,7 +49,7 @@ public class GeneratorPDF {
             
             pdfGenerated = true;
 
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -93,7 +93,7 @@ public class WszystkieDokumenty {
 
             content.endText();
 
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -122,7 +122,7 @@ public class WszystkieDokumenty {
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getNrDowodu(), 360, 322, 0);
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -173,7 +173,7 @@ public class WszystkieDokumenty {
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 183, 485, 0);
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -225,7 +225,7 @@ public class WszystkieDokumenty {
 
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex ) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -290,7 +290,7 @@ public class WszystkieDokumenty {
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, dt1.format(plus7dni), 400, 415, 0);
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -314,7 +314,7 @@ public class WszystkieDokumenty {
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 170, 223, 0);
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -351,9 +351,11 @@ public class WszystkieDokumenty {
                 System.out.println("NIE kwadrat!");
                 
             } 
-
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() + " zł", 318, 361, 0);
-
+            
+            content.setFontAndSize(bf, 8);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() + "zł", 318, 361, 0);
+            content.setFontAndSize(bf, 10);
+            
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 193, 155, 0);
             content.endText();
             
@@ -381,7 +383,7 @@ public class WszystkieDokumenty {
                 
             }
 
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -417,7 +419,7 @@ public class WszystkieDokumenty {
 
 
             content.endText();
-        } catch (DocumentException | IOException ex) {
+        } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
 
