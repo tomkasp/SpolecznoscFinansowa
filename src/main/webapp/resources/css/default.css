@@ -19,6 +19,12 @@ h1 {
     color: #D20005;
 }
 
+h2{
+    border-left:4px solid #5297cb;
+    padding-left: 10px;
+    font-size: 28px;
+}
+
 a:link, a:visited {
   color: #045491;
   font-weight : bold;
@@ -29,4 +35,50 @@ a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
   text-decoration : underline;
+}
+
+.field{
+    float: left;
+    width: 100%; 
+    min-height: 15px;
+    margin: 0 0 9px 0;
+    
+}
+
+.label{
+    float: left;
+    width: 40%;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
+}
+
+.label2{
+    float: left;
+    width: auto;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #000000;
+    font-family: Arial;
+    font-weight:bold;
+}
+
+.leftLoginBox{
+    border:1px solid #dddddd;
+    width: 400px;
+    margin: 15px;
+    height: 700px; 
+    float: left;
+}
+
+.rightLoginBox{
+    border:1px solid #dddddd; 
+    width: 450px;
+    margin: 15px;
+    height: 700px;
+    float: right;
 }

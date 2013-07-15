@@ -1,20 +1,21 @@
 
 #top {
     position: relative;
-    background-color: #ede9e9;
+    background-color: #ffffff;
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
     height: 150px;
-    border:1px solid #000000;
+    border:1px solid #dddddd;
 }
 
 #bottom {
     position: relative;
     background-color: #ffffff;
     padding: 0px;
-    margin: 10px -20px 0px -30px;
+    margin: 10px -20px 0px -20px;
     height: 150px;
+    border:1px solid #dddddd;
 }
 
 #left {
@@ -33,10 +34,11 @@
 
 .center_content {
     position: relative;
-    background-color: #ede9e9;
+    background-color: #ffffff;
     padding: 5px;
-    min-height: 500px;
-    border:1px solid #000000;
+    min-height: 800px;
+    border:1px solid #dddddd;
+    border-bottom: 4px solid #5297cb;
 }
 
 .left_content {
@@ -62,5 +64,7 @@
   font-weight : bold;
   text-decoration : underline;
 }
+
+
 
 
