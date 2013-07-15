@@ -16,7 +16,18 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <div class="topbarLogo">
+                    <h:graphicImage id="ig_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+                
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                            <h:link class ="topMenuButton" value="Logowanie" outcome="index"/>
+                            <h:link class ="topMenuButton" value="Zarejestruj się za darmo" outcome="index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:insert>
         </div>
 
         <div id="content" class="center_content">
