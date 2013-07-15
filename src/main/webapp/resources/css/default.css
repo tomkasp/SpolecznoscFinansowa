@@ -59,7 +59,9 @@ a:link:hover, a:visited:hover  {
 .label2{
     float: left;
     width: auto;
-    min-height: 15px;
+    min-height: 16px;
+    padding: 2px;
+    font-size: 16px;
     clear: both;
     letter-spacing: 1pt;
     color: #000000;
