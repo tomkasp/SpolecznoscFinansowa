@@ -5,6 +5,7 @@
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
+    height: 150px;
 }
 
 #bottom {
@@ -12,6 +13,7 @@
     background-color: #c2dfef;
     padding: 5px;
     margin: 10px 0px 0px 0px;
+    height: 150px;
 }
 
 #left {
@@ -32,6 +34,7 @@
     position: relative;
     background-color: #dddddd;
     padding: 5px;
+    min-height: 500px;
 }
 
 .left_content {
