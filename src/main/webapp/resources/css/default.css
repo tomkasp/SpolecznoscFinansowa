@@ -43,6 +43,13 @@ a:link:hover, a:visited:hover  {
   text-decoration : underline;
 }
 
+.navibar{
+    float: left;
+    width: 45%; 
+    min-height: 15px;
+    margin: 3px; 
+}
+
 .newsletter{
     float: right;
     width: 45%; 
@@ -98,11 +105,12 @@ a:link:hover, a:visited:hover  {
     float: right;
 }
 
-.centerSuccessBox{
+.centerFillBox{
     border:1px solid #dddddd;
-    width: 980px;
+    width: auto;
     margin: 0px;
-    height: 200px; 
+    min-height: 140px; 
     float: left;
+    border-bottom: 4px solid #5297cb;
 }
 
