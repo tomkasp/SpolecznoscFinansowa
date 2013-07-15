@@ -1,20 +1,147 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./templates/mainTemplate.xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
 
-            <ui:define name="content">
-            <div id="profileBar" style="border-bottom:  dodgerblue 4px solid;">
-                <h:graphicImage id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                <p:outputLabel style="font:bold 30px Arial, sans-serif;"> Zarejestruj się jako doradca </p:outputLabel>
-                <h:panelGroup>
-                    <p:inputText id="keyword" required="true" label="Keyword" style="width: 200px" />     
-                    <p:watermark for="keyword" value="wpisz email aby dostać newsletter" />  
-                </h:panelGroup> 
-            </div>
-                
-            </ui:define>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-</ui:composition>
+      
+     
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+
+                    <ui:define name="content">
+                    <div id="profileBar" style="border-bottom:  dodgerblue 4px solid; min-height: 150px;">
+                        <h:graphicImage style="float: left" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                        <p:outputLabel style="font:bold 30px Arial, sans-serif; float: left; margin-left: 10px; width: 500px; min-height: 121px;"> Zarejestruj się jako doradca </p:outputLabel>
+                        <div style="float:right; ">
+                            <h:form>
+                            <h:panelGroup>
+                                <p:inputText id="keyword" required="true" label="Keyword" style="width: 250px; margin-right: 20px" />     
+                                <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
+                                <h:link class ="blueButton" style="padding: 5px 40px 5px 40px;" value="Akceptuj"/>
+                            </h:panelGroup> 
+                            </h:form>
+                        </div>
+                    </div>
+                    <div style="font: bold 15px Arial, sans-seriff; margin-top: 30px; color: red">
+                            <p:outputLabel value="Rejestracja jest DARMOWA."/> <br />
+                            <p:outputLabel value="Możesz wykupić wersję PRO w dowolnej chwilii. "/>        
+                    </div>
+                    <div style="min-height: 800px">
+                        <div class="leftLoginBox">
+                            <h:form>
+                                <div style="margin-top: 40px; margin-left: 20px">
+                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Potwierdź hasło"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText/> </div>
+                                </div>
+
+                                <div class="greyBackground" style="margin-left: 30px; margin-top: 50px; margin-right: 30px;"> <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
+                                <div style="min-height: 60px;">
+                                     <h:link class ="blueButton" style="float:right; margin-top: 20px; margin-right: 30px;" value="Załóż konto" outcome="index"/> 
+
+                                </div>
+                                <div>
+                                     <h:link class="greenButton" style="text-align: center; margin-right: 30px; margin-left: 30px; width: 296px; " value="Chcę zarejestrować się jako klient" />
+                                </div>
+                            </h:form>
+                        </div>
+
+                        <div class="rightLoginBox">
+                            <h4> Co zyskujesz jako doradca </h4>
+
+
+                            <div class="solidText"> 
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqu.
+                                Ut enim ad minim veniam, quis nostrud exercitation u
+                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                Duis aute irure dolor in reprehenderit in voluptate velit 
+                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                                anim id est laborum. 
+                                <br />
+                                <br />                            
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqu.
+                                Ut enim ad minim veniam, quis nostrud exercitation u
+                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                Duis aute irure dolor in reprehenderit in voluptate velit 
+                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                                anim id est laborum. 
+                            </div>       
+                        </div>
+                    </div>
+                    <div class="bottomTable">
+                        <p:dataTable>
+                                <p:column headerText="Lp">  
+                                </p:column>  
+
+                                <p:column headerText="Numer klienta">  
+                                </p:column>  
+
+                                <p:column headerText="Data dodania">    
+                                </p:column>  
+
+                                <p:column headerText="Numer sprawy">  
+                                </p:column>  
+                            
+                                <p:column headerText="Postęp">  
+                                </p:column> 
+                            
+                                <p:column headerText="Rodzaj kredytu"  >  
+                                </p:column> 
+                            
+                                <p:column headerText="BIK">  
+                                </p:column> 
+                            
+                                <p:column headerText="Kod pocztowy">  
+                                </p:column>
+                            
+                                <p:column headerText="Wiek">  
+                                </p:column>
+                            
+                                <p:column headerText="Typ zatrudnienia">  
+                                </p:column>
+                            
+                                <p:column headerText="Branża">  
+                                </p:column>
+                            
+                                <p:column headerText="Trudności kredytu">  
+                                </p:column>
+                            
+                                <p:column headerText="Ilość doradców">  
+                                </p:column>
+                            
+                                <p:column headerText="Koniec aukcji">  
+                                </p:column>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </p:dataTable>
+                    </div>
+                        
+                    </ui:define>
+
+            
+            
+            
+        </ui:composition>
+    
+    </body>
+</html>
