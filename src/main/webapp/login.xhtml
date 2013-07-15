@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+     
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                
+                <div class="leftLoginBox"> 
+                     
+                    <div style="padding-top: 100px; padding-left: 25px;">
+                    <h2>Zaloguj się</h2>
+                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika:"/>  <h:inputText/> </div>
+                    <div class="field"> <h:outputText class="label" value="Hasło:"/>  <h:inputText/> </div>
+                    <div class="field"> <h:selectBooleanCheckbox/> <h:outputText class="label" value="Zapamiętaj"/>  </div>
+                    </div>
+                    
+                </div>
+                
+                
+                <div class="rightLoginBox">   
+                    
+                    <div class="field"> <h:outputText class="label2" value="wpisz email aby dostać Newsletter"/>  <h:inputText/> </div>
+                    
+                    <div style="padding-left: 15px;">
+                    
+                    <div style="padding-top: 100px;">
+                    <h2>Nie masz jeszcze konta?</h2>
+                    </div>
+                    
+                    </div>
+                    
+                </div>
+                 
+            </ui:define>
+
+            
+
+        </ui:composition>
+
+    </body>
+</html>
