@@ -6,7 +6,6 @@
     padding: 5px;
     margin: 0px 0px 10px 0px;
     height: 150px;
-    border:1px solid #000000;
 }
 
 #bottom {
@@ -64,6 +63,12 @@
   text-decoration : underline;
 }
 
-.topbarBlue {
+.topbarMenuBlue {
     border-bottom: dodgerblue 4px solid; 
+    width: 1000px;
+    height: 150px;
+}
+
+.topbarLogo {
+    
 }
