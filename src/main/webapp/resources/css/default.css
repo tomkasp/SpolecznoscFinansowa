@@ -47,6 +47,13 @@ a:link:hover, a:visited:hover  {
   text-decoration : underline;
 }
 
+.navibar{
+    float: left;
+    width: 45%; 
+    min-height: 15px;
+    margin: 3px; 
+}
+
 .newsletter{
     float: right;
     width: 45%; 
@@ -104,6 +111,7 @@ a:link:hover, a:visited:hover  {
     float: right;
 }
 
+
 .redUnderlineLink{
     
     color: crimson;
@@ -136,3 +144,13 @@ a:link:hover, a:visited:hover  {
     height: 200px; 
     float: left;
 }
+
+.centerFillBox{
+    border:1px solid #dddddd;
+    width: auto;
+    margin: 0px;
+    min-height: 140px; 
+    float: left;
+    border-bottom: 4px solid #5297cb;
+}
+
