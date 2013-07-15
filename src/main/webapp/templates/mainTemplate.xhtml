@@ -9,6 +9,7 @@
         
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css" />
+        <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <title>Facelets Template</title>
         
     </h:head>
@@ -18,13 +19,13 @@
         <div id="top">
             <ui:insert name="top">
                 <div class="topbarLogo">
-                    <h:graphicImage id="ig_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                 </div>
                 
                 <div class="topbarMenuBlue">
                     <h:panelGroup>
-                            <h:link class ="topMenuButton" value="Logowanie" outcome="index"/>
-                            <h:link class ="topMenuButton" value="Zarejestruj się za darmo" outcome="index"/>
+                            <h:link class ="topMenuButton greyButton" value="Logowanie" outcome="index"/>
+                            <h:link class ="topMenuButton greyButton" value="Zarejestruj się za darmo" outcome="index"/>
                     </h:panelGroup>
                 </div>
             </ui:insert>
@@ -33,6 +34,7 @@
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
+        
 
         <div id="bottom">
             <ui:insert name="bottom">
