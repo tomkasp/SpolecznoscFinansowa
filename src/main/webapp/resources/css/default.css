@@ -25,6 +25,12 @@ h2{
     font-size: 28px;
 }
 
+h4{
+    border-left:3px solid #5297cb;
+    font-size: 16px;
+    padding: 5px 0 5px 10px;
+}
+
 a:link, a:visited {
   /*color: #045491;*/
   font-weight : bold;
@@ -37,12 +43,18 @@ a:link:hover, a:visited:hover  {
   text-decoration : underline;
 }
 
+.newsletter{
+    float: right;
+    width: 45%; 
+    min-height: 15px;
+    margin: 3px; 
+}
+
 .field{
     float: left;
     width: 100%; 
     min-height: 15px;
-    margin: 0 0 9px 0;
-    
+    margin: 3px;   
 }
 
 .label{
@@ -58,8 +70,10 @@ a:link:hover, a:visited:hover  {
 
 .label2{
     float: left;
-    width: auto;
-    min-height: 15px;
+    width: 340px;
+    min-height: 20px;
+    padding: 2px;
+    font-size: 14px;
     clear: both;
     letter-spacing: 1pt;
     color: #000000;
@@ -69,8 +83,9 @@ a:link:hover, a:visited:hover  {
 
 .leftLoginBox{
     border:1px solid #dddddd;
-    width: 400px;
+    width: 480px;
     margin: 15px;
+    margin-left: 0px;
     height: 700px; 
     float: left;
 }
@@ -82,3 +97,12 @@ a:link:hover, a:visited:hover  {
     height: 700px;
     float: right;
 }
+
+.centerSuccessBox{
+    border:1px solid #dddddd;
+    width: 980px;
+    margin: 0px;
+    height: 200px; 
+    float: left;
+}
+
