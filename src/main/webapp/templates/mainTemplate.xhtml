@@ -9,6 +9,7 @@
         
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css" />
+        <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <title>Facelets Template</title>
         
     </h:head>
@@ -18,13 +19,13 @@
         <div id="top">
             <ui:insert name="top">
                 <div class="topbarLogo">
-                    <h:graphicImage id="ig_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                 </div>
                 
                 <div class="topbarMenuBlue">
                     <h:panelGroup>
-                            <h:link class ="topMenuButton" value="Logowanie" outcome="index"/>
-                            <h:link class ="topMenuButton" value="Zarejestruj się za darmo" outcome="index"/>
+                            <h:link class ="topMenuButton greyButton" value="Logowanie" outcome="index"/>
+                            <h:link class ="topMenuButton greyButton" value="Zarejestruj się za darmo" outcome="index"/>
                     </h:panelGroup>
                 </div>
             </ui:insert>
@@ -33,6 +34,7 @@
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
+        
 
         <div id="bottom">
             <ui:insert name="bottom">
@@ -40,11 +42,11 @@
                 
                 
                 <div>
-                    <h:graphicImage id="ue_logo" style="float: left;" alt="could not be found."  value="/resources/images/innowacyjna_gospodarka.png" width="190" height="92" title="This is demo" ></h:graphicImage>
+                    <h:graphicImage id="ue_logo" style="float: left;" alt="could not be found"  value="/resources/images/innowacyjna_gospodarka.png"  ></h:graphicImage>
                 </div>
                 
                 <div>
-                    <h:graphicImage id="ig_logo" style="float: right;" alt="could not be found."  value="/resources/images/ue_logo.png" width="198" height="70" title="This is demo" ></h:graphicImage>
+                    <h:graphicImage id="ig_logo" style="float: right;" alt="could not be found"  value="/resources/images/ue_logo.png"  ></h:graphicImage>
                 </div>
                 
             </ui:insert>

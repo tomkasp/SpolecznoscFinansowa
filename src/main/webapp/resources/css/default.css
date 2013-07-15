@@ -37,21 +37,32 @@ a:link, a:visited {
   text-decoration: none;
 }
 
+p:column {
+    white-space:pre-line;
+}
+
 a:link:hover, a:visited:hover  {
   /*color: #045491;*/
   font-weight : bold;
   text-decoration : underline;
 }
 
-.newsletter{
-    float: right;
+.navibar{
+    float: left;
     width: 45%; 
     min-height: 15px;
     margin: 3px; 
 }
 
+.newsletter{
+    float: right;
+    width: auto;
+    min-height: 15px;
+    margin: 3px; 
+}
+
 .field{
-    float: left;
+/*    float: left;*/
     width: 100%; 
     min-height: 15px;
     margin: 3px;   
@@ -66,6 +77,8 @@ a:link:hover, a:visited:hover  {
     color: #868686;
     font-family: Arial;
     font-weight:bold;
+    text-align: right;
+    margin-right: 5px;
 }
 
 .label2{
@@ -83,19 +96,53 @@ a:link:hover, a:visited:hover  {
 
 .leftLoginBox{
     border:1px solid #dddddd;
-    width: 480px;
-    margin: 15px;
-    margin-left: 0px;
-    height: 700px; 
+    width: 50%;
     float: left;
+    min-height: 600px;
 }
 
 .rightLoginBox{
     border:1px solid #dddddd; 
+<<<<<<< HEAD
+    width: 49%;
+=======
     width: 450px;
-    margin: 15px;
+    margin: 40px 0px 0px 0px;
     height: 700px;
+>>>>>>> branch 'master' of https://github.com/madejson/SpolecznoscFinansowa.git
     float: right;
+    min-height: 600px;
+}
+
+.contentLoginBox{
+    width: 100%;
+    min-height: 500px;
+}
+
+
+.redUnderlineLink{
+    
+    color: crimson;
+    margin-left: 5px;
+    text-decoration: underline;
+}
+
+.greyBackground {
+    
+    background-color:  lightgrey;
+}
+
+.solidText {
+    
+    margin-left: 50px;
+    margin-right: 20px;
+    text-align: justify;
+}
+
+.bottomTable {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: dodgerblue 4px solid; 
 }
 
 .centerSuccessBox{
@@ -104,5 +151,14 @@ a:link:hover, a:visited:hover  {
     margin: 0px;
     height: 200px; 
     float: left;
+}
+
+.centerFillBox{
+    border:1px solid #dddddd;
+    width: auto;
+    margin: 0px;
+    min-height: 140px; 
+    float: left;
+    border-bottom: 4px solid #5297cb;
 }
 
