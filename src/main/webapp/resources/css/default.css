@@ -31,6 +31,7 @@ h4{
     padding: 5px 0 5px 10px;
 }
 
+
 a:link, a:visited {
   /*color: #045491;*/
   font-weight : bold;
@@ -103,6 +104,7 @@ a:link:hover, a:visited:hover  {
 }
 
 .rightLoginBox{
+
     border:0px solid #dddddd; 
     width: 50%;
     float: right;
@@ -112,6 +114,23 @@ a:link:hover, a:visited:hover  {
 .contentLoginBox{
     width: 100%;
     min-height: 500px;
+}
+
+.leftThinerBox{
+    border:1px solid #dddddd;
+    width: 430px;
+    margin: 15px;
+    margin-left: 0px;
+    min-height: 300px; 
+    float: left;
+}
+
+.rightWiderBox{
+    border:1px solid #dddddd; 
+    width: 480px;
+    margin: 15px;
+    min-height: 300px;
+    float: right;
 }
 
 
@@ -139,7 +158,6 @@ a:link:hover, a:visited:hover  {
 
 .bottomTable {
     margin-top: 20px;
-    padding-top: 20px;
     border-top: dodgerblue 4px solid; 
 }
 
@@ -160,3 +178,53 @@ a:link:hover, a:visited:hover  {
     border-bottom: 4px solid #5297cb;
 }
 
+.redMessage
+{
+    font: bold 15px Arial, sans-seriff;
+    margin-top: 30px;
+    color: red    
+}
+
+.oneColumnLengthButton
+{
+    text-align: center; 
+    margin-right: 30px;
+    margin-left: 30px;
+    width: 328px;
+}
+
+.marginTB20
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.marginLR30
+{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.floatR
+{
+    float: right;
+}
+
+.floatL
+{
+    float: left;
+}
+
+.blackTitle
+{
+    font:bold 30px Arial, sans-serif; 
+    float: left;
+    margin-left: 10px;
+    width: 500px;
+    min-height: 121px;
+}
+
+.blueLine
+{
+    border-bottom: dodgerblue 4px solid;
+}
