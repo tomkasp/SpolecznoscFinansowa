@@ -7,7 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
 
       
-     
+    <title>Doradca - Rejestracja</title>
+    
     <body>
 
         <ui:composition template="./templates/mainTemplate.xhtml">
@@ -15,13 +16,35 @@
                     <ui:define name="content">
                     <div id="profileBar" class="blueLine" style="min-height: 150px;">
                         <h:graphicImage class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                        <h4> Stanisław Nowy </h4>
+                        
+                        <div id="spaceFiller" style="min-height: 128px"> </div>
+                        <div>     
+                            <h5> Stanisław Nowy </h5> 
+                            <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                            <h5> 000001 </h5>
+                        </div>
+                    </div>
+                        
+                    <div style="min-height: 400px">
+                         <div class="leftThinerBox">
+                             <h4> Uzupelnij swoje dane </h4>
+                             <h:outputText class="redMessage" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
+                         </div>
+                        
+                        <h:form>
+                                <div class="marginLR30" style="margin-top: 40px;">
+                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Staż w branży"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <h:inputText/> </div>
+                                </div>
+                        </h:form>
+                        
                     </div>
                    
                     <div class="bottomTable">
                         
-                        <h5> Stanisław Nowy <h5>
-                        
+                       
                         <p:dataTable>
                                 <p:column headerText="Lp">  
                                 </p:column>  
