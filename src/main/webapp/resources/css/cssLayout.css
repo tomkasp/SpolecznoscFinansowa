@@ -36,7 +36,7 @@
     position: relative;
     background-color: #ffffff;
     padding: 5px;
-    min-height: 800px;
+    min-height: 500px;
     border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
 }
@@ -143,7 +143,7 @@
 }
 
 .zalogujLogin{
-    margin:60px 0 0 0;
+    margin:60px 0 40px 0;
     float:left;
     width:320px;
     background-image: url("../resources/images/zaloguj_1.png");
@@ -171,6 +171,29 @@
     font-size:20px;
     color:#545454;
 }
+
+.checkItLogin{
+    background-image: url("../resources/images/kropka_1.png");
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    clear:both;
+    margin:0 0 0 450px;
+    width:220px;
+    
+    height:70px;
+}
+
+.checkItLogin p{
+    width:140px;
+    
+    padding: 8px 0;
+    margin:0px 80px;
+    text-align:left;
+    font-size:20px;
+    color:#545454;
+    
+}
+
 /** WATERMARK CSS!!! **/
 /** chorme and safari **/
 ::-webkit-input-placeholder {
