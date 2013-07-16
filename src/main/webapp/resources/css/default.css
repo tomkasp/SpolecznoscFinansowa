@@ -22,7 +22,7 @@ h1 {
 h2{
     border-left:4px solid #5297cb;
     padding-left: 10px;
-    font-size: 28px;
+    font-size: 24px;
 }
 
 h4{
@@ -86,6 +86,7 @@ a:link:hover, a:visited:hover  {
     font-family: Arial;
     font-weight:bold;
     text-align: right;
+    margin: 3px;
     margin-right: 5px;
 }
 
@@ -103,16 +104,16 @@ a:link:hover, a:visited:hover  {
 }
 
 .leftLoginBox{
-    border:1px solid #dddddd;
+    border:0px solid #dddddd;
     width: 50%;
     float: left;
     min-height: 600px;
 }
 
 .rightLoginBox{
-    border:1px solid #dddddd; 
-    width: 49%;
-    margin: 40px 0px 0px 0px;
+
+    border:0px solid #dddddd; 
+    width: 50%;
     float: right;
     min-height: 600px;
 }
@@ -148,8 +149,11 @@ a:link:hover, a:visited:hover  {
 }
 
 .greyBackground {
-    
     background-color:  lightgrey;
+}
+
+.buttonspace{
+    margin: 5px;
 }
 
 .solidText {
