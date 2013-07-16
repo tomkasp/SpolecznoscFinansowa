@@ -134,12 +134,15 @@
     height:290px;
 }
 
-.klientLogin p{
+.klientLogin p a{
     width:172px;
+    display: block;
     margin:92px 200px 0 0;
     text-align:right;
     font-size:20px;
+    font-weight: normal;
     color:#545454;
+    text-decoration:none;
 }
 
 .zalogujLogin{
@@ -163,13 +166,14 @@
     height:290px;
 }
 
-.doradcaLogin p{
+.doradcaLogin p a{
     width:190px;
-    
+    display:block;
     margin:92px 0px 0 125px;
     text-align:left;
     font-size:20px;
     color:#545454;
+    text-decoration:none;
 }
 
 .checkItLogin{
@@ -179,13 +183,14 @@
     clear:both;
     margin:0 0 0 450px;
     width:220px;
-    
+
     height:70px;
 }
 
-.checkItLogin p{
+.checkItLogin p a{
     width:140px;
-    
+        display:block;
+    text-decoration:none;
     padding: 8px 0;
     margin:0px 80px;
     text-align:left;
