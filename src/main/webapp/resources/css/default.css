@@ -25,6 +25,13 @@ h2{
     font-size: 24px;
 }
 
+h3{
+    font-weight: bold;
+    border-left:3px solid #5297cb;
+    font-size: 20px;
+    padding: 5px 0 5px 10px;
+}
+
 h4{
     border-left:3px solid #5297cb;
     font-size: 16px;
@@ -36,6 +43,12 @@ h5{
     font-size: 16px;
     margin: 0;
     display: inline;
+}
+
+h6{
+    border-left:3px solid #5297cb;
+    font-size: 13px;
+    margin: 0;
 }
 
 
@@ -88,6 +101,14 @@ a:link:hover, a:visited:hover  {
     text-align: right;
     margin: 3px;
     margin-right: 5px;
+}
+
+.fontGrey 
+{
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
 }
 
 .label2{
