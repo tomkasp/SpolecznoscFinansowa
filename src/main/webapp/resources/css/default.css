@@ -253,3 +253,32 @@ p:column {
     min-width: 130px; 
     padding: 5px 0 5px 0;
 }
+
+.redX {
+   border-top-color: #ADA6A5;
+   border-right-color: #ADA6A5;
+   border-bottom-color: #545454;
+   border-left-color: #ADA6A5;
+   border-width: 1px 1px 1px 1px;
+   border-style: solid; 
+   -webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   font-size:12px;
+   font-family:arial, helvetica, sans-serif;
+   padding: 5px 20px 5px 20px; 
+   text-decoration:none; 
+   display:inline-block;
+   text-shadow: 0px 0px 0 rgba(0,0,0,0.3);
+   font-weight:bold; 
+   color: #D20005;
+   background-color: #FFFFFF; 
+   background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#707070)) url(x.png) no-repeat;
+   background-image: -webkit-linear-gradient(top, #FFFFFF, #707070) ;
+   background-image: -moz-linear-gradient(top, #FFFFFF, #707070);
+   background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
+   background-image: -o-linear-gradient(top, #FFFFFF, #707070);
+   background-image: linear-gradient(to bottom, #FFFFFF, #707070);
+   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
+    
+}
