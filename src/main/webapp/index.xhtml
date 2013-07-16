@@ -9,8 +9,28 @@
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
+            <ui:define name="top">
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+                <div class="naglowekLogin">
+                    
+                    <h1>Dołącz do <br/>społeczności finansowej</h1>
+                </div>
+                
+            </ui:define>
+            
             <ui:define name="content">
-                content
+                <div class="klientLogin">
+                    <p>zostań<br/> naszym klientem</p>
+                </div>
+                <div class="zalogujLogin">
+                    
+                </div>
+                <div class="doradcaLogin">
+                    <p>dołącz do <br/> naszych doradców</p>
+                </div>
+                
             </ui:define>
 
         </ui:composition>
