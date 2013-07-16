@@ -13,17 +13,14 @@
             <ui:define name="content">
                 
             <div id="profileBar" style="border-bottom:  dodgerblue 4px solid; min-height: 150px;">
-                        <h:graphicImage style="float: left" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                        <p:outputLabel style="font:bold 30px Arial, sans-serif; float: left; margin-left: 10px; width: 500px; min-height: 121px;"> Twój abonament wygasa za 18 dni </p:outputLabel>
-                        <div style="float:right;">
-                            <h:form>
-                            <h:panelGroup>
-                                <p:inputText id="keyword" required="true" label="Keyword" style="width: 250px; margin-right: 20px" />     
-                                <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
-                                <h:link class ="blueButton" style="padding: 5px 40px 5px 40px;" value="Akceptuj"/>
-                            </h:panelGroup> 
-                            </h:form>
+                        
+                        <h:graphicImage style="position: relative; top: 5px; left: 0px;" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                        
+                        <div style="position: relative;  bottom: 10px; width: 500px; display: inline;"> 
+                            <h4 style="display: inline;">Stanisław Nowy</h4> <h4 style="display: inline;">nr Doradcy: 00001</h4> <h4 style="display: inline;">Twój ranking: 123/123456(+12)</h4>
                         </div>
+                        
+                        
             </div>    
                 
                 
@@ -31,7 +28,9 @@
                 
                 <div style="width: 100%; height: 80px;">  
                     
-                    <h2>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO</h2>
+                    <h4>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO.</h4>
+                    
+                    <h2>Oceny</h2>
                     
                 </div>
                 
@@ -44,7 +43,6 @@
                     </div>
                     
                 </div>
-                
                 
                 <div class="rightLoginBox" style="width: 46%">   
                     
