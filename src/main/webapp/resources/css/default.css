@@ -135,7 +135,7 @@ p:column {
 }
 
 .leftThinerBox{
-    border:1px solid #dddddd;
+/*    border:1px solid #dddddd;*/
     width: 430px;
     margin: 15px;
     margin-left: 0px;
@@ -144,9 +144,9 @@ p:column {
 }
 
 .rightWiderBox{
-    border:1px solid #dddddd; 
+/*    border:1px solid #dddddd; */
     width: 480px;
-    margin: 15px;
+    margin: 15px 0px 15px 0px;
     min-height: 300px;
     float: right;
 }
