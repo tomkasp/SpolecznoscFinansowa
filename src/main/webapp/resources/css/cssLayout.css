@@ -72,6 +72,7 @@
 
 .topbarLogo {
    height: 124px;
+   float:left;
 }
 
 .topMenuButton {
@@ -108,8 +109,68 @@
     background-image: linear-gradient(to bottom, #15D95E, #004505);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#15D95E, endColorstr=#004505);
 }
 
+.naglowekLogin{
+    float:left;
+    
+}
 
+.naglowekLogin h1{
+    width:550px;
+    float:left;
+    margin:30px 0 20px 0px;
+    color:silver;
+    font-size:42px;
+    text-align:center;
+    border:0px;
+}
+.klientLogin{
+    margin:100px 0 0 25px;
+    float:left;
+    width:310px;
+    padding:0;
+    background-image: url("../resources/images/button_green_1.png");
+    background-repeat:no-repeat;
+    background-position: 180px 60px;
+    height:290px;
+}
 
+.klientLogin p{
+    width:172px;
+    margin:92px 200px 0 0;
+    text-align:right;
+    font-size:20px;
+    color:#545454;
+}
+
+.zalogujLogin{
+    margin:60px 0 0 0;
+    float:left;
+    width:320px;
+    background-image: url("../resources/images/zaloguj_1.png");
+    background-repeat:no-repeat;
+    background-position: 0px 0px;
+    
+    height:320px;
+}
+
+.doradcaLogin{
+    margin:100px 0 0 0;
+    float:left;
+    width:310px;
+    background-image: url("../resources/images/button_blue_1.png");
+    background-repeat:no-repeat;
+    background-position: 2px 60px;
+    height:290px;
+}
+
+.doradcaLogin p{
+    width:190px;
+    
+    margin:92px 0px 0 125px;
+    text-align:left;
+    font-size:20px;
+    color:#545454;
+}
 /** WATERMARK CSS!!! **/
 /** chorme and safari **/
 ::-webkit-input-placeholder {
