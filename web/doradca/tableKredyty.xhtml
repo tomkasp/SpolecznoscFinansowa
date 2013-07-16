@@ -23,9 +23,9 @@
 
                <h:form prependId="false">
 
-                    <p:dataTable  id="dataTable1" value="#{kredytyMB.kredytylist}" var="data2" paginator="true" rows="20" 
-                                  rowKey="#{data2.kredytyId}"  selection="#{kredytyMB.selectedKredyt}" selectionMode="single"
-                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">                
+                    <p:dataTable id="dataTable1" value="#{kredytyMB.kredytylist}" var="data2" paginator="true" rows="20" 
+                                 rowKey="#{data2.kredytyId}"  selection="#{kredytyMB.selectedKredyt}" selectionMode="single"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="20,60,100">                
 
                         <p:ajax event="rowSelect" update="dataTable1"/>
                         <p:ajax event="rowUnselect" update="dataTable1"/>
@@ -36,7 +36,7 @@
                         <p:column width="30"><f:facet name="header">Prowizja banku w %</f:facet>#{data2.prowizjaBankuWprocentach}</p:column>
                         <p:column width="30"><f:facet name="header">Prowizja banku w PLN</f:facet>#{data2.prowizjaBankuWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Ubezp. w PLN</f:facet>#{data2.ubezpieczenieWpln}</p:column>
-                        <p:column width="30"><f:facet name="header">Kaszta w PLN</f:facet>#{data2.kosztaWpln}</p:column>
+                        <p:column width="30"><f:facet name="header">Inne koszta</f:facet>#{data2.kosztaWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Swot w %</f:facet>#{data2.swotWprocentach}</p:column>
                         <p:column width="30"><f:facet name="header">Swot w PLN</f:facet>#{data2.swotWpln}</p:column>
                         <p:column width="30"><f:facet name="header">Kwota konsolidacji</f:facet>#{data2.kwotaKonsolidacji}</p:column>
