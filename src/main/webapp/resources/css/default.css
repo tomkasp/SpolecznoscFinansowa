@@ -30,6 +30,7 @@ h3{
     border-left:3px solid #5297cb;
     font-size: 20px;
     padding: 5px 0 5px 10px;
+  
 }
 
 h4{
@@ -82,6 +83,21 @@ p:column {
 .label{
     float: left;
     width: 40%;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
+    text-align: right;
+    margin: 3px;
+    margin-right: 5px;
+}
+
+.label3
+{
+    width: 100%;
+    float: left;
     min-height: 15px;
     clear: both;
     letter-spacing: 1pt;
