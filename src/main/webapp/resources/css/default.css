@@ -52,21 +52,11 @@ h6{
 }
 
 
-a:link, a:visited {
-  /*color: #045491;*/
-  font-weight : bold;
-  text-decoration: none;
-}
 
 p:column {
     white-space:pre-line;
 }
 
-a:link:hover, a:visited:hover  {
-  /*color: #045491;*/
-  font-weight : bold;
-  text-decoration : underline;
-}
 
 .navibar{
     float: left;
