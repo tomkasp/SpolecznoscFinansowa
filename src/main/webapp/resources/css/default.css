@@ -31,6 +31,13 @@ h4{
     padding: 5px 0 5px 10px;
 }
 
+h5{
+    border-right:3px solid #5297cb;
+    font-size: 16px;
+    margin: 0;
+    display: inline;
+}
+
 
 a:link, a:visited {
   /*color: #045491;*/
@@ -223,4 +230,11 @@ a:link:hover, a:visited:hover  {
 .blueLine
 {
     border-bottom: dodgerblue 4px solid;
+}
+
+.wideButton
+{
+    text-align: center; 
+    min-width: 130px; 
+    padding: 5px 0 5px 0;
 }
