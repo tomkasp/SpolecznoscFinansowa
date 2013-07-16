@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+      
+   
+    
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+            
+                  <ui:define name="top"> 
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                            </div>
+
+                            <div class="topbarMenuBlue">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="index"/>
+                                </h:panelGroup>
+                            </div>
+                      
+                    </ui:define>
+            
+                   <ui:define name="content">
+                        <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                            <div id="spaceFiller" style="min-height: 128px"> 
+                            <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                            </div>
+                            
+                            <div>     
+                                <h5> Stanisław Nowy </h5> 
+                                <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                                <h5> 000001 </h5>
+                                <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                                <h5> 123/123456 (+12) </h5>
+                            </div>
+                        </div>
+                       <div style="margin-top: 10px;">
+                           <h3 style="display: inline">Witaj Stanisław Nowy. Dziękujemy za wykupienie wersji </h3>
+                           <h:outputText style="display:inline; color: #0793F0; font-weight: bold;  font-size: 20px" value="PRO." /> 
+                       </div>
+                       
+                       <div style="margin-top: 50px">
+                            <h3> Uzupelnij swoje dane </h3>
+                       </div>
+                                             
+                    <div style="min-height: 320px">
+                         <div class="leftThinerBox">
+                             
+                            <h:outputText style="margin-left: 17px;" class="redMessage" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
+
+                            <h:form>
+                                    <div class="marginLR30" style="margin-top: 40px;">
+                                        <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Email"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label3" value="Na ten email będzie wysyłana wszelka korespondencja"/> </div>
+                                        <div class="field"> <h:outputText class="label3" value="dotycząca twojego konta"/> </div>                        
+                                    </div>
+                            </h:form>
+                         </div>
+                          
+                        <div class="rightWiderBox">
+                            <h4 style="margin: 0;">USTAW ZDJECIE</h4>
+                            <h:graphicImage style="display: inline-block; width: 25%; margin: 10px 0px 0px 10px;" id="profil_logo_blue_small" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                            
+                            <h:outputText class="fontGrey" style="display:inline-block; width: 63%; margin-left: 3px;" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
+                        
+                            <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 59%" value="przeglądaj..." />
+                            
+                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
+                            
+                            <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <h:inputText/> </div>
+                            
+                        </div>
+                    </div>
+                       
+                       
+                   </ui:define>
+        </ui:composition>
+    </body>
+</html>
