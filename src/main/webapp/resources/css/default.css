@@ -104,13 +104,8 @@ a:link:hover, a:visited:hover  {
 
 .rightLoginBox{
     border:1px solid #dddddd; 
-<<<<<<< HEAD
     width: 49%;
-=======
-    width: 450px;
     margin: 40px 0px 0px 0px;
-    height: 700px;
->>>>>>> branch 'master' of https://github.com/madejson/SpolecznoscFinansowa.git
     float: right;
     min-height: 600px;
 }
