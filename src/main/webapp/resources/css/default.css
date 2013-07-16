@@ -57,7 +57,7 @@ a:link:hover, a:visited:hover  {
 
 .newsletter{
     float: right;
-    width: 45%; 
+    width: auto;
     min-height: 15px;
     margin: 3px; 
 }
@@ -97,19 +97,27 @@ a:link:hover, a:visited:hover  {
 
 .leftLoginBox{
     border:1px solid #dddddd;
-    width: 480px;
-    margin: 15px;
-    margin-left: 0px;
-    height: 700px; 
+    width: 50%;
     float: left;
+    min-height: 600px;
 }
 
 .rightLoginBox{
     border:1px solid #dddddd; 
+<<<<<<< HEAD
+    width: 49%;
+=======
     width: 450px;
     margin: 40px 0px 0px 0px;
     height: 700px;
+>>>>>>> branch 'master' of https://github.com/madejson/SpolecznoscFinansowa.git
     float: right;
+    min-height: 600px;
+}
+
+.contentLoginBox{
+    width: 100%;
+    min-height: 500px;
 }
 
 .leftThinerBox{
