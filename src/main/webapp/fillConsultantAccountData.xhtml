@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+      
+     
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+                    <ui:define name="content">
+                    <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                        <h:graphicImage class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                        <h4> Stanisław Nowy </h4>
+                    </div>
+                   
+                    <div class="bottomTable">
+                        
+                        <h5> Stanisław Nowy <h5>
+                        
+                        <p:dataTable>
+                                <p:column headerText="Lp">  
+                                </p:column>  
+
+                                <p:column headerText="Numer klienta">  
+                                </p:column>  
+
+                                <p:column headerText="Data dodania">    
+                                </p:column>  
+
+                                <p:column headerText="Numer sprawy">  
+                                </p:column>  
+                            
+                                <p:column headerText="Postęp">  
+                                </p:column> 
+                            
+                                <p:column headerText="Rodzaj kredytu"  >  
+                                </p:column> 
+                            
+                                <p:column headerText="BIK">  
+                                </p:column> 
+                            
+                                <p:column headerText="Kod pocztowy">  
+                                </p:column>
+                            
+                                <p:column headerText="Wiek">  
+                                </p:column>
+                            
+                                <p:column headerText="Typ zatrudnienia">  
+                                </p:column>
+                            
+                                <p:column headerText="Branża">  
+                                </p:column>
+                            
+                                <p:column headerText="Trudności kredytu">  
+                                </p:column>
+                            
+                                <p:column headerText="Ilość doradców">  
+                                </p:column>
+                            
+                                <p:column headerText="Koniec aukcji">  
+                                </p:column>  
+                            
+                        </p:dataTable>
+                    </div>
+                        
+                    </ui:define>
+
+            
+            
+            
+        </ui:composition>
+    
+    </body>
+</html>

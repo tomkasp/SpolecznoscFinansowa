@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+     
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+                
+            <div class="contentLoginBox">
+                
+                <div class="leftLoginBox" style="width: 54%"> 
+                     
+                    <div style="padding: 40px; padding-top: 100px; padding-left: 5px; ">
+                    <h2>Zgłoś naruszenie zasad - formularz</h2>
+                    Bardzo poważnie traktujemy przypadki naruszeń w swoich usługach.
+                    W poniższych polach podaj informacje na temat który Twoim zdaniem narusza nasze Warunki korzystania z usługi.
+                    Przeanalizujemy Twoje zgłoszenie i w razie konieczności podejmiemy stosowne działania.
+                    Skontaktujemy się z Tobą tylko wtedy, gdy będziemy potrzebować więcej informacji lub będziemy mieć dodatkowe informacje do przekazania.
+                    
+                    
+                    <div class="field"> <h:outputText class="label" value="Nr doradcy/wniosku/klienta:"/>  <h:inputText value="wpisz numer"/> </div>
+                    <div class="field"> <h:outputText class="label" value="Powód:"/>  <h:inputText value="wpisz powód"/> </div>
+                    <div class="field"> <h:inputTextarea style="width: 480px; height: 280px;"/> </div>
+                    <div class="field"> <h:link class="greyButton" value="Zgłoś" style="left: 410px; position: relative;"/> </div>
+                   
+                    
+                    
+                    </div>
+                    
+                </div>
+                
+                
+                <div class="rightLoginBox" style="width: 46%">   
+                    
+                    <div class="newsletter"> <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/> <h:link class="blueButton"  style="margin-left: 2px;" value="Akceptuj"/> </div>
+                    
+                    <div style="padding-left: 5px;">
+                    
+                    <div style="padding-top: 100px;">
+                    <h2>Nie masz jeszcze konta?</h2>
+                    
+                    <h:link class="blueButton buttonspace" style="width: 350px;" value="Zarejestruj się za darmo"/>
+                    <h:link class="greyButton buttonspace" style="width: 350px;" value="Dowiedz się więcej"/>
+                    
+                    </div>
+                    
+                    </div>
+                    
+                </div>
+                    
+              </div>
+                 
+            </ui:define>
+
+            
+
+        </ui:composition>
+
+    </body>
+</html>
