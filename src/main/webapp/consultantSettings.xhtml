@@ -53,10 +53,10 @@
                        </div>
                        
                        <div style="margin-top: 50px">
-                            <h3> Uzupelnij swoje dane </h3>
+                            <h3> Ustawienie konta </h3>
                        </div>
                                              
-                    <div style="min-height: 320px">
+                    <div style="min-height: 350px">
                          <div class="leftThinerBox">
                              
                             <h:outputText style="margin-left: 17px;" class="redMessage" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
@@ -85,10 +85,189 @@
                             <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
                             
                             <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText/> </div>
-                            <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <h:inputText/> </div>
-                            
+                            <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <p:selectOneMenu style="width: 150px" /> </div>
+                            <div class="field"> <h:outputText class="label" value="    "/>  <h:inputText/> </div>
+                            <h:link class="floatR greyButton wideButton" value="OK" outcome="index"/>
                         </div>
                     </div>
+                    <div>
+                         <h3 style="margin:0"> Dane kredytowe </h3>
+                    </div>
+                       
+                    <div>
+                     <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>            
+                         <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">  
+                                 <f:selectItem itemLabel="AIG Bank Polska" />  
+                                 <f:selectItem itemLabel="Alior Bank" />  
+                                 <f:selectItem itemLabel="Allianz Bank Polska" />  
+                                 <f:selectItem itemLabel="Bank Gdański" />  
+                                 <f:selectItem itemLabel="Bank Gospodarki Żywnościowej" />  
+                                 <f:selectItem itemLabel="Bank Gospodarstwa krajowego" />  
+                                 <f:selectItem itemLabel="Bank Inicjatyw Gospodarczych" /> 
+                                 <f:selectItem itemLabel="Bank Ochrony Środowiska" /> 
+                                 <f:selectItem itemLabel="Bank Pocztowy" /> 
+                                 <f:selectItem itemLabel="BIG Bank Gdański" /> 
+                                 <f:selectItem itemLabel="BNP Paribas Bank Polska" /> 
+                                 <f:selectItem itemLabel="Bank BPH" /> 
+                                 <f:selectItem itemLabel="Bank Włościański w Poznaniu" /> 
+                                 <f:selectItem itemLabel="BIG Bank Gdański" /> 
+                         </p:selectManyCheckbox>  
+
+                         <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">  
+                                 <f:selectItem itemLabel="BNP Paribas Bank Polska" />  
+                                 <f:selectItem itemLabel="Bank BPH" />  
+                                 <f:selectItem itemLabel="BRE Bank" />  
+                                 <f:selectItem itemLabel="Bank Zachodni WBK" />  
+                                 <f:selectItem itemLabel="Cetolem Bank" />  
+                                 <f:selectItem itemLabel="Credit Agricole Bank Polska" />  
+                                 <f:selectItem itemLabel="EuroBank" /> 
+                                 <f:selectItem itemLabel="GE Money Bank" /> 
+                                 <f:selectItem itemLabel="GETIN Bank" /> 
+                                 <f:selectItem itemLabel="Bank Handlowy" /> 
+                                 <f:selectItem itemLabel="ING Bank Śląski" /> 
+                                 <f:selectItem itemLabel="Invest Bank" /> 
+                                 <f:selectItem itemLabel="Kredyt Bank" /> 
+                                 <f:selectItem itemLabel="MBank" /> 
+                         </p:selectManyCheckbox>  
+
+                         <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
+                                 <f:selectItem itemLabel="Meritum Bank ICB" />  
+                                 <f:selectItem itemLabel="Bank Millenium" />  
+                                 <f:selectItem itemLabel="MultiBank" />  
+                                 <f:selectItem itemLabel="Noble Bank" />  
+                                 <f:selectItem itemLabel="Nordea Bank Polska" />  
+                                 <f:selectItem itemLabel="Bank Pekao" />  
+                                 <f:selectItem itemLabel="PKO Bank Polski" /> 
+                                 <f:selectItem itemLabel="Polbank EFG" /> 
+                                 <f:selectItem itemLabel="Raiffeisen Bank Polska" /> 
+                                 <f:selectItem itemLabel="Santander Consumer Bank" /> 
+                                 <f:selectItem itemLabel="Volkswagen Bank Polska" /> 
+                                 <f:selectItem itemLabel="inny:" /> 
+                         </p:selectManyCheckbox>     
+                 </div>
+                       
+                <div>
+                        <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
+                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
+                            <f:selectItem itemLabel="SKOK" /> 
+                            <f:selectItem itemLabel="FERRATUM" /> 
+                        </p:selectManyCheckbox>
+                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" layout="pageDirection">
+                            <f:selectItem itemLabel="PROVIDENT" /> 
+                            <f:selectItem itemLabel="BOCIAN" /> 
+                        </p:selectManyCheckbox> 
+                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">
+                            <f:selectItem itemLabel="PROFIKREDYT" /> 
+                            <f:selectItem itemLabel="inny:" /> 
+                        </p:selectManyCheckbox> 
+                        <h:inputText class="floatR" style="margin-right: 140px;"/>
+                </div>
+                <div>
+                    <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="hipoteczny" /> 
+                        <f:selectItem itemLabel="firmowy" /> 
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="gotówkowy(pożyczka)" /> 
+                        <f:selectItem itemLabel="leasing" /> 
+                    </p:selectManyCheckbox>
+
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="chwilówka" /> 
+                    </p:selectManyCheckbox>
+                </div> 
+                       
+                <div>
+                    <h4 style="display:inline-block" >JAKIE UMOWY OBSŁUGUJESZ?</h4>
+                    <h4 style="display:inline-block; margin-left: 70px" > UMOWY </h4>
+                    <div> </div>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 93px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="umowa o pracę" /> 
+                        <f:selectItem itemLabel="umowa o pracę (czas określony)" />
+                        <f:selectItem itemLabel="umowa o dzieło/zlecenie" />
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 10px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="dochody uzyskane poza granicami kraju" /> 
+                        <f:selectItem itemLabel="działy specjalnej produkcji rolnej" /> 
+                        <f:selectItem itemLabel="najem poza działalnością gospodarczą" />
+                    </p:selectManyCheckbox>
+
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="renta/emerytura" /> 
+                        <f:selectItem itemLabel="marynarz" />
+                        <f:selectItem itemLabel="gospodarstwo rolne" />
+                    </p:selectManyCheckbox>
+                </div>  
+                <div>
+                    <h4 style="display:inline-block" >JAKIE UMOWY OBSŁUGUJESZ?</h4>
+                    <h4 style="display:inline-block; margin-left: 70px" > DZIAŁALNOŚĆ GOSPODARCZA </h4>
+                    <div> </div>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="max-width:  31%; margin-right: 48px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="działalność gospodarcza rozliczana na zasadach ogólnych (KPiR)" /> 
+                        <f:selectItem itemLabel="działalność gospodarcza rozliczana w formie uproszczonej (zaliczki na PD)" />
+                        
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="max-width: 30%; margin-right: 35px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="działalność gospodarcza rozliczana w formie ryczałtu" /> 
+                        <f:selectItem itemLabel="działalność gospodarcza rozliczana w formie pełnej księgowości" /> 
+                    </p:selectManyCheckbox>
+
+                    <p:selectManyCheckbox styleClass="fontGrey" style="max-width: 30%; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="działalność gospodarcza rozliczana w formie karty podatkowej" /> 
+                    </p:selectManyCheckbox>
+                </div>  
+                       
+                <div>
+                        <h4> ZASIĘG/MOBILNOŚĆ </h4>
+                        <div> <p:selectOneMenu style="width: 250px; margin-left: 35px; margin-bottom: 10px;"> </p:selectOneMenu> </div>
+                        <div> <p:selectBooleanCheckbox style="margin-left: 10px; margin-right: 10px;" /> <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" /> </div>
+                    </div>  
+                    <div style="width:45%; display: inline-block;"> <h4> DANE ADRESOWE </h4> </div>
+                    <div style="width:45%; margin-left: 80px; display: inline-block;"> <h4> DANE DO FAKTURY </h4> </div>
+                    <div style="width:45%; display: inline-block; ">
+                        <div style="min-height: 26px;" class="field"> </div>
+                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText/>   </div>
+                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText/> </div>
+                        <div> <p:selectBooleanCheckbox style="margin-left: 90px; margin-right: 10px;" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
+                        
+                    </div>
+                        
+                    <div style="margin-left: 80px; width:45%; display: inline-block; vertical-align: top; border-left: 3px solid #5297cb;">
+                        
+                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText /> </div>
+                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText/>   </div>
+                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="NIP"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="REGON"/>  <h:inputText/> </div>
+                    </div>
+                    
+                    <div>
+                        <h4>WYBIERZ ABONAMENT</h4>
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 190px; display:inline-table" layout="pageDirection">
+                                <f:selectItem itemLabel="Standard (99 PLN)" /> 
+                                <f:selectItem itemLabel="Standard+ (169 PLN)" />
+                            </p:selectManyCheckbox>
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 80px; display:inline-table" layout="pageDirection">
+                                <f:selectItem itemLabel="Premium (299 PLN)" /> 
+                                <f:selectItem itemLabel="Chcę przetestować serwis" />
+                            </p:selectManyCheckbox>
+                            <p:selectManyCheckbox styleClass="redMessage" style="margin-top: 0; display:inline-table" layout="pageDirection">
+                                <f:selectItem itemLabel="akceptuję regulamin" /> 
+                                <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" />
+                            </p:selectManyCheckbox>
+                            <div style="min-height: 60px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="index"/> </div>
+                    </div>
+                        
+                  
                        
                        
                    </ui:define>
