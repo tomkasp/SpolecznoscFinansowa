@@ -14,3 +14,7 @@
     border:1px solid #dddddd;
     border-bottom: 4px solid green;
 }
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+   
+}
