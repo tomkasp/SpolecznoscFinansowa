@@ -203,6 +203,19 @@ p:column {
     border-top: dodgerblue 4px solid; 
 }
 
+
+.leftTable{
+    width:500px;
+    float:left;
+    
+}
+
+.rightTable{
+    width:460px;
+    float:right;
+    
+}
+
 .centerSuccessBox{
     border:1px solid #dddddd;
     width: 980px;

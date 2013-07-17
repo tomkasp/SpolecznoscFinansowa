@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="top"> 
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                </div>
+
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                    <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                    <div id="spaceFiller" style="min-height: 128px"> 
+                        <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                    </div>
+
+                    <div>     
+                        <h5> Stanisław Nowy </h5> 
+                        <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                        <h5> 000001 </h5>
+                        <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                        <h5> 123/123456 (+12) </h5>
+                    </div>
+                </div>
+
+                <h4> Witaj Stanisław NowyDupa. Dziękujemy za wykupienie wersji PRO. </h4>
+
+                <div class="leftTable">
+
+                    
+                    <h3>Lista otrzymanych komentarzy</h3>
+                    <p:dataTable>
+                        <p:column headerText=" ">  
+                        </p:column>  
+
+                        <p:column headerText="Od Kogo">  
+                        </p:column>  
+
+                        <p:column headerText="Typ">    
+                        </p:column>  
+
+                        <p:column headerText="Śr.ocena">  
+                        </p:column>  
+
+                        <p:column headerText="Data">  
+                        </p:column> 
+
+                        <p:column headerText="Nr. Transakcji"  >  
+                        </p:column> 
+
+                    </p:dataTable>
+                </div>
+
+                <div class="rightTable">
+                    <h4>Wiadomości</h4>
+                </div>
+
+            </ui:define>           
+        </ui:composition>
+    </body>
+</html>
