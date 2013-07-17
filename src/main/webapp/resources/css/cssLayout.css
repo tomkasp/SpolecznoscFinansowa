@@ -71,6 +71,11 @@ img{border:0px;}
     height: 27px;
 }
 
+.topbarMenuGreen {
+    border-bottom: green 4px solid; 
+    height: 27px;
+}
+
 .topbarLogo {
    height: 124px;
 }
@@ -218,5 +223,33 @@ img{border:0px;}
 .ui-watermark {
 	font-weight: normal !important;
         padding-left: 20px;
+}
+
+ul{
+    margin:20px 0;
+    padding:0 22px;
+    color:#5297cb;
+    min-height:150px
+}
+
+li{
+    color:black;
+    margin:0px 0 3px 0px;
+    min-width:350px;
+    padding:8px 0 0 0;
+}
+
+li.headerList{
+    margin:5px -22px 0;
+    padding:5px 10px;
+    height:20px;
+    border-left: 3px solid #5297cb;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+li.regularList{
+    border-bottom: 2px solid #5297cb;
+
 }
 

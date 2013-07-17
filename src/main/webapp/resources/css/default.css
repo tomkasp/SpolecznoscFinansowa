@@ -118,6 +118,14 @@ p:column {
     font-weight:bold;
 }
 
+.fontBlack
+{
+    letter-spacing: 1pt;
+    color: #000000;
+    font-family: Arial;
+    font-weight:bold;
+}
+
 .label2{
     float: left;
     width: 340px;
@@ -197,6 +205,19 @@ p:column {
     border-top: dodgerblue 4px solid; 
 }
 
+
+.leftTable{
+    width:500px;
+    float:left;
+    
+}
+
+.rightTable{
+    width:460px;
+    float:right;
+    min-height: 450px;
+}
+
 .centerSuccessBox{
     border:1px solid #dddddd;
     width: 980px;
@@ -235,6 +256,10 @@ p:column {
     width: 328px;
 }
 
+
+.greenLeftBorder {
+    border-left: 3px solid green;
+}
 .marginTB20
 {
     margin-top: 20px;
@@ -263,12 +288,22 @@ p:column {
     float: left;
     margin-left: 10px;
     width: 500px;
-    min-height: 121px;
 }
+
+.height120
+{
+    min-height: 120px;   
+}
+ 
 
 .blueLine
 {
     border-bottom: dodgerblue 4px solid;
+}
+
+.greenLine
+{
+    border-bottom: green 4px solid;
 }
 
 .wideButton
@@ -276,6 +311,12 @@ p:column {
     text-align: center; 
     min-width: 130px; 
     padding: 5px 0 5px 0;
+}
+
+.smallCenterInput
+{
+    max-width: 60px;
+    text-align: center;
 }
 
 .redX {
