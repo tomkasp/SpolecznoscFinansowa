@@ -11,65 +11,73 @@
 
             <ui:define name="content">
 
-                <div style="border-bottom: 4px solid #5297cb; font-size: 22px; padding: 2px;">Stanisław Nowy</div>
-                
-                <div style="padding: 2px; height: 200px;">
-                <h:graphicImage id="mail_logo" style="float: left;" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
-                <h2 style="top: 130px; left: 165px; position: absolute;">Wiadomości - skrzynka odbiorcza</h2> 
-                </div>
-                
-                <div style="float: right; padding-bottom: 20px;"> <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton"  style="margin-left: 2px;" value="OK"/> </div>
-                 
-                <div class="centerFillBox"> 
+                <h:form>
 
-                    <h4>Jan Kowalski</h4>
+                    <div class="topTitle">Stanisław Nowy</div>
 
-                    <div style="margin-left: 10px; width: 55%; float: left;">
-                        Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
-                        W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
-                        wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
-                    </div>
-                     <div style="margin-left: 5px; width: 40%; float: right;">
-                         <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="4 dni temu"/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
+                    <div style="padding: 2px; height: 200px; position: relative;">
+
+                        <h:graphicImage id="mail_logo" style="float: left;" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
+                        <h2 style="top: 100px; left: 170px; position: absolute;">Wiadomości - skrzynka odbiorcza</h2> 
+
+                        <div class="search"> 
+                            <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton"  style="margin-left: 2px;" value="OK"/> 
+                        </div>
+
                     </div>
 
-                </div>
-                <div class="centerFillBox"> 
+                    <div class="messagesBox"> 
 
-                    <h4>Adam Nowak</h4>
+                        <h4>Jan Kowalski</h4>
 
-                    <div style="margin-left: 10px; width: 55%; float: left;">
-                        Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
-                        W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
-                        wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
-                    </div>
-                    <div style="margin-left: 5px; width: 40%; float: right;">
-                         <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="6 dni temu"/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
-                    </div>
+                        <div style="margin-left: 10px; width: 55%; float: left;">
+                            Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
+                            W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
+                            wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
+                        </div>
 
-                </div>
-                <div class="centerFillBox"> 
-
-                    <h4>Michał Jankowiak</h4>
-
-                    <div style="margin-left: 10px; width: 55%; float: left;">
-                        Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
-                        W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
-                        wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
-                    </div>
-                    <div style="margin-left: 5px; width: 40%; float: right;">
-                         <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="9 dni temu"/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
-                          <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
+                        <div style=" width: 40%; float: right;">
+                            <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="4 dni temu"/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
+                        </div>
                     </div>
 
-                </div>
+                    <div class="messagesBox"> 
 
+                        <h4>Adam Nowak</h4>
 
+                        <div style="margin-left: 10px; width: 55%; float: left;">
+                            Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
+                            W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
+                            wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
+                        </div>
+                        <div style="width: 40%; float: right;">
+                            <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="6 dni temu"/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
+                        </div>
+
+                    </div>
+
+                    <div class="messagesBox"> 
+
+                        <h4>Michał Jankowiak</h4>
+
+                        <div style="margin-left: 10px; width: 55%; float: left;">
+                            Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
+                            W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
+                            wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
+                        </div>
+                        <div style=" width: 40%; float: right;">
+                            <h:outputText style="border:1px solid #dddddd; padding: 6px 16px;" value="9 dni temu"/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="oznacz jako nieprzeczytane "/>
+                            <h:link style="color: #5297cb; padding: 6px;" value="archiwizuj"/> 
+                        </div>
+
+                    </div>
+
+                </h:form>
 
             </ui:define>
 
