@@ -226,7 +226,6 @@ img{border:0px;}
 }
 
 ul{
-    
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
@@ -236,7 +235,7 @@ ul{
 li{
     color:black;
     margin:0px 0 3px 0px;
-    width:350px;
+    
     padding:8px 0 0 0;
 }
 li.headerList{
