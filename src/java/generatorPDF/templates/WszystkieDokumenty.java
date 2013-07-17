@@ -451,17 +451,18 @@ public class WszystkieDokumenty {
 
             content.setFontAndSize(bf, 10);
 
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() + ", dn. " + kredyt.getDataDodaniaKredytu().toString(), 365, 740, 0);
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 55, 740, 0);
-            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 55, 725, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() + ", dn. " + kredyt.getDataDodaniaKredytu().toString(), 365, 790, 0);
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 55, 760, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 55, 745, 0);
 
             if (klient.getMiejscowosc().equals(klient.getPoczta())) {
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 710, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 695, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 715, 0);
             } else {
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 55, 710, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 695, 0);
-                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 680, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 55, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 715, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 700, 0);
             }
 
 
