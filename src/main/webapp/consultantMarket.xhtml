@@ -65,13 +65,77 @@
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 105px">
                                <h:outputText class="fontGrey marginLR30" value="Lokalizacja" /> 
-                               <p:selectOneMenu style="width: 130px"/>
+                               <p:selectOneMenu id="localizationButton" style="width: 130px"/>
                            </h:panelGroup>  
                            <h:panelGroup>
                                <h:outputText class="fontGrey marginLR30" value="Zatrudnienie" /> 
-                               <p:selectOneMenu style="width: 130px"/>
+                               <p:selectOneMenu id="employmentButton" style="width: 130px"/>
                            </h:panelGroup> 
                        </div>
+                       
+                       <p:overlayPanel id="localizationPanel" style="width: 350px;" for="localizationButton" hideEffect="fade" dynamic="true">
+                             <p:outputPanel id="radioPanel">
+                                 <p:selectOneRadio id="customRadio" layout="custom">  
+                                     <f:selectItem itemLabel=" " itemValue="1" />  
+                                     <f:selectItem itemLabel=" " itemValue="2" />  
+                                     <f:selectItem itemLabel=" " itemValue="3" />  
+                                 </p:selectOneRadio> 
+                             </p:outputPanel>
+                           
+                             <h:panelGrid columns="3">  
+                                
+                                 <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>  
+                                 <h:outputText class="fontGrey" value="Województwo" />
+                                 <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
+             
+                                 <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
+                                 <h:outputText value="W odległości" />
+                                 <h:panelGroup class="fontGrey">   
+                                    <h:inputText size="4" />
+                                    <h:outputText value="od" />
+                                    <h:inputText size="10" value="(kod pocztowy)"/>    
+                                 </h:panelGroup>
+                                 
+                                 <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
+                                 <h:outputText value="Miejscowość" />
+                                 <h:inputText size="25" />
+                                 
+                             </h:panelGrid>  
+                           
+                             <h:panelGroup>
+                                    <h:link class="redMessage" style="color: red" value="Wyczyść" />
+                                    <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
+                                    <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                             </h:panelGroup>
+                       </p:overlayPanel> 
+
+                       
+                       <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
+                           <h:panelGroup>   
+                                <h:link class="fontGrey" value="umowa o pracę"/> 
+                                <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
+                                <h:link class="fontGrey" value="umowa o zlecenie"/>  
+                           </h:panelGroup>
+                           <div>
+                               <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
+                                    <f:selectItem itemLabel="umowa o pracę" />  
+                                    <f:selectItem itemLabel="umowa o pracę czas określony" />  
+                                    <f:selectItem itemLabel="umowa o dzieło/zlecenie" />  
+                                    <f:selectItem itemLabel="renta/emerytura" />  
+                                    <f:selectItem itemLabel="marynarz" />  
+                                    <f:selectItem itemLabel="gospodarstwo rolne" />  
+                                    <f:selectItem itemLabel="dochody uzyskane za granicą" /> 
+                                    <f:selectItem itemLabel="działy specjalnej produkcji rolnej" /> 
+                                    <f:selectItem itemLabel="najem poza działalnością gospodarczą" /> 
+                               </p:selectManyCheckbox> 
+                           </div>
+                           <h:panelGroup>
+                               <h:link class="redMessage " style="color: red" value="Wyczyść" />
+                               <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
+                               <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                           </h:panelGroup>
+                       </p:overlayPanel> 
+                       
                        
                        <p:dataTable  paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
                                 <p:column headerText="Lp">  
