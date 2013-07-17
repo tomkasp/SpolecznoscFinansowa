@@ -5,68 +5,241 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
-     
+
     <body>
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
             <ui:define name="content">
-                
-            <div id="profileBar" style="border-bottom:  dodgerblue 4px solid; min-height: 150px;">
-                        <h:graphicImage style="float: left" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                        <p:outputLabel style="font:bold 30px Arial, sans-serif; float: left; margin-left: 10px; width: 500px; min-height: 121px;"> Twój abonament wygasa za 18 dni </p:outputLabel>
-                        <div style="float:right;">
-                            <h:form>
-                            <h:panelGroup>
-                                <p:inputText id="keyword" required="true" label="Keyword" style="width: 250px; margin-right: 20px" />     
-                                <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
-                                <h:link class ="blueButton" style="padding: 5px 40px 5px 40px;" value="Akceptuj"/>
-                            </h:panelGroup> 
-                            </h:form>
-                        </div>
-            </div>    
-                
-                
-            <div class="contentLoginBox">
-                
-                <div style="width: 100%; height: 80px;">  
-                    
-                    <h2>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO</h2>
-                    
-                </div>
-                
-                <div class="leftLoginBox" style="width: 54%"> 
-                     
-                    <div style="padding: 40px; padding-top: 100px; padding-left: 5px; ">
+
+                <div id="profileBar" style="border-bottom:  dodgerblue 4px solid; ">
                    
-                       <h2>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO</h2> 
+                    <h:graphicImage style="position: relative; " id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                    <div style="position: relative;  bottom: 10px; width: 500px; display: inline;"> 
+                        <h4 style="display: inline;">Stanisław Nowy</h4> <h4 style="display: inline;">nr Doradcy: 00001</h4> <h4 style="display: inline;">Twój ranking: 123/123456(+12)</h4>
+                    </div>
+
+                </div>    
+
+
+                <div class="contentLoginBox"  style="padding: 40px; padding-left: 5px;">
+
+                    <div style="width: 100%; height: 80px;">                   
+                        <h4>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO.</h4>    
+                    </div>
+
+                    <div class="leftLoginBox" style="width: 58%"> 
+
+                            <h2>Oceny</h2>
+
+                            <p style="padding-left: 10px;">
+                                Klienci oceniają przebieg transakcji z Tobą w czterech kategoriach.
+                                Pozwoli Ci to sprawdzić, które z nich należy poproawić, aby zdobyć większe zaufanie klientów.
+                            </p>
+
+                            <h4>ŚREDNIA OCEN Z OSTATNICH 20 TRANSAKCJI</h4>
+
+                            <div style="border-bottom:4px solid #5297cb; padding: 5px;">Zestawienie zawiera średnią ocen z transakcji we wszystkich czterech kategoriach.</div>
+
+                            <div style="margin-top: 25px;">
+
+                                <h4 style="display: inline;">Kategoria 1</h4> 
+                                <h4 style="display: inline; left: 200px; position: relative;">
+                                    <h:outputText value="ocena 5.0"/>
+                                    <div style="display: inline;" >
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/> 
+                                    </div>
+                                </h4>
+
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                    <li>Mauris in massa at nisl porttitor congue.</li>
+                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                    <li>Donec viverra arcu non mattis auctor.</li>
+                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                                </ul>
+                                
+                            </div>
+                            
+                              <div  style="margin-top: 25px;">
+
+                                <h4 style="display: inline;">Kategoria 2</h4> 
+                                <h4 style="display: inline; left: 200px; position: relative;">
+                                    <h:outputText value="ocena 4.0"/>
+                                    <div style="display: inline;" >
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    </div>
+                                </h4>
+
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                    <li>Mauris in massa at nisl porttitor congue.</li>
+                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                    <li>Donec viverra arcu non mattis auctor.</li>
+                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                                </ul>
+                                
+                            </div>
+                            
+                            <div  style="margin-top: 25px;">
+
+                                <h4 style="display: inline;">Kategoria 3</h4> 
+                                <h4 style="display: inline; left: 200px; position: relative;">
+                                    <h:outputText value="ocena 3.0"/>
+                                    <div style="display: inline;" >
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    </div>
+                                </h4>
+
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                    <li>Mauris in massa at nisl porttitor congue.</li>
+                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                    <li>Donec viverra arcu non mattis auctor.</li>
+                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                                </ul>
+                                
+                            </div>
+                            
+                            <div  style="margin-top: 25px;">
+
+                                <h4 style="display: inline;">Kategoria 4</h4> 
+                                <h4 style="display: inline; left: 200px; position: relative;">
+                                    <h:outputText value="ocena 4.0"/>
+                                    <div style="display: inline;" >
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
+                                    </div>
+                                </h4>
+
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                    <li>Mauris in massa at nisl porttitor congue.</li>
+                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                    <li>Donec viverra arcu non mattis auctor.</li>
+                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                                </ul>
+                                
+                            </div>
+                            
+                            <div  style="margin-top: 25px;">
+
+                                <h4 style="display: inline;">Kategoria 5</h4> 
+                                <h4 style="display: inline; left: 200px; position: relative;">
+                                    <h:outputText value="ocena 2.0"/>
+                                    <div style="display: inline;" >
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    <h:graphicImage value="/resources/images/kropka_kolor.png"/>
+                                    </div>
+                                </h4>
+
+                                <ul>
+                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                    <li>Mauris in massa at nisl porttitor congue.</li>
+                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                    <li>Donec viverra arcu non mattis auctor.</li>
+                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                                </ul>
+                                
+                            </div>
+                       
+
+                    </div>
+
+                    
+                    
+                  
+                    
+                    <div class="rightLoginBox" style="width: 42%">   
                         
+                        <div style="padding-left: 5px;">
+
+                            <div style="padding-top: 40px;">
+                                
+                            <h4>WIADOMOŚCI</h4>
+
+                                   <div style="border-bottom:3px solid #5297cb; padding: 5px; margin-right: 20px;">Najnowsze funkcje (17.07.2013)</div> 
+                                  
+                                <ul>
+                                    
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Lorem ipsum dolor </div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Consectetur adipiscing elit </div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Curabitur ut lorem in felis </div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Quisque quis lectus eget </div></li>
+                                </ul>
+                                    
+                                    <div style="border-bottom:3px solid #5297cb; padding: 5px; margin-right: 20px;">Statystyki konta</div> 
+                                  
+                                <ul>
+                                    
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Klienci: 6</div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Prowadzone wnioski: 12</div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Średnia ocena: 2.4 </div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Komentarze: 70 </div></li>
+                                </ul>
+                                        
+                                    <div style="border-bottom:3px solid #5297cb; padding: 5px; margin-right: 20px;">Klucz API</div> 
+                                  
+                                <ul>
+                                    
+                                    <li>
+                                        <div style="border-bottom:3px solid #5297cb; padding: 5px;">Klucz ten daje dostęp do API społeczności finansowej:</div>
+                                        <div style="border-bottom:3px solid #5297cb; padding: 5px;">XIOSHjkhSOOO</div>
+                                    </li>
+                                  
+                                    
+                                </ul>
+                                            
+                                    <div style="border-bottom:3px solid #5297cb; padding: 5px; margin-right: 20px;">Pomocna dłoń</div> 
+                                  
+                                <ul>
+                                    
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Do testowania witryny używaj przeglądarki tekstowej, na przykład Lynx, ponieważ większość robotów wyszukiwarek analizuje witryny tak jak Lynx. Jeśli zaawansowane funkcje, takie jak JavaScript, pliki cookie, identyfikatory sesji, ramki, kod DHTML lub Flash uniemożliwiają wyświetlenie całej witryny w przeglądarce tekstowej, roboty sieciowe mogą mieć problemy z jej zindeksowaniem. </div></li>
+                                    <li><div style="border-bottom:3px solid #5297cb; padding: 5px;">Zezwól robotom wyszukiwarek na przemierzanie witryn bez identyfikatorów sesji lub argumentów służących do śledzenia ich drogi w witrynie. Techniki te są przydatne w śledzeniu zachowania użytkowników, ale sposób działania robotów jest zupełnie inny. Korzystanie z tych technik może doprowadzić do niepełnego zindeksowania witryny, ponieważ roboty mogą nie być w stanie wyeliminować adresów URL, które wyglądają inaczej, ale wskazują w rzeczywistości tę samą stronę. </div></li>
+                                    
+                                    
+                                </ul>
+                                
+                            
+                            </div>
+
+                        </div>
+
                     </div>
-                    
+
                 </div>
-                
-                
-                <div class="rightLoginBox" style="width: 46%">   
-                    
-                    <div style="padding-left: 5px;">
-                    
-                    <div style="padding-top: 100px;">
-                    <h2>Nie masz jeszcze konta?</h2>
-                    
-                    <h:link class="blueButton buttonspace" style="width: 350px;" value="Zarejestruj się za darmo"/>
-                    <h:link class="greyButton buttonspace" style="width: 350px;" value="Dowiedz się więcej"/>
-                    
-                    </div>
-                    
-                    </div>
-                    
-                </div>
-                    
-              </div>
-                 
+
             </ui:define>
 
-            
+
 
         </ui:composition>
 

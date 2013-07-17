@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+
+            <ui:define name="content">
+
+                <div class="centerFillBox"> 
+
+                    <div class="navibar"> Jesteś tutaj: <h:link value="Strona główna"/> > <h:link value="Porady"/> </div>
+
+                    <h:form>
+
+                        <div class="newsletter">
+                            <h:inputText class="label2" value="wpisz email aby dostać Newsletter" />
+                            <h:link class="blueButton" style="margin-left: 2px;" value="Akceptuj"/> 
+                        </div>
+
+                    </h:form>
+
+                </div>
+
+                <div class="centerFillBox"> 
+
+                    <h:form>
+                        <p:commandLink styleClass="blueButton" id="viewButton3" value="Usuń" icon="ui-icon-search" update=":dialog3"  oncomplete="usun.show()"/> 
+                         
+
+                    </h:form>
+
+                </div>
+
+
+                <p:dialog id="dialog3" header="Usuń" widgetVar="usun" resizable="tfalse"  
+                          height="120" width="400" showEffect="clip" hideEffect="fold" modal="true">  
+
+                    <h:form>
+
+                        <p style="text-align: center;">
+                            <div class="nazwa"><h:outputLabel >Czy napewno chcesz usunąć konto?</h:outputLabel></div>
+                        </p>   
+
+                        <div class="przyciskiDol" style="width: 200px;">
+                            
+                            <p:commandLink styleClass="blueButton" value="Anuluj" type="submit" onclick="usun.hide()" /> 
+                            <p:commandLink styleClass="blueButton" value="Usuń"   type="submit" onclick="usun.hide()" /> 
+                        
+                        </div>
+
+                    </h:form> 
+
+                </p:dialog>  
+
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>

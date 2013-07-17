@@ -5,7 +5,7 @@ img{border:0px;}
     background-color: #ffffff;
     color: white;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
     height: 150px;
     border:1px solid #dddddd;
 }
@@ -14,7 +14,7 @@ img{border:0px;}
     position: relative;
     background-color: #ffffff;
     padding: 0px;
-    margin: 10px -20px 0px -20px;
+    margin: 0px -20px 0px -20px;
     height: 150px;
     border:1px solid #dddddd;
 }
@@ -36,7 +36,7 @@ img{border:0px;}
 .center_content {
     position: relative;
     background-color: #ffffff;
-    padding: 5px;
+    padding: 0px 5px;
     min-height: 500px;
     border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
@@ -226,7 +226,6 @@ img{border:0px;}
 }
 
 ul{
-    
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
@@ -236,9 +235,10 @@ ul{
 li{
     color:black;
     margin:0px 0 3px 0px;
-    width:350px;
+    
     padding:8px 0 0 0;
 }
+
 li.headerList{
     margin:5px -22px 0;
     padding:5px 10px;
