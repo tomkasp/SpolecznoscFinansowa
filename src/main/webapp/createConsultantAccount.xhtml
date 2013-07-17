@@ -12,14 +12,16 @@
 
         <ui:composition template="./templates/mainTemplate.xhtml">
                     <ui:define name="top"> 
+                        
+                       
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                                 <h:graphicImage class="floatR" style="margin-right: 20px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
                             </div>
-
+                            
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class ="topMenuButton greyButton" value="Logowanie" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="login"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -32,7 +34,7 @@
                             <h:panelGroup>
                                 <p:inputText id="keyword" required="true" label="Keyword" style="width: 250px; margin-right: 20px" />     
                                 <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
-                                <h:link class ="blueButton" style="padding: 7px 40px 5px 40px;" value="Akceptuj"/>
+                                <h:link class ="blueButton wideButton" style="padding-bottom: 7px;" value="Akceptuj"/>
                             </h:panelGroup> 
                             </h:form>
                         </div>
@@ -55,7 +57,7 @@
 
                                 <div class="greyBackground marginLR30" style="margin-top: 40px;">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
                                 <div >
-                                     <h:link class ="blueButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="index"/> 
+                                     <h:link class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="index"/> 
                                 </div>
                                 <div>
                                      <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" />
