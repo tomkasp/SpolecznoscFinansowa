@@ -39,11 +39,12 @@ public class LogowanieMB implements Serializable {
     }
 
     public String wyloguj() {
+        
         zalogowany = false;
         System.out.println(zalogowany);
         return "index";
     }
-
+    
     public String getLogin() {
         return login;
     }

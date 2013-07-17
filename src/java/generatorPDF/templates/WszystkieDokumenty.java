@@ -22,7 +22,7 @@ import sql.entity.KlienciKredyty;
 import sql.entity.Kredyty;
 
 /**
- *
+ * 
  * @author WR1EI1
  */
 public class WszystkieDokumenty {
@@ -58,7 +58,6 @@ public class WszystkieDokumenty {
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 30, 680, 0);
             }
 
-
             if (partner != null) {
 
                 content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getImie() + " " + partner.getNazwisko(), 30, 660, 0);
@@ -75,8 +74,6 @@ public class WszystkieDokumenty {
                 }
 
             }
-
-
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataMozliwegoUruchomienia().toString(), 255, 525, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNazwaBanku(), 255, 500, 0);
             content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getKwotaKredytuBrutto().toString() + " zł", 170, 460, 0);
@@ -125,12 +122,35 @@ public class WszystkieDokumenty {
         } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        
         try {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
             PdfContentByte content = pdfStamper.getOverContent(3);//pierwsza stronka
+            content.beginText();
+            content.setFontAndSize(bf, 12);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() + ", dn. " + kredyt.getDataDodaniaKredytu().toString(), 365, 816, 0);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getNrUmowyPosrednictwa(), 250, 588, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 100, 574, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getSwotWpln().toString() + " zł", 300, 574, 0);
+
+           
+
+            content.endText();
+        } catch (DocumentException | IOException  | NullPointerException ex) {
+            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+        try {
+
+            BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
+
+            PdfContentByte content = pdfStamper.getOverContent(4);//pierwsza stronka
             content.beginText();
             content.setFontAndSize(bf, 12);
 
@@ -184,7 +204,7 @@ public class WszystkieDokumenty {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
-            PdfContentByte content = pdfStamper.getOverContent(4);//pierwsza stronka
+            PdfContentByte content = pdfStamper.getOverContent(5);//pierwsza stronka
             content.beginText();
             content.setFontAndSize(bf, 12);
 
@@ -235,7 +255,7 @@ public class WszystkieDokumenty {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
-            PdfContentByte content = pdfStamper.getOverContent(5);//pierwsza stronka
+            PdfContentByte content = pdfStamper.getOverContent(6);//pierwsza stronka
             content.beginText();
 
             content.setFontAndSize(bf, 17);
@@ -299,7 +319,7 @@ public class WszystkieDokumenty {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
-            PdfContentByte content = pdfStamper.getOverContent(6);//pierwsza stronka
+            PdfContentByte content = pdfStamper.getOverContent(7);//pierwsza stronka
             content.beginText();
             content.setFontAndSize(bf, 12);
 
@@ -323,7 +343,7 @@ public class WszystkieDokumenty {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
-            PdfContentByte content = pdfStamper.getOverContent(7);//pierwsza stronka
+            PdfContentByte content = pdfStamper.getOverContent(8);//pierwsza stronka
             
             content.beginText();
             content.setFontAndSize(bf, 10);
@@ -359,9 +379,7 @@ public class WszystkieDokumenty {
             
             content.endText();
             
-             System.out.println("TESTYYY 1");
             if(partner==null){
-                System.out.println("TESTYYY 2");
                 content.setColorStroke(BaseColor.WHITE);
                 content.setColorFill(BaseColor.WHITE);
 
@@ -393,7 +411,7 @@ public class WszystkieDokumenty {
 
             BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
 
-            PdfContentByte content = pdfStamper.getOverContent(8);//pierwsza stronka
+            PdfContentByte content = pdfStamper.getOverContent(9);//pierwsza stronka
             content.beginText();
 
             content.setFontAndSize(bf, 13);
@@ -422,8 +440,118 @@ public class WszystkieDokumenty {
         } catch (DocumentException | IOException  | NullPointerException ex) {
             Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        try {
+
+            BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
+
+            PdfContentByte content = pdfStamper.getOverContent(12);//pierwsza stronka
+            content.beginText();
+
+            content.setFontAndSize(bf, 10);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow() + ", dn. " + kredyt.getDataDodaniaKredytu().toString(), 365, 790, 0);
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko(), 55, 760, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 55, 745, 0);
+
+            if (klient.getMiejscowosc().equals(klient.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 715, 0);
+            } else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 55, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 55, 715, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "PESEL: " + klient.getPesel(), 55, 700, 0);
+            }
 
 
+            content.endText();
+        } catch (DocumentException | IOException  | NullPointerException ex) {
+            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+
+            BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
+
+            PdfContentByte content = pdfStamper.getOverContent(13);//pierwsza stronka
+            content.beginText();
+
+            content.setFontAndSize(bf, 10);
+
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getDataDodaniaKredytu().toString(), 90, 766, 0);
+           
+//            Kamil Kowaleski zamieszkały  52-122 Konstancin Jaworna 22/3 legitymujący się				
+//            dowodem osobistym AAD 172197 PESEL 83838312345  - zwany zleceniodawcą				
+           
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getImie() + " " + klient.getNazwisko() +" zamieszkały "+  klient.getUlica() + " " + klient.getNrDomu() + "/" + klient.getNrMieszkania(), 20, 745, 0);
+
+            if (klient.getMiejscowosc().equals(klient.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 20, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "legitymując się dowodem osobistym: "+klient.getSeriaDowodu()+klient.getNrDowodu() + " PESEL: " + klient.getPesel(), 20, 715, 0);
+            }else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getMiejscowosc(), 20, 730, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, klient.getKodPocztowy() + " " + klient.getPoczta(), 20, 715, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "legitymując się dowodem osobistym: "+klient.getSeriaDowodu()+klient.getNrDowodu() + " PESEL: " + klient.getPesel(), 20, 700, 0);
+            }
+
+            if (partner != null) {
+
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT,partner.getImie() + " " + partner.getNazwisko() +" zamieszkały "+  partner.getUlica() + " " + partner.getNrDomu() + "/" + partner.getNrMieszkania(), 20, 685, 0);
+   
+                if (partner.getMiejscowosc().equals(partner.getPoczta())) {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 20, 670, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "legitymując się dowodem osobistym: "+partner.getSeriaDowodu()+partner.getNrDowodu() + " PESEL: " + partner.getPesel(), 20, 655, 0);
+            }else {
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getMiejscowosc(), 20, 670, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, partner.getKodPocztowy() + " " + partner.getPoczta(), 20, 655, 0);
+                content.showTextAligned(PdfContentByte.ALIGN_LEFT, "legitymując się dowodem osobistym: "+partner.getSeriaDowodu()+partner.getNrDowodu() + " PESEL: " + partner.getPesel(), 20, 640, 0);
+                }
+                
+            }
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT,  kredyt.getNrUmowyPosrednictwa() , 490, 610, 0);
+            
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT,  kredyt.getNrUmowyPosrednictwa() , 25, 223, 0);
+
+            content.endText();
+        } catch (DocumentException | IOException  | NullPointerException ex) {
+            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        try {
+
+            BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
+
+            PdfContentByte content = pdfStamper.getOverContent(14);//pierwsza stronka
+            content.beginText();
+
+            content.setFontAndSize(bf, 10);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT, kredyt.getMiejscePodpisaniaDokumentow()+" dnia "+kredyt.getDataDodaniaKredytu(), 28, 450, 0);
+            
+            content.endText();
+        } catch (DocumentException | IOException  | NullPointerException ex) {
+            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         try {
+
+            BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.CACHED);
+
+            PdfContentByte content = pdfStamper.getOverContent(15);//pierwsza stronka
+            content.beginText();
+
+            content.setFontAndSize(bf, 10);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT,""+kredyt.getDataDodaniaKredytu(),410, 268, 0);
+            content.showTextAligned(PdfContentByte.ALIGN_LEFT,""+kredyt.getNrUmowyPosrednictwa(),42, 250, 0);
+            
+            content.endText();
+            
+        } catch (DocumentException | IOException  | NullPointerException ex) {
+            Logger.getLogger(GeneratorPDF.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         kredyt.setCzyWygenerowanoDokumenty(Boolean.TRUE);
         kredytyDAO.updateKredyty(kredyt);

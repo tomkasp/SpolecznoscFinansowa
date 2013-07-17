@@ -83,7 +83,7 @@
                     </h:panelGroup>
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton">
-                        <h:outputLabel value="Koszt w PLN" styleClass="absoluteR" />
+                        <h:outputLabel value="Inne koszta, np. opłata brokerska" styleClass="absoluteR" />
                         <h:inputText id="KosztawPLN" styleClass="relativeR" value="#{kredytyMB.kredyty.kosztaWpln}" required="true">
                             <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
                             <f:validateLength minimum="1" maximum="12" />
@@ -172,7 +172,7 @@
                     
                     <h:panelGroup style="display: block" styleClass="centmain bodytextbutton borderbuttononly">
                         <h:outputLabel value="Data możliwego uruchomienia" styleClass="absoluteR" />
-                        <p:calendar styleClass="relativeR"  value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}" required="true" ></p:calendar>
+                        <p:calendar styleClass="relativeR" required="true" value="#{kredytyMB.kredyty.dataMozliwegoUruchomienia}"/>
                     </h:panelGroup>   
 
                     <p class="absoluteR">
