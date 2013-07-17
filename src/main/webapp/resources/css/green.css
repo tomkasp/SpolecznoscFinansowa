@@ -1,0 +1,16 @@
+/* 
+    Document   : green
+    Created on : 2013-07-17, 10:41:29
+    Author     : XaI
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.center_content {
+    position: relative;
+    background-color: #ffffff;
+    padding: 5px;
+    min-height: 500px;
+    border:1px solid #dddddd;
+    border-bottom: 4px solid green;
+}
