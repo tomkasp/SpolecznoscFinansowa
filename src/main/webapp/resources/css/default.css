@@ -231,7 +231,8 @@ p:column {
     border:1px solid #dddddd;
     width: auto;
     margin: 0px;
-    min-height: 140px; 
+    margin-top: 20px;
+    min-height: 30px; 
     display: block;
 }
 
@@ -375,3 +376,5 @@ p:column {
     font-size: 22px;
     padding: 2px;
 }
+
+
