@@ -5,6 +5,7 @@ body {
     color: #000000;  
     margin: auto;
     width: 1000px;
+    height: auto;
     border:1px solid #000000;
     padding: 30px;
 }
@@ -133,21 +134,22 @@ p:column {
 .leftLoginBox{
     border:0px solid #dddddd;
     width: 50%;
+    min-height: 500px;
     float: left;
-    min-height: 600px;
 }
 
 .rightLoginBox{
-
     border:0px solid #dddddd; 
-    width: 50%;
-    float: right;
-    min-height: 600px;
+    width: 40%;
+    min-height: 500px;
+    float: left;
 }
+
 
 .contentLoginBox{
     width: 100%;
     min-height: 500px;
+    overflow: hidden;
 }
 
 .leftThinerBox{
@@ -208,9 +210,15 @@ p:column {
     width: auto;
     margin: 0px;
     min-height: 140px; 
-    float: left;
+    display: block;
+}
+
+.messagesBox{
+    min-height: 140px; 
+    border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
 }
+
 
 .redMessage
 {
@@ -297,4 +305,18 @@ p:column {
    background-image: linear-gradient(to bottom, #FFFFFF, #707070);
    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
     
+}
+
+.search{
+    border:1px solid #dddddd;
+    height: auto;
+    position: absolute;
+    top: 165px;
+    right: 0px; 
+}
+
+.topTitle{
+    border-bottom: 4px solid #5297cb;
+    font-size: 22px;
+    padding: 2px;
 }
