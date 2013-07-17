@@ -236,8 +236,8 @@ p:column {
 
 .redMessage
 {
-    font: bold 15px Arial, sans-seriff;
-    margin-top: 30px;
+    font: bold 14px Arial, sans-seriff;
+/*    margin-top: 30px;*/
     color: red    
 }
 
