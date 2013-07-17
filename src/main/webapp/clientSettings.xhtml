@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    
+    
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+                 
+                  <ui:define name="top"> 
+                            <h:outputStylesheet library="css" name="green.css" />
+            
+                      
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                            </div>
+
+                            <div class="topbarMenuGreen">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                </h:panelGroup>
+                            </div>
+                    </ui:define>
+                    <ui:define name="content">
+                        <div id="profileBar" class="greenLine" style="min-height: 150px;">
+                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                            <div id="spaceFiller" style="min-height: 128px"> </div>
+                            <div>     
+                                <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                                <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
+                                <h5 class="greenRightBorder"> 000001 </h5>
+
+                            </div>
+                        </div>
+                        
+                       <div style="margin-top: 50px">
+                           <h3 class="greenLeftBorder"> Ustawienie konta </h3>
+                       </div>
+                        
+                       <div style="min-height: 670px">
+                         <div class="leftThinerBox">
+                             
+                             <h4 class="greenLeftBorder">Użytkownik: Stanislaw_novy</h4> 
+
+                            <h:form>
+                                <div class="marginLR30" style="margin-top: 20px;">
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label3" style="color: red" value="Na ten email będzie wysyłana wszelka korespondencja"/> </div>
+                                        <div class="field"> <h:outputText class="label3" style="color: red" value="dotycząca twojego konta."/> </div>                        
+                                        <div class="field"> <h:outputText class="label" value="Rok urodzenia"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Dochód"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <h:selectOneMenu style="width: 160px;" /> </div>
+                                        <div class="field"> <h:outputText class="label" value=""/>  <h:link class="greenLink" value="Działalność gospodarcza"/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Branża"/>  <h:selectOneMenu style="width: 160px;" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText/> </div>
+                                </div>
+                            </h:form>
+                             
+                            <h4 class="greenLeftBorder" style="margin: 20px 0 0 0">USTAW ZDJĘCIE</h4>
+                            
+                            <h:graphicImage style="display: inline-block; width: 25%; margin: 10px 0px 0px 10px;" id="profil_logo_green_small" alt="could not be found."  value="/resources/images/profil_green.png" title="Profil Green Small" ></h:graphicImage>
+                            
+                            <h:outputText class="fontGrey" style="text-align: justify; display:inline-block; width: 71%; margin-left: 3px;" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
+                        
+                            <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 54%" value="przeglądaj..." />
+                            
+                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
+                            
+                    
+                         </div>
+                          
+                        <div class="rightWiderBox">
+                            <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
+                            <div class="field"> <h:outputText class="label" value="Obecne hasło"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Nowe hasło"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText/> </div>
+                            <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="index"/> </div>
+                            <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
+                            
+                            <div> <h:outputText style="margin-left: 20px;" class="redMessage" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
+                            <div> <h:outputText style="margin-left: 20px;" class="redMessage" value="Zaktualizuj swój raport BIK." /> </div>
+                            <div class="marginTB20">
+                                <div> <h:outputText style="margin-left: 20px;" class="fontGrey" value="Wgraj zeskanowany raport BIK w postaci .zip." /> </div>    
+                                <div> <h:outputText style="margin-left: 20px; margin-right: 6px;" class="fontGrey" value="Dowiedz się" /> <h:link class="redMessage" value="jak to zrobić." /> </div>
+                            </div>
+                            <div class="marginTB20">
+                                <div> <h:outputText style="margin-left: 20px;" class="fontGrey" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
+                                <div> <h:link style="margin-left: 20px; margin-right: 6px;" class="redMessage" value="kliknij tutaj." /> </div>
+                            </div>
+                            
+                            <div>
+                                <h:inputText  class="label2"  style="margin-left: 20px; display: inline; width: 94%" value="przeglądaj..." />
+                            </div>
+                            
+                            <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="index"/>
+                            <h:link  class="floatR wideButton redX" value="Anuluj" outcome="index" />
+                            
+                            
+                            <div style="min-height: 150px;"> </div>
+                        </div>
+                        <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="index"/>
+                    </div>
+                    </ui:define>
+        </ui:composition>
+    </body>
+</html>
