@@ -50,6 +50,7 @@ h6{
     border-left:3px solid #5297cb;
     font-size: 13px;
     margin: 0;
+    padding-left: 5px;
 }
 
 
@@ -252,6 +253,15 @@ p:column {
 .greenLeftBorder {
     border-left: 3px solid green;
 }
+
+.greenRightBorder {
+    border-right: 3px solid green;
+}
+
+.greenLink {
+    color: green;
+    font-weight: bold;
+}
 .marginTB20
 {
     margin-top: 20px;
@@ -298,6 +308,10 @@ p:column {
     border-bottom: green 4px solid;
 }
 
+.topGreenLine
+{
+     border-top: green 4px solid;
+}
 .wideButton
 {
     text-align: center; 
