@@ -213,7 +213,7 @@ p:column {
 .rightTable{
     width:460px;
     float:right;
-    
+    min-height: 450px;
 }
 
 .centerSuccessBox{
