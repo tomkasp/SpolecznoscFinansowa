@@ -12,8 +12,8 @@
     
     <property name="c3p0.acquire_increment">10</property>
     <property name="c3p0.idle_test_periods">10</property>
-    <property name="c3p0.min_size">15</property>
-    <property name="c3p0.max_size">55</property>
+    <property name="c3p0.min_size">10</property>
+    <property name="c3p0.max_size">25</property>
     <property name="c3p0.max_statements">0</property>
     <property name="c3p0.timeout">20</property>
     <property name="c3p0.unreturnedConnectionTimeout">3</property>
