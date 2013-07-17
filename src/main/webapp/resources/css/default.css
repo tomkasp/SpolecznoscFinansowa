@@ -5,6 +5,7 @@ body {
     color: #000000;  
     margin: auto;
     width: 1000px;
+    height: auto;
     border:1px solid #000000;
     padding: 30px;
 }
@@ -50,6 +51,7 @@ h6{
     border-left:3px solid #5297cb;
     font-size: 13px;
     margin: 0;
+    padding-left: 5px;
 }
 
 
@@ -141,21 +143,22 @@ p:column {
 .leftLoginBox{
     border:0px solid #dddddd;
     width: 50%;
+    min-height: 500px;
     float: left;
-    min-height: 600px;
 }
 
 .rightLoginBox{
-
     border:0px solid #dddddd; 
-    width: 50%;
-    float: right;
-    min-height: 600px;
+    width: 40%;
+    min-height: 500px;
+    float: left;
 }
+
 
 .contentLoginBox{
     width: 100%;
     min-height: 500px;
+    overflow: hidden;
 }
 
 .leftThinerBox{
@@ -228,10 +231,17 @@ p:column {
     border:1px solid #dddddd;
     width: auto;
     margin: 0px;
+    margin-top: 20px;
+    min-height: 30px; 
+    display: block;
+}
+
+.messagesBox{
     min-height: 140px; 
-    float: left;
+    border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
 }
+
 
 .redMessage
 {
@@ -251,6 +261,15 @@ p:column {
 
 .greenLeftBorder {
     border-left: 3px solid green;
+}
+
+.greenRightBorder {
+    border-right: 3px solid green;
+}
+
+.greenLink {
+    color: green;
+    font-weight: bold;
 }
 .marginTB20
 {
@@ -298,6 +317,10 @@ p:column {
     border-bottom: green 4px solid;
 }
 
+.topGreenLine
+{
+     border-top: green 4px solid;
+}
 .wideButton
 {
     text-align: center; 
@@ -339,3 +362,19 @@ p:column {
    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
     
 }
+
+.search{
+    border:1px solid #dddddd;
+    height: auto;
+    position: absolute;
+    top: 165px;
+    right: 0px; 
+}
+
+.topTitle{
+    border-bottom: 4px solid #5297cb;
+    font-size: 22px;
+    padding: 2px;
+}
+
+
