@@ -10,7 +10,7 @@
         <ui:composition template="./templates/mainTemplate.xhtml">
 
             <ui:define name="content">
-                
+                <h:form>   
             <div class="contentLoginBox">
                 
                 <div class="leftLoginBox"> 
@@ -30,9 +30,11 @@
                 </div>
                 
                 
-                <div class="rightLoginBox">   
+                <div class="rightLoginBox" style="width: 46%">   
                     
                     <div class="newsletter"> <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  style="margin-left: 2px;" value="Akceptuj"/> </div>
+                    
+                  
                     
                     <div style="padding-left: 5px;">
                     
@@ -49,7 +51,7 @@
                 </div>
                     
               </div>
-                 
+                 </h:form> 
             </ui:define>
 
             
