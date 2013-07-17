@@ -10,8 +10,10 @@
         <ui:composition template="./templates/mainTemplate.xhtml">
 
             <ui:define name="content">
-                
-            <div class="contentLoginBox">
+               
+            
+              
+                <h:form>
                 
                 <div class="leftLoginBox" style="width: 54%"> 
                      
@@ -25,11 +27,9 @@
                     
                     <div class="field"> <h:outputText class="label" value="Nr doradcy/wniosku/klienta:"/>  <h:inputText value="wpisz numer"/> </div>
                     <div class="field"> <h:outputText class="label" value="Powód:"/>  <h:inputText value="wpisz powód"/> </div>
-                    <div class="field"> <h:inputTextarea style="width: 480px; height: 280px;"/> </div>
+                    <div class="field"> <h:inputTextarea style="width: 480px; height: 100px;"/> </div>
                     <div class="field"> <h:link class="greyButton" value="Zgłoś" style="left: 410px; position: relative;"/> </div>
                    
-                    
-                    
                     </div>
                     
                 </div>
@@ -52,8 +52,9 @@
                     </div>
                     
                 </div>
-                    
-              </div>
+                 
+                </h:form>
+                
                  
             </ui:define>
 
