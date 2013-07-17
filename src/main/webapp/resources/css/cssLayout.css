@@ -230,7 +230,7 @@ ul{
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
-    height:150px
+    min-height:150px
 }
 
 li{
