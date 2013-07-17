@@ -248,6 +248,10 @@ p:column {
     width: 328px;
 }
 
+
+.greenLeftBorder {
+    border-left: 3px solid green;
+}
 .marginTB20
 {
     margin-top: 20px;
@@ -287,6 +291,11 @@ p:column {
 .blueLine
 {
     border-bottom: dodgerblue 4px solid;
+}
+
+.greenLine
+{
+    border-bottom: green 4px solid;
 }
 
 .wideButton

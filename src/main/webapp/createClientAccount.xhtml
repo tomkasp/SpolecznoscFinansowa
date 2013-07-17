@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        
+        <ui:composition template="./templates/mainTemplate.xhtml">
+            <ui:define name="top" class=""> 
+                            <h:outputStylesheet library="css" name="green.css" />
+                            
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                            </div>
+                            
+                            <div class="topbarMenuGreen">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="login"/>
+                                </h:panelGroup>
+                            </div>
+                    </ui:define>
+            <ui:define name="content" class="center_content_green">
+                    <div id="profileBar" class="greenLine" style="min-height: 150px;">
+                        <h:graphicImage class="floatL" id="profile_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+                        <p:outputLabel styleClass="blackTitle height120"> Zarejestruj się jako klient </p:outputLabel>
+                        <div class="floatR">
+                            <h:form>
+                            <h:panelGroup>
+                                <p:inputText id="keyword" required="true" label="Keyword" style="width: 250px; margin-right: 20px" />     
+                                <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
+                                <h:link class ="greenButton wideButton" style="padding-bottom: 8px;" value="Akceptuj"/>
+                            </h:panelGroup> 
+                            </h:form>
+                        </div>
+                    </div>
+                    <div class="redMessage">
+                            <p:outputLabel value="Rejestracja jest DARMOWA."/> <br />
+                            <p:outputLabel value="Jeśli nie jesteś pewien, zobacz demo serwisu. "/>        
+                    </div>
+                    <div style="min-height: 400px">
+                        <div class="leftThinerBox">
+                            <h:form>
+                                <div class="marginLR30" style="margin-top: 40px;">
+                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Potwierdź hasło"/>  <h:inputText/> </div>
+                                    <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText/> </div>
+                                </div>
+
+                                <div class="greyBackground marginLR30" style="margin-top: 40px;">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
+                                <div >
+                                     <h:link class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="index"/> 
+                                </div>
+                                <div>
+                                     <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" />
+                                </div>
+                            </h:form>
+                        </div>
+
+                        <div class="rightWiderBox">
+                            <h4 class="greenLeftBorder"> CO ZYSKUJESZ JAKO KLIENT </h4>
+
+
+                            <div class="solidText"> 
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqu.
+                                Ut enim ad minim veniam, quis nostrud exercitation u
+                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                Duis aute irure dolor in reprehenderit in voluptate velit 
+                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                                anim id est laborum. 
+                                <br />
+                                <br />                            
+                                Lorem ipsum dolor sit amet,
+                                consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt
+                                ut labore et dolore magna aliqu.
+                                Ut enim ad minim veniam, quis nostrud exercitation u
+                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                Duis aute irure dolor in reprehenderit in voluptate velit 
+                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                                anim id est laborum. 
+                            </div>       
+                        </div>
+                    </div>
+                    
+                        
+                    </ui:define>
+
+            
+            
+            
+        </ui:composition>
+    
+    </body>
+</html>
