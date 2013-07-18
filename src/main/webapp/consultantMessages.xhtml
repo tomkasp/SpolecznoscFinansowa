@@ -9,6 +9,24 @@
 
         <ui:composition template="./templates/mainTemplate.xhtml">
 
+            <ui:define name="top"> 
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                    <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                </div>
+
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+            
             <ui:define name="content">
 
                 <h:form>

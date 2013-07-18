@@ -154,10 +154,8 @@ p:column {
     float: left;
 }
 
-
 .contentBox{
     width: 100%;
-    min-height: 500px;
     overflow: hidden;
 }
 
