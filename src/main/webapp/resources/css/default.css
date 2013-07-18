@@ -452,3 +452,7 @@ p:column {
     left: 200px;
     position: relative; 
 }
+
+.category{
+    margin-top: 40px;
+}
