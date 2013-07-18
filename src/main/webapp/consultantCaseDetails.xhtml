@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+            
+                  <ui:define name="top"> 
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                            </div>
+
+                            <div class="topbarMenuBlue">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="index"/>
+                                </h:panelGroup>
+                            </div>
+                    </ui:define>
+            
+                    <ui:define name="content">
+                        <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                            <div id="spaceFiller" style="min-height: 128px"> 
+                            <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                            </div>
+                            
+                            <div>     
+                                <h5> Stanisław Nowy </h5> 
+                                <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                                <h5> 000001 </h5>
+                                <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                                <h5> 123/123456 (+12) </h5>
+                            </div>
+                        </div>
+                        
+                        <h3> Sprawa numer: 12345 </h3>
+                        
+                        <div style="min-height: 900px">
+                            <div class="leftThinerBox">
+                                <h:form>
+                                    <h4> DANE KLIENTA </h4>
+                                    <div class="marginLR30" style="margin-top: 30px;">        
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Stanisław" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Nowy" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="89010122345" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="01-01-1989" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="stanislaw.novy@sf.pl" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="602 321 242" /> </div>
+                                    </div>
+                                    
+                                    <h4> DANE O ZATRUDNIENIU </h4>
+                                    <div class="marginLR30" style="margin-top: 30px;">   
+                                         <div class="field"> <h:outputText class="label" value="Typ"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="umowa o pracę" /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Branża"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="budownictwo" /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="1 300 PLN" /> </div>
+                                         
+                                    </div>    
+                                        
+                                    <h4> DANE SPRAWY </h4>
+                                    <div class="marginLR30" style="margin-top: 30px;">        
+                                        <div class="field"> <h:outputText class="label" value="Data rozpoczęcia"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="18-07-2013" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="1 (Przedstawienie oferty)" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Samochód" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="12 000 PLN" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="0 PLN" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="500 PLN" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="gotówkowy" /> </div>
+                                    </div>
+                                
+                                </h:form>
+                            </div>
+
+                            <div class="rightWiderBox">
+                                <h4> GENERUJ NAJLEPSZĄ OFERTĘ </h4>
+
+
+                                <div class="solidText"> 
+                                     Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
+                                </div>  
+                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="index"/> </div>
+                                
+                                <p:dataTable>
+                                      <p:column headerText="Nazwa banku">  
+                                      </p:column>  
+
+                                      <p:column headerText="Nazwa oferta">  
+                                      </p:column>  
+
+                                      <p:column headerText="Trafność">    
+                                      </p:column>  
+                                    
+                                      <p:column headerText="">    
+                                      </p:column>    
+                                </p:dataTable>
+                                <h:link class="floatR greyButton wideButton" value="Wyślij zapytanie" outcome="index"/>
+                                <h4 style="margin-top: 80px;"> GENERUJ UMOWY </h4>
+                                <div class="solidText"> 
+                                     Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (Dokumenty zostaną wygenerowane w formacie pdf).
+                                </div>  
+                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="index"/> </div>
+                            </div>
+                        </div>
+                    </ui:define>
+        </ui:composition>
+    </body>
+</html>  
+    
