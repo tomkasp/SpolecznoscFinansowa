@@ -11,7 +11,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
                  
                   <ui:define name="top"> 
                             <h:outputStylesheet library="css" name="green.css" />
@@ -26,12 +26,12 @@
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" />
                                 </h:panelGroup>
                             </div>
                     </ui:define>
                     <ui:define name="content">
-                        <div id="profileBar" style="padding-bottom: 5px" class="greenLine" >
+                        <div id="profileBar" class="profileBarThin" >
                             <h:outputText class="smallTitle" value="Stanisław Nowy" />
                         </div>
                        <div id="marketLogoBar" style="min-height: 190px;">
@@ -43,24 +43,24 @@
                            <h4 class="greenLeftBorder"> PARAMETRY </h4>
                        </div>
                        <div class="marginTB20">
-                           <h:panelGroup style="margin-right: 105px">    
+                           <h:panelGroup class="marketLeft">    
                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
                            </h:panelGroup>     
-                           <h:panelGroup style="margin-right: 30px">
+                           <h:panelGroup class="marginLR30">
                                <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
                                <h:outputText class="fontGrey marginLR30" value="lat" /> 
                            </h:panelGroup> 
                            <h:panelGroup>
-                               <h:outputText class="fontGrey marginLR30" value="Trudnosc" /> 
+                               <h:outputText class="fontGrey marginLR30" value="Trudność" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
                            </h:panelGroup> 
                        </div>    
-                       <div style="margin-bottom: 60px">
+                       <div>
                            <h:panelGroup style="margin-right: 65px">
                                <h:outputText class="fontGrey marginLR30" value="Branża" /> 
                                <p:selectOneMenu style="width: 145px"/>
@@ -138,52 +138,52 @@
                            </h:panelGroup>
                        </p:overlayPanel> 
                        
-                       
-                       <p:dataTable  paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
-                                <p:column headerText="Lp">  
-                                </p:column>  
+                       <div class="marginT50">
+                        <p:dataTable  paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
+                                 <p:column headerText="Lp">  
+                                 </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                                 <p:column headerText="Numer klienta">  
+                                 </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                                 <p:column headerText="Data dodania">    
+                                 </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
-                        </p:dataTable>
-                
+                                 <p:column headerText="Numer sprawy">  
+                                 </p:column>  
+
+                                 <p:column headerText="Postęp">  
+                                 </p:column> 
+
+                                 <p:column headerText="Rodzaj kredytu"  >  
+                                 </p:column> 
+
+                                 <p:column headerText="BIK">  
+                                 </p:column> 
+
+                                 <p:column headerText="Kod pocztowy">  
+                                 </p:column>
+
+                                 <p:column headerText="Wiek">  
+                                 </p:column>
+
+                                 <p:column headerText="Typ zatrudnienia">  
+                                 </p:column>
+
+                                 <p:column headerText="Branża">  
+                                 </p:column>
+
+                                 <p:column headerText="Trudności kredytu">  
+                                 </p:column>
+
+                                 <p:column headerText="Ilość doradców">  
+                                 </p:column>
+
+                                 <p:column headerText="Koniec aukcji">  
+                                 </p:column>  
+
+                         </p:dataTable>
+                       </div>
                    </ui:define>
 
             

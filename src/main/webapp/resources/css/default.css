@@ -244,9 +244,28 @@ p:column {
     display: block;
 }
 
+.newsletterInput
+{
+    width: 250px;
+    margin-right: 20px;
+}
+
 #marketLogoBar
 {
     min-height: 190px;
+}
+
+#red_envelope
+{
+    float: left; 
+    margin-right: 10px; 
+    margin-top: 10px; 
+    margin-left: 70px;
+}
+
+#spaceFiller
+{
+    min-height: 128px;
 }
 
 .bigMenuButton
@@ -261,15 +280,6 @@ p:column {
     border-bottom: 4px solid #5297cb;
 }
 
-.marginT10
-{
-    margin-top: 10px;
-}
-
-.marginT50
-{
-    margin-top: 50px;
-}
 
 .redMessage
 {
@@ -308,6 +318,22 @@ p:column {
 {
     margin-left: 30px;
     margin-right: 30px;
+}
+
+
+.marginT10
+{
+    margin-top: 10px;
+}
+
+.marginT50
+{
+    margin-top: 50px;
+}
+
+.marginB30
+{
+    margin-bottom: 30px;
 }
 
 .marginLRT30
@@ -428,6 +454,17 @@ p:column {
 {
     border-bottom: dodgerblue 4px solid;
     min-height: 150px;
+}
+
+.profileBarThin
+{
+    padding-bottom: 5px;
+    border-bottom: dodgerblue 4px solid;
+}
+
+.marketLeft 
+{
+    margin-right: 75px
 }
 
 .paymentExpire  

@@ -17,9 +17,9 @@
                   <ui:define name="top"> 
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
                             </div>
 
                             <div class="topbarMenuBlue">
@@ -30,13 +30,13 @@
                     </ui:define>
             
                     <ui:define name="content">
-                    <div id="profileBar" class="blueLine" style="min-height: 150px;">
-                        <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                    <div id="profileBar" class="profilBar">
+                        <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
                         
-                        <div id="spaceFiller" style="min-height: 128px"> </div>
+                        <div id="spaceFiller"> </div>
                         <div>     
                             <h5> Stanisław Nowy </h5> 
-                            <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                            <h:outputText class="profileText" value="nr. doradcy:" />
                             <h5> 000001 </h5>
                         </div>
                     </div>
@@ -44,11 +44,11 @@
                     <div style="min-height: 325px">
                          <div class="leftThinerBox">
                              <h3> Uzupelnij swoje dane </h3>
-                             <h:outputText style="margin-left: 17px;" class="redMessage" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
+                             <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
                         
                         
                             <h:form>
-                                    <div class="marginLR30" style="margin-top: 40px;">
+                                    <div class="marginLRT30">
                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Staż w branży"/>  <h:inputText class="inputWidth" /> </div>
@@ -58,7 +58,7 @@
                          </div> 
                         
                         <div class="rightWiderBox">
-                            <div style="margin-top: 20px; margin-bottom: 5px;">
+                            <div class="marginTB20">
                                  <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
@@ -153,27 +153,28 @@
                         
                     <div>
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
-                        <div> <p:selectOneMenu style="width: 250px; margin-left: 35px; margin-bottom: 10px;"> </p:selectOneMenu> </div>
-                        <div> <p:selectBooleanCheckbox style="margin-left: 10px; margin-right: 10px;" /> <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" /> </div>
+                        <div> <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30"></p:selectOneMenu> </div>
+                        <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" /> </div>
                     </div>  
-                    <div style="width:45%; display: inline-block;"> <h4> DANE ADRESOWE </h4> </div>
-                    <div style="width:45%; margin-left: 80px; display: inline-block;"> <h4> DANE DO FAKTURY </h4> </div>
-                    <div style="width:45%; display: inline-block; ">
+                    <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
+                    <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
+                    <div class="adressSection">
                         <div style="min-height: 26px;" class="field"> </div>
-                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
+                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 39%; "> </p:selectOneMenu> </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div> <p:selectBooleanCheckbox style="margin-left: 90px; margin-right: 10px;" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
+                        <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
                         
                     </div>
                         
-                    <div style="margin-left: 80px; width:45%; display: inline-block; vertical-align: top; border-left: 3px solid #5297cb;">
                         
-                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText  class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
+                    <div class="invoiceSection invoiceSectionContent">
+                        
+                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
+                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 39%"> </p:selectOneMenu> </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
