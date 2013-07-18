@@ -449,8 +449,8 @@ p:column {
 
 .rateSection{
     display: inline; 
-    left: 200px;
-    position: relative; 
+    left: 320px;
+    position: absolute;
 }
 
 .category{
