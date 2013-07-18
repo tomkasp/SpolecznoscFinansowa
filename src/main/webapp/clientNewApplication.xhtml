@@ -36,6 +36,9 @@
             </ui:define>
 
             <ui:define name="content">
+                
+                <h:form>
+                
                 <div id="profileBar" class="greenLine" >
 
                     <div id="spaceFiller"> </div>
@@ -51,7 +54,7 @@
 
                 <div>
 
-                    <div class="contentBox">
+                    <div class="contentBox" style="margin-bottom: 30px;">
 
                         <div class="leftBox">
 
@@ -66,16 +69,25 @@
                             <div class="field"> <h:outputText class="label" value="Rok urodzenia:"/>  <h:inputText/> </div>
 
                             <div class="field"> <h:outputText class="label" value="Dochód:"/>  <h:inputText/> </div>
-
+                            
                             <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  
-
-                                <h:selectOneMenu style="width: 150px; ">
-                                    <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                
+                                <h:selectOneMenu style="width: 170px; ">
+                                    <f:selectItem  itemValue="Umowa o prace(czas określony)" itemLabel="Umowa o prace(czas określony)" />
                                 </h:selectOneMenu>  
 
                             </div>
+                            
+                            <div class="field" > <h:outputText class="label"/>  <h:link class="greenLink" value="Działalność gospodarcza"/>   </div>
+    
 
-                            <div class="field"> <h:outputText class="label" value="Branża:"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Branża:"/> 
+                            
+                                  <h:selectOneMenu style="width: 170px; ">
+                                    <f:selectItem  itemValue="Analiza" itemLabel="Analiza" />
+                                </h:selectOneMenu>  
+                                
+                            </div>
 
                             <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
 
@@ -90,10 +102,23 @@
 
                             <p style="margin-left: 30px;">Potrzeby:</p>
 
-                            <div class="field"> <h:outputText class="label" value="Rodzaj kredytu:"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Rodzaj kredytu:"/>  
+                            
+                                <h:selectOneMenu style="width: 170px; ">
+                                    <f:selectItem  itemValue="chcę kupić dom" itemLabel="chcę kupić dom" />
+                                </h:selectOneMenu>  
+                            
+                            </div>
 
-                            <div class="field"> <h:outputText class="label" value="Okres:"/>  <h:inputText/> </div>
-
+                            <div class="field"> <h:outputText class="label" value="Okres:"/>  
+                            
+                                <h:inputText style="width: 40px; margin-right: 10px;"/>
+                                
+                                 <h:selectOneMenu style="width: 110px;">
+                                    <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                </h:selectOneMenu>  
+                            
+                            </div>
 
                         </div>   
 
@@ -157,7 +182,7 @@
 
                             </div>
 
-                            <div id="buttonsBox3" style="margin: 30px 0px; padding-bottom: 30px;">
+                            <div id="buttonsBox3">
 
                                 <h:link class="greenButton wideButton" value="Dalej" style="float: right;"/>
 
@@ -224,6 +249,8 @@
 
                 </div>
 
+              </h:form>      
+                    
             </ui:define>           
         </ui:composition>
     </body>
