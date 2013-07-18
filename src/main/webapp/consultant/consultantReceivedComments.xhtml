@@ -7,9 +7,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-
-
-
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
@@ -17,9 +14,9 @@
             <ui:define name="top"> 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                    <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
-                    <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                    <h:graphicImage class="bigMenuButton" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                    <h:graphicImage class="bigMenuButton" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                    <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
                 </div>
 
                 <div class="topbarMenuBlue">
@@ -35,18 +32,18 @@
 
             <ui:define name="content">
                 
-                <div id="profileBar" class="blueLine" style="min-height: 150px;">
-                    <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                     <div id="spaceFiller" style="min-height: 128px"> 
-                        <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" />  <h:outputText class="boldDays" value="18 dni" />
                     </div>
 
                     <div>     
                         <h5> Stanisław Nowy </h5> 
-                        <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                        <h:outputText class="profileText" value="nr. doradcy:" />
                         <h5> 000001 </h5>
-                        <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                        <h:outputText class="profileText" value="Twój ranking:" /> 
                         <h5> 123/123456 (+12) </h5>
                     </div>
                 </div>
