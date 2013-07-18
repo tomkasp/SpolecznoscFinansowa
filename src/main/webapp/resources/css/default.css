@@ -261,11 +261,19 @@ p:column {
     border-bottom: 4px solid #5297cb;
 }
 
+.marginT10
+{
+    margin-top: 10px;
+}
+
+.marginT50
+{
+    margin-top: 50px;
+}
 
 .redMessage
 {
     font: bold 14px Arial, sans-seriff;
-/*    margin-top: 30px;*/
     color: red    
 }
 
@@ -309,6 +317,60 @@ p:column {
     margin-right: 30px;
 }
 
+.marginL20
+{
+    margin-left: 20px;
+}
+
+.photoChange
+{
+    display: inline-block; 
+    width: 25%; 
+    margin: 10px 0px 0px 10px;
+}
+
+.photoChangeText
+{
+    display:inline-block; 
+    width: 72%; 
+    margin-left: 3px; 
+    text-align: justify;
+}
+
+.browseInput
+{
+    margin-left: 10px; 
+    display: inline; 
+    width: 60%
+}
+
+.browseButton
+{
+    margin-top: 2px; 
+    margin-left: 5px;
+    margin-bottom: 10px
+}
+
+.adressSection
+{
+    width:45%; 
+    display: inline-block;
+}
+
+.invoiceSection
+{  
+    width:45%;
+    margin-left: 80px; 
+    display: inline-block;
+}
+
+.invoiceSectionContent
+{
+    
+    vertical-align: top; 
+    border-left: 3px solid #5297cb;
+}
+
 .floatR
 {
     float: right;
@@ -336,6 +398,11 @@ p:column {
 .profileText
 {
     margin-left: 3px;
+}
+
+.bluePRO
+{
+    color: #0793F0; font-weight: bold;  font-size: 20px
 }
 
 .smallTitle
