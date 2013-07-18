@@ -19,9 +19,9 @@
                       
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
                             </div>
 
                             <div class="topbarMenuGreen">
@@ -32,10 +32,10 @@
                     </ui:define>
                     <ui:define name="content">
                         <div id="profileBar" style="padding-bottom: 5px" class="greenLine" >
-                            <h:outputText style="font-weight: bold; font-size: 18px" value="Stanisław Nowy" />
+                            <h:outputText class="smallTitle" value="Stanisław Nowy" />
                         </div>
                        <div id="marketLogoBar" style="min-height: 190px;">
-                           <h:graphicImage style="float: left; margin-right: 10px; margin-top: 10px;" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
+                           <h:graphicImage class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
                            <div id="spaceFiller" style="min-height: 120px"> </div>
                            <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
                        </div>
@@ -61,17 +61,17 @@
                            </h:panelGroup> 
                        </div>    
                        <div style="margin-bottom: 60px">
-                           <h:panelGroup style="margin-right: 80px">
+                           <h:panelGroup style="margin-right: 65px">
                                <h:outputText class="fontGrey marginLR30" value="Branża" /> 
-                               <p:selectOneMenu style="width: 130px"/>
+                               <p:selectOneMenu style="width: 145px"/>
                            </h:panelGroup>  
-                           <h:panelGroup style="margin-right: 105px">
+                           <h:panelGroup style="margin-right: 90px">
                                <h:outputText class="fontGrey marginLR30" value="Lokalizacja" /> 
-                               <p:selectOneMenu id="localizationButton" style="width: 130px"/>
+                               <p:selectOneMenu id="localizationButton" style="width: 145px"/>
                            </h:panelGroup>  
                            <h:panelGroup>
                                <h:outputText class="fontGrey marginLR30" value="Zatrudnienie" /> 
-                               <p:selectOneMenu id="employmentButton" style="width: 130px"/>
+                               <p:selectOneMenu id="employmentButton" style="width: 145px"/>
                            </h:panelGroup> 
                        </div>
                        
@@ -93,14 +93,14 @@
                                  <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
                                  <h:outputText  class="fontGrey" value="W odległości" />
                                  <h:panelGroup class="fontGrey">   
-                                    <h:inputText style="border: 1px solid #AFAFAF" size="4" />
+                                    <h:inputText class="borderedInput" size="4" />
                                     <h:outputText value="od" />
-                                    <h:inputText style="border: 1px solid #AFAFAF" size="12" value="(kod pocztowy)"/>    
+                                    <h:inputText class="borderedInput" size="12" value="(kod pocztowy)"/>    
                                  </h:panelGroup>
                                  
                                  <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
                                  <h:outputText   class="fontGrey" value="Miejscowość" />
-                                 <h:inputText style="border: 1px solid #AFAFAF" size="27" />
+                                 <h:inputText class="borderedInput" size="27" />
                                  
                              </h:panelGrid>  
                            
@@ -115,7 +115,7 @@
                        <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
                            <h:panelGroup>   
                                 <h:link class="fontBlue" value="umowa o pracę"/> 
-                                <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
+                                <p:spacer styleClass="spacer" />
                                 <h:link class="fontBlue" value="działalnośc gosp."/>  
                            </h:panelGroup>
                            <div>
@@ -133,7 +133,7 @@
                            </div>
                            <h:panelGroup>
                                <h:link class="redX floatL" style="color: red" value="Wyczyść" />
-                               <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
+             
                                <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
                            </h:panelGroup>
                        </p:overlayPanel> 

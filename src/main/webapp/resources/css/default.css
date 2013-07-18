@@ -242,6 +242,17 @@ p:column {
     display: block;
 }
 
+#marketLogoBar
+{
+    min-height: 190px;
+}
+
+.bigMenuButton
+{
+    float: right;
+    margin-right: 50px;
+}
+
 .messagesBox{
     min-height: 140px; 
     border:1px solid #dddddd;
@@ -289,6 +300,13 @@ p:column {
     margin-right: 30px;
 }
 
+.marginLRT30
+{
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 .floatR
 {
     float: right;
@@ -305,6 +323,31 @@ p:column {
     float: left;
     margin-left: 10px;
     width: 500px;
+}
+
+.smallTitle
+{
+    font-weight: bold;
+    font-size: 18px
+}
+
+.contentLogo
+{
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.spacer
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 3px;
+}
+
+.borderedInput
+{
+    border: 1px solid #AFAFAF
 }
 
 .height120
