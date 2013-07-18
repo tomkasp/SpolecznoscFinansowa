@@ -271,6 +271,15 @@ input
     color: cornflowerblue;
 }
 
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    background: #F0F0F0;
+}
+
+input:focus
+{ 
+    border: #0793F0 3px solid;
+}
+
 
 
 

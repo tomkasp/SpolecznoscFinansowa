@@ -11,7 +11,7 @@
     
     <body>
 
-        <ui:composition template="/templates/mainTemplate.xhtml">
+        <ui:composition template="./templates/mainTemplate.xhtml">
                  
                   <ui:define name="top"> 
                             <h:outputStylesheet library="css" name="green.css" />
@@ -19,14 +19,14 @@
                       
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
                             </div>
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -47,8 +47,8 @@
                         <div style="min-height: 560px">
                          <div class="leftThinerBox">
                              <h3 class="greenLeftBorder"> Twoje potrzeby finansowe </h3>
-                             <h:outputText style="margin-left: 17px;" class="redMessage" value="Im więcej danych tym większe prawdopodobieństwo otrzymania kredytu" /> 
-                        
+                             <h:outputText style="margin-left: 17px;" class="redMessage" value="Im więcej danych tym większe prawdopodobieństwo"/> <br />
+                             <h:outputText style="margin-left: 17px;" class="redMessage" value="otrzymania kredytu."/> 
                         
                             <h:form>
                                     <div class="marginLR30" style="margin-top: 40px; margin-bottom: 40px;">
@@ -88,7 +88,7 @@
                                  <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
-                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/> </div>
+                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="index"/> </div>
                            
                            <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
                   
@@ -111,10 +111,10 @@
                                  <p:column headerText="Zaległe"  >  
                                  </p:column> 
                          </p:dataTable>
-                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/index"/>
+                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="index"/>
                          <div style="min-height: 270px;"> </div>
                     </div>
-                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/>
+                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="index"/>
                  </div>
                         
                  <div class="bottomTable topGreenLine">
