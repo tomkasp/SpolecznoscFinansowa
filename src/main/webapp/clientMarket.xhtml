@@ -43,12 +43,12 @@
                            <h4 class="greenLeftBorder"> PARAMETRY </h4>
                        </div>
                        <div class="marginTB20">
-                           <h:panelGroup style="margin-right: 113px">    
+                           <h:panelGroup style="margin-right: 105px">    
                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
                            </h:panelGroup>     
-                           <h:panelGroup style="margin-right: 45px">
+                           <h:panelGroup style="margin-right: 30px">
                                <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
@@ -75,7 +75,7 @@
                            </h:panelGroup> 
                        </div>
                        
-                       <p:overlayPanel id="localizationPanel" style="width: 320px;" at="left bottom" for="localizationButton" hideEffect="fade" dynamic="true">
+                         <p:overlayPanel id="localizationPanel" style="width: 350px;" for="localizationButton" hideEffect="fade" dynamic="true">
                              <p:outputPanel id="radioPanel">
                                  <p:selectOneRadio id="customRadio" layout="custom">  
                                      <f:selectItem itemLabel=" " itemValue="1" />  
@@ -91,43 +91,34 @@
                                  <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
              
                                  <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
-                                 <h:outputText class="fontGrey" value="W odległości" />
+                                 <h:outputText  class="fontGrey" value="W odległości" />
                                  <h:panelGroup class="fontGrey">   
-                                    <h:inputText size="4" />
-                                    <h:outputText class="fontGrey" value="od" />
-                                    <h:inputText size="12" value="(kod pocztowy)"/>    
+                                    <h:inputText style="border: 1px solid #AFAFAF" size="4" />
+                                    <h:outputText value="od" />
+                                    <h:inputText style="border: 1px solid #AFAFAF" size="12" value="(kod pocztowy)"/>    
                                  </h:panelGroup>
                                  
                                  <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
-                                 <h:outputText class="fontGrey" value="Miejscowość" />
-                                 <h:inputText size="25" />
+                                 <h:outputText   class="fontGrey" value="Miejscowość" />
+                                 <h:inputText style="border: 1px solid #AFAFAF" size="27" />
                                  
                              </h:panelGrid>  
                            
-                           <div style="min-height: 30px;">
-                           </div>
-                           
                              <h:panelGroup>
-                                    <h:link class="redMessage" style="color: red" value="Wyczyść" />
-                                    <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
-                                    <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                                    <h:link class="redX floatL" style="color: red" value="Wyczyść" />
+                                  
+                                    <h:link class="greyButton floatR" style="margin-right: 18px; color: #000000" value="Wybierz"/>  
                              </h:panelGroup>
-                           
-                           
                        </p:overlayPanel> 
 
                        
                        <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
-                           <div>
                            <h:panelGroup>   
-                                <h:link class="fontGrey" value="umowa o pracę"/> 
+                                <h:link class="fontBlue" value="umowa o pracę"/> 
                                 <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
-                                <h:link class="fontGrey" value="umowa o zlecenie"/>  
+                                <h:link class="fontBlue" value="działalnośc gosp."/>  
                            </h:panelGroup>
-                           </div>
-                           <div style="min-height: 20px"></div>
                            <div>
-                               
                                <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
                                     <f:selectItem itemLabel="umowa o pracę" />  
                                     <f:selectItem itemLabel="umowa o pracę czas określony" />  
@@ -141,7 +132,7 @@
                                </p:selectManyCheckbox> 
                            </div>
                            <h:panelGroup>
-                               <h:link class="redMessage " style="color: red" value="Wyczyść" />
+                               <h:link class="redX floatL" style="color: red" value="Wyczyść" />
                                <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
                                <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
                            </h:panelGroup>
