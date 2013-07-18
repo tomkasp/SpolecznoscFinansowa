@@ -10,7 +10,7 @@
      
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
                     <ui:define name="top"> 
                         
                        
@@ -21,7 +21,7 @@
                             
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="login"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="/login"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -43,7 +43,7 @@
                             <p:outputLabel value="Rejestracja jest DARMOWA."/> <br />
                             <p:outputLabel value="Możesz wykupić wersję PRO w dowolnej chwilii. "/>        
                     </div>
-                    <div style="min-height: 400px">
+                    <div style="min-height: 470px">
                         <div class="leftThinerBox">
                             <h:form>
                                 <div class="marginLR30" style="margin-top: 40px;">
@@ -57,7 +57,7 @@
 
                                 <div class="greyBackground marginLR30" style="margin-top: 40px;">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
                                 <div >
-                                     <h:link class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="index"/> 
+                                     <h:link class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/index"/> 
                                 </div>
                                 <div>
                                      <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" />

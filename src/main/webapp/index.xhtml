@@ -7,7 +7,7 @@
      
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
 
             <ui:define name="top">
                 <div class="topbarLogo floatL">
@@ -25,7 +25,7 @@
                     <p><h:link>Zostań<br/> naszym klientem</h:link></p>
                 </div>
                 <div class="zalogujLogin">
-                    <h:link outcome="login.xhtml"><h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/zaloguj_1.png" title="SF Logo" ></h:graphicImage></h:link>
+                    <h:link outcome="/login.xhtml"><h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/zaloguj_1.png" title="SF Logo" ></h:graphicImage></h:link>
                 </div>
                 <div class="doradcaLogin">
                     <p><h:link>Dołącz do <br/> naszych doradców</h:link></p>
