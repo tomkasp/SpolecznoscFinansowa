@@ -111,6 +111,8 @@ p:column {
     margin-right: 5px;
 }
 
+
+
 .fontGrey 
 {
     letter-spacing: 1pt;
@@ -325,6 +327,17 @@ p:column {
     width: 500px;
 }
 
+.boldDays
+{
+    font-size:  16px; 
+    font-weight: bold;
+}
+
+.profileText
+{
+    margin-left: 3px;
+}
+
 .smallTitle
 {
     font-weight: bold;
@@ -336,6 +349,24 @@ p:column {
     float: left;
     margin-right: 10px;
     margin-top: 10px;
+}
+
+.profilLogo
+{
+    margin-right: 10px;
+    float: left;
+}
+
+.profilBar
+{
+    border-bottom: dodgerblue 4px solid;
+    min-height: 150px;
+}
+
+.paymentExpire  
+{
+    margin-left: 3px; 
+    font-weight: bold;
 }
 
 .spacer
@@ -358,7 +389,7 @@ p:column {
 
 .blueLine
 {
-    border-bottom: dodgerblue 4px solid;
+    
 }
 
 .greenLine
