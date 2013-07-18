@@ -11,7 +11,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
                  
                   <ui:define name="top"> 
                             <h:outputStylesheet library="css" name="green.css" />
@@ -26,7 +26,7 @@
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -79,7 +79,7 @@
                         
                             <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 54%" value="przeglądaj..." />
                             
-                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
+                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="/index" />
                             
                     
                          </div>
@@ -89,7 +89,7 @@
                             <div class="field"> <h:outputText class="label" value="Obecne hasło"/>  <h:inputText/> </div>
                             <div class="field"> <h:outputText class="label" value="Nowe hasło"/>  <h:inputText/> </div>
                             <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText/> </div>
-                            <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="index"/> </div>
+                            <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="/index"/> </div>
                             <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
                             
                             <div> <h:outputText style="margin-left: 20px;" class="redMessage" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
@@ -107,13 +107,13 @@
                                 <h:inputText  class="label2"  style="margin-left: 20px; display: inline; width: 94%" value="przeglądaj..." />
                             </div>
                             
-                            <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="index"/>
-                            <h:link  class="floatR wideButton redX" value="Anuluj" outcome="index" />
+                            <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
+                            <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
                             
                             
                             <div style="min-height: 150px;"> </div>
                         </div>
-                        <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="index"/>
+                        <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/>
                     </div>
                     </ui:define>
         </ui:composition>

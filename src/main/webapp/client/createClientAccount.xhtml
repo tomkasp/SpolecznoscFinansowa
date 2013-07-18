@@ -8,7 +8,7 @@
 
     <body>
         
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="top" class=""> 
                             <h:outputStylesheet library="css" name="green.css" />
                             
@@ -18,7 +18,7 @@
                             
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="login"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="/login"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -54,7 +54,7 @@
 
                                 <div class="greyBackground marginLR30" style="margin-top: 30px;">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
                                 <div >
-                                     <h:link class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="index"/> 
+                                     <h:link class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/index"/> 
                                 </div>
                                 <div>
                                      <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" />
