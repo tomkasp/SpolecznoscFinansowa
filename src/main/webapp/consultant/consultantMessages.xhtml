@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
 
             <ui:define name="top"> 
                 <div class="topbarLogo">
@@ -19,10 +19,10 @@
 
                 <div class="topbarMenuBlue">
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
                     </h:panelGroup>
                 </div>
             </ui:define>

@@ -11,7 +11,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
                  
                   <ui:define name="top"> 
                             <h:outputStylesheet library="css" name="green.css" />
@@ -26,7 +26,7 @@
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -75,7 +75,7 @@
                                  <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
-                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="index"/> </div>
+                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/> </div>
                            
                             <h4 class="greenLeftBorder"> SZYBKA POMOC </h4>
                             <div class="solidText" style="margin-bottom: 60px;"> 
@@ -105,7 +105,7 @@
                             
                         </div>
                         
-                        <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="index"/>
+                        <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/>
                          
                     </div>
                     
