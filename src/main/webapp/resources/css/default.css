@@ -357,8 +357,14 @@ p:column {
    background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
    background-image: -o-linear-gradient(top, #FFFFFF, #707070);
    background-image: linear-gradient(to bottom, #FFFFFF, #707070);
-   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
-    
+   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070); 
+}
+
+.boldItem {
+    float: right;
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .search{
