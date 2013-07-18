@@ -448,9 +448,10 @@ p:column {
 }
 
 .rateSection{
-    display: inline; 
-    left: 200px;
-    position: relative; 
+    right:20px;
+    padding:5px 3px;
+    margin:15px 0 0 0;
+    width: 220px;
 }
 
 .category{
