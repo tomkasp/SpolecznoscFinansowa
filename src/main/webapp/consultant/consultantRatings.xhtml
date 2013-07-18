@@ -10,8 +10,8 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
 
-           
-             <ui:define name="top"> 
+
+            <ui:define name="top"> 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
@@ -26,10 +26,10 @@
                     </h:panelGroup>
                 </div>
             </ui:define>
-            
+
             <ui:define name="content">
 
-               <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                <div id="profileBar" class="blueLine" style="min-height: 150px;">
                     <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                     <div id="spaceFiller" style="min-height: 128px"> 
@@ -47,25 +47,33 @@
 
 
                 <div class="contentBox">
-                  
-                        <h4>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO.</h4>    
-                 
+
+                    <h4>Witaj Stanisław Nowy dziękujemy za wykupienie wersji PRO.</h4>    
+
                     <div class="leftBox" style="width: 58%"> 
 
-                            <h2>Oceny</h2>
+                        <h2>Oceny</h2>
 
-                            <p>
-                                Klienci oceniają przebieg transakcji z Tobą w czterech kategoriach.
-                                Pozwoli Ci to sprawdzić, które z nich należy poproawić, aby zdobyć większe zaufanie klientów.
-                            </p>
+                        <p>
+                            Klienci oceniają przebieg transakcji z Tobą w czterech kategoriach.
+                            Pozwoli Ci to sprawdzić, które z nich należy poproawić, aby zdobyć większe zaufanie klientów.
+                        </p>
 
-                            <h4>ŚREDNIA OCEN Z OSTATNICH 20 TRANSAKCJI</h4>
+                        <h4>ŚREDNIA OCEN Z OSTATNICH 20 TRANSAKCJI</h4>
 
-                            <div>Zestawienie zawiera średnią ocen z transakcji we wszystkich czterech kategoriach.</div>
+                        <div>Zestawienie zawiera średnią ocen z transakcji we wszystkich czterech kategoriach.</div>
 
-                            <div class="category">
+                        <div class="category">
 
-                                <h4 style="display: inline;">Kategoria 1</h4> 
+                            <div style="float:left;width:300px;">
+                                <h4 >Terminowość</h4>
+                                <h4 >Doświadczenie</h4> 
+                                <h4 >Ocena komentarzy</h4>
+                                <h4 >Kategoria 4</h4>
+                                <h4 >Kategoria 5</h4> 
+                            </div>
+
+                            <div style="float:right;width:250px;">
                                 <h4 class="rateSection">
                                     <h:outputText value="ocena 5.0"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
@@ -73,154 +81,165 @@
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/> 
-                                   
+
                                 </h4>
 
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
-                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
-                                    <li>Mauris in massa at nisl porttitor congue.</li>
-                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
-                                    <li>Donec viverra arcu non mattis auctor.</li>
-                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
-                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
-                                </ul>
-                                
-                            </div>
-                            
-                             <div class="category">
-
-                                <h4 style="display: inline;">Kategoria 2</h4> 
                                 <h4 class="rateSection">
                                     <h:outputText value="ocena 4.0"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
-                                   
+
                                 </h4>
 
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
-                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
-                                    <li>Mauris in massa at nisl porttitor congue.</li>
-                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
-                                    <li>Donec viverra arcu non mattis auctor.</li>
-                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
-                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
-                                </ul>
-                                
-                            </div>
-                            
-                            <div class="category">
-
-                                <h4 style="display: inline;">Kategoria 3</h4> 
                                 <h4 class="rateSection">
                                     <h:outputText value="ocena 3.0"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
-                                   
+
                                 </h4>
 
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
-                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
-                                    <li>Mauris in massa at nisl porttitor congue.</li>
-                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
-                                    <li>Donec viverra arcu non mattis auctor.</li>
-                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
-                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
-                                </ul>
-                                
-                            </div>
-                            
-                            <div class="category">
-
-                                <h4 style="display: inline;">Kategoria 4</h4> 
-                               <h4 class="rateSection">
+                                <h4 class="rateSection">
                                     <h:outputText value="ocena 4.0"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage  value="/resources/images/kropka_kolor.png"/>
-                                   
+
                                 </h4>
-
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
-                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
-                                    <li>Mauris in massa at nisl porttitor congue.</li>
-                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
-                                    <li>Donec viverra arcu non mattis auctor.</li>
-                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
-                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
-                                </ul>
-                                
-                            </div>
-                            
-                            <div class="category">
-
-                                <h4 style="display: inline;">Kategoria 5</h4> 
                                 <h4 class="rateSection">
                                     <h:outputText value="ocena 2.0"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
                                     <h:graphicImage value="/resources/images/kropka_kolor.png"/>
-                                   
-                                </h4>
 
-                                <ul>
-                                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                    <li>Proin egestas erat sit amet scelerisque gravida.</li>
-                                    <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
-                                    <li>Mauris in massa at nisl porttitor congue.</li>
-                                    <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
-                                    <li>Donec viverra arcu non mattis auctor.</li>
-                                    <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
-                                    <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
-                                </ul>
-                                
+                                </h4>
                             </div>
-                       
+
+
+
+
+                            <ul style="display:none;clear:both;">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                <li>Mauris in massa at nisl porttitor congue.</li>
+                                <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                <li>Donec viverra arcu non mattis auctor.</li>
+                                <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="category" style="clear:both;">
+
+
+
+
+                            <ul style="display:none;">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                <li>Mauris in massa at nisl porttitor congue.</li>
+                                <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                <li>Donec viverra arcu non mattis auctor.</li>
+                                <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="category">
+
+
+
+
+                            <ul style="display:none;">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                <li>Mauris in massa at nisl porttitor congue.</li>
+                                <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                <li>Donec viverra arcu non mattis auctor.</li>
+                                <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="category">
+
+
+
+
+                            <ul style="display:none;">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                <li>Mauris in massa at nisl porttitor congue.</li>
+                                <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                <li>Donec viverra arcu non mattis auctor.</li>
+                                <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="category">
+
+
+
+
+                            <ul style="display:none;">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Proin egestas erat sit amet scelerisque gravida.</li>
+                                <li>Phasellus porttitor dolor in erat faucibus, vitae imperdiet libero semper.</li>
+                                <li>Mauris in massa at nisl porttitor congue.</li>
+                                <li>Curabitur ut lorem in felis scelerisque feugiat nec a elit.</li>
+                                <li>Donec viverra arcu non mattis auctor.</li>
+                                <li>Proin vel sapien consectetur ipsum auctor tempus non id nisi.</li>
+                                <li>Quisque quis lectus eget lacus rhoncus fringilla.</li>
+                            </ul>
+
+                        </div>
+
 
                     </div>
 
-                    
-                    
-                    <div class="rightBox" style="width: 42%">   
-                        
-                        <h4>Wiadomości</h4>
-                    <ul>
-                        <li class="headerList">Najnowsze funkcje (21.09.2011)</li>
-                        <li class="regularList">Narzędzie do tworzenia PDF</li>
-                        <li class="regularList">Integracja z Emito do wysyłania emaili</li>
-                        <li class="regularList">Zaawansowana Ocena Doradcy</li>
-                        <li class="regularList">Odwiedź nasz blog by dowiedzieć się więcej</li>
-                    </ul>
 
-                    
-                    <ul>
-                        <li class="headerList">Statystyki konta</li>
-                        <li class="regularList">Klienci</li>
-                        <li class="regularList">Prowadzone wnioski</li>
-                        <li class="regularList">Średnia ocena</li>
-                        <li class="regularList">Komentarze</li>
-                    </ul>
-                    
-                    <ul>
-                        <li class="headerList">Klucz Api</li>
-                        <li class="regularList">Klucz ten daje dostęp do API Społeczności Finansowej</li>
-                        <li class="regularList">yqYXyXhnjyyi</li>
-                    </ul>
-                    <ul>
-                        <li class="headerList">Pomocna dłoń</li>
-                        <li class="regularList">Adres email który podasz będzie używany do przesyłania informacji związanych z Twoim kontem. Upewnij się, że jest aktualny i bezbłędny.</li>
-                        <li class="regularList">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
-                    </ul>
+
+                    <div class="rightBox" style="width: 42%">   
+
+                        <h4>Wiadomości</h4>
+                        <ul>
+                            <li class="headerList">Najnowsze funkcje (21.09.2011)</li>
+                            <li class="regularList">Narzędzie do tworzenia PDF</li>
+                            <li class="regularList">Integracja z Emito do wysyłania emaili</li>
+                            <li class="regularList">Zaawansowana Ocena Doradcy</li>
+                            <li class="regularList">Odwiedź nasz blog by dowiedzieć się więcej</li>
+                        </ul>
+
+
+                        <ul>
+                            <li class="headerList">Statystyki konta</li>
+                            <li class="regularList">Klienci</li>
+                            <li class="regularList">Prowadzone wnioski</li>
+                            <li class="regularList">Średnia ocena</li>
+                            <li class="regularList">Komentarze</li>
+                        </ul>
+
+                        <ul>
+                            <li class="headerList">Klucz Api</li>
+                            <li class="regularList">Klucz ten daje dostęp do API Społeczności Finansowej</li>
+                            <li class="regularList">yqYXyXhnjyyi</li>
+                        </ul>
+                        <ul>
+                            <li class="headerList">Pomocna dłoń</li>
+                            <li class="regularList">Adres email który podasz będzie używany do przesyłania informacji związanych z Twoim kontem. Upewnij się, że jest aktualny i bezbłędny.</li>
+                            <li class="regularList">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </li>
+                        </ul>
 
                     </div>
 
