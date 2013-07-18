@@ -140,14 +140,14 @@ p:column {
     font-weight:bold;
 }
 
-.leftLoginBox{
+.leftBox{
     border:0px solid #dddddd;
     width: 50%;
     min-height: 500px;
     float: left;
 }
 
-.rightLoginBox{
+.rightBox{
     border:0px solid #dddddd; 
     width: 40%;
     min-height: 500px;
@@ -155,7 +155,7 @@ p:column {
 }
 
 
-.contentLoginBox{
+.contentBox{
     width: 100%;
     min-height: 500px;
     overflow: hidden;
