@@ -63,11 +63,11 @@
 
                             <h:form>
                                     <div class="marginLR30" style="margin-top: 40px;">
-                                        <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputText/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Email"/>  <h:inputText/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputText class="inputWidth" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText class="inputWidth" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Email"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label3" value="Na ten email będzie wysyłana wszelka korespondencja"/> </div>
                                         <div class="field"> <h:outputText class="label3" value="dotycząca twojego konta"/> </div>                        
                                     </div>
@@ -80,13 +80,13 @@
                             
                             <h:outputText class="fontGrey" style="display:inline-block; width: 63%; margin-left: 3px;" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
                         
-                            <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 59%" value="przeglądaj..." />
+                            <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 60%" value="przeglądaj..." />
                             
                             <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
                             
-                            <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText class="inputWidth2" /> </div>
                             <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <p:selectOneMenu style="width: 150px" /> </div>
-                            <div class="field"> <h:outputText class="label" value="    "/>  <h:inputText/> </div>
+                            <div class="field"> <h:outputText class="label" value="    "/>  <h:inputText class="inputWidth2" /> </div>
                             <h:link class="floatR greyButton wideButton" value="OK" outcome="index"/>
                         </div>
                     </div>
@@ -228,26 +228,26 @@
                     <div style="width:45%; display: inline-block; ">
                         <div style="min-height: 26px;" class="field"> </div>
                         <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText/>   </div>
-                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
+                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
                         <div> <p:selectBooleanCheckbox style="margin-left: 90px; margin-right: 10px;" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
                         
                     </div>
                         
                     <div style="margin-left: 80px; width:45%; display: inline-block; vertical-align: top; border-left: 3px solid #5297cb;">
                         
-                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText /> </div>
+                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
                         <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 150px; margin-left: 3px;"> </p:selectOneMenu> </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText/>   </div>
-                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="NIP"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="REGON"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
+                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="NIP"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="REGON"/>  <h:inputText class="inputWidth3" /> </div>
                     </div>
                     
                     <div>

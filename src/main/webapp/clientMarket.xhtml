@@ -75,7 +75,7 @@
                            </h:panelGroup> 
                        </div>
                        
-                       <p:overlayPanel id="localizationPanel" style="width: 350px;" for="localizationButton" hideEffect="fade" dynamic="true">
+                       <p:overlayPanel id="localizationPanel" style="width: 320px;" at="left bottom" for="localizationButton" hideEffect="fade" dynamic="true">
                              <p:outputPanel id="radioPanel">
                                  <p:selectOneRadio id="customRadio" layout="custom">  
                                      <f:selectItem itemLabel=" " itemValue="1" />  
@@ -95,7 +95,7 @@
                                  <h:panelGroup class="fontGrey">   
                                     <h:inputText size="4" />
                                     <h:outputText class="fontGrey" value="od" />
-                                    <h:inputText size="10" value="(kod pocztowy)"/>    
+                                    <h:inputText size="12" value="(kod pocztowy)"/>    
                                  </h:panelGroup>
                                  
                                  <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
@@ -104,7 +104,7 @@
                                  
                              </h:panelGrid>  
                            
-                           <div style="min-height: 40px;">
+                           <div style="min-height: 30px;">
                            </div>
                            
                              <h:panelGroup>
@@ -118,13 +118,17 @@
 
                        
                        <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
+                           <div>
                            <h:panelGroup>   
                                 <h:link class="fontGrey" value="umowa o pracę"/> 
                                 <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
                                 <h:link class="fontGrey" value="umowa o zlecenie"/>  
                            </h:panelGroup>
+                           </div>
+                           <div style="min-height: 20px"></div>
                            <div>
-                               <p:selectManyCheckbox  style="margin-right: 40px; display:inline-table" layout="pageDirection">  
+                               
+                               <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
                                     <f:selectItem itemLabel="umowa o pracę" />  
                                     <f:selectItem itemLabel="umowa o pracę czas określony" />  
                                     <f:selectItem itemLabel="umowa o dzieło/zlecenie" />  
