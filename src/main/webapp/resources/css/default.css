@@ -404,5 +404,8 @@ p:column {
     width: 37%
 }
 
-
-
+.rateSection{
+    display: inline; 
+    left: 200px;
+    position: relative; 
+}
