@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    
+    
+    <body>
+
+        <ui:composition template="./templates/mainTemplate.xhtml">
+                 
+                  <ui:define name="top"> 
+                            <h:outputStylesheet library="css" name="green.css" />
+            
+                      
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                            </div>
+
+                            <div class="topbarMenuGreen">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                                </h:panelGroup>
+                            </div>
+                    </ui:define>
+            
+                    <ui:define name="content">
+                        <div id="profileBar" class="greenLine" style="min-height: 150px;">
+                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                            <div id="spaceFiller" style="min-height: 128px"> </div>
+                            <div>     
+                                <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                                <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
+                                <h5 class="greenRightBorder"> 000001 </h5>
+                                <h:outputText style="margin-left: 3px;" value="Stan konta:" />
+                                <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                            </div>
+                        </div>
+                        
+                                                
+                        <h3> Sprawa numer: 12345 </h3>
+                        
+                        <div style="min-height: 600px">
+                            <div class="leftThinerBox">
+                                <h:form>
+                                    <h4> DANE SPRAWY </h4>
+                                    <div class="marginLR30" style="margin-top: 30px;">        
+                                        <div class="field"> <h:outputText class="label" value="Pierwotna kwota zobowiązania"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="20 000 PLN" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="samochód" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="hipoteka" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Wielkość raty"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="732.64 PLN" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data otrzymania kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="18-07-2013" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Okres"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="2 lata" /> </div>
+                                    </div>
+                                    
+                                    <h4> DANE DORADCY</h4>
+                                    <div class="marginLR30" style="margin-top: 30px;">   
+                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Stanisław" /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Nowy" /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="stanislaw.novy@sf.pl" /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="602 321 242" /> </div>                                         
+                                    </div>    
+                                </h:form>
+                            </div>
+
+                            <div class="rightWiderBox">
+                                <h4> NASTĘPNA RATA </h4>
+                                
+                                    <div style="min-height: 58px;"><h:outputText class="boldItem" value="18-08-2013" /> </div>
+                                
+                                <h4> PROGNOZOWANY CZAS ZAKOŃCZENIA</h4>    
+                                    
+                                    <div style="min-height: 58px;"><h:outputText class="boldItem" value="18-02-2015" /> </div>
+                                
+                                <h4> HARMONOGRAM SPŁAT </h4>
+                                
+                                <p:dataTable>
+                                      <p:column headerText="Termin spłaty">  
+                                    
+                                      </p:column>  
+
+                                      <p:column headerText="Kwota">  
+                                       
+                                      </p:column>  
+
+                                      <p:column headerText="Pozostało">    
+                                        
+                                      </p:column>  
+                                    
+                                      <p:column headerText="Spłacono">  
+                                          
+                                      </p:column>    
+                                </p:dataTable>
+                                <h:link class="floatR greyButton wideButton" value="Dodaj spłatę" outcome="index"/>
+                                <h4 style="margin-top: 80px;"> HISTORIA SPŁAT </h4>
+                                
+                                <p:dataTable>
+                                      <p:column headerText="Data wpłaty">  
+                                    
+                                      </p:column>  
+
+                                      <p:column headerText="Kwota">  
+                                       
+                                      </p:column>  
+
+                                      <p:column headerText="Pozostało">    
+                                        
+                                      </p:column>  
+                                    
+                                      <p:column headerText="Spłacono">  
+                                          
+                                      </p:column>    
+                                </p:dataTable>
+                                
+                                
+                            </div>
+                        </div>
+                    </ui:define>
+        </ui:composition>
+    </body>
+</html>

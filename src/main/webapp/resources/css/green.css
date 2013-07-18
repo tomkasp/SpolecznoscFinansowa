@@ -6,12 +6,43 @@
         Purpose of the stylesheet follows.
 */
 
+h2{
+    border-left:4px solid green;
+    padding-left: 10px;
+    font-size: 24px;
+}
+
+h3{
+    font-weight: bold;
+    border-left:3px solid green;
+    font-size: 20px;
+    padding: 5px 0 5px 10px; 
+}
+
+h4{
+    border-left:3px solid green;
+    font-size: 16px;
+    padding: 5px 0 5px 10px;
+}
+
+h5{
+    border-right:3px solid green;
+    font-size: 16px;
+    margin: 0;
+    display: inline;
+}
+
+h6{
+    border-left:3px solid green;
+    font-size: 13px;
+    margin: 0;
+    padding-left: 5px;
+}
 .center_content {
     position: relative;
     background-color: #ffffff;
-    padding: 5px;
+    padding: 0px 5px;
     min-height: 500px;
-    border:1px solid #dddddd;
     border-bottom: 4px solid green;
 }
 
