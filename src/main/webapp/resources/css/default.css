@@ -127,6 +127,14 @@ p:column {
     font-weight:bold;
 }
 
+.fontBlue
+{
+    letter-spacing: 1pt;
+    color: cornflowerblue;
+    font-family: Arial;
+    font-weight:bold;
+}
+
 .label2{
     float: left;
     width: 340px;

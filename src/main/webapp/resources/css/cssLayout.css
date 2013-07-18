@@ -261,6 +261,16 @@ input
     padding: 4px 3px 3px 7px;
 }
 
+.ui-widget-content{
+    border: none;
+    background: #F0F0F0 50% 50% repeat-x;
+    color: #000000;
+}
+
+.ui-widget-content a {
+    color: cornflowerblue;
+}
+
 
 
 
