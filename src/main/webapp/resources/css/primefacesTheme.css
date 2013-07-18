@@ -8,6 +8,7 @@
 
 ui-dialog-content ui-widget-content {
     background:none;
+    color: #000000;
 }
 
 .ui-dialog{
@@ -20,9 +21,9 @@ ui-dialog-content ui-widget-content {
 
 .ui-dialog .ui-dialog-title{
     color: black;  
-    border-left: 2px solid #048215;
-    padding-left: 5px;
-    font-size: 16px;
+    border-left: 3px solid rgb(85,184,103);
+    padding-left: 10px;
+    font-size: 18px;
 }
 
 

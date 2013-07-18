@@ -31,29 +31,42 @@
 
                     <h:form>
                         <p:commandLink styleClass="blueButton" id="viewButton3" value="Usuń" icon="ui-icon-search" update=":dialog3"  oncomplete="usun.show()"/> 
-                         
+
 
                     </h:form>
 
                 </div>
 
 
-                <p:dialog id="dialog3" header="Usuń" widgetVar="usun" resizable="tfalse"  
-                          height="120" width="400" showEffect="clip" hideEffect="fold" modal="true">  
+                <p:dialog id="dialog3" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); border-radius: 0px; " 
+                          header="Usuń"  widgetVar="usun" resizable="tfalse"  
+                          height="220" width="500" showEffect="clip" hideEffect="fold" modal="true">  
 
                     <h:form>
 
-                        <p style="text-align: center;">
-                            <div class="nazwa"><h:outputLabel >Czy napewno chcesz usunąć konto?</h:outputLabel></div>
-                        </p>   
+                        <div class="centerFillBox" style="color: black; border: 0px; ">
 
-                        <div class="przyciskiDol" style="width: 200px;">
+                            <div>
+                             <h6 style="border-left: 3px solid rgb(85,184,103);display: inline;">Wybrałeś usunięcie konta Jan_Kowal</h6>   
+                             <h6 style="border-left: 3px solid rgb(85,184,103);display: inline;">Nr Klienta: 097991</h6>   
+                            </div>
                             
-                            <p:commandLink styleClass="blueButton" value="Anuluj" type="submit" onclick="usun.hide()" /> 
-                            <p:commandLink styleClass="blueButton" value="Usuń"   type="submit" onclick="usun.hide()" /> 
-                        
-                        </div>
 
+                            <p>
+                                Eum et erat summo signiferumque, vix alia viderer feugait at. Cum ea quod nonumy fierent, suas putent minimum ut qui, mea consul docendi ne. Erat dolore prompta pro te, ad cum democritum necessitatibus. Eripuit maiorum est no. Ea eam purto praesent repudiare, ut ignota senserit corrumpit vix. Tation eruditi nam an.
+                            </p>
+                            
+                            <h6 style="border-left: 3px solid rgb(85,184,103);">Czy napewno chcesz usunąć?</h6>
+
+
+                        </div> 
+
+
+
+                        <div class="przyciskiDol" style="margin-top: 20px;">                  
+                            <p:commandLink styleClass="greenButton" style="margin-right: 12px; color: black;" value="Anuluj" type="submit" onclick="usun.hide()" /> 
+                            <p:commandLink styleClass="greyButton" style="color: red;" value="Usuń"   type="submit" onclick="usun.hide()" /> 
+                        </div>
                     </h:form> 
 
                 </p:dialog>  
