@@ -72,7 +72,7 @@ p:column {
     float: right;
     width: auto;
     min-height: 15px;
-    margin: 3px; 
+    margin: 3px 0; 
 }
 
 .field{
@@ -148,19 +148,18 @@ p:column {
     color: #000000;
     font-family: Arial;
     font-weight:bold;
+    
 }
 
 .leftBox{
     border:0px solid #dddddd;
     width: 50%;
-    min-height: 500px;
     float: left;
 }
 
 .rightBox{
     border:0px solid #dddddd; 
     width: 40%;
-    min-height: 500px;
     float: left;
 }
 
@@ -199,7 +198,7 @@ p:column {
 }
 
 .buttonspace{
-    margin: 5px;
+    margin:0 5px;
 }
 
 .solidText {
@@ -256,6 +255,12 @@ p:column {
 }
 
 .messagesBox{
+    min-height: 140px; 
+    border:1px solid #dddddd;
+    border-bottom: 4px solid #5297cb;
+}
+
+.messagesBoxContent{
     min-height: 140px; 
     border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
