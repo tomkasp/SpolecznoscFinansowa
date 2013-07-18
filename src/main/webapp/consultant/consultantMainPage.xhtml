@@ -31,31 +31,30 @@
                     </ui:define>
             
                     <ui:define name="content">
-                        <div id="profileBar" class="blueLine" style="min-height: 150px;">
-                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                        <div id="profileBar" class="profilBar">
+                            <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                             <div id="spaceFiller" style="min-height: 128px"> 
-                            <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                            <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
                             </div>
                             
                             <div>     
                                 <h5> Stanisław Nowy </h5> 
-                                <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                                <h:outputText class="profileText" value="nr. doradcy:" />
                                 <h5> 000001 </h5>
-                                <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                                <h:outputText class="profileText" value="Twój ranking:" /> 
                                 <h5> 123/123456 (+12) </h5>
                             </div>
                         </div>
                         
                         <div style="min-height: 63px;">
-                            <h:graphicImage style="float: left; margin-right: 10px; margin-top: 10px; margin-left: 70px" id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL" style="margin-top: 30px;" value="Uwaga! Klient 00123 wybrał Ciebie do prowadzenia sprawy kredytowej nr. 12345. Czy akceptujesz zgłoszenie?" /> 
+                            <h:graphicImage  id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Klient 00123 wybrał Ciebie do prowadzenia sprawy kredytowej nr. 12345. Czy akceptujesz zgłoszenie?" /> 
                           
-                            <h:link style="margin-top:10px" class="topMenuButton wideButton redX" value="Nie akceptuję" outcome="/index"> 
+                            <h:link  class="floatR redX wideButton marginT10" value="Nie akceptuję" outcome="/index"> 
 <!--                                <p:graphicImage style="width:20%" value="../resources/images/x.png" /> -->
                             </h:link>
-                            <h:link style="margin-top:10px" class="topMenuButton greyButton wideButton" value="Akceptuję" outcome="/index"/>
-
+                            <h:link  class="floatR greyButton wideButton marginT10" value="Akceptuję" outcome="/index"/>
                         </div>
 
                         
@@ -119,7 +118,7 @@
                     <h:link class="topMenuButton greyButton wideButton" value="Obserwuj" outcome="/index"/>
                     <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/index"/>
                     
-                    <div style="margin-top: 50px">
+                    <div class="marginT50">
                         
                         <h4> MOJE PROWADZONE SPRAWY </h4>
                         
@@ -168,7 +167,7 @@
                         </p:dataTable>
                     </div>
                     
-                    <div style="margin-top: 50px">
+                    <div class="marginT50">
                         
                         <h4>ZAKOŃCZONE SPRAWY </h4>
                         
@@ -225,7 +224,7 @@
                     
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                     
-                                        <div style="margin-top: 50px">
+                   <div class="marginT50">
                         
                         <h4>OBSERWOWANE</h4>
                         
@@ -277,7 +276,7 @@
                         </p:dataTable>
                     </div>
                     
-                    <div>
+                    <div class="marginT50 marginB30">
                     <h4> PODSUMOWANIE RANKINGU </h4>
                     <p:dataTable>
                                 <p:column headerText="">  
