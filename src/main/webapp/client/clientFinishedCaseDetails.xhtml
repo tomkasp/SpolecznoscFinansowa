@@ -11,7 +11,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
                  
                   <ui:define name="top"> 
                             <h:outputStylesheet library="css" name="green.css" />
@@ -26,11 +26,11 @@
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -52,7 +52,7 @@
                                                 
                         <h3> Sprawa numer: 12345 </h3>
                         
-                        <div style="min-height: 600px">
+                        <div style="min-height: 650px">
                             <div class="leftThinerBox">
                                 <h:form>
                                     <h4> DANE SPRAWY </h4>
@@ -103,7 +103,7 @@
                                           
                                       </p:column>    
                                 </p:dataTable>
-                                <h:link class="floatR greyButton wideButton" value="Dodaj spłatę" outcome="index"/>
+                                <h:link class="floatR greyButton wideButton" value="Dodaj spłatę" outcome="/index"/>
                                 <h4 style="margin-top: 80px;"> HISTORIA SPŁAT </h4>
                                 
                                 <p:dataTable>

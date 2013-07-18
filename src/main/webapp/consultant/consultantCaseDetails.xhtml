@@ -9,7 +9,7 @@
 
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
             
                   <ui:define name="top"> 
                             <div class="topbarLogo">
@@ -21,11 +21,11 @@
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -49,7 +49,7 @@
                         
                         <h3> Sprawa numer: 12345 </h3>
                         
-                        <div style="min-height: 900px">
+                        <div style="min-height: 950px">
                             <div class="leftThinerBox">
                                 <h:form>
                                     <h4> DANE KLIENTA </h4>
@@ -91,7 +91,7 @@
                                 <div class="solidText"> 
                                      Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
                                 </div>  
-                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="index"/> </div>
+                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
                                 
                                 <p:dataTable>
                                       <p:column headerText="Nazwa banku">  
@@ -110,12 +110,12 @@
                                           
                                       </p:column>    
                                 </p:dataTable>
-                                <h:link class="floatR greyButton wideButton" value="Wyślij zapytanie" outcome="index"/>
+                                <h:link class="floatR greyButton wideButton" value="Wyślij zapytanie" outcome="/index"/>
                                 <h4 style="margin-top: 80px;"> GENERUJ UMOWY </h4>
                                 <div class="solidText"> 
                                      Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (Dokumenty zostaną wygenerowane w formacie pdf).
                                 </div>  
-                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="index"/> </div>
+                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
                             </div>
                         </div>
                     </ui:define>

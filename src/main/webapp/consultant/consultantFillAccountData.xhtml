@@ -12,7 +12,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
             
                   <ui:define name="top"> 
                             <div class="topbarLogo">
@@ -24,7 +24,7 @@
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                         
-                    <div style="min-height: 320px">
+                    <div style="min-height: 325px">
                          <div class="leftThinerBox">
                              <h3> Uzupelnij swoje dane </h3>
                              <h:outputText style="margin-left: 17px;" class="redMessage" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
@@ -62,7 +62,7 @@
                                  <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
-                            <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="index"/>
+                            <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/>
 
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                                 <f:selectItem itemLabel="akceptuję regulamin" /> 
                                 <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" />
                             </p:selectManyCheckbox>
-                            <div style="min-height: 40px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="index"/> </div>
+                            <div style="min-height: 40px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/> </div>
                     </div>
                         
                         
@@ -254,7 +254,7 @@
                         
                    
                         
-                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="index"/> </div>
+                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/index"/> </div>
                    
                     </div>
                     </ui:define>

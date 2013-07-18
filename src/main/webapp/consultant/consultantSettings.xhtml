@@ -12,7 +12,7 @@
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
             
                   <ui:define name="top"> 
                             <div class="topbarLogo">
@@ -24,8 +24,8 @@
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                       
@@ -82,12 +82,12 @@
                         
                             <h:inputText  class="label2"  style="margin-left: 10px; display: inline; width: 60%" value="przeglądaj..." />
                             
-                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="index" />
+                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="/index" />
                             
                             <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText class="inputWidth" /> </div>
                             <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <p:selectOneMenu style="width: 150px" /> </div>
                             <div class="field"> <h:outputText class="label" value="    "/>  <h:inputText class="inputWidth" /> </div>
-                            <h:link class="floatR greyButton wideButton" value="OK" outcome="index"/>
+                            <h:link class="floatR greyButton wideButton" value="OK" outcome="/index"/>
                         </div>
                     </div>
                     <div>
@@ -264,7 +264,7 @@
                                 <f:selectItem itemLabel="akceptuję regulamin" /> 
                                 <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" />
                             </p:selectManyCheckbox>
-                            <div style="min-height: 60px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="index"/> </div>
+                            <div style="min-height: 60px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/> </div>
                     </div>
                         
                   

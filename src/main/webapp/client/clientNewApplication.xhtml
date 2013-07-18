@@ -11,7 +11,7 @@
 
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
+        <ui:composition template="/templates/mainTemplate.xhtml">
 
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
@@ -26,11 +26,11 @@
 
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
                     </h:panelGroup>
                 </div>
             </ui:define>

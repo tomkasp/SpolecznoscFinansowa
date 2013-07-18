@@ -7,29 +7,31 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-      
-   
+    
     
     <body>
 
-        <ui:composition template="./templates/mainTemplate.xhtml">
-            
+        <ui:composition template="/templates/mainTemplate.xhtml">
+                 
                   <ui:define name="top"> 
+                            <h:outputStylesheet library="css" name="green.css" />
+            
+                      
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                                 <h:graphicImage class="floatR" style="margin-right: 50px" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="floatR" style="margin-right: 50px" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
+                                <h:graphicImage class="floatR" style="margin-right: 50px" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
                                 <h:graphicImage class="floatR" style="margin-right: 50px" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
                             </div>
 
-                            <div class="topbarMenuBlue">
+                            <div class="topbarMenuGreen">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
-                   <ui:define name="content">
-                        <div id="profileBar" style="padding-bottom: 5px" class="blueLine" >
+                    <ui:define name="content">
+                        <div id="profileBar" style="padding-bottom: 5px" class="greenLine" >
                             <h:outputText style="font-weight: bold; font-size: 18px" value="Stanisław Nowy" />
                         </div>
                        <div id="marketLogoBar" style="min-height: 190px;">
@@ -38,15 +40,15 @@
                            <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
                        </div>
                        <div>
-                           <h4> PARAMETRY </h4>
+                           <h4 class="greenLeftBorder"> PARAMETRY </h4>
                        </div>
                        <div class="marginTB20">
-                           <h:panelGroup style="margin-right: 113px">    
+                           <h:panelGroup style="margin-right: 105px">    
                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
                            </h:panelGroup>     
-                           <h:panelGroup style="margin-right: 45px">
+                           <h:panelGroup style="margin-right: 30px">
                                <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
                                <h:inputText class="fontBlack smallCenterInput"  value="Min" />
                                <h:inputText class="fontBlack smallCenterInput" value="Max" />
@@ -73,7 +75,7 @@
                            </h:panelGroup> 
                        </div>
                        
-                       <p:overlayPanel id="localizationPanel" style="width: 350px;" for="localizationButton" hideEffect="fade" dynamic="true">
+                         <p:overlayPanel id="localizationPanel" style="width: 350px;" for="localizationButton" hideEffect="fade" dynamic="true">
                              <p:outputPanel id="radioPanel">
                                  <p:selectOneRadio id="customRadio" layout="custom">  
                                      <f:selectItem itemLabel=" " itemValue="1" />  
@@ -89,32 +91,32 @@
                                  <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
              
                                  <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
-                                 <h:outputText value="W odległości" />
+                                 <h:outputText  class="fontGrey" value="W odległości" />
                                  <h:panelGroup class="fontGrey">   
-                                    <h:inputText size="4" />
+                                    <h:inputText style="border: 1px solid #AFAFAF" size="4" />
                                     <h:outputText value="od" />
-                                    <h:inputText size="12" value="(kod pocztowy)"/>    
+                                    <h:inputText style="border: 1px solid #AFAFAF" size="12" value="(kod pocztowy)"/>    
                                  </h:panelGroup>
                                  
                                  <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
-                                 <h:outputText value="Miejscowość" />
-                                 <h:inputText size="25" />
+                                 <h:outputText   class="fontGrey" value="Miejscowość" />
+                                 <h:inputText style="border: 1px solid #AFAFAF" size="27" />
                                  
                              </h:panelGrid>  
                            
                              <h:panelGroup>
-                                    <h:link class="redMessage" style="color: red" value="Wyczyść" />
-                                    <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
-                                    <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                                    <h:link class="redX floatL" style="color: red" value="Wyczyść" />
+                                  
+                                    <h:link class="greyButton floatR" style="margin-right: 18px; color: #000000" value="Wybierz"/>  
                              </h:panelGroup>
                        </p:overlayPanel> 
 
                        
                        <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
                            <h:panelGroup>   
-                                <h:link class="fontGrey" value="umowa o pracę"/> 
+                                <h:link class="fontBlue" value="umowa o pracę"/> 
                                 <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
-                                <h:link class="fontGrey" value="umowa o zlecenie"/>  
+                                <h:link class="fontBlue" value="działalnośc gosp."/>  
                            </h:panelGroup>
                            <div>
                                <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
@@ -130,7 +132,7 @@
                                </p:selectManyCheckbox> 
                            </div>
                            <h:panelGroup>
-                               <h:link class="redMessage " style="color: red" value="Wyczyść" />
+                               <h:link class="redX floatL" style="color: red" value="Wyczyść" />
                                <p:spacer style="margin-left: 10px; margin-right: 10px; width: 3px" />
                                <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
                            </h:panelGroup>
