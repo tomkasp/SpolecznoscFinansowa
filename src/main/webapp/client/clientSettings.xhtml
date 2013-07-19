@@ -76,9 +76,9 @@
                             
                             <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
                         
-                            <h:inputText  class="label2 browseInput" value="przeglądaj..." />
+                            <h:inputText  class="label2 browseInput" style="width: 55%" value="przeglądaj..." />
                             
-                            <h:link style="margin-top: 2px; margin-left: 5px; margin-bottom: 10px;" class="wideButton redX" value="Usuń zdjęcie" outcome="/index" />
+                            <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
                             
                     
                          </div>
@@ -91,26 +91,27 @@
                             <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="/index"/> </div>
                             <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
                             
-                            <div> <h:outputText style="margin-left: 20px;" class="redMessage" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
-                            <div> <h:outputText style="margin-left: 20px;" class="redMessage" value="Zaktualizuj swój raport BIK." /> </div>
+                            <div> <h:outputText class="redMessage marginL20" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
+                            <div> <h:outputText class="redMessage marginL20" value="Zaktualizuj swój raport BIK." /> </div>
                             <div class="marginTB20">
-                                <div> <h:outputText style="margin-left: 20px;" class="fontGrey" value="Wgraj zeskanowany raport BIK w postaci .zip." /> </div>    
-                                <div> <h:outputText style="margin-left: 20px; margin-right: 6px;" class="fontGrey" value="Dowiedz się" /> <h:link class="redMessage" value="jak to zrobić." /> </div>
+                                <div> <h:outputText class="fontGrey marginL20" value="Wgraj zeskanowany raport BIK w postaci .zip." /> </div>    
+                                <div> <h:outputText class="fontGrey marginL20 wordSpace" value="Dowiedz się" />
+                                      <h:link class="redMessage" value="jak to zrobić." /> </div>
                             </div>
                             <div class="marginTB20">
-                                <div> <h:outputText style="margin-left: 20px;" class="fontGrey" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
-                                <div> <h:link style="margin-left: 20px; margin-right: 6px;" class="redMessage" value="kliknij tutaj." /> </div>
+                                <div> <h:outputText  class="fontGrey marginL20" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
+                                <div> <h:link class="redMessage marginL20 wordSpace" value="kliknij tutaj." /> </div>
                             </div>
                             
                             <div>
-                                <h:inputText  class="label2"  style="margin-left: 20px; display: inline; width: 94%" value="przeglądaj..." />
+                                <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
                             </div>
                             
                             <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
                             <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
                             
                             
-                            <div style="min-height: 150px;"> </div>
+                            <div style="min-height: 340px;"> </div>
                         </div>
                         <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/>
                     </div>

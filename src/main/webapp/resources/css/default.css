@@ -377,6 +377,17 @@ p:column {
     margin-bottom: 10px
 }
 
+.wordSpace
+{
+    margin-right: 6px;
+}
+
+.centerLink
+{
+    width: 100%; 
+    text-align: center;
+}
+
 .adressSection
 {
     width:45%; 
