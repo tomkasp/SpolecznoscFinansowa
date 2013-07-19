@@ -103,7 +103,25 @@
                                           
                                       </p:column>    
                                 </p:dataTable>
-                                <h:link class="floatR greyButton wideButton" value="Dodaj spłatę" outcome="/index"/>
+                                <p:commandLink styleClass="wideButton greyButton floatR" id="viewButton3" value="Dodaj spłatę"  oncomplete="dodaj.show()"/>
+                                
+                                <p:dialog id="dialog3"  styleClass="dialog"
+                                          header="Dodaj spłatę"  widgetVar="dodaj" resizable="tfalse"  
+                                          height="160" width="400" showEffect="clip" hideEffect="fold" modal="true">  
+                                
+                                    <div class="dialogFillBox" >
+                                         <div class="field"> <h:outputText class="label" value="Kwota spłaty"/>  <h:inputText  /> </div>
+                                         <div class="field"> <h:outputText class="label" value="Data spłaty"/>  <h:inputText  /> </div>
+                                    </div>
+
+                                    <div class="przyciskiDol marginT10">                  
+                                          <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit" onclick="dodaj.hide()" /> 
+                                          <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź"   type="submit" onclick="dodaj.hide()" /> 
+                                    </div>
+                                     
+                                </p:dialog>
+                                
+                                
                                 <h4 style="margin-top: 80px;"> HISTORIA SPŁAT </h4>
                                 
                                 <p:dataTable>
