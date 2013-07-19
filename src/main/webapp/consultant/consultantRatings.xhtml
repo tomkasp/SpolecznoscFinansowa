@@ -28,22 +28,22 @@
             </ui:define>
 
             <ui:define name="content">
-
-                <div id="profileBar" class="blueLine" style="min-height: 150px;">
-                    <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                     <div id="spaceFiller" style="min-height: 128px"> 
-                        <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" />  <h:outputText class="boldDays" value="18 dni" />
                     </div>
 
                     <div>     
-                        <h5> Mirosław Jabłoński </h5> 
-                        <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
-                        <h5> 089527 </h5>
-                        <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
-                        <h5> 80/100 (+12) </h5>
+                        <h5> Stanisław Nowy </h5> 
+                        <h:outputText class="profileText" value="nr. doradcy:" />
+                        <h5> 000001 </h5>
+                        <h:outputText class="profileText" value="Twój ranking:" /> 
+                        <h5> 123/123456 (+12) </h5>
                     </div>
-                </div>   
+                </div> 
 
 
                 <div class="contentBox">

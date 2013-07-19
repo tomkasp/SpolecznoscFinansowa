@@ -31,8 +31,8 @@
                 </div>
             </ui:define>
             <ui:define name="content">
-                <div id="profileBar" style="padding-bottom: 5px; margin-bottom: 50px;" class="greenLine" >
-                    <h:outputText style="font-weight: bold; font-size: 18px" value="Stanisław Nowy" />
+                <div id="profileBar" style="margin-bottom: 50px;" class="greenLine" >
+                     <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
                 </div>
 
                 <h:form>
@@ -40,32 +40,31 @@
 
                     <h2 class="greenLeftBorder">Dodaj zobowiązanie</h2>
 
-                    <div class="leftBox" style="margin-top: 25px;">
+                    <div class="leftBox">
 
                         <div class="field"> <h:outputText class="label" value="Rodzaj zobowiązania:"/>  
-                            <p:selectOneMenu style="width: 228px;">
+                            <p:selectOneMenu style="width: 230px;">
                                 <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
                             </p:selectOneMenu>
                         </div>
                         <div class="field"> <h:outputText class="label" value="Data podpisania umowy:"/>  
-                            <p:calendar style="height: 10px;"/>
+                            <p:calendar/>
                         </div>
                         <div class="field"> <h:outputText class="label" value="Kwota zobowiązania:"/>  <p:inputText value="30000" style="width: 220px;"/> </div>
                         <div class="field"> <h:outputText class="label" value="Rata:"/>  <p:inputText value="700" style="width: 220px;"/> </div>
                         <div class="field"> <h:outputText class="label" value="Okres spłaty:"/> 
-                            <p:inputText value="8" style="width: 58px; display: inline; margin-right: 10px; float: left;"/>  
-                            <p:selectOneMenu style="width: 150px; ">
+                            <p:inputText value="8" style="width: 60px; margin-right: 10px; float: left;"/>  
+                            <p:selectOneMenu style="width: 150px;">
                                 <f:selectItem  itemValue="lat" itemLabel="lat" />
                             </p:selectOneMenu>  
                         </div>
-                        <div class="field"> <h:outputText class="label" value="Ilość dni spóźnienia:"/>  <p:inputText style="width: 220px;" value="16"/>  </div>
-                        <div class="field"> <h:outputText class="label"/>  
-                            <h:link class="greyButton" style="margin: 2px;" value="Dodaj zobowiązanie"/>
-                            <h:link class="greyButton" style="margin: 2px;" value="Anuluj"/> 
+                        <div class="field"> <h:outputText class="label" value="Ilość dni spóźnienia:"/> 
+                            <p:inputText value="16"/> 
                         </div>
-
-
-
+                        <div class="field"> <h:outputText class="label"/>  
+                            <h:link class="greyButton buttonspace" value="Dodaj zobowiązanie"/>
+                            <h:link class="greyButton" value="Anuluj"/> 
+                        </div>
 
                     </div>
 
@@ -74,7 +73,7 @@
 
                         <h4 class="greenLeftBorder">Obecne zobowiązanie</h4>
 
-                        <p:dataTable rows="10" style="width: 500px; " emptyMessage="brak wyników!">  
+                        <p:dataTable rows="10" style="width: 500px;" emptyMessage="brak wyników!">  
 
                             <p:column headerText="Lp">  
                             </p:column>  
@@ -96,7 +95,7 @@
 
                         </p:dataTable>
 
-                        <h:link class="greyButton" style="margin: 5px; right: 0px; position: absolute;" value="Dodaj zobowiązanie"/>
+                        <h:link class="greyButton buttonMargin buttonRight"  value="Dodaj zobowiązanie"/>
 
 
                     </div>

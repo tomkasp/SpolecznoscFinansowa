@@ -10,14 +10,6 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-            
-                  <ui:define name="top"> 
-                            <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
-                            </div>
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
@@ -57,61 +49,12 @@
                             <h:link  class="floatR greyButton wideButton marginT10" value="Akceptuję" outcome="/index"/>
                         </div>
 
-                        
-                        <div class="bottomTable">
-                        
-                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
-                        
-                        <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
+            <ui:define name="content">
+                <div id="profileBar" class="blueLine" style="min-height: 150px;">
+                    <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
-
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
-
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
-                                <p:column headerText="">  
-                                </p:column> 
-                            
-                                <p:column headerText="">  
-                                </p:column> 
-                            
-                        </p:dataTable>
+                    <div id="spaceFiller" style="min-height: 128px"> 
+                        <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
                     </div>
                         
                     <h:link class="topMenuButton greyButton wideButton" value="Akceptuj" outcome="/index"/>
@@ -126,45 +69,12 @@
                                 <p:column headerText="Lp">  
                                 </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
-
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
-
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Data zakończenia">  
-                                </p:column>
-                            
-                                <p:column headerText="Status">  
-                                </p:column>                  
-                        </p:dataTable>
+                    <div>     
+                        <h5> Stanisław Nowy </h5> 
+                        <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                        <h5> 000001 </h5>
+                        <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                        <h5> 123/123456 (+12) </h5>
                     </div>
                     
                     <div class="marginT50">
@@ -175,11 +85,14 @@
                                 <p:column headerText="Lp">  
                                 </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                <div style="min-height: 63px;">
+                    <h:graphicImage style="float: left; margin-right: 10px; margin-top: 10px; margin-left: 70px" id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                    <h:outputText class="redMessage floatL" style="margin-top: 30px;" value="Uwaga! Klient 00123 wybrał Ciebie do prowadzenia sprawy kredytowej nr. 12345. Czy akceptujesz zgłoszenie?" /> 
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                    <h:link style="margin-top:10px" class="topMenuButton wideButton redX" value="Nie akceptuję" outcome="/index"> 
+                        <!--                                <p:graphicImage style="width:20%" value="../resources/images/x.png" /> -->
+                    </h:link>
+                    <h:link style="margin-top:10px" class="topMenuButton greyButton wideButton" value="Akceptuję" outcome="/index"/>
 
                                 <p:column headerText="Numer sprawy">  
                                 </p:column>  
@@ -232,11 +145,8 @@
                                 <p:column headerText="Lp">  
                                 </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                <div class="bottomTable">
 
                                 <p:column headerText="Numer sprawy">  
                                 </p:column>  
@@ -279,25 +189,25 @@
                     <div class="marginT50 marginB30">
                     <h4> PODSUMOWANIE RANKINGU </h4>
                     <p:dataTable>
-                                <p:column headerText="">  
-                                </p:column>  
+                        <p:column headerText="">  
+                        </p:column>  
 
-                                <p:column headerText="Twój wynik">  
-                                </p:column>  
+                        <p:column headerText="Twój wynik">  
+                        </p:column>  
 
-                                <p:column headerText="Średnia wszystkich doradców">    
-                                </p:column>  
+                        <p:column headerText="Średnia wszystkich doradców">    
+                        </p:column>  
 
-                                <p:column headerText="Najlepszy wynik">  
-                                </p:column>  
-                            
-                                <p:column headerText="Najgorszy wynik">  
-                                </p:column> 
-                                          
-                        </p:dataTable>
-                    </div>
-                    
-                    </ui:define>           
+                        <p:column headerText="Najlepszy wynik">  
+                        </p:column>  
+
+                        <p:column headerText="Najgorszy wynik">  
+                        </p:column> 
+
+                    </p:dataTable>
+                </div>
+
+            </ui:define>           
         </ui:composition>
     </body>
 </html>
