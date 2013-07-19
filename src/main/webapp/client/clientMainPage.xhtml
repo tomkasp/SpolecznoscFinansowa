@@ -7,335 +7,329 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    
-    
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-                 
-                  <ui:define name="top"> 
-                            <h:outputStylesheet library="css" name="green.css" />
-            
-                           
-                  
-                            <div class="topbarLogo">
-                               <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                               
-                               <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                               <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> 
-                               <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> 
-                              
-                               </div>
 
-                            <div class="topbarMenuGreen">
-                                <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" />
-                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                                </h:panelGroup>
-                            </div>
-                    </ui:define>
-            
-                    <ui:define name="content">
-                        <div id="profileBar" class="profilBar">
-                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
 
-                            <div id="spaceFiller" > </div>
-                            <div>     
-                                <h5> Stanisław Nowy </h5> 
-                                <h:outputText class="profileText" value="nr. klienta:" />
-                                <h5> 000001 </h5>
-                                <h:outputText class="profileText" value="Stan konta:" />
-                                <h5> 3/5 pkt. </h5>
-                            </div>
-                        </div>
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
 
-                        
-                        <div class="marginT50">
-                        
-                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
-                        
-                        <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
+                <div class="topbarMenuGreen">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" />
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+            <ui:define name="content">
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
-
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
-                                <p:column headerText="">  
-                                </p:column> 
-                            
-                                <p:column headerText="">  
-                                </p:column> 
-                            
-                        </p:dataTable>
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5> Stanisław Nowy </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5> 000001 </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5> 3/5 pkt. </h5>
                     </div>
-  
-                    <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/index"/>
-                    
-                    <div class="marginT50">
-                        
-                        <h4>OCZEKUJACE</h4>
-                        
-                        <p:dataTable>
-                                <p:column headerText=" ">  
-                                </p:column>  
+                </div>
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                <div class="marginT50">
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość wyświetleń">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>                  
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>      
-                            
-                                <p:column headerText="">  
-                                </p:column>      
-                            
-                            
-                        </p:dataTable>
-                    </div>
-                     <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
-                    <div class="marginT50">
-                        
-                        <h4> TRWAJĄCE </h4>
-                        
-                        <p:dataTable>
-                                <p:column headerText="">  
-                                </p:column>  
+                    <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                    <p:dataTable>
+                        <p:column headerText="Lp">  
+                        </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Status">  
-                                </p:column>  
-                            
-                                <p:column headerText="">  
-                                </p:column>                    
-                        </p:dataTable>
-                    </div>
-                    
-                    <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/index"/>
-                    
-                   <div class="marginT50">
-                        
-                       <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
-                        
-                        <p:dataTable>
-                                <p:column headerText="">  
-                                </p:column>  
-                            
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Data zakończenia">  
-                                </p:column>
-                            
-                                <p:column headerText="Umowa">  
-                                </p:column>   
-                            
-                                <p:column headerText="Kwota">  
-                                </p:column> 
-                            
-                                <p:column headerText="Ocena doradcy">  
-                                </p:column> 
-                  
-                        </p:dataTable>
-                    </div>
-                    <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
-                    <div>
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>  
+
+                        <p:column headerText="">  
+                        </p:column> 
+
+                        <p:column headerText="">  
+                        </p:column> 
+
+                    </p:dataTable>
+                </div>
+
+                <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/index"/>
+
+                <div class="marginT50">
+
+                    <h4>OCZEKUJACE</h4>
+
+                    <p:dataTable>
+                        <p:column headerText=" ">  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość wyświetleń">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>                  
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>      
+
+                        <p:column headerText="">  
+                        </p:column>      
+
+
+                    </p:dataTable>
+                </div>
+                <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
+                <div class="marginT50">
+
+                    <h4> TRWAJĄCE </h4>
+
+                    <p:dataTable>
+                        <p:column headerText="">  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
+
+                        <p:column headerText="Status">  
+                        </p:column>  
+
+                        <p:column headerText="">  
+                        </p:column>                    
+                    </p:dataTable>
+                </div>
+
+                <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/index"/>
+
+                <div class="marginT50">
+
+                    <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
+
+                    <p:dataTable>
+                        <p:column headerText="">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Data zakończenia">  
+                        </p:column>
+
+                        <p:column headerText="Umowa">  
+                        </p:column>   
+
+                        <p:column headerText="Kwota">  
+                        </p:column> 
+
+                        <p:column headerText="Ocena doradcy">  
+                        </p:column> 
+
+                    </p:dataTable>
+                </div>
+                <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
+                <div>
                     <h4> PREMIUM </h4>
-                   
-                        <p:dataTable>
-                                <p:column headerText=" ">  
-                                </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                    <p:dataTable>
+                        <p:column headerText=" ">  
+                        </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość wyświetleń">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>                  
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>      
-                            
-                            <p:column style="background:  #5297cb" headerText="">  
-                                </p:column>      
-                            
-                            
-                        </p:dataTable>
-                    </div>
-                    
-                    <div class="marginB30">
-                    
-                    </div>
-                    
-                    </ui:define>           
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość wyświetleń">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>                  
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>      
+
+                        <p:column style="background:  #5297cb" headerText="">  
+                        </p:column>      
+
+
+                    </p:dataTable>
+                </div>
+
+                <div class="marginB30">
+
+                </div>
+
+            </ui:define>           
         </ui:composition>
     </body>
 </html>
