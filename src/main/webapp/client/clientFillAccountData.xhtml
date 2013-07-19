@@ -32,34 +32,34 @@
                     </ui:define>
             
                     <ui:define name="content">
-                    <div id="profileBar" class="greenLine" style="min-height: 150px;">
-                        <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
-                        
-                        <div id="spaceFiller" style="min-height: 128px"> </div>
-                        <div>     
-                            <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
-                            <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
-                            <h5 class="greenRightBorder"> 000001 </h5>
-                            <h:outputText style="margin-left: 3px;" value="Stan konta:" />
-                            <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                        <div id="profileBar" class="profilBar">
+                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                            <div id="spaceFiller" > </div>
+                            <div>     
+                                <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                                <h:outputText class="profileText" value="nr. klienta:" />
+                                <h5 class="greenRightBorder"> 000001 </h5>
+                                <h:outputText class="profileText" value="Stan konta:" />
+                                <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                            </div>
                         </div>
-                    </div>
                         
                     <div style="min-height: 650px">
                          <div class="leftThinerBox">
                              <h3 class="greenLeftBorder"> Uzupelnij swoje dane </h3>
-                             <h:outputText style="margin-left: 17px;" class="redMessage" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
+                             <h:outputText  class="redMessage marginL20" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
                         
                         
                             <h:form>
-                                    <div class="marginLR30" style="margin-top: 40px; margin-bottom: 40px;">
+                                    <div class="marginLRT30">
                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Rok Urodzenia"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 200px"/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%"/> </div>
                                         <div class="field"> <h:outputText class="label" value=" "/> <h:link class="greenLink" value="Działalność gospodarcza"/></div>
                                         <div class="field"> <h:outputText class="label" value="Wynagrodzenie netto"/> <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 200px"/> </div>
+                                        <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 57%"/> </div>
                                     </div>
                                     <div class="marginLR30" >
                                         <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
@@ -71,7 +71,7 @@
                          </div> 
                         
                         <div class="rightWiderBox">
-                            <div style="margin-top: 20px; margin-bottom: 5px;">
+                            <div class="marginTB20">
                                  <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
@@ -105,6 +105,9 @@
                             
                         </div>
                         
+                            
+                        </div>
+                        <div style="min-height: 30px;">
                         <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/>
                          
                     </div>
