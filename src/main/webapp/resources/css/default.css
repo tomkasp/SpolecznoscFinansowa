@@ -31,7 +31,7 @@ h3{
     border-left:3px solid #5297cb;
     font-size: 20px;
     padding: 5px 0 5px 10px;
-  
+
 }
 
 h4{
@@ -72,11 +72,11 @@ p:column {
     float: right;
     width: auto;
     min-height: 15px;
-    margin: 3px; 
+    margin: 3px 0; 
 }
 
 .field{
-/*    float: left;*/
+    /*    float: left;*/
     width: 100%; 
     min-height: 15px;
     margin: 20px 3px;   
@@ -148,19 +148,18 @@ p:column {
     color: #000000;
     font-family: Arial;
     font-weight:bold;
+
 }
 
 .leftBox{
     border:0px solid #dddddd;
     width: 50%;
-    min-height: 500px;
     float: left;
 }
 
 .rightBox{
     border:0px solid #dddddd; 
     width: 40%;
-    min-height: 500px;
     float: left;
 }
 
@@ -170,7 +169,7 @@ p:column {
 }
 
 .leftThinerBox{
-/*    border:1px solid #dddddd;*/
+    /*    border:1px solid #dddddd;*/
     width: 430px;
     margin: 15px;
     margin-left: 0px;
@@ -179,7 +178,7 @@ p:column {
 }
 
 .rightWiderBox{
-/*    border:1px solid #dddddd; */
+    /*    border:1px solid #dddddd; */
     width: 480px;
     margin: 15px 0px 15px 0px;
     min-height: 300px;
@@ -207,7 +206,7 @@ p:column {
 
 
 .redUnderlineLink{
-    
+
     color: crimson;
     margin-left: 5px;
     text-decoration: underline;
@@ -218,11 +217,11 @@ p:column {
 }
 
 .buttonspace{
-    margin: 5px;
+    margin:0 5px;
 }
 
 .solidText {
-    
+
     margin-left: 50px;
     margin-right: 20px;
     text-align: justify;
@@ -237,7 +236,7 @@ p:column {
 .leftTable{
     width:500px;
     float:left;
-    
+
 }
 
 .rightTable{
@@ -308,9 +307,36 @@ p:column {
 }
 
 .messagesBox{
-    min-height: 140px; 
-    border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
+    overflow: hidden; 
+    margin-bottom: 20px;
+}
+
+.messagesBoxContentLeft{
+    width: 55%; 
+    float: left;
+}
+
+.messagesBoxContentRight{
+    margin-top: 75px;
+    margin-left: 5%;
+    width: 40%;
+    float: right;;
+}
+
+.messagesBoxLink{
+    padding-left: 20px;
+}
+
+.messagesGrayRectangle{
+    border:1px solid #dddddd;
+    padding: 6px;
+}
+
+.messagesTitle{
+    top: 100px;
+    left: 160px;
+    position: absolute;
 }
 
 
@@ -436,7 +462,7 @@ p:column {
 
 .invoiceSectionContent
 {
-    
+
     vertical-align: top; 
     border-left: 3px solid #5297cb;
 }
@@ -533,11 +559,11 @@ p:column {
 {
     min-height: 120px;   
 }
- 
+
 
 .blueLine
 {
-    
+
 }
 
 .greenLine
@@ -547,7 +573,7 @@ p:column {
 
 .topGreenLine
 {
-     border-top: green 4px solid;
+    border-top: green 4px solid;
 }
 .wideButton
 {
@@ -563,31 +589,31 @@ p:column {
 }
 
 .redX {
-   border-top-color: #ADA6A5;
-   border-right-color: #ADA6A5;
-   border-bottom-color: #545454;
-   border-left-color: #ADA6A5;
-   border-width: 1px 1px 1px 1px;
-   border-style: solid; 
-   -webkit-border-radius: 0px;
-   -moz-border-radius: 0px;
-   border-radius: 0px;
-   font-size:12px;
-   font-family:arial, helvetica, sans-serif;
-   padding: 5px 20px 5px 20px; 
-   text-decoration:none; 
-   display:inline-block;
-   text-shadow: 0px 0px 0 rgba(0,0,0,0.3);
-   font-weight:bold; 
-   color: #D20005;
-   background-color: #FFFFFF; 
-   background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#707070)) url(x.png) no-repeat;
-   background-image: -webkit-linear-gradient(top, #FFFFFF, #707070) ;
-   background-image: -moz-linear-gradient(top, #FFFFFF, #707070);
-   background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
-   background-image: -o-linear-gradient(top, #FFFFFF, #707070);
-   background-image: linear-gradient(to bottom, #FFFFFF, #707070);
-   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070); 
+    border-top-color: #ADA6A5;
+    border-right-color: #ADA6A5;
+    border-bottom-color: #545454;
+    border-left-color: #ADA6A5;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid; 
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    font-size:12px;
+    font-family:arial, helvetica, sans-serif;
+    padding: 5px 20px 5px 20px; 
+    text-decoration:none; 
+    display:inline-block;
+    text-shadow: 0px 0px 0 rgba(0,0,0,0.3);
+    font-weight:bold; 
+    color: #D20005;
+    background-color: #FFFFFF; 
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#707070)) url(x.png) no-repeat;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #707070) ;
+    background-image: -moz-linear-gradient(top, #FFFFFF, #707070);
+    background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
+    background-image: -o-linear-gradient(top, #FFFFFF, #707070);
+    background-image: linear-gradient(to bottom, #FFFFFF, #707070);
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070); 
 }
 
 .boldItem {
@@ -598,8 +624,6 @@ p:column {
 }
 
 .search{
-    border:1px solid #dddddd;
-    height: auto;
     position: absolute;
     top: 165px;
     right: 0px; 
