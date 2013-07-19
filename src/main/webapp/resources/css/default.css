@@ -424,6 +424,7 @@ p:column {
 
 .browseInput
 {
+    margin-top: 5px;
     margin-left: 10px; 
     display: inline; 
     width: 60%
