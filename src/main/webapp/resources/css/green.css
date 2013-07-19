@@ -52,3 +52,15 @@ h6{
 .ui-widget-content a {
     color: green;
 }
+
+.profileBarThin
+{
+    padding-bottom: 5px;
+    border-bottom: green 4px solid;
+}
+
+.profilBar
+{
+    border-bottom: green 4px solid;
+    min-height: 150px;
+}

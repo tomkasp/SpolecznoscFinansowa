@@ -31,29 +31,29 @@
                     </ui:define>
             
                     <ui:define name="content">
-                        <div id="profileBar" class="blueLine" style="min-height: 150px;">
-                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                        <div id="profileBar" class="profilBar">
+                            <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                             <div id="spaceFiller" style="min-height: 128px"> 
-                            <h:outputText style="margin-left: 3px; font-weight: bold;" value="Uwaga! Twój abonament wygasa za" /> <h:outputText style="font-size:  16px; font-weight: bold" value="18 dni" />
+                            <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
                             </div>
                             
                             <div>     
                                 <h5> Stanisław Nowy </h5> 
-                                <h:outputText style="margin-left: 3px;" value="nr. doradcy:" />
+                                <h:outputText class="profileText" value="nr. doradcy:" />
                                 <h5> 000001 </h5>
-                                <h:outputText style="margin-left: 3px;" value="Twój ranking:" /> 
+                                <h:outputText class="profileText" value="Twój ranking:" /> 
                                 <h5> 123/123456 (+12) </h5>
                             </div>
                         </div>
                         
                         <h3> Sprawa numer: 12345 </h3>
                         
-                        <div style="min-height: 950px">
+                        <div style="min-height: 960px">
                             <div class="leftThinerBox">
                                 <h:form>
                                     <h4> DANE KLIENTA </h4>
-                                    <div class="marginLR30" style="margin-top: 30px;">        
+                                    <div class="marginLRT30">        
                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Stanisław" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Nowy" /> </div>
                                         <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="89010122345" /> </div>
@@ -63,7 +63,7 @@
                                     </div>
                                     
                                     <h4> DANE O ZATRUDNIENIU </h4>
-                                    <div class="marginLR30" style="margin-top: 30px;">   
+                                    <div class="marginLRT30" >   
                                          <div class="field"> <h:outputText class="label" value="Typ"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="umowa o pracę" /> </div>
                                          <div class="field"> <h:outputText class="label" value="Branża"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="budownictwo" /> </div>
                                          <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="1 300 PLN" /> </div>
@@ -71,7 +71,7 @@
                                     </div>    
                                         
                                     <h4> DANE SPRAWY </h4>
-                                    <div class="marginLR30" style="margin-top: 30px;">        
+                                    <div class="marginLRT30">        
                                         <div class="field"> <h:outputText class="label" value="Data rozpoczęcia"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="18-07-2013" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="1 (Przedstawienie oferty)" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Samochód" /> </div>
@@ -91,7 +91,7 @@
                                 <div class="solidText"> 
                                      Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
                                 </div>  
-                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
+                                <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
                                 
                                 <p:dataTable>
                                       <p:column headerText="Nazwa banku">  
@@ -110,10 +110,13 @@
                                           
                                       </p:column>    
                                 </p:dataTable>
-                                <h:link class="floatR greyButton wideButton" value="Wyślij zapytanie" outcome="/index"/>
-                                <h4 style="margin-top: 80px;"> GENERUJ UMOWY </h4>
+                                
+                                <h:link class="floatR greyButton wideButton" value="Wyślij ofertę" outcome="/index"/>
+                                <div class="marginT50">
+                                    <h4> GENERUJ UMOWY </h4>
+                                </div>
                                 <div class="solidText"> 
-                                     Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (Dokumenty zostaną wygenerowane w formacie pdf).
+                                     Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
                                 </div>  
                                 <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
                             </div>
