@@ -244,6 +244,20 @@ p:column {
     display: block;
 }
 
+.dialog
+{
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); 
+    border-radius: 0px;
+}
+
+.dialogFillBox
+{
+    display: block;
+    min-height: 30px; 
+    width: auto;
+    margin: 0px
+}
+
 .newsletterInput
 {
     width: 250px;
