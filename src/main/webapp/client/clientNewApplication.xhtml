@@ -16,241 +16,240 @@
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
 
-
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                    <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                    <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
 
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" />
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
                     </h:panelGroup>
                 </div>
             </ui:define>
 
             <ui:define name="content">
-                
+
                 <h:form>
-                
-                <div id="profileBar" class="greenLine" >
 
-                    <div id="spaceFiller"> </div>
-                    <div>     
-                        <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
-                        <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
-                        <h5 class="greenRightBorder"> 000001 </h5>
-                        <h:outputText style="margin-left: 3px;" value="Stan konta:" />
-                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                    <div id="profileBar" class="greenLine" >
+
+                        <div id="spaceFiller"> </div>
+                        <div>     
+                            <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                            <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
+                            <h5 class="greenRightBorder"> 000001 </h5>
+                            <h:outputText style="margin-left: 3px;" value="Stan konta:" />
+                            <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                        </div>
                     </div>
-                </div>
 
 
-                <div>
+                    <div>
 
-                    <div class="contentBox" style="margin-bottom: 30px;">
+                        <div class="contentBox" style="margin-bottom: 30px;">
 
-                        <div class="leftBox">
+                            <div class="leftBox">
 
-                            <h3 class="greenLeftBorder"> Nowy wniosek </h3>
+                                <h3 class="greenLeftBorder"> Nowy wniosek </h3>
 
-                            <p style="margin-left: 30px; color: red;">Sprawdź czy dane są poprawne</p>
+                                <p style="margin-left: 30px; color: red;">Sprawdź czy dane są poprawne</p>
 
-                            <div class="field"> <h:outputText class="label" value="Imie:"/>  <h:inputText/> </div>
+                                <div class="field"> <h:outputText class="label" value="Imie:"/>  <h:inputText/> </div>
 
-                            <div class="field"> <h:outputText class="label" value="Nazwisko:"/>  <h:inputText/> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko:"/>  <h:inputText/> </div>
 
-                            <div class="field"> <h:outputText class="label" value="Rok urodzenia:"/>  <h:inputText/> </div>
+                                <div class="field"> <h:outputText class="label" value="Rok urodzenia:"/>  <h:inputText/> </div>
 
-                            <div class="field"> <h:outputText class="label" value="Dochód:"/>  <h:inputText/> </div>
-                            
-                            <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  
-                                
-                                <h:selectOneMenu style="width: 170px; ">
-                                    <f:selectItem  itemValue="Umowa o prace(czas określony)" itemLabel="Umowa o prace(czas określony)" />
-                                </h:selectOneMenu>  
+                                <div class="field"> <h:outputText class="label" value="Dochód:"/>  <h:inputText/> </div>
 
-                            </div>
-                            
-                            <div class="field" > <h:outputText class="label"/>  <h:link class="greenLink" value="Działalność gospodarcza"/>   </div>
-    
+                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  
 
-                            <div class="field"> <h:outputText class="label" value="Branża:"/> 
-                            
-                                  <h:selectOneMenu style="width: 170px; ">
-                                    <f:selectItem  itemValue="Analiza" itemLabel="Analiza" />
-                                </h:selectOneMenu>  
-                                
-                            </div>
+                                    <h:selectOneMenu style="width: 170px; ">
+                                        <f:selectItem  itemValue="Umowa o prace(czas określony)" itemLabel="Umowa o prace(czas określony)" />
+                                    </h:selectOneMenu>  
 
-                            <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
+                                </div>
 
-                            <p style="margin-left: 30px;">Dane adresowe:</p>
-
-                            <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  <h:inputText/> </div>
-
-                            <div class="field"> <h:outputText class="label" value="Branża:"/>  <h:inputText/> </div>
-
-                            <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
+                                <div class="field" > <h:outputText class="label"/>  <h:link class="greenLink" value="Działalność gospodarcza"/>   </div>
 
 
-                            <p style="margin-left: 30px;">Potrzeby:</p>
+                                <div class="field"> <h:outputText class="label" value="Branża:"/> 
 
-                            <div class="field"> <h:outputText class="label" value="Rodzaj kredytu:"/>  
-                            
-                                <h:selectOneMenu style="width: 170px; ">
-                                    <f:selectItem  itemValue="chcę kupić dom" itemLabel="chcę kupić dom" />
-                                </h:selectOneMenu>  
-                            
-                            </div>
+                                    <h:selectOneMenu style="width: 170px; ">
+                                        <f:selectItem  itemValue="Analiza" itemLabel="Analiza" />
+                                    </h:selectOneMenu>  
 
-                            <div class="field"> <h:outputText class="label" value="Okres:"/>  
-                            
-                                <h:inputText style="width: 40px; margin-right: 10px;"/>
-                                
-                                 <h:selectOneMenu style="width: 110px;">
-                                    <f:selectItem  itemValue="lat" itemLabel="lat" />
-                                </h:selectOneMenu>  
-                            
-                            </div>
+                                </div>
 
-                        </div>   
+                                <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
+
+                                <p style="margin-left: 30px;">Dane adresowe:</p>
+
+                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  <h:inputText/> </div>
+
+                                <div class="field"> <h:outputText class="label" value="Branża:"/>  <h:inputText/> </div>
+
+                                <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
 
 
-                        <div class="rightBox" style="width: 50%;">
+                                <p style="margin-left: 30px;">Potrzeby:</p>
 
-                            <h4 class="greenLeftBorder"> Koszt punktów: </h4>
+                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu:"/>  
 
-                            <h4 class="greenLeftBorder"> PUNKTY - Jak działa i co za ile </h4>
-                            <div>
+                                    <h:selectOneMenu style="width: 170px; ">
+                                        <f:selectItem  itemValue="chcę kupić dom" itemLabel="chcę kupić dom" />
+                                    </h:selectOneMenu>  
 
-                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+                                </div>
 
-                            </div>
+                                <div class="field"> <h:outputText class="label" value="Okres:"/>  
 
-                            <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIKu </h4>
-                            <div style="margin-bottom: 30px;">
+                                    <h:inputText style="width: 40px; margin-right: 10px;"/>
 
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                                    <h:selectOneMenu style="width: 110px;">
+                                        <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                    </h:selectOneMenu>  
 
-                            </div>
+                                </div>
 
-                            <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Posiadam raport BIK"/> </div>
-                            <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Nie posiadam raportu BIK"/> </div>
-
-                            <div id="buttonsBox1" style="margin-top: 30px;">
-
-                                <h:link class="greyButton wideButton" value="Więcej o usłudze" style="margin-right: 20px; width: 190px;"/>
-
-                                <h:link class="greyButton wideButton" value="Wykup usługe skanowania BIKu" style="width: 190px;"/>
-
-                            </div>
-
-                            <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
+                            </div>   
 
 
-                            <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
+                            <div class="rightBox" style="width: 50%;">
 
-                                <p:column headerText="Rodzaj">  
-                                </p:column>  
+                                <h4 class="greenLeftBorder"> Koszt punktów: </h4>
 
-                                <p:column headerText="Wygasa">    
-                                </p:column>  
+                                <h4 class="greenLeftBorder"> PUNKTY - Jak działa i co za ile </h4>
+                                <div>
 
-                                <p:column headerText="Rata">  
-                                </p:column>  
+                                    Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
 
-                                <p:column headerText="Kwota">  
-                                </p:column> 
+                                </div>
 
-                                <p:column headerText="Zaległe"  >  
-                                </p:column> 
+                                <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIKu </h4>
+                                <div style="margin-bottom: 30px;">
 
-                            </p:dataTable>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
 
-                            <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
+                                </div>
 
-                                <h:link class="greyButton wideButton" value="Dodaj zobowiązanie" style="float: right;"/>
+                                <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Posiadam raport BIK"/> </div>
+                                <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Nie posiadam raportu BIK"/> </div>
 
-                            </div>
+                                <div id="buttonsBox1" style="margin-top: 30px;">
 
-                            <div id="buttonsBox3">
+                                    <h:link class="greyButton wideButton" value="Więcej o usłudze" style="margin-right: 20px; width: 190px;"/>
 
-                                <h:link class="greenButton wideButton" value="Dalej" style="float: right;"/>
+                                    <h:link class="greyButton wideButton" value="Wykup usługe skanowania BIKu" style="width: 190px;"/>
+
+                                </div>
+
+                                <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
+
+
+                                <p:dataTable>
+                                    <p:column headerText="Lp">  
+                                    </p:column>  
+
+                                    <p:column headerText="Rodzaj">  
+                                    </p:column>  
+
+                                    <p:column headerText="Wygasa">    
+                                    </p:column>  
+
+                                    <p:column headerText="Rata">  
+                                    </p:column>  
+
+                                    <p:column headerText="Kwota">  
+                                    </p:column> 
+
+                                    <p:column headerText="Zaległe"  >  
+                                    </p:column> 
+
+                                </p:dataTable>
+
+                                <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
+
+                                    <h:link class="greyButton wideButton" value="Dodaj zobowiązanie" style="float: right;" outcome="/client/clientMainPage"/>
+
+                                </div>
+
+                                <div id="buttonsBox3">
+
+                                    <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
+
+                                </div>
 
                             </div>
 
                         </div>
 
+                        <div class="greenLine" ></div>  
+
+
+                        <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
+
+                        <p:dataTable> 
+
+                            <p:column headerText="Lp">  
+                            </p:column> 
+
+                            <p:column headerText="Numer klienta">  
+                            </p:column>  
+
+                            <p:column headerText="Data dodania">    
+                            </p:column>  
+
+                            <p:column headerText="Numer sprawy">  
+                            </p:column>  
+
+                            <p:column headerText="Postęp">  
+                            </p:column> 
+
+                            <p:column headerText="Rodzaj kredytu"  >  
+                            </p:column> 
+
+                            <p:column headerText="BIK">  
+                            </p:column> 
+
+                            <p:column headerText="Kod pocztowy">  
+                            </p:column>
+
+                            <p:column headerText="Wiek">  
+                            </p:column>
+
+                            <p:column headerText="Typ zatrudnienia">  
+                            </p:column>
+
+                            <p:column headerText="Branża">  
+                            </p:column>
+
+                            <p:column headerText="Trudności kredytu">  
+                            </p:column>
+
+                            <p:column headerText="Ilość doradców">  
+                            </p:column>                  
+
+                            <p:column headerText="Koniec aukcji">  
+                            </p:column>      
+
+
+                        </p:dataTable>
                     </div>
 
-                    <div class="greenLine" ></div>  
+                    <div style="min-height: 30px;">
 
+                    </div>
 
-                    <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
+                </h:form>      
 
-                    <p:dataTable> 
-
-                        <p:column headerText="Lp">  
-                        </p:column> 
-
-                        <p:column headerText="Numer klienta">  
-                        </p:column>  
-
-                        <p:column headerText="Data dodania">    
-                        </p:column>  
-
-                        <p:column headerText="Numer sprawy">  
-                        </p:column>  
-
-                        <p:column headerText="Postęp">  
-                        </p:column> 
-
-                        <p:column headerText="Rodzaj kredytu"  >  
-                        </p:column> 
-
-                        <p:column headerText="BIK">  
-                        </p:column> 
-
-                        <p:column headerText="Kod pocztowy">  
-                        </p:column>
-
-                        <p:column headerText="Wiek">  
-                        </p:column>
-
-                        <p:column headerText="Typ zatrudnienia">  
-                        </p:column>
-
-                        <p:column headerText="Branża">  
-                        </p:column>
-
-                        <p:column headerText="Trudności kredytu">  
-                        </p:column>
-
-                        <p:column headerText="Ilość doradców">  
-                        </p:column>                  
-
-                        <p:column headerText="Koniec aukcji">  
-                        </p:column>      
-
-
-                    </p:dataTable>
-                </div>
-
-                <div style="min-height: 30px;">
-
-                </div>
-
-              </h:form>      
-                    
             </ui:define>           
         </ui:composition>
     </body>
