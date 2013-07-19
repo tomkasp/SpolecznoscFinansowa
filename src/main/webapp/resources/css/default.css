@@ -186,6 +186,25 @@ p:column {
     float: right;
 }
 
+.leftInlineBox
+{
+    width: 430px;
+    margin: 15px;
+    margin-left: 0px;
+    margin-right: 74px;
+    min-height: 300px; 
+    display: inline-block;
+}
+
+.rightInlineBox
+{
+    width: 480px;
+    margin: 15px 0px 15px 0px;
+    min-height: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
 
 .redUnderlineLink{
     
@@ -244,9 +263,42 @@ p:column {
     display: block;
 }
 
+.dialog
+{
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); 
+    border-radius: 0px;
+}
+
+.dialogFillBox
+{
+    display: block;
+    min-height: 30px; 
+    width: auto;
+    margin: 0px
+}
+
+.newsletterInput
+{
+    width: 250px;
+    margin-right: 20px;
+}
+
 #marketLogoBar
 {
     min-height: 190px;
+}
+
+#red_envelope
+{
+    float: left; 
+    margin-right: 10px; 
+    margin-top: 10px; 
+    margin-left: 70px;
+}
+
+#spaceFiller
+{
+    min-height: 128px;
 }
 
 .bigMenuButton
@@ -261,15 +313,6 @@ p:column {
     border-bottom: 4px solid #5297cb;
 }
 
-.marginT10
-{
-    margin-top: 10px;
-}
-
-.marginT50
-{
-    margin-top: 50px;
-}
 
 .redMessage
 {
@@ -310,6 +353,22 @@ p:column {
     margin-right: 30px;
 }
 
+
+.marginT10
+{
+    margin-top: 10px;
+}
+
+.marginT50
+{
+    margin-top: 50px;
+}
+
+.marginB30
+{
+    margin-bottom: 30px;
+}
+
 .marginLRT30
 {
     margin-top: 30px;
@@ -332,7 +391,7 @@ p:column {
 .photoChangeText
 {
     display:inline-block; 
-    width: 72%; 
+    width: 71%; 
     margin-left: 3px; 
     text-align: justify;
 }
@@ -349,6 +408,17 @@ p:column {
     margin-top: 2px; 
     margin-left: 5px;
     margin-bottom: 10px
+}
+
+.wordSpace
+{
+    margin-right: 6px;
+}
+
+.centerLink
+{
+    width: 100%; 
+    text-align: center;
 }
 
 .adressSection
@@ -428,6 +498,17 @@ p:column {
 {
     border-bottom: dodgerblue 4px solid;
     min-height: 150px;
+}
+
+.profileBarThin
+{
+    padding-bottom: 5px;
+    border-bottom: dodgerblue 4px solid;
+}
+
+.marketLeft 
+{
+    margin-right: 75px
 }
 
 .paymentExpire  

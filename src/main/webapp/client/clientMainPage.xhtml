@@ -36,23 +36,23 @@
                     </ui:define>
             
                     <ui:define name="content">
-                        <div id="profileBar" class="greenLine" style="min-height: 150px;">
-                            <h:graphicImage style="margin-right: 10px;" class="floatL" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+                        <div id="profileBar" class="profilBar">
+                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
-                            <div id="spaceFiller" style="min-height: 128px"> </div>
+                            <div id="spaceFiller" > </div>
                             <div>     
-                                <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
-                                <h:outputText style="margin-left: 3px;" value="nr. klienta:" />
-                                <h5 class="greenRightBorder"> 000001 </h5>
-                                <h:outputText style="margin-left: 3px;" value="Stan konta:" />
-                                <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                                <h5> Stanisław Nowy </h5> 
+                                <h:outputText class="profileText" value="nr. klienta:" />
+                                <h5> 000001 </h5>
+                                <h:outputText class="profileText" value="Stan konta:" />
+                                <h5> 3/5 pkt. </h5>
                             </div>
                         </div>
 
                         
-                        <div style="margin-top: 50px">
+                        <div class="marginT50">
                         
-                        <h4 class="greenLeftBorder"> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
+                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
                         
                         <p:dataTable>
                                 <p:column headerText="Lp">  
@@ -108,9 +108,9 @@
   
                     <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/index"/>
                     
-                    <div style="margin-top: 50px">
+                    <div class="marginT50">
                         
-                        <h4 class="greenLeftBorder">OCZEKUJACE</h4>
+                        <h4>OCZEKUJACE</h4>
                         
                         <p:dataTable>
                                 <p:column headerText=" ">  
@@ -165,9 +165,9 @@
                         </p:dataTable>
                     </div>
                      <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/index"/>
-                    <div style="margin-top: 50px">
+                    <div class="marginT50">
                         
-                        <h4 class="greenLeftBorder"> TRWAJĄCE </h4>
+                        <h4> TRWAJĄCE </h4>
                         
                         <p:dataTable>
                                 <p:column headerText="">  
@@ -219,9 +219,9 @@
                     
                     <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/index"/>
                     
-                   <div style="margin-top: 50px">
+                   <div class="marginT50">
                         
-                       <h4 class="greenLeftBorder">MOJE ZAKOŃCZONE SPRAWY</h4>
+                       <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
                         
                         <p:dataTable>
                                 <p:column headerText="">  
@@ -273,7 +273,7 @@
                     </div>
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                     <div>
-                    <h4 class="greenLeftBorder"> PREMIUM</h4>
+                    <h4> PREMIUM </h4>
                    
                         <p:dataTable>
                                 <p:column headerText=" ">  
@@ -328,7 +328,7 @@
                         </p:dataTable>
                     </div>
                     
-                    <div style="min-height: 30px;">
+                    <div class="marginB30">
                     
                     </div>
                     
