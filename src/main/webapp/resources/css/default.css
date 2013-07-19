@@ -186,6 +186,25 @@ p:column {
     float: right;
 }
 
+.leftInlineBox
+{
+    width: 430px;
+    margin: 15px;
+    margin-left: 0px;
+    margin-right: 74px;
+    min-height: 300px; 
+    display: inline-block;
+}
+
+.rightInlineBox
+{
+    width: 480px;
+    margin: 15px 0px 15px 0px;
+    min-height: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
 
 .redUnderlineLink{
     
