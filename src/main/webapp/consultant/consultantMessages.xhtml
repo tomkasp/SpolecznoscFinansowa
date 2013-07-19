@@ -33,17 +33,19 @@
 
                     <div class="topTitle">Stanisław Nowy</div>
 
-                    <div class="contentBox" style=" height: 200px; position: relative;">
-
-                        <h:graphicImage id="mail_logo" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
-                        <h2 style="top: 100px; left: 160px; position: absolute;">Wiadomości - skrzynka odbiorcza</h2> 
-
-                        <div class="search"> 
-                            <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton" value="OK"/> 
+                    <div class="contentBox" style="position: relative;">
+                        
+                        <div>
+                            <h:graphicImage id="mail_logo" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
+                            <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
                         </div>
-
+                        
                     </div>
-
+                    
+                    <div class="newsletter" style="margin: 25px 0;"> 
+                            <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton buttonspace" value="OK"/> 
+                     </div>
+                    
                     <div class="contentBox">
 
                         <div class="messagesBox"> 
@@ -64,7 +66,7 @@
                             </div>
 
                             <div class="messagesBoxContentRight">
-                                <h:outputText style="border:1px solid #dddddd; padding: 6px;" value="4 dni temu"/>
+                                <h:outputText class="messagesGrayRectangle" value="4 dni temu"/>
                                 <h:link class="fontBlue messagesBoxLink"  value="oznacz jako nieprzeczytane "/>
                                 <h:link class="fontBlue messagesBoxLink"  value="archiwizuj"/> 
                             </div>
@@ -85,7 +87,7 @@
                             </div>
 
                             <div class="messagesBoxContentRight">
-                                <h:outputText style="border:1px solid #dddddd; padding: 6px;" value="6 dni temu"/>
+                                <h:outputText class="messagesGrayRectangle" value="6 dni temu"/>
                                 <h:link class="fontBlue messagesBoxLink"  value="oznacz jako nieprzeczytane "/>
                                 <h:link class="fontBlue messagesBoxLink"  value="archiwizuj"/> 
                             </div>
@@ -106,7 +108,7 @@
                             </div>
 
                             <div class="messagesBoxContentRight">
-                                <h:outputText style="border:1px solid #dddddd; padding: 6px;" value="9 dni temu"/>
+                                <h:outputText class="messagesGrayRectangle" value="9 dni temu"/>
                                 <h:link class="fontBlue messagesBoxLink"  value="oznacz jako nieprzeczytane "/>
                                 <h:link class="fontBlue messagesBoxLink"  value="archiwizuj"/> 
                             </div>

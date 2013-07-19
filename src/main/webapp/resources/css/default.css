@@ -276,6 +276,17 @@ p:column {
     padding-left: 20px;
 }
 
+.messagesGrayRectangle{
+    border:1px solid #dddddd;
+    padding: 6px;
+}
+
+.messagesTitle{
+    top: 100px;
+    left: 160px;
+    position: absolute;
+}
+
 .marginT10
 {
     margin-top: 10px;

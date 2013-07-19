@@ -85,7 +85,12 @@ img{border:0px;}
 }
 
 .buttonMargin{
-    margin: 3px;
+    margin: 5px;
+}
+
+.buttonRight{
+  right: 0px; 
+  position: absolute;   
 }
 
 
