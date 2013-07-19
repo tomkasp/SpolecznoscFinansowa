@@ -54,10 +54,10 @@
 
                                 <div class="greyBackground marginLRT30">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
                                 <div >
-                                     <h:link class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/index"/> 
+                                     <h:link class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/client/clientFillAccountData"/> 
                                 </div>
                                 <div>
-                                     <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" />
+                                    <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" outcome="/consultant/consultantCreateAccount"/>
                                 </div>
                             </h:form>
                         </div>
@@ -92,14 +92,9 @@
                             </div>       
                         </div>
                     </div>
-                    
-                    
-                        
+                      
                     </ui:define>
 
-            
-            
-            
         </ui:composition>
     
     </body>
