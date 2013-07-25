@@ -7,7 +7,6 @@ img{border:0px;}
     padding: 5px;
     margin: 0px 0px 0px 0px;
     height: 150px;
-    border:1px solid #dddddd;
 }
 
 #bottom {
@@ -16,7 +15,6 @@ img{border:0px;}
     padding: 0px;
     margin: 0px -20px 0px -20px;
     height: 150px;
-    border:1px solid #dddddd;
 }
 
 #left {
@@ -38,7 +36,6 @@ img{border:0px;}
     background-color: #ffffff;
     padding: 0px 5px;
     min-height: 500px;
-    border:1px solid #dddddd;
     border-bottom: 4px solid #5297cb;
 }
 
