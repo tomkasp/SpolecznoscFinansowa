@@ -24,7 +24,7 @@
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
                                 </h:panelGroup>
                             </div>
                     </ui:define>
@@ -62,8 +62,11 @@
                                  <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
-                            <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/>
-
+                            
+                            <h:form>
+                            <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/consultant/consultantMainPage"/>
+                            </h:form>
+                            
                         </div>
                     </div>
                         
@@ -198,7 +201,9 @@
                                 <f:selectItem itemLabel="akceptuję regulamin" /> 
                                 <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" />
                             </p:selectManyCheckbox>
-                            <div style="min-height: 40px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/> </div>
+                            <div style="min-height: 40px;"> 
+                                <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="/consultant/consultantMainPage"/> 
+                            </div>
                     </div>
                         
                         
@@ -255,7 +260,7 @@
                         
                    
                         
-                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/index"/> </div>
+                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/consultant/consultantMainPage"/> </div>
                    
                     </div>
                     </ui:define>

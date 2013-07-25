@@ -7,165 +7,165 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    
-    
+
+
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-                 
-                  <ui:define name="top"> 
-                            <h:outputStylesheet library="css" name="green.css" />
-            
-                      
-                            <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
-                            </div>
 
-                            <div class="topbarMenuGreen">
-                                <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                                </h:panelGroup>
-                            </div>
-                    </ui:define>
-                    <ui:define name="content">
-                        <div id="profileBar" class="profilBar">
-                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
 
-                            <div id="spaceFiller" > </div>
-                            <div>     
-                                <h5> Stanisław Nowy </h5> 
-                                <h:outputText class="profileText" value="nr. klienta:" />
-                                <h5> 000001 </h5>
-                                <h:outputText class="profileText" value="Stan konta:" />
-                                <h5> 3/5 pkt. </h5>
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <div class="topbarMenuGreen">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+            <ui:define name="content">
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5> Stanisław Nowy </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5> 000001 </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5> 3/5 pkt. </h5>
+                    </div>
+                </div>
+
+                <div style="min-height: 560px">
+                    <div class="leftThinerBox">
+                        <h3 class="greenLeftBorder"> Twoje potrzeby finansowe </h3>
+                        <h:outputText class="redMessage marginL20" value="Im więcej danych tym większe prawdopodobieństwo"/> <br />
+                        <h:outputText class="redMessage marginL20" value="otrzymania kredytu."/> 
+
+                        <h:form>
+                            <div class="marginLRT30" >
+                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <p:selectOneMenu style="width: 200px"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/>  <p:selectOneMenu style="width: 137px"/> </div>
                             </div>
+                        </h:form>
+
+                        <h4 class="greenLeftBorder">DODAWANIE RAPORTU BIK</h4>
+                        <div class="solidText">
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqu.
+                            Ut enim ad minim veniam, quis nostrud exercitation u
+                            llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit 
                         </div>
-                        
-                        <div style="min-height: 560px">
-                         <div class="leftThinerBox">
-                             <h3 class="greenLeftBorder"> Twoje potrzeby finansowe </h3>
-                             <h:outputText class="redMessage marginL20" value="Im więcej danych tym większe prawdopodobieństwo"/> <br />
-                             <h:outputText class="redMessage marginL20" value="otrzymania kredytu."/> 
-                        
-                            <h:form>
-                                    <div class="marginLRT30" >
-                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <p:selectOneMenu style="width: 200px"/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/>  <p:selectOneMenu style="width: 137px"/> </div>
-                                    </div>
-                            </h:form>
-                             
-                             <h4 class="greenLeftBorder">DODAWANIE RAPORTU BIK</h4>
-                             <div class="solidText">
-                                Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqu.
-                                Ut enim ad minim veniam, quis nostrud exercitation u
-                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                Duis aute irure dolor in reprehenderit in voluptate velit 
-                             </div>
-                             <div class="marginLR30 marginTB20">
-                                  <p:selectManyCheckbox styleClass="fontGrey" layout="pageDirection">
-                                       <f:selectItem itemLabel="posiadam raport BIK" /> 
-                                       <f:selectItem itemLabel="nie posiadam raportu BIK" />
-                                   </p:selectManyCheckbox>
-                             </div>
-                             
-                            <div>
-                                <h:link class="greyButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" />
-                            </div>
-                             
-                             <div class="marginTB20 centerLink" >
-                                 <h:link class="greenLink " value="Więcej o usłudze" />   
-                             </div>
-                         </div> 
-                        
-                        <div class="rightWiderBox">
-                            <div class="marginTB20">
-                                 <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
-                                 <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
-                            </div>
-                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/> </div>
-                           
-                           <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
-                  
-                           <p:dataTable>
-                                 <p:column headerText="Lp">  
-                                 </p:column>  
+                        <div class="marginLR30 marginTB20">
+                            <p:selectManyCheckbox styleClass="fontGrey" layout="pageDirection">
+                                <f:selectItem itemLabel="posiadam raport BIK" /> 
+                                <f:selectItem itemLabel="nie posiadam raportu BIK" />
+                            </p:selectManyCheckbox>
+                        </div>
 
-                                 <p:column headerText="Rodzaj">  
-                                 </p:column>  
+                        <div>
+                            <h:link class="greyButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" outcome="/consultant/consultantCreateAccount" />
+                        </div>
 
-                                 <p:column headerText="Wygasa">    
-                                 </p:column>  
+                        <div class="marginTB20 centerLink" >
+                            <h:link class="greenLink " value="Więcej o usłudze" />   
+                        </div>
+                    </div> 
 
-                                 <p:column headerText="Rata">  
-                                 </p:column>  
+                    <div class="rightWiderBox">
+                        <div class="marginTB20">
+                            <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
+                            <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
+                        </div>
+                        <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/client/clientMainPage.xhtml"/> </div>
 
-                                 <p:column headerText="Kwota">  
-                                 </p:column> 
+                        <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
 
-                                 <p:column headerText="Zaległe"  >  
-                                 </p:column> 
-                         </p:dataTable>
-                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/index"/>
-                         <div style="min-height: 270px;"> </div>
-                    </div>
-                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/>
-                 </div>
-                        
-                 <div class="bottomTable topGreenLine">
-                        
-                        <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
                         <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
+                            <p:column headerText="Lp">  
+                            </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                            <p:column headerText="Rodzaj">  
+                            </p:column>  
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                            <p:column headerText="Wygasa">    
+                            </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
+                            <p:column headerText="Rata">  
+                            </p:column>  
+
+                            <p:column headerText="Kwota">  
+                            </p:column> 
+
+                            <p:column headerText="Zaległe"  >  
+                            </p:column> 
                         </p:dataTable>
-                   
+                        <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/client/clientAddObligation"/>
+                        <div style="min-height: 270px;"> </div>
                     </div>
+                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/client/clientMainPage.xhtml"/>
+                </div>
+
+                <div class="bottomTable topGreenLine">
+
+                    <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
+                    <p:dataTable>
+                        <p:column headerText="Lp">  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>  
+
+                    </p:dataTable>
+
+                </div>
             </ui:define>
         </ui:composition>
     </body>

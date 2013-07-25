@@ -7,163 +7,161 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    
-    
+
+
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-                 
-                  <ui:define name="top"> 
-                            <h:outputStylesheet library="css" name="green.css" />
-            
-                      
-                            <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
-                            </div>
 
-                            <div class="topbarMenuGreen">
-                                <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                                </h:panelGroup>
-                            </div>
-                    </ui:define>
-            
-                    <ui:define name="content">
-                        <div id="profileBar" class="profilBar">
-                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
 
-                            <div id="spaceFiller" > </div>
-                            <div>     
-                                <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
-                                <h:outputText class="profileText" value="nr. klienta:" />
-                                <h5 class="greenRightBorder"> 000001 </h5>
-                                <h:outputText class="profileText" value="Stan konta:" />
-                                <h5 class="greenRightBorder"> 3/5 pkt. </h5>
-                            </div>
-                        </div>
-                        
-                    <div style="min-height: 650px">
-                         <div class="leftThinerBox">
-                             <h3 class="greenLeftBorder"> Uzupelnij swoje dane </h3>
-                             <h:outputText  class="redMessage marginL20" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
-                        
-                        
-                            <h:form>
-                                    <div class="marginLRT30">
-                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Rok Urodzenia"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%"/> </div>
-                                        <div class="field"> <h:outputText class="label" value=" "/> <h:link class="greenLink" value="Działalność gospodarcza"/></div>
-                                        <div class="field"> <h:outputText class="label" value="Wynagrodzenie netto"/> <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 57%"/> </div>
-                                    </div>
-                                    <div class="marginLR30" >
-                                        <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
-                                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth" /> </div>
-                                    </div>
-                            </h:form>
-                         </div> 
-                        
-                        <div class="rightWiderBox">
-                            <div class="marginTB20">
-                                 <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
-                                 <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
-                            </div>
-                            <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/index"/> </div>
-                           
-                            <h4 class="greenLeftBorder"> SZYBKA POMOC </h4>
-                            <div class="solidText" style="margin-bottom: 60px;"> 
-                                Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqu.
-                                Ut enim ad minim veniam, quis nostrud exercitation u
-                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                Duis aute irure dolor in reprehenderit in voluptate velit 
-                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-                                anim id est laborum. 
-                                <br />
-                                <br />                            
-                                Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqu.
-                                Ut enim ad minim veniam, quis nostrud exercitation u
-                                llamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                Duis aute irure dolor in reprehenderit in voluptate velit 
-                                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-                                anim id est laborum. 
-                            </div>   
-                            
-                        </div>
-                        
-                            
-                        </div>
-                        <div style="min-height: 30px;">
-                        <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/index"/>
-                         
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <div class="topbarMenuGreen">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5 class="greenRightBorder"> 000001 </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
                     </div>
-                    
-                                         
-                    <div class="bottomTable topGreenLine">
-                        
-                        <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
-                        <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
+                </div>
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                <div style="min-height: 650px">
+                    <div class="leftThinerBox">
+                        <h3 class="greenLeftBorder"> Uzupelnij swoje dane </h3>
+                        <h:outputText  class="redMessage marginL20" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
-                        </p:dataTable>
-                   
+                        <h:form>
+                            <div class="marginLRT30">
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Rok Urodzenia"/>  <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%"/> </div>
+                                <div class="field"> <h:outputText class="label" value=" "/> <h:link class="greenLink" value="Działalność gospodarcza"/></div>
+                                <div class="field"> <h:outputText class="label" value="Wynagrodzenie netto"/> <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 57%"/> </div>
+                            </div>
+                            <div class="marginLR30" >
+                                <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText class="inputWidth" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth" /> </div>
+                            </div>
+                        </h:form>
+                    </div> 
+
+                    <div class="rightWiderBox">
+                        <div class="marginTB20">
+                            <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
+                            <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
+                        </div>
+                        <div style="min-height: 40px;"> <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/client/clientMainPage.xhtml"/> </div>
+
+                        <h4 class="greenLeftBorder"> SZYBKA POMOC </h4>
+                        <div class="solidText" style="margin-bottom: 60px;"> 
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqu.
+                            Ut enim ad minim veniam, quis nostrud exercitation u
+                            llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit 
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                            anim id est laborum. 
+                            <br />
+                            <br />                            
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqu.
+                            Ut enim ad minim veniam, quis nostrud exercitation u
+                            llamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit 
+                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
+                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+                            anim id est laborum. 
+                        </div>   
+
                     </div>
-                    </ui:define>
+
+
+                </div>
+                <div style="min-height: 30px;">
+                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/client/clientFinancialNeeds"/>
+
+                </div>
+
+
+                <div class="bottomTable topGreenLine">
+
+                    <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
+                    <p:dataTable>
+                        <p:column headerText="Lp">  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>  
+
+                    </p:dataTable>
+
+                </div>
+            </ui:define>
         </ui:composition>
     </body>
 </html>
-                        
