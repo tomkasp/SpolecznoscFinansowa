@@ -52,8 +52,17 @@
 
                         <h:form>
                             <div class="marginLRT30" >
-                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <p:selectOneMenu style="width: 200px"/> </div>
-                                <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/>  <p:selectOneMenu style="width: 137px"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  
+                                    <p:selectOneMenu style="width: 200px"> 
+                                     <f:selectItem  itemValue="konsolidacyjny" itemLabel="konsolidacyjny" />
+                                    </p:selectOneMenu>
+                                
+                                </div>
+                                <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/> 
+                                    <p:selectOneMenu style="width: 137px">
+                                         <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                    </p:selectOneMenu> 
+                                </div>
                             </div>
                         </h:form>
 
