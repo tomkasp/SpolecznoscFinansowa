@@ -15,11 +15,11 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             
                   <ui:define name="top"> 
-                            <div class="topbarLogo">
+                           <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
+                                <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                             </div>
 
                             <div class="topbarMenuBlue">
@@ -264,7 +264,7 @@
                                 <f:selectItem itemLabel="akceptuję regulamin" /> 
                                 <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" />
                             </p:selectManyCheckbox>
-                            <div style="min-height: 60px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/> </div>
+                            <div style="min-height: 60px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/consultant/consultantMainPage"/> </div>
                     </div>
                         
                   
