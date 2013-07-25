@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 09:27:03 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-25 12:36:34 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -29,6 +29,7 @@ public class IncomeBuisnessActivity  implements java.io.Serializable {
      private Integer idIncomeBuisnessActivity;
      private Client client;
      private EmploymentType employmentType;
+     private Branch branch;
      private Date beginDate;
      private String revenueExpenceLedger;
      private BigDecimal incomeCurrentYearBrutto;
@@ -54,12 +55,14 @@ public class IncomeBuisnessActivity  implements java.io.Serializable {
     }
 
 	
-    public IncomeBuisnessActivity(EmploymentType employmentType) {
+    public IncomeBuisnessActivity(EmploymentType employmentType, Branch branch) {
         this.employmentType = employmentType;
+        this.branch = branch;
     }
-    public IncomeBuisnessActivity(Client client, EmploymentType employmentType, Date beginDate, String revenueExpenceLedger, BigDecimal incomeCurrentYearBrutto, BigDecimal incomeLastYearBrutto, BigDecimal incomeCurrentYearNetto, BigDecimal incomeLastYearNetto, BigDecimal incomeTax6mthAdv, BigDecimal valueZus, BigDecimal valueUs, BigDecimal valueKrd, String titleKrd, BigDecimal depreciationCurrentYear, BigDecimal depreciationLastYear, BigDecimal rateRe, BigDecimal incomeLastYearRe, BigDecimal incomeCurrentYearRe, BigDecimal taxValue1mth, BigDecimal taxValue2mth, BigDecimal taxValue3mth, BigDecimal constantAmountCard) {
+    public IncomeBuisnessActivity(Client client, EmploymentType employmentType, Branch branch, Date beginDate, String revenueExpenceLedger, BigDecimal incomeCurrentYearBrutto, BigDecimal incomeLastYearBrutto, BigDecimal incomeCurrentYearNetto, BigDecimal incomeLastYearNetto, BigDecimal incomeTax6mthAdv, BigDecimal valueZus, BigDecimal valueUs, BigDecimal valueKrd, String titleKrd, BigDecimal depreciationCurrentYear, BigDecimal depreciationLastYear, BigDecimal rateRe, BigDecimal incomeLastYearRe, BigDecimal incomeCurrentYearRe, BigDecimal taxValue1mth, BigDecimal taxValue2mth, BigDecimal taxValue3mth, BigDecimal constantAmountCard) {
        this.client = client;
        this.employmentType = employmentType;
+       this.branch = branch;
        this.beginDate = beginDate;
        this.revenueExpenceLedger = revenueExpenceLedger;
        this.incomeCurrentYearBrutto = incomeCurrentYearBrutto;
@@ -109,6 +112,15 @@ public class IncomeBuisnessActivity  implements java.io.Serializable {
     
     public void setEmploymentType(EmploymentType employmentType) {
         this.employmentType = employmentType;
+    }
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fk_branch", nullable=false)
+    public Branch getBranch() {
+        return this.branch;
+    }
+    
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
     @Temporal(TemporalType.DATE)
     @Column(name="beginDate", length=10)
