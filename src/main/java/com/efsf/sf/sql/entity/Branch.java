@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 12:36:34 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-25 12:50:30 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
 public class Branch  implements java.io.Serializable {
 
 
-     private Integer isBranch;
+     private Integer idBranch;
      private String name;
      private Set<Income> incomes = new HashSet<Income>(0);
      private Set<IncomeBuisnessActivity> incomeBuisnessActivities = new HashSet<IncomeBuisnessActivity>(0);
@@ -46,13 +46,13 @@ public class Branch  implements java.io.Serializable {
    
      @Id @GeneratedValue(strategy=IDENTITY)
     
-    @Column(name="is_branch", unique=true, nullable=false)
-    public Integer getIsBranch() {
-        return this.isBranch;
+    @Column(name="id_branch", unique=true, nullable=false)
+    public Integer getIdBranch() {
+        return this.idBranch;
     }
     
-    public void setIsBranch(Integer isBranch) {
-        this.isBranch = isBranch;
+    public void setIdBranch(Integer idBranch) {
+        this.idBranch = idBranch;
     }
     
     @Column(name="name", unique=true, nullable=false, length=35)
