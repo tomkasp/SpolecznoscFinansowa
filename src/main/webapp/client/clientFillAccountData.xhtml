@@ -55,10 +55,18 @@
                                 <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Rok Urodzenia"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%"/> </div>
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%">
+                                         <f:selectItem  itemValue="umowa o pracę" itemLabel="umowa o pracę" />
+                                    </p:selectOneMenu>
+                                </div>
                                 <div class="field"> <h:outputText class="label" value=" "/> <h:link class="greenLink" value="Działalność gospodarcza"/></div>
                                 <div class="field"> <h:outputText class="label" value="Wynagrodzenie netto"/> <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 57%"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Branża"/> 
+                                    <p:selectOneMenu style="width: 57%"> 
+                                     <f:selectItem  itemValue="budownictwo" itemLabel="budownictwo" />
+                                    </p:selectOneMenu>
+                                </div>
                             </div>
                             <div class="marginLR30" >
                                 <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>

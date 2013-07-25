@@ -59,10 +59,18 @@
                                 <div class="field" style="margin: 0;"> <h:outputText class="label3" style="color: red" value="dotycząca twojego konta."/> </div>                        
                                 <div class="field"> <h:outputText class="label" value="Rok urodzenia"/>  <h:inputText class="inputWidth" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Dochód"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/> 
+                                    <p:selectOneMenu style="width: 57%" > 
+                                     <f:selectItem  itemValue="test" itemLabel="umowa o prace" />
+                                    </p:selectOneMenu>
+                                </div>
                                 <div class="field"> <h:outputText class="label" value=""/>  <h:link class="greenLink" value="Działalność gospodarcza"/> </div>
                                 <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Branża"/>  <p:selectOneMenu style="width: 57%;" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Branża"/>  
+                                    <p:selectOneMenu style="width: 57%;" >
+                                         <f:selectItem  itemValue="test" itemLabel="budownictwo" />
+                                        </p:selectOneMenu>
+                                </div>
                                 <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText class="inputWidth" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth" /> </div>
