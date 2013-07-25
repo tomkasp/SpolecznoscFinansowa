@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 09:27:03 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-25 12:50:30 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -29,8 +29,8 @@ public class Income  implements java.io.Serializable {
      private Integer idIncome;
      private Client client;
      private EmploymentType employmentType;
+     private Branch branch;
      private String employer;
-     private String branch;
      private BigDecimal monthlyNetto;
      private Date beginDate;
 
@@ -38,15 +38,16 @@ public class Income  implements java.io.Serializable {
     }
 
 	
-    public Income(Client client, EmploymentType employmentType) {
+    public Income(Client client, EmploymentType employmentType, Branch branch) {
         this.client = client;
         this.employmentType = employmentType;
+        this.branch = branch;
     }
-    public Income(Client client, EmploymentType employmentType, String employer, String branch, BigDecimal monthlyNetto, Date beginDate) {
+    public Income(Client client, EmploymentType employmentType, Branch branch, String employer, BigDecimal monthlyNetto, Date beginDate) {
        this.client = client;
        this.employmentType = employmentType;
-       this.employer = employer;
        this.branch = branch;
+       this.employer = employer;
        this.monthlyNetto = monthlyNetto;
        this.beginDate = beginDate;
     }
@@ -79,6 +80,15 @@ public class Income  implements java.io.Serializable {
     public void setEmploymentType(EmploymentType employmentType) {
         this.employmentType = employmentType;
     }
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="fk_branch", nullable=false)
+    public Branch getBranch() {
+        return this.branch;
+    }
+    
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
     
     @Column(name="employer")
     public String getEmployer() {
@@ -87,15 +97,6 @@ public class Income  implements java.io.Serializable {
     
     public void setEmployer(String employer) {
         this.employer = employer;
-    }
-    
-    @Column(name="branch", length=45)
-    public String getBranch() {
-        return this.branch;
-    }
-    
-    public void setBranch(String branch) {
-        this.branch = branch;
     }
     
     @Column(name="monthlyNetto", precision=8)

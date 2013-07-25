@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 09:27:03 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-25 12:50:30 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -42,10 +42,8 @@ public class Address  implements java.io.Serializable {
     }
 
 	
-    public Address(Region region, Consultant consultant, Client client, String houseNumber) {
+    public Address(Region region, String houseNumber) {
         this.region = region;
-        this.consultant = consultant;
-        this.client = client;
         this.houseNumber = houseNumber;
     }
     public Address(Region region, Consultant consultant, Client client, String street, String houseNumber, String zipCode, String city, String country, String phone, Set<InvoiceData> invoiceDatas) {
@@ -81,7 +79,7 @@ public class Address  implements java.io.Serializable {
         this.region = region;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_consultant", nullable=false)
+    @JoinColumn(name="fk_consultant")
     public Consultant getConsultant() {
         return this.consultant;
     }
@@ -90,7 +88,7 @@ public class Address  implements java.io.Serializable {
         this.consultant = consultant;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_client", nullable=false)
+    @JoinColumn(name="fk_client")
     public Client getClient() {
         return this.client;
     }
