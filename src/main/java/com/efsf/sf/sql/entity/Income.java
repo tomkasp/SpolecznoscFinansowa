@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 12:36:34 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-25 12:50:30 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;
@@ -31,7 +31,6 @@ public class Income  implements java.io.Serializable {
      private EmploymentType employmentType;
      private Branch branch;
      private String employer;
-     private String branch_1;
      private BigDecimal monthlyNetto;
      private Date beginDate;
 
@@ -44,12 +43,11 @@ public class Income  implements java.io.Serializable {
         this.employmentType = employmentType;
         this.branch = branch;
     }
-    public Income(Client client, EmploymentType employmentType, Branch branch, String employer, String branch_1, BigDecimal monthlyNetto, Date beginDate) {
+    public Income(Client client, EmploymentType employmentType, Branch branch, String employer, BigDecimal monthlyNetto, Date beginDate) {
        this.client = client;
        this.employmentType = employmentType;
        this.branch = branch;
        this.employer = employer;
-       this.branch_1 = branch_1;
        this.monthlyNetto = monthlyNetto;
        this.beginDate = beginDate;
     }
@@ -99,15 +97,6 @@ public class Income  implements java.io.Serializable {
     
     public void setEmployer(String employer) {
         this.employer = employer;
-    }
-    
-    @Column(name="branch", length=45)
-    public String getBranch_1() {
-        return this.branch_1;
-    }
-    
-    public void setBranch_1(String branch_1) {
-        this.branch_1 = branch_1;
     }
     
     @Column(name="monthlyNetto", precision=8)
