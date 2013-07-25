@@ -13,16 +13,21 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
                  
-                  <ui:define name="top"> 
-                            <h:outputStylesheet library="css" name="green.css" />
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
             
-                      
-                            <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage>
-                                <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage>
-                            </div>
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> 
+                        <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> 
+                    </h:link>
+                    <h:link outcome="/client/clientMainPage"> 
+                        <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> 
+                    </h:link>
+                    <h:link outcome="/client/clientSettings"> 
+                        <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> 
+                    </h:link>
+                </div>
 
                             <div class="topbarMenuGreen">
                                 <h:panelGroup>
@@ -84,11 +89,11 @@
                                  </p:selectOneRadio> 
                              </p:outputPanel>
                            
-                             <h:panelGrid columns="3">  
+                    <h:panelGrid columns="3">  
                                 
-                                 <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>  
-                                 <h:outputText class="fontGrey" value="Województwo" />
-                                 <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
+                        <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>  
+                        <h:outputText class="fontGrey" value="Województwo" />
+                        <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
              
                                  <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
                                  <h:outputText  class="fontGrey" value="W odległości" />
@@ -98,93 +103,93 @@
                                     <h:inputText class="borderedInput" size="12" value="(kod pocztowy)"/>    
                                  </h:panelGroup>
                                  
-                                 <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
-                                 <h:outputText   class="fontGrey" value="Miejscowość" />
-                                 <h:inputText class="borderedInput" size="27" />
+                        <p:radioButton id="opt3" for="customRadio" itemIndex="2"/> 
+                        <h:outputText   class="fontGrey" value="Miejscowość" />
+                        <h:inputText class="borderedInput" size="27" />
                                  
-                             </h:panelGrid>  
+                    </h:panelGrid>  
                            
-                             <h:panelGroup>
-                                    <h:link class="redX floatL" style="color: red" value="Wyczyść" />
+                    <h:panelGroup>
+                        <h:link class="redX floatL" style="color: red" value="Wyczyść" />
                                   
                                     <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
                              </h:panelGroup>
                        </p:overlayPanel> 
 
                        
-                       <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
-                           <h:panelGroup>   
-                                <h:link class="fontBlue" value="umowa o pracę"/> 
-                                <p:spacer styleClass="spacer" />
-                                <h:link class="fontBlue" value="działalnośc gosp."/>  
-                           </h:panelGroup>
-                           <div>
-                               <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
-                                    <f:selectItem itemLabel="umowa o pracę" />  
-                                    <f:selectItem itemLabel="umowa o pracę czas określony" />  
-                                    <f:selectItem itemLabel="umowa o dzieło/zlecenie" />  
-                                    <f:selectItem itemLabel="renta/emerytura" />  
-                                    <f:selectItem itemLabel="marynarz" />  
-                                    <f:selectItem itemLabel="gospodarstwo rolne" />  
-                                    <f:selectItem itemLabel="dochody uzyskane za granicą" /> 
-                                    <f:selectItem itemLabel="działy specjalnej produkcji rolnej" /> 
-                                    <f:selectItem itemLabel="najem poza działalnością gospodarczą" /> 
-                               </p:selectManyCheckbox> 
-                           </div>
-                           <h:panelGroup>
-                               <h:link class="redX floatL" style="color: red" value="Wyczyść" />
+                <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
+                    <h:panelGroup>   
+                        <h:link class="fontBlue" value="umowa o pracę"/> 
+                        <p:spacer styleClass="spacer" />
+                        <h:link class="fontBlue" value="działalnośc gosp."/>  
+                    </h:panelGroup>
+                    <div>
+                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
+                            <f:selectItem itemLabel="umowa o pracę" />  
+                            <f:selectItem itemLabel="umowa o pracę czas określony" />  
+                            <f:selectItem itemLabel="umowa o dzieło/zlecenie" />  
+                            <f:selectItem itemLabel="renta/emerytura" />  
+                            <f:selectItem itemLabel="marynarz" />  
+                            <f:selectItem itemLabel="gospodarstwo rolne" />  
+                            <f:selectItem itemLabel="dochody uzyskane za granicą" /> 
+                            <f:selectItem itemLabel="działy specjalnej produkcji rolnej" /> 
+                            <f:selectItem itemLabel="najem poza działalnością gospodarczą" /> 
+                        </p:selectManyCheckbox> 
+                    </div>
+                    <h:panelGroup>
+                        <h:link class="redX floatL" style="color: red" value="Wyczyść" />
              
-                               <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
-                           </h:panelGroup>
-                       </p:overlayPanel> 
+                        <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                    </h:panelGroup>
+                </p:overlayPanel> 
                        
                        <div class="marginT50 marginB30">
                         <p:dataTable  paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
                                  <p:column headerText="Lp">  
                                  </p:column>  
 
-                                 <p:column headerText="Numer klienta">  
-                                 </p:column>  
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
 
-                                 <p:column headerText="Data dodania">    
-                                 </p:column>  
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
 
-                                 <p:column headerText="Numer sprawy">  
-                                 </p:column>  
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
 
-                                 <p:column headerText="Postęp">  
-                                 </p:column> 
+                        <p:column headerText="Postęp">  
+                        </p:column> 
 
-                                 <p:column headerText="Rodzaj kredytu"  >  
-                                 </p:column> 
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
 
-                                 <p:column headerText="BIK">  
-                                 </p:column> 
+                        <p:column headerText="BIK">  
+                        </p:column> 
 
-                                 <p:column headerText="Kod pocztowy">  
-                                 </p:column>
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
 
-                                 <p:column headerText="Wiek">  
-                                 </p:column>
+                        <p:column headerText="Wiek">  
+                        </p:column>
 
-                                 <p:column headerText="Typ zatrudnienia">  
-                                 </p:column>
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
 
-                                 <p:column headerText="Branża">  
-                                 </p:column>
+                        <p:column headerText="Branża">  
+                        </p:column>
 
-                                 <p:column headerText="Trudności kredytu">  
-                                 </p:column>
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
 
-                                 <p:column headerText="Ilość doradców">  
-                                 </p:column>
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
 
-                                 <p:column headerText="Koniec aukcji">  
-                                 </p:column>  
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>  
 
-                         </p:dataTable>
-                       </div>
-                   </ui:define>
+                    </p:dataTable>
+                </div>
+            </ui:define>
 
             
             

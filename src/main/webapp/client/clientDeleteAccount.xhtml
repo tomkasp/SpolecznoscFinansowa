@@ -9,18 +9,32 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-
+            
+            <ui:define name="top" class=""> 
+                            <h:outputStylesheet library="css" name="green.css" />
+                            
+                            <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                            </div>
+                            
+                            <div class="topbarMenuGreen">
+                                <h:panelGroup>
+                                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="/login"/>
+                                </h:panelGroup>
+                            </div>
+                    </ui:define>
+            
             <ui:define name="content">
-
+                
                 <div class="centerFillBox"> 
 
-                    <div class="navibar"> Jesteś tutaj: <h:link value="Strona główna"/> > <h:link value="Porady"/> </div>
+                    <div class="navibar"> Jesteś tutaj: <h:link value="Strona główna" outcome="/index"/> > <h:link value="Usun Konto"/> </div>
 
                     <h:form>
 
                         <div class="newsletter">
                             <h:inputText class="label2" value="wpisz email aby dostać Newsletter" />
-                            <h:link class="blueButton" style="margin-left: 2px;" value="Akceptuj"/> 
+                            <h:link class="greenButton" style="margin-left: 2px;" value="Akceptuj"/> 
                         </div>
 
                     </h:form>
@@ -30,7 +44,7 @@
                 <div class="centerFillBox"> 
 
                     <h:form>
-                        <p:commandLink styleClass="blueButton" id="viewButton3" value="Usuń" icon="ui-icon-search" update=":dialog3"  oncomplete="usun.show()"/> 
+                        <p:commandLink styleClass="greenButton" id="viewButton3" value="Usuń" icon="ui-icon-search" update=":dialog3"  oncomplete="usun.show()"/> 
 
 
                     </h:form>
@@ -65,7 +79,7 @@
 
                         <div class="przyciskiDol" style="margin-top: 20px;">                  
                             <p:commandLink styleClass="greenButton" style="margin-right: 12px; color: black;" value="Anuluj" type="submit" onclick="usun.hide()" /> 
-                            <p:commandLink styleClass="greyButton" style="color: red;" value="Usuń"   type="submit" onclick="usun.hide()" /> 
+                            <h:link styleClass="greyButton" style="color: red;" value="Usuń"    outcome="/index" /> 
                         </div>
                     </h:form> 
 
