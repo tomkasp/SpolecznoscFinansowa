@@ -61,15 +61,21 @@
                        <div>
                            <h:panelGroup style="margin-right: 65px">
                                <h:outputText class="fontGrey marginLR30" value="Branża" /> 
-                               <p:selectOneMenu style="width: 145px"/>
+                               <p:selectOneMenu style="width: 145px">
+                                    <f:selectItem  itemValue="test" itemLabel="budownictwo" />
+                               </p:selectOneMenu>
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 71px">
                                <h:outputText class="fontGrey marginLR30" value="Lokalizacja" /> 
-                               <p:selectOneMenu id="localizationButton" style="width: 145px"/>
+                               <p:selectOneMenu id="localizationButton" style="width: 145px">
+                                    <f:selectItem  itemValue="test" itemLabel="Wrocław" />
+                               </p:selectOneMenu>
                            </h:panelGroup>  
                            <h:panelGroup>
                                <h:outputText class="fontGrey marginLR30" value="Zatrudnienie" /> 
-                               <p:selectOneMenu id="employmentButton" style="width: 145px"/>
+                               <p:selectOneMenu id="employmentButton" style="width: 145px">
+                                    <f:selectItem  itemValue="test" itemLabel="umowa o pracę" />
+                               </p:selectOneMenu>
                            </h:panelGroup> 
                        </div>
                        
@@ -86,7 +92,9 @@
                                 
                                  <p:radioButton id="opt1" for="customRadio" itemIndex="0"/>  
                                  <h:outputText class="fontGrey" value="Województwo" />
-                                 <p:selectOneMenu style="width: 200px" value="dolnośląskie"/>
+                                 <p:selectOneMenu style="width: 200px" value="dolnośląskie">
+                                      <f:selectItem  itemValue="test" itemLabel="Dolnośląskie" />
+                                 </p:selectOneMenu>
              
                                  <p:radioButton id="opt2" for="customRadio" itemIndex="1"/>  
                                  <h:outputText  class="fontGrey" value="W odległości" />

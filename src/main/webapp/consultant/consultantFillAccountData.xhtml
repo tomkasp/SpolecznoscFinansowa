@@ -156,14 +156,22 @@
                         
                     <div>
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
-                        <div> <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30"></p:selectOneMenu> </div>
+                        <div> 
+                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30">
+                                 <f:selectItem  itemValue="test" itemLabel="cała polska" />
+                            </p:selectOneMenu> 
+                        </div>
                         <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" /> </div>
                     </div>  
                     <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
                     <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
                     <div class="adressSection">
                         <div style="min-height: 26px;" class="field"> </div>
-                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 39%; "> </p:selectOneMenu> </div>
+                        <div class="field"> 
+                            <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 39%; "> 
+                                 <f:selectItem  itemValue="test" itemLabel="Dolnośląskie" />
+                            </p:selectOneMenu> 
+                        </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
@@ -177,7 +185,11 @@
                     <div class="invoiceSection invoiceSectionContent">
                         
                         <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
-                        <div class="field"> <h:outputText class="label" value="Województwo"/>  <p:selectOneMenu style="width: 39%"> </p:selectOneMenu> </div>
+                        <div class="field"> <h:outputText class="label" value="Województwo"/> 
+                            <p:selectOneMenu style="width: 39%"> 
+                                 <f:selectItem  itemValue="test" itemLabel="Pomorskie" />
+                            </p:selectOneMenu>
+                        </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
