@@ -7,5 +7,32 @@
     <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
     <property name="hibernate.connection.username">SFuser</property>
     <property name="hibernate.connection.password">SFuser123</property>
+    <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
+    <mapping class="com.efsf.sf.sql.entity.Address"/>
+    <mapping class="com.efsf.sf.sql.entity.IncomeBuisnessActivity"/>
+    <mapping class="com.efsf.sf.sql.entity.Subscription"/>
+    <mapping class="com.efsf.sf.sql.entity.Education"/>
+    <mapping class="com.efsf.sf.sql.entity.Income"/>
+    <mapping class="com.efsf.sf.sql.entity.CaseRating"/>
+    <mapping class="com.efsf.sf.sql.entity.ProductDetails"/>
+    <mapping class="com.efsf.sf.sql.entity.EmploymentType"/>
+    <mapping class="com.efsf.sf.sql.entity.Consultant"/>
+    <mapping class="com.efsf.sf.sql.entity.InvoiceData"/>
+    <mapping class="com.efsf.sf.sql.entity.RequiredDocuments"/>
+    <mapping class="com.efsf.sf.sql.entity.IdentyficationDocument"/>
+    <mapping class="com.efsf.sf.sql.entity.SubscriptionType"/>
+    <mapping class="com.efsf.sf.sql.entity.User"/>
+    <mapping class="com.efsf.sf.sql.entity.Obligation"/>
+    <mapping class="com.efsf.sf.sql.entity.Region"/>
+    <mapping class="com.efsf.sf.sql.entity.ConsultantRating"/>
+    <mapping class="com.efsf.sf.sql.entity.ProductType"/>
+    <mapping class="com.efsf.sf.sql.entity.Product"/>
+    <mapping class="com.efsf.sf.sql.entity.Client"/>
+    <mapping class="com.efsf.sf.sql.entity.Institution"/>
+    <mapping class="com.efsf.sf.sql.entity.Message"/>
+    <mapping class="com.efsf.sf.sql.entity.CaseStatus"/>
+    <mapping class="com.efsf.sf.sql.entity.ClientCase"/>
+    <mapping class="com.efsf.sf.sql.entity.MaritalStatus"/>
+    <mapping class="com.efsf.sf.sql.entity.Newsletter"/>
   </session-factory>
 </hibernate-configuration>
