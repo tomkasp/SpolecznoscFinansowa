@@ -283,7 +283,21 @@ input
 
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
     background: #F0F0F0;
+    border: none;
+    font-weight: bold!important;
 }
+
+.ui-selectonemenu label.ui-selectonemenu-label
+{
+     font-weight: bold!important;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border: none;
+    border-radius:  inherit;
+}
+
+
 
 
 
