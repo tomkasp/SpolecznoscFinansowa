@@ -43,7 +43,7 @@ public class FakeBean {
         trwajace.add(new FakeDataHolder("1","000120", "15.07.2013","000200" ,"80%","chwilówka", "nie", "54-763", "40", "UOP", "Budownictwo", "4/10", "6", "72h", "12", "kompletowanie dokumentów", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
         trwajace.add(new FakeDataHolder("1","000120", "16.07.2013","000205" ,"70%","chwilówka", "nie", "54-763", "40", "UOP", "Budownictwo", "5/10", "12", "72h", "12", "przetwarzanie danych", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
         
-        zakończone.add(new FakeDataHolder("1","000120", "11.02.2013","000205" ,"100%","hipoteczny", "nie", "54-763", "40", "UOP", "Budownictwo", "8/10", "12", "72h", "12", "zakończony", "nie", "20.05.2012", "50000", "4.8", "20 dni", "700 PLN"));
+        zakończone.add(new FakeDataHolder("1","000120", "11.02.2013","000103" ,"100%","hipoteczny", "nie", "54-763", "40", "UOP", "Budownictwo", "8/10", "12", "72h", "12", "zakończony", "nie", "20.05.2012", "50000", "4.8", "20 dni", "700 PLN"));
         
         zobowiazania.add(new FakeDataHolder("1","chwilówka","30.07.2013","3 000 PLN","10 dni", "200 PLN"));
         zobowiazania.add(new FakeDataHolder("2","chwilówka","30.08.2013","1 000 PLN","0 dni", "75 PLN"));
