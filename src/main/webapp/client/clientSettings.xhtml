@@ -35,10 +35,11 @@
                     <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
                     <div id="spaceFiller"> </div>
                     <div>     
-                        <h5> Stanisław Nowy </h5> 
+                        <h5 class="greenRightBorder"> Tomasz Nowak </h5> 
                         <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5> 000001 </h5>
-
+                        <h5 class="greenRightBorder"> 000120 </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
                     </div>
                 </div>
 
@@ -91,9 +92,9 @@
 
                     <div class="rightWiderBox">
                         <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
-                        <div class="field"> <h:outputText class="label" value="Obecne hasło"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Nowe hasło"/>  <h:inputText/> </div>
-                        <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputText/> </div>
+                        <div class="field"> <h:outputText class="label" value="Obecne hasło"/>  <h:inputSecret/> </div>
+                        <div class="field"> <h:outputText class="label" value="Nowe hasło"/>  <h:inputSecret/> </div>
+                        <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputSecret/> </div>
                         <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="/index"/> </div>
                         <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
 
