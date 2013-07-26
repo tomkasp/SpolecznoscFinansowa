@@ -1,12 +1,14 @@
 .ui-widget-content.ui-datatable-even{
     background: none repeat scroll 0 0 #E7E3E3;
     text-align: center;
+    font-size: 11px;
 
 }
 
 .ui-widget-content.ui-datatable-odd{
     background: none repeat scroll 0 0 #ADADAD;
     text-align: center;
+    font-size: 11px;
 
 }
 
