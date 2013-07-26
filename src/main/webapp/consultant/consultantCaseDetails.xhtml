@@ -113,6 +113,13 @@
                                 </p:dataTable>
                                 -->
                                 <p:dataTable id="dataTable3" value="#{fakeBean.wygenerowanaOferta}" var="data" emptyMessage="brak klientów!" >
+                                    
+                                                         
+                                      <p:column headerText="">  
+                                          <p:selectBooleanCheckbox />
+                                      </p:column>   
+                                    
+                                    
                                       <p:column headerText="Nazwa instytucji">  
                                           <h:outputText value="#{data.nazwaBanku}" />
                                       </p:column>  
@@ -124,10 +131,7 @@
                                       <p:column headerText="Trafność">    
                                           <h:outputText value="#{data.trafność}" />
                                       </p:column>  
-                                    
-                                      <p:column headerText="">  
-                                          <p:selectBooleanCheckbox />
-                                      </p:column>    
+                
                                 </p:dataTable>
                                 
                                 
