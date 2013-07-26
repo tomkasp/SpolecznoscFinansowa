@@ -31,10 +31,10 @@ public class FakeBean {
     
     private ArrayList<FakeDataHolder> zakończone = new ArrayList();
     
+    private ArrayList<FakeDataHolder> wygenerowanaOferta = new ArrayList();
+
     private ArrayList<FakeDataHolder> premium;
-    
-    
-    
+ 
     private ArrayList<FakeDataHolder> zobowiazania = new ArrayList();
     /**
      * Creates a new instance of FakeBean
@@ -61,6 +61,12 @@ public class FakeBean {
         
         splacono.add(new FakeDataHolder("08.06.2013", "700", "49 300", "700"));
         splacono.add(new FakeDataHolder("10.07.2013", "700", "48 600", "1 400"));
+        
+        wygenerowanaOferta.add(new FakeDataHolder("SKOK", "Pożyczka Prestige", "83%" ));
+        wygenerowanaOferta.add(new FakeDataHolder("Provident", "Pożyczka dla Ciebie", "75%" ));
+        wygenerowanaOferta.add(new FakeDataHolder("Bocian", "Pożyczka pieniężna", "68%" ));
+        wygenerowanaOferta.add(new FakeDataHolder("Getin Bank", "Chwilówka na dowód", "60%" ));
+        wygenerowanaOferta.add(new FakeDataHolder("Ferratum", "Chwilówka z bankomatu", "60%" ));
         
     }
 
@@ -127,4 +133,13 @@ public class FakeBean {
     public void setHarmonogram(ArrayList<FakeDataHolder> harmonogram) {
         this.harmonogram = harmonogram;
     }
+        
+   public ArrayList<FakeDataHolder> getWygenerowanaOferta() {
+        return wygenerowanaOferta;
+    }
+
+    public void setWygenerowanaOferta(ArrayList<FakeDataHolder> wygenerowanaOferta) {
+        this.wygenerowanaOferta = wygenerowanaOferta;
+    }
+    
 }

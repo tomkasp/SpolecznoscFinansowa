@@ -41,6 +41,16 @@ public class FakeDataHolder
     private String pozostało; 
     private String spłacono;
 
+    public FakeDataHolder(String nazwaBanku, String nazwaOferty, String trafność) {
+        this.nazwaBanku = nazwaBanku;
+        this.nazwaOferty = nazwaOferty;
+        this.trafność = trafność;
+    }
+    
+    private String nazwaBanku;
+    private String nazwaOferty;
+    private String trafność;
+
 
     private String zalegle;
     private String rata;
@@ -294,6 +304,30 @@ public class FakeDataHolder
 
     public void setSpłacono(String spłacono) {
         this.spłacono = spłacono;
+    }
+
+    public String getNazwaBanku() {
+        return nazwaBanku;
+    }
+
+    public void setNazwaBanku(String nazwaBanku) {
+        this.nazwaBanku = nazwaBanku;
+    }
+
+    public String getNazwaOferty() {
+        return nazwaOferty;
+    }
+
+    public void setNazwaOferty(String nazwaOferty) {
+        this.nazwaOferty = nazwaOferty;
+    }
+
+    public String getTrafność() {
+        return trafność;
+    }
+
+    public void setTrafność(String trafność) {
+        this.trafność = trafność;
     }
    
 }
