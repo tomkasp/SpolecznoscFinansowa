@@ -29,6 +29,9 @@
                             </div>
                     </ui:define>
                    <ui:define name="content">
+                       
+                   
+                       
                        <h:form>
                         <div id="profileBar" class="profileBarThin" >
                             
@@ -42,6 +45,9 @@
                        <div>
                            <h4> PARAMETRY </h4>
                        </div>
+                           
+                           
+                           
                        <div class="marginTB20">
                            <h:panelGroup class="marketLeft">    
                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
@@ -64,7 +70,7 @@
                            <h:panelGroup style="margin-right: 65px">
                                <h:outputText class="fontGrey marginLR30" value="Branża" /> 
                                <p:selectOneMenu style="width: 145px">
-                                    <f:selectItem  itemValue="test" itemLabel="budownictwo" />
+                                    <f:selectItem  itemValue="test" itemLabel="Budownictwo" />
                                </p:selectOneMenu>
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 71px">
@@ -120,6 +126,7 @@
                        </p:overlayPanel> 
 
                        
+                           
                        <p:overlayPanel id="employmentPanel" style="width: 280px;" for="employmentButton" hideEffect="fade" dynamic="true">
                            <h:panelGroup>   
                                 <h:link class="fontBlue" value="umowa o pracę"/> 
@@ -144,54 +151,70 @@
                                <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
                            </h:panelGroup>
                        </p:overlayPanel> 
-                       
-                       <div class="marginT50">
-                        <p:dataTable  paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
+                           <div class="marginTB20">
+                               <p:dataTable  var="row" value="#{fakeBean2.fdh5}" paginator="true" rows="10" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"   rowsPerPageTemplate="5,10,15">  
+                           
+                            
                                  <p:column headerText="Lp">  
+                                     <h:outputText  value="#{row.lp}"/>
                                  </p:column>  
 
-                                 <p:column headerText="Numer klienta">  
+                                 <p:column headerText="Numer klienta">    
+                                     <h:outputText  value="#{row.numerKlienta}"/>
                                  </p:column>  
 
-                                 <p:column headerText="Data dodania">    
+                                 <p:column headerText="Data dodania">      
+                                     <h:outputText  value="#{row.dataDodania}"/>
                                  </p:column>  
 
-                                 <p:column headerText="Numer sprawy">  
+                                 <p:column headerText="Numer sprawy">   
+                                     <h:outputText  value="#{row.numerSprawy}"/> 
                                  </p:column>  
 
-                                 <p:column headerText="Postęp">  
+                                 <p:column headerText="Postęp">   
+                                     <h:outputText  value="#{row.postęp}"/> 
                                  </p:column> 
 
-                                 <p:column headerText="Rodzaj kredytu"  >  
+                                 <p:column headerText="Rodzaj kredytu"  >    
+                                     <h:outputText  value="#{row.rodzajKredytu}"/>
                                  </p:column> 
 
-                                 <p:column headerText="BIK">  
+                                 <p:column headerText="BIK">    
+                                     <h:outputText  value="#{row.bik}"/>
                                  </p:column> 
 
-                                 <p:column headerText="Kod pocztowy">  
+                                 <p:column headerText="Kod pocztowy">    
+                                     <h:outputText  value="#{row.kodPocztowy}"/>
                                  </p:column>
 
-                                 <p:column headerText="Wiek">  
+                                 <p:column headerText="Wiek">    
+                                     <h:outputText  value="#{row.wiek}"/>
                                  </p:column>
 
-                                 <p:column headerText="Typ zatrudnienia">  
+                                 <p:column headerText="Typ zatrudnienia">    
+                                     <h:outputText  value="#{row.typZatrudnienia}"/>
                                  </p:column>
 
-                                 <p:column headerText="Branża">  
+                                 <p:column headerText="Branża">    
+                                     <h:outputText  value="#{row.branża}"/>
                                  </p:column>
 
                                  <p:column headerText="Trudności kredytu">  
+                                     <h:outputText  value="#{row.trudnościKredytu}"/>  
                                  </p:column>
 
-                                 <p:column headerText="Ilość doradców">  
+                                 <p:column headerText="Ilość doradców">    
+                                     <h:outputText  value="#{row.ilośćDoradców}"/>
                                  </p:column>
 
-                                 <p:column headerText="Koniec aukcji">  
+                                 <p:column headerText="Koniec aukcji">    
+                                     <h:outputText  value="#{row.koniecAukcji}"/>
                                  </p:column>  
 
                          </p:dataTable>
-                       </div>
-                           
+                      
+                           </div>          
+                               
                       </h:form>
                    </ui:define>
 

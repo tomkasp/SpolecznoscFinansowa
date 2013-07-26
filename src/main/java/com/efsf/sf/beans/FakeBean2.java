@@ -24,6 +24,9 @@ public class FakeBean2 {
     
     private ArrayList<RatingDataHolder> rdh = new ArrayList();
     
+    private ArrayList<FakeDataHolder2> fdh5 = new ArrayList();
+    
+    //GIELDA:
     private FakeDataHolder2 selectedFakeDataHolder=new FakeDataHolder2();
     /**
      * Creates a new instance of FakeBean
@@ -49,6 +52,8 @@ public class FakeBean2 {
         fdh4.add(new FakeDataHolder2(true,"3","00467", "07.05.2012","00123" ,"60%","hipoteka", "tak", "54-200", "66", "UOPO", "Emeryt", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata" ,""));
         fdh4.add(new FakeDataHolder2(true,"4","00112", "08.05.2012","00123" ,"10%","hipoteka", "nie", "44-320", "43",  "UOPO","Finanse", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
         
+         
+        
         rdh.add(new RatingDataHolder("Kontakt", "14", "11", "19", "2"));
         rdh.add(new RatingDataHolder("Kultura", "9", "11", "16", "2"));
         rdh.add(new RatingDataHolder("Kompetencje", "8", "13", "20", "1"));
@@ -58,6 +63,26 @@ public class FakeBean2 {
         rdh.add(new RatingDataHolder("Trud",  "13", "15", "13", "1"));
         rdh.add(new RatingDataHolder("Zaufanie", "14", "12", "17", "1"));
         rdh.add(new RatingDataHolder("Średnia", "13", "12", "18", "2"));
+        
+        //GIEŁDA:
+        
+        fdh5.add(new FakeDataHolder2(false,"1","00112", "08.05.2012","00123" ,"10%","hipoteka", "nie", "42-120", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"2","00113", "08.05.2012","00124" ,"10%","hipoteka", "nie", "24-230", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"3","00114", "08.05.2012","00125" ,"10%","hipoteka", "nie", "44-460", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"4","00115", "08.05.2012","00126" ,"10%","hipoteka", "tak", "32-640", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"5","00116", "08.05.2012","00127" ,"10%","hipoteka", "nie", "23-320", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"6","00117", "08.05.2012","00128" ,"10%","hipoteka", "nie", "67-230", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"7","00118", "08.05.2012","00129" ,"15%","hipoteka", "nie", "33-450", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"8","00119", "08.05.2012","00130" ,"10%","hipoteka", "nie", "37-340", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"9","00117", "08.05.2012","00131" ,"10%","hipoteka", "tak", "88-320", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"10","00122", "08.05.2012","00132" ,"15%","hipoteka", "nie", "46-360", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"11","00132", "08.05.2012","00133" ,"10%","hipoteka", "nie", "36-380", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"12","00142", "08.05.2012","00134" ,"10%","hipoteka", "nie", "37-930", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"13","00152", "08.05.2012","00135" ,"10%","hipoteka", "nie", "85-520", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"14","00162", "08.05.2012","00136" ,"10%","hipoteka", "nie", "64-760", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh5.add(new FakeDataHolder2(false,"15","00172", "08.05.2012","00137" ,"10%","hipoteka", "nie", "43-330", "43",  "UOPO","Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        
+        
         
     }
 
@@ -109,6 +134,14 @@ public class FakeBean2 {
 
     public void setRdh(ArrayList<RatingDataHolder> rdh) {
         this.rdh = rdh;
+    }
+
+    public ArrayList<FakeDataHolder2> getFdh5() {
+        return fdh5;
+    }
+
+    public void setFdh5(ArrayList<FakeDataHolder2> fdh5) {
+        this.fdh5 = fdh5;
     }
     
     
