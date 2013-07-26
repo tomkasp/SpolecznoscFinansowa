@@ -21,6 +21,10 @@ public class FakeBean {
 
     private ArrayList<FakeDataHolder> fdh = new ArrayList();
     
+    private ArrayList<FakeDataHolder> splacono = new ArrayList();
+    
+    private ArrayList<FakeDataHolder> harmonogram = new ArrayList();
+    
     private ArrayList<FakeDataHolder> lastActivityClient = new ArrayList();
     
     private ArrayList<FakeDataHolder> trwajace = new ArrayList();
@@ -43,12 +47,20 @@ public class FakeBean {
         trwajace.add(new FakeDataHolder("1","000120", "15.07.2013","000200" ,"80%","chwilówka", "nie", "54-763", "40", "UOP", "Budownictwo", "4/10", "6", "72h", "12", "kompletowanie dokumentów", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
         trwajace.add(new FakeDataHolder("1","000120", "16.07.2013","000205" ,"70%","chwilówka", "nie", "54-763", "40", "UOP", "Budownictwo", "5/10", "12", "72h", "12", "przetwarzanie danych", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
         
-        zakończone.add(new FakeDataHolder("1","000120", "11.02.2013","000205" ,"100%","hipoteczny", "nie", "54-763", "40", "UOP", "Budownictwo", "8/10", "12", "72h", "12", "zakończony", "nie", "20.05.2012", "50000", "4.8", "20 dni", "700 PLN"));
+        zakończone.add(new FakeDataHolder("1","000120", "11.02.2013","000103" ,"100%","hipoteczny", "nie", "54-763", "40", "UOP", "Budownictwo", "8/10", "12", "72h", "12", "zakończony", "nie", "20.05.2013", "50000", "4.8", "20 dni", "700 PLN"));
         
         zobowiazania.add(new FakeDataHolder("1","chwilówka","30.07.2013","3 000 PLN","10 dni", "200 PLN"));
         zobowiazania.add(new FakeDataHolder("2","chwilówka","30.08.2013","1 000 PLN","0 dni", "75 PLN"));
         zobowiazania.add(new FakeDataHolder("3","hipoteczny","30.10.2018","50 000 PLN","22 dni", "700 PLN"));
         
+        harmonogram.add(new FakeDataHolder("11.08.2013", "700", "47 900", "2 100"));
+        harmonogram.add(new FakeDataHolder("11.09.2013", "700", "47 200", "2 800"));
+        harmonogram.add(new FakeDataHolder("11.10.2013", "700", "46 500", "3 500"));
+        harmonogram.add(new FakeDataHolder("11.11.2013", "700", "45 800", "4 200"));
+        harmonogram.add(new FakeDataHolder("11.12.2013", "700", "45 100", "4 900"));
+        
+        splacono.add(new FakeDataHolder("08.06.2013", "700", "49 300", "700"));
+        splacono.add(new FakeDataHolder("10.07.2013", "700", "48 600", "1 400"));
         
     }
 
@@ -98,5 +110,21 @@ public class FakeBean {
 
     public void setZakończone(ArrayList<FakeDataHolder> zakończone) {
         this.zakończone = zakończone;
+    }
+
+    public ArrayList<FakeDataHolder> getSplacono() {
+        return splacono;
+    }
+
+    public void setSplacono(ArrayList<FakeDataHolder> splacono) {
+        this.splacono = splacono;
+    }
+
+    public ArrayList<FakeDataHolder> getHarmonogram() {
+        return harmonogram;
+    }
+
+    public void setHarmonogram(ArrayList<FakeDataHolder> harmonogram) {
+        this.harmonogram = harmonogram;
     }
 }
