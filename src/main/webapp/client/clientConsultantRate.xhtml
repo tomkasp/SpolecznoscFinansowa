@@ -31,33 +31,44 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="leftBox" style="width: 58%; border:1px solid black;padding:20px;"> 
-                     <h:panelGrid columns="2" cellpadding="5"> 
-                        <p>Kontakt:</p>  
+                <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
+                     <h:panelGrid columns="2" cellpadding="0"> 
+                         <h4>Kontakt:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Kultura:</p>
+                        <h4>Kultura:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Kompetencje:</p> 
+                        <h4>Kompetencje:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Czas:</p>
+                        <h4>Czas:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Rzetelność:</p> 
+                        <h4>Rzetelność:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Szacunek:</p>
+                        <h4>Szacunek:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Trud:</p>  
+                        <h4>Trud:</h4>  
                         <p:rating value="#{ratingController.rating1}" />
                         
-                        <p>Zaufanie:</p>
+                        <h4>Zaufanie:</h4>
                         <p:rating value="#{ratingController.rating1}" />
                      </h:panelGrid>
                 
+                </div>
+                
+                <div class="rightBox" style="margin:20px;">
+                    <h4>Pamiętaj!</h4>
+                    Ocena doradcy musi być adekwatna do stanu faktycznego! 
+                    Każda krzywdząca opinia może zostać przez doradcę podważona, 
+                    a w niektórych przypadkach unieważniona. Jeśli sytuacja będzie
+                    się powtarzać, konto klienta może zostać tymczasowo zablokowane.
+                    
+                    <p>Uzupełnij dane zgodnie z prawdą.</p>
+                    
                     
                     
                 </div>
