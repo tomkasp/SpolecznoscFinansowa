@@ -50,7 +50,7 @@
                             <h:form>
                                     <div class="marginLRT30">
                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
+                                        <div class="field" style="display: none;"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Staż w branży"/>  <h:inputText class="inputWidth" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  <h:inputText class="inputWidth" /> </div>
                                     </div>
@@ -72,85 +72,85 @@
                         
                     <div>
                         <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>            
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">  
-                                    <f:selectItem itemLabel="AIG Bank Polska" />  
-                                    <f:selectItem itemLabel="Alior Bank" />  
-                                    <f:selectItem itemLabel="Allianz Bank Polska" />  
-                                    <f:selectItem itemLabel="Bank Gdański" />  
-                                    <f:selectItem itemLabel="Bank Gospodarki Żywnościowej" />  
-                                    <f:selectItem itemLabel="Bank Gospodarstwa krajowego" />  
-                                    <f:selectItem itemLabel="Bank Inicjatyw Gospodarczych" /> 
-                                    <f:selectItem itemLabel="Bank Ochrony Środowiska" /> 
-                                    <f:selectItem itemLabel="Bank Pocztowy" /> 
-                                    <f:selectItem itemLabel="BIG Bank Gdański" /> 
-                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" /> 
-                                    <f:selectItem itemLabel="Bank BPH" /> 
-                                    <f:selectItem itemLabel="Bank Włościański w Poznaniu" /> 
-                                    <f:selectItem itemLabel="BIG Bank Gdański" /> 
+                        <p:selectManyCheckbox styleClass="fontGrey"  style="margin-right: 100px; display:inline-table" layout="pageDirection">  
+                            <f:selectItem itemLabel="AIG Bank Polska" itemValue="false"/>  
+                            <f:selectItem itemLabel="Alior Bank" itemValue="false" />  
+                                    <f:selectItem itemLabel="Allianz Bank Polska" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Gdański" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Gospodarki Żywnościowej" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Gospodarstwa krajowego" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Inicjatyw Gospodarczych" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Bank Ochrony Środowiska" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Bank Pocztowy" itemValue="false"/> 
+                                    <f:selectItem itemLabel="BIG Bank Gdański" itemValue="false"/> 
+                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Bank BPH" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Bank Włościański w Poznaniu" itemValue="false"/> 
+                                    <f:selectItem itemLabel="BIG Bank Gdański" itemValue="false"/> 
                             </p:selectManyCheckbox>  
                         
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">  
-                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" />  
-                                    <f:selectItem itemLabel="Bank BPH" />  
-                                    <f:selectItem itemLabel="BRE Bank" />  
-                                    <f:selectItem itemLabel="Bank Zachodni WBK" />  
-                                    <f:selectItem itemLabel="Cetolem Bank" />  
-                                    <f:selectItem itemLabel="Credit Agricole Bank Polska" />  
-                                    <f:selectItem itemLabel="EuroBank" /> 
-                                    <f:selectItem itemLabel="GE Money Bank" /> 
-                                    <f:selectItem itemLabel="GETIN Bank" /> 
-                                    <f:selectItem itemLabel="Bank Handlowy" /> 
-                                    <f:selectItem itemLabel="ING Bank Śląski" /> 
-                                    <f:selectItem itemLabel="Invest Bank" /> 
-                                    <f:selectItem itemLabel="Kredyt Bank" /> 
-                                    <f:selectItem itemLabel="MBank" /> 
+                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank BPH" itemValue="false"/>  
+                                    <f:selectItem itemLabel="BRE Bank" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Zachodni WBK" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Cetolem Bank" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Credit Agricole Bank Polska" itemValue="false"/>  
+                                    <f:selectItem itemLabel="EuroBank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="GE Money Bank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="GETIN Bank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Bank Handlowy" itemValue="false"/> 
+                                    <f:selectItem itemLabel="ING Bank Śląski" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Invest Bank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Kredyt Bank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="MBank" itemValue="false"/> 
                             </p:selectManyCheckbox>  
                             
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
-                                    <f:selectItem itemLabel="Meritum Bank ICB" />  
-                                    <f:selectItem itemLabel="Bank Millenium" />  
-                                    <f:selectItem itemLabel="MultiBank" />  
-                                    <f:selectItem itemLabel="Noble Bank" />  
-                                    <f:selectItem itemLabel="Nordea Bank Polska" />  
-                                    <f:selectItem itemLabel="Bank Pekao" />  
-                                    <f:selectItem itemLabel="PKO Bank Polski" /> 
-                                    <f:selectItem itemLabel="Polbank EFG" /> 
-                                    <f:selectItem itemLabel="Raiffeisen Bank Polska" /> 
-                                    <f:selectItem itemLabel="Santander Consumer Bank" /> 
-                                    <f:selectItem itemLabel="Volkswagen Bank Polska" /> 
-                                    <f:selectItem itemLabel="inny:" /> 
+                                    <f:selectItem itemLabel="Meritum Bank ICB" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Millenium" itemValue="false"/>  
+                                    <f:selectItem itemLabel="MultiBank" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Noble Bank" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Nordea Bank Polska" itemValue="false"/>  
+                                    <f:selectItem itemLabel="Bank Pekao" itemValue="false"/>  
+                                    <f:selectItem itemLabel="PKO Bank Polski" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Polbank EFG" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Raiffeisen Bank Polska" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Santander Consumer Bank" itemValue="false"/> 
+                                    <f:selectItem itemLabel="Volkswagen Bank Polska" itemValue="false"/> 
+                                    <f:selectItem itemLabel="inny:" itemValue="false"/> 
                             </p:selectManyCheckbox>     
                     </div>
                         
                     <div>
                             <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="SKOK" /> 
-                                <f:selectItem itemLabel="FERRATUM" /> 
+                                <f:selectItem itemLabel="SKOK" itemValue="false"/> 
+                                <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
                             </p:selectManyCheckbox>
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="PROVIDENT" /> 
-                                <f:selectItem itemLabel="BOCIAN" /> 
+                                <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
+                                <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
                             </p:selectManyCheckbox> 
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="PROFIKREDYT" /> 
-                                <f:selectItem itemLabel="inny:" /> 
+                                <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
+                                <f:selectItem itemLabel="inny:" itemValue="false"/> 
                             </p:selectManyCheckbox> 
                             <h:inputText class="floatR" style="margin-right: 140px;"/>
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="hipoteczny" /> 
-                                <f:selectItem itemLabel="firmowy" /> 
+                                <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
+                                <f:selectItem itemLabel="firmowy" itemValue="false"/> 
                             </p:selectManyCheckbox>
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="gotówkowy(pożyczka)" /> 
-                                <f:selectItem itemLabel="leasing" /> 
+                                <f:selectItem itemLabel="gotówkowy(pożyczka)" itemValue="false"/> 
+                                <f:selectItem itemLabel="leasing" itemValue="false"/> 
                             </p:selectManyCheckbox>
                         
                             <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="chwilówka" /> 
+                                <f:selectItem itemLabel="chwilówka" itemValue="false"/> 
                             </p:selectManyCheckbox>
                     </div>    
                         
@@ -202,12 +202,12 @@
                     <div>
                         <h4>WYBIERZ ABONAMENT</h4>
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 190px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="Standard (99 PLN)" /> 
-                                <f:selectItem itemLabel="Standard+ (169 PLN)" />
+                                <f:selectItem itemLabel="Standard (99 PLN)" itemValue="false"/> 
+                                <f:selectItem itemLabel="Standard+ (169 PLN)" itemValue="false"/>
                             </p:selectManyCheckbox>
                             <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 80px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="Premium (299 PLN)" /> 
-                                <f:selectItem itemLabel="Chcę przetestować serwis" />
+                                <f:selectItem itemLabel="Premium (299 PLN)" itemValue="false"/> 
+                                <f:selectItem itemLabel="Chcę przetestować serwis" itemValue="false"/>
                             </p:selectManyCheckbox>
                             <p:selectManyCheckbox styleClass="redMessage" style="margin-top: 0; display:inline-table" layout="pageDirection">
                                 <f:selectItem itemLabel="akceptuję regulamin" /> 
