@@ -9,10 +9,7 @@ package com.efsf.sf.beans;
  * @author XaI
  */
 public class FakeDataHolder 
-{
-
-
-    
+{   
     private String lp;
     private String numerKlienta;
     private String dataDodania; 
