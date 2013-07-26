@@ -22,6 +22,8 @@ public class FakeBean2 {
     private ArrayList<FakeDataHolder2> fdh3 = new ArrayList();
     private ArrayList<FakeDataHolder2> fdh4 = new ArrayList();
     
+    private ArrayList<RatingDataHolder> rdh = new ArrayList();
+    
     private FakeDataHolder2 selectedFakeDataHolder=new FakeDataHolder2();
     /**
      * Creates a new instance of FakeBean
@@ -45,6 +47,15 @@ public class FakeBean2 {
         fdh4.add(new FakeDataHolder2(true,"3","00467", "07.05.2012","00123" ,"60%","hipoteka", "tak", "54-200", "66", "UOPO", "Emeryt", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata" ,""));
         fdh4.add(new FakeDataHolder2(true,"4","00112", "08.05.2012","00123" ,"10%","hipoteka", "nie", "44-320", "43",  "UOPO","Finanse", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
         
+        rdh.add(new RatingDataHolder("Kontakt", "14", "11", "19", "2"));
+        rdh.add(new RatingDataHolder("Kultura", "9", "11", "16", "2"));
+        rdh.add(new RatingDataHolder("Kompetencje", "8", "13", "20", "1"));
+        rdh.add(new RatingDataHolder("Czas", "11", "12", "18", "1"));
+        rdh.add(new RatingDataHolder("Rzetelnosc", "14", "12", "19", "2"));
+        rdh.add(new RatingDataHolder("Szacunek", "14", "11", "19", "2"));
+        rdh.add(new RatingDataHolder("Trud",  "13", "15", "13", "1"));
+        rdh.add(new RatingDataHolder("Zaufanie", "14", "12", "17", "1"));
+        rdh.add(new RatingDataHolder("Średnia", "13", "12", "18", "2"));
         
     }
 
@@ -88,6 +99,14 @@ public class FakeBean2 {
 
     public void setSelectedFakeDataHolder(FakeDataHolder2 selectedFakeDataHolder) {
         this.selectedFakeDataHolder = selectedFakeDataHolder;
+    }
+
+    public ArrayList<RatingDataHolder> getRdh() {
+        return rdh;
+    }
+
+    public void setRdh(ArrayList<RatingDataHolder> rdh) {
+        this.rdh = rdh;
     }
     
     

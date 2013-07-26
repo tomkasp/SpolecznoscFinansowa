@@ -372,21 +372,27 @@
 
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>
-                                            <p:dataTable>
+                                            
+                                            <p:dataTable var="row" value="#{fakeBean2.rdh}">
 
                                                 <p:column headerText="">  
+                                                    <h:outputText  value="#{row.typOceny}"/>
                                                 </p:column>  
 
-                                                <p:column headerText="Twój wynik">  
+                                                <p:column headerText="Twój wynik"> 
+                                                    <h:outputText  value="#{row.twojWynik}"/>
                                                 </p:column>  
 
-                                                <p:column headerText="Średnia wszystkich doradców">    
+                                                <p:column headerText="Średnia wszystkich doradców">  
+                                                    <h:outputText  value="#{row.sredniaDoradcow}"/>
                                                 </p:column>  
 
                                                 <p:column headerText="Najlepszy wynik">  
+                                                    <h:outputText  value="#{row.najlepszyWynik}"/>
                                                 </p:column>  
 
                                                 <p:column headerText="Najgorszy wynik">  
+                                                    <h:outputText  value="#{row.najgorszyWynik}"/>
                                                 </p:column> 
 
                                             </p:dataTable>
