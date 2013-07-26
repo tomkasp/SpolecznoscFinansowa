@@ -16,20 +16,38 @@
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
 
+
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                   <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
                     <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
 
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
                         <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
                     </h:panelGroup>
                 </div>
             </ui:define>
 
             <ui:define name="content">
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5> Tomasz Nowak </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5> 000120 </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5> 3/5 pkt. </h5>
+                    </div>
+                </div>
+                <h4>Komentujesz sprawę nr: 000103 </h4>
                 <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
                      <h:panelGrid columns="2" cellpadding="0"> 
                          <h4>Kontakt:</h4>
@@ -69,6 +87,13 @@
                     <p>Uzupełnij dane zgodnie z prawdą.</p>
                     
                  </div>
+                <div class="przyciskiDol marginT10">                  
+                                <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit" onclick="dodaj.hide()" /> 
+                                <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź"   type="submit" onclick="dodaj.hide()" /> 
+                            </div>
+                <div style="clear: both;">
+                    
+                </div>
             </ui:define>
         </ui:composition>
     </body>
