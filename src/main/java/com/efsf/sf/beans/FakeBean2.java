@@ -19,6 +19,7 @@ public class FakeBean2 {
 
     private ArrayList<FakeDataHolder> fdh = new ArrayList();
     
+    private int gwiazdki = 5;
     /**
      * Creates a new instance of FakeBean
      */
@@ -38,5 +39,19 @@ public class FakeBean2 {
 
     public void setFdh(ArrayList<FakeDataHolder> fdh) {
         this.fdh = fdh;
+    }
+
+    /**
+     * @return the gwiazdki
+     */
+    public int getGwiazdki() {
+        return gwiazdki;
+    }
+
+    /**
+     * @param gwiazdki the gwiazdki to set
+     */
+    public void setGwiazdki(int gwiazdki) {
+        this.gwiazdki = gwiazdki;
     }
 }
