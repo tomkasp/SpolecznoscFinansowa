@@ -41,36 +41,36 @@
 
                     <div id="spaceFiller" > </div>
                     <div>     
-                        <h5 class="greenRightBorder"> Stanisław Nowy </h5> 
+                        <h5> Tomasz Nowak </h5> 
                         <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5 class="greenRightBorder"> 000001 </h5>
+                        <h5> 000120 </h5>
                         <h:outputText class="profileText" value="Stan konta:" />
-                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                        <h5> 3/5 pkt. </h5>
                     </div>
                 </div>
 
 
-                <h3> Sprawa numer: 12345 </h3>
+                <h3> Sprawa numer: 000103 </h3>
 
                 <div style="min-height: 100px">
                     <div class="leftInlineBox">
                         <h:form>
                             <h4> DANE SPRAWY </h4>
                             <div class="marginLRT30">        
-                                <div class="field"> <h:outputText class="label" value="Pierwotna kwota zobowiązania"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="20 000 PLN" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Pierwotna kwota zobowiązania"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="50 000 PLN" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="samochód" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="hipoteka" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Wielkość raty"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="732.64 PLN" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Data otrzymania kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="18-07-2013" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Okres"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="2 lata" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="hipoteczny" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Wielkość raty"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="700.00 PLN" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Data otrzymania kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="30-05-2013" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Okres"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="5 lat" /> </div>
                             </div>
 
                             <h4> DANE DORADCY</h4>
                             <div class="marginLRT30">   
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Stanisław" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Nowy" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="stanislaw.novy@sf.pl" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="602 321 242" /> </div>                                         
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Jan" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Kazimierczak" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="jan_kaz@go2.pl" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="607 887 392" /> </div>                                         
                             </div>    
                         </h:form>
                     </div>
@@ -78,29 +78,30 @@
                     <div class="rightInlineBox">
                         <h4> NASTĘPNA RATA </h4>
 
-                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="18-08-2013" /> </div>
+                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
 
                         <h4> PROGNOZOWANY CZAS ZAKOŃCZENIA</h4>    
 
-                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="18-02-2015" /> </div>
+                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="30-10-2018" /> </div>
 
                         <h4> HARMONOGRAM SPŁAT </h4>
 
-                        <p:dataTable>
+                        <p:dataTable id="dataTable2" value="#{fakeBean.harmonogram}" var="data" emptyMessage="brak klientów!" 
+                                     rowKey="#{data.pozostało}">
                             <p:column headerText="Termin spłaty">  
-
+                                <h:outputText value="#{data.termin}" /> 
                             </p:column>  
 
                             <p:column headerText="Kwota">  
-
+                                <h:outputText value="#{data.kwota2}" /> 
                             </p:column>  
 
                             <p:column headerText="Pozostało">    
-
+                                <h:outputText value="#{data.pozostało}" /> 
                             </p:column>  
 
                             <p:column headerText="Spłacono">  
-
+                                <h:outputText value="#{data.spłacono}" /> 
                             </p:column>    
                         </p:dataTable>
                         <p:commandLink styleClass="wideButton greyButton floatR" id="viewButton3" value="Dodaj spłatę"  oncomplete="dodaj.show()"/>
@@ -124,22 +125,23 @@
 
                         <h4 style="margin-top: 80px;"> HISTORIA SPŁAT </h4>
 
-                        <p:dataTable>
+                        <p:dataTable id="dataTable3" value="#{fakeBean.splacono}" var="data" emptyMessage="brak klientów!" >
+                        
                             <p:column headerText="Data wpłaty">  
-
+                                <h:outputText value="#{data.termin}" /> 
                             </p:column>  
 
                             <p:column headerText="Kwota">  
-
+                                <h:outputText value="#{data.kwota2}" /> 
                             </p:column>  
 
                             <p:column headerText="Pozostało">    
-
+                                <h:outputText value="#{data.pozostało}" /> 
                             </p:column>  
 
                             <p:column headerText="Spłacono">  
-
-                            </p:column>    
+                                <h:outputText value="#{data.spłacono}" /> 
+                            </p:column>      
                         </p:dataTable>
 
 
