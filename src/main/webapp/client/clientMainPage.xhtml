@@ -38,9 +38,9 @@
 
                     <div id="spaceFiller" > </div>
                     <div>     
-                        <h5> Stanisław Nowy </h5> 
+                        <h5> Tomasz Nowak </h5> 
                         <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5> 000001 </h5>
+                        <h5> 000120 </h5>
                         <h:outputText class="profileText" value="Stan konta:" />
                         <h5> 3/5 pkt. </h5>
                     </div>
@@ -51,54 +51,63 @@
 
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
-                    <p:dataTable>
+                    <p:dataTable id="dataTable2" value="#{fakeBean.lastActivityClient}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
                         <p:column headerText="Lp">  
+                            <h:outputText value="#{data.lp}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer klienta">  
+                            <h:outputText value="#{data.numerKlienta}" /> 
                         </p:column>  
 
                         <p:column headerText="Data dodania">    
+                            <h:outputText value="#{data.dataDodania}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer sprawy">  
+                            <h:outputText value="#{data.numerSprawy}" /> 
                         </p:column>  
 
                         <p:column headerText="Postęp">  
+                            <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >  
+                        <p:column headerText="Rodzaj kredytu"  > 
+                            <h:outputText value="#{data.rodzajKredytu}" /> 
                         </p:column> 
 
                         <p:column headerText="BIK">  
+                             <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
+                        <p:column headerText="Kod pocztowy"> 
+                            <h:outputText value="#{data.kodPocztowy}" /> 
                         </p:column>
 
-                        <p:column headerText="Wiek">  
+                        <p:column headerText="Wiek"> 
+                            <h:outputText value="#{data.wiek}" /> 
                         </p:column>
 
-                        <p:column headerText="Typ zatrudnienia">  
+                        <p:column headerText="Typ zatrudnienia"> 
+                            <h:outputText value="#{data.typZatrudnienia}" />
                         </p:column>
 
                         <p:column headerText="Branża">  
+                            <h:outputText value="#{data.branża}" />
                         </p:column>
 
-                        <p:column headerText="Trudności kredytu">  
+                        <p:column headerText="Trudności kredytu"> 
+                            <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
 
                         <p:column headerText="Ilość doradców">  
+                            <h:outputText value="#{data.ilośćDoradców}" />
                         </p:column>
 
-                        <p:column headerText="Koniec aukcji">  
+                        <p:column headerText="Koniec aukcji">
+                            <h:outputText value="#{data.koniecAukcji}" />
                         </p:column>  
-
-                        <p:column headerText="">  
-                        </p:column> 
-
-                        <p:column headerText="">  
-                        </p:column> 
 
                     </p:dataTable>
                 </div>
@@ -109,161 +118,200 @@
 
                     <h4>OCZEKUJĄCE</h4>
 
-                    <p:dataTable>
+                        <p:dataTable id="dataTable3" value="#{fakeBean.lastActivityClient}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
                         <p:column headerText=" ">  
+                            <p:selectBooleanCheckbox />
                         </p:column>  
 
                         <p:column headerText="Numer klienta">  
+                            <h:outputText value="#{data.numerKlienta}" /> 
                         </p:column>  
 
                         <p:column headerText="Data dodania">    
+                            <h:outputText value="#{data.dataDodania}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer sprawy">  
+                            <h:outputText value="#{data.numerSprawy}" /> 
                         </p:column>  
 
                         <p:column headerText="Postęp">  
+                            <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >  
+                        <p:column headerText="Rodzaj kredytu"  > 
+                            <h:outputText value="#{data.rodzajKredytu}" /> 
                         </p:column> 
 
                         <p:column headerText="BIK">  
+                             <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
+                        <p:column headerText="Kod pocztowy"> 
+                            <h:outputText value="#{data.kodPocztowy}" /> 
                         </p:column>
 
-                        <p:column headerText="Wiek">  
+                        <p:column headerText="Wiek"> 
+                            <h:outputText value="#{data.wiek}" /> 
                         </p:column>
 
-                        <p:column headerText="Typ zatrudnienia">  
+                        <p:column headerText="Typ zatrudnienia"> 
+                            <h:outputText value="#{data.typZatrudnienia}" />
                         </p:column>
 
                         <p:column headerText="Branża">  
+                            <h:outputText value="#{data.branża}" />
                         </p:column>
 
-                        <p:column headerText="Trudności kredytu">  
+                        <p:column headerText="Trudności kredytu"> 
+                            <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
-
+                            
                         <p:column headerText="Ilość wyświetleń">  
+                            <h:outputText value="#{data.ilośćWyświetleń}" />
                         </p:column>
 
                         <p:column headerText="Ilość doradców">  
-                        </p:column>                  
+                            <h:outputText value="#{data.ilośćDoradców}" />
+                        </p:column>
 
-                        <p:column headerText="Koniec aukcji">  
-                        </p:column>      
-
-                        <p:column headerText="">  
-                        </p:column>      
-
+                        <p:column headerText="Koniec aukcji">
+                            <h:outputText value="#{data.koniecAukcji}" />
+                        </p:column>     
 
                     </p:dataTable>
                 </div>
                 <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
+                <h:link class="topMenuButton  redX wideButton" value="Wycofaj" outcome="/client/clientNewApplication.xhtml"/>
                 <div class="marginT50">
 
                     <h4> TRWAJĄCE </h4>
 
-                    <p:dataTable>
-                        <p:column headerText="">  
+                        <p:dataTable id="dataTable4" value="#{fakeBean.trwajace}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
+                            
+                        <p:column headerText=" ">  
+                            <p:selectBooleanCheckbox />
                         </p:column>  
-
+                            
                         <p:column headerText="Numer klienta">  
+                            <h:outputText value="#{data.numerKlienta}" /> 
                         </p:column>  
 
                         <p:column headerText="Data dodania">    
+                            <h:outputText value="#{data.dataDodania}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer sprawy">  
+                            <h:outputText value="#{data.numerSprawy}" /> 
                         </p:column>  
 
                         <p:column headerText="Postęp">  
+                            <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >  
+                        <p:column headerText="Rodzaj kredytu"  > 
+                            <h:outputText value="#{data.rodzajKredytu}" /> 
                         </p:column> 
 
                         <p:column headerText="BIK">  
+                             <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
+                        <p:column headerText="Kod pocztowy"> 
+                            <h:outputText value="#{data.kodPocztowy}" /> 
                         </p:column>
 
-                        <p:column headerText="Wiek">  
+                        <p:column headerText="Wiek"> 
+                            <h:outputText value="#{data.wiek}" /> 
                         </p:column>
 
-                        <p:column headerText="Typ zatrudnienia">  
+                        <p:column headerText="Typ zatrudnienia"> 
+                            <h:outputText value="#{data.typZatrudnienia}" />
                         </p:column>
 
                         <p:column headerText="Branża">  
+                            <h:outputText value="#{data.branża}" />
                         </p:column>
 
-                        <p:column headerText="Trudności kredytu">  
+
+                        <p:column headerText="Trudności kredytu"> 
+                            <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
 
-                        <p:column headerText="Ilość doradców">  
-                        </p:column>
-
-                        <p:column headerText="Status">  
-                        </p:column>  
-
-                        <p:column headerText="">  
-                        </p:column>                    
+                        <p:column headerText="Status"> 
+                            <h:outputText value="#{data.status}" />
+                        </p:column>                     
                     </p:dataTable>
                 </div>
 
                 <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/index"/>
-
+                <h:link class="topMenuButton  redX wideButton" value="Wycofaj" outcome="/client/clientNewApplication.xhtml"/>
+            
+                
                 <div class="marginT50">
 
                     <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
 
-                    <p:dataTable>
-                        <p:column headerText="">  
+                      <p:dataTable id="dataTable5" value="#{fakeBean.zakończone}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
+                            
+                        <p:column headerText=" ">  
+                            <p:selectBooleanCheckbox />
                         </p:column>  
 
                         <p:column headerText="Data dodania">    
+                            <h:outputText value="#{data.dataDodania}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer sprawy">  
-                        </p:column>  
+                            <h:outputText value="#{data.numerSprawy}" /> 
+                        </p:column>   
 
-                        <p:column headerText="Postęp">  
+                                                <p:column headerText="Postęp">  
+                            <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >  
+                        <p:column headerText="Rodzaj kredytu"  > 
+                            <h:outputText value="#{data.rodzajKredytu}" /> 
                         </p:column> 
 
                         <p:column headerText="BIK">  
+                             <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
+                        <p:column headerText="Wiek"> 
+                            <h:outputText value="#{data.wiek}" /> 
                         </p:column>
 
-                        <p:column headerText="Wiek">  
-                        </p:column>
-
-                        <p:column headerText="Typ zatrudnienia">  
+                        <p:column headerText="Typ zatrudnienia"> 
+                            <h:outputText value="#{data.typZatrudnienia}" />
                         </p:column>
 
                         <p:column headerText="Branża">  
+                            <h:outputText value="#{data.branża}" />
                         </p:column>
 
-                        <p:column headerText="Trudności kredytu">  
+
+                        <p:column headerText="Trudności kredytu"> 
+                            <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
 
                         <p:column headerText="Data zakończenia">  
+                            <h:outputText value="#{data.dataZakończenia}" />
                         </p:column>
 
-                        <p:column headerText="Umowa">  
+                        <p:column headerText="Umowa"> 
+                            <h:outputText value="#{data.umowa}" />
                         </p:column>   
 
                         <p:column headerText="Kwota">  
+                            <h:outputText style="color: green;" value="#{data.kwota}" />
                         </p:column> 
 
-                        <p:column headerText="Ocena doradcy">  
+                        <p:column  headerText="Ocena doradcy">  
+                            <h:outputText style="color: red;" value="#{data.ocenaDoradcy}" />
                         </p:column> 
 
                     </p:dataTable>
@@ -272,7 +320,8 @@
                 <div>
                     <h4> PREMIUM </h4>
 
-                    <p:dataTable>
+                    <p:dataTable id="dataTable6" value="#{fakeBean.premium}" var="data" emptyMessage="Nie masz żadnych wniosków PREMIUM" 
+                                 rowKey="#{data.lp}">
                         <p:column headerText=" ">  
                         </p:column>  
 
@@ -318,7 +367,7 @@
                         <p:column headerText="Koniec aukcji">  
                         </p:column>      
 
-                        <p:column style="background:  #5297cb" headerText="">  
+                        <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
                         </p:column>      
 
 

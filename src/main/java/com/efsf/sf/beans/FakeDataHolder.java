@@ -35,9 +35,23 @@ public class FakeDataHolder
     private String ocenaDoradcy;
 
 
+    
+    private String termin;
+    private String kwota2;
+    private String pozostało; 
+    private String spłacono;
+
+
     private String zalegle;
     private String rata;
     
+    
+    public FakeDataHolder(String termin, String kwota2, String pozostało, String spłacono) {
+        this.termin = termin;
+        this.kwota2 = kwota2;
+        this.pozostało = pozostało;
+        this.spłacono = spłacono;
+    }
     
     public FakeDataHolder(String counter, String client, String addDate, String caseNr, String progress, String loanType,  String bic, String zipCode, String age, String emplType, String branch, String difficulty, String consultCount, String auctionEnd, String viewed, String stats, String deal, String endDate, String value, String note, String invoice, String missed)
     {
@@ -248,6 +262,38 @@ public class FakeDataHolder
 
     public void setRata(String rata) {
         this.rata = rata;
+    }
+
+    public String getTermin() {
+        return termin;
+    }
+
+    public void setTermin(String termin) {
+        this.termin = termin;
+    }
+
+    public String getKwota2() {
+        return kwota2;
+    }
+
+    public void setKwota2(String kwota2) {
+        this.kwota2 = kwota2;
+    }
+
+    public String getPozostało() {
+        return pozostało;
+    }
+
+    public void setPozostało(String pozostało) {
+        this.pozostało = pozostało;
+    }
+
+    public String getSpłacono() {
+        return spłacono;
+    }
+
+    public void setSpłacono(String spłacono) {
+        this.spłacono = spłacono;
     }
    
 }
