@@ -127,7 +127,7 @@
                             </p:column> 
                         </p:dataTable>
                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/client/clientAddObligation"/>
-                        <div style="min-height: 270px;"> </div>
+                        <div style="min-height: 205px;"> </div>
                     </div>
                     <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/client/clientMainPage.xhtml"/>
                 </div>
@@ -135,41 +135,54 @@
                 <div class="bottomTable topGreenLine">
 
                     <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
-                    <p:dataTable>
+                    <p:dataTable id="dataTable2" value="#{fakeBean.fdh}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
                         <p:column headerText="Lp">  
+                            <h:outputText value="#{data.lp}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer klienta">  
+                            <h:outputText value="#{data.numerKlienta}" /> 
                         </p:column>  
 
                         <p:column headerText="Data dodania">    
+                            <h:outputText value="#{data.dataDodania}" /> 
                         </p:column>  
 
                         <p:column headerText="Numer sprawy">  
+                            <h:outputText value="#{data.numerSprawy}" /> 
                         </p:column>  
 
                         <p:column headerText="Postęp">  
+                            <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >  
+                        <p:column headerText="Rodzaj kredytu"  > 
+                            
                         </p:column> 
 
                         <p:column headerText="BIK">  
+                            
                         </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
+                        <p:column headerText="Kod pocztowy"> 
+                            <h:outputText value="#{data.kodPocztowy}" /> 
                         </p:column>
 
-                        <p:column headerText="Wiek">  
+                        <p:column headerText="Wiek"> 
+                            <h:outputText value="#{data.wiek}" /> 
                         </p:column>
 
-                        <p:column headerText="Typ zatrudnienia">  
+                        <p:column headerText="Typ zatrudnienia"> 
+                            <h:outputText value="#{data.typZatrudnienia}" />
                         </p:column>
 
                         <p:column headerText="Branża">  
+                            <h:outputText value="#{data.branża}" />
                         </p:column>
 
-                        <p:column headerText="Trudności kredytu">  
+                        <p:column headerText="Trudności kredytu"> 
+                            <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
 
                         <p:column headerText="Ilość doradców">  
