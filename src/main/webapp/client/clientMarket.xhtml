@@ -12,7 +12,7 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-                 
+            <ui:define name="title"> Klient - giełda </ui:define>      
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
             
@@ -74,11 +74,15 @@
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 71px">
                                <h:outputText class="fontGrey marginLR30" value="Lokalizacja" /> 
-                               <p:selectOneMenu id="localizationButton" style="width: 145px"/>
+                               <p:selectOneMenu id="localizationButton" style="width: 145px">
+                                   <f:selectItem itemLabel="Wybierz..." itemValue="Wybierz..." />
+                               </p:selectOneMenu>
                            </h:panelGroup>  
                            <h:panelGroup>
                                <h:outputText class="fontGrey marginLR30" value="Zatrudnienie" /> 
-                               <p:selectOneMenu id="employmentButton" style="width: 145px"/>
+                               <p:selectOneMenu id="employmentButton" style="width: 145px">
+                                         <f:selectItem itemLabel="Wybierz..." itemValue="Wybierz..." />
+                               </p:selectOneMenu>
                            </h:panelGroup> 
                        </div>
                        
