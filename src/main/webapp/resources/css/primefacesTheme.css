@@ -1,9 +1,13 @@
 .ui-widget-content.ui-datatable-even{
-    background: none repeat scroll 0 0 #E7E3E3
+    background: none repeat scroll 0 0 #E7E3E3;
+    text-align: center;
+
 }
 
 .ui-widget-content.ui-datatable-odd{
-    background: none repeat scroll 0 0 #ADADAD
+    background: none repeat scroll 0 0 #ADADAD;
+    text-align: center;
+
 }
 
 ui-dialog-content ui-widget-content {
