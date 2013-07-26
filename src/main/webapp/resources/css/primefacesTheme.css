@@ -1,9 +1,9 @@
 .ui-widget-content.ui-datatable-even{
-    background: none repeat scroll 0 0 #ffffff;	
+    background: none repeat scroll 0 0 #E7E3E3
 }
 
 .ui-widget-content.ui-datatable-odd{
-    background: none repeat scroll 0 0 #ffffff;	
+    background: none repeat scroll 0 0 #ADADAD
 }
 
 ui-dialog-content ui-widget-content {

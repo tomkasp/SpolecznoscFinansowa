@@ -70,13 +70,7 @@
 
                         <h4 class="greenLeftBorder">DODAWANIE RAPORTU BIK</h4>
                         <div class="solidText">
-                            Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqu.
-                            Ut enim ad minim veniam, quis nostrud exercitation u
-                            llamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            Duis aute irure dolor in reprehenderit in voluptate velit 
+                            Dodanie raportu BIK pozwoli lepiej określić doradcy twój profil kredytowy, a co za tym idzie skuteczniej dobrać strategię działania.
                         </div>
                         <div class="marginLR30 marginTB20">
                             <p:selectManyCheckbox styleClass="fontGrey" layout="pageDirection">
@@ -88,9 +82,13 @@
                         <div>
                         </div>
 
+                        <h:link class="greyButton oneColumnLengthButton" value="Chcę wykupić usługę skanowania BIKu" outcome="/consultant/consultantCreateAccount"/>
+                        
                         <div class="marginTB20 centerLink" >
                             <h:link class="greenLink " value="Więcej o usłudze" />   
                         </div>
+                        
+                        
                     </div> 
 
                     <div class="rightWiderBox">
@@ -102,23 +100,30 @@
 
                         <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
 
-                        <p:dataTable>
+                        <p:dataTable id="dataTable1" value="#{fakeBean.zobowiazania}" var="data" emptyMessage="brak klientów!" 
+                                 rowKey="#{data.lp}">
                             <p:column headerText="Lp">  
-                            </p:column>  
+                                <h:outputText value="#{data.lp}" /> 
+                            </p:column>   
 
                             <p:column headerText="Rodzaj">  
+                                <h:outputText value="#{data.rodzajKredytu}" />
                             </p:column>  
 
-                            <p:column headerText="Wygasa">    
+                            <p:column headerText="Wygasa"> 
+                                <h:outputText value="#{data.dataZakończenia}" />
                             </p:column>  
 
                             <p:column headerText="Rata">  
+                                <h:outputText value="#{data.rata}" />
                             </p:column>  
 
                             <p:column headerText="Kwota">  
+                                <h:outputText value="#{data.kwota}" />
                             </p:column> 
 
                             <p:column headerText="Zaległe"  >  
+                                 <h:outputText value="#{data.zalegle}" />
                             </p:column> 
                         </p:dataTable>
                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/client/clientAddObligation"/>

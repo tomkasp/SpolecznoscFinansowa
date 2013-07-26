@@ -10,6 +10,9 @@ package com.efsf.sf.beans;
  */
 public class FakeDataHolder 
 {
+
+
+    
     private String lp;
     private String numerKlienta;
     private String dataDodania; 
@@ -30,6 +33,8 @@ public class FakeDataHolder
     private String dataZakończenia;
     private String kwota;
     private String ocenaDoradcy;
+
+
     private String zalegle;
     private String rata;
     
@@ -59,6 +64,15 @@ public class FakeDataHolder
       zalegle =  missed;
       rata = invoice;
     }
+    
+        public FakeDataHolder(String lp, String rodzajKredytu, String dataZakończenia, String kwota, String zalegle, String rata) {
+            this.lp = lp;
+            this.rodzajKredytu = rodzajKredytu;
+            this.dataZakończenia = dataZakończenia;
+            this.kwota = kwota;
+            this.zalegle = zalegle;
+            this.rata = rata;
+        }
 
     public String getLp() {
         return lp;
@@ -218,6 +232,22 @@ public class FakeDataHolder
 
     public void setOcenaDoradcy(String ocenaDoradcy) {
         this.ocenaDoradcy = ocenaDoradcy;
+    }
+    
+        public String getZalegle() {
+        return zalegle;
+    }
+
+    public void setZalegle(String zalegle) {
+        this.zalegle = zalegle;
+    }
+
+    public String getRata() {
+        return rata;
+    }
+
+    public void setRata(String rata) {
+        this.rata = rata;
     }
    
 }
