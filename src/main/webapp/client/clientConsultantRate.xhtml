@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Klient - uzupełnij dane </ui:define> 
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <div class="topbarMenuGreen">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
+                     <h:panelGrid columns="2" cellpadding="0"> 
+                         <h4>Kontakt:</h4>
+                         <p:rating value="5"/>
+                        
+                        <h4>Kultura:</h4>
+                        <p:rating value="5" />
+                        
+                        <h4>Kompetencje:</h4>
+                        <p:rating value="5" />
+                        
+                        <h4>Czas:</h4>
+                        <p:rating value="5" />
+                        
+                        <h4>Rzetelność:</h4>
+                        <p:rating value="5" />
+                        
+                        <h4>Szacunek:</h4>
+                        <p:rating value="5" />
+                        
+                        <h4>Trud:</h4>  
+                        <p:rating value="5" />
+                        
+                        <h4>Zaufanie:</h4>
+                        <p:rating value="5" />
+                     </h:panelGrid>
+                
+                </div>
+                
+                <div class="rightBox" style="margin:20px;">
+                    <h4>Pamiętaj!</h4>
+                    Ocena doradcy musi być adekwatna do stanu faktycznego! 
+                    Każda krzywdząca opinia może zostać przez doradcę podważona, 
+                    a w niektórych przypadkach unieważniona. Jeśli sytuacja będzie
+                    się powtarzać, konto klienta może zostać tymczasowo zablokowane.
+                    
+                    <p>Uzupełnij dane zgodnie z prawdą.</p>
+                    
+                 </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
