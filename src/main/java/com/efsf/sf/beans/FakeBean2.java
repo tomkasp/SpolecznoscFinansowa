@@ -41,7 +41,7 @@ public class FakeBean2 {
         fdh.add(new FakeDataHolder2(false,"6","02312", "10.05.2012","00123" ,"80%","hipoteka", "nie", "63-520", "23", "UOPO", "Edukacja", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
    
         fdh2.add(new FakeDataHolder2(true,"3","00467", "07.05.2012","00123" ,"60%","hipoteka", "tak", "54-200", "66", "UOPO", "Emeryt", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata" ,""));
-        fdh2.add(new FakeDataHolder2(true,"4","00112", "08.05.2012","00123" ,"10%","hipoteka", "nie", "44-320", "43",  "UOPO","Finanse", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
+        fdh2.add(new FakeDataHolder2(true,"4","00112", "08.05.2012","00123" ,"10%","hipoteka", "nie", "44-320", "43",  "UOPO","Finanse", "7/10", "6", "25h", "12", "oczekiwanie na bank", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
         fdh2.add(new FakeDataHolder2(true,"5","00612", "09.05.2012","00123" ,"30%","chwilówka", "nie", "21-100", "25",  "UOPO","Inne", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "zalegle", "rata","" ));
         fdh2.add(new FakeDataHolder2(true,"10","000120", "16.07.2013","000205" ,"70%","chwilówka", "nie", "54-763", "40", "UOP", "Budownictwo", "5/10", "12", "72h", "12", "przetwarzanie danych", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN", ""));
       

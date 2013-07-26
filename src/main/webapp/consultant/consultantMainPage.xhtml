@@ -205,13 +205,16 @@
                                 <h:outputText  value="#{row.trudnościKredytu}"/>
                             </p:column>
 
-                            <p:column headerText="Data zakończenia">  
+                            <p:column headerText="Data zak.">  
                                 <h:outputText  value="#{row.koniecAukcji}"/>
                             </p:column>
 
                             <p:column headerText="Status">  
                                 <p:selectOneMenu>
-                                    <f:selectItem  itemValue="test" itemLabel="#{row.status}" />
+                                    <f:selectItem  itemValue="test" itemLabel="oczekiwanie na bank" />
+                                    <f:selectItem  itemValue="test" itemLabel="oczekiwanie na klienta" />
+                                    <f:selectItem  itemValue="test" itemLabel="analiza" />
+                                    <f:selectItem  itemValue="test" itemLabel="przetwarzanie danych" />
                                 </p:selectOneMenu> 
                             </p:column>                  
                         </p:dataTable>
