@@ -18,7 +18,7 @@ import javax.faces.bean.SessionScoped;
 public class FakeBean2 {
 
     private ArrayList<FakeDataHolder> fdh = new ArrayList();
-    
+   
     /**
      * Creates a new instance of FakeBean
      */
@@ -39,4 +39,5 @@ public class FakeBean2 {
     public void setFdh(ArrayList<FakeDataHolder> fdh) {
         this.fdh = fdh;
     }
+
 }
