@@ -48,14 +48,14 @@
                                     <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="#{createClientMB.login}"/> </div>
                                     <div class="field"> 
                                         <h:outputText class="label" value="Imię"/>  
-                                        <h:inputText class="inputWidth" value="#{createClientMB.name}" >
+                                        <h:inputText class="inputWidth" required="true" value="#{createClientMB.name}" >
                                             <f:validateLength minimum="3" maximum="20" />
                                         </h:inputText>
                                     </div>   
                                     <div class="field"> 
                                         <h:outputText class="label" value="Hasło"/> 
-                                        <h:inputSecret id="password" class="inputWidth" value="#{createClientMB.password}" > 
-                                             <f:validateLength minimum="6" maximum="20" />
+                                        <h:inputSecret id="password" class="inputWidth" required="true" value="#{createClientMB.password}" > 
+                                             <f:validateLength minimum="8" maximum="20" />
                                              <f:ajax event="blur" render="passwordMessage" />
                                         </h:inputSecret>
                                         <h:message for="password" errorClass="invalid" id="passwordMessage" />
@@ -63,16 +63,16 @@
                                     
                                     <div class="field">
                                         <h:outputText class="label" value="Potwierdź hasło"/> 
-                                        <h:inputSecret id="passwordCheck" class="inputWidth" value="#{createClientMB.passwordCheck}" validator="#{createClientMB.validateSamePassword}" > 
+                                        <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{createClientMB.passwordCheck}" validator="#{createClientMB.validateSamePassword}" > 
                                             <f:ajax event="blur" render="passwordCheckMessage"/>
                                         </h:inputSecret>
                                         <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
                                     </div>
                                     <div class="field"> 
                                         <h:outputText class="label" value="Adres email"/> 
-                                        <h:inputText id ="email" class="inputWidth" value="#{createClientMB.email}" >
+                                        <h:inputText id ="email" class="inputWidth" required="true" value="#{createClientMB.email}" >
                                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                            <f:ajax event="blur" render="emailMessage"/>
+                                            <f:ajax event="keydown" render="emailMessage"/>
                                         </h:inputText>
                                         <h:message for="email" errorClass="invalid" id="emailMessage" />
                                     </div>

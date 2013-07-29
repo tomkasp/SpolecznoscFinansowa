@@ -5,6 +5,9 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.UserDAO;
+import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.User;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,7 +25,8 @@ import javax.faces.validator.ValidatorException;
 public class CreateClientMB 
 {
     
-    ClientDAO clientDao = new ClientDAO();
+   
+    
     
     private int loginNumber;
     private String  login;
@@ -33,11 +37,32 @@ public class CreateClientMB
     
     public CreateClientMB()
     {
-        loginNumber = clientDao.getLastClientID() + 1;
+        UserDAO userDao = new UserDAO();
+        loginNumber = userDao.getLastUserID() + 1;
         login = Integer.toString(loginNumber);
         login = ("000000" + login).substring(login.length());
     }
     
+    public void createClientAccount()
+    {
+        
+        ClientDAO clientDao = new ClientDAO();
+        
+        User user = new User();
+        
+        //The user id is copied to the login field. 
+        user.setLogin(Integer.toString(loginNumber)); 
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setType(3);
+        
+        Client client = new Client();
+        client.setName(name);
+        client.setUser(user);
+        
+        clientDao.save(client);
+    }
+        
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
         String confirmPassword = (String)value;
@@ -46,8 +71,6 @@ public class CreateClientMB
         throw new ValidatorException(message);
         }
     }
-    
-    
 
     public int getLoginNumber() {
         return loginNumber;
