@@ -6,8 +6,6 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -15,21 +13,18 @@ import org.hibernate.Session;
  *
  * @author admin
  */
-public class DAOregion {
-
+public class RegionDAO {
+   
+    
     public List regionList(){
-        List lista = new ArrayList();
+        List<Region> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("From Region").list().iterator();
-        while(i.hasNext()){
-            Region reg = (Region)i.next();
-            lista.add(reg.getIdRegion(),reg.getRegion());
-        }
+        lista = session.createQuery("from Region").list();
         
         session.getTransaction().commit();
-        session.close();   
+        session.close();
         return lista;
     }
 }
