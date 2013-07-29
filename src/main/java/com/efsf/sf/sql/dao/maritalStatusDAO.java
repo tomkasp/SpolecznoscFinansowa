@@ -4,7 +4,7 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.WorkingPlace;
+import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,23 +15,22 @@ import org.hibernate.Session;
  *
  * @author admin
  */
-public class DAOworkingPlace {
+public class maritalStatusDAO {
 
-    public List workingPlaceList(){
+    public List maritalStatusList(){
         List lista = new ArrayList();
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("From WorkingPlace").list().iterator();
+        Iterator i = session.createQuery("From MaritalStatus").list().iterator();
         while(i.hasNext()){
-            WorkingPlace wp = (WorkingPlace)i.next();
-            lista.add(wp.getIdWorkingPlace(),wp.getName());
+            MaritalStatus ms = (MaritalStatus)i.next();
+            lista.add(ms.getIdMaritalStatus(), ms.getName());
         }
         
         session.getTransaction().commit();
         session.close();   
         return lista;
     }
-
 
 }

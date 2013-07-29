@@ -15,7 +15,7 @@ import org.hibernate.Session;
  *
  * @author admin
  */
-public class DAOregion {
+public class regionDAO {
 
     public List regionList(){
         List lista = new ArrayList();
