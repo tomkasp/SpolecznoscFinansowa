@@ -14,7 +14,20 @@ import org.hibernate.classic.Session;
  */
 public class MaritalStatusDAO {
    
+    public MaritalStatus getMaritalStatus(int id)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
         
+        MaritalStatus ms = (MaritalStatus) session.get(MaritalStatus.class, id);
+                
+        session.getTransaction().commit();
+        session.close();
+        
+        return ms;
+        
+    }
+    
     public List maritalStatusList(){
         List<MaritalStatus> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();

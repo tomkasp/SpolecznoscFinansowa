@@ -5,12 +5,16 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.EducationDAO;
+import com.efsf.sf.sql.dao.MaritalStatusDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.util.Security;
+import java.security.NoSuchAlgorithmException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -21,12 +25,12 @@ import javax.faces.validator.ValidatorException;
  * @author XaI
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class CreateClientMB 
 {
+    boolean wasAccountCreated;
     
-   
-    
+    User user; 
     
     private int loginNumber;
     private String  login;
@@ -38,29 +42,38 @@ public class CreateClientMB
     public CreateClientMB()
     {
         UserDAO userDao = new UserDAO();
-        loginNumber = userDao.getLastUserID() + 1;
+        
+        user = new User(3);
+        userDao.save(user);
+        loginNumber = user.getIdUser();
         login = Integer.toString(loginNumber);
         login = ("000000" + login).substring(login.length());
     }
     
-    public void createClientAccount()
+    public String createClientAccount() throws NoSuchAlgorithmException
     {
-        
+        UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
-        
-        User user = new User();
+        EducationDAO eduDao = new EducationDAO();
+        MaritalStatusDAO maritalDao = new MaritalStatusDAO();
         
         //The user id is copied to the login field. 
         user.setLogin(Integer.toString(loginNumber)); 
-        user.setPassword(password);
+        user.setPassword(Security.sha1(password));
         user.setEmail(email);
         user.setType(3);
         
         Client client = new Client();
         client.setName(name);
         client.setUser(user);
+        client.setLastName("");
+        client.setEducation(eduDao.getEducation(7));  
+        client.setMaritalStatus(maritalDao.getMaritalStatus(7));
         
+        userDao.save(user);
         clientDao.save(client);
+        
+        return "/client/clientFillAccountData?faces-redirect=true";
     }
         
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
