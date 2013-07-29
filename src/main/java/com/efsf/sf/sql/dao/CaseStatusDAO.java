@@ -4,34 +4,28 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.WorkingPlace;
+import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import org.hibernate.Session;
 
 /**
  *
  * @author admin
  */
-public class DAOworkingPlace {
-
-    public List workingPlaceList(){
-        List lista = new ArrayList();
+public class CaseStatusDAO {
+    
+    public List caseStatusList(){
+        List<CaseStatus> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
-        Iterator i = session.createQuery("From WorkingPlace").list().iterator();
-        while(i.hasNext()){
-            WorkingPlace wp = (WorkingPlace)i.next();
-            lista.add(wp.getIdWorkingPlace(),wp.getName());
-        }
-        
+        lista = session.createQuery("from CaseStatus").list();
         session.getTransaction().commit();
-        session.close();   
+        session.close();
         return lista;
     }
-
 
 }
