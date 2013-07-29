@@ -88,13 +88,13 @@
                                 <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
 
 
-<!--                                <div class="solidText"> 
+                               <div class="solidText"> 
                                      Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
                                 </div>  
                                 <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
-                                -->
+                               
                                 
-<!--                                <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
+                               <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
                                       <p:column headerText="Nazwa instytucji">  
                                     
                                       </p:column>  
@@ -111,7 +111,7 @@
                                           
                                       </p:column>    
                                 </p:dataTable>
-                                -->
+                               <!--
                                 
                                 <p:dataTable id="dataTable3" value="#{fakeBean.wygenerowanaOferta}" var="data" emptyMessage="brak klientów!" >
                                     
@@ -135,9 +135,9 @@
                 
                                 </p:dataTable>
                                 
+                                -->
                                 
-                                
-                                <h:link class="floatR greyButton wideButton" value="Wyślij ofertę" outcome="/index"/>
+                                <h:link class="floatR greyButton wideButton" rendered="false" value="Wyślij ofertę" outcome="/index"/>
                                 <div class="marginT50">
                                     <h4> GENERUJ UMOWY </h4>
                                 </div>
