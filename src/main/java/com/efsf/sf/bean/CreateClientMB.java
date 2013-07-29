@@ -43,7 +43,7 @@ public class CreateClientMB
     {
         UserDAO userDao = new UserDAO();
         
-        user = new User();        
+        user = new User("", "", "", 3);        
         userDao.save(user);
         loginNumber = user.getIdUser();
         login = Integer.toString(loginNumber);
@@ -70,7 +70,7 @@ public class CreateClientMB
         client.setEducation(eduDao.getEducation(7));  
         client.setMaritalStatus(maritalDao.getMaritalStatus(7));
         
-        userDao.save(user);
+        userDao.update(user);
         clientDao.save(client);
         
         return "/client/clientFillAccountData?faces-redirect=true";
