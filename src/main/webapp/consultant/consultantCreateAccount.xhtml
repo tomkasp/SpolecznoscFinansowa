@@ -56,7 +56,7 @@
                                     
                                     <div class="field">
                                         <h:outputText class="label" value="Imię"/>
-                                        <h:inputText class="inputWidth" value="#{consultantCreateAccountMB.consultant.name}"/>
+                                        <h:inputText class="inputWidth" value="#{consultantCreateAccountMB.consultant.name}" />
                                     </div>
                                     
                                     <div class="field" style="display: none;" > 
@@ -66,17 +66,17 @@
                                     
                                     <div class="field"> 
                                         <h:outputText class="label" value="Hasło"/> 
-                                        <h:inputSecret class="inputWidth" value="#{consultantCreateAccountMB.user.password}"/> 
+                                        <h:inputSecret class="inputWidth" value="#{consultantCreateAccountMB.user.password}" /> 
                                     </div>
                                     
                                     <div class="field">
                                         <h:outputText class="label" value="Potwierdź hasło"/> 
-                                        <h:inputSecret class="inputWidth" #{consultantCreateAccountMB.confirmPassword}/>
+                                        <h:inputSecret class="inputWidth" value="#{consultantCreateAccountMB.confirmPassword}" />
                                     </div>
                                     
                                     <div class="field">
                                         <h:outputText class="label" value="Adres email"/>
-                                        <h:inputText class="inputWidth" #{consultantCreateAccountMB.user.email}/> 
+                                        <h:inputText class="inputWidth" value="#{consultantCreateAccountMB.user.email}" /> 
                                     </div>
                                     
                                 </div>
@@ -89,7 +89,8 @@
                                 </div>
                                 
                                 <div >
-                                     <h:link class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/consultant/consultantFillAccountData"/> 
+                                     
+                                    <h:commandLink class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" action="#{consultantCreateAccountMB.save()}"/>
                                 </div>
                                 
                                 <div>
