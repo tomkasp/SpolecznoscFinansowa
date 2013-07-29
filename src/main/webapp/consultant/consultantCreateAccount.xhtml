@@ -44,29 +44,64 @@
                     </div>
                     <div style="min-height: 470px">
                         <div class="leftThinerBox">
+                            
                             <h:form>
-                                <div class="marginLRT30" >
-                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText disabled="true" value="007061" class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                    <div class="field" style="display: none;" > <h:outputText class="label" value="Nazwisko" />  <h:inputText  class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Potwierdź hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth" /> </div>
+                                
+                                <div class="marginLRT30">
+                                    
+                                    <div class="field">
+                                        <h:outputText class="label" value="Nazwa użytkownika"/>
+                                        <h:inputText disabled="true" value="007061" class="inputWidth" />
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <h:outputText class="label" value="Imię"/>
+                                        <h:inputText class="inputWidth" value="#{consultantCreateAccountMB.consultant.name}"/>
+                                    </div>
+                                    
+                                    <div class="field" style="display: none;" > 
+                                        <h:outputText class="label" value="Nazwisko" />
+                                        <h:inputText  class="inputWidth" /> 
+                                    </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Hasło"/> 
+                                        <h:inputSecret class="inputWidth" value="#{consultantCreateAccountMB.user.password}"/> 
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <h:outputText class="label" value="Potwierdź hasło"/> 
+                                        <h:inputSecret class="inputWidth" #{consultantCreateAccountMB.confirmPassword}/>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <h:outputText class="label" value="Adres email"/>
+                                        <h:inputText class="inputWidth" #{consultantCreateAccountMB.user.email}/> 
+                                    </div>
+                                    
                                 </div>
 
-                                <div class="greyBackground marginLRT30">  <h:outputText class="marginL20" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
+                                <div class="greyBackground marginLRT30"> 
+                                    <h:outputText class="marginL20" value="Akceptuję"/> 
+                                    <h:link class="redUnderlineLink" value="Regulamin" />
+                                    <h:outputText style="margin-left: 5px"  value="oraz" /> 
+                                    <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> 
+                                </div>
+                                
                                 <div >
                                      <h:link class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" outcome="/consultant/consultantFillAccountData"/> 
                                 </div>
+                                
                                 <div>
                                     <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" outcome="/client/clientCreateAccount"/>
                                 </div>
+                                
                             </h:form>
+                            
                         </div>
 
                         <div class="rightWiderBox">
                             <h4> Co zyskujesz jako doradca </h4>
-
 
                             <div class="solidText"> 
                                 
