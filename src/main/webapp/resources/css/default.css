@@ -661,3 +661,11 @@ p:column {
 .category{
     margin-top: 40px;
 }
+
+.invalid{
+    color: red;
+    font-weight: bold;
+    float:right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

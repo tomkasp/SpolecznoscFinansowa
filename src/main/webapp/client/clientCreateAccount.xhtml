@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
         
@@ -44,11 +45,39 @@
                         <div class="leftThinerBox">
                             <h:form>
                                 <div class="marginLRT30">
-                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="000120"/> </div>
-                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Potwierdź hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth" /> </div>
+                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="#{createClientMB.login}"/> </div>
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Imię"/>  
+                                        <h:inputText class="inputWidth" value="#{createClientMB.name}" >
+                                            <f:validateLength minimum="3" maximum="20" />
+                                        </h:inputText>
+                                    </div>   
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Hasło"/> 
+                                        <h:inputSecret id="password" class="inputWidth" value="#{createClientMB.password}" > 
+                                             <f:validateLength minimum="6" maximum="20" />
+                                             <f:ajax event="blur" render="passwordMessage" />
+                                        </h:inputSecret>
+                                        <h:message for="password" errorClass="invalid" id="passwordMessage" />
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <h:outputText class="label" value="Potwierdź hasło"/> 
+                                        <h:inputSecret id="passwordCheck" class="inputWidth" value="#{createClientMB.passwordCheck}" validator="#{createClientMB.validateSamePassword}" > 
+                                            <f:ajax event="blur" render="passwordCheckMessage"/>
+                                        </h:inputSecret>
+                                        <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
+                                    </div>
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Adres email"/> 
+                                        <h:inputText id ="email" class="inputWidth" value="#{createClientMB.email}" >
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            <f:ajax event="blur" render="emailMessage"/>
+                                        </h:inputText>
+                                        <h:message for="email" errorClass="invalid" id="emailMessage" />
+                                    </div>
+                                        
+                                    
                                 </div>
 
                                 <div class="greyBackground marginLRT30">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>

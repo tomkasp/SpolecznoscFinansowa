@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.MaritalStatus;
@@ -9,28 +5,25 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.hibernate.Session;
+import javax.faces.model.SelectItem;
+import org.hibernate.classic.Session;
 
 /**
  *
  * @author admin
  */
-public class DAOmaritalStatus {
-
+public class MaritalStatusDAO {
+   
+        
     public List maritalStatusList(){
-        List lista = new ArrayList();
+        List<MaritalStatus> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("From MaritalStatus").list().iterator();
-        while(i.hasNext()){
-            MaritalStatus ms = (MaritalStatus)i.next();
-            lista.add(ms.getIdMaritalStatus(), ms.getName());
-        }
+        lista = session.createQuery("from MaritalStatus").list();
         
         session.getTransaction().commit();
-        session.close();   
+        session.close();
         return lista;
     }
-
 }

@@ -6,6 +6,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -68,6 +69,28 @@ public class ClientDAO {
         session.getTransaction().commit();
         
         session.close();
+    }
+    
+    public int getLastClientID()
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        
+        List result =  session.createQuery("select max(idClient) from Client").list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        if (result.isEmpty())
+        {
+            return 0;
+        }
+        else
+        {
+          
+           return (Integer) result.get(0); 
+        }
+        
     }
     
 }

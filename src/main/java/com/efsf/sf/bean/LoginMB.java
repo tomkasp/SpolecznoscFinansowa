@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class LoginMB implements Serializable{
+public class LoginMB implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String email;
@@ -35,8 +35,7 @@ public class LoginMB implements Serializable{
             if(type==3){ return "/client/clientMainPage";  }
         }
         
-        return "/login";
-        
+        return "/login"; 
     }
 
     public String logout() {

@@ -4,10 +4,7 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
-import com.efsf.sf.util.Security;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -29,9 +26,8 @@ public class NewMain {
 //          System.out.println( Security.sha1("admin") );
         
         UserDAO udao=new UserDAO();
-        
         User u=udao.login("admin@admin.pl", "admin");
-        
         System.out.println(u.getLogin());
+        
     }
 }
