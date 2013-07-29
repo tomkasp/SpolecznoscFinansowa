@@ -5,6 +5,7 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import org.hibernate.Session;
 
 public class WorkingPlaceDAO {
@@ -17,7 +18,7 @@ public class WorkingPlaceDAO {
         Iterator i = session.createQuery("from WorkingPlace").list().iterator();
         while(i.hasNext()){
             WorkingPlace wp = (WorkingPlace)i.next();
-            lista.add(wp.getIdWorkingPlace(),wp.getName());
+            lista.add(new SelectItem(wp.getIdWorkingPlace(),wp.getName()));
         }
         session.getTransaction().commit();
         session.close();

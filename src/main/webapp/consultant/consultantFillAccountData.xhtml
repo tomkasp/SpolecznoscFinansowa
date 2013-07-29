@@ -154,23 +154,8 @@
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
                         <div> 
                             
-                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30">
-                                 <f:selectItem  itemValue="test" itemLabel="cała polska"/>
-                                 <f:selectItem  itemValue="test" itemLabel="dolnośląskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="kujawsko-pomorskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="lubelskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="lubuskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="łódzkie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="małopolskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="mazowieckie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="opolskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="podkarpackie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="podlaskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="pomorskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="śląskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="świętokrzyskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="warmińsko-mazurskie"/>
-                                 <f:selectItem  itemValue="test" itemLabel="zachodniopomorskie"/>
+                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{fakeBean.pozycja}">
+                                <f:selectItems value="#{fakeBean.wojewodztwa}" />
                             </p:selectOneMenu> 
                             
                         </div>
