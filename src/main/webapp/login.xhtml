@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
      
     <body>
@@ -19,13 +20,13 @@
                     
             <div class="contentBox">
                 
-                 
-                
                 <div class="leftBox" style="padding-top: 50px;"> 
                      
                     <h2 style="margin-bottom: 50px;">Zaloguj się</h2>
                     
-                    <div class="field"> <h:outputText class="label" value="E-mail:"/> <h:inputText value="#{loginMB.email}"/> </div>
+                    <div class="field"> <h:outputText class="label" value="E-mail:"/> <h:inputText value="#{loginMB.email}">  
+			<f:validator validatorId="com.efsf.sf.util.EmailValidator" />
+                        </h:inputText> </div>
                     <div class="field"> <h:outputText class="label" value="Hasło:"/> <h:inputSecret value="#{loginMB.password}"/> </div>
                     <div class="field"> <h:selectBooleanCheckbox/> <h:outputText class="label" value="Zapamiętaj mnie"/>  </div>
                     
