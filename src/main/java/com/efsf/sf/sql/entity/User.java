@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-25 12:50:30 by Hibernate Tools 3.2.1.GA
+// Generated 2013-07-29 13:21:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -40,7 +40,10 @@ public class User  implements java.io.Serializable {
     }
 
 	
-    public User(int type) {
+    public User(String login, String password, String email, int type) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
         this.type = type;
     }
     public User(String login, String password, String email, int type, Set<Client> clients, Set<Message> messagesForFkFromUser, Set<Message> messagesForFkToUser, Set<Consultant> consultants) {
@@ -65,7 +68,7 @@ public class User  implements java.io.Serializable {
         this.idUser = idUser;
     }
     
-    @Column(name="login", unique=true, length=45)
+    @Column(name="login", unique=true, nullable=false, length=45)
     public String getLogin() {
         return this.login;
     }
@@ -74,7 +77,7 @@ public class User  implements java.io.Serializable {
         this.login = login;
     }
     
-    @Column(name="password", length=45)
+    @Column(name="password", nullable=false, length=45)
     public String getPassword() {
         return this.password;
     }
@@ -83,7 +86,7 @@ public class User  implements java.io.Serializable {
         this.password = password;
     }
     
-    @Column(name="email", unique=true, length=45)
+    @Column(name="email", unique=true, nullable=false, length=45)
     public String getEmail() {
         return this.email;
     }
