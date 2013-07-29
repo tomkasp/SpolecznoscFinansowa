@@ -43,7 +43,7 @@ public class CreateClientMB
     {
         UserDAO userDao = new UserDAO();
         
-        user = new User(3);
+        user = new User();        
         userDao.save(user);
         loginNumber = user.getIdUser();
         login = Integer.toString(loginNumber);
