@@ -5,23 +5,23 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.hibernate.Session;
+import javax.faces.model.SelectItem;
+import org.hibernate.classic.Session;
 
-public class DAOeducation {
-
+public class EducationDAO {
+    
+    
     public List educationList(){
-        List lista = new ArrayList();
+        List<Education> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("From Education").list().iterator();
-        while(i.hasNext()){
-            Education edu = (Education)i.next();
-            lista.add(edu.getIdEducation(),edu.getName());
-        }
+        lista = session.createQuery("from Education").list();
         
         session.getTransaction().commit();
-        session.close();   
+        session.close();
         return lista;
     }
+    
+    
 }
