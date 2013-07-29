@@ -71,26 +71,6 @@ public class ClientDAO {
         session.close();
     }
     
-    public int getLastClientID()
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-        
-        List result =  session.createQuery("select max(idClient) from Client").list();
-        
-        session.getTransaction().commit();
-        session.close();
-        
-        if (result.isEmpty())
-        {
-            return 0;
-        }
-        else
-        {
-          
-           return (Integer) result.get(0); 
-        }
-        
-    }
+
     
 }

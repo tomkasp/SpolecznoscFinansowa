@@ -7,6 +7,7 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Security;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
@@ -61,6 +62,21 @@ public class UserDAO {
         return user;
     }
     
+    public void save(User user)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+        session.save(user);
+        
+        session.refresh(user);
+        
+        session.getTransaction().commit();
+        
+        session.close();
+    }
+    
+    
     public Boolean ifEmailExist(String email) {
 
         Session session = null;
@@ -81,6 +97,5 @@ public class UserDAO {
 
         return false;
     }
-    
     
 }
