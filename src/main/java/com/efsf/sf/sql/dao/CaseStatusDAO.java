@@ -9,6 +9,7 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import org.hibernate.Session;
 
 /**
@@ -25,7 +26,7 @@ public class CaseStatusDAO {
         Iterator i = session.createQuery("from CaseStatus").list().iterator();
         while(i.hasNext()){
             CaseStatus cs = (CaseStatus)i.next();
-            lista.add(cs.getIdCaseStatus(),cs.getName());
+            lista.add(new SelectItem(cs.getIdCaseStatus(),cs.getName()));
         }
         session.getTransaction().commit();
         session.close();

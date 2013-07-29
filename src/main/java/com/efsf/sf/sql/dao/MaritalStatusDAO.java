@@ -5,6 +5,7 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.model.SelectItem;
 import org.hibernate.classic.Session;
 
 /**
@@ -22,7 +23,7 @@ public class MaritalStatusDAO {
         Iterator i = session.createQuery("from MaritalStatus").list().iterator();
         while(i.hasNext()){
             MaritalStatus ms = (MaritalStatus)i.next();
-            lista.add(ms.getIdMaritalStatus(),ms.getName());
+            lista.add(new SelectItem(ms.getIdMaritalStatus(),ms.getName()));
         }
         session.getTransaction().commit();
         session.close();

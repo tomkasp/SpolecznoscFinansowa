@@ -5,7 +5,9 @@
 package com.efsf.sf.beans;
 
 
+import com.efsf.sf.sql.dao.RegionDAO;
 import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -39,7 +41,14 @@ public class FakeBean {
     /**
      * Creates a new instance of FakeBean
      */
+    private List wojewodztwa = new ArrayList();
+    private String pozycja ;
+    
     public FakeBean() {
+        
+        RegionDAO reg = new RegionDAO();
+        wojewodztwa = reg.regionList();
+        
         fdh.add(new FakeDataHolder("1","000120", "26.07.2013","000211" ,"45%","hipoteka", "nie", "54-763", "40", "UOP", "Budownictwo", "7/10", "6", "25h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
         
         lastActivityClient.add(new FakeDataHolder("1","000120", "26.07.2013","000211" ,"45%","konsolidacyjny", "nie", "54-763", "40", "UOP", "Budownictwo", "7/10", "2", "72h", "12", "analiza oferty", "nie", "20.05.2012", "200 000", "Oceń", "20 dni", "700 PLN"));
@@ -140,6 +149,34 @@ public class FakeBean {
 
     public void setWygenerowanaOferta(ArrayList<FakeDataHolder> wygenerowanaOferta) {
         this.wygenerowanaOferta = wygenerowanaOferta;
+    }
+
+    /**
+     * @return the wojewodztwa
+     */
+    public List getWojewodztwa() {
+        return wojewodztwa;
+    }
+
+    /**
+     * @param wojewodztwa the wojewodztwa to set
+     */
+    public void setWojewodztwa(List wojewodztwa) {
+        this.wojewodztwa = wojewodztwa;
+    }
+
+    /**
+     * @return the pozycja
+     */
+    public String getPozycja() {
+        return pozycja;
+    }
+
+    /**
+     * @param pozycja the pozycja to set
+     */
+    public void setPozycja(String pozycja) {
+        this.pozycja = pozycja;
     }
     
 }
