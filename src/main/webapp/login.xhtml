@@ -25,13 +25,13 @@
                      
                     <h2 style="margin-bottom: 50px;">Zaloguj się</h2>
                     
-                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika:"/>  <h:inputText/> </div>
-                    <div class="field"> <h:outputText class="label" value="Hasło:"/>  <h:inputText/> </div>
+                    <div class="field"> <h:outputText class="label" value="E-mail:"/> <h:inputText value="#{loginMB.email}"/> </div>
+                    <div class="field"> <h:outputText class="label" value="Hasło:"/> <h:inputText value="#{loginMB.password}"/> </div>
                     <div class="field"> <h:selectBooleanCheckbox/> <h:outputText class="label" value="Zapamiętaj mnie"/>  </div>
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <h:link class="blueButton buttonMargin" value="Zaloguj" outcome="/client/clientMainPage"/>
+                    <h:commandLink class="blueButton buttonMargin" value="Zaloguj" action="#{loginMB.login()}"/>
                     
                     
                 </div>

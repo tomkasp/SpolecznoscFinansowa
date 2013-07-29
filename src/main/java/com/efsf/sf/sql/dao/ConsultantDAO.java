@@ -6,6 +6,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -18,8 +19,12 @@ public class ConsultantDAO {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-
-        Consultant consultant = (Consultant) session.load(Consultant.class, id);
+        
+        Query q = null;
+        q = session.createQuery("FROM Consultant c left outer join fetch c.user as u WHERE id_consultant = :id");
+        q.setParameter("id", id);
+         
+        Consultant consultant=(Consultant) q.list().get(0);
 
         session.getTransaction().commit();
 
@@ -29,31 +34,31 @@ public class ConsultantDAO {
     }
 
     public void save(Consultant consultant) {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-       
+
         session.save(consultant);
-        
+
         session.getTransaction().commit();
-        
-        session.close();    
+
+        session.close();
     }
 
     public void update(Consultant consultant) {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
-       
+
         session.update(consultant);
-        
+
         session.getTransaction().commit();
-        
+
         session.close();
     }
 
     public void delete(Consultant consultant) {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
 
