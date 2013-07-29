@@ -14,17 +14,14 @@ import org.hibernate.classic.Session;
  */
 public class MaritalStatusDAO {
    
-    private List lista = new ArrayList();
-    
+        
     public List maritalStatusList(){
+        List<MaritalStatus> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("from MaritalStatus").list().iterator();
-        while(i.hasNext()){
-            MaritalStatus ms = (MaritalStatus)i.next();
-            lista.add(new SelectItem(ms.getIdMaritalStatus(),ms.getName()));
-        }
+        lista = session.createQuery("from MaritalStatus").list();
+        
         session.getTransaction().commit();
         session.close();
         return lista;

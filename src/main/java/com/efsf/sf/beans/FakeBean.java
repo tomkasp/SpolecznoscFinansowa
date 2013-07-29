@@ -6,6 +6,7 @@ package com.efsf.sf.beans;
 
 
 import com.efsf.sf.sql.dao.RegionDAO;
+import com.efsf.sf.sql.entity.Region;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -41,8 +42,8 @@ public class FakeBean {
     /**
      * Creates a new instance of FakeBean
      */
-    private List wojewodztwa = new ArrayList();
-    private String pozycja ;
+    private List<Region> wojewodztwa;
+    private int pozycja ;
     
     public FakeBean() {
         
@@ -168,14 +169,14 @@ public class FakeBean {
     /**
      * @return the pozycja
      */
-    public String getPozycja() {
+    public int getPozycja() {
         return pozycja;
     }
 
     /**
      * @param pozycja the pozycja to set
      */
-    public void setPozycja(String pozycja) {
+    public void setPozycja(int pozycja) {
         this.pozycja = pozycja;
     }
     
