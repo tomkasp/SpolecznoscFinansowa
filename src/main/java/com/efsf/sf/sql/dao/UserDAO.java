@@ -8,11 +8,9 @@ import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Security;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
-import org.hibernate.QueryException;
 import org.hibernate.Session;
 
 /**
@@ -35,6 +33,21 @@ public class UserDAO {
         return client;
         
     }
+    
+    public void save(User user)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+       
+        session.save(user);
+        
+        session.refresh(user);
+        
+        session.getTransaction().commit();
+        
+        session.close();
+    }
+    
     
     public User login(String email, String password) {
         
@@ -60,6 +73,5 @@ public class UserDAO {
            
         return user;
     }
-    
     
 }
