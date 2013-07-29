@@ -7,6 +7,7 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -20,14 +21,17 @@ public class ClientDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
      
-        Client client = (Client) session.load(Client.class,id);
+        Query q = null;
+        q = session.createQuery("FROM Client c left outer join fetch c.user as u WHERE id_client = :id");
+        q.setParameter("id", id);
+        
+        Client client = (Client) q.list().get(0);
         
         session.getTransaction().commit();
         
         session.close();
         
         return client;
-        
     }
     
      public void save(Client client){

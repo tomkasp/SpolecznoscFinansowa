@@ -10,12 +10,11 @@ import java.util.List;
 import org.hibernate.Session;
 
 /**
- *
  * @author admin
  */
+
 public class RegionDAO {
    
-    
     public List regionList(){
         List<Region> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
