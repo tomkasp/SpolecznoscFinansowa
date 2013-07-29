@@ -2,12 +2,14 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.User;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class LoginMB {
+public class LoginMB implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     private String email;
     private String password;
