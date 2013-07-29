@@ -28,7 +28,7 @@ public class EmailValidator implements Validator {
       UserDAO udao=new UserDAO();
       Boolean ifEmailExist=udao.ifEmailExist(value.toString());
       
-      if(ifEmailExist){
+      if(!ifEmailExist){
          FacesContext context = FacesContext.getCurrentInstance();
          ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
          FacesMessage msg =  new FacesMessage(bundle.getString("failed1"),bundle.getString("failed1"));
