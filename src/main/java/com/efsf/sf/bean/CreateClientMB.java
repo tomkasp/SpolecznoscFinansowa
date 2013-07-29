@@ -47,8 +47,6 @@ public class CreateClientMB
         }
     }
     
-    
-
     public int getLoginNumber() {
         return loginNumber;
     }
