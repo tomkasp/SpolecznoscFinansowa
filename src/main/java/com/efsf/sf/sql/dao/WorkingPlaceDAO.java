@@ -9,17 +9,14 @@ import javax.faces.model.SelectItem;
 import org.hibernate.Session;
 
 public class WorkingPlaceDAO {
-    private List lista = new ArrayList();
     
     public List regionList(){
+        List<WorkingPlace> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("from WorkingPlace").list().iterator();
-        while(i.hasNext()){
-            WorkingPlace wp = (WorkingPlace)i.next();
-            lista.add(new SelectItem(wp.getIdWorkingPlace(),wp.getName()));
-        }
+        lista = session.createQuery("from WorkingPlace").list();
+        
         session.getTransaction().commit();
         session.close();
         return lista;

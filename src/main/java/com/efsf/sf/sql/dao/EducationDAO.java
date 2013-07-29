@@ -9,17 +9,14 @@ import javax.faces.model.SelectItem;
 import org.hibernate.classic.Session;
 
 public class EducationDAO {
-    private List lista = new ArrayList();
+    
     
     public List educationList(){
+        List<Education> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Iterator i = session.createQuery("from Education").list().iterator();
-        while(i.hasNext()){
-            Education edu = (Education)i.next();
-            lista.add(new SelectItem(edu.getIdEducation(),edu.getName()));
-        }
+        lista = session.createQuery("from Education").list();
         
         session.getTransaction().commit();
         session.close();

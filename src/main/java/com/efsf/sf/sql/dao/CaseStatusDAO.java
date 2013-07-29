@@ -17,17 +17,12 @@ import org.hibernate.Session;
  * @author admin
  */
 public class CaseStatusDAO {
-    private List lista = new ArrayList();
     
-    public List regionList(){
+    public List caseStatusList(){
+        List<CaseStatus> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
-        Iterator i = session.createQuery("from CaseStatus").list().iterator();
-        while(i.hasNext()){
-            CaseStatus cs = (CaseStatus)i.next();
-            lista.add(new SelectItem(cs.getIdCaseStatus(),cs.getName()));
-        }
+        lista = session.createQuery("from CaseStatus").list();
         session.getTransaction().commit();
         session.close();
         return lista;
