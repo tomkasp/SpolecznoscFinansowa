@@ -66,5 +66,25 @@ public class DictionaryMB {
         return caseStatus;
     }
 
+    public void setRegion(List<Region> region) {
+        this.region = region;
+    }
+
+    public void setEducation(List<Education> education) {
+        this.education = education;
+    }
+
+    public void setMaritalStatus(List<MaritalStatus> maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public void setWorkingPlace(List<WorkingPlace> workingPlace) {
+        this.workingPlace = workingPlace;
+    }
+
+    public void setCaseStatus(List<CaseStatus> caseStatus) {
+        this.caseStatus = caseStatus;
+    }
+
     
 }
