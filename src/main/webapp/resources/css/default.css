@@ -682,7 +682,7 @@ p:column {
 
 .dialogLabel
 {
-    width: 40%;
+    float: left;
     min-height: 15px;
     clear: both;
     letter-spacing: 1pt;
@@ -693,3 +693,4 @@ p:column {
     margin: 3px;
     margin-right: 5px;
 }
+
