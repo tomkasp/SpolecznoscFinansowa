@@ -5,10 +5,13 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.dao.WorkingPlaceDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Consultant;
+import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.entity.WorkingPlace;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -23,11 +26,13 @@ public class ConsultantCreateMB implements Serializable{
     private User user=new User();
     private Consultant consultant=new Consultant();
     private String confirmPassword=new String();
-    
     //ConsultantFillAccountData
     
     private Address mainAddress;
     private Address invoiceAddress;
+    
+    private List<Institution> selectedInstitution1,selectedInstitution2,selectedInstitution3,selectedInstitution4;
+    
     
     public ConsultantCreateMB() {
     }
@@ -65,7 +70,14 @@ public class ConsultantCreateMB implements Serializable{
         
         return "/consultant/consultantFillAccountData";   
     }
-
+    
+    public String show(){  
+        
+        System.out.println( "Zaznaczono:"+ selectedInstitution1.size() );   
+        
+        return "/consultant/consultantFillAccountData?faces-redirect=true";   
+    }
+    
     public User getUser() {
         return user;
     }
@@ -105,6 +117,44 @@ public class ConsultantCreateMB implements Serializable{
     public void setInvoiceAddress(Address invoiceAddress) {
         this.invoiceAddress = invoiceAddress;
     }
+
+    public List<Institution> getSelectedInstitution1() {
+        return selectedInstitution1;
+    }
+
+    public void setSelectedInstitution1(List<Institution> selectedInstitution1) {
+        this.selectedInstitution1 = selectedInstitution1;
+    }
+
+    public List<Institution> getSelectedInstitution2() {
+        return selectedInstitution2;
+    }
+
+    public void setSelectedInstitution2(List<Institution> selectedInstitution2) {
+        this.selectedInstitution2 = selectedInstitution2;
+    }
+
+    public List<Institution> getSelectedInstitution3() {
+        return selectedInstitution3;
+    }
+
+    public void setSelectedInstitution3(List<Institution> selectedInstitution3) {
+        this.selectedInstitution3 = selectedInstitution3;
+    }
+
+    public List<Institution> getSelectedInstitution4() {
+        return selectedInstitution4;
+    }
+
+    public void setSelectedInstitution4(List<Institution> selectedInstitution4) {
+        this.selectedInstitution4 = selectedInstitution4;
+    }
+
+    
+
+   
+
+   
     
     
     

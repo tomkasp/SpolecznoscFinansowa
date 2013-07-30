@@ -28,7 +28,7 @@
             
                     <ui:define name="content">
                         
-                        <h:form>
+                     
                         
                     <div id="profileBar" class="profilBar">
                         <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
@@ -97,82 +97,33 @@
                     <div>
                         
                         <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
+                      
+                        <h:form>
                         
-                        <p:selectManyCheckbox styleClass="fontGrey"  style="margin-right: 100px; display:inline;" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">  
+                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.selectedInstitution1}" layout="pageDirection" >  
                             
-                            
-                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
-                            
-                                    <f:selectItem itemLabel="AIG Bank Polska" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Alior Bank" itemValue="false" />  
-                                    <f:selectItem itemLabel="Allianz Bank Polska" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Gdański" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Gospodarki Żywnościowej" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Gospodarstwa krajowego" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Inicjatyw Gospodarczych" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Bank Ochrony Środowiska" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Bank Pocztowy" itemValue="false"/> 
-                                    <f:selectItem itemLabel="BIG Bank Gdański" itemValue="false"/> 
-                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Bank BPH" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Bank Włościański w Poznaniu" itemValue="false"/> 
-                                    <f:selectItem itemLabel="BIG Bank Gdański" itemValue="false"/> 
-                           
-                                    
-                                    <f:selectItem itemLabel="BNP Paribas Bank Polska" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank BPH" itemValue="false"/>  
-                                    <f:selectItem itemLabel="BRE Bank" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Zachodni WBK" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Cetolem Bank" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Credit Agricole Bank Polska" itemValue="false"/>  
-                                    <f:selectItem itemLabel="EuroBank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="GE Money Bank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="GETIN Bank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Bank Handlowy" itemValue="false"/> 
-                                    <f:selectItem itemLabel="ING Bank Śląski" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Invest Bank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Kredyt Bank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="MBank" itemValue="false"/> 
-                               
-                                    
-                                    <f:selectItem itemLabel="Meritum Bank ICB" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Millenium" itemValue="false"/>  
-                                    <f:selectItem itemLabel="MultiBank" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Noble Bank" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Nordea Bank Polska" itemValue="false"/>  
-                                    <f:selectItem itemLabel="Bank Pekao" itemValue="false"/>  
-                                    <f:selectItem itemLabel="PKO Bank Polski" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Polbank EFG" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Raiffeisen Bank Polska" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Santander Consumer Bank" itemValue="false"/> 
-                                    <f:selectItem itemLabel="Volkswagen Bank Polska" itemValue="false"/> 
-                               
-                                    
+                            <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                         
                         </p:selectManyCheckbox>  
                         
+                        <h:commandLink value="Wyswietl" action="#{ consultantCreateMB.show() }"></h:commandLink>
                         
-                       
+                        </h:form>
+                        
                     </div>
                         
                     <div>
                             <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="SKOK" itemValue="false"/> 
-                                <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
+                            
+                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
+                                <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
                             </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
-                                <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
-                                <f:selectItem itemLabel="inny:" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <h:inputText class="floatR" style="margin-right: 140px;"/>
+                            
+                                
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
                                 <f:selectItem itemLabel="firmowy" itemValue="false"/> 
                             </p:selectManyCheckbox>
@@ -314,7 +265,7 @@
                   
                     </div>
                     
-                 </h:form>
+               
                     
               </ui:define>
             
