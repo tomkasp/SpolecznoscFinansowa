@@ -27,7 +27,10 @@ public class DictionaryMB {
     private List<MaritalStatus> maritalStatus;
     private List<WorkingPlace> workingPlace;
     private List<CaseStatus> caseStatus;
-    
+    private List<EmploymentType> businessActivity;
+    private List<EmploymentType> income;
+    private List<Institution> bank;
+    private List<Institution> institution;
     
     public DictionaryMB() {
         RegionDAO reg = new RegionDAO();
@@ -44,6 +47,14 @@ public class DictionaryMB {
         
         CaseStatusDAO cs = new CaseStatusDAO();
         caseStatus = cs.caseStatusList();  
+        
+        EmploymentTypeDAO e = new EmploymentTypeDAO();
+        businessActivity = e.businessActivityList();
+        income = e.incomeList();
+    
+        InstitutionDAO idao=new InstitutionDAO();
+        bank = idao.bankList();
+        institution = idao.institutionList();
     }
 
     public List<Region> getRegion() {
@@ -66,25 +77,22 @@ public class DictionaryMB {
         return caseStatus;
     }
 
-    public void setRegion(List<Region> region) {
-        this.region = region;
+    public List<EmploymentType> getBusinessActivity() {
+        return businessActivity;
     }
 
-    public void setEducation(List<Education> education) {
-        this.education = education;
+    public List<EmploymentType> getIncome() {
+        return income;
     }
 
-    public void setMaritalStatus(List<MaritalStatus> maritalStatus) {
-        this.maritalStatus = maritalStatus;
+    public List<Institution> getBank() {
+        return bank;
     }
 
-    public void setWorkingPlace(List<WorkingPlace> workingPlace) {
-        this.workingPlace = workingPlace;
+    public List<Institution> getInstitution() {
+        return institution;
     }
 
-    public void setCaseStatus(List<CaseStatus> caseStatus) {
-        this.caseStatus = caseStatus;
-    }
-
+    
     
 }

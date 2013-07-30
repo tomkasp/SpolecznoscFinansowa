@@ -669,3 +669,27 @@ p:column {
     margin-top: 2px;
     margin-bottom: 0px;
 }
+
+.calendar{
+    width: 206px;
+    
+}
+
+.hasDatepicker
+{
+    width: 206px;
+}
+
+.dialogLabel
+{
+    width: 40%;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
+    text-align: right;
+    margin: 3px;
+    margin-right: 5px;
+}
