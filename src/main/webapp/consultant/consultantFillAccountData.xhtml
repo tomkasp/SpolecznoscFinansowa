@@ -6,282 +6,282 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-    
+
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-                  <ui:define name="title"> Doradca - uzupełnij dane </ui:define> 
-                  <ui:define name="top"> 
-                            <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                                <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-                                <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+            <ui:define name="title"> Doradca - uzupełnij dane </ui:define> 
+            <ui:define name="top"> 
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+
+
+
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                    <div id="spaceFiller"> </div>
+                    <div>     
+                        <h5> Jan Kazimierczak </h5> 
+                        <h:outputText class="profileText" value="nr. doradcy:" />
+                        <h5> 007061 </h5>
+                    </div>
+                </div>
+
+                <div style="min-height: 325px">
+                    <div class="leftThinerBox">
+                        <h3> Uzupelnij swoje dane </h3>
+                        <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
+
+
+
+                        <div class="marginLRT30">
+
+                            <div class="field">
+                                <h:outputText class="label" value="Imię"/> 
+                                <h:inputText id="name" class="inputWidth" value="#{consultantCreateMB.consultant.name}"  />
+                                <h:message styleClass="invalid" for="name"/>
                             </div>
 
-                            <div class="topbarMenuBlue">
-                                <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
-                                </h:panelGroup>
+                            <div class="field">
+                                <h:outputText class="label" value="Nazwisko"/>
+                                <h:inputText id="lastName" class="inputWidth" value="#{consultantCreateMB.consultant.lastName}"/> 
+                                <h:message styleClass="invalid" for="lastName"/>
                             </div>
-                    </ui:define>
-            
-                    <ui:define name="content">
-                        
-                     
-                        
-                    <div id="profileBar" class="profilBar">
-                        <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                        
-                        <div id="spaceFiller"> </div>
-                        <div>     
-                            <h5> Jan Kazimierczak </h5> 
-                            <h:outputText class="profileText" value="nr. doradcy:" />
-                            <h5> 007061 </h5>
-                        </div>
-                    </div>
-                        
-                    <div style="min-height: 325px">
-                         <div class="leftThinerBox">
-                             <h3> Uzupelnij swoje dane </h3>
-                             <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
-                        
-                        
-                            
-                                    <div class="marginLRT30">
-                                        
-                                        <div class="field">
-                                            <h:outputText class="label" value="Imię"/> 
-                                            <h:inputText id="name" class="inputWidth" value="#{consultantCreateMB.consultant.name}"  />
-                                            <h:message styleClass="invalid" for="name"/>
-                                        </div>
-                                        
-                                        <div class="field">
-                                            <h:outputText class="label" value="Nazwisko"/>
-                                            <h:inputText id="lastName" class="inputWidth" value="#{consultantCreateMB.consultant.lastName}"/> 
-                                             <h:message styleClass="invalid" for="lastName"/>
-                                        </div>
-                                        
-                                        <div class="field">
-                                            <h:outputText class="label" value="Staż w branży"/> 
-                                            <h:inputText id="expirience" class="inputWidth" value="#{consultantCreateMB.consultant.expirience}"/>
-                                             <h:message styleClass="invalid" for="expirience"/>
-                                        </div>
-                                        
-                                        <div class="field"> 
-                                            <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                            <p:selectOneMenu style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.consultant.workingPlace}">
-                                                <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w}" />
-                                            </p:selectOneMenu> 
-                                            <h:message styleClass="invalid" for="workingPlace"/>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                            
-                         </div> 
-                        
-                        <div class="rightWiderBox">
-                            <div class="marginTB20">
-                                 <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
-                                 <h6> Zawsze można dodać te informacje w profilu. </h6> 
-                            </div>
-                            
-                          
-                            <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/consultant/consultantMainPage"/>
-                            
-                        </div>
-                        
-                    </div>
-                        
-                    <div>
-                        
-                        <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
-                      
-                        <h:form>
-                        
-                        <p:selectManyCheckbox styleClass="fontGrey"  style="width:120px;" value="#{consultantCreateMB.selectedInstitution1}" >  
-                            
-                            <span style="display: inline;"> <f:selectItems value="#{dictionaryMB.bank.subList( 0, (dictionaryMB.bank.size()/3) )}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/> </span>
-                         
-                            <span style="display: inline;"> <f:selectItems value="#{dictionaryMB.bank.subList( (dictionaryMB.bank.size()/3), (dictionaryMB.bank.size()/3*2) )}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/> </span>
 
+                            <div class="field">
+                                <h:outputText class="label" value="Staż w branży"/> 
+                                <h:inputText id="expirience" class="inputWidth" value="#{consultantCreateMB.consultant.expirience}"/>
+                                <h:message styleClass="invalid" for="expirience"/>
+                            </div>
+
+                            <div class="field"> 
+                                <h:outputText class="label" value="Miejsce zatrudnienia"/>
+                                <p:selectOneMenu style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.consultant.workingPlace}">
+                                    <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w}" />
+                                </p:selectOneMenu> 
+                                <h:message styleClass="invalid" for="workingPlace"/>
+
+                            </div>
+
+                        </div>
+
+                    </div> 
+
+                    <div class="rightWiderBox">
+                        <div class="marginTB20">
+                            <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
+                            <h6> Zawsze można dodać te informacje w profilu. </h6> 
+                        </div>
+
+
+                        <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/consultant/consultantMainPage"/>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
+
+                    <h:form>
+
+                      <div style="float:left;width:300px; background-color: blue; height:100px">
+                                <p:selectManyCheckbox layout="none" value="#{consultantCreateMB.selectedInstitution1}" >
+                                    
+                                    <f:selectItems value="#{dictionaryMB.bank.subList( 0, (dictionaryMB.bank.size()/3) )}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/> 
+                                        <br/>
+                                </p:selectManyCheckbox>
+                         </div>       
                             
-                        </p:selectManyCheckbox>  
-                        
-                        
-                       
+
+
+
                         <h:commandLink value="Wyswietl" action="#{ consultantCreateMB.show() }"></h:commandLink>
-                        
-                        </h:form>
-                        
-                    </div>
-                        
-                    <div>
-                            <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="SKOK" itemValue="false"/> 
-                                <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
-                            </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
-                                <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
-                                <f:selectItem itemLabel="inny:" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <h:inputText class="floatR" style="margin-right: 140px;"/>
-                    </div>
-                    <div>
-                        <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
-                                <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
-                                <f:selectItem itemLabel="firmowy" itemValue="false"/> 
-                            </p:selectManyCheckbox>
-                        
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
-                                <f:selectItem itemLabel="gotówkowy(pożyczka)" itemValue="false"/> 
-                                <f:selectItem itemLabel="leasing" itemValue="false"/> 
-                            </p:selectManyCheckbox>
-                        
-                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
-                                <f:selectItem itemLabel="chwilówka" itemValue="false"/> 
-                            </p:selectManyCheckbox>
-                    </div>    
-                    <div>
-                        <h4> ZASIĘG/MOBILNOŚĆ </h4>
-                        
-                        <div>  
-                                <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
-                                    <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
-                            </p:selectOneMenu> 
-                           
-                            
-                        </div>
-                        
-                        <div> 
-                            <p:selectBooleanCheckbox styleClass="marginLRT30" />
-                            <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" />
-                        </div>
-                  
-                    </div>  
-                    <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
-                    <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
-                    <div class="adressSection">
-                        <div style="min-height: 26px;" class="field"> </div>
-                        <div class="field"> 
-                            <h:outputText class="label" value="Województwo"/>  
-                            <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.consultant.region}">  
-                                <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
-                            </p:selectOneMenu> 
-                        </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.city}"/> </div>
-                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.zipCode}"/>   </div>
-                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.phone}" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.street}"/> </div>
-                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.houseNumber}"/> </div>
-                        <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
-                        
-                    </div>
-                        
-                        
-                    <div class="invoiceSection invoiceSectionContent">
-                        
-                        <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
-                        <div class="field"> <h:outputText class="label" value="Województwo"/> 
-                            <p:selectOneMenu style="width: 39%" value="#{consultantCreateMB.consultant.region}"> 
-                                <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
-                            </p:selectOneMenu>
-                        </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
-                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="NIP"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="REGON"/>  <h:inputText class="inputWidth3" /> </div>
-                    </div>
-                    
-                    <div>
-                        <h4>WYBIERZ ABONAMENT</h4>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 190px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="Standard (99 PLN)" itemValue="false"/> 
-                                <f:selectItem itemLabel="Standard+ (169 PLN)" itemValue="false"/>
-                            </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 80px; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="Premium (299 PLN)" itemValue="false"/> 
-                                <f:selectItem itemLabel="Chcę przetestować serwis" itemValue="false"/>
-                            </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="redMessage" style="margin-top: 0; display:inline-table" layout="pageDirection">
-                                <f:selectItem itemLabel="akceptuję regulamin" itemValue="false"/> 
-                                <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" itemValue="false"/>
-                            </p:selectManyCheckbox>
-                            <div style="min-height: 40px;"> 
-                                <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="/consultant/consultantMainPage"/> 
-                            </div>
-                    </div>
-                        
-                        
-                    
-                        
-                    <div class="bottomTable">
-                        
-                        <h4> PODGLĄD GIEŁDY </h4>
-                        <p:dataTable>
-                                <p:column headerText="Lp">  
-                                </p:column>  
 
-                                <p:column headerText="Numer klienta">  
-                                </p:column>  
+                    </h:form>
 
-                                <p:column headerText="Data dodania">    
-                                </p:column>  
+                </div>
 
-                                <p:column headerText="Numer sprawy">  
-                                </p:column>  
-                            
-                                <p:column headerText="Postęp">  
-                                </p:column> 
-                            
-                                <p:column headerText="Rodzaj kredytu"  >  
-                                </p:column> 
-                            
-                                <p:column headerText="BIK">  
-                                </p:column> 
-                            
-                                <p:column headerText="Kod pocztowy">  
-                                </p:column>
-                            
-                                <p:column headerText="Wiek">  
-                                </p:column>
-                            
-                                <p:column headerText="Typ zatrudnienia">  
-                                </p:column>
-                            
-                                <p:column headerText="Branża">  
-                                </p:column>
-                            
-                                <p:column headerText="Trudności kredytu">  
-                                </p:column>
-                            
-                                <p:column headerText="Ilość doradców">  
-                                </p:column>
-                            
-                                <p:column headerText="Koniec aukcji">  
-                                </p:column>  
-                            
-                         </p:dataTable>
-                    
-                        <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/consultant/consultantMainPage"/> </div>
-                  
+                <div>
+                    <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
+                        <f:selectItem itemLabel="SKOK" itemValue="false"/> 
+                        <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
+                        <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
+                        <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
+                    </p:selectManyCheckbox> 
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
+                        <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
+                        <f:selectItem itemLabel="inny:" itemValue="false"/> 
+                    </p:selectManyCheckbox> 
+                    <h:inputText class="floatR" style="margin-right: 140px;"/>
+                </div>
+                <div>
+                    <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                        <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
+                        <f:selectItem itemLabel="firmowy" itemValue="false"/> 
+                    </p:selectManyCheckbox>
+
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                        <f:selectItem itemLabel="gotówkowy(pożyczka)" itemValue="false"/> 
+                        <f:selectItem itemLabel="leasing" itemValue="false"/> 
+                    </p:selectManyCheckbox>
+
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                        <f:selectItem itemLabel="chwilówka" itemValue="false"/> 
+                    </p:selectManyCheckbox>
+                </div>    
+                <div>
+                    <h4> ZASIĘG/MOBILNOŚĆ </h4>
+
+                    <div>  
+                        <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
+                        </p:selectOneMenu> 
+
+
                     </div>
-                    
-               
-                    
-              </ui:define>
-            
+
+                    <div> 
+                        <p:selectBooleanCheckbox styleClass="marginLRT30" />
+                        <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" />
+                    </div>
+
+                </div>  
+                <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
+                <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
+                <div class="adressSection">
+                    <div style="min-height: 26px;" class="field"> </div>
+                    <div class="field"> 
+                        <h:outputText class="label" value="Województwo"/>  
+                        <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.consultant.region}">  
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                        </p:selectOneMenu> 
+                    </div>
+                    <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.city}"/> </div>
+                    <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.zipCode}"/>   </div>
+                    <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.phone}" /> </div>
+                    <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.street}"/> </div>
+                    <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.houseNumber}"/> </div>
+                    <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
+
+                </div>
+
+
+                <div class="invoiceSection invoiceSectionContent">
+
+                    <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
+                    <div class="field"> <h:outputText class="label" value="Województwo"/> 
+                        <p:selectOneMenu style="width: 39%" value="#{consultantCreateMB.consultant.region}"> 
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
+                    <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
+                    <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
+                    <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
+                    <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
+                    <div class="field"> <h:outputText class="label" value="NIP"/>  <h:inputText class="inputWidth3" /> </div>
+                    <div class="field"> <h:outputText class="label" value="REGON"/>  <h:inputText class="inputWidth3" /> </div>
+                </div>
+
+                <div>
+                    <h4>WYBIERZ ABONAMENT</h4>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 190px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="Standard (99 PLN)" itemValue="false"/> 
+                        <f:selectItem itemLabel="Standard+ (169 PLN)" itemValue="false"/>
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 80px; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="Premium (299 PLN)" itemValue="false"/> 
+                        <f:selectItem itemLabel="Chcę przetestować serwis" itemValue="false"/>
+                    </p:selectManyCheckbox>
+                    <p:selectManyCheckbox styleClass="redMessage" style="margin-top: 0; display:inline-table" layout="pageDirection">
+                        <f:selectItem itemLabel="akceptuję regulamin" itemValue="false"/> 
+                        <f:selectItem itemLabel="wyrażam zgodę na przetwarzanie danych" itemValue="false"/>
+                    </p:selectManyCheckbox>
+                    <div style="min-height: 40px;"> 
+                        <h:link class ="blueButton wideButton floatR marginTB20" value="Dalej" outcome="/consultant/consultantMainPage"/> 
+                    </div>
+                </div>
+
+
+
+
+                <div class="bottomTable">
+
+                    <h4> PODGLĄD GIEŁDY </h4>
+                    <p:dataTable>
+                        <p:column headerText="Lp">  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta">  
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                        </p:column>  
+
+                        <p:column headerText="Numer sprawy">  
+                        </p:column>  
+
+                        <p:column headerText="Postęp">  
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >  
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">  
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                        </p:column>
+
+                        <p:column headerText="Trudności kredytu">  
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców">  
+                        </p:column>
+
+                        <p:column headerText="Koniec aukcji">  
+                        </p:column>  
+
+                    </p:dataTable>
+
+                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/consultant/consultantMainPage"/> </div>
+
+                </div>
+
+
+
+            </ui:define>
+
         </ui:composition>
-    
+
     </body>
 </html>
