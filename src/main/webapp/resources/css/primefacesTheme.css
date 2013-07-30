@@ -137,4 +137,8 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
     border-style:solid;
 }
 
+.ui-selectmanycheckbox tbody tr{
+    width: 330px;
+    float: left;
+}
 
