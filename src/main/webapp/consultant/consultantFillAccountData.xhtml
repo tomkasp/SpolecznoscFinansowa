@@ -178,7 +178,7 @@
                         <div> 
                             <h:form>
                                 <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
-                                <f:selectItems value="#{fakeBean.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}" />
+                                    <f:selectItems value="#{dictionaryMB.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
                                 <p:ajax update="poz" event="change"></p:ajax>
                             </p:selectOneMenu> 
                             poz:
@@ -200,7 +200,7 @@
                         <div class="field"> 
                             <h:outputText class="label" value="Województwo"/>  
                             <p:selectOneMenu style="width: 39%; " value="#{consultantCreateMB.consultant.region}">  
-                                <f:selectItems value="#{fakeBean.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
+                                <f:selectItems value="#{dictionaryMB.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
                             </p:selectOneMenu> 
                         </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB}"/> </div>

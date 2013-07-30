@@ -6,7 +6,6 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.RegionDAO;
 import com.efsf.sf.sql.entity.Region;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
