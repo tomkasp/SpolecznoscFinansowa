@@ -6,37 +6,57 @@ import com.efsf.sf.sql.dao.WorkingPlaceDAO;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.entity.WorkingPlace;
+import java.io.Serializable;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
  * @author WR1EI1
  */
-
 @ManagedBean
 @SessionScoped
-public class ConsultantCreateAccountMB {
+public class ConsultantCreateMB implements Serializable{
 
     private User user=new User();
     private Consultant consultant=new Consultant();
     private String confirmPassword=new String();
     
-    public ConsultantCreateAccountMB() {
+    public ConsultantCreateMB() {
     }
     
-    public String save(){
+    public String save1() {
+        user.setLogin( String.valueOf( new Date().getTime() ) );
         UserDAO udao=new UserDAO();
+        udao.save(user);
+        user.setLogin( user.getIdUser().toString() );
         
+        WorkingPlaceDAO wpdao=new WorkingPlaceDAO();
+        WorkingPlace wp=(WorkingPlace) wpdao.regionList().get(0);
+        
+        
+        ConsultantDAO cdao=new ConsultantDAO();
+        consultant.setUser(user);
+        consultant.setWorkingPlace(wp);
+        cdao.save(consultant);
+        
+        return "/consultant/consultantFillAccountData";   
+    }
+    
+    public String save2() {
+        user.setLogin("");
+        UserDAO udao=new UserDAO();
+        udao.save(user);
         
         WorkingPlaceDAO wpdao=new WorkingPlaceDAO();
         WorkingPlace wp=(WorkingPlace) wpdao.regionList().get(0);
         
         ConsultantDAO cdao=new ConsultantDAO();
         consultant.setUser(user);
-        
         consultant.setWorkingPlace(wp);
         cdao.save(consultant);
-        return "/consultant/consultantFillAccountData";
+        
+        return "/consultant/consultantFillAccountData";   
     }
 
     public User getUser() {

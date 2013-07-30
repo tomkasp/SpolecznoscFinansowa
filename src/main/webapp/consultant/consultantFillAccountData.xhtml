@@ -49,22 +49,26 @@
                                         
                                         <div class="field">
                                             <h:outputText class="label" value="Imię"/> 
-                                            <h:inputText class="inputWidth" value="value"  />
+                                            <h:inputText id="name" class="inputWidth" value="#{consultantCreateMB.consultant.name}"  />
+                                            <h:message styleClass="invalid" for="name"/>
                                         </div>
                                         
                                         <div class="field">
                                             <h:outputText class="label" value="Nazwisko"/>
-                                            <h:inputText class="inputWidth" /> 
+                                            <h:inputText id="lastName" class="inputWidth" value="#{consultantCreateMB.consultant.lastName}"/> 
+                                             <h:message styleClass="invalid" for="lastName"/>
                                         </div>
                                         
                                         <div class="field">
                                             <h:outputText class="label" value="Staż w branży"/> 
-                                            <h:inputText class="inputWidth" />
+                                            <h:inputText id="expirience" class="inputWidth" value="#{consultantCreateMB.consultant.expirience}"/>
+                                             <h:message styleClass="invalid" for="expirience"/>
                                         </div>
                                         
                                         <div class="field"> 
                                             <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                            <h:inputText class="inputWidth" />
+                                            <h:inputText id="workingPlace" class="inputWidth" value="#{consultantCreateMB.consultant.workingPlace}"/>
+                                            <h:message styleClass="invalid" for="workingPlace"/>
                                         </div>
                                         
                                     </div>
@@ -86,7 +90,7 @@
                         
                     <div>
                         <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>            
-                        <p:selectManyCheckbox styleClass="fontGrey"  style="margin-right: 100px; display:inline-table" layout="pageDirection">  
+                        <p:selectManyCheckbox styleClass="fontGrey"  style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">  
                             <f:selectItem itemLabel="AIG Bank Polska" itemValue="false"/>  
                             <f:selectItem itemLabel="Alior Bank" itemValue="false" />  
                                     <f:selectItem itemLabel="Allianz Bank Polska" itemValue="false"/>  
@@ -103,7 +107,7 @@
                                     <f:selectItem itemLabel="BIG Bank Gdański" itemValue="false"/> 
                             </p:selectManyCheckbox>  
                         
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">  
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">  
                                     <f:selectItem itemLabel="BNP Paribas Bank Polska" itemValue="false"/>  
                                     <f:selectItem itemLabel="Bank BPH" itemValue="false"/>  
                                     <f:selectItem itemLabel="BRE Bank" itemValue="false"/>  
@@ -120,7 +124,7 @@
                                     <f:selectItem itemLabel="MBank" itemValue="false"/> 
                             </p:selectManyCheckbox>  
                             
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" layout="pageDirection">  
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 40px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">  
                                     <f:selectItem itemLabel="Meritum Bank ICB" itemValue="false"/>  
                                     <f:selectItem itemLabel="Bank Millenium" itemValue="false"/>  
                                     <f:selectItem itemLabel="MultiBank" itemValue="false"/>  
@@ -138,15 +142,15 @@
                         
                     <div>
                             <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
                                 <f:selectItem itemLabel="SKOK" itemValue="false"/> 
                                 <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
                             </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
                                 <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
                                 <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
                             </p:selectManyCheckbox> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
                                 <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
                                 <f:selectItem itemLabel="inny:" itemValue="false"/> 
                             </p:selectManyCheckbox> 
@@ -154,24 +158,26 @@
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" layout="pageDirection">
+                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
                                 <f:selectItem itemLabel="firmowy" itemValue="false"/> 
                             </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" layout="pageDirection">
+                        
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 145px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="gotówkowy(pożyczka)" itemValue="false"/> 
                                 <f:selectItem itemLabel="leasing" itemValue="false"/> 
                             </p:selectManyCheckbox>
                         
-                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="chwilówka" itemValue="false"/> 
                             </p:selectManyCheckbox>
                     </div>    
                     <div>
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
+                        
                         <div> 
                             <h:form>
-                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{fakeBean.pozycja}">
+                                <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
                                 <f:selectItems value="#{fakeBean.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}" />
                                 <p:ajax update="poz" event="change"></p:ajax>
                             </p:selectOneMenu> 
@@ -180,7 +186,12 @@
                             </h:form>
                             
                         </div>
-                        <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" /> </div>
+                        
+                        <div> 
+                            <p:selectBooleanCheckbox styleClass="marginLRT30" />
+                            <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" />
+                        </div>
+                  
                     </div>  
                     <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
                     <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
@@ -188,11 +199,11 @@
                         <div style="min-height: 26px;" class="field"> </div>
                         <div class="field"> 
                             <h:outputText class="label" value="Województwo"/>  
-                            <p:selectOneMenu style="width: 39%; " value="#{fakeBean.pozycja}">  
+                            <p:selectOneMenu style="width: 39%; " value="#{consultantCreateMB.consultant.region}">  
                                 <f:selectItems value="#{fakeBean.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
                             </p:selectOneMenu> 
                         </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB}"/> </div>
                         <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
                         <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
                         <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
