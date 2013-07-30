@@ -669,3 +669,13 @@ p:column {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.calendar{
+    width: 206px;
+    
+}
+
+.hasDatepicker
+{
+    width: 206px;
+}

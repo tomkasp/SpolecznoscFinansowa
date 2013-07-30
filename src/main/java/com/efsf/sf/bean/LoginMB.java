@@ -1,6 +1,8 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.UserDAO;
+import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -16,23 +18,39 @@ public class LoginMB implements Serializable {
     private boolean isLogged = false;
     private Integer type;
     private int idUser;
-
+    
+    private User user; 
+    private  Client client;
+    private  Consultant consultant;
+    
+    
     public LoginMB() {  
     }
 
     public String login() {
 
         UserDAO userDao=new UserDAO();
-        User user=null;
+        user=null;
         user=userDao.login(this.email, this.password);
         if ( user!=null ) {
             isLogged = true;
             type = user.getType();
             idUser = user.getIdUser();
+            
             System.out.println("login");
             if(type==1){ return "/admin/adminMainPage"; }
-            if(type==2){ return "/consultant/consultantMainPage"; }
-            if(type==3){ return "/client/clientMainPage";  }
+            
+            if(type==2)
+            { 
+                consultant = userDao.getCounsultantConnectedToUser(idUser);
+                return "/consultant/consultantMainPage"; 
+            }
+            
+            if(type==3)
+            {
+                client = userDao.getClientConnectedToUser(idUser);
+                return "/client/clientMainPage";  
+            } 
         }
         
         return "/login"; 
@@ -82,6 +100,30 @@ public class LoginMB implements Serializable {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Consultant getConsultant() {
+        return consultant;
+    }
+
+    public void setConsultant(Consultant consultant) {
+        this.consultant = consultant;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
    
