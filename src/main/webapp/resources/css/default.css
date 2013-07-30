@@ -693,3 +693,8 @@ p:column {
     margin: 3px;
     margin-right: 5px;
 }
+
+.test{
+    display: inline;
+    width: 30%;
+}
