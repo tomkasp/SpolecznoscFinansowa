@@ -158,7 +158,7 @@
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                        <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
                                 <f:selectItem itemLabel="firmowy" itemValue="false"/> 
                             </p:selectManyCheckbox>
@@ -176,13 +176,10 @@
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
                         
                         <div> 
-                            <h:form>
+                            <h:form>   
                                 <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
-                                    <f:selectItems value="#{dictionaryMB.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
-                                <p:ajax update="poz" event="change"></p:ajax>
+                                    <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}" />
                             </p:selectOneMenu> 
-                            poz:
-                            <h:outputText id="poz" value="#{fakeBean.pozycja}" />
                             </h:form>
                             
                         </div>
@@ -200,14 +197,14 @@
                         <div class="field"> 
                             <h:outputText class="label" value="Województwo"/>  
                             <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.consultant.region}">  
-                                <f:selectItems value="#{dictionaryMB.wojewodztwa}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                                <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
                             </p:selectOneMenu> 
                         </div>
-                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB}"/> </div>
-                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" />   </div>
-                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" /> </div>
-                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.city}"/> </div>
+                        <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>   <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.zipCode}"/>   </div>
+                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.phone}" /> </div>
+                        <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.street}"/> </div>
+                        <div class="field"> <h:outputText class="label" value="Numer"/>  <h:inputText class="inputWidth3" value="#{consultantCreateMB.mainAddress.houseNumber}"/> </div>
                         <div> <p:selectBooleanCheckbox styleClass="marginLRT30" /> <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> </div>
                         
                     </div>
@@ -217,8 +214,8 @@
                         
                         <div class="field"> <h:outputText class="label" value="Nazwa"/>  <h:inputText class="inputWidth3"/> </div>
                         <div class="field"> <h:outputText class="label" value="Województwo"/> 
-                            <p:selectOneMenu style="width: 39%"> 
-                                <f:selectItems value="#{fakeBean.wojewodztwa}" var="w" itemValue="#{w.idRegion}" itemLabel="#{w.region}"/>
+                            <p:selectOneMenu style="width: 39%" value="#{consultantCreateMB.consultant.region}"> 
+                                <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
                             </p:selectOneMenu>
                         </div>
                         <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth3" /> </div>
