@@ -21,13 +21,7 @@ public class ClientFillAccountDataMB
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
 
-    public LoginMB getLoginMB() {
-        return loginMB;
-    }
 
-    public void setLoginMB(LoginMB loginMB) {
-        this.loginMB = loginMB;
-    }
     
     private String name;
     private String surname; 
@@ -39,12 +33,27 @@ public class ClientFillAccountDataMB
     private String pesel;
     private int birthPlace;
     
-    
+    private boolean isIncome = true;
 
     /**
      * Creates a new instance of ClientFillAccountDataMB
      */
+    
+    
+    
     public ClientFillAccountDataMB() {
+    }
+    
+    public void toIncome()
+    {
+        setIsIncome(true);
+        System.out.println("Widać income");
+    }
+    
+    public void toBusinessActivity()
+    {
+        setIsIncome(false);
+        System.out.println("Widać działalność");
     }
 
     public String getName() {
@@ -117,5 +126,21 @@ public class ClientFillAccountDataMB
 
     public void setBirthPlace(int birthPlace) {
         this.birthPlace = birthPlace;
+    }
+
+    public boolean isIsIncome() {
+        return isIncome;
+    }
+
+    public void setIsIncome(boolean isIncome) {
+        this.isIncome = isIncome;
+    }
+    
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
     }
 }
