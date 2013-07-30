@@ -60,7 +60,6 @@
                                         <f:selectItem itemLabel="M" itemValue="true" />
                                     </p:selectOneRadio>
                                 </div>
-            
                                 <div class="field"> <h:outputText class="label" value="Nazwisko rodowe"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.familyName}" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{clientFillAccountDataMB.birthDate}"  /> </div>
                                 <div class="field"> <h:outputText class="label" value="Pesel"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.pesel}" /> </div>
@@ -113,20 +112,23 @@
                                         <h:outputText value="#{data.kwota}" />
                                     </p:column> 
                                 </p:dataTable>
-                                
-                                <p:commandLink styleClass="greyButton floatR"  value="Dodaj" oncomplete="add.show()"  /> 
+                               
+                                <p:commandLink styleClass="greyButton floatR" value="Dodaj" oncomplete="add.show()"  /> 
                                 
                             </div>
                             
                            
                             <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); border-radius: 0px;" header="Dodaj informacje"  widgetVar="add" resizable="tfalse"  
                                height="220" width="500" showEffect="clip" hideEffect="fold" modal="true" >   
-                                <h:form>
-                                    <!--<p:commandButton value="Umowa" class="greyButton wideButton floatL"  oncomplete="add.hide()"  action="#{clientFillAccountDataMB.toIncome()} " />-->  
-                                    <!--<p:commandButton value="Działalność" class="greyButton wideButton floatR" oncomplete="add.hide()" action="#{clientFillAccountDataMB.toBusinessActivity()} "  />--> 
-                                    <div>
-                                         
-                                    </div>
+                                <h:form> 
+                                    <h:panelGroup rendered="#{clientFillAccountDataMB.isIncome}" >
+                                         <div> 
+                                             <h:outputText class="dialogLabel" value="Typ umowy"/> 
+                                             <p:selectOneMenu styleClass="inputWidth" value="#{clientFillAccountDataMB.income.employmentType}">
+                                                 <f:selectItems value="#{dictionaryMB.income}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict}" />
+                                             </p:selectOneMenu> 
+                                         </div>
+                                    </h:panelGroup>
                                 </h:form>
                             </p:dialog>
                             
