@@ -5,10 +5,13 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.dao.WorkingPlaceDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Consultant;
+import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.entity.WorkingPlace;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -23,11 +26,13 @@ public class ConsultantCreateMB implements Serializable{
     private User user=new User();
     private Consultant consultant=new Consultant();
     private String confirmPassword=new String();
-    
     //ConsultantFillAccountData
     
     private Address mainAddress;
     private Address invoiceAddress;
+    
+    private List<Institution> selectedInstitution=new ArrayList<>();
+    
     
     public ConsultantCreateMB() {
     }
@@ -65,7 +70,14 @@ public class ConsultantCreateMB implements Serializable{
         
         return "/consultant/consultantFillAccountData";   
     }
-
+    
+    public String show(){  
+        
+        System.out.println( "Zaznaczono:"+ selectedInstitution.size() );   
+        
+        return "/consultant/consultantFillAccountData?faces-redirect=true";   
+    }
+    
     public User getUser() {
         return user;
     }
@@ -105,6 +117,18 @@ public class ConsultantCreateMB implements Serializable{
     public void setInvoiceAddress(Address invoiceAddress) {
         this.invoiceAddress = invoiceAddress;
     }
+
+    public List<Institution> getSelectedInstitution() {
+        return selectedInstitution;
+    }
+
+    public void setSelectedInstitution(List<Institution> selectedInstitution) {
+        this.selectedInstitution = selectedInstitution;
+    }
+
+   
+
+   
     
     
     
