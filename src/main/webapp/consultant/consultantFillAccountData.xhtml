@@ -67,8 +67,12 @@
                                         
                                         <div class="field"> 
                                             <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                            <h:inputText id="workingPlace" class="inputWidth" value="#{consultantCreateMB.consultant.workingPlace}"/>
+                                            
+                                            <p:selectOneMenu style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.consultant.workingPlace}">
+                                                <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w}" />
+                                            </p:selectOneMenu> 
                                             <h:message styleClass="invalid" for="workingPlace"/>
+                                            
                                         </div>
                                         
                                     </div>
@@ -178,7 +182,7 @@
                         <div> 
                             <h:form>   
                                 <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
-                                    <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.idRegion}" itemValue="#{woj.region}" />
+                                    <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
                             </p:selectOneMenu> 
                             </h:form>
                             
