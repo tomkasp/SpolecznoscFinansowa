@@ -4,6 +4,8 @@
  */
 package com.efsf.sf.sql.dao;
 
+import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Security;
@@ -111,8 +113,33 @@ public class UserDAO {
         finally {
             session.close();
         }
-
         return false;
+    }
+    
+    public Client getClientConnectedToUser(int userId)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        
+        Query q  = session.createQuery("FROM Client c JOIN Fetch c.user as u where u.idUser = :userId");
+        q.setParameter("userId", userId);
+        
+        Client result = (Client) q.list().get(0);
+        
+        return result; 
+    }
+    
+    public Consultant getCounsultantConnectedToUser(int userId)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        
+        Query q  = session.createQuery("FROM Consultant c JOIN Fetch c.user as u where u.idUser = :userId");
+        q.setParameter("userId", userId);
+        
+        Consultant result = (Consultant) q.list().get(0);
+        
+        return result; 
     }
     
 }
