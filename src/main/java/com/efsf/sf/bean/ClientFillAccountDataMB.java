@@ -5,12 +5,19 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.collection.IncomeData;
+import com.efsf.sf.sql.entity.Branch;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
+import com.efsf.sf.sql.entity.IncomeBuisnessActivity;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -18,11 +25,15 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class ClientFillAccountDataMB
+public class ClientFillAccountDataMB implements Serializable
 {
-    
+    private static final long serialVersionUID = 1L;
+   
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
+    
+    @ManagedProperty(value="#{dictionaryMB}")
+    private DictionaryMB dictionaryMB;
 
 
     
@@ -39,27 +50,58 @@ public class ClientFillAccountDataMB
     private IncomeData currentIncomeData;
     
     private Income income = new Income();
+    
+    private IncomeBuisnessActivity business = new IncomeBuisnessActivity();
+    
+    //Fields used to make select menus working
+    
+    private int incomeId;
+    private int branchId;
 
-    private boolean isIncome = true;
+    private boolean isIncome = false;
 
     /**
      * Creates a new instance of ClientFillAccountDataMB
      */
     
     public ClientFillAccountDataMB() {
-        income.setEmploymentType(new EmploymentType());
+        
+        
+        
+    }
+    
+    @PostConstruct
+    public void fillFields()
+    {
+//        if (loginMB != null)
+//          name = loginMB.getClient().getName();      
+    }
+    
+    public void cleanDialog()
+    {
+       
+        income = new Income();
+        branchId = 0;
+        incomeId = 0;
+        
+        System.out.println("Wyczyściło");
+    }
+    
+    public void addIncome()
+    {
+        
     }
     
     public void toIncome()
     {
         setIsIncome(true);
-        System.out.println("Widać income");
+        System.out.println(isIncome);
     }
     
     public void toBusinessActivity()
     {
         setIsIncome(false);
-        System.out.println("Widać działalność");
+        System.out.println(isIncome);
     }
 
     public String getName() {
@@ -164,6 +206,38 @@ public class ClientFillAccountDataMB
 
     public void setIncome(Income income) {
         this.income = income;
+    }
+    
+      public DictionaryMB getDictionaryMB() {
+        return dictionaryMB;
+    }
+
+    public void setDictionaryMB(DictionaryMB dictionaryMB) {
+        this.dictionaryMB = dictionaryMB;
+    }
+
+    public int getIncomeId() {
+        return incomeId;
+    }
+
+    public void setIncomeId(int incomeId) {
+        this.incomeId = incomeId;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public IncomeBuisnessActivity getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(IncomeBuisnessActivity business) {
+        this.business = business;
     }
     
 }
