@@ -12,9 +12,9 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
 import java.security.NoSuchAlgorithmException;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -29,7 +29,9 @@ import javax.faces.validator.ValidatorException;
 @ViewScoped
 public class CreateClientMB 
 {
-    boolean wasAccountCreated;
+    
+    @ManagedProperty(value="#{loginMB}")
+    private LoginMB loginMB;
     
     User user; 
     
@@ -81,6 +83,7 @@ public class CreateClientMB
         client.setLastName("");
         client.setEducation(eduDao.getEducation(7));  
         client.setMaritalStatus(maritalDao.getMaritalStatus(7));
+        client.setPoints(5);
         
         userDao.save(user);
         clientDao.save(client);
@@ -88,6 +91,12 @@ public class CreateClientMB
         user.setLogin(user.getIdUser().toString());
         
         userDao.update(user);
+        
+        
+        loginMB.setUser(user);
+        loginMB.setClient(client);
+        
+        
         
         return "/client/clientFillAccountData?faces-redirect=true";
     }
@@ -152,6 +161,14 @@ public class CreateClientMB
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
     }
     
            
