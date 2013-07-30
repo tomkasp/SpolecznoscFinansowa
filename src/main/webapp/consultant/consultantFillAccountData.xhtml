@@ -101,6 +101,8 @@
                         <p:selectManyCheckbox styleClass="fontGrey"  style="margin-right: 100px; display:inline;" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">  
                             
                             
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                            
                                     <f:selectItem itemLabel="AIG Bank Polska" itemValue="false"/>  
                                     <f:selectItem itemLabel="Alior Bank" itemValue="false" />  
                                     <f:selectItem itemLabel="Allianz Bank Polska" itemValue="false"/>  
