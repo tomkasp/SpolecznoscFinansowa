@@ -124,9 +124,16 @@
                                     <h:panelGroup rendered="#{clientFillAccountDataMB.isIncome}" >
                                          <div> 
                                              <h:outputText class="dialogLabel" value="Typ umowy"/> 
-                                             <p:selectOneMenu styleClass="inputWidth" value="#{clientFillAccountDataMB.income.employmentType}">
+                                             <p:selectOneMenu style="width: 375px;" value="#{clientFillAccountDataMB.income.employmentType}">
                                                  <f:selectItems value="#{dictionaryMB.income}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict}" />
-                                             </p:selectOneMenu> 
+                                             </p:selectOneMenu>         
+                                         </div>
+                                        
+                                         <div> 
+                                             <h:outputText class="dialogLabel" value="Branża"/> 
+                                             <p:selectOneMenu style="width: 375px;" value="#{clientFillAccountDataMB.income.branch}">
+                                                 <f:selectItems value="#{dictionaryMB}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict}" />
+                                             </p:selectOneMenu>         
                                          </div>
                                     </h:panelGroup>
                                 </h:form>
