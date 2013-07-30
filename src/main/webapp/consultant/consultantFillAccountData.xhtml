@@ -100,17 +100,12 @@
                       
                         <h:form>
                         
-                        <p:selectManyCheckbox styleClass="fontGrey"  style="width:120px;" value="#{consultantCreateMB.selectedInstitution1}" >  
+                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.selectedInstitution1}" layout="pageDirection" >  
                             
-                            <span style="display: inline;"> <f:selectItems value="#{dictionaryMB.bank.subList( 0, (dictionaryMB.bank.size()/3) )}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/> </span>
+                            <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
                          
-                            <span style="display: inline;"> <f:selectItems value="#{dictionaryMB.bank.subList( (dictionaryMB.bank.size()/3), (dictionaryMB.bank.size()/3*2) )}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/> </span>
-
-                            
                         </p:selectManyCheckbox>  
                         
-                        
-                       
                         <h:commandLink value="Wyswietl" action="#{ consultantCreateMB.show() }"></h:commandLink>
                         
                         </h:form>
@@ -119,23 +114,16 @@
                         
                     <div>
                             <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="SKOK" itemValue="false"/> 
-                                <f:selectItem itemLabel="FERRATUM" itemValue="false" /> 
+                            
+                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
+                                <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
                             </p:selectManyCheckbox>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 220px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROVIDENT" itemValue="false"/> 
-                                <f:selectItem itemLabel="BOCIAN" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 100px; display:inline-table" value="#{consultantCreateMB.consultant.institutions}" layout="pageDirection">
-                                <f:selectItem itemLabel="PROFIKREDYT" itemValue="false"/> 
-                                <f:selectItem itemLabel="inny:" itemValue="false"/> 
-                            </p:selectManyCheckbox> 
-                            <h:inputText class="floatR" style="margin-right: 140px;"/>
+                            
+                                
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                            <p:selectManyCheckbox styleClass="fontGrey" style="margin-right: 250px; display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
+                            <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
                                 <f:selectItem itemLabel="hipoteczny" itemValue="false"/> 
                                 <f:selectItem itemLabel="firmowy" itemValue="false"/> 
                             </p:selectManyCheckbox>
