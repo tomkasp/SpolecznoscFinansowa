@@ -5,6 +5,7 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.collection.IncomeData;
+import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Branch;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
@@ -37,6 +38,8 @@ public class ClientFillAccountDataMB implements Serializable
 
 
     
+    //General Information
+   
     private String name;
     private String surname; 
     private String familyName;
@@ -47,26 +50,32 @@ public class ClientFillAccountDataMB implements Serializable
     private String pesel;
     private int birthPlace;
     
+    //Income
+    
     private IncomeData currentIncomeData;
-    
+    private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
     private Income income = new Income();
-    
     private IncomeBuisnessActivity business = new IncomeBuisnessActivity();
-    
+     
     //Fields used to make select menus working
     
     private int incomeId;
     private int branchId;
-
     private boolean isIncome = false;
+    
+    
+    //Address Data
+    
+    private Address address = new Address();
+    
+    
 
     /**
      * Creates a new instance of ClientFillAccountDataMB
      */
     
-    public ClientFillAccountDataMB() {
-        
-        
+    public ClientFillAccountDataMB()
+    {
         
     }
     
@@ -238,6 +247,22 @@ public class ClientFillAccountDataMB implements Serializable
 
     public void setBusiness(IncomeBuisnessActivity business) {
         this.business = business;
+    }
+
+    public ArrayList<IncomeData> getIncomeTable() {
+        return incomeTable;
+    }
+
+    public void setIncomeTable(ArrayList<IncomeData> incomeTable) {
+        this.incomeTable = incomeTable;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
     
 }
