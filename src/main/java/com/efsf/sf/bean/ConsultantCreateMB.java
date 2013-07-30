@@ -3,6 +3,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.dao.WorkingPlaceDAO;
+import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.entity.WorkingPlace;
@@ -18,9 +19,15 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ConsultantCreateMB implements Serializable{
 
+    //ConsultantCreateAccount
     private User user=new User();
     private Consultant consultant=new Consultant();
     private String confirmPassword=new String();
+    
+    //ConsultantFillAccountData
+    
+    private Address mainAddress;
+    private Address invoiceAddress;
     
     public ConsultantCreateMB() {
     }
@@ -82,5 +89,23 @@ public class ConsultantCreateMB implements Serializable{
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+    public Address getMainAddress() {
+        return mainAddress;
+    }
+
+    public void setMainAddress(Address mainAddress) {
+        this.mainAddress = mainAddress;
+    }
+
+    public Address getInvoiceAddress() {
+        return invoiceAddress;
+    }
+
+    public void setInvoiceAddress(Address invoiceAddress) {
+        this.invoiceAddress = invoiceAddress;
+    }
+    
+    
     
 }
