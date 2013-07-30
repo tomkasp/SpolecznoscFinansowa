@@ -76,11 +76,28 @@ public class UserDAO {
         session.close();
     }
     
+    public void update(User user)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        session.update(user);
+        session.getTransaction().commit();
+
+        session.close();
+    }
+    
+    public void delete(User user)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        session.delete(user);
+        session.getTransaction().commit();
+        session.close();
+    }
     
     public Boolean ifEmailExist(String email) {
 
         Session session = null;
-        User user = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Query q = null;
