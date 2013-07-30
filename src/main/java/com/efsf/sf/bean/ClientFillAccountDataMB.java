@@ -4,6 +4,9 @@
  */
 package com.efsf.sf.bean;
 
+import com.efsf.sf.collection.IncomeData;
+import com.efsf.sf.sql.entity.EmploymentType;
+import com.efsf.sf.sql.entity.Income;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -33,15 +36,18 @@ public class ClientFillAccountDataMB
     private String pesel;
     private int birthPlace;
     
+    private IncomeData currentIncomeData;
+    
+    private Income income = new Income();
+
     private boolean isIncome = true;
 
     /**
      * Creates a new instance of ClientFillAccountDataMB
      */
     
-    
-    
     public ClientFillAccountDataMB() {
+        income.setEmploymentType(new EmploymentType());
     }
     
     public void toIncome()
@@ -143,4 +149,21 @@ public class ClientFillAccountDataMB
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
+    
+    public IncomeData getCurrentIncomeData() {
+        return currentIncomeData;
+    }
+
+    public void setCurrentIncomeData(IncomeData currentIncomeData) {
+        this.currentIncomeData = currentIncomeData;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public void setIncome(Income income) {
+        this.income = income;
+    }
+    
 }
