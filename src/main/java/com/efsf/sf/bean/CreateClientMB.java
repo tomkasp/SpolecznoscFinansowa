@@ -12,6 +12,7 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
 import java.security.NoSuchAlgorithmException;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -41,15 +42,25 @@ public class CreateClientMB
     
     public CreateClientMB()
     {
-        UserDAO userDao = new UserDAO();
-        
-        user = new User("", "", "", 3);        
-        userDao.save(user);
-        loginNumber = user.getIdUser();
-        login = Integer.toString(loginNumber);
-        login = ("000000" + login).substring(login.length());
+//        UserDAO userDao = new UserDAO();
+//        
+//        user = new User("", "", "", 3);        
+//        userDao.save(user);
+//        loginNumber = user.getIdUser();
+//        login = Integer.toString(loginNumber);
+//        login = ("000000" + login).substring(login.length());
     }
-    
+//    
+//    @PreDestroy
+//    public void deleteUser()
+//    {
+////        UserDAO userDao = new UserDAO();
+////        
+////        userDao.delete(user);
+////        
+////        System.out.println("Usunieto");
+//        
+//    }
     public String createClientAccount() throws NoSuchAlgorithmException
     {
         UserDAO userDao = new UserDAO();
@@ -57,11 +68,12 @@ public class CreateClientMB
         EducationDAO eduDao = new EducationDAO();
         MaritalStatusDAO maritalDao = new MaritalStatusDAO();
         
-        //The user id is copied to the login field. 
-        user.setLogin(Integer.toString(loginNumber)); 
+    
+        user = new User();
         user.setPassword(Security.sha1(password));
         user.setEmail(email);
         user.setType(3);
+        user.setLogin(email); 
         
         Client client = new Client();
         client.setName(name);
@@ -70,8 +82,12 @@ public class CreateClientMB
         client.setEducation(eduDao.getEducation(7));  
         client.setMaritalStatus(maritalDao.getMaritalStatus(7));
         
-        userDao.update(user);
+        userDao.save(user);
         clientDao.save(client);
+        
+        user.setLogin(user.getIdUser().toString());
+        
+        userDao.update(user);
         
         return "/client/clientFillAccountData?faces-redirect=true";
     }
@@ -83,6 +99,11 @@ public class CreateClientMB
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
         }
+    }
+    
+    public String redirectToCreateConsultant()
+    {
+        return "/consultant/consultantCreateAccount?faces-redirect=true";   
     }
 
     public int getLoginNumber() {

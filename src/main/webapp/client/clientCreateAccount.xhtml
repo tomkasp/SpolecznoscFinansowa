@@ -45,7 +45,7 @@
                         <div class="leftThinerBox">
                             <h:form>
                                 <div class="marginLRT30">
-                                    <div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="#{createClientMB.login}"/> </div>
+                                    <!--<div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="#{createClientMB.login}"/> </div>-->
                                     <div class="field"> 
                                         <h:outputText class="label" value="Imię"/>  
                                         <h:inputText class="inputWidth" required="true" value="#{createClientMB.name}" >
@@ -56,7 +56,7 @@
                                         <h:outputText class="label" value="Hasło"/> 
                                         <h:inputSecret id="password" class="inputWidth" required="true" value="#{createClientMB.password}" > 
                                              <f:validateLength minimum="8" maximum="20" />
-                                             <f:ajax event="blur" render="passwordMessage" />
+                                             <p:ajax event="keyup" update="passwordMessage" />
                                         </h:inputSecret>
                                         <h:message for="password" errorClass="invalid" id="passwordMessage" />
                                     </div>
@@ -64,7 +64,7 @@
                                     <div class="field">
                                         <h:outputText class="label" value="Potwierdź hasło"/> 
                                         <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{createClientMB.passwordCheck}" validator="#{createClientMB.validateSamePassword}" > 
-                                            <f:ajax event="blur" render="passwordCheckMessage"/>
+                                            <p:ajax event="keyup" update="passwordCheckMessage"/>
                                         </h:inputSecret>
                                         <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
                                     </div>
@@ -72,7 +72,8 @@
                                         <h:outputText class="label" value="Adres email"/> 
                                         <h:inputText id ="email" class="inputWidth" required="true" value="#{createClientMB.email}" >
                                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                            <f:ajax event="keydown" render="emailMessage"/>
+                                            <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
+                                            <p:ajax event="keyup" update="emailMessage"/>
                                         </h:inputText>
                                         <h:message for="email" errorClass="invalid" id="emailMessage" />
                                     </div>
@@ -87,10 +88,11 @@
                                     </h:commandButton>              
                                 </div>
                             </h:form>
+                            <h:form>
                                 <div>
-                                    <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" outcome="/consultant/consultantCreateAccount"/>
+                                    <h:link class="blueButton oneColumnLengthButton" value="Chcę zarejestrować się jako doradca" outcome="/consultant/consultantCreateAccount" />
                                 </div>
-                           
+                            </h:form>
                         </div>
 
                         <div class="rightWiderBox">
