@@ -31,6 +31,7 @@ public class DictionaryMB {
     private List<EmploymentType> income;
     private List<Institution> bank;
     private List<Institution> institution;
+    private List<Branch> branch;
     
     public DictionaryMB() {
         RegionDAO reg = new RegionDAO();
@@ -55,6 +56,9 @@ public class DictionaryMB {
         InstitutionDAO idao=new InstitutionDAO();
         bank = idao.bankList();
         institution = idao.institutionList();
+        
+        BranchDAO bdao = new BranchDAO();
+        branch = bdao.branchList();
     }
 
     public List<Region> getRegion() {
@@ -92,6 +96,12 @@ public class DictionaryMB {
     public List<Institution> getInstitution() {
         return institution;
     }
+
+    public List<Branch> getBranch() {
+        return branch;
+    }
+
+ 
 
     
     

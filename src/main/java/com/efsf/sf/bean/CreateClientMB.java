@@ -30,6 +30,9 @@ import javax.faces.validator.ValidatorException;
 @ViewScoped
 public class CreateClientMB implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
+
     
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
