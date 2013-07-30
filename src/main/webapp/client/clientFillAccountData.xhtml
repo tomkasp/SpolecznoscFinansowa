@@ -35,11 +35,11 @@
 
                     <div id="spaceFiller" > </div>
                     <div>     
-                        <h5 class="greenRightBorder"> Tomasz Nowak </h5> 
+                        <h5 class="greenRightBorder"> #{loginMB.client.name} &nbsp; #{loginMB.client.lastName} </h5> 
                         <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5 class="greenRightBorder"> 000120 </h5>
+                        <h5 class="greenRightBorder"> #{loginMB.user.login} </h5>
                         <h:outputText class="profileText" value="Stan konta:" />
-                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
+                        <h5 class="greenRightBorder"> #{loginMB.client.points} /5 pkt. </h5>
                     </div>
                 </div>
 
@@ -51,10 +51,20 @@
 
                         <h:form>
                             <div class="marginLRT30">
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Rok urodzenia"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> 
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.name}"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.surname}" /> </div>
+                                <div class="field">
+                                    <h:outputText class="label" value="Płeć"/>
+                                    <p:selectOneRadio style="font-weight: bold;" id="sex"  value="#{formBean.number}"> 
+                                        <f:selectItem itemLabel="K" itemValue="false" /> 
+                                        <f:selectItem itemLabel="M" itemValue="true" />
+                                    </p:selectOneRadio>
+                                </div>
+            
+                                <div class="field"> <h:outputText class="label" value="Nazwisko rodowe"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.familyName}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{clientFillAccountDataMB.birthDate}"  /> </div>
+                                <div class="field"> <h:outputText class="label" value="Pesel"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.pesel}" /> </div>
+<!--                            <div>
                                     <h:outputText class="label" value="Typ zatrudnienia"/>  <p:selectOneMenu style="width: 57%">
                                          <f:selectItem  itemValue="umowa o pracę" itemLabel="umowa o pracę" />
                                          <f:selectItem  itemValue="umowa o pracę (czas określony)" itemLabel="umowa o pracę (czas określony)" />
@@ -79,8 +89,41 @@
                                      <f:selectItem  itemValue="ochrona mienia" itemLabel="ochrona mienia" />
                                      <f:selectItem  itemValue="handel" itemLabel="handel" />
                                     </p:selectOneMenu>
-                                </div>
+                                </div>-->
                             </div>
+                            
+                            <div class="marginLR30">
+                                <div class="field"> <h:outputText class="label fontBlack" value="Dane o dochodach"/> </div>
+                                <p:dataTable id="dochody" value="#{fakeBean.zobowiazania}" var="data" emptyMessage="brak klientów!" 
+                                     rowKey="#{data.lp}">
+                                    <p:column headerText="Lp">  
+                                        <h:outputText value="#{data.lp}" /> 
+                                    </p:column>   
+
+                                    <p:column headerText="Rodzaj">  
+                                        <h:outputText value="#{data.rodzajKredytu}" />
+                                    </p:column>  
+
+                                    <p:column headerText="Wygasa"> 
+                                        <h:outputText value="#{data.dataZakończenia}" />
+                                    </p:column>  
+
+                                    <p:column headerText="Rata">  
+                                        <h:outputText value="#{data.rata}" />
+                                    </p:column>  
+
+                                    <p:column headerText="Kwota">  
+                                        <h:outputText value="#{data.kwota}" />
+                                    </p:column> 
+
+                                    <p:column headerText="Zaległe"  >  
+                                         <h:outputText value="#{data.zalegle}" />
+                                    </p:column> 
+                                </p:dataTable>
+                            </div>
+                            
+                            
+                            
                             <div class="marginLR30" >
                                 <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
                                 <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth" /> </div>
