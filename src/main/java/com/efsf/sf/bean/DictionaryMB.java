@@ -34,7 +34,7 @@ public class DictionaryMB {
         region = reg.regionList();
         
         EducationDAO edu = new EducationDAO();
-        region = edu.educationList();
+        education = edu.educationList();
         
         MaritalStatusDAO ms = new MaritalStatusDAO();
         maritalStatus = ms.maritalStatusList();
