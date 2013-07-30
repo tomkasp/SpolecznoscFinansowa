@@ -34,7 +34,7 @@ public class DictionaryMB {
         region = reg.regionList();
         
         EducationDAO edu = new EducationDAO();
-        region = edu.educationList();
+        education = edu.educationList();
         
         MaritalStatusDAO ms = new MaritalStatusDAO();
         maritalStatus = ms.maritalStatusList();
@@ -64,6 +64,26 @@ public class DictionaryMB {
 
     public List<CaseStatus> getCaseStatus() {
         return caseStatus;
+    }
+
+    public void setRegion(List<Region> region) {
+        this.region = region;
+    }
+
+    public void setEducation(List<Education> education) {
+        this.education = education;
+    }
+
+    public void setMaritalStatus(List<MaritalStatus> maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public void setWorkingPlace(List<WorkingPlace> workingPlace) {
+        this.workingPlace = workingPlace;
+    }
+
+    public void setCaseStatus(List<CaseStatus> caseStatus) {
+        this.caseStatus = caseStatus;
     }
 
     
