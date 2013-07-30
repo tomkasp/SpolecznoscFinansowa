@@ -11,6 +11,7 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - uzupełnij dane </ui:define> 
+            
             <ui:define name="top"> 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
@@ -36,14 +37,14 @@
                         <h:outputText class="profileText" value="nr. doradcy:" />
                         <h5> 007061 </h5>
                     </div>
+                </div>
                         
-                    <div style="min-height: 325px">
                          <div class="leftThinerBox">
                              <h3> Uzupelnij swoje dane </h3>
                              <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
                         
                         
-                            <h:form>
+                           
                                     <div class="marginLRT30">
                                         
                                         <div class="field">
@@ -75,15 +76,15 @@
                                         </div>
                                         
                                     </div>
-                            </h:form>
+                            
                          </div> 
-                        
+                    
+                
                         <div class="rightWiderBox">
                             <div class="marginTB20">
                                  <h6> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                                  <h6> Zawsze można dodać te informacje w profilu. </h6> 
                             </div>
-                        </h:form>
                     </div> 
 
                     <div class="rightWiderBox">
@@ -92,9 +93,9 @@
                             <h6> Zawsze można dodać te informacje w profilu. </h6> 
                         </div>
 
-                        <h:form>
+                        
                             <h:link class="floatR greyButton wideButton" value="Pomiń ten krok" outcome="/consultant/consultantMainPage"/>
-                        </h:form>
+                       
 
                     </div>
                         
@@ -186,11 +187,11 @@
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
                         
                         <div> 
-                            <h:form>   
+                            
                                 <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
                                     <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}" />
                             </p:selectOneMenu> 
-                        </h:form>
+                        
 
                     </div>
 
@@ -312,9 +313,10 @@
 
                     <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/consultant/consultantMainPage"/> </div>
 
-                </div>
+                </div>  
+                
             </ui:define>
-
+            
         </ui:composition>
 
     </body>
