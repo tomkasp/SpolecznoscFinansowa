@@ -32,25 +32,25 @@ public class ConsultantCreateMB implements Serializable{
     public ConsultantCreateMB() {
     }
     
-    public String save1() {
+    public String savePart1() {
         user.setLogin( String.valueOf( new Date().getTime() ) );
         UserDAO udao=new UserDAO();
         udao.save(user);
         user.setLogin( user.getIdUser().toString() );
+        udao.update(user);
         
         WorkingPlaceDAO wpdao=new WorkingPlaceDAO();
         WorkingPlace wp=(WorkingPlace) wpdao.regionList().get(0);
-        
         
         ConsultantDAO cdao=new ConsultantDAO();
         consultant.setUser(user);
         consultant.setWorkingPlace(wp);
         cdao.save(consultant);
         
-        return "/consultant/consultantFillAccountData";   
+        return "/consultant/consultantFillAccountData?faces-redirect=true";   
     }
     
-    public String save2() {
+    public String savePart2() {
         user.setLogin("");
         UserDAO udao=new UserDAO();
         udao.save(user);
