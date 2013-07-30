@@ -4,12 +4,11 @@
  */
 package com.efsf.sf.bean;
 
-import com.efsf.sf.sql.dao.RegionDAO;
-import com.efsf.sf.sql.entity.Region;
-import java.util.ArrayList;
+import com.efsf.sf.sql.dao.*;
+import com.efsf.sf.sql.entity.*;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
@@ -23,25 +22,51 @@ public class DictionaryMB {
      * Creates a new instance of DictionaryMB
      */
     
-    private List<Region> wojewodztwa;
+    private List<Region> region;
+    private List<Education> education;
+    private List<MaritalStatus> maritalStatus;
+    private List<WorkingPlace> workingPlace;
+    private List<CaseStatus> caseStatus;
     
     
     public DictionaryMB() {
         RegionDAO reg = new RegionDAO();
-        wojewodztwa = reg.regionList();
+        region = reg.regionList();
+        
+        EducationDAO edu = new EducationDAO();
+        region = edu.educationList();
+        
+        MaritalStatusDAO ms = new MaritalStatusDAO();
+        maritalStatus = ms.maritalStatusList();
+        
+        WorkingPlaceDAO wp = new WorkingPlaceDAO();
+        workingPlace = wp.regionList();
+        
+        CaseStatusDAO cs = new CaseStatusDAO();
+        caseStatus = cs.caseStatusList();
+        
+        
     }
 
-    /**
-     * @return the wojewodztwa
-     */
-    public List<Region> getWojewodztwa() {
-        return wojewodztwa;
+    public List<Region> getRegion() {
+        return region;
     }
 
-    /**
-     * @param wojewodztwa the wojewodztwa to set
-     */
-    public void setWojewodztwa(List<Region> wojewodztwa) {
-        this.wojewodztwa = wojewodztwa;
+    public List<Education> getEducation() {
+        return education;
     }
+
+    public List<MaritalStatus> getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public List<WorkingPlace> getWorkingPlace() {
+        return workingPlace;
+    }
+
+    public List<CaseStatus> getCaseStatus() {
+        return caseStatus;
+    }
+
+    
 }
