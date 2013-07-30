@@ -25,9 +25,10 @@ public class NewMain {
 //          System.out.println(c.getUser().getLogin());
 //          System.out.println( Security.sha1("admin") );
         
-        UserDAO udao=new UserDAO();
-        User u=udao.login("admin@admin.pl", "admin");
-        System.out.println(u.getLogin());
+//        UserDAO udao=new UserDAO();
+//        User u=udao.login("admin@admin.pl", "admin");
+//        System.out.println(u.getLogin());
+        
         
     }
 }
