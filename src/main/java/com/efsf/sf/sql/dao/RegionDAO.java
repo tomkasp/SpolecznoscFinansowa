@@ -23,7 +23,7 @@ public class RegionDAO {
         lista = session.createQuery("from Region").list();
         
         session.getTransaction().commit();
-        session.close();
+        //session.close();
         return lista;
     }
 }
