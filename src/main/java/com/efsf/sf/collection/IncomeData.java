@@ -12,19 +12,19 @@ public class IncomeData
 {
     private String employmentType;
     private String branch;
-    private int incomeNetto;
+    private double incomeNetto;
     
-    public IncomeData(String employmentType, String branch, int incomeNetto) {
+    public IncomeData(String employmentType, String branch, double incomeNetto) {
         this.employmentType = employmentType;
         this.branch = branch;
         this.incomeNetto = incomeNetto;
     }
 
-    public int getIncomeNetto() {
+    public double getIncomeNetto() {
         return incomeNetto;
     }
 
-    public void setIncomeNetto(int incomeNetto) {
+    public void setIncomeNetto(double incomeNetto) {
         this.incomeNetto = incomeNetto;
     }
 

@@ -52,7 +52,7 @@ public class ClientFillAccountDataMB implements Serializable
     
     //Income
     
-    private IncomeData currentIncomeData;
+   
     private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
     private Income income = new Income();
     private IncomeBuisnessActivity business = new IncomeBuisnessActivity();
@@ -61,7 +61,7 @@ public class ClientFillAccountDataMB implements Serializable
     
     private int incomeId;
     private int branchId;
-    private boolean isIncome = false;
+    private boolean isIncome = true;
     
     
     //Address Data
@@ -98,8 +98,45 @@ public class ClientFillAccountDataMB implements Serializable
     
     public void addIncome()
     {
-        
+                EmploymentType et = null; 
+                for (EmploymentType i : dictionaryMB.getIncome())
+                {
+                    if (i.getIdEmploymentType() == incomeId)
+                    {
+                        et = i;
+                        break;
+                    }
+                }
+                
+                Branch b = null;
+ 
+                for (Branch i : dictionaryMB.getBranch())
+                {
+                    if (i.getIdBranch() == branchId)
+                    {
+                        b = i;
+                        break;
+                    }
+                }
+                if (isIncome)
+                {
+                    income.setBranch(b);
+                    income.setEmploymentType(et);
+                    income.setClient(loginMB.getClient());
+                    incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));   
+                    //save INCOME!@!
+                }
+                else
+                {
+                    business.setBranch(b);
+                    business.setEmploymentType(et);
+                    business.setClient(loginMB.getClient());
+                    incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));         
+                }
     }
+    
+
+ 
     
     public void toIncome()
     {
@@ -201,14 +238,6 @@ public class ClientFillAccountDataMB implements Serializable
         this.loginMB = loginMB;
     }
     
-    public IncomeData getCurrentIncomeData() {
-        return currentIncomeData;
-    }
-
-    public void setCurrentIncomeData(IncomeData currentIncomeData) {
-        this.currentIncomeData = currentIncomeData;
-    }
-
     public Income getIncome() {
         return income;
     }
