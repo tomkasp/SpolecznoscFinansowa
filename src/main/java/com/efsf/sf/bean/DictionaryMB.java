@@ -6,9 +6,11 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -26,11 +28,14 @@ public class DictionaryMB {
     private List<Education> education;
     private List<MaritalStatus> maritalStatus;
     private List<WorkingPlace> workingPlace;
+    private ArrayList<SelectItem> workingPlaceMap;
     private List<CaseStatus> caseStatus;
     private List<EmploymentType> businessActivity;
     private List<EmploymentType> income;
     private List<Institution> bank;
     private List<Institution> institution;
+    private List<ProductType> productType;
+    private List<SubscriptionType> subscriptionType;
     
     public DictionaryMB() {
         RegionDAO reg = new RegionDAO();
@@ -43,7 +48,8 @@ public class DictionaryMB {
         maritalStatus = ms.maritalStatusList();
         
         WorkingPlaceDAO wp = new WorkingPlaceDAO();
-        workingPlace = wp.regionList();
+        workingPlace = wp.workingPlaceList();
+        workingPlaceMap = wp.workingPlaceMap();
         
         CaseStatusDAO cs = new CaseStatusDAO();
         caseStatus = cs.caseStatusList();  
@@ -52,9 +58,15 @@ public class DictionaryMB {
         businessActivity = e.businessActivityList();
         income = e.incomeList();
     
-        InstitutionDAO idao=new InstitutionDAO();
+        InstitutionDAO idao = new InstitutionDAO();
         bank = idao.bankList();
         institution = idao.institutionList();
+        
+        ProductTypeDAO pdao = new ProductTypeDAO();
+        productType = pdao.productTypeList();
+        
+        SubscriptionTypeDAO sdao = new SubscriptionTypeDAO();
+        subscriptionType = sdao.subscriptionTypeList();
     }
 
     public List<Region> getRegion() {
@@ -73,6 +85,14 @@ public class DictionaryMB {
         return workingPlace;
     }
 
+    public ArrayList<SelectItem> getWorkingPlaceMap() {
+        return workingPlaceMap;
+    }
+
+    public void setWorkingPlaceMap(ArrayList<SelectItem> workingPlaceMap) {
+        this.workingPlaceMap = workingPlaceMap;
+    }
+    
     public List<CaseStatus> getCaseStatus() {
         return caseStatus;
     }
@@ -92,6 +112,15 @@ public class DictionaryMB {
     public List<Institution> getInstitution() {
         return institution;
     }
+
+    public List<ProductType> getProductType() {
+        return productType;
+    }
+
+    public List<SubscriptionType> getSubscriptionType() {
+        return subscriptionType;
+    }
+
 
     
     
