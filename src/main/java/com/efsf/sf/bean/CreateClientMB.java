@@ -12,9 +12,11 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Branch;
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Education;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBuisnessActivity;
+import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
@@ -64,9 +66,10 @@ public class CreateClientMB implements Serializable
     private int maritalStatus;
     private int education; 
     private Boolean sex;
+    private String sexString;
     private String pesel;
     private int birthPlace;
-    
+
     //Income
     
     private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
@@ -82,10 +85,12 @@ public class CreateClientMB implements Serializable
     private int branchId;
     private boolean isIncome = true;
     
+    
+    
     //Address Data
     
     private int regionId;
-
+    
     public int getRegionId() {
         return regionId;
     }
@@ -135,8 +140,8 @@ public class CreateClientMB implements Serializable
         client.setName(name);
         client.setUser(user);
         client.setLastName("");
-        client.setEducation(eduDao.getEducation(7));  
-        client.setMaritalStatus(maritalDao.getMaritalStatus(7));
+        client.setEducation(eduDao.getEducation(0));  
+        client.setMaritalStatus(maritalDao.getMaritalStatus(0));
         client.setPoints(5);
         
         userDao.save(user);
@@ -191,6 +196,8 @@ public class CreateClientMB implements Serializable
                     }
                 }
                 
+
+                
                 Branch b = null;
  
                 for (Branch i : dictionaryMB.getBranch())
@@ -211,6 +218,16 @@ public class CreateClientMB implements Serializable
                 }
                 else
                 {
+                    
+                    for (EmploymentType i : dictionaryMB.getBusinessActivity())
+                    {
+                          if (i.getIdEmploymentType() == incomeId)
+                          {
+                                 et = i;
+                                 break;
+                          }
+                    }
+                    
                     business.setBranch(b);
                     business.setEmploymentType(et);
                     business.setClient(loginMB.getClient());
@@ -226,6 +243,25 @@ public class CreateClientMB implements Serializable
         
         Client client = loginMB.getClient();
         
+        
+        for (Education i : dictionaryMB.getEducation())
+        {
+            if (i.getIdEducation() == education)
+            {
+                client.setEducation(i);
+                break;
+            }
+        }
+        
+        for (MaritalStatus i : dictionaryMB.getMaritalStatus())
+        {
+            if (i.getIdMaritalStatus() == maritalStatus)
+            {
+                client.setMaritalStatus(i);
+                break;
+            }
+        }
+        
         for (Region i : dictionaryMB.getRegion())
         {
             if (i.getIdRegion() == regionId)
@@ -235,10 +271,24 @@ public class CreateClientMB implements Serializable
             }
         }
         
-        address.setClient(client);
-        addressSet.add(address);
+        if(!(regionId == 0 && address.getCity().equals("") && address.getHouseNumber().equals("") && address.getPhone().equals("") 
+                 && address.getStreet().equals("") && address.getZipCode().equals("")))
+        {
+            address.setClient(client);
+            address.setCountry("Polska");
+            addressSet.add(address);
+            client.setAddresses(addressSet);
+        }
         
-        client.setAddresses(addressSet);
+        if(sexString.equals("true"))
+        {
+            client.setSex(true);
+        }
+        else if(sexString.equals("false"))
+        {
+            client.setSex(true);
+        }
+        
         
         client.setName(name);
         client.setFamilyName(familyName);
@@ -452,6 +502,15 @@ public class CreateClientMB implements Serializable
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public String getSexString() {
+        return sexString;
+    }
+
+    public void setSexString(String sexString) {
+        this.sexString = sexString;
+    }
+
     
            
     

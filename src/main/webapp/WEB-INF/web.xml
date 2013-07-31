@@ -3,7 +3,7 @@
    
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
-        <filter-class>util.CharacterEncodingFilter</filter-class>
+        <filter-class> com.efsf.sf.util.CharacterEncodingFilter</filter-class>
     </filter>
     
     <context-param>
