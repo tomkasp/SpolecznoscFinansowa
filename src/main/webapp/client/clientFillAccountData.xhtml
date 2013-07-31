@@ -93,13 +93,13 @@
                         </h:form>
                         
 
-                        <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informacje"  widgetVar="income" resizable="tfalse" height="500" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
+                        <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informacje"  widgetVar="income" resizable="tfalse" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:form> 
-                                <p:commandButton  styleClass="floatL  wideButton marginTB20 marginLR30" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa"  >
+                                <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa"  >
                                     
                                 </p:commandButton>
                                                   
-                                <p:commandButton styleClass="floatR  wideButton marginTB20" style="margin-right: 30px;" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" oncomplete="income.hide(); business.show()" >
+                                <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" oncomplete="income.hide(); business.show()" >
                                    
                                 </p:commandButton>
                               
@@ -119,30 +119,31 @@
                                     </div>
 
                                    <div class="marginT10">  <h:outputText class="dialogLabel" value="Pracodawca"/> <h:inputText class="floatR marginT10" value="#{clientFillAccountDataMB.income.employer}" style="width: 70%" /> </div>
-                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Dochód netto"/> <h:inputText class="floatR marginT10"  style="width: 40%" value="#{clientFillAccountDataMB.income.monthlyNetto}" /> </div>
+                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Dochód netto"/> <h:inputText class="floatR marginT10"  style="width: 39%" value="#{clientFillAccountDataMB.income.monthlyNetto}" /> </div>
                                    <div class="marginT10">  <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> <p:calendar  navigator="true" styleClass="floatR marginT10"  value="#{clientFillAccountDataMB.income.beginDate}"/> </div> 
                                
                                    </h:panelGroup>
-                                
-                                   <p:commandButton styleClass="floatL" action="#{clientFillAccountDataMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
-                                   <p:commandButton styleClass="floatR" action="#{clientFillAccountDataMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                                    <div>
+                                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientFillAccountDataMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
+                                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientFillAccountDataMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                                    </div>
                             </h:form>
                         </p:dialog>
                         
                         <p:dialog id="addBusiness" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informacje"  widgetVar="business" resizable="tfalse" height="500" width="550" showEffect="clip" hideEffect="explode" modal="true" >    
                                 <h:form>  
-                                  <p:commandButton  styleClass="floatL marginTB20" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
+                                  <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
                                      
                                   </p:commandButton>
 
-                                  <p:commandButton styleClass="floatR marginTB20" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" >
+                                  <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" >
                                       
                                   </p:commandButton>             
                                 <h:panelGroup id="panel2">
                                   <div style="max-height: 400px; overflow-y: auto; clear: both;">
                                   <div class="marginT10"> 
                                       <h:outputText class="dialogLabel" value="Typ umowy"/> 
-                                      <p:selectOneMenu style="width: 375px;" value="#{clientFillAccountDataMB.incomeId}">
+                                      <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{clientFillAccountDataMB.incomeId}">
                                           <f:selectItems value="#{dictionaryMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
                                       </p:selectOneMenu>         
                                   </div>
