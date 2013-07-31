@@ -48,9 +48,11 @@
                                     <!--<div class="field"> <h:outputText class="label" value="Nazwa użytkownika"/>  <h:inputText class="inputWidth" disabled="true" value="#{createClientMB.login}"/> </div>-->
                                     <div class="field"> 
                                         <h:outputText class="label" value="Imię"/>  
-                                        <h:inputText class="inputWidth" required="true" value="#{createClientMB.name}" >
+                                        <h:inputText id="name" class="inputWidth" required="true" value="#{createClientMB.name}" >
                                             <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="nameMessage" />
                                         </h:inputText>
+                                        <h:message for="name" errorClass="invalid" id="nameMessage" />
                                     </div>   
                                     <div class="field"> 
                                         <h:outputText class="label" value="Hasło"/> 
