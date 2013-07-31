@@ -92,7 +92,7 @@ public class CreateClientMB implements Serializable
         userDao.save(user);
         clientDao.save(client);
         
-        user.setLogin((000000 + user.getIdUser().toString().substring(user.getIdUser())));
+        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         
         userDao.update(user);
         
