@@ -30,6 +30,9 @@ import javax.faces.validator.ValidatorException;
 @ViewScoped
 public class CreateClientMB implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+    
+
     
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
@@ -89,7 +92,7 @@ public class CreateClientMB implements Serializable
         userDao.save(user);
         clientDao.save(client);
         
-        user.setLogin(user.getIdUser().toString());
+        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         
         userDao.update(user);
         

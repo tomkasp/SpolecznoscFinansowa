@@ -37,7 +37,7 @@ public class ProductTypeDAO {
         lista = session.createQuery("from ProductType").list();
         
         session.getTransaction().commit();
-        session.close();
+        //session.close();
         return lista;
     }
 }

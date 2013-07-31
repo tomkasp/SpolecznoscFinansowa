@@ -34,15 +34,22 @@ public class ConsultantCreateMB implements Serializable{
     private Address mainAddress=new Address();
     private Address invoiceAddress=new Address();
     
-    private List<Institution> selectedBankList=new ArrayList<>();
-    private List<Institution> selectedInstitutionList=new ArrayList<>();
+    private Integer idWorkingPlace;
     
-    private SubscriptionType subscriptionType=new SubscriptionType();
+    private List<Institution> idselectedBankList=new ArrayList<>();
+    private List<Institution> idselectedInstitutionList=new ArrayList<>();
+    private List<Integer> idProductTypes=new ArrayList<>();
+    
+    private Integer idScope;
+    
+    private Integer idMainRegion;
+    private Integer idInvoiceRegion;
+    
+    private Integer idSubscriptionType;
     
     private Boolean policy=false;
     private Boolean policy2=false;
     
-    private Integer workingPlaceId=0;
     
     public ConsultantCreateMB() {
     }
@@ -94,10 +101,6 @@ public class ConsultantCreateMB implements Serializable{
         return "/consultant/consultantMainPage?faces-redirect=true";   
     }
     
-    public String show(){       
-        System.out.println( "Zaznaczono:"+ selectedBankList.size() );   
-        return "/consultant/consultantFillAccountData?faces-redirect=true";   
-    }
     
     public User getUser() {
         return user;
@@ -139,30 +142,6 @@ public class ConsultantCreateMB implements Serializable{
         this.invoiceAddress = invoiceAddress;
     }
 
-    public List<Institution> getSelectedBankList() {
-        return selectedBankList;
-    }
-
-    public void setSelectedBankList(List<Institution> selectedBankList) {
-        this.selectedBankList = selectedBankList;
-    }
-
-    public List<Institution> getSelectedInstitutionList() {
-        return selectedInstitutionList;
-    }
-
-    public void setSelectedInstitutionList(List<Institution> selectedInstitutionList) {
-        this.selectedInstitutionList = selectedInstitutionList;
-    }
-
-    public SubscriptionType getSubscriptionType() {
-        return subscriptionType;
-    }
-
-    public void setSubscriptionType(SubscriptionType subscriptionType) {
-        this.subscriptionType = subscriptionType;
-    }
-
     public Boolean getPolicy() {
         return policy;
     }
@@ -179,14 +158,73 @@ public class ConsultantCreateMB implements Serializable{
         this.policy2 = policy2;
     }
 
-    public Integer getWorkingPlaceId() {
-        return workingPlaceId;
+    public Integer getIdWorkingPlace() {
+        return idWorkingPlace;
     }
 
-    public void setWorkingPlaceId(Integer workingPlaceId) {
-        this.workingPlaceId = workingPlaceId;
+    public void setIdWorkingPlace(Integer idWorkingPlace) {
+        this.idWorkingPlace = idWorkingPlace;
     }
 
+    public List<Institution> getIdselectedBankList() {
+        return idselectedBankList;
+    }
+
+    public void setIdselectedBankList(List<Institution> idselectedBankList) {
+        this.idselectedBankList = idselectedBankList;
+    }
+
+    public List<Institution> getIdselectedInstitutionList() {
+        return idselectedInstitutionList;
+    }
+
+    public void setIdselectedInstitutionList(List<Institution> idselectedInstitutionList) {
+        this.idselectedInstitutionList = idselectedInstitutionList;
+    }
+
+    public List<Integer> getIdProductTypes() {
+        return idProductTypes;
+    }
+
+    public void setIdProductTypes(List<Integer> idProductTypes) {
+        this.idProductTypes = idProductTypes;
+    }
+
+    
+
+    public Integer getIdScope() {
+        return idScope;
+    }
+
+    public void setIdScope(Integer idScope) {
+        this.idScope = idScope;
+    }
+
+    public Integer getIdMainRegion() {
+        return idMainRegion;
+    }
+
+    public void setIdMainRegion(Integer idMainRegion) {
+        this.idMainRegion = idMainRegion;
+    }
+
+    public Integer getIdInvoiceRegion() {
+        return idInvoiceRegion;
+    }
+
+    public void setIdInvoiceRegion(Integer idInvoiceRegion) {
+        this.idInvoiceRegion = idInvoiceRegion;
+    }
+
+    public Integer getIdSubscriptionType() {
+        return idSubscriptionType;
+    }
+
+    public void setIdSubscriptionType(Integer idSubscriptionType) {
+        this.idSubscriptionType = idSubscriptionType;
+    }
+
+    
     
   
 }

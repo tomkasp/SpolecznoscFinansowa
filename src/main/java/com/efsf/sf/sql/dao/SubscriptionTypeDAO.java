@@ -32,12 +32,10 @@ public class SubscriptionTypeDAO {
     public List subscriptionTypeList(){
         List<SubscriptionType> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         
         lista = session.createQuery("from SubscriptionType").list();
         
-        session.getTransaction().commit();
-        session.close();
+       // session.close();
         return lista;
     }
     
