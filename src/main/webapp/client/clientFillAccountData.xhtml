@@ -44,8 +44,8 @@
                 </div>
                 <h:form id="generalForm">
                     
-                <div style="min-height: 850px">
-                    <div class="leftThinerBox">
+                <div style="min-height: 100px">
+                    <div class="leftInlineBox">
                         <h3 class="greenLeftBorder"> Uzupelnij swoje dane </h3>
                         <h:outputText  class="redMessage marginL20" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
 
@@ -72,7 +72,7 @@
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Płeć"/>
-                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{createClientMB.sex}" > 
+                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{createClientMB.sexString}" > 
                                         <f:selectItem itemLabel="K" itemValue="false" /> 
                                         <f:selectItem itemLabel="M" itemValue="true" />
                                     </p:selectOneRadio>
@@ -87,10 +87,28 @@
                                     <h:message for="family" errorClass="invalid" id="familyMessage" />
                                 </div>
                                 
-                                <div class="field"> <h:outputText class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{createClientMB.birthDate}"  /> </div>
+                                <div class="field"> <h:outputText  class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{createClientMB.birthDate}"  /> </div>
+                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Pesel"/> 
-                                    <h:inputText class="inputWidth" value="#{createClientMB.pesel}" />
+                                    <h:inputText id="pesel" class="inputWidth" value="#{createClientMB.pesel}" >
+                                            <f:validateLength minimum="11" maximum="11" />
+                                            <f:convertNumber integerOnly="" />
+                                            <p:ajax event="keyup" update="peselMessage" />
+                                    </h:inputText>
+                                    <h:message for="pesel" errorClass="invalid" id="peselMessage" />
+                                </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="Stan cywilny"/> 
+                                    <p:selectOneMenu style="width:214px" value="#{createClientMB.maritalStatus}">
+                                        <f:selectItems value="#{dictionaryMB.maritalStatus}" var="ms" itemLabel="#{ms.name}" itemValue="#{ms.idMaritalStatus}"   />
+                                    </p:selectOneMenu>    
+                                </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="Wykształcenie"/> 
+                                    <p:selectOneMenu style="width:214px"  value="#{createClientMB.education}">
+                                        <f:selectItems value="#{dictionaryMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
+                                    </p:selectOneMenu>    
                                 </div>
                             </div>
 
@@ -112,7 +130,7 @@
                                     </p:column>  
 
                                     <p:column headerText=" ">  
-                                        <h:outputText value="Usuń" />
+                                        <p:commandLink value="Usuń" />
                                     </p:column> 
                                 </p:dataTable>
 
@@ -130,22 +148,62 @@
                                 <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="Województwo "/> 
-                                    <p:selectOneMenu styleClass="inputWidth3" value="#{createClientMB.regionId}">
+                                    <p:selectOneMenu style="width:214px"  value="#{createClientMB.regionId}">
                                         <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
                                     </p:selectOneMenu>    
                                 </div>
                                 
-                                <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText value="#{createClientMB.address.city}" class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText value="#{createClientMB.address.zipCode}"  class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText value="#{createClientMB.address.street}" class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Numer domu"/>  <h:inputText value="#{createClientMB.address.houseNumber}" class="inputWidth" /> </div> 
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText value="#{createClientMB.address.phone}"  class="inputWidth" /> </div>
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Miasto"/> 
+                                    <h:inputText id="city" value="#{createClientMB.address.city}" class="inputWidth" > 
+                                            <f:validateLength minimum="3" maximum="30" />
+                                            <p:ajax event="keyup" update="cityMessage" />
+                                    </h:inputText>
+                                    <h:message for="city" errorClass="invalid" id="cityMessage" />
+                                </div>
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Kod pocztowy"/> 
+                                    <h:inputText id="zipCode" value="#{createClientMB.address.zipCode}"  class="inputWidth" > 
+                                            <f:validateLength minimum="6" maximum="6" />
+                                            <p:ajax event="keyup" update="zipCodeMessage" />
+                                    </h:inputText>
+                                    <h:message for="zipCode" errorClass="invalid" id="zipCodeMessage" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Ulica"/> 
+                                    <h:inputText id="street" value="#{createClientMB.address.street}" class="inputWidth" >
+                                            <f:validateLength minimum="3" maximum="30" />
+                                            <p:ajax event="keyup" update="streetMessage" />
+                                    </h:inputText>
+                                    <h:message for="street" errorClass="invalid" id="streetMessage" />
+                                </div>
+                                
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Numer domu"/> 
+                                    <h:inputText id="streetNumber" value="#{createClientMB.address.houseNumber}" class="inputWidth" > 
+                                            <f:validateLength minimum="3" maximum="10" />
+                                            <p:ajax event="keyup" update="streetNumberMessage" />
+                                    </h:inputText>
+                                    <h:message for="streetNumber" errorClass="invalid" id="streetNumberMessage" /> 
+                                </div> 
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Telefon"/> 
+                                    <h:inputText id="phone" value="#{createClientMB.address.phone}"  class="inputWidth" >
+                                            <f:validateLength minimum="7" maximum="20" />
+                                            <p:ajax event="keyup" update="phoneMessage" />
+                                    </h:inputText>
+                                    <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
+                                </div>
                             
                             </div>
                       
                     </div> 
                 
-                    <div class="rightWiderBox">
+                    <div class="rightInlineBox">
                         <div class="marginTB20">
                             <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                             <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
@@ -357,7 +415,7 @@
                                  </h:panelGroup>
                                     
                                   <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
-                                  <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" value="Dodaj" oncomplete="business.hide()"  />
+                                  <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
                           </h:form>
                 </p:dialog>
                 
