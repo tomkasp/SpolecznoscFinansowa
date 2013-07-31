@@ -72,11 +72,10 @@
 
                             <div class="field"> 
                                 <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.workingPlaceId}">
+                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.idWorkingPlace}">
                                     <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
                                 </p:selectOneMenu> 
                                 <h:message styleClass="invalid" for="workingPlace"/>
-
                             </div>
 
                         </div>
@@ -100,9 +99,9 @@
 
                     <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
 
-                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.selectedBankList}" layout="pageDirection" >  
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.idselectedBankList}" layout="pageDirection" >  
 
-                        <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                        <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
 
                     </p:selectManyCheckbox>  
 
@@ -112,23 +111,23 @@
 
                     <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
 
-                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.selectedInstitutionList}" layout="pageDirection">
-                        <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idselectedInstitutionList}" layout="pageDirection">
+                        <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
                     </p:selectManyCheckbox>
 
                 </div>
                 <div>
                     <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.consultant.productTypes}" layout="pageDirection">
-                        <f:selectItems value="#{ dictionaryMB.productType}" var="w" itemLabel="#{w.name }" itemValue="#{w}"/>
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idProductTypes}" layout="pageDirection">
+                        <f:selectItems value="#{ dictionaryMB.productType}" var="p" itemLabel="#{p.name}" itemValue="#{p.idProductType}"/>
                     </p:selectManyCheckbox>
                 </div>    
                 <div>
                     <h4> ZASIĘG/MOBILNOŚĆ </h4>
 
                     <div>  
-                        <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.consultant.region}">
-                            <f:selectItems value="#{dictionaryMB.region}" var="w" itemLabel="#{w.region}" itemValue="#{w}" />
+                        <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.idScope}">
+                            <f:selectItems value="#{dictionaryMB.region}" var="w" itemLabel="#{w.region}" itemValue="#{w.idRegion}" />
                         </p:selectOneMenu> 
 
 
@@ -147,8 +146,8 @@
 
                     <div class="field"> 
                         <h:outputText class="label" value="Województwo"/>  
-                        <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.mainAddress.region}">  
-                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                        <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.idMainRegion}">  
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
                         </p:selectOneMenu> 
                     </div>
 
@@ -194,8 +193,8 @@
 
                     <div class="field"> 
                         <h:outputText class="label" value="Województwo"/> 
-                        <p:selectOneMenu style="width: 39% " value="#{consultantCreateMB.invoiceAddress.region}"> 
-                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj}"/>
+                        <p:selectOneMenu style="width: 39% " value="#{consultantCreateMB.idInvoiceRegion}"> 
+                            <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
                         </p:selectOneMenu>
                     </div>
 
@@ -240,8 +239,8 @@
                     <h4>WYBIERZ ABONAMENT</h4>
 
                     <p>       
-                        <p:selectOneRadio styleClass="fontGrey" value="#{consultantCreateMB.subscriptionType}" >
-                        <f:selectItems value="#{ dictionaryMB.subscriptionType }" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                        <p:selectOneRadio styleClass="fontGrey" value="#{consultantCreateMB.idSubscriptionType}" >
+                            <f:selectItems value="#{ dictionaryMB.subscriptionType }" var="w" itemLabel="#{w.name}" itemValue="#{w.idSubscriptionType}"/>
                         </p:selectOneRadio>
                     </p>
                     

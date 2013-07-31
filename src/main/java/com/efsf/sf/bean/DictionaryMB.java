@@ -34,8 +34,10 @@ public class DictionaryMB {
     private List<EmploymentType> income;
     private List<Institution> bank;
     private List<Institution> institution;
+    private List<Branch> branch;
     private List<ProductType> productType;
     private List<SubscriptionType> subscriptionType;
+    
     
     public DictionaryMB() {
         RegionDAO reg = new RegionDAO();
@@ -49,7 +51,7 @@ public class DictionaryMB {
         
         WorkingPlaceDAO wp = new WorkingPlaceDAO();
         workingPlace = wp.workingPlaceList();
-        workingPlaceMap = wp.workingPlaceMap();
+        //workingPlaceMap = wp.workingPlaceMap();
         
         CaseStatusDAO cs = new CaseStatusDAO();
         caseStatus = cs.caseStatusList();  
@@ -62,11 +64,14 @@ public class DictionaryMB {
         bank = idao.bankList();
         institution = idao.institutionList();
         
-        ProductTypeDAO pdao = new ProductTypeDAO();
-        productType = pdao.productTypeList();
+        BranchDAO bdao = new BranchDAO();
+        branch = bdao.branchList();
         
-        SubscriptionTypeDAO sdao = new SubscriptionTypeDAO();
-        subscriptionType = sdao.subscriptionTypeList();
+        ProductTypeDAO ptdao=new ProductTypeDAO();
+        productType=ptdao.productTypeList();
+        
+        SubscriptionTypeDAO stdao=new SubscriptionTypeDAO();
+        subscriptionType=stdao.subscriptionTypeList();
     }
 
     public List<Region> getRegion() {
@@ -113,14 +118,27 @@ public class DictionaryMB {
         return institution;
     }
 
+    public List<Branch> getBranch() {
+        return branch;
+    }
+
     public List<ProductType> getProductType() {
         return productType;
+    }
+
+    public void setProductType(List<ProductType> productType) {
+        this.productType = productType;
     }
 
     public List<SubscriptionType> getSubscriptionType() {
         return subscriptionType;
     }
 
+    public void setSubscriptionType(List<SubscriptionType> subscriptionType) {
+        this.subscriptionType = subscriptionType;
+    }
+
+    
 
     
     

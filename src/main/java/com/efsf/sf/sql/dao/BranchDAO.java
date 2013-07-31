@@ -4,26 +4,26 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.Region;
+
+import com.efsf.sf.sql.entity.Branch;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
 /**
- * @author admin
+ *
+ * @author XaI
  */
-
-public class RegionDAO {
-   
-    public List regionList(){
-        List<Region> lista;
+public class BranchDAO
+{
+        public List branchList(){
+        List<Branch> list;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
-        lista = session.createQuery("from Region").list();
-        
+        list = session.createQuery("from Branch").list();
         session.getTransaction().commit();
-        //session.close();
-        return lista;
+        session.close();
+        return list;
     }
+    
 }
