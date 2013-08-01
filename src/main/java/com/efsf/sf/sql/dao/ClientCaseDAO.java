@@ -3,6 +3,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.entity.CaseStatus;
+import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.ProductType;
 import com.efsf.sf.sql.util.HibernateUtil;
@@ -16,14 +17,14 @@ import org.hibernate.Session;
  */
 public class ClientCaseDAO {
     
-    public void saveClientCase(ClientCase client, LoginMB login){
+    public void saveClientCase(ClientCase client, Client cli){
        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
         CaseStatus caseStatus = (CaseStatus)session.load(CaseStatus.class, 1);
         ProductType pt = (ProductType)session.load(ProductType.class, 1);
         
-        client.setClient(login.getClient());
+        client.setClient(cli);
         
         client.setProductType(pt);
         client.setCaseStatus(caseStatus);
