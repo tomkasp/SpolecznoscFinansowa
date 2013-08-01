@@ -81,8 +81,8 @@ public class Institution  implements java.io.Serializable {
     }
 @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinTable(name="consultantInstitution", catalog="SpolecznoscFinansowa", joinColumns = { 
-        @JoinColumn(name="fk_institutionInst", nullable=false, updatable=false) }, inverseJoinColumns = { 
-        @JoinColumn(name="fk_consultantInst", nullable=false, updatable=false) })
+        @JoinColumn(name="fk_institutionInst", nullable=false, updatable=true) }, inverseJoinColumns = { 
+        @JoinColumn(name="fk_consultantInst", nullable=false, updatable=true) })
     public Set<Consultant> getConsultants() {
         return this.consultants;
     }
