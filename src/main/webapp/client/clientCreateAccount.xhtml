@@ -83,12 +83,31 @@
                                     
                                 </div>
 
-                                <div class="greyBackground marginLRT30">  <h:outputText style="margin-left: 5px" value="Akceptuję"/> <h:link class="redUnderlineLink" value="Regulamin" /> <h:outputText style="margin-left: 5px"  value="oraz" />  <h:link  class="redUnderlineLink" value="Politykę Prywatności" /> </div>
-                                <div >
-                                    <h:commandButton class ="greenButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" action="#{createClientMB.createClientAccount()}" >
-                                        <f:ajax execute="@form" render="@form"/>
-                                    </h:commandButton>              
-                                </div>
+                                <div class="field">
+                                    <div class="label">
+                                         <h:outputText value="Akceptuję"/>
+                                         <h:link class="redUnderlineLink" value="Regulamin" />
+                                    </div>
+                                    <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
+                                       <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                    </p:selectBooleanCheckbox>
+                                    <h:message style="margin-right:30px" for="rules" class="invalid" id="rulesMessage" />
+                                </div> 
+                               <div class="field">
+                                    <div class="label">
+                                         <h:outputText value="Akceptuję"/>
+                                         <h:link class="redUnderlineLink" value="Politykę Prywatności" />
+                                    </div>
+                                   <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
+                                       <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                   </p:selectBooleanCheckbox>
+                                   <h:message style="margin-right:30px" for="policy" class="invalid" id="policyMessage" />
+                               </div>
+                                
+                                <h:commandButton class ="greenButton wideButton floatR marginLR30 marginTB20" style="clear: both;" value="Załóż konto" action="#{createClientMB.createClientAccount()}" >
+                                     <f:ajax execute="@form" render="@form"/>
+                                </h:commandButton>              
+                               
                             </h:form>
                             <h:form>
                                 <div>
