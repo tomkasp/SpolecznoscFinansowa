@@ -39,7 +39,6 @@ public class ClientCaseMB implements Serializable{
         ClientCaseDAO ccd = new ClientCaseDAO();
         
         clientCase.setClient(login.getClient());
-        
         clientCase.setPhase(1);
         clientCase.setViewCounter(0);
         clientCase.setDifficulty(0);

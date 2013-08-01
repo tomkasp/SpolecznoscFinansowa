@@ -1,4 +1,3 @@
-
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.bean.LoginMB;
@@ -16,38 +15,29 @@ import org.hibernate.Session;
  * @author admin
  */
 public class ClientCaseDAO {
-    
-    public void saveClientCase(ClientCase client){
-       Session session = HibernateUtil.getSessionFactory().openSession();
+
+    public void saveClientCase(ClientCase client) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
-        CaseStatus caseStatus = (CaseStatus)session.load(CaseStatus.class, 1);
-        ProductType pt = (ProductType)session.load(ProductType.class, 1);
-        
-        client.setProductType(pt);
-        client.setCaseStatus(caseStatus);
-       
-        session.save(client);
-        
+
+            session.save(client);
+
         session.getTransaction().commit();
-        session.close(); 
-        
+        session.close();
+
     }
 
-    public List last5Cases()
-    {
-         List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
-         session.beginTransaction();
-         
-         Query q = session.createQuery("from ClientCase order by BeginDate");
-         
-         q.setMaxResults(5);
-         
-         list = q.list();
-         
-         return list;
-    }
-    
+    public List last5Cases() {
+        List<ClientCase> list;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
 
+        Query q = session.createQuery("from ClientCase order by BeginDate");
+
+        q.setMaxResults(5);
+
+        list = q.list();
+
+        return list;
+    }
 }
