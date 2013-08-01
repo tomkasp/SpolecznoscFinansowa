@@ -294,6 +294,10 @@ input
     border-radius:  inherit;
 }
 
+.ui-c {
+    display: block;
+}
+
 
 
 
