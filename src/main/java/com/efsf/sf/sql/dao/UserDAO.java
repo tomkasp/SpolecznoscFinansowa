@@ -154,7 +154,6 @@ public class UserDAO {
         
         Query q  = session.createQuery("FROM Consultant c JOIN Fetch c.user as u where u.idUser = :userId");
         q.setParameter("userId", userId);
-        
         Consultant result = (Consultant) q.list().get(0);
         
         return result; 
