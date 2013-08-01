@@ -673,6 +673,7 @@ p:column {
     float:right;
     margin-top: 2px;
     margin-bottom: 0px;
+    clear: both;
 }
 
 .calendar{

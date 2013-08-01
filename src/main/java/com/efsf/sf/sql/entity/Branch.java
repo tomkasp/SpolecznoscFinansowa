@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class Branch  implements java.io.Serializable {
      private Integer idBranch;
      private String name;
      private Set<Income> incomes = new HashSet<Income>(0);
-     private Set<IncomeBuisnessActivity> incomeBuisnessActivities = new HashSet<IncomeBuisnessActivity>(0);
+     private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
 
     public Branch() {
     }
@@ -38,10 +38,10 @@ public class Branch  implements java.io.Serializable {
     public Branch(String name) {
         this.name = name;
     }
-    public Branch(String name, Set<Income> incomes, Set<IncomeBuisnessActivity> incomeBuisnessActivities) {
+    public Branch(String name, Set<Income> incomes, Set<IncomeBusinessActivity> incomeBusinessActivities) {
        this.name = name;
        this.incomes = incomes;
-       this.incomeBuisnessActivities = incomeBuisnessActivities;
+       this.incomeBusinessActivities = incomeBusinessActivities;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -72,12 +72,12 @@ public class Branch  implements java.io.Serializable {
         this.incomes = incomes;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="branch")
-    public Set<IncomeBuisnessActivity> getIncomeBuisnessActivities() {
-        return this.incomeBuisnessActivities;
+    public Set<IncomeBusinessActivity> getIncomeBusinessActivities() {
+        return this.incomeBusinessActivities;
     }
     
-    public void setIncomeBuisnessActivities(Set<IncomeBuisnessActivity> incomeBuisnessActivities) {
-        this.incomeBuisnessActivities = incomeBuisnessActivities;
+    public void setIncomeBusinessActivities(Set<IncomeBusinessActivity> incomeBusinessActivities) {
+        this.incomeBusinessActivities = incomeBusinessActivities;
     }
 
 

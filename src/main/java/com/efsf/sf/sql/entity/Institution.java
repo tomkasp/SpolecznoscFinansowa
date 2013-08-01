@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -81,8 +81,8 @@ public class Institution  implements java.io.Serializable {
     }
 @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinTable(name="consultantInstitution", catalog="SpolecznoscFinansowa", joinColumns = { 
-        @JoinColumn(name="fk_institutionInst", nullable=false, updatable=true) }, inverseJoinColumns = { 
-        @JoinColumn(name="fk_consultantInst", nullable=false, updatable=true) })
+        @JoinColumn(name="fk_institutionInst", nullable=false, updatable=false) }, inverseJoinColumns = { 
+        @JoinColumn(name="fk_consultantInst", nullable=false, updatable=false) })
     public Set<Consultant> getConsultants() {
         return this.consultants;
     }
