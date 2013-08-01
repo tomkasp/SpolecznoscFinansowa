@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -36,6 +36,7 @@ public class Address  implements java.io.Serializable {
      private String city;
      private String country;
      private String phone;
+     private Integer type;
      private Set<InvoiceData> invoiceDatas = new HashSet<InvoiceData>(0);
 
     public Address() {
@@ -46,7 +47,7 @@ public class Address  implements java.io.Serializable {
         this.region = region;
         this.houseNumber = houseNumber;
     }
-    public Address(Region region, Consultant consultant, Client client, String street, String houseNumber, String zipCode, String city, String country, String phone, Set<InvoiceData> invoiceDatas) {
+    public Address(Region region, Consultant consultant, Client client, String street, String houseNumber, String zipCode, String city, String country, String phone, Integer type, Set<InvoiceData> invoiceDatas) {
        this.region = region;
        this.consultant = consultant;
        this.client = client;
@@ -56,6 +57,7 @@ public class Address  implements java.io.Serializable {
        this.city = city;
        this.country = country;
        this.phone = phone;
+       this.type = type;
        this.invoiceDatas = invoiceDatas;
     }
    
@@ -149,6 +151,15 @@ public class Address  implements java.io.Serializable {
     
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    @Column(name="type")
+    public Integer getType() {
+        return this.type;
+    }
+    
+    public void setType(Integer type) {
+        this.type = type;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="address")
     public Set<InvoiceData> getInvoiceDatas() {

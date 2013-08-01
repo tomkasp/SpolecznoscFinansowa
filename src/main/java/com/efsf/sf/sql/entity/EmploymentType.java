@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -27,7 +27,8 @@ public class EmploymentType  implements java.io.Serializable {
      private Integer idEmploymentType;
      private String name;
      private boolean companyFlag;
-     private Set<IncomeBuisnessActivity> incomeBuisnessActivities = new HashSet<IncomeBuisnessActivity>(0);
+     private String shortcut;
+     private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
      private Set<Income> incomes = new HashSet<Income>(0);
      private Set<ProductDetails> productDetailses = new HashSet<ProductDetails>(0);
 
@@ -39,10 +40,11 @@ public class EmploymentType  implements java.io.Serializable {
         this.name = name;
         this.companyFlag = companyFlag;
     }
-    public EmploymentType(String name, boolean companyFlag, Set<IncomeBuisnessActivity> incomeBuisnessActivities, Set<Income> incomes, Set<ProductDetails> productDetailses) {
+    public EmploymentType(String name, boolean companyFlag, String shortcut, Set<IncomeBusinessActivity> incomeBusinessActivities, Set<Income> incomes, Set<ProductDetails> productDetailses) {
        this.name = name;
        this.companyFlag = companyFlag;
-       this.incomeBuisnessActivities = incomeBuisnessActivities;
+       this.shortcut = shortcut;
+       this.incomeBusinessActivities = incomeBusinessActivities;
        this.incomes = incomes;
        this.productDetailses = productDetailses;
     }
@@ -58,7 +60,7 @@ public class EmploymentType  implements java.io.Serializable {
         this.idEmploymentType = idEmploymentType;
     }
     
-    @Column(name="name", nullable=false, length=45)
+    @Column(name="name", nullable=false, length=80)
     public String getName() {
         return this.name;
     }
@@ -75,13 +77,22 @@ public class EmploymentType  implements java.io.Serializable {
     public void setCompanyFlag(boolean companyFlag) {
         this.companyFlag = companyFlag;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="employmentType")
-    public Set<IncomeBuisnessActivity> getIncomeBuisnessActivities() {
-        return this.incomeBuisnessActivities;
+    
+    @Column(name="shortcut", length=10)
+    public String getShortcut() {
+        return this.shortcut;
     }
     
-    public void setIncomeBuisnessActivities(Set<IncomeBuisnessActivity> incomeBuisnessActivities) {
-        this.incomeBuisnessActivities = incomeBuisnessActivities;
+    public void setShortcut(String shortcut) {
+        this.shortcut = shortcut;
+    }
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="employmentType")
+    public Set<IncomeBusinessActivity> getIncomeBusinessActivities() {
+        return this.incomeBusinessActivities;
+    }
+    
+    public void setIncomeBusinessActivities(Set<IncomeBusinessActivity> incomeBusinessActivities) {
+        this.incomeBusinessActivities = incomeBusinessActivities;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="employmentType")
     public Set<Income> getIncomes() {
