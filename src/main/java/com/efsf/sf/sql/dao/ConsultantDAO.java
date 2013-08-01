@@ -44,7 +44,7 @@ public class ConsultantDAO {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-        session.beginTransaction().begin();
+        session.beginTransaction();
         session.save(consultant);
         session.getTransaction().commit();
         }
@@ -59,7 +59,7 @@ public class ConsultantDAO {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-        session.beginTransaction().begin();
+        session.beginTransaction();
         session.update(consultant);
         session.getTransaction().commit();
         }catch(HibernateException e)
