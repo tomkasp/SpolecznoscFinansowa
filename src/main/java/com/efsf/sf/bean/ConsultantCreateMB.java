@@ -26,8 +26,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 /**
  * @author WR1EI1
@@ -55,7 +59,6 @@ public class ConsultantCreateMB implements Serializable {
     private Boolean policy = false;
     private Boolean policy2 = false;
     
-
     public ConsultantCreateMB() {
     }
 
@@ -160,6 +163,15 @@ public class ConsultantCreateMB implements Serializable {
         udao.update(user);
 
         return "/consultant/consultantMainPage?faces-redirect=true";
+    }
+    
+    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
+    {
+        String password = (String)value;
+        if (!password.equals(confirmPassword)) {
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
+        throw new ValidatorException(message);
+        }
     }
 
     public User getUser() {
