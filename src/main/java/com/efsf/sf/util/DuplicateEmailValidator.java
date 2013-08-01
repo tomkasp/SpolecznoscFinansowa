@@ -33,6 +33,7 @@ public class DuplicateEmailValidator implements Validator {
          msg.setSeverity(FacesMessage.SEVERITY_ERROR);
          throw new ValidatorException(msg);
       }
+      
 
    }
  

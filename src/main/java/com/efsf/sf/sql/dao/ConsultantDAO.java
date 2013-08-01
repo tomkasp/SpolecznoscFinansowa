@@ -6,6 +6,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -16,19 +17,25 @@ import org.hibernate.Session;
 public class ConsultantDAO {
 
     public Consultant read(int id) {
-
+       
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
+        Consultant consultant=null;
         
+        try
+        {
+        session.beginTransaction().begin();
         Query q = null;
         q = session.createQuery("FROM Consultant c left outer join fetch c.user as u WHERE id_consultant = :id");
         q.setParameter("id", id);
-         
-        Consultant consultant=(Consultant) q.list().get(0);
-
+        consultant=(Consultant) q.list().get(0);
         session.getTransaction().commit();
-
+        
+        }
+        catch(HibernateException exp)
+        {}
+        finally{   
         session.close();
+        }
 
         return consultant;
     }
@@ -36,25 +43,30 @@ public class ConsultantDAO {
     public void save(Consultant consultant) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
         session.beginTransaction().begin();
-
         session.save(consultant);
-
         session.getTransaction().commit();
-
+        }
+        catch(HibernateException e)
+        {}
+        finally{
         session.close();
+        }
     }
 
     public void update(Consultant consultant) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
         session.beginTransaction().begin();
-
         session.update(consultant);
-
         session.getTransaction().commit();
-
+        }catch(HibernateException e)
+        {}
+        finally{
         session.close();
+        }
     }
 
     public void delete(Consultant consultant) {

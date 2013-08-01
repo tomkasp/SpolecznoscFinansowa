@@ -13,7 +13,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.QueryException;
 import org.hibernate.Session;
 import org.hibernate.exception.JDBCConnectionException;
 
@@ -24,15 +26,22 @@ public class UserDAO {
 
     public User read(int id) {
 
+        User client=null;
         Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        try
+        {
         session.beginTransaction().begin();
-
-        User client = (User) session.load(User.class, id);
-
+        client = (User) session.load(User.class, id);
         session.getTransaction().commit();
-
+        }
+        catch(HibernateException exp)
+        {
+        }
+        finally{   
         session.close();
-
+        }
+      
         return client;
 
     }
@@ -66,26 +75,35 @@ public class UserDAO {
     
     public void save(User user)
     {
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
         session.beginTransaction().begin();
-       
-        session.save(user);
-        
-        session.refresh(user);
-        
+        session.save(user);        
+        session.refresh(user);      
         session.getTransaction().commit();
-        
+        }catch(HibernateException e)
+        {}
+        finally{
         session.close();
+        }
+        
     }
     
     public void update(User user)
     {
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
         session.beginTransaction().begin();
         session.update(user);
         session.getTransaction().commit();
-
+        }catch(HibernateException e)
+        {}
+        finally{
         session.close();
+        }
+        
     }
     
     public void delete(User user)
