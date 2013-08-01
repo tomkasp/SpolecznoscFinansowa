@@ -18,27 +18,9 @@ public class WorkingPlaceDAO {
         }catch(HibernateException e)
         {}
         finally{
-        //session.close();
         }
         return lista;
     }
     
-    public ArrayList<SelectItem>  workingPlaceMap(){
-        ArrayList<SelectItem> selectItems = new ArrayList<>();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
-        List<WorkingPlace> lista = session.createQuery("from WorkingPlace").list();
-   
-        while( lista.iterator().hasNext() ) {
-           WorkingPlace wp=lista.iterator().next();
-           selectItems.add(new SelectItem( wp.getName(), wp.getIdWorkingPlace().toString() ));
-        }
-        
-        }catch(HibernateException e)
-        {}
-        finally{
-        session.close();
-        }
-        return selectItems;
-    }
+    
 }

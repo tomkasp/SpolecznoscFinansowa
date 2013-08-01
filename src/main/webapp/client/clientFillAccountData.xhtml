@@ -42,33 +42,80 @@
                         <h5 class="greenRightBorder"> #{loginMB.client.points} /5 pkt. </h5>
                     </div>
                 </div>
-
-                <div style="min-height: 850px">
-                    <div class="leftThinerBox">
+                <h:form id="generalForm">
+                    
+                <div style="min-height: 100px">
+                    <div class="leftInlineBox">
                         <h3 class="greenLeftBorder"> Uzupelnij swoje dane </h3>
                         <h:outputText  class="redMessage marginL20" value="Te dane są wymagane do uczestnictwa w giełdzie zleceń" /> 
 
 
-                        <h:form>
+                        
                             <div class="marginLRT30">
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.name}"/> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.surname}" /> </div>
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Imię"/>  
+                                    <h:inputText id="name" class="inputWidth" required="true" value="#{createClientMB.name}"> 
+                                            <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="nameMessage" />
+                                    </h:inputText>
+                                    <h:message for="name" errorClass="invalid" id="nameMessage" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Nazwisko"/>  
+                                    <h:inputText id="surname" class="inputWidth" value="#{createClientMB.surname}" >
+                                            <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="surnameMessage" />
+                                    </h:inputText>
+                                    <h:message for="surname" errorClass="invalid" id="surnameMessage" />
+                                </div>
+                                
                                 <div class="field">
                                     <h:outputText class="label" value="Płeć"/>
-                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{clientFillAccountDataMB.sex}" > 
+                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{createClientMB.sexString}" > 
                                         <f:selectItem itemLabel="K" itemValue="false" /> 
                                         <f:selectItem itemLabel="M" itemValue="true" />
                                     </p:selectOneRadio>
                                 </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko rodowe"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.familyName}" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{clientFillAccountDataMB.birthDate}"  /> </div>
-                                <div class="field"> <h:outputText class="label" value="Pesel"/>  <h:inputText class="inputWidth" value="#{clientFillAccountDataMB.pesel}" /> </div>
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Nazwisko rodowe"/>  
+                                    <h:inputText id="family" class="inputWidth" value="#{createClientMB.familyName}" > 
+                                            <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="familyMessage" />
+                                    </h:inputText>
+                                    <h:message for="family" errorClass="invalid" id="familyMessage" />
+                                </div>
+                                
+                                <div class="field"> <h:outputText  class="label" value="Data urodzenia"/>  <p:calendar navigator="true" styleClass="calendar" value="#{createClientMB.birthDate}"  /> </div>
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Pesel"/> 
+                                    <h:inputText id="pesel" class="inputWidth" value="#{createClientMB.pesel}" >
+                                            <f:validateLength minimum="11" maximum="11" />
+                                            <f:convertNumber integerOnly="" />
+                                            <p:ajax event="keyup" update="peselMessage" />
+                                    </h:inputText>
+                                    <h:message for="pesel" errorClass="invalid" id="peselMessage" />
+                                </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="Stan cywilny"/> 
+                                    <p:selectOneMenu style="width:214px" value="#{createClientMB.maritalStatus}">
+                                        <f:selectItems value="#{dictionaryMB.maritalStatus}" var="ms" itemLabel="#{ms.name}" itemValue="#{ms.idMaritalStatus}"   />
+                                    </p:selectOneMenu>    
+                                </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="Wykształcenie"/> 
+                                    <p:selectOneMenu style="width:214px"  value="#{createClientMB.education}">
+                                        <f:selectItems value="#{dictionaryMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
+                                    </p:selectOneMenu>    
+                                </div>
                             </div>
 
                             <div class="marginLR30">
                                 <div class="field"> <h:outputText class="label fontBlack" value="Dane o dochodach"/> </div>
                           
-                                <p:dataTable id="dochody" value="#{clientFillAccountDataMB.incomeTable}" var="data" emptyMessage="Nie dodano jeszcze żadnych dochodów" >
+                                <p:dataTable id="dochody" value="#{createClientMB.incomeTable}" var="data" emptyMessage="Nie dodano jeszcze żadnych dochodów" >
                                     
                                     <p:column headerText="Rodzaj">  
                                         <h:outputText value="#{data.employmentType}" />
@@ -83,208 +130,80 @@
                                     </p:column>  
 
                                     <p:column headerText=" ">  
-                                        <h:outputText value="Usuń" />
+                                        <p:commandLink value="Usuń" />
                                     </p:column> 
                                 </p:dataTable>
 
                                 <p:commandLink styleClass="greyButton floatR" value="Dodaj" oncomplete="income.show()"  /> 
  
                             </div>
-                        </h:form>
+                        
                         
 
-                        <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informacje"  widgetVar="income" resizable="tfalse" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:form> 
-                                <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa"  >
-                                    
-                                </p:commandButton>
-                                                  
-                                <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" oncomplete="income.hide(); business.show()" >
-                                   
-                                </p:commandButton>
-                              
-                                <h:panelGroup id="panel1">
-                                    <div class="marginT10"> 
-                                        <h:outputText class="dialogLabel" value="Typ umowy"/> 
-                                        <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{clientFillAccountDataMB.incomeId}">
-                                            <f:selectItems value="#{dictionaryMB.income}" var="empl" itemLabel="#{empl.name}" itemValue="#{empl.idEmploymentType}"   />
-                                        </p:selectOneMenu>         
-                                    </div>
-                                   
-                                    <div class="marginT10"> 
-                                        <h:outputText class="dialogLabel" value="Branża"/> 
-                                        <p:selectOneMenu styleClass="marginT10" style="width: 375px; margin-left: 31px; float:right;" value="#{clientFillAccountDataMB.branchId}">
-                                            <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
-                                        </p:selectOneMenu>         
-                                    </div>
 
-                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Pracodawca"/> <h:inputText class="floatR marginT10" value="#{clientFillAccountDataMB.income.employer}" style="width: 70%" /> </div>
-                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Dochód netto"/> <h:inputText class="floatR marginT10"  style="width: 39%" value="#{clientFillAccountDataMB.income.monthlyNetto}" /> </div>
-                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> <p:calendar  navigator="true" styleClass="floatR marginT10"  value="#{clientFillAccountDataMB.income.beginDate}"/> </div> 
-                               
-                                   </h:panelGroup>
-                                    <div>
-                                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientFillAccountDataMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
-                                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientFillAccountDataMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
-                                    </div>
-                            </h:form>
-                        </p:dialog>
                         
-                        <p:dialog id="addBusiness" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informacje"  widgetVar="business" resizable="tfalse" height="500" width="550" showEffect="clip" hideEffect="explode" modal="true" >    
-                                <h:form>  
-                                  <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientFillAccountDataMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
-                                     
-                                  </p:commandButton>
-
-                                  <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientFillAccountDataMB.toBusinessActivity()}" value="Działalność" >
-                                      
-                                  </p:commandButton>             
-                                <h:panelGroup id="panel2">
-                                  <div style="max-height: 400px; overflow-y: auto; clear: both;">
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Typ umowy"/> 
-                                      <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{clientFillAccountDataMB.incomeId}">
-                                          <f:selectItems value="#{dictionaryMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
-                                      </p:selectOneMenu>         
-                                  </div>
-
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Branża"/> 
-                                      <p:selectOneMenu style="width: 375px; margin-left: 31px;" value="#{clientFillAccountDataMB.branchId}">
-                                          <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
-                                      </p:selectOneMenu>         
-                                  </div>
-
-                                  <div class="marginT10">  
-                                      <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
-                                      <p:calendar navigator="true" styleClass="calendar" value="#{clientFillAccountDataMB.business.beginDate}"/> 
-                                  </div> 
-
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Nr księgi przychodów i rozchodów"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.revenueExpenceLedger}" style="width: 20%" /> 
-                                  </div>
-
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Przychód w roku obecnym (brutto)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeCurrentYearBrutto}" style="width: 20%" /> 
-                                  </div>
-
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Przychód w roku obecnym (netto)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeCurrentYearNetto}" style="width: 20%" /> 
-                                  </div>
-
-                                  <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (brutto)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeLastYearBrutto}" style="width: 20%" /> 
-                                  </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (netto)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeLastYearNetto}" style="width: 20%" /> 
-                                 </div>
-
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Zaliczka na podatek dochodowy (6 miesięcy w przód)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeTax6mthAdv}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Kwota zaległości ZUS"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.valueZus}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Kwota zaległości US"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.valueUs}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Kwota zaległości KRD"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.valueKrd}" style="width: 20%" /> 
-                                 </div>
-
-                                <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Tytuł zaległości w KRD"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.titleKrd}" style="width: 20%" /> 
-                                 </div>
-
-                                <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Amortyzacja w roku bieżącym"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.depreciationCurrentYear}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Amortyzacja w roku ubiegłym"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.depreciationLastYear}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość stawki"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.rateRe}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku ubiegłym"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeLastYearRe}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku bieżącym"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.incomeCurrentYearRe}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - Kwota podatku (ostatni miesiąc)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.taxValue1mth}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - Kwota podatku (2 miesiące wstecz)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.taxValue2mth}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - Kwota podatku (3 miesiące wstecz)"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.taxValue3mth}" style="width: 20%" /> 
-                                 </div>
-
-                                 <div class="marginT10"> 
-                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość karty podatkowej"/>
-                                      <h:inputText value="#{clientFillAccountDataMB.business.constantAmountCard}" style="width: 20%" /> 
-                                 </div>
-
-
-                                </div>
-                                 </h:panelGroup>
-                                    
-                                  <p:commandButton styleClass="floatL" action="#{clientFillAccountDataMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
-                                  <p:commandButton styleClass="floatR" action="#{clientFillAccountDataMB.addIncome()}" value="Dodaj" oncomplete="business.hide()"  />
-                          </h:form>
-                        </p:dialog>
-
+                        
+                        
                             <div class="marginLR30" >
                                 <div class="field"> <h:outputText class="label fontBlack" value="Dane adresowe"/> </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="Województwo "/> 
-                                    <p:selectOneMenu styleClass="inputWidth3" value="#{clientFillAccountDataMB.address.region}">
-                                        <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg}"   />
+                                    <p:selectOneMenu style="width:214px"  value="#{createClientMB.regionId}">
+                                        <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
                                     </p:selectOneMenu>    
                                 </div>
                                 
-                                <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText value="#{clientFillAccountDataMB.address.city}" class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText value="#{clientFillAccountDataMB.address.zipCode}"  class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Ulica"/>  <h:inputText value="#{clientFillAccountDataMB.address.street}" class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Numer domu"/>  <h:inputText value="#{clientFillAccountDataMB.address.houseNumber}" class="inputWidth" /> </div> 
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText value="#{clientFillAccountDataMB.address.phone}"  class="inputWidth" /> </div>
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Miasto"/> 
+                                    <h:inputText id="city" value="#{createClientMB.address.city}" class="inputWidth" > 
+                                            <f:validateLength minimum="3" maximum="30" />
+                                            <p:ajax event="keyup" update="cityMessage" />
+                                    </h:inputText>
+                                    <h:message for="city" errorClass="invalid" id="cityMessage" />
+                                </div>
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Kod pocztowy"/> 
+                                    <h:inputText id="zipCode" value="#{createClientMB.address.zipCode}"  class="inputWidth" > 
+                                            <f:validateLength minimum="6" maximum="6" />
+                                            <p:ajax event="keyup" update="zipCodeMessage" />
+                                    </h:inputText>
+                                    <h:message for="zipCode" errorClass="invalid" id="zipCodeMessage" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Ulica"/> 
+                                    <h:inputText id="street" value="#{createClientMB.address.street}" class="inputWidth" >
+                                            <f:validateLength minimum="3" maximum="30" />
+                                            <p:ajax event="keyup" update="streetMessage" />
+                                    </h:inputText>
+                                    <h:message for="street" errorClass="invalid" id="streetMessage" />
+                                </div>
+                                
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Numer domu"/> 
+                                    <h:inputText id="streetNumber" value="#{createClientMB.address.houseNumber}" class="inputWidth" > 
+                                            <f:validateLength minimum="3" maximum="10" />
+                                            <p:ajax event="keyup" update="streetNumberMessage" />
+                                    </h:inputText>
+                                    <h:message for="streetNumber" errorClass="invalid" id="streetNumberMessage" /> 
+                                </div> 
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Telefon"/> 
+                                    <h:inputText id="phone" value="#{createClientMB.address.phone}"  class="inputWidth" >
+                                            <f:validateLength minimum="7" maximum="20" />
+                                            <p:ajax event="keyup" update="phoneMessage" />
+                                    </h:inputText>
+                                    <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
+                                </div>
                             
                             </div>
-                       
+                      
                     </div> 
-
-                    <div class="rightWiderBox">
+                
+                    <div class="rightInlineBox">
                         <div class="marginTB20">
                             <h6 class="greenLeftBorder"> Możesz pominąć ten krok i od razu przejść do swojego profilu. </h6>
                             <h6 class="greenLeftBorder"> Zawsze można dodać te informacje w profilu. </h6> 
@@ -311,11 +230,10 @@
 
                 </div>
                 <div style="min-height: 30px;">
-                    <h:link class ="greenButton wideButton floatR marginTB20" value="Dalej" outcome="/client/clientFinancialNeeds"/>
-
+                    <h:commandButton class ="greenButton wideButton floatR marginTB20" type="submit" action="#{createClientMB.saveAndRedirect()}" value="Dalej" >
+                    </h:commandButton>
                 </div>
-
-
+                </h:form>
                 <div class="bottomTable topGreenLine">
 
                     <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY </h4>
@@ -365,6 +283,180 @@
                     </p:dataTable>
 
                 </div>
+                
+                <p:dialog id="addBusiness" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="business" resizable="tfalse" height="550" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                                <h:form>  
+                                  <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{createClientMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
+                                     
+                                  </p:commandButton>
+
+                                  <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{createClientMB.toBusinessActivity()}" value="Działalność" >
+                                      
+                                  </p:commandButton>             
+                                <h:panelGroup id="panel2">
+                                  <div style="max-height: 400px; overflow-y: auto; clear: both;">
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Typ umowy"/> 
+                                      <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; float:right;" value="#{createClientMB.incomeId}">
+                                          <f:selectItems value="#{dictionaryMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
+                                      </p:selectOneMenu>         
+                                  </div>
+
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Branża"/> 
+                                      <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; margin-left: 31px; float:right;" value="#{createClientMB.branchId}">
+                                          <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                      </p:selectOneMenu>         
+                                  </div>
+
+                                  <div class="marginT10">  
+                                      <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
+                                      <p:calendar navigator="true" styleClass="floatR marginT10 marginR5"  value="#{createClientMB.business.beginDate}"/> 
+                                  </div> 
+
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Nr księgi przychodów i rozchodów"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.revenueExpenceLedger}" style="width: 20%" /> 
+                                  </div>
+
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Przychód w roku obecnym (brutto)"/>
+                                      <h:inputText  class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeCurrentYearBrutto}" style="width: 20%" /> 
+                                  </div>
+
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Przychód w roku obecnym (netto)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeCurrentYearNetto}" style="width: 20%" /> 
+                                  </div>
+
+                                  <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (brutto)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeLastYearBrutto}" style="width: 20%" /> 
+                                  </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (netto)"/>
+                                      <h:inputText class="floatR marginT10 marginR5 " value="#{createClientMB.business.incomeLastYearNetto}" style="width: 20%" /> 
+                                 </div>
+
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Zaliczka na podatek dochodowy (6 miesięcy w przód)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeTax6mthAdv}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Kwota zaległości ZUS"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.valueZus}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Kwota zaległości US"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.valueUs}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Kwota zaległości KRD"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.valueKrd}" style="width: 20%" /> 
+                                 </div>
+
+                                <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Tytuł zaległości w KRD"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.titleKrd}" style="width: 20%" /> 
+                                 </div>
+
+                                <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Amortyzacja w roku bieżącym"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.depreciationCurrentYear}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Amortyzacja w roku ubiegłym"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.depreciationLastYear}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość stawki"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.rateRe}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku ubiegłym"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeLastYearRe}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku bieżącym"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.incomeCurrentYearRe}" style="width: 20%" /> 
+                                 </div> 
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (ostatni miesiąc)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.taxValue1mth}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (2 miesiące wstecz)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.taxValue2mth}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (3 miesiące wstecz)"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.taxValue3mth}" style="width: 20%" /> 
+                                 </div>
+
+                                 <div class="marginT10"> 
+                                      <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość karty podatkowej"/>
+                                      <h:inputText class="floatR marginT10 marginR5" value="#{createClientMB.business.constantAmountCard}" style="width: 20%" /> 
+                                 </div>
+
+
+                                </div>
+                                 </h:panelGroup>
+                                    
+                                  <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
+                                  <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
+                          </h:form>
+                </p:dialog>
+                
+                <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="tfalse" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
+                            <h:form> 
+                                <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{createClientMB.toIncome()}" value="Umowa"  >
+                                    
+                                </p:commandButton>
+                                                  
+                                <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{createClientMB.toBusinessActivity()}" value="Działalność" oncomplete="income.hide(); business.show()" >
+                                   
+                                </p:commandButton>
+                              
+                                <h:panelGroup id="panel1">
+                                    <div class="marginT10"> 
+                                        <h:outputText class="dialogLabel" value="Typ umowy"/> 
+                                        <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{createClientMB.incomeId}">
+                                            <f:selectItems value="#{dictionaryMB.income}" var="empl" itemLabel="#{empl.name}" itemValue="#{empl.idEmploymentType}"   />
+                                        </p:selectOneMenu>         
+                                    </div>
+                                   
+                                    <div class="marginT10"> 
+                                        <h:outputText class="dialogLabel" value="Branża"/> 
+                                        <p:selectOneMenu styleClass="marginT10" style="width: 375px; margin-left: 31px; float:right;" value="#{createClientMB.branchId}">
+                                            <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                        </p:selectOneMenu>         
+                                    </div>
+
+                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Pracodawca"/> <h:inputText class="floatR marginT10" value="#{createClientMB.income.employer}" style="width: 70%" /> </div>
+                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Dochód netto"/> <h:inputText class="floatR marginT10"  style="width: 39%" value="#{createClientMB.income.monthlyNetto}" /> </div>
+                                   <div class="marginT10">  <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> <p:calendar  navigator="true" styleClass="floatR marginT10"  value="#{createClientMB.income.beginDate}"/> </div> 
+                               
+                                   </h:panelGroup>
+                                    <div>
+                                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
+                                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                                    </div>
+                            </h:form>
+                </p:dialog>
+                
+                
             </ui:define>
         </ui:composition>
     </body>
