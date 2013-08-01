@@ -174,7 +174,7 @@
                                 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kod pocztowy"/> 
-                                    <h:inputText id="zipCode" value="#{createClientMB.address.zipCode}"  class="inputWidth" > 
+                                    <h:inputText required="#{createClientMB.areRequired}" id="zipCode" value="#{createClientMB.address.zipCode}"  class="inputWidth" > 
                                             <f:validateLength minimum="6" maximum="6" />
                                             <p:ajax event="keyup" update="zipCodeMessage" />
                                     </h:inputText>
