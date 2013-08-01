@@ -62,42 +62,81 @@
 
                             <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
 
+                          <div class="marginLRT30">
 
-                            <div class="marginLRT30" >
-                                <div class="field"> <h:outputText class="label" value="Hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputSecret class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Email"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field" style="margin:0;"> <h:outputText class="label3" value="Na ten email będzie wysyłana wszelka korespondencja"/> </div>
-                                <div class="field" style="margin:0;"> <h:outputText class="label3" value="dotycząca twojego konta"/> </div>                        
+                            <div class="field">
+                                <h:outputText class="label" value="Imię"/> 
+                                <h:inputText id="name" class="inputWidth" value="#{consultantCreateMB.consultant.name}"  />
+                                <h:message styleClass="invalid" for="name"/>
                             </div>
+
+                            <div class="field">
+                                <h:outputText class="label" value="Nazwisko"/>
+                                <h:inputText id="lastName" class="inputWidth" value="#{consultantCreateMB.consultant.lastName}"/> 
+                                <h:message styleClass="invalid" for="lastName"/>
+                            </div>
+                                 
+                                
+                              
+                              <div class="field"> 
+                                    <h:outputText  class="label" value="Hasło"/> 
+                                    <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" > 
+                                        <f:validateLength minimum="8" maximum="20"/>
+                                        <p:ajax event="keyup" update="passwordMessage" />
+                                    </h:inputSecret>
+                                    <h:message for="password" errorClass="invalid" id="passwordMessage" />
+                                </div>
+
+                                <div class="field">
+                                    <h:outputText id="confirmPassword" class="label" value="Potwierdź hasło"/> 
+                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" validator="#{consultantCreateMB.validateSamePassword}" > 
+                                        <p:ajax event="keyup" update="passwordCheckMessage"/>
+                                    </h:inputSecret>
+                                    <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Adres email"/> 
+                                    <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
+                                        <p:ajax event="keyup" update="emailMessage"/>
+                                    </h:inputText>
+                                    <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p> 
+                                    <h:message for="email" errorClass="invalid" id="emailMessage" />
+                                </div>
+                              
+                               <div class="field">
+                                <h:outputText class="label" value="Staż w branży"/> 
+                                <h:inputText id="expirience" class="inputWidth" value="#{consultantCreateMB.consultant.expirience}"/>
+                                <h:message styleClass="invalid" for="expirience"/>
+                               </div>
+
+                               <div class="field"> 
+                                <h:outputText class="label" value="Miejsce zatrudnienia"/>
+                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.idWorkingPlace}">
+                                    <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
+                                </p:selectOneMenu> 
+                                <h:message styleClass="invalid" for="workingPlace"/>
+                              </div>
+
+                          </div>
+                            
 
                         </div>
 
                         <div class="rightWiderBox">
                             <h4 style="margin: 0;">USTAW ZDJECIE</h4>
+                            
                             <h:graphicImage class="photoChange" id="profil_logo_blue_small" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                             <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
 
                             <h:inputText  class="label2 browseInput"  value="przeglądaj..." />
+                            
+                            <h:link class="floatR greyButton wideButton" value="Wczytaj" />
 
-                            <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" outcome="/index" />
-
-                            <div class="field"> <h:outputText class="label" value="Staż w braży (lata)"/>  <h:inputText class="inputWidth" /> </div>
-                            <div class="field"> <h:outputText class="label" value="Miejsce zatrudnienia"/>  
-                                <p:selectOneMenu style="width: 56%" >
-                                    <f:selectItem  itemValue="test" itemLabel="bank" />
-                                    <f:selectItem  itemValue="test" itemLabel="SKOK" />
-                                    <f:selectItem  itemValue="test" itemLabel="parabank" />
-                                    <f:selectItem  itemValue="test" itemLabel="instytucje finansowa" />
-                                </p:selectOneMenu>
-                            </div>
-
-                            <div class="field"> <h:outputText class="label" value="    "/>  <h:inputText class="inputWidth" /> </div>
-
-                            <h:link class="floatR greyButton wideButton" value="OK" outcome="/index"/>
+                            <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
 
                         </div>
 
