@@ -70,46 +70,44 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable var="row" value="#{fakeBean2.fdh}" >
+                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie dodano jeszcze żadnych dochodów" >
 
-                            <p:column  headerText="">  
-                                <p:selectBooleanCheckbox value="#{row.selected}"/>
-                            </p:column>  
+                            <p:column selectionMode="multiple" />   
 
                             <p:column  headerText="Lp">  
-                                <h:outputText  value="#{row.lp}"/>
+                                <h:outputText  value="#{rowNumber+1}"/>
                             </p:column>  
 
                             <p:column headerText="Numer klienta"> 
-                                <h:outputText  value="#{row.numerKlienta}"/>
+                                <h:outputText  value="#{row.client.idClient}"/>
                             </p:column>  
 
                             <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.dataDodania}"/>
+                                <h:outputText  value="#{row.beginDate}"/>
                             </p:column>  
 
                             <p:column headerText="Numer sprawy">  
-                                <h:outputText  value="#{row.numerSprawy}"/>
+                                <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
 
                             <p:column headerText="Postęp">  
-                                <h:outputText  value="#{row.postęp}"/>
+                                <h:outputText  value="#{row.phase}"/>
                             </p:column> 
 
                             <p:column headerText="Rodzaj kredytu"  >
-                                <h:outputText  value="#{row.rodzajKredytu}"/>
+                                <h:outputText  value="#{row.productType.name}"/>
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{row.bik}"/>
+                                <h:outputText  value="#{row.phase}"/>
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
-                                <h:outputText  value="#{row.kodPocztowy}"/>
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
                             </p:column>
 
                             <p:column headerText="Wiek">  
-                                <h:outputText  value="#{row.wiek}"/>
+                                <h:outputText  />
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
