@@ -42,11 +42,11 @@
 
                             <div id="spaceFiller" > </div>
                             <div>     
-                                <h5> Stanisław Nowy </h5> 
+                                <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
                                 <h:outputText class="profileText" value="nr. klienta:" />
-                                <h5> 000001 </h5>
+                                <h5> #{loginMB.client.user.login} </h5>
                                 <h:outputText class="profileText" value="Stan konta:" />
-                                <h5> 3/5 pkt. </h5>
+                                <h5> #{loginMB.client.points} / 5 </h5>
                             </div>
                         </div>
 
@@ -59,65 +59,33 @@
 
                                 <h3 class="greenLeftBorder"> Nowy wniosek </h3>
 
-                                <p style="margin-left: 30px; color: red;">Sprawdź czy dane są poprawne</p>
 
-                                <div class="field"> <h:outputText class="label" value="Imie:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Nazwisko:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Rok urodzenia:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Dochód:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  
-
-                                    <h:selectOneMenu style="width: 170px; ">
-                                        <f:selectItem  itemValue="Umowa o prace(czas określony)" itemLabel="Umowa o prace(czas określony)" />
-                                    </h:selectOneMenu>  
-
+                                <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
+                                    <p:calendar id="beginDate" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}"></p:calendar>
+                                </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
+                                    <p:calendar id="endDate" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}"></p:calendar>
                                 </div>
 
-                                <div class="field" > <h:outputText class="label"/>  <h:link class="greenLink" value="Działalność gospodarcza"/>   </div>
+                                <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  <h:inputText value="#{clientCaseMB.clientCase.consolidationValue}"/> </div>
 
+                                <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}"/> </div>
 
-                                <div class="field"> <h:outputText class="label" value="Branża:"/> 
+                                <div class="field"> <h:outputText class="label" value="Cel:"/>  <h:inputText value="#{clientCaseMB.clientCase.goal}"/> </div>
 
-                                    <h:selectOneMenu style="width: 170px; ">
-                                        <f:selectItem  itemValue="Analiza" itemLabel="Analiza" />
-                                    </h:selectOneMenu>  
+                                <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>  <h:inputText value="#{clientCaseMB.clientCase.expectedInstalment}"/> </div>
+                                
+                                <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
+                                
+                                <h:commandButton value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
 
-                                </div>
+                                
 
-                                <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
+                                
 
-                                <p style="margin-left: 30px;">Dane adresowe:</p>
-
-                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Branża:"/>  <h:inputText/> </div>
-
-                                <div class="field"> <h:outputText class="label" value="Pensja:"/>  <h:inputText/> </div>
-
-
-                                <p style="margin-left: 30px;">Potrzeby:</p>
-
-                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu:"/>  
-
-                                    <h:selectOneMenu style="width: 170px; ">
-                                        <f:selectItem  itemValue="chcę kupić dom" itemLabel="chcę kupić dom" />
-                                    </h:selectOneMenu>  
-
-                                </div>
-
-                                <div class="field"> <h:outputText class="label" value="Okres:"/>  
-
-                                    <h:inputText style="width: 40px; margin-right: 10px;"/>
-
-                                    <h:selectOneMenu style="width: 110px;">
-                                        <f:selectItem  itemValue="lat" itemLabel="lat" />
-                                    </h:selectOneMenu>  
-
-                                </div>
+                                
+                                
 
                             </div>   
 

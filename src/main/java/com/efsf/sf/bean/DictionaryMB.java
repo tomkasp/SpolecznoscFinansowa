@@ -6,6 +6,7 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
@@ -17,7 +18,7 @@ import javax.faces.model.SelectItem;
  */
 @ManagedBean
 @ApplicationScoped
-public class DictionaryMB {
+public class DictionaryMB implements Serializable{
 
     /**
      * Creates a new instance of DictionaryMB
