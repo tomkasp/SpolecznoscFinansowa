@@ -28,6 +28,11 @@ public class ClientCaseDAO
          
          list = q.list();
          
+         
+         session.getTransaction().commit();
+         session.close();
+         
+
          return list;
     }
     
