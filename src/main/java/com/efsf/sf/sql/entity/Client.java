@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -47,7 +47,7 @@ public class Client  implements java.io.Serializable {
      private Set<RequiredDocuments> requiredDocumentses = new HashSet<RequiredDocuments>(0);
      private Set<Obligation> obligations = new HashSet<Obligation>(0);
      private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
-     private Set<IncomeBuisnessActivity> incomeBuisnessActivities = new HashSet<IncomeBuisnessActivity>(0);
+     private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
      private Set<IdentyficationDocument> identyficationDocuments = new HashSet<IdentyficationDocument>(0);
      private Set<Address> addresses = new HashSet<Address>(0);
 
@@ -62,7 +62,7 @@ public class Client  implements java.io.Serializable {
         this.name = name;
         this.lastName = lastName;
     }
-    public Client(User user, Education education, MaritalStatus maritalStatus, String name, String lastName, Boolean sex, String pesel, Date birthDate, String familyName, String birthPlace, Integer points, Set<Income> incomes, Set<RequiredDocuments> requiredDocumentses, Set<Obligation> obligations, Set<ClientCase> clientCases, Set<IncomeBuisnessActivity> incomeBuisnessActivities, Set<IdentyficationDocument> identyficationDocuments, Set<Address> addresses) {
+    public Client(User user, Education education, MaritalStatus maritalStatus, String name, String lastName, Boolean sex, String pesel, Date birthDate, String familyName, String birthPlace, Integer points, Set<Income> incomes, Set<RequiredDocuments> requiredDocumentses, Set<Obligation> obligations, Set<ClientCase> clientCases, Set<IncomeBusinessActivity> incomeBusinessActivities, Set<IdentyficationDocument> identyficationDocuments, Set<Address> addresses) {
        this.user = user;
        this.education = education;
        this.maritalStatus = maritalStatus;
@@ -78,7 +78,7 @@ public class Client  implements java.io.Serializable {
        this.requiredDocumentses = requiredDocumentses;
        this.obligations = obligations;
        this.clientCases = clientCases;
-       this.incomeBuisnessActivities = incomeBuisnessActivities;
+       this.incomeBusinessActivities = incomeBusinessActivities;
        this.identyficationDocuments = identyficationDocuments;
        this.addresses = addresses;
     }
@@ -225,12 +225,12 @@ public class Client  implements java.io.Serializable {
         this.clientCases = clientCases;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="client")
-    public Set<IncomeBuisnessActivity> getIncomeBuisnessActivities() {
-        return this.incomeBuisnessActivities;
+    public Set<IncomeBusinessActivity> getIncomeBusinessActivities() {
+        return this.incomeBusinessActivities;
     }
     
-    public void setIncomeBuisnessActivities(Set<IncomeBuisnessActivity> incomeBuisnessActivities) {
-        this.incomeBuisnessActivities = incomeBuisnessActivities;
+    public void setIncomeBusinessActivities(Set<IncomeBusinessActivity> incomeBusinessActivities) {
+        this.incomeBusinessActivities = incomeBusinessActivities;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="client")
     public Set<IdentyficationDocument> getIdentyficationDocuments() {

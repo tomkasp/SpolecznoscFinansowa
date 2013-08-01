@@ -13,7 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
 /**
- *
  * @author admin
  */
 @ManagedBean
