@@ -17,29 +17,20 @@ import org.hibernate.Session;
  */
 public class ClientCaseDAO {
     
-    public void saveClientCase(ClientCase client, Client cli){
+    public void saveClientCase(ClientCase client){
        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
         CaseStatus caseStatus = (CaseStatus)session.load(CaseStatus.class, 1);
         ProductType pt = (ProductType)session.load(ProductType.class, 1);
         
-        client.setClient(cli);
-        
         client.setProductType(pt);
         client.setCaseStatus(caseStatus);
-        
-        
-        client.setPhase(1);
-        client.setViewCounter(0);
-        client.setDifficulty(0);
        
         session.save(client);
         
-        
         session.getTransaction().commit();
         session.close(); 
-        
         
     }
 
