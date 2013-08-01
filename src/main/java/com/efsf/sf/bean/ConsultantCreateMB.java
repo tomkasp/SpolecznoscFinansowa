@@ -70,7 +70,7 @@ public class ConsultantCreateMB implements Serializable {
         user.setLogin(String.valueOf(new Date().getTime()));
         user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
-        user.setLogin(user.getIdUser().toString());
+        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         udao.update(user);
 
 
