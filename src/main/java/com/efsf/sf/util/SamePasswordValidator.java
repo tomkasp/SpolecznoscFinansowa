@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
@@ -21,19 +22,32 @@ import javax.faces.validator.ValidatorException;
 public class SamePasswordValidator implements Validator {
     
    @Override
-   public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+	public void validate(FacesContext context, UIComponent component,
+		Object value) throws ValidatorException {
+ 
+	  String password = value.toString();
 
-      String password=(String)value;
-      String confirmPassword=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("confirmPassword");
-      
-      if( !password.equals(confirmPassword) ){
-         FacesContext context = FacesContext.getCurrentInstance();
-         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-         FacesMessage msg =  new FacesMessage(bundle.getString("failed1"),bundle.getString("failed1"));
-         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-         throw new ValidatorException(msg);
-      }
-      
-   }
+	  UIInput uiInputConfirmPassword = (UIInput) component.getAttributes()
+		.get("confirmPassword");
+	  String confirmPassword = uiInputConfirmPassword.getSubmittedValue()
+		.toString();
+ 
+           confirmPassword = (String) component.getAttributes().get("confirmPassword");
+
+	  // Let required="true" do its job.
+	  if (password == null || password.isEmpty() || confirmPassword == null
+		|| confirmPassword.isEmpty()) {
+			return;
+	  }
+ 
+	  if (!password.equals(confirmPassword)) {
+		uiInputConfirmPassword.setValid(false);
+		throw new ValidatorException(new FacesMessage(
+			"Password must match confirm password."));
+	  }
+ 
+	}
+    
+   
  
 }

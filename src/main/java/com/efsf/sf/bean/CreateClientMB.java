@@ -53,6 +53,8 @@ public class CreateClientMB implements Serializable
     
     User user; 
     
+    
+    
     //General information
     
     private int loginNumber;
@@ -70,7 +72,7 @@ public class CreateClientMB implements Serializable
     private String sexString;
     private String pesel;
     private int birthPlace;
-
+    
     //Income
     
     private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();

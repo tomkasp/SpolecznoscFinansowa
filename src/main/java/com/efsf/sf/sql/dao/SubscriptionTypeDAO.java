@@ -35,7 +35,7 @@ public class SubscriptionTypeDAO {
         
         lista = session.createQuery("from SubscriptionType").list();
         
-       // session.close();
+        session.close();
         return lista;
     }
     

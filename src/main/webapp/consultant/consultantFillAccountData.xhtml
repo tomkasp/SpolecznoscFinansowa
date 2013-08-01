@@ -242,18 +242,7 @@
                         </p:selectOneRadio>
                     </p>
                     
-                    <div style="margin-bottom: 10px;"> 
-                        <h:outputText class="label" value="akceptuje regulamin"/> 
-                        <p:selectBooleanCheckbox id="policy1" value="#{consultantCreateMB.policy}" validator="#{consultantCreateMB.validatePolicy}" /> 
-                        <h:message for="policy1" errorClass="invalid" id="policy1CheckMessage" />
-                    </div>
-                    
-                    <div> 
-                        <h:outputText class="label" value="wyrażam zgodę na przetwarzanie danych" />
-                        <p:selectBooleanCheckbox id="policy2" value="#{consultantCreateMB.policy2}" validator="#{consultantCreateMB.validatePolicy}" /> 
-                        <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
-                    </div>                                                                                         
-                     
+                         
                     <div  style="min-height: 40px;"> 
                         <h:commandLink class ="blueButton wideButton floatR marginTB20" value="Dalej" action="#{consultantCreateMB.savePart2()}"/>                       
                     </div>
