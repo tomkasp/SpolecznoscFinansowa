@@ -16,6 +16,7 @@ public class WorkingPlaceDAO {
         }catch(HibernateException e)
         {}
         finally{
+            session.close();
         }
         return lista;
     }

@@ -27,5 +27,7 @@ public class CaseStatusDAO {
         session.close();
         return lista;
     }
+    
+   
 
 }
