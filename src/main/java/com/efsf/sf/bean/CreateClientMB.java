@@ -31,6 +31,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.faces.validator.ValidatorException;
 
 
@@ -73,6 +74,8 @@ public class CreateClientMB implements Serializable
     //Income
     
     private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
+    private boolean tableEmpty = true;
+           
     private Income income = new Income();
     private IncomeBuisnessActivity business = new IncomeBuisnessActivity();
     
@@ -90,6 +93,18 @@ public class CreateClientMB implements Serializable
     //Address Data
     
     private int regionId;
+    
+    // flag to set required elements if we want to make new application
+    
+    private boolean areRequired = false;
+
+    public boolean isAreRequired() {
+        return areRequired;
+    }
+
+    public void setAreRequired(boolean areRequired) {
+        this.areRequired = areRequired;
+    }
     
     public int getRegionId() {
         return regionId;
@@ -143,6 +158,8 @@ public class CreateClientMB implements Serializable
         client.setEducation(eduDao.getEducation(0));  
         client.setMaritalStatus(maritalDao.getMaritalStatus(0));
         client.setPoints(5);
+        
+        
         
         userDao.save(user);
         clientDao.save(client);
@@ -213,6 +230,7 @@ public class CreateClientMB implements Serializable
                     income.setBranch(b);
                     income.setEmploymentType(et);
                     income.setClient(loginMB.getClient());
+                    tableEmpty = false;
                     incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));   
                     incomeSet.add(income);
                 }
@@ -227,13 +245,31 @@ public class CreateClientMB implements Serializable
                                  break;
                           }
                     }
-                    
                     business.setBranch(b);
                     business.setEmploymentType(et);
                     business.setClient(loginMB.getClient());
+                    tableEmpty = false;
                     incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));         
                     businessSet.add(business);
                 }
+    }
+    
+    public void required()
+    {
+        areRequired = true;
+        System.out.println("Zmieniło");
+    }
+    
+    public void notRequired()
+    {
+        areRequired = false;
+        System.out.println("NieZmieniło");
+    }
+    
+    public void notRequired2(ComponentSystemEvent event)
+    {
+        areRequired = false;
+        System.out.println("NieZmieniło");
     }
     
     public String saveAndRedirect()
@@ -271,8 +307,8 @@ public class CreateClientMB implements Serializable
             }
         }
         
-        if(!(regionId == 0 && address.getCity().equals("") && address.getHouseNumber().equals("") && address.getPhone().equals("") 
-                 && address.getStreet().equals("") && address.getZipCode().equals("")))
+        if(!(regionId == 0 && address.getCity() == null && address.getHouseNumber() == null  && address.getPhone() == null  
+                 && address.getStreet() == null  && address.getZipCode() == null ))
         {
             address.setClient(client);
             address.setCountry("Polska");
@@ -280,11 +316,11 @@ public class CreateClientMB implements Serializable
             client.setAddresses(addressSet);
         }
         
-        if(sexString.equals("true"))
+        if(sexString != null && sexString.equals("true"))
         {
             client.setSex(true);
         }
-        else if(sexString.equals("false"))
+        else if(sexString != null && sexString.equals("false"))
         {
             client.setSex(true);
         }
@@ -509,6 +545,14 @@ public class CreateClientMB implements Serializable
 
     public void setSexString(String sexString) {
         this.sexString = sexString;
+    }
+    
+    public boolean isTableEmpty() {
+        return tableEmpty;
+    }
+
+    public void setTableEmpty(boolean tableEmpty) {
+        this.tableEmpty = tableEmpty;
     }
 
     
