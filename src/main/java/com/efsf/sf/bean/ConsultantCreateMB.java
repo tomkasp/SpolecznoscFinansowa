@@ -173,6 +173,16 @@ public class ConsultantCreateMB implements Serializable {
         throw new ValidatorException(message);
         }
     }
+    
+    public void validatePolicy(FacesContext context, UIComponent toValidate, Object value) 
+    {
+        Boolean policyValue=(Boolean)value;
+        
+        if (policyValue==false ) {
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Musisz akceptować warunki umowy", "Musisz akceptować warunki umowy");
+        throw new ValidatorException(message);
+        }
+    }
 
     public User getUser() {
         return user;
