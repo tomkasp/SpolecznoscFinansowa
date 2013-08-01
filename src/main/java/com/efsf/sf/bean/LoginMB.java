@@ -20,8 +20,8 @@ public class LoginMB implements Serializable {
     private int idUser;
     
     private User user; 
-    private  Client client;
-    private  Consultant consultant;
+    private Client client;
+    private Consultant consultant;
     
     
     public LoginMB() {  
@@ -36,23 +36,22 @@ public class LoginMB implements Serializable {
             isLogged = true;
             type = user.getType();
             idUser = user.getIdUser();
-            
             System.out.println("login");
-            if(type==1){ return "/admin/adminMainPage"; }
-            
-            if(type==2)
+            if(type==1)
+            {
+                return "/admin/adminMainPage"; 
+            }
+             if(type==2)
             { 
                 consultant = userDao.getCounsultantConnectedToUser(idUser);
                 return "/consultant/consultantMainPage"; 
             }
-            
             if(type==3)
             {
                 client = userDao.getClientConnectedToUser(idUser);
                 return "/client/clientMainPage";  
             } 
         }
-        
         return "/login"; 
     }
 

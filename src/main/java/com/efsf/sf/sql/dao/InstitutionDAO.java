@@ -21,7 +21,7 @@ public class InstitutionDAO {
         list = session.createQuery("from Institution where type = 0").list();
 
         session.getTransaction().commit();
-        //session.close();
+        session.close();
         return list;
     }
 
@@ -33,7 +33,7 @@ public class InstitutionDAO {
         list = session.createQuery("from Institution where type = 1").list();
 
         session.getTransaction().commit();
-       // session.close();
+        session.close();
         return list;
     }
     
