@@ -15,7 +15,7 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Education;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
-import com.efsf.sf.sql.entity.IncomeBuisnessActivity;
+import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.entity.User;
@@ -74,10 +74,10 @@ public class CreateClientMB implements Serializable
     
     private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
     private Income income = new Income();
-    private IncomeBuisnessActivity business = new IncomeBuisnessActivity();
+    private IncomeBusinessActivity business = new IncomeBusinessActivity();
     
     private HashSet<Income> incomeSet = new HashSet();
-    private HashSet<IncomeBuisnessActivity> businessSet = new HashSet();
+    private HashSet<IncomeBusinessActivity> businessSet = new HashSet();
     
     //Fields used to make select menus working
     
@@ -297,7 +297,7 @@ public class CreateClientMB implements Serializable
         client.setPesel(pesel);
           
         client.setIncomes(incomeSet);
-        client.setIncomeBuisnessActivities(businessSet);
+        client.setIncomeBusinessActivities(businessSet);
         
         clientDao.update(client);
         
@@ -463,11 +463,11 @@ public class CreateClientMB implements Serializable
         this.income = income;
     }
 
-    public IncomeBuisnessActivity getBusiness() {
+    public IncomeBusinessActivity getBusiness() {
         return business;
     }
 
-    public void setBusiness(IncomeBuisnessActivity business) {
+    public void setBusiness(IncomeBusinessActivity business) {
         this.business = business;
     }
 

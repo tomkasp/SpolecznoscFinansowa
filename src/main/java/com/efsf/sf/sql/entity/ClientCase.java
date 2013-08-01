@@ -1,5 +1,5 @@
 package com.efsf.sf.sql.entity;
-// Generated 2013-07-29 13:34:29 by Hibernate Tools 3.2.1.GA
+// Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 
 import java.math.BigDecimal;

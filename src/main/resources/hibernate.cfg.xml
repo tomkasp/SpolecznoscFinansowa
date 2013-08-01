@@ -8,10 +8,8 @@
     <property name="hibernate.connection.username">SFuser</property>
     <property name="hibernate.connection.password">SFuser123</property>
     <property name="hibernate.show_sql">true</property>
-    
     <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
     <mapping class="com.efsf.sf.sql.entity.Address"/>
-    <mapping class="com.efsf.sf.sql.entity.IncomeBuisnessActivity"/>
     <mapping class="com.efsf.sf.sql.entity.Subscription"/>
     <mapping class="com.efsf.sf.sql.entity.Education"/>
     <mapping class="com.efsf.sf.sql.entity.Income"/>
@@ -23,6 +21,7 @@
     <mapping class="com.efsf.sf.sql.entity.RequiredDocuments"/>
     <mapping class="com.efsf.sf.sql.entity.SubscriptionType"/>
     <mapping class="com.efsf.sf.sql.entity.IdentyficationDocument"/>
+    <mapping class="com.efsf.sf.sql.entity.IncomeBusinessActivity"/>
     <mapping class="com.efsf.sf.sql.entity.User"/>
     <mapping class="com.efsf.sf.sql.entity.Obligation"/>
     <mapping class="com.efsf.sf.sql.entity.Region"/>
