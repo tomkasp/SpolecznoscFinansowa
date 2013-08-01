@@ -37,13 +37,13 @@
 
                     <div id="spaceFiller"> </div>
                     <div>     
-                        <h5> Jan Kazimierczak </h5> 
+                        <h5> #{consultantCreateMB.consultant.name} #{consultantCreateMB.consultant.lastName} </h5> 
                         <h:outputText class="profileText" value="nr. doradcy:" />
-                        <h5> 007061 </h5>
+                        <h5> #{consultantCreateMB.user.login} </h5>
                     </div>
                 </div>
 
-                <div style="min-height: 325px">
+                <div style="min-height: 325px;">
                     <div class="leftThinerBox">
                         <h3> Uzupelnij swoje dane </h3>
                         <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
@@ -99,10 +99,10 @@
 
                     <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
 
-                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.idselectedBankList}" layout="pageDirection" >  
-
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.idSelectedBankList}" layout="pageDirection" >  
+                        
                         <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
-
+       
                     </p:selectManyCheckbox>  
 
                 </div>
@@ -111,7 +111,7 @@
 
                     <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
 
-                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idselectedInstitutionList}" layout="pageDirection">
+                    <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idSelectedInstitutionList}" layout="pageDirection">
                         <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
                     </p:selectManyCheckbox>
 
@@ -126,13 +126,11 @@
                     <h4> ZASIĘG/MOBILNOŚĆ </h4>
 
                     <div>  
-                        <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.idScope}">
+                        <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.idRegion}">
                             <f:selectItems value="#{dictionaryMB.region}" var="w" itemLabel="#{w.region}" itemValue="#{w.idRegion}" />
                         </p:selectOneMenu> 
-
-
                     </div>
-
+                    
                     <div> 
                         <p:selectBooleanCheckbox styleClass="marginLRT30" />
                         <h:outputText styleClass="fontGrey"  value="ogranicz wyniki do mojego województwa" />
@@ -246,17 +244,18 @@
                     
                     <div style="margin-bottom: 10px;"> 
                         <h:outputText class="label" value="akceptuje regulamin"/> 
-                        <p:selectBooleanCheckbox value="#{consultantCreateMB.policy}"/> 
+                        <p:selectBooleanCheckbox id="policy1" value="#{consultantCreateMB.policy}" validator="#{consultantCreateMB.validatePolicy}" /> 
+                        <h:message for="policy1" errorClass="invalid" id="policy1CheckMessage" />
                     </div>
                     
                     <div> 
-                        <h:outputText class="label" value="wyrażam zgodę na przetwarzanie danych"/>
-                        <p:selectBooleanCheckbox value="#{consultantCreateMB.policy2}"/> 
+                        <h:outputText class="label" value="wyrażam zgodę na przetwarzanie danych" />
+                        <p:selectBooleanCheckbox id="policy2" value="#{consultantCreateMB.policy2}" validator="#{consultantCreateMB.validatePolicy}" /> 
+                        <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
                     </div>                                                                                         
                      
                     <div  style="min-height: 40px;"> 
-                        <h:commandLink class ="blueButton wideButton floatR marginTB20" value="Dalej" action="#{consultantCreateMB.savePart2()}"/> 
-                        
+                        <h:commandLink class ="blueButton wideButton floatR marginTB20" value="Dalej" action="#{consultantCreateMB.savePart2()}"/>                       
                     </div>
 
                 </div>

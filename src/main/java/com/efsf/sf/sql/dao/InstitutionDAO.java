@@ -1,6 +1,8 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.EmploymentType;
+import com.efsf.sf.sql.entity.Institution;
+import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
@@ -34,4 +36,19 @@ public class InstitutionDAO {
        // session.close();
         return list;
     }
+    
+    public Institution getInstitution(int id)
+    {
+        org.hibernate.classic.Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Institution ms = (Institution) session.get(Institution.class, id);
+                
+        session.getTransaction().commit();
+        session.close();
+        
+        return ms;   
+    }
+    
+    
 }
