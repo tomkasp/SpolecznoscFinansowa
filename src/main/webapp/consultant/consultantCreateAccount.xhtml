@@ -4,13 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
       
      
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
+            
                 <ui:define name="title"> Doradca - rejestracja </ui:define>     
                 <ui:define name="top"> 
                             <div class="topbarLogo">
@@ -49,34 +51,49 @@
                                 
                                 <div class="marginLRT30">
                                    
-                                    <div class="field">
-                                        <h:outputText class="label" value="Imię"/>
-                                        <h:inputText id="name" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.name}" />
-                                        <h:message styleClass="invalid" for="name"/>
-                                    </div>
-                                    
-                                    <div class="field" > 
-                                        <h:outputText class="label" value="Nazwisko" />
-                                        <h:inputText id="lastName" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.lastName}" /> 
-                                         <h:message styleClass="invalid" for="lastName"/>
-                                    </div>
-                                    
                                     <div class="field"> 
+                                        <h:outputText class="label" value="Imię"/>  
+                                        <h:inputText id="name" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.name}" >
+                                            <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="nameMessage" />
+                                        </h:inputText>
+                                        <h:message for="name" errorClass="invalid" id="nameMessage" />
+                                    </div> 
+                                    
+                                   <div class="field"> 
+                                        <h:outputText class="label" value="Nazwisko"/>  
+                                        <h:inputText id="lastName" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.lastName}" >
+                                            <f:validateLength minimum="3" maximum="20" />
+                                            <p:ajax event="keyup" update="nameMessage" />
+                                        </h:inputText>
+                                        <h:message for="lastName" errorClass="invalid" id="lastNameMessage" />
+                                    </div> 
+                                    
+                                     <div class="field"> 
                                         <h:outputText class="label" value="Hasło"/> 
-                                        <h:inputSecret id="password" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" /> 
-                                        <h:message styleClass="invalid" for="password"/>
+                                        <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" > 
+                                             <f:validateLength minimum="8" maximum="20"/>
+                                             <p:ajax event="keyup" update="passwordMessage" />
+                                        </h:inputSecret>
+                                        <h:message for="password" errorClass="invalid" id="passwordMessage" />
                                     </div>
                                     
                                     <div class="field">
                                         <h:outputText class="label" value="Potwierdź hasło"/> 
-                                        <h:inputSecret id="confirmPassword" class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" />
-                                        <h:message styleClass="invalid" for="confirmPassword"/>
+                                        <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" validator="#{consultantCreateMB.validateSamePassword}" > 
+                                            <p:ajax event="keyup" update="passwordCheckMessage"/>
+                                        </h:inputSecret>
+                                        <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
                                     </div>
                                     
-                                    <div class="field">
-                                        <h:outputText class="label" value="Adres email"/>
-                                        <h:inputText id="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" /> 
-                                         <h:message styleClass="invalid" for="email"/>
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Adres email"/> 
+                                        <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
+                                            <p:ajax event="keyup" update="emailMessage"/>
+                                        </h:inputText>
+                                        <h:message for="email" errorClass="invalid" id="emailMessage" />
                                     </div>
                                     
                                 </div>

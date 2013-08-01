@@ -1,6 +1,10 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.InstitutionDAO;
+import com.efsf.sf.sql.dao.ProductTypeDAO;
+import com.efsf.sf.sql.dao.RegionDAO;
 import com.efsf.sf.sql.dao.SubscriptionDAO;
 import com.efsf.sf.sql.dao.SubscriptionTypeDAO;
 import com.efsf.sf.sql.dao.UserDAO;
@@ -8,100 +12,178 @@ import com.efsf.sf.sql.dao.WorkingPlaceDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Institution;
+import com.efsf.sf.sql.entity.ProductType;
+import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.entity.WorkingPlace;
+import com.efsf.sf.util.Security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+
 /**
  * @author WR1EI1
  */
 @ManagedBean
 @SessionScoped
-public class ConsultantCreateMB implements Serializable{
-    
+public class ConsultantCreateMB implements Serializable {
+
     //ConsultantCreateAccount
-    private User user=new User();
-    private Consultant consultant=new Consultant();
-    private String confirmPassword=new String();
-    
+    private User user = new User();
+    private Consultant consultant = new Consultant();
+    private String confirmPassword = new String();
+    private Subscription subscription = new Subscription();
     //ConsultantFillAccountData
-    private Address mainAddress=new Address();
-    private Address invoiceAddress=new Address();
-    
+    private Address mainAddress = new Address();
+    private Address invoiceAddress = new Address();
     private Integer idWorkingPlace;
-    
-    private List<Institution> idselectedBankList=new ArrayList<>();
-    private List<Institution> idselectedInstitutionList=new ArrayList<>();
-    private List<Integer> idProductTypes=new ArrayList<>();
-    
-    private Integer idScope;
-    
+    private List<Integer> idSelectedBankList = new ArrayList<>();
+    private List<Integer> idSelectedInstitutionList = new ArrayList<>();
+    private List<Integer> idProductTypes = new ArrayList<>();
+    private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
-    
     private Integer idSubscriptionType;
-    
-    private Boolean policy=false;
-    private Boolean policy2=false;
-    
+    private Boolean policy = false;
+    private Boolean policy2 = false;
     
     public ConsultantCreateMB() {
     }
-    
+
     public String savePart1() {
-        UserDAO udao=new UserDAO();
-        
+        UserDAO udao = new UserDAO();
+
         //SET USER TYPE:
-        user.setType(1);
-        
-        user.setLogin( String.valueOf( new Date().getTime() ) );
+        user.setType(2);
+        user.setLogin(String.valueOf(new Date().getTime()));
+        user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
-        user.setLogin( user.getIdUser().toString() );
+        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         udao.update(user);
-        
-        
-        WorkingPlaceDAO wpdao=new WorkingPlaceDAO();
-        WorkingPlace wp=(WorkingPlace) wpdao.workingPlaceList().get(0);
-        if(wp!=null)
-        {
-        consultant.setWorkingPlace(wp);
+
+
+        WorkingPlaceDAO wpdao = new WorkingPlaceDAO();
+        WorkingPlace wp = (WorkingPlace) wpdao.workingPlaceList().get(3);
+        if (wp != null) {
+            consultant.setWorkingPlace(wp);
         }
-        ConsultantDAO cdao=new ConsultantDAO();
+        ConsultantDAO cdao = new ConsultantDAO();
         consultant.setUser(user);
         cdao.save(consultant);
-        
-        Subscription trialSubscription=new Subscription();
-        trialSubscription.setConsultant(consultant);
-        SubscriptionTypeDAO stdao=new SubscriptionTypeDAO();
-        SubscriptionType st=stdao.getSubscriptionType(4);
-        if(st!=null){
-        trialSubscription.setSubscriptionType(st); 
-        //PAMIETAJ O DODANIU DATY W PRZYSZŁOŚCI
-        SubscriptionDAO sdao=new SubscriptionDAO();
-        sdao.save(trialSubscription);
+
+        subscription.setConsultant(consultant);
+        SubscriptionTypeDAO stdao = new SubscriptionTypeDAO();
+        SubscriptionType st = stdao.getSubscriptionType(4);
+        if (st != null) {
+            subscription.setSubscriptionType(st);
+            //PAMIETAJ O DODANIU DATY W PRZYSZŁOŚCI
+            SubscriptionDAO sdao = new SubscriptionDAO();
+            sdao.save(subscription);
         }
-        
-        return "/consultant/consultantFillAccountData?faces-redirect=true";   
+        return "/consultant/consultantFillAccountData?faces-redirect=true";
     }
-    
+
     public String savePart2() {
+
+        DictionaryMB dictionaryMB = new DictionaryMB();
+        InstitutionDAO idao=new InstitutionDAO();
+        ProductTypeDAO ptdao=new ProductTypeDAO();
+        RegionDAO rdao=new RegionDAO();
         
-        //UserDAO udao=new UserDAO();
-        //udao.update(user);
-        
-        ConsultantDAO cdao=new ConsultantDAO();
+        WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
+        consultant.setWorkingPlace(wp);
+        //HERE:
+        //ADD BANKS
+        Set<Institution> institutionSet = new HashSet<Institution>();
+        Iterator it=idSelectedBankList.iterator();
+        while ( it.hasNext() ) {  
+            Integer id = Integer.valueOf( it.next().toString() );
+            Institution inst = idao.getInstitution( id );
+            institutionSet.add( inst );
+        } 
+        //ADD INSTITUTIONS
+        it=idSelectedInstitutionList.iterator();
+        while ( it.hasNext() ) {  
+            Integer id = Integer.valueOf( it.next().toString() );
+            Institution inst = idao.getInstitution( id );
+            institutionSet.add( inst );
+        }
+        //ADD ALL INSTITUTIONS IN CONSULTANT
+        consultant.setInstitutions(institutionSet);
+        //ADD PRODUCT TYPES
+        Set<ProductType> productTypeSet = new HashSet<>();
+        it=idProductTypes.iterator();
+        while ( it.hasNext() ) {  
+            Integer id = Integer.valueOf( it.next().toString() );
+            ProductType pt = ptdao.getProductType(id);
+            productTypeSet.add(pt);
+        }
+        consultant.setProductTypes(productTypeSet);
+        //ADD CONSULTANT REGION
+        Region r=rdao.getRegion(idRegion);
+        consultant.setRegion(r);
+        //ADD MAIN REGION
+        r=rdao.getRegion(idMainRegion);
+        mainAddress.setRegion(r);
+        mainAddress.setConsultant(consultant);
+        AddressDAO adao=new AddressDAO();
+        adao.save(mainAddress);
+        //ADD INVOICE REGION
+        r=rdao.getRegion(idInvoiceRegion);
+        invoiceAddress.setRegion(r);
+        invoiceAddress.setConsultant(consultant);
+        adao.save(invoiceAddress);
+        //ADD SUBSCRIPTION TYPE
+        if(idSubscriptionType!=null)
+        {
+        SubscriptionTypeDAO stdao = new SubscriptionTypeDAO();
+        SubscriptionType subscriptionType = stdao.getSubscriptionType(idSubscriptionType);
+        subscription.setSubscriptionType(subscriptionType);
+        subscription.setConsultant(consultant);
+        SubscriptionDAO sdao=new SubscriptionDAO();
+        sdao.update(subscription);
+        }
+        //UPDATE CONSULTANT
+        ConsultantDAO cdao = new ConsultantDAO();
         cdao.update(consultant);
-        
-        return "/consultant/consultantMainPage?faces-redirect=true";   
+        //UPDATE USER
+        UserDAO udao = new UserDAO();
+        udao.update(user);
+
+        return "/consultant/consultantMainPage?faces-redirect=true";
     }
     
+    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
+    {
+        String password = (String)value;
+        if (!password.equals(confirmPassword)) {
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
+        throw new ValidatorException(message);
+        }
+    }
     
+    public void validatePolicy(FacesContext context, UIComponent toValidate, Object value) 
+    {
+        Boolean policyValue=(Boolean)value;
+        
+        if (policyValue==false ) {
+             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Musisz akceptować warunki umowy", "Musisz akceptować warunki umowy");
+        throw new ValidatorException(message);
+        }
+    }
+
     public User getUser() {
         return user;
     }
@@ -166,20 +248,20 @@ public class ConsultantCreateMB implements Serializable{
         this.idWorkingPlace = idWorkingPlace;
     }
 
-    public List<Institution> getIdselectedBankList() {
-        return idselectedBankList;
+    public List<Integer> getIdSelectedBankList() {
+        return idSelectedBankList;
     }
 
-    public void setIdselectedBankList(List<Institution> idselectedBankList) {
-        this.idselectedBankList = idselectedBankList;
+    public void setIdSelectedBankList(List<Integer> idSelectedBankList) {
+        this.idSelectedBankList = idSelectedBankList;
     }
 
-    public List<Institution> getIdselectedInstitutionList() {
-        return idselectedInstitutionList;
+    public List<Integer> getIdSelectedInstitutionList() {
+        return idSelectedInstitutionList;
     }
 
-    public void setIdselectedInstitutionList(List<Institution> idselectedInstitutionList) {
-        this.idselectedInstitutionList = idselectedInstitutionList;
+    public void setIdSelectedInstitutionList(List<Integer> idSelectedInstitutionList) {
+        this.idSelectedInstitutionList = idSelectedInstitutionList;
     }
 
     public List<Integer> getIdProductTypes() {
@@ -190,14 +272,12 @@ public class ConsultantCreateMB implements Serializable{
         this.idProductTypes = idProductTypes;
     }
 
-    
-
-    public Integer getIdScope() {
-        return idScope;
+    public Integer getIdRegion() {
+        return idRegion;
     }
 
-    public void setIdScope(Integer idScope) {
-        this.idScope = idScope;
+    public void setIdRegion(Integer idRegion) {
+        this.idRegion = idRegion;
     }
 
     public Integer getIdMainRegion() {
@@ -226,5 +306,6 @@ public class ConsultantCreateMB implements Serializable{
 
     
     
-  
+    
+    
 }

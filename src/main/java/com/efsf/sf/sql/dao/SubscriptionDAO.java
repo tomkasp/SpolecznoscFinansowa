@@ -25,5 +25,20 @@ public class SubscriptionDAO {
         }
         
     }
+    
+    public void update(Subscription subscription) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+        session.beginTransaction().begin();
+        session.update(subscription);
+        session.getTransaction().commit();
+        }catch(HibernateException e)
+        {}
+        finally{
+        session.close();
+        }
+        
+    }
    
 }
