@@ -5,6 +5,7 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ClientCaseDAO;
+import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ProductTypeDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
@@ -41,6 +42,12 @@ public class ClientCaseMB implements Serializable{
     public void addCase(){
         ClientCaseDAO ccd = new ClientCaseDAO();
         ProductTypeDAO ptd = new ProductTypeDAO();
+        ClientDAO cd = new ClientDAO();
+        
+        //pamietac o zabraniu punktow z klienta!
+        cd.decrementPoints(login.getClient());
+        login.getClient().setPoints(login.getClient().getPoints()-1);
+        
         
         clientCase.setProductType(ptd.getProductType(idTypProduktu));
         clientCase.setClient(login.getClient());
@@ -48,6 +55,8 @@ public class ClientCaseMB implements Serializable{
         clientCase.setViewCounter(0);
         clientCase.setDifficulty(0);
         ccd.saveClientCase(clientCase);
+        
+        clientCase=null;
     }
     
     
