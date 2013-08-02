@@ -12,7 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-
 @ManagedBean
 @SessionScoped
 public class ClientCaseMB implements Serializable {
@@ -22,20 +21,13 @@ public class ClientCaseMB implements Serializable {
     private int idTypProduktu;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
-    private Boolean newAppActive=false;
+    
 
     /**
      * Creates a new instance of ClientCaseMB
      */
-    public ClientCaseMB() {
-        if (login.getClient().getPoints() > 0) {
-            newAppActive=true;
-        }
-    }
+    
 
-   
-    
-    
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
@@ -53,7 +45,7 @@ public class ClientCaseMB implements Serializable {
             clientCase.setDifficulty(0);
             ccd.saveClientCase(clientCase);
 
-            clientCase = null;
+            clientCase = new ClientCase();
         }
     }
 
@@ -85,7 +77,5 @@ public class ClientCaseMB implements Serializable {
         this.idTypProduktu = idTypProduktu;
     }
 
-    public Boolean getNewAppActive() {
-        return newAppActive;
-    }
+    
 }

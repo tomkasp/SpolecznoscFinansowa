@@ -59,9 +59,9 @@
 
                                 <h3 class="greenLeftBorder"> Nowy wniosek </h3>
 
-                                <h:panelGrid rendered="#{clientCaseMB.newAppInactive}" >
+                                <h:panelGroup rendered="#{loginMB.points>0}" >
                                 <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
-                                    <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
+                                    <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
                                         <p:ajax  event="dateSelect" update="end-date"  />
                                     </p:calendar>
                                      <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
@@ -75,8 +75,7 @@
 
                                 <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
                                     <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
-                                        <f:convertNumber pattern=""/>
-                                        <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
+                                        <f:convertNumber maxFractionDigits="2" />
                                         <p:ajax  event="keyup" update="consolidationValueMessage" />
                                         
                                     </h:inputText>
@@ -103,7 +102,7 @@
                                     </p:selectOneMenu>
                                 
                                 </div>
-                                </h:panelGrid>
+                                </h:panelGroup>
                                 <h:commandButton value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
 
                                 
