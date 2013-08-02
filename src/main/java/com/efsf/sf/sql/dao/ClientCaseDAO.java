@@ -50,7 +50,7 @@ public class ClientCaseDAO {
                  + "left join fetch ba.employmentType as empltype2 "
                  + "left join fetch clt.requiredDocumentses as rd "
                  + "where cs.beginDate <= :dateNow "
-                 + "order by cs.beginDate desc");
+                 + "order by cs.beginDate desc, cs.idClientCase");
          
          q.setParameter("dateNow", new DateTime().toDate());
          q.setMaxResults(5);
