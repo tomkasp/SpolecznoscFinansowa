@@ -23,6 +23,7 @@ import javax.faces.validator.ValidatorException;
 @ManagedBean
 @SessionScoped
 public class ConsultantCreateMB implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     //ConsultantCreateAccount
     private User user = new User();
@@ -120,12 +121,14 @@ public class ConsultantCreateMB implements Serializable {
         consultant.setRegion(r);
         //ADD MAIN REGION
         r=rdao.getRegion(idMainRegion);
+        mainAddress.setType(1);
         mainAddress.setRegion(r);
         mainAddress.setConsultant(consultant);
         AddressDAO adao=new AddressDAO();
         adao.save(mainAddress);
         //ADD INVOICE REGION
         r=rdao.getRegion(idInvoiceRegion);
+        invoiceAddress.setType(2);
         invoiceAddress.setRegion(r);
         invoiceAddress.setConsultant(consultant);
         adao.save(invoiceAddress);

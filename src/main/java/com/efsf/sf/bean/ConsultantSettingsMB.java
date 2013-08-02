@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -19,16 +21,22 @@ import javax.faces.validator.ValidatorException;
  * @author WR1EI1
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class ConsultantSettingsMB implements Serializable {
 
     //Update Settings
+    @ManagedProperty(value="#{loginMB.user}")
     private User user = new User();
+    @ManagedProperty(value="#{loginMB.consultant}")
     private Consultant consultant = new Consultant();
+    
     private String confirmPassword = new String();
+    
     private Subscription subscription = new Subscription();
+    
     private Address mainAddress = new Address();
     private Address invoiceAddress = new Address();
+    
     private Integer idWorkingPlace;
     private List<Integer> idSelectedBankList = new ArrayList<>();
     private List<Integer> idSelectedInstitutionList = new ArrayList<>();
@@ -41,6 +49,15 @@ public class ConsultantSettingsMB implements Serializable {
     private Boolean policy2 = false;
     
     public ConsultantSettingsMB() {
+        int idConsultant=consultant.getIdConsultant();
+        
+        SubscriptionDAO sdao=new SubscriptionDAO();
+        sdao.loadFkConsultant( idConsultant );
+        
+        AddressDAO adao = new AddressDAO();
+        mainAddress = adao.loadMainAddressFromFkConsultant(idConsultant);
+        invoiceAddress = adao.loadInvoiceAddressFromFkConsultant(idConsultant);
+        
     }
 
     public String updateSettings() {

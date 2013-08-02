@@ -96,13 +96,13 @@
                                 </div>
 
                                 <div class="field"> 
+                                    <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p>                                    
                                     <h:outputText class="label" value="Adres email"/> 
                                     <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                         <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
                                         <p:ajax event="keyup" update="emailMessage"/>
                                     </h:inputText>
-                                    <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p> 
                                     <h:message for="email" errorClass="invalid" id="emailMessage" />
                                 </div>
                               
