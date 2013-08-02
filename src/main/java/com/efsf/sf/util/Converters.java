@@ -4,9 +4,13 @@
  */
 package com.efsf.sf.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
+import org.joda.time.Hours;
 
 /**
  *
@@ -32,5 +36,14 @@ public class Converters
 
         return age;
     }
+    
+    public String hoursLeft(Date end)
+    {
+        return Hours.hoursBetween(new DateTime(), new DateTime(end)).getHours() + " h";
+    }
+    
+
+    
+
     
 }
