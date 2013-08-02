@@ -45,9 +45,9 @@
                     <div>     
                         <h5> #{loginMB.consultant.name} &nbsp; #{loginMB.consultant.lastName} </h5> 
                         <h:outputText class="profileText" value="nr. doradcy:" />
-                        <h5> #{loginMB.consultant.user} </h5>
+                        <h5> #{loginMB.consultant.user.login} </h5>
                         <h:outputText class="profileText" value="Twój ranking:" /> 
-                        <h5> 78/100 </h5>
+                        <h5> #{marketMB.clientCaseList.size()}/100 </h5>
                     </div>
                 </div>
 
@@ -70,18 +70,18 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedCase}" selectionMode="single" >
+                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedCases}" >
                             
-                            <p:column  headerText="Lp">  
-                                <h:outputText  value="#{rowNumber+1}"/>
-                            </p:column>  
-
+                            <p:column selectionMode="multiple"  />
+                            
                             <p:column headerText="Numer klienta"> 
                                 <h:outputText  value="#{row.client.idClient}"/>
                             </p:column>  
 
                             <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}"/>
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
                             </p:column>  
 
                             <p:column headerText="Numer sprawy">  
@@ -97,44 +97,49 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{row.phase}"/>
+                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
                                 <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
                             </p:column>
-
+                           
                             <p:column headerText="Wiek">  
-                                <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText  value=" "/>
+                                <h:outputText rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <p:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.modelsEmploymentType.get(rowNumber)}" />
+                                </p:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText  value=" "/>
+                                <h:outputText rendered="#{marketMB.modelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <p:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.modelsBranch.get(rowNumber)}" />
+                                </p:selectOneMenu>
                             </p:column>
 
-                            <p:column headerText="Trudności kredytu"> 
+                            <p:column headerText="Trudność kredytu"> 
                                 <h:outputText  value="#{row.difficulty}"/>
                             </p:column>
 
                             <p:column headerText="Ilość doradców"> 
-                                <h:outputText  value="#{row.consultants.size()}"/>
+                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
                             </p:column>
 
                             <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{row.endDate}"/>
+                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>
+                                      
                             </p:column> 
 
-                            <p:column headerText=""> 
+<!--                            <p:column headerText=""> 
                                 <h:outputText  value=" "/>
-                            </p:column> 
+                            </p:column> -->
 
-                            <p:column headerText=""> 
-                                <h:outputText style="color: red;" value="Ingoruj"/>
-                            </p:column> 
+                           
 
                         </p:dataTable>
                     </div>
