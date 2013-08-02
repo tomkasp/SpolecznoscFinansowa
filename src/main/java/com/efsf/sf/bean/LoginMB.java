@@ -23,7 +23,6 @@ public class LoginMB implements Serializable {
     private Client client;
     private Consultant consultant;
     
-    
     public LoginMB() {  
     }
 
@@ -125,6 +124,4 @@ public class LoginMB implements Serializable {
         this.user = user;
     }
 
-   
-    
 }
