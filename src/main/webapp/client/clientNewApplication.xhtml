@@ -79,8 +79,8 @@
                                 <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="notatka"/> 
-                                    <p:selectOneMenu value="#{clientCaseMB.clientCase.productType}">
-                                        <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                                    <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
+                                        <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                     </p:selectOneMenu>
                                 
                                 </div>
