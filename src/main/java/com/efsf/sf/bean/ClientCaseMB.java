@@ -5,6 +5,7 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ClientCaseDAO;
+import com.efsf.sf.sql.dao.ProductTypeDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
@@ -27,6 +28,8 @@ public class ClientCaseMB implements Serializable{
     @ManagedProperty(value="#{loginMB}")
     private LoginMB login;
     
+    private int idTypProduktu;
+    
     private ClientCase clientCase = new ClientCase();
     /**
      * Creates a new instance of ClientCaseMB
@@ -37,14 +40,14 @@ public class ClientCaseMB implements Serializable{
     
     public void addCase(){
         ClientCaseDAO ccd = new ClientCaseDAO();
+        ProductTypeDAO ptd = new ProductTypeDAO();
         
+        clientCase.setProductType(ptd.getProductType(idTypProduktu));
         clientCase.setClient(login.getClient());
         clientCase.setPhase(1);
         clientCase.setViewCounter(0);
         clientCase.setDifficulty(0);
-        
         ccd.saveClientCase(clientCase);
-        
     }
     
     
@@ -63,5 +66,13 @@ public class ClientCaseMB implements Serializable{
 
     public void setLogin(LoginMB login) {
         this.login = login;
+    }
+
+    public int getIdTypProduktu() {
+        return idTypProduktu;
+    }
+
+    public void setIdTypProduktu(int idTypProduktu) {
+        this.idTypProduktu = idTypProduktu;
     }
 }

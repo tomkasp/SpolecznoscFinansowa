@@ -20,11 +20,14 @@ public class ClientCaseDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
+            CaseStatus cs = (CaseStatus)session.load(CaseStatus.class, 1);
+            client.setCaseStatus(cs);
+            
             session.save(client);
 
+            
         session.getTransaction().commit();
         session.close();
-
     }
 
     public List last5Cases() {
