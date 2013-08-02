@@ -11,7 +11,6 @@ import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -21,21 +20,15 @@ import javax.faces.validator.ValidatorException;
  * @author WR1EI1
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ConsultantSettingsMB implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     //Update Settings
-    @ManagedProperty(value="#{loginMB.user}")
-    private User user = new User();
-    @ManagedProperty(value="#{loginMB.consultant}")
-    private Consultant consultant = new Consultant();
+    @ManagedProperty(value="#{loginMB.consultant.idConsultant}")
+    private Integer idConsultant;
     
+    private Consultant consultant; 
     private String confirmPassword = new String();
-    
-    private Subscription subscription = new Subscription();
-    
-    private Address mainAddress = new Address();
-    private Address invoiceAddress = new Address();
     
     private Integer idWorkingPlace;
     private List<Integer> idSelectedBankList = new ArrayList<>();
@@ -45,19 +38,10 @@ public class ConsultantSettingsMB implements Serializable {
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
     private Integer idSubscriptionType;
-    private Boolean policy = false;
-    private Boolean policy2 = false;
     
     public ConsultantSettingsMB() {
-        int idConsultant=consultant.getIdConsultant();
-        
-        SubscriptionDAO sdao=new SubscriptionDAO();
-        sdao.loadFkConsultant( idConsultant );
-        
-        AddressDAO adao = new AddressDAO();
-        mainAddress = adao.loadMainAddressFromFkConsultant(idConsultant);
-        invoiceAddress = adao.loadInvoiceAddressFromFkConsultant(idConsultant);
-        
+        ConsultantDAO cdao=new ConsultantDAO();
+        consultant=cdao.readConsultantForSettings(idConsultant);
     }
 
     public String updateSettings() {
@@ -101,31 +85,25 @@ public class ConsultantSettingsMB implements Serializable {
         consultant.setRegion(r);
         //ADD MAIN REGION
         r=rdao.getRegion(idMainRegion);
-        mainAddress.setRegion(r);
-        mainAddress.setConsultant(consultant);
+        
         AddressDAO adao=new AddressDAO();
-        adao.save(mainAddress);
+        
         //ADD INVOICE REGION
         r=rdao.getRegion(idInvoiceRegion);
-        invoiceAddress.setRegion(r);
-        invoiceAddress.setConsultant(consultant);
-        adao.save(invoiceAddress);
+        
         //ADD SUBSCRIPTION TYPE
         if(idSubscriptionType!=null)
         {
         SubscriptionTypeDAO stdao = new SubscriptionTypeDAO();
         SubscriptionType subscriptionType = stdao.getSubscriptionType(idSubscriptionType);
-        subscription.setSubscriptionType(subscriptionType);
-        subscription.setConsultant(consultant);
+        
         SubscriptionDAO sdao=new SubscriptionDAO();
-        sdao.update(subscription);
         }
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
         cdao.update(consultant);
         //UPDATE USER
-        UserDAO udao = new UserDAO();
-        udao.update(user);
+        
 
         return "/consultant/consultantMainPage?faces-redirect=true";
     }
@@ -138,14 +116,13 @@ public class ConsultantSettingsMB implements Serializable {
         throw new ValidatorException(message);
         }      
     }
-   
 
-    public User getUser() {
-        return user;
+    public Integer getIdConsultant() {
+        return idConsultant;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdConsultant(Integer idConsultant) {
+        this.idConsultant = idConsultant;
     }
 
     public Consultant getConsultant() {
@@ -162,38 +139,6 @@ public class ConsultantSettingsMB implements Serializable {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-    }
-
-    public Address getMainAddress() {
-        return mainAddress;
-    }
-
-    public void setMainAddress(Address mainAddress) {
-        this.mainAddress = mainAddress;
-    }
-
-    public Address getInvoiceAddress() {
-        return invoiceAddress;
-    }
-
-    public void setInvoiceAddress(Address invoiceAddress) {
-        this.invoiceAddress = invoiceAddress;
-    }
-
-    public Boolean getPolicy() {
-        return policy;
-    }
-
-    public void setPolicy(Boolean policy) {
-        this.policy = policy;
-    }
-
-    public Boolean getPolicy2() {
-        return policy2;
-    }
-
-    public void setPolicy2(Boolean policy2) {
-        this.policy2 = policy2;
     }
 
     public Integer getIdWorkingPlace() {
@@ -259,9 +204,5 @@ public class ConsultantSettingsMB implements Serializable {
     public void setIdSubscriptionType(Integer idSubscriptionType) {
         this.idSubscriptionType = idSubscriptionType;
     }
-
-    
-    
-    
-    
+   
 }

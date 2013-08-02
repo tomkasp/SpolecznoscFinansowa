@@ -66,13 +66,13 @@
 
                             <div class="field">
                                 <h:outputText class="label" value="Imię"/> 
-                                <h:inputText id="name" class="inputWidth" value="#{consultantCreateMB.consultant.name}"  />
+                                <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
                                 <h:message styleClass="invalid" for="name"/>
                             </div>
 
                             <div class="field">
                                 <h:outputText class="label" value="Nazwisko"/>
-                                <h:inputText id="lastName" class="inputWidth" value="#{consultantCreateMB.consultant.lastName}"/> 
+                                <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
                                 <h:message styleClass="invalid" for="lastName"/>
                             </div>
                                  
@@ -80,7 +80,7 @@
                               
                               <div class="field"> 
                                     <h:outputText  class="label" value="Hasło"/> 
-                                    <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" > 
+                                    <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantSettingsMB.confirmPassword}" > 
                                         <f:validateLength minimum="8" maximum="20"/>
                                         <p:ajax event="keyup" update="passwordMessage" />
                                     </h:inputSecret>
@@ -89,7 +89,7 @@
 
                                 <div class="field">
                                     <h:outputText id="confirmPassword" class="label" value="Potwierdź hasło"/> 
-                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" validator="#{consultantCreateMB.validateSamePassword}" > 
+                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantSettingsMB.consultant.user.password}" validator="#{consultantSettingsMB.validateSamePassword}" > 
                                         <p:ajax event="keyup" update="passwordCheckMessage"/>
                                     </h:inputSecret>
                                     <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
@@ -98,7 +98,7 @@
                                 <div class="field"> 
                                     <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p>                                    
                                     <h:outputText class="label" value="Adres email"/> 
-                                    <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
+                                    <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantSettingsMB.consultant.user.email}" >
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                         <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
                                         <p:ajax event="keyup" update="emailMessage"/>
@@ -108,13 +108,13 @@
                               
                                <div class="field">
                                 <h:outputText class="label" value="Staż w branży"/> 
-                                <h:inputText id="expirience" class="inputWidth" value="#{consultantCreateMB.consultant.expirience}"/>
+                                <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}"/>
                                 <h:message styleClass="invalid" for="expirience"/>
                                </div>
 
                                <div class="field"> 
                                 <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantCreateMB.idWorkingPlace}">
+                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantSettingsMB.idWorkingPlace}">
                                     <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
                                 </p:selectOneMenu> 
                                 <h:message styleClass="invalid" for="workingPlace"/>
@@ -149,7 +149,7 @@
 
                         <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
 
-                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantCreateMB.idSelectedBankList}" layout="pageDirection" >  
+                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantSettingsMB.idSelectedBankList}" layout="pageDirection" >  
 
                             <f:selectItems value="#{ dictionaryMB.bank }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
 
@@ -161,14 +161,14 @@
 
                         <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
 
-                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idSelectedInstitutionList}" layout="pageDirection">
+                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantSettingsMB.idSelectedInstitutionList}" layout="pageDirection">
                             <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
                         </p:selectManyCheckbox>
 
                     </div>
                     <div>
                         <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
-                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantCreateMB.idProductTypes}" layout="pageDirection">
+                        <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantSettingsMB.idProductTypes}" layout="pageDirection">
                             <f:selectItems value="#{ dictionaryMB.productType}" var="p" itemLabel="#{p.name}" itemValue="#{p.idProductType}"/>
                         </p:selectManyCheckbox>
                     </div>    
@@ -176,7 +176,7 @@
                         <h4> ZASIĘG/MOBILNOŚĆ </h4>
 
                         <div>  
-                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantCreateMB.idRegion}">
+                            <p:selectOneMenu style="width: 32%;" styleClass="marginLRT30" value="#{consultantSettingsMB.idRegion}">
                                 <f:selectItems value="#{dictionaryMB.region}" var="w" itemLabel="#{w.region}" itemValue="#{w.idRegion}" />
                             </p:selectOneMenu> 
                         </div>
@@ -194,7 +194,7 @@
 
                         <div class="field"> 
                             <h:outputText class="label" value="Województwo"/>  
-                            <p:selectOneMenu style="width: 39%;" value="#{consultantCreateMB.idMainRegion}">  
+                            <p:selectOneMenu style="width: 39%;" value="#{consultantSettingsMB.idMainRegion}">  
                                 <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
                             </p:selectOneMenu> 
                         </div>
