@@ -110,16 +110,16 @@
 
                             <p:column headerText="Typ zatrudnienia">
                                 <h:outputText rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <p:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                <h:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
                                     <f:selectItems value="#{marketMB.modelsEmploymentType.get(rowNumber)}" />
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
                                 <h:outputText rendered="#{marketMB.modelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <p:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                <h:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
                                     <f:selectItems value="#{marketMB.modelsBranch.get(rowNumber)}" />
-                                </p:selectOneMenu>
+                                </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Trudność kredytu"> 
