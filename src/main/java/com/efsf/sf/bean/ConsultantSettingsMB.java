@@ -13,7 +13,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -41,6 +40,7 @@ public class ConsultantSettingsMB implements Serializable {
     private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
+    private InvoiceData invoiceData;
     private Integer idSubscriptionType;
     
     public ConsultantSettingsMB() { 
@@ -71,7 +71,6 @@ public class ConsultantSettingsMB implements Serializable {
             idProductTypes.add( pt.getIdProductType() );          
         }
         
-        
         idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
         
         idRegion=consultant.getRegion().getIdRegion();
@@ -85,6 +84,8 @@ public class ConsultantSettingsMB implements Serializable {
             if(a.getType()==2)
             { idInvoiceRegion=a.getIdAddress(); }   
         }
+        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        invoiceData=iddao.loadFromFkAddress(idInvoiceRegion);
         
         Iterator<Subscription> it4=consultant.getSubscriptions().iterator();
         while(it4.hasNext())
@@ -253,6 +254,14 @@ public class ConsultantSettingsMB implements Serializable {
         this.idInvoiceRegion = idInvoiceRegion;
     }
 
+    public InvoiceData getInvoiceData() {
+        return invoiceData;
+    }
+
+    public void setInvoiceData(InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+    }
+
     public Integer getIdSubscriptionType() {
         return idSubscriptionType;
     }
@@ -260,5 +269,7 @@ public class ConsultantSettingsMB implements Serializable {
     public void setIdSubscriptionType(Integer idSubscriptionType) {
         this.idSubscriptionType = idSubscriptionType;
     }
+    
+    
    
 }
