@@ -40,6 +40,7 @@ public class ConsultantCreateMB implements Serializable {
     private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
+    private InvoiceData invoiceData=new InvoiceData();
     private Integer idSubscriptionType;
     private Boolean policy = false;
     private Boolean policy2 = false;
@@ -132,6 +133,10 @@ public class ConsultantCreateMB implements Serializable {
         invoiceAddress.setRegion(r);
         invoiceAddress.setConsultant(consultant);
         adao.save(invoiceAddress);
+        //ADD INVOICEDATA
+        invoiceData.setAddress(invoiceAddress);
+        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        iddao.save(invoiceData);
         //ADD SUBSCRIPTION TYPE
         if(idSubscriptionType!=null)
         {
@@ -154,12 +159,11 @@ public class ConsultantCreateMB implements Serializable {
     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
-        
         String password = (String) value;
 
 //        UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
 //        confirmPassword = (String) otherInput.getSubmittedValue();
-//        
+      
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
@@ -289,6 +293,22 @@ public class ConsultantCreateMB implements Serializable {
         this.idInvoiceRegion = idInvoiceRegion;
     }
 
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
+
+    public InvoiceData getInvoiceData() {
+        return invoiceData;
+    }
+
+    public void setInvoiceData(InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+    }
+    
     public Integer getIdSubscriptionType() {
         return idSubscriptionType;
     }
