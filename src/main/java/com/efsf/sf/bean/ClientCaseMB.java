@@ -4,21 +4,15 @@
  */
 package com.efsf.sf.bean;
 
-import com.efsf.sf.sql.dao.ClientCaseDAO;
-import com.efsf.sf.sql.dao.ClientDAO;
-import com.efsf.sf.sql.dao.ProductTypeDAO;
-import com.efsf.sf.sql.entity.CaseStatus;
-import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.dao.*;
+import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-/**
- * @author admin
- */
+
 @ManagedBean
 @SessionScoped
 public class ClientCaseMB implements Serializable {
@@ -35,6 +29,9 @@ public class ClientCaseMB implements Serializable {
     public ClientCaseMB() {
     }
 
+   
+    
+    
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
