@@ -70,10 +70,8 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie dodano jeszcze żadnych dochodów" >
-
-                            <p:column selectionMode="multiple" />   
-
+                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedCase}" selectionMode="single" >
+                            
                             <p:column  headerText="Lp">  
                                 <h:outputText  value="#{rowNumber+1}"/>
                             </p:column>  
@@ -107,34 +105,34 @@
                             </p:column>
 
                             <p:column headerText="Wiek">  
-                                <h:outputText  />
+                                <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText  value="#{row.typZatrudnienia}"/>
+                                <h:outputText  value=" "/>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText  value="#{row.branża}"/>
+                                <h:outputText  value=" "/>
                             </p:column>
 
                             <p:column headerText="Trudności kredytu"> 
-                                <h:outputText  value="#{row.trudnościKredytu}"/>
+                                <h:outputText  value="#{row.difficulty}"/>
                             </p:column>
 
                             <p:column headerText="Ilość doradców"> 
-                                <h:outputText  value="#{row.ilośćDoradców}"/>
+                                <h:outputText  value="#{row.consultants.size()}"/>
                             </p:column>
 
                             <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{row.koniecAukcji}"/>
+                                <h:outputText  value="#{row.endDate}"/>
                             </p:column> 
 
                             <p:column headerText=""> 
-                                <h:outputText  value="#{row.koniecAukcji}"/>
+                                <h:outputText  value=" "/>
                             </p:column> 
 
-                            <p:column headerText="Koniec aukcji"> 
+                            <p:column headerText=""> 
                                 <h:outputText style="color: red;" value="Ingoruj"/>
                             </p:column> 
 

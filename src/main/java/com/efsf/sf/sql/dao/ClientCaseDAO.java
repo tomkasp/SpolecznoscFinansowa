@@ -48,8 +48,8 @@ public class ClientCaseDAO {
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
          
-         Query q = session.createQuery("from ClientCase order by BeginDate");
-         
+    //     Query q = session.createQuery("from ClientCase c left outer join fetch c.productType as p left outer join fetch c.client as cil left outer join cil.addresses as add");
+         Query q = session.createQuery("FROM ClinetCase fetch all properties order by beginDate");
          q.setMaxResults(5);
          
          list = q.list();

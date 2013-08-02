@@ -199,9 +199,6 @@ public class CreateClientMB implements Serializable
         income = new Income();
         branchId = 0;
         incomeId = 0;
-        
-        
-        
     }
     
     public void addIncome()
@@ -215,8 +212,6 @@ public class CreateClientMB implements Serializable
                         break;
                     }
                 }
-                
-
                 
                 Branch b = null;
  
