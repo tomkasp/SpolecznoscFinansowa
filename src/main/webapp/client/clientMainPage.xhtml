@@ -37,11 +37,11 @@
 
                     <div id="spaceFiller" > </div>
                     <div>     
-                        <h5> Tomasz Nowak </h5> 
+                        <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
                         <h:outputText class="profileText" value="nr. klienta:" />
                         <h5> #{loginMB.client.user.login} </h5>
                         <h:outputText class="profileText" value="Stan konta:" />
-                        <h5> 3/5 pkt. </h5>
+                        <h5> #{loginMB.client.points} / 5 </h5>
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                             <h:outputText value="#{data.bik}" /> 
+                            <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy"> 
@@ -117,7 +117,7 @@
 
                     <h4>OCZEKUJĄCE</h4>
 
-                        <p:dataTable id="dataTable3" value="#{fakeBean.lastActivityClient}" var="data" emptyMessage="brak klientów!" 
+                    <p:dataTable id="dataTable3" value="#{fakeBean.lastActivityClient}" var="data" emptyMessage="brak klientów!" 
                                  rowKey="#{data.lp}">
                         <p:column headerText=" ">  
                             <p:selectBooleanCheckbox />
@@ -144,7 +144,7 @@
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                             <h:outputText value="#{data.bik}" /> 
+                            <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy"> 
@@ -166,7 +166,7 @@
                         <p:column headerText="Trudności kredytu"> 
                             <h:outputText value="#{data.trudnościKredytu}" />
                         </p:column>
-                            
+
                         <p:column headerText="Ilość wyświetleń">  
                             <h:outputText value="#{data.ilośćWyświetleń}" />
                         </p:column>
@@ -187,13 +187,13 @@
 
                     <h4> TRWAJĄCE </h4>
 
-                        <p:dataTable id="dataTable4" value="#{fakeBean.trwajace}" var="data" emptyMessage="brak klientów!" 
+                    <p:dataTable id="dataTable4" value="#{fakeBean.trwajace}" var="data" emptyMessage="brak klientów!" 
                                  rowKey="#{data.lp}">
-                            
+
                         <p:column headerText=" ">  
                             <p:selectBooleanCheckbox />
                         </p:column>  
-                            
+
                         <p:column headerText="Numer klienta">  
                             <h:outputText value="#{data.numerKlienta}" /> 
                         </p:column>  
@@ -215,7 +215,7 @@
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                             <h:outputText value="#{data.bik}" /> 
+                            <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy"> 
@@ -247,15 +247,15 @@
 
                 <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/index"/>
                 <h:link class="topMenuButton  redX wideButton" value="Wycofaj" outcome="/client/clientNewApplication.xhtml"/>
-            
-                
+
+
                 <div class="marginT50">
 
                     <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
 
-                      <p:dataTable id="dataTable5" value="#{fakeBean.zakończone}" var="data" emptyMessage="brak klientów!" 
+                    <p:dataTable id="dataTable5" value="#{fakeBean.zakończone}" var="data" emptyMessage="brak klientów!" 
                                  rowKey="#{data.lp}">
-                            
+
                         <p:column headerText=" ">  
                             <p:selectBooleanCheckbox />
                         </p:column>  
@@ -268,7 +268,7 @@
                             <h:outputText value="#{data.numerSprawy}" /> 
                         </p:column>   
 
-                                                <p:column headerText="Postęp">  
+                        <p:column headerText="Postęp">  
                             <h:outputText value="#{data.postęp}" /> 
                         </p:column> 
 
@@ -277,7 +277,7 @@
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                             <h:outputText value="#{data.bik}" /> 
+                            <h:outputText value="#{data.bik}" /> 
                         </p:column> 
 
                         <p:column headerText="Wiek"> 

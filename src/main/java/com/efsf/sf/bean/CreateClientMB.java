@@ -146,7 +146,6 @@ public class CreateClientMB implements Serializable
         EducationDAO eduDao = new EducationDAO();
         MaritalStatusDAO maritalDao = new MaritalStatusDAO();
         
-    
         user = new User();
         user.setPassword(Security.sha1(password));
         user.setEmail(email);
@@ -161,8 +160,6 @@ public class CreateClientMB implements Serializable
         client.setMaritalStatus(maritalDao.getMaritalStatus(0));
         client.setPoints(5);
         
-        
-        
         userDao.save(user);
         clientDao.save(client);
         
@@ -170,11 +167,8 @@ public class CreateClientMB implements Serializable
         
         userDao.update(user);
         
-        
         loginMB.setUser(user);
         loginMB.setClient(client);
-        
-        
         
         return "/client/clientFillAccountData?faces-redirect=true";
     }

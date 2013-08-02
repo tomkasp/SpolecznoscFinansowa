@@ -113,7 +113,7 @@ public class ClientCase  implements java.io.Serializable {
         this.client = client;
     }
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_caseStatus", nullable=false)
+    @JoinColumn(name="fk_caseStatus", nullable=false,columnDefinition = "int default 1")
     public CaseStatus getCaseStatus() {
         return this.caseStatus;
     }

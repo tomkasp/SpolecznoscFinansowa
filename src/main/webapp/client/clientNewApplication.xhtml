@@ -61,26 +61,45 @@
 
 
                                 <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
-                                    <p:calendar id="beginDate" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}"></p:calendar>
+                                    <p:calendar  mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
+                                        <p:ajax  event="dateSelect" update="end-date"  />
+                                    </p:calendar>
+                                     <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
                                 </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
-                                    <p:calendar id="endDate" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}"></p:calendar>
+                                    <p:calendar mindate="#{clientCaseMB.clientCase.beginDate}" required="true" id="end-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}">
+                                        <p:ajax  event="dateSelect" update="begin-date"  />
+                                    </p:calendar>
                                 </div>
 
-                                <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  <h:inputText value="#{clientCaseMB.clientCase.consolidationValue}"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                    <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
+                                        <f:convertNumber pattern=""/>
+                                        <f:convertNumber  maxFractionDigits="2" maxIntegerDigits="10"/>
+                                        <p:ajax  event="keyup" update="consolidationValueMessage" />
+                                        
+                                    </h:inputText>
+                                        <h:message for="consolidationValue" errorClass="invalid" id="consolidationValueMessage" />
+                                </div>
 
-                                <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  
+                                    <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}" /> 
+                                </div>
 
-                                <div class="field"> <h:outputText class="label" value="Cel:"/>  <h:inputText value="#{clientCaseMB.clientCase.goal}"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Cel:"/>
+                                    <h:inputText required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                </div>
 
-                                <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>  <h:inputText value="#{clientCaseMB.clientCase.expectedInstalment}"/> </div>
+                                <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>
+                                    <h:inputText required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"/> 
+                                </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
                                 
                                 <div class="field"> <h:outputText class="label" value="notatka"/> 
-                                    <p:selectOneMenu value="#{clientCaseMB.clientCase.productType}">
-                                        <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w}"/>
+                                    <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
+                                        <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                     </p:selectOneMenu>
                                 
                                 </div>

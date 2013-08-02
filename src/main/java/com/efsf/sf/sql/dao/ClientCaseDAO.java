@@ -17,15 +17,17 @@ import org.joda.time.DateTime;
  */
 public class ClientCaseDAO {
 
-    public void saveClientCase(ClientCase client) {
+    public void saveClientCase(ClientCase clientCase) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-            session.save(client);
+        
+            //pierwsza faza CaseStatus.
+            clientCase.setCaseStatus( (CaseStatus)session.load(CaseStatus.class, 1) );
+            session.save(clientCase);
 
         session.getTransaction().commit();
         session.close();
-
     }
 
     public List last5Cases()
