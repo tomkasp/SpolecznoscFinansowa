@@ -22,11 +22,15 @@ public class ClientCaseMB implements Serializable {
     private int idTypProduktu;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
+    private Boolean newAppActive=false;
 
     /**
      * Creates a new instance of ClientCaseMB
      */
     public ClientCaseMB() {
+        if (login.getClient().getPoints() > 0) {
+            newAppActive=true;
+        }
     }
 
    
@@ -79,5 +83,9 @@ public class ClientCaseMB implements Serializable {
 
     public void setIdTypProduktu(int idTypProduktu) {
         this.idTypProduktu = idTypProduktu;
+    }
+
+    public Boolean getNewAppActive() {
+        return newAppActive;
     }
 }
