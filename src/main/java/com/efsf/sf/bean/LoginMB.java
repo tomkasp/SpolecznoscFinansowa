@@ -18,6 +18,7 @@ public class LoginMB implements Serializable {
     private boolean isLogged = false;
     private Integer type;
     private int idUser;
+    private int points;
     
     private User user; 
     private Client client;
@@ -49,6 +50,7 @@ public class LoginMB implements Serializable {
             if(type==3)
             {
                 client = userDao.getClientConnectedToUser(idUser);
+                points = client.getPoints();
                 return "/client/clientMainPage";  
             } 
         }
@@ -123,6 +125,10 @@ public class LoginMB implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
    
