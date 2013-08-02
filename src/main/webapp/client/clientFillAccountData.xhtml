@@ -91,8 +91,8 @@
                                 
                                 <div class="field"> 
                                     <h:outputText  class="label" value="Data urodzenia"/> 
-                                    <p:calendar required="#{createClientMB.areRequired}" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{createClientMB.birthDate}" >
-                                            <f:convertDateTime type="date" />
+                                    <p:calendar required="#{createClientMB.areRequired}" maxdate="#{createClientMB.maxBirthDate}" pattern="dd-MM-yyyy" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{createClientMB.birthDate}" >
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
                                             <p:ajax  event="keyup" update="birthDateMessage" />
                                     </p:calendar>
                                     <h:message for="birthDate" errorClass="invalid" id="birthDateMessage" />
@@ -346,8 +346,8 @@
 
                                   <div class="marginT10">  
                                       <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
-                                      <p:calendar id="beginDate2" yearRange="1960:2030" navigator="true" styleClass="floatR marginT10 marginR5"  value="#{createClientMB.business.beginDate}"> 
-                                            <f:convertDateTime type="date" />
+                                       <p:calendar id="beginDate2" yearRange="1960:2030" maxdate="#{createClientMB.currentDate}" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{createClientMB.income.beginDate}"> 
+                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
                                             <p:ajax  event="keyup" update="beginDate2Message" />
                                        </p:calendar>
                                        <h:message for="beginDate2" errorClass="invalid" id="beginDate2Message" />
@@ -511,8 +511,8 @@
                                     
                                    <div class="marginT10"> 
                                        <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
-                                       <p:calendar id="beginDate" yearRange="1960:2030" navigator="true" styleClass="floatR marginT10"  value="#{createClientMB.income.beginDate}"> 
-                                            <f:convertDateTime type="date" />
+                                       <p:calendar id="beginDate" yearRange="1960:2030" maxdate="#{createClientMB.currentDate}" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{createClientMB.income.beginDate}"> 
+                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
                                             <p:ajax  event="keyup" update="beginDateMessage" />
                                        </p:calendar>
                                        <h:message for="beginDate" errorClass="invalid" id="beginDateMessage" />
