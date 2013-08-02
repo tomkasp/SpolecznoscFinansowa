@@ -6,6 +6,7 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
+import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.ProductType;
 import com.efsf.sf.sql.util.HibernateUtil;
@@ -36,7 +37,13 @@ public class ClientCaseMB implements Serializable{
     
     public void addCase(){
         ClientCaseDAO ccd = new ClientCaseDAO();
-        ccd.saveClientCase(clientCase,login);
+        
+        clientCase.setClient(login.getClient());
+        clientCase.setPhase(1);
+        clientCase.setViewCounter(0);
+        clientCase.setDifficulty(0);
+        
+        ccd.saveClientCase(clientCase);
         
     }
     
