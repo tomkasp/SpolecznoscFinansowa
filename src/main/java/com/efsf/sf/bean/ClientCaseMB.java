@@ -10,17 +10,13 @@ import com.efsf.sf.sql.dao.ProductTypeDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.ProductType;
-import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.Session;
 
 /**
- *
  * @author admin
  */
 @ManagedBean
