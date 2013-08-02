@@ -110,7 +110,7 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 .ui-datatable .ui-datatable-header,.ui-datatable .ui-datatable-footer
 {
     text-align:center;
-    padding:4px 10px;
+    padding:4px 4px !important;
 }
 
 .ui-datatable .ui-datatable-header
@@ -130,7 +130,7 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 
 .ui-datatable thead th,.ui-datatable tbody td,.ui-datatable tfoot td
 {
-    padding:4px 10px;
+    padding:4px 4px !important; 
     overflow:hidden;
     white-space: normal!important;
     border-width:1px;

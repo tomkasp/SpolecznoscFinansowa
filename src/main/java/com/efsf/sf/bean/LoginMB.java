@@ -44,7 +44,7 @@ public class LoginMB implements Serializable {
              if(type==2)
             { 
                 consultant = userDao.getCounsultantConnectedToUser(idUser);
-                return "/consultant/consultantMainPage"; 
+                return "/consultant/consultantMainPage?faces-redirect=true"; 
             }
             if(type==3)
             {

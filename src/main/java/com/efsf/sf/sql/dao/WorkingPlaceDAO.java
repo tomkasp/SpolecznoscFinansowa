@@ -2,9 +2,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.WorkingPlace;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
-import javax.faces.model.SelectItem;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
