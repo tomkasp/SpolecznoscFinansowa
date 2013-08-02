@@ -59,7 +59,7 @@
 
                                 <h3 class="greenLeftBorder"> Nowy wniosek </h3>
 
-                                <h:panelGroup rendered="#{loginMB.points>0}" >
+                                <h:panelGroup rendered="#{clientCaseMB.addNewApp}" >
                                 <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
                                     <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
                                         <p:ajax  event="dateSelect" update="end-date"  />
