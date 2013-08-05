@@ -39,10 +39,10 @@ public class ClientCaseMB implements Serializable {
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
         
         ObligationDAO obdao = new ObligationDAO();
-        obdao.save(this.obligation);
+        obdao.save(obligation);
         
         
-        this.obligation = new Obligation();
+        obligation = new Obligation();
     }
     
     
