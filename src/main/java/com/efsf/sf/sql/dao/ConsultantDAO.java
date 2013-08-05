@@ -84,37 +84,6 @@ public class ConsultantDAO {
         session.close();
     }
     
-    public Consultant getCounsultantConnectedToUser(int userId)
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-        
-        
-        Query q  = session.createQuery("FROM Consultant c "
-                + " JOIN Fetch c.user as u "
-                + "LEFT JOIN FETCH c.clientCases_2 as cs " 
-                + "left join fetch cs.client as clt "
-                + "left join fetch cs.productType as pt "      
-                + "left join fetch cs.consultants as consul "
-                + "left join fetch clt.addresses as addr "
-                + "left join fetch cs.caseStatus as cstats "
-                + "left join fetch clt.incomes as inc "
-                + "left join fetch clt.incomeBusinessActivities as ba "
-                + "left join fetch inc.branch as br "
-                + "left join fetch inc.employmentType as empltype "
-                + "left join fetch ba.branch as br2 "
-                + "left join fetch ba.employmentType as empltype2 "
-                + "left join fetch clt.requiredDocumentses as rd "  
-                + "where u.idUser = :userId");
-        
-        q.setParameter("userId", userId);
-        Consultant result = (Consultant) q.list().get(0);
-        
-        session.getTransaction().commit();
-        session.close();
-        
-        return result; 
-    }
     
     public Consultant readConsultantForSettings(int id) {
        
@@ -149,5 +118,5 @@ public class ConsultantDAO {
         return consultant;
     }
     
-
+    
 }
