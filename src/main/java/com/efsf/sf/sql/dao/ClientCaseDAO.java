@@ -84,20 +84,18 @@ public class ClientCaseDAO {
                  + "left join fetch ba.branch as br2 "
                  + "left join fetch ba.employmentType as empltype2 "
                  + "left join fetch clt.requiredDocumentses as rd "
-                 + "where cs.beginDate <= :dateNow "
+                 + "WHERE cs.beginDate <= :dateNow "
+                 + "AND cs.fk_client = 31 "
                  + "order by cs.beginDate desc, cs.idClientCase desc");
-         
+        
          q.setParameter( "dateNow", new DateTime().toDate() );
-         
          q.setMaxResults(5);
          
          list = q.list();
          
-         
          session.getTransaction().commit();
          session.close();
          
-
          return list;
     }
    
