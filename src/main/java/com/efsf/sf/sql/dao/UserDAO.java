@@ -144,19 +144,12 @@ public class UserDAO {
         
         Client result = (Client) q.list().get(0);
         
+        session.getTransaction().commit();
+        session.close();
+        
         return result; 
     }
     
-    public Consultant getCounsultantConnectedToUser(int userId)
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-        
-        Query q  = session.createQuery("FROM Consultant c JOIN Fetch c.user as u where u.idUser = :userId");
-        q.setParameter("userId", userId);
-        Consultant result = (Consultant) q.list().get(0);
-        
-        return result; 
-    }
+
     
 }
