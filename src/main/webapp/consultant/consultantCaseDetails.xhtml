@@ -39,112 +39,107 @@
                             </div>
                             
                             <div>     
-                                <h5> Jan Kazimierczak </h5> 
+                                <h5> #{loginMB.consultant.name} &nbsp; #{loginMB.consultant.lastName} </h5> 
                                 <h:outputText class="profileText" value="nr. doradcy:" />
-                                <h5> 007061 </h5>
+                                <h5> #{loginMB.consultant.user.login} </h5>
                                 <h:outputText class="profileText" value="Twój ranking:" /> 
-                                <h5> 78/100 </h5>
+                                <h5> #{marketMB.clientCaseList.size()}/100 </h5>
                             </div>
                         </div>
                         
-                        <h3> Sprawa numer: 000205 </h3>
+                        <h3> Sprawa numer: #{marketMB.selectedCase.idClientCase} </h3>
                         
-                        <div style="min-height: 960px">
-                            <div class="leftThinerBox">
+                        <div style="min-height: 160px">
+                            <div class="leftInlineBox">
                                 <h:form>
                                     <h4> DANE KLIENTA </h4>
                                     <div class="marginLRT30">        
-                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Tomasz" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Nowak" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="73042300170" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="23.04.1973" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="tomas07@gmail.com" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="677983023" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="Tomasz" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="Nowak" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="73042300170" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="23.04.1973" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="tomas07@gmail.com" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="677983023" /> </div>
                                     </div>
                                     
                                     <h4> DANE O ZATRUDNIENIU </h4>
-                                    <div class="marginLRT30" >   
-                                         <div class="field"> <h:outputText class="label" value="Typ"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="umowa o pracę" /> </div>
-                                         <div class="field"> <h:outputText class="label" value="Branża"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="budownictwo" /> </div>
-                                         <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="2 100 PLN" /> </div>
+                                    <div class="marginTB20" >   
+                                        <p:dataTable style="clear:both" id="table" value="#{marketMB.selectedCaseIncomeTable}" var="data" emptyMessage="Klient nie zdefiniował żadnych informacji." >
+                                    
+                                            <p:column headerText="Rodzaj">  
+                                                <h:outputText  value="#{data.employmentType}" />
+                                            </p:column>  
+
+                                            <p:column headerText="Branża"> 
+                                                <h:outputText value="#{data.branch}" />
+                                            </p:column>  
+
+                                            <p:column headerText="Dochód">  
+                                                <h:outputText value="#{data.incomeNetto}" />
+                                            </p:column>  
+ 
+                                        </p:dataTable>
                                          
                                     </div>    
                                         
                                     <h4> DANE SPRAWY </h4>
                                     <div class="marginLRT30">        
-                                        <div class="field"> <h:outputText class="label" value="Data rozpoczęcia"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="16-07-2013" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Przetwarzanie danych" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Meble" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="2 000 PLN" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="0 PLN" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="150 PLN" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="chwilówka" /> </div>
+                                        <div class="field"> 
+                                            <h:outputText class="label" value="Data rozpoczęcia"/>  
+                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.beginDate}" > 
+                                                <f:convertDateTime type="date"  pattern="dd-MM-yyyy" />
+                                            </h:inputText>
+                                        </div>
+                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.caseStatus.name}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.goal}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.freeResourcesValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.consolidationValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.expectedInstalment}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.productType.name}" /> </div>
                                     </div>
                                 
                                 </h:form>
                             </div>
 
-                            <div class="rightWiderBox">
-                                <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
+                            <div class="rightInlineBox">
+                                <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" >
+                                    <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
 
 
-                               <div class="solidText"> 
-                                     Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
-                                </div>  
-                                <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
-                               
-                                
-                               <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
-                                      <p:column headerText="Nazwa instytucji">  
-                                    
-                                      </p:column>  
+                                   <div class="solidText"> 
+                                         Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
+                                    </div>  
+                                    <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
 
-                                      <p:column headerText="Nazwa oferty">  
-                                       
-                                      </p:column>  
 
-                                      <p:column headerText="Trafność">    
-                                        
-                                      </p:column>  
-                                    
-                                      <p:column headerText="">  
-                                          
-                                      </p:column>    
-                                </p:dataTable>
-                               <!--
-                                
-                                <p:dataTable id="dataTable3" value="#{fakeBean.wygenerowanaOferta}" var="data" emptyMessage="brak klientów!" >
-                                    
-                                                         
-                                      <p:column headerText="">  
-                                          <p:selectBooleanCheckbox />
-                                      </p:column>   
-                                    
-                                    
-                                      <p:column headerText="Nazwa instytucji">  
-                                          <h:outputText value="#{data.nazwaBanku}" />
-                                      </p:column>  
+                                   <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
+                                          <p:column headerText="Nazwa instytucji">  
 
-                                      <p:column headerText="Nazwa oferty">  
-                                          <h:outputText value="#{data.nazwaOferty}" />
-                                      </p:column>  
+                                          </p:column>  
 
-                                      <p:column headerText="Trafność">    
-                                          <h:outputText value="#{data.trafność}" />
-                                      </p:column>  
-                
-                                </p:dataTable>
-                                
-                                -->
-                                
-                                <h:link class="floatR greyButton wideButton" rendered="false" value="Wyślij ofertę" outcome="/index"/>
-                                <div class="marginT50">
-                                    <h4> GENERUJ UMOWY </h4>
-                                </div>
-                                <div class="solidText"> 
-                                     Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
-                                </div>  
-                                <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
+                                          <p:column headerText="Nazwa oferty">  
+
+                                          </p:column>  
+
+                                          <p:column headerText="Trafność">    
+
+                                          </p:column>  
+
+                                          <p:column headerText="">  
+
+                                          </p:column>    
+                                    </p:dataTable>
+
+
+                                    <h:link class="floatR greyButton wideButton" rendered="false" value="Wyślij ofertę" outcome="/index"/>
+                                    <div class="marginT50">
+                                        <h4> GENERUJ UMOWY </h4>
+                                    </div>
+                                    <div class="solidText"> 
+                                         Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
+                                    </div>  
+                                    <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </ui:define>
