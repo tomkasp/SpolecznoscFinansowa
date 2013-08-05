@@ -59,7 +59,6 @@ public class MarketMB
             modelsBranch.add(showAllClientsBranches(clientCaseList.get(i).getClient()));
         }
         
-        
         System.out.println("Pobrano"); 
     }
     
