@@ -21,13 +21,14 @@ public class ClientCaseMB implements Serializable {
     private int idTypProduktu;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
-    private Boolean addNewApp = true;
-
+    
     /**
      * Creates a new instance of ClientCaseMB
      */
-    
 
+    public ClientCaseMB(){
+        
+    }    
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
@@ -46,7 +47,7 @@ public class ClientCaseMB implements Serializable {
             ccd.saveClientCase(clientCase);
 
             if(login.getClient().getPoints()==0){
-                setAddNewApp((Boolean) false);
+                login.setActiveAddingApp(false);
             }
             clientCase = new ClientCase();
         }
@@ -80,13 +81,6 @@ public class ClientCaseMB implements Serializable {
         this.idTypProduktu = idTypProduktu;
     }
 
-    public Boolean getAddNewApp() {
-        return addNewApp;
-    }
-
-    public void setAddNewApp(Boolean addNewApp) {
-        this.addNewApp = addNewApp;
-    }
 
     
 }

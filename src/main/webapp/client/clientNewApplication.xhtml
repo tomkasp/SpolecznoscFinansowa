@@ -36,19 +36,19 @@
             <ui:define name="content">
 
                 <h:form>
-               
-                        <div id="profileBar" class="profilBar">
-                            <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
-                            <div id="spaceFiller" > </div>
-                            <div>     
-                                <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
-                                <h:outputText class="profileText" value="nr. klienta:" />
-                                <h5> #{loginMB.client.user.login} </h5>
-                                <h:outputText class="profileText" value="Stan konta:" />
-                                <h5> #{loginMB.client.points} / 5 </h5>
-                            </div>
+                    <div id="profileBar" class="profilBar">
+                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                        <div id="spaceFiller" > </div>
+                        <div>     
+                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
+                            <h:outputText class="profileText" value="nr. klienta:" />
+                            <h5> #{loginMB.client.user.login} </h5>
+                            <h:outputText class="profileText" value="Stan konta:" />
+                            <h5> #{loginMB.client.points} / 5 </h5>
                         </div>
+                    </div>
 
 
                     <div>
@@ -59,58 +59,65 @@
 
                                 <h3 class="greenLeftBorder"> Nowy wniosek </h3>
 
-                                <h:panelGroup rendered="#{clientCaseMB.addNewApp}" >
-                                <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
-                                    <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
-                                        <p:ajax  event="dateSelect" update="end-date"  />
-                                    </p:calendar>
-                                     <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
-                                </div>
-                                
-                                <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
-                                    <p:calendar mindate="#{clientCaseMB.clientCase.beginDate}" required="true" id="end-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}">
-                                        <p:ajax  event="dateSelect" update="begin-date"  />
-                                    </p:calendar>
-                                </div>
+                                <h:panelGroup >
+                                    <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
+                                        <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
+                                            <p:ajax  event="dateSelect" update="end-date"  />
+                                        </p:calendar>
+                                        <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
+                                    </div>
 
-                                <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
-                                    <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
-                                        <f:convertNumber maxFractionDigits="2" />
-                                        <p:ajax  event="keyup" update="consolidationValueMessage" />
-                                        
-                                    </h:inputText>
+                                    <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
+                                        <p:calendar mindate="#{clientCaseMB.clientCase.beginDate}" required="true" id="end-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}">
+                                            <p:ajax  event="dateSelect" update="begin-date"  />
+                                        </p:calendar>
+                                    </div>
+
+                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                        <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
+                                            <f:convertNumber maxFractionDigits="2" />
+                                            <p:ajax  event="keyup" update="consolidationValueMessage" />
+
+                                        </h:inputText>
                                         <h:message for="consolidationValue" errorClass="invalid" id="consolidationValueMessage" />
-                                </div>
+                                    </div>
 
-                                <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  
-                                    <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}" /> 
-                                </div>
+                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  
+                                        <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}" /> 
+                                    </div>
 
-                                <div class="field"> <h:outputText class="label" value="Cel:"/>
-                                    <h:inputText required="true" value="#{clientCaseMB.clientCase.goal}"/> 
-                                </div>
+                                    <div class="field"> <h:outputText class="label" value="Cel:"/>
+                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                    </div>
 
-                                <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>
-                                    <h:inputText required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"/> 
-                                </div>
-                                
-                                <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
-                                
-                                <div class="field"> <h:outputText class="label" value="notatka"/> 
-                                    <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
-                                        <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
-                                    </p:selectOneMenu>
-                                
-                                </div>
+                                    <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>
+                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"/> 
+                                    </div>
+
+                                    <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
+
+                                    <div class="field"> <h:outputText class="label" value="notatka"/> 
+                                        <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
+                                            <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                                        </p:selectOneMenu>
+
+                                    </div>
                                 </h:panelGroup>
-                                <h:commandButton value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
 
-                                
 
-                                
+                                <h:commandButton  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                                <p:commandButton  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" /> 
 
-                                
-                                
+                                <p:dialog id="basicDialog" header="Wyczerpany limit " widgetVar="dlg1" rendered="true">  
+                                    <h:outputText value="Niestety wyczerpałeś już swój limit punktów na dodawanie wniosków. Doładuj punkty i wypełnij wniosek ponownie!" />  
+                                </p:dialog>  
+
+
+
+
+
+
+
 
                             </div>   
 
