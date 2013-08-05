@@ -41,15 +41,20 @@
             <version>3.2.5.ga</version>
         </dependency>
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.3.2.GA</version>
         </dependency>
 	<dependency>
-			<groupId>javax.sql</groupId>
-			<artifactId>jdbc-stdext</artifactId>
-			<version>2.0</version>
-		</dependency>
+                <groupId>javax.sql</groupId>
+                <artifactId>jdbc-stdext</artifactId>
+                <version>2.0</version>
+        </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
@@ -75,7 +80,8 @@
         <dependency>  
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
-            <version>3.5</version>  
+            <version>3.5</version>
+            <type>jar</type>
         </dependency>  
         <dependency>
             <groupId>org.primefaces.themes</groupId>
