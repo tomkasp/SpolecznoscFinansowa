@@ -106,7 +106,7 @@
 
 
                                 <h:commandButton  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
-                                <p:commandButton  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" /> 
+                                <h:commandButton  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" /> 
 
                                 <p:dialog id="basicDialog" header="Wyczerpany limit " widgetVar="dlg1" rendered="true">  
                                     <h:outputText value="Niestety wyczerpałeś już swój limit punktów na dodawanie wniosków. Doładuj punkty i wypełnij wniosek ponownie!" />  
@@ -177,8 +177,21 @@
 
                                 <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
-                                    <h:link class="greyButton wideButton" value="Dodaj zobowiązanie" style="float: right;" outcome="/client/clientMainPage"/>
+                                    <p:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();" /> 
 
+                                    
+                                    <p:dialog id="basicDialog" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
+                                    
+                                        <h:panelGrid columns="2">
+                                            <h:outputText>Rodziaj </h:outputText>
+                                            <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
+                                                <f:selectItem itemLabel="Bankowe" itemValue="b"/>
+                                                <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
+                                            </h:selectOneMenu>
+                                            
+                                        </h:panelGrid>
+                                        
+                                </p:dialog>
                                 </div>
 
                                 <div id="buttonsBox3">

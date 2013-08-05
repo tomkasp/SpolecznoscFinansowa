@@ -21,6 +21,7 @@ public class ClientCaseMB implements Serializable {
     private int idTypProduktu;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
+    private Obligation obligation = new Obligation();
     
     /**
      * Creates a new instance of ClientCaseMB
@@ -29,6 +30,15 @@ public class ClientCaseMB implements Serializable {
     public ClientCaseMB(){
         
     }    
+    
+    
+    public void addObligation(){
+        
+        
+    }
+    
+    
+    
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
@@ -79,6 +89,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setIdTypProduktu(int idTypProduktu) {
         this.idTypProduktu = idTypProduktu;
+    }
+
+    public Obligation getObligation() {
+        return obligation;
+    }
+
+    public void setObligation(Obligation obligation) {
+        this.obligation = obligation;
     }
 
 
