@@ -216,6 +216,21 @@ public class MarketMB implements Serializable
         }
     }
     
+    public void stopObserve()
+    {
+        ConsultantDAO consultantDao = new ConsultantDAO();
+        for (ClientCase cc : loginMB.getConsultant().getClientCases_2())
+        {
+            if (cc.getIdClientCase() == selectedObservedCase.getIdClientCase())
+            {
+                loginMB.getConsultant().getClientCases_2().remove(cc);
+                consultantDao.update(loginMB.getConsultant());
+                selectedObservedCase = null;
+                break;
+            }
+        }
+    }
+    
     public List<ClientCase> getClientCaseList() {
         return clientCaseList;
     }
