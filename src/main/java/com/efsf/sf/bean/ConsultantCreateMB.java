@@ -59,7 +59,6 @@ public class ConsultantCreateMB implements Serializable {
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         udao.update(user);
 
-
         WorkingPlaceDAO wpdao = new WorkingPlaceDAO();
         WorkingPlace wp = (WorkingPlace) wpdao.workingPlaceList().get(3);
         if (wp != null) {
@@ -79,6 +78,7 @@ public class ConsultantCreateMB implements Serializable {
             sdao.save(subscription);
         }
         return "/consultant/consultantFillAccountData?faces-redirect=true";
+        
     }
 
     public String savePart2() {
@@ -153,8 +153,34 @@ public class ConsultantCreateMB implements Serializable {
         //UPDATE USER
         UserDAO udao = new UserDAO();
         udao.update(user);
+        
+        
+        
+        //CLEAR ALL FIELDS
+        clearFields();
 
         return "/consultant/consultantMainPage?faces-redirect=true";
+    }
+    
+    private void clearFields(){
+    user = new User();
+    consultant = new Consultant();
+    confirmPassword = new String();
+    subscription = new Subscription();
+    //ConsultantFillAccountData
+    mainAddress = new Address();
+    invoiceAddress = new Address();
+    idWorkingPlace=null;
+    idSelectedBankList = new ArrayList<>();
+    idSelectedInstitutionList = new ArrayList<>();
+    idProductTypes = new ArrayList<>();
+    idRegion=null;
+    idMainRegion=null;
+    idInvoiceRegion=null;
+    invoiceData=new InvoiceData();
+    idSubscriptionType=null;
+    policy = false;
+    policy2 = false;
     }
     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 

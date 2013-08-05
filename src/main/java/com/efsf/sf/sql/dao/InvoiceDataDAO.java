@@ -33,6 +33,23 @@ public class InvoiceDataDAO {
         
     }
     
+    
+    public void update(InvoiceData invoiceData) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+        session.beginTransaction();
+        session.update(invoiceData);
+        session.getTransaction().commit();
+        }
+        catch(HibernateException e)
+        {}
+        finally{
+        session.close();
+        }
+        
+    }
+    
      public InvoiceData loadFromFkAddress(Integer fkAddress) {
          
         InvoiceData invoiceData = null;
