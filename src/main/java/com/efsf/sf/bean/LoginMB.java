@@ -1,5 +1,6 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
@@ -32,6 +33,7 @@ public class LoginMB implements Serializable {
     public String login() {
 
         UserDAO userDao=new UserDAO();
+        ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
         if ( user!=null ) {
@@ -45,7 +47,7 @@ public class LoginMB implements Serializable {
             }
              if(type==2)
             { 
-                consultant = userDao.getCounsultantConnectedToUser(idUser);
+                consultant = consultantDao.getCounsultantConnectedToUser(idUser);
                 return "/consultant/consultantMainPage?faces-redirect=true"; 
             }
             if(type==3)
