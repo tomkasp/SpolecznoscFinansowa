@@ -44,7 +44,7 @@ public class ClientMainPageMB implements Serializable {
         modelsBranch= new ArrayList();
         
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
-        
+        System.out.println("SIZA: "+loginMB.getClient().getIdClient() );
         for (int i = 0; i<clientCaseList.size(); i++)
         {
             modelsEmploymentType.add( showAllClientsEmploymentTypes( clientCaseList.get(i).getClient() ) );
@@ -162,6 +162,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getClientCaseList() {
+        reloadCases();
         return clientCaseList;
     }
 
