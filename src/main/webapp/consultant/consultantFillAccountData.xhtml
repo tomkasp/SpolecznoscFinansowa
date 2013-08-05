@@ -185,7 +185,7 @@
 
                     <div class="field"> 
                         <h:outputText class="label" value="Nazwa"/> 
-                        <h:inputText class="inputWidth3"/>
+                        <h:inputText class="inputWidth3" value="#{consultantCreateMB.invoiceData.name}"/>
                     </div>
 
                     <div class="field"> 
@@ -222,12 +222,12 @@
 
                     <div class="field"> 
                         <h:outputText class="label" value="NIP"/> 
-                        <h:inputText class="inputWidth3" value="#{consultantCreateMB.consultant.nip}"/> 
+                        <h:inputText class="inputWidth3" value="#{consultantCreateMB.invoiceData.nip}"/> 
                     </div>
 
                     <div class="field"> 
                         <h:outputText class="label" value="REGON"/>  
-                        <h:inputText class="inputWidth3" value="#{consultantCreateMB.consultant.regon}"/> 
+                        <h:inputText class="inputWidth3" value="#{consultantCreateMB.invoiceData.regon}"/> 
                     </div>
                 </div>
 

@@ -40,6 +40,7 @@ public class ConsultantCreateMB implements Serializable {
     private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
+    private InvoiceData invoiceData=new InvoiceData();
     private Integer idSubscriptionType;
     private Boolean policy = false;
     private Boolean policy2 = false;
@@ -57,7 +58,6 @@ public class ConsultantCreateMB implements Serializable {
         udao.save(user);
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         udao.update(user);
-
 
         WorkingPlaceDAO wpdao = new WorkingPlaceDAO();
         WorkingPlace wp = (WorkingPlace) wpdao.workingPlaceList().get(3);
@@ -78,6 +78,7 @@ public class ConsultantCreateMB implements Serializable {
             sdao.save(subscription);
         }
         return "/consultant/consultantFillAccountData?faces-redirect=true";
+        
     }
 
     public String savePart2() {
@@ -132,6 +133,10 @@ public class ConsultantCreateMB implements Serializable {
         invoiceAddress.setRegion(r);
         invoiceAddress.setConsultant(consultant);
         adao.save(invoiceAddress);
+        //ADD INVOICEDATA
+        invoiceData.setAddress(invoiceAddress);
+        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        iddao.save(invoiceData);
         //ADD SUBSCRIPTION TYPE
         if(idSubscriptionType!=null)
         {
@@ -148,18 +153,43 @@ public class ConsultantCreateMB implements Serializable {
         //UPDATE USER
         UserDAO udao = new UserDAO();
         udao.update(user);
+        
+        
+        
+        //CLEAR ALL FIELDS
+        clearFields();
 
         return "/consultant/consultantMainPage?faces-redirect=true";
     }
     
+    private void clearFields(){
+    user = new User();
+    consultant = new Consultant();
+    confirmPassword = new String();
+    subscription = new Subscription();
+    //ConsultantFillAccountData
+    mainAddress = new Address();
+    invoiceAddress = new Address();
+    idWorkingPlace=null;
+    idSelectedBankList = new ArrayList<>();
+    idSelectedInstitutionList = new ArrayList<>();
+    idProductTypes = new ArrayList<>();
+    idRegion=null;
+    idMainRegion=null;
+    idInvoiceRegion=null;
+    invoiceData=new InvoiceData();
+    idSubscriptionType=null;
+    policy = false;
+    policy2 = false;
+    }
+    
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
-        
         String password = (String) value;
 
 //        UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
 //        confirmPassword = (String) otherInput.getSubmittedValue();
-//        
+      
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
@@ -289,6 +319,22 @@ public class ConsultantCreateMB implements Serializable {
         this.idInvoiceRegion = idInvoiceRegion;
     }
 
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
+
+    public InvoiceData getInvoiceData() {
+        return invoiceData;
+    }
+
+    public void setInvoiceData(InvoiceData invoiceData) {
+        this.invoiceData = invoiceData;
+    }
+    
     public Integer getIdSubscriptionType() {
         return idSubscriptionType;
     }

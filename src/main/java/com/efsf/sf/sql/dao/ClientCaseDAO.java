@@ -21,7 +21,6 @@ public class ClientCaseDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        
             //pierwsza faza CaseStatus.
             clientCase.setCaseStatus( (CaseStatus)session.load(CaseStatus.class, 1) );
             session.save(clientCase);
