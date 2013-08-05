@@ -371,10 +371,10 @@
                                         </div>
                                         
                                         <h:commandButton class="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.traceCase()}">
-                                             <f:ajax execute="lastCases" render="traced" />
+                                             <f:ajax execute="traced" render="traced" />
                                         </h:commandButton>
-                                        <h:commandButton class="topMenuButton greyButton wideButton" value="Usuń" action="#{marketMB.traceCase()}">
-                                             <f:ajax execute="lastCases" render="traced" />
+                                        <h:commandButton class="topMenuButton greyButton wideButton" value="Usuń" action="#{marketMB.stopObserve()}">
+                                             <f:ajax execute="traced" render="traced" />
                                         </h:commandButton>
 
                                         <div class="marginT50 marginB30">
