@@ -44,6 +44,7 @@ public class NewMain {
 //        
         
         ClientCaseDAO ccdao=new ClientCaseDAO();
+        @SuppressWarnings("unchecked")
         List<ClientCase> list=ccdao.last5CasesSelectedClient(31);
         System.out.println(list.size());
     }
