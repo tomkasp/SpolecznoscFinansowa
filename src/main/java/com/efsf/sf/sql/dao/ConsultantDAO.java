@@ -5,6 +5,7 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
+import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -25,7 +26,7 @@ public class ConsultantDAO {
         {
         session.beginTransaction().begin();
         Query q = null;
-        q = session.createQuery("FROM Consultant c left outer join fetch c.user as u WHERE id_consultant = :id");
+        q = session.createQuery("FROM Consultant c LEFT JOIN FETCH c.user as u WHERE id_consultant = :id");
         q.setParameter("id", id);
         consultant=(Consultant) q.list().get(0);
         session.getTransaction().commit();
@@ -115,4 +116,38 @@ public class ConsultantDAO {
         return result; 
     }
     
+    public Consultant readConsultantForSettings(int id) {
+       
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Consultant consultant=null;
+        
+        try
+        {
+        session.beginTransaction().begin();
+        Query q = null;
+        q = session.createQuery("FROM Consultant c "
+                + " LEFT JOIN FETCH c.user as u "
+                + " LEFT JOIN FETCH c.region as r "
+                + " LEFT JOIN FETCH c.workingPlace as w "
+                + " LEFT JOIN FETCH c.subscriptions as s "
+                + " LEFT JOIN FETCH c.productTypes as p "
+                + " LEFT JOIN FETCH c.institutions as i "
+                + " LEFT JOIN FETCH c.addresses as a "
+                + " WHERE id_consultant = :id ");
+        
+        q.setParameter("id", id);
+        consultant=(Consultant) q.list().get(0);
+        session.getTransaction().commit();
+        
+        }
+        catch(HibernateException exp)
+        {}
+        finally{   
+        session.close();
+        }
+
+        return consultant;
+    }
+    
+
 }
