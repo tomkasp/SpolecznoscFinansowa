@@ -1,11 +1,9 @@
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.entity.CaseStatus;
-import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.ProductType;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,7 +13,7 @@ import org.joda.time.DateTime;
  *
  * @author admin
  */
-public class ClientCaseDAO {
+public class ClientCaseDAO implements Serializable {
 
     public void saveClientCase(ClientCase clientCase) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -41,13 +39,14 @@ public class ClientCaseDAO {
                  + "join fetch cs.productType as pt "      
                  + "left join fetch cs.consultants as consul "
                  + "join fetch clt.addresses as addr "
+                 + "join fetch cs.caseStatus as cstats "
                  + "left join fetch clt.incomes as inc "
                  + "left join fetch clt.incomeBusinessActivities as ba "
                  + "left join fetch inc.branch as br "
                  + "left join fetch inc.employmentType as empltype "
                  + "left join fetch ba.branch as br2 "
                  + "left join fetch ba.employmentType as empltype2 "
-                 + "left join fetch clt.requiredDocumentses as rd "
+                 + "left join fetch clt.requiredDocumentses as rd "        
                  + "where cs.beginDate <= :dateNow "
                  + "order by cs.beginDate desc, cs.idClientCase desc");
          
@@ -56,16 +55,35 @@ public class ClientCaseDAO {
          
          list = q.list();
          
-         
-         
          session.getTransaction().commit();
          session.close();
          
 
          return list;
     }
+   
+    public boolean doesConsultantObserveCase(int consultantID, int caseID)
+    {
+         boolean flag;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+         
+         Query q = session.createQuery("from Consultant as c "
+                 + "join fetch c.clientCases_2 as cc2 "
+                 + "where c.idConsultant = :consultantID and cc2.idClientCase = :caseID");
+         q.setParameter("caseID", caseID);
+         q.setParameter("consultantID", consultantID);
+         
+         flag =  q.list().isEmpty();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         return !flag;
+    }
     
-    public List last5CasesSelectedClient(int idClient)
+     
+    public List last5CasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
@@ -84,11 +102,12 @@ public class ClientCaseDAO {
                  + "left join fetch ba.branch as br2 "
                  + "left join fetch ba.employmentType as empltype2 "
                  + "left join fetch clt.requiredDocumentses as rd "
-                 + "WHERE cs.beginDate <= :dateNow "
-                 + "AND cs.fk_client = 31 "
+                 + "where cs.beginDate <= :dateNow "
+                 + "and clt.idClient = :fk "
                  + "order by cs.beginDate desc, cs.idClientCase desc");
-        
+         
          q.setParameter( "dateNow", new DateTime().toDate() );
+         q.setParameter("fk", fkClient );
          q.setMaxResults(5);
          
          list = q.list();
@@ -98,5 +117,7 @@ public class ClientCaseDAO {
          
          return list;
     }
+
+    
    
 }

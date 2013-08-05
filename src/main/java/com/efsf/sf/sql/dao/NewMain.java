@@ -22,10 +22,10 @@ public class NewMain {
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
         
-//          ConsultantDAO cdao=new ConsultantDAO(); 
-//          Consultant c=cdao.readConsultantForSettings(18);     
+//        ConsultantDAO cdao=new ConsultantDAO(); 
+//        Consultant c=cdao.readConsultantForSettings(18);     
 //          
-//          System.out.println( c.getAddresses().iterator().next().getIdAddress() );
+//        System.out.println( c.getAddresses().iterator().next().getIdAddress() );
 //          
 //        ClientDAO cdao=new ClientDAO();
 //        Client c=cdao.read(1);
@@ -41,11 +41,12 @@ public class NewMain {
 //        AddressDAO adao=new AddressDAO();
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
-//        
+//
         
         ClientCaseDAO ccdao=new ClientCaseDAO();
         @SuppressWarnings("unchecked")
         List<ClientCase> list=ccdao.last5CasesSelectedClient(31);
-        System.out.println(list.size());
+        ClientCase cc=list.get(0);
+        System.out.println(cc.getClient().getIdClient());
     }
 }

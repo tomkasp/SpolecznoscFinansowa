@@ -1,5 +1,6 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
@@ -24,12 +25,15 @@ public class LoginMB implements Serializable {
     private Client client;
     private Consultant consultant;
     
+    private Boolean activeAddingApp;
+    
     public LoginMB() {  
     }
 
     public String login() {
 
         UserDAO userDao=new UserDAO();
+        ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
         if ( user!=null ) {
@@ -43,19 +47,31 @@ public class LoginMB implements Serializable {
             }
              if(type==2)
             { 
-                consultant = userDao.getCounsultantConnectedToUser(idUser);
+                consultant = consultantDao.getCounsultantConnectedToUser(idUser);
                 return "/consultant/consultantMainPage?faces-redirect=true"; 
             }
             if(type==3)
             {
                 client = userDao.getClientConnectedToUser(idUser);
                 points = client.getPoints();
+                
+                this.activeAddingApp=this.checkNewAppActivity();
+                
                 return "/client/clientMainPage";  
             } 
         }
         return "/login"; 
     }
 
+    
+    private Boolean checkNewAppActivity(){
+        if(this.points>0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     public String logout() {
         isLogged = false;
         System.out.println("logout");
@@ -128,6 +144,14 @@ public class LoginMB implements Serializable {
 
     public int getPoints() {
         return points;
+    }
+
+    public Boolean getActiveAddingApp() {
+        return activeAddingApp;
+    }
+
+    public void setActiveAddingApp(Boolean activeAddingApp) {
+        this.activeAddingApp = activeAddingApp;
     }
 
    
