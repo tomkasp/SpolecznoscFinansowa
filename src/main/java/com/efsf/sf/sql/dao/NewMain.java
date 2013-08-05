@@ -6,7 +6,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.sql.entity.Consultant;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -20,22 +20,25 @@ public class NewMain {
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
         
-//          ConsultantDAO cdao=new ConsultantDAO(); 
-//          Consultant c=cdao.read(4);       
-//          ClientDAO cdao=new ClientDAO();
-//          Client c=cdao.read(1);
-//         
-//          System.out.println(c.getUser().getLogin());
+          ConsultantDAO cdao=new ConsultantDAO(); 
+          Consultant c=cdao.readConsultantForSettings(18);     
           
-//          System.out.println( Security.sha1("admin") );
-        
+          System.out.println( c.getAddresses().iterator().next().getIdAddress() );
+          
+//        ClientDAO cdao=new ClientDAO();
+//        Client c=cdao.read(1);
+//         
+//        System.out.println(c.getUser().getLogin());
+//          
+//        System.out.println( Security.sha1("admin") );
+//        
 //        UserDAO udao=new UserDAO();
 //        User u=udao.login("admin@admin.pl", "admin");
 //        System.out.println(u.getLogin());
-        
-        AddressDAO adao=new AddressDAO();
-        Address a=adao.loadMainAddressFromFkConsultant(21);
-        System.out.println(a.getIdAddress());
-        
+//       
+//        AddressDAO adao=new AddressDAO();
+//        Address a=adao.loadMainAddressFromFkConsultant(21);
+//        System.out.println(a.getIdAddress());
+//        
     }
 }

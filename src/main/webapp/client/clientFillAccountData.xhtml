@@ -7,8 +7,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-   
-
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
@@ -319,7 +317,7 @@
 
                 </div>
                 
-                <p:dialog id="addBusiness"  style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="business" resizable="tfalse" height="550" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                <p:dialog id="addBusiness"  style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="business" resizable="false" height="550" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
                                 <h:form>  
                                   <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{createClientMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
                                      

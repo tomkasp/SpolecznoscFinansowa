@@ -25,6 +25,7 @@ public class LoginMB implements Serializable {
     private Client client;
     private Consultant consultant;
     
+    private Boolean activeAddingApp;
     
     public LoginMB() {  
     }
@@ -53,12 +54,24 @@ public class LoginMB implements Serializable {
             {
                 client = userDao.getClientConnectedToUser(idUser);
                 points = client.getPoints();
+                
+                this.activeAddingApp=this.checkNewAppActivity();
+                
                 return "/client/clientMainPage";  
             } 
         }
         return "/login"; 
     }
 
+    
+    private Boolean checkNewAppActivity(){
+        if(this.points>0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     public String logout() {
         isLogged = false;
         System.out.println("logout");
@@ -131,6 +144,14 @@ public class LoginMB implements Serializable {
 
     public int getPoints() {
         return points;
+    }
+
+    public Boolean getActiveAddingApp() {
+        return activeAddingApp;
+    }
+
+    public void setActiveAddingApp(Boolean activeAddingApp) {
+        this.activeAddingApp = activeAddingApp;
     }
 
    
