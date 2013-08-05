@@ -14,7 +14,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
@@ -57,7 +56,7 @@ public class ConsultantCreateMB implements Serializable {
         user.setLogin(String.valueOf(new Date().getTime()));
         user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
-        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
+        user.setLogin( ( "000000" + Integer.toString(user.getIdUser())).substring( Integer.toString( user.getIdUser() ).length() ) );
         udao.update(user);
 
         WorkingPlaceDAO wpdao = new WorkingPlaceDAO();

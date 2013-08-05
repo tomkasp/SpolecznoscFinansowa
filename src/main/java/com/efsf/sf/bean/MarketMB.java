@@ -38,8 +38,7 @@ public class MarketMB implements Serializable
     
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
-    
-    
+     
     private List<ClientCase> clientCaseList = new ArrayList();
     
     private Converters converters =  new Converters();
@@ -56,8 +55,7 @@ public class MarketMB implements Serializable
     private ArrayList<Set<String>> observedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
-    
- 
+   
     public MarketMB()
     {
         reloadCases(); 
