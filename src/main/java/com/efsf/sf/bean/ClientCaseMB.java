@@ -4,20 +4,14 @@
  */
 package com.efsf.sf.bean;
 
-import com.efsf.sf.sql.dao.ClientCaseDAO;
-import com.efsf.sf.sql.dao.ClientDAO;
-import com.efsf.sf.sql.dao.ProductTypeDAO;
-import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.dao.*;
+import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-/**
- * @author admin
- */
 @ManagedBean
 @SessionScoped
 public class ClientCaseMB implements Serializable {
@@ -27,12 +21,12 @@ public class ClientCaseMB implements Serializable {
     private int idTypProduktu;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
+    private Boolean addNewApp = true;
 
     /**
      * Creates a new instance of ClientCaseMB
      */
-    public ClientCaseMB() {
-    }
+    
 
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
@@ -51,7 +45,10 @@ public class ClientCaseMB implements Serializable {
             clientCase.setDifficulty(0);
             ccd.saveClientCase(clientCase);
 
-            clientCase = null;
+            if(login.getClient().getPoints()==0){
+                setAddNewApp((Boolean) false);
+            }
+            clientCase = new ClientCase();
         }
     }
 
@@ -82,4 +79,14 @@ public class ClientCaseMB implements Serializable {
     public void setIdTypProduktu(int idTypProduktu) {
         this.idTypProduktu = idTypProduktu;
     }
+
+    public Boolean getAddNewApp() {
+        return addNewApp;
+    }
+
+    public void setAddNewApp(Boolean addNewApp) {
+        this.addNewApp = addNewApp;
+    }
+
+    
 }

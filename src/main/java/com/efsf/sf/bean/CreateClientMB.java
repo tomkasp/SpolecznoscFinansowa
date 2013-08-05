@@ -33,6 +33,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.validator.ValidatorException;
+import org.joda.time.DateTime;
 
 
 /**
@@ -72,6 +73,12 @@ public class CreateClientMB implements Serializable
     private String sexString;
     private String pesel;
     private int birthPlace;
+    
+    
+    private Date currentDate = new DateTime().toDate();
+    private Date maxBirthDate = new DateTime().minusYears(18).toDate();
+    
+    
     
     //Income
     
@@ -193,8 +200,6 @@ public class CreateClientMB implements Serializable
         income = new Income();
         branchId = 0;
         incomeId = 0;
-        
-        System.out.println("Wyczyściło");
     }
     
     public void addIncome()
@@ -208,8 +213,6 @@ public class CreateClientMB implements Serializable
                         break;
                     }
                 }
-                
-
                 
                 Branch b = null;
  
@@ -229,6 +232,7 @@ public class CreateClientMB implements Serializable
                     tableEmpty = false;
                     incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));   
                     incomeSet.add(income);
+                    income = new Income();
                 }
                 else
                 {
@@ -247,30 +251,27 @@ public class CreateClientMB implements Serializable
                     tableEmpty = false;
                     incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));         
                     businessSet.add(business);
+                    business = new IncomeBusinessActivity();
                 }
     }
     
     public void required()
     {
         areRequired = true;
-        System.out.println("Zmieniło");
     }
     
     public void notRequired()
     {
         areRequired = false;
-        System.out.println("NieZmieniło");
     }
     
     public void notRequired2(ComponentSystemEvent event)
     {
-        areRequired = false;
-        System.out.println("NieZmieniło");
+        areRequired = false;  
     }
     
     public String saveAndRedirect()
     {
-        System.out.println("Dalej");
         ClientDAO clientDao = new ClientDAO();
         
         Client client = loginMB.getClient();
@@ -341,13 +342,13 @@ public class CreateClientMB implements Serializable
     public void toIncome()
     {
         setIsIncome(true);
-        System.out.println(isIncome);
+       
     }
     
     public void toBusinessActivity()
     {
         setIsIncome(false);
-        System.out.println(isIncome);
+        
     }
 
 
@@ -549,6 +550,22 @@ public class CreateClientMB implements Serializable
 
     public void setTableEmpty(boolean tableEmpty) {
         this.tableEmpty = tableEmpty;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public Date getMaxBirthDate() {
+        return maxBirthDate;
+    }
+
+    public void setMaxBirthDate(Date maxBirthDate) {
+        this.maxBirthDate = maxBirthDate;
     }
 
     
