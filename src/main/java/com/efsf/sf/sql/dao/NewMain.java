@@ -6,8 +6,10 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  *
@@ -20,11 +22,11 @@ public class NewMain {
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
         
-          ConsultantDAO cdao=new ConsultantDAO(); 
-          Consultant c=cdao.readConsultantForSettings(18);     
-          
-          System.out.println( c.getAddresses().iterator().next().getIdAddress() );
-          
+//          ConsultantDAO cdao=new ConsultantDAO(); 
+//          Consultant c=cdao.readConsultantForSettings(18);     
+//          
+//          System.out.println( c.getAddresses().iterator().next().getIdAddress() );
+//          
 //        ClientDAO cdao=new ClientDAO();
 //        Client c=cdao.read(1);
 //         
@@ -40,5 +42,9 @@ public class NewMain {
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
 //        
+        
+        ClientCaseDAO ccdao=new ClientCaseDAO();
+        List<ClientCase> list=ccdao.last5CasesSelectedClient(31);
+        System.out.println(list.size());
     }
 }
