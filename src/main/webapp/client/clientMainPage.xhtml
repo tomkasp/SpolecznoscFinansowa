@@ -32,6 +32,9 @@
             </ui:define>
 
             <ui:define name="content">
+                
+                <h:form>
+                
                 <div id="profileBar" class="profilBar">
                     <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
@@ -48,67 +51,85 @@
 
                 <div class="marginT50">
 
-                    <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
+                   
+                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
-                    <p:dataTable id="dataTable2" value="#{fakeBean.lastActivityClient}" var="data" emptyMessage="brak klientów!" 
-                                 rowKey="#{data.lp}">
-                        <p:column headerText="Lp">  
-                            <h:outputText value="#{data.lp}" /> 
-                        </p:column>  
+                     
 
-                        <p:column headerText="Numer klienta">  
-                            <h:outputText value="#{data.numerKlienta}" /> 
-                        </p:column>  
+                        <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.selectedCase}" selectionMode="single" >
+          
+                            <p:ajax event="rowSelect" update="@form" listener="#{clientMainPageMB.rowClick()}"/> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{clientMainPageMB.rowDoubleClick()}"/>
+                            
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
+                            
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
+                            
+                            <p:column headerText="Numer klienta"> 
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column>
 
-                        <p:column headerText="Data dodania">    
-                            <h:outputText value="#{data.dataDodania}" /> 
-                        </p:column>  
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
 
-                        <p:column headerText="Numer sprawy">  
-                            <h:outputText value="#{data.numerSprawy}" /> 
-                        </p:column>  
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
 
-                        <p:column headerText="Postęp">  
-                            <h:outputText value="#{data.postęp}" /> 
-                        </p:column> 
+                            <p:column headerText="BIK">
+                                <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  > 
-                            <h:outputText value="#{data.rodzajKredytu}" /> 
-                        </p:column> 
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
+                           
+                            <p:column headerText="Wiek">  
+                                     <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
 
-                        <p:column headerText="BIK">  
-                            <h:outputText value="#{data.bik}" /> 
-                        </p:column> 
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                        <p:column headerText="Kod pocztowy"> 
-                            <h:outputText value="#{data.kodPocztowy}" /> 
-                        </p:column>
+                            <p:column headerText="Branża"> 
+                                <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(rowNumber).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{clientMainPageMB.modelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                        <p:column headerText="Wiek"> 
-                            <h:outputText value="#{data.wiek}" /> 
-                        </p:column>
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
 
-                        <p:column headerText="Typ zatrudnienia"> 
-                            <h:outputText value="#{data.typZatrudnienia}" />
-                        </p:column>
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
+                            </p:column>
 
-                        <p:column headerText="Branża">  
-                            <h:outputText value="#{data.branża}" />
-                        </p:column>
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
 
-                        <p:column headerText="Trudności kredytu"> 
-                            <h:outputText value="#{data.trudnościKredytu}" />
-                        </p:column>
+<!--                            <p:column headerText=""> 
+                                <h:outputText  value=" "/>
+                            </p:column> -->
 
-                        <p:column headerText="Ilość doradców">  
-                            <h:outputText value="#{data.ilośćDoradców}" />
-                        </p:column>
+                           
 
-                        <p:column headerText="Koniec aukcji">
-                            <h:outputText value="#{data.koniecAukcji}" />
-                        </p:column>  
-
-                    </p:dataTable>
+                        </p:dataTable>
+                
+                        
                 </div>
 
                 <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/index"/>
@@ -377,6 +398,8 @@
 
                 </div>
 
+             </h:form>   
+                
             </ui:define>           
         </ui:composition>
     </body>
