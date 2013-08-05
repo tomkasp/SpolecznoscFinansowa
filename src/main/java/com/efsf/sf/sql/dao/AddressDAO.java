@@ -5,17 +5,15 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Address;
-import com.efsf.sf.sql.entity.Consultant;
-import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- *
  * @author WR1EI1
  */
+
 public class AddressDAO {
 
     public void save(Address address) {
@@ -24,6 +22,21 @@ public class AddressDAO {
         try{
         session.beginTransaction();
         session.save(address);
+        session.getTransaction().commit();
+        }
+        catch(HibernateException e)
+        {}
+        finally{
+        session.close();
+        }
+    }
+    
+    public void update(Address address) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+        session.beginTransaction();
+        session.update(address);
         session.getTransaction().commit();
         }
         catch(HibernateException e)

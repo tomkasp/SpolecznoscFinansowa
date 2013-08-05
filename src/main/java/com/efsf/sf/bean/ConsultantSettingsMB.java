@@ -31,17 +31,22 @@ public class ConsultantSettingsMB implements Serializable {
     private Integer idConsultant;
    
     private Consultant consultant; 
-    private String confirmPassword = new String();
+    private String confirmPassword;
     
     private Integer idWorkingPlace;
     private List<Integer> idSelectedBankList = new ArrayList<>();
     private List<Integer> idSelectedInstitutionList = new ArrayList<>();
     private List<Integer> idProductTypes = new ArrayList<>();
+    
     private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
+    private Address mainAddress = new Address();
+    private Address invoiceAddress = new Address();
     private InvoiceData invoiceData;
+    
     private Integer idSubscriptionType;
+    private Subscription subscription;
     
     public ConsultantSettingsMB() { 
     }
@@ -71,21 +76,40 @@ public class ConsultantSettingsMB implements Serializable {
             idProductTypes.add( pt.getIdProductType() );          
         }
         
+        
+        
         idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
         
         idRegion=consultant.getRegion().getIdRegion();
         
+        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        
+        
         Iterator<Address> it3=consultant.getAddresses().iterator();
+        
         while(it3.hasNext())
         {
             Address a=it3.next();
+            
             if(a.getType()==1)
-            { idMainRegion=a.getIdAddress(); }
+            {   
+                
+                mainAddress=a;
+                idMainRegion=mainAddress.getRegion().getIdRegion();
+                //idMainRegion=1;
+            }
             if(a.getType()==2)
-            { idInvoiceRegion=a.getIdAddress(); }   
+            {  
+                  
+                invoiceAddress=a;
+                idInvoiceRegion=invoiceAddress.getRegion().getIdRegion();
+                //idInvoiceRegion=1;
+                //I PRZY OKAZJI:
+                invoiceData=iddao.loadFromFkAddress(a.getIdAddress());
+            } 
+           
         }
-        InvoiceDataDAO iddao=new InvoiceDataDAO();
-        invoiceData=iddao.loadFromFkAddress(idInvoiceRegion);
+       
         
         Iterator<Subscription> it4=consultant.getSubscriptions().iterator();
         while(it4.hasNext())
@@ -94,11 +118,9 @@ public class ConsultantSettingsMB implements Serializable {
             if(!it4.hasNext())//ZAWSZE ZWRACA OSTATNI ABONAMENT
             {
                 idSubscriptionType=s.getIdSubscription();
+                subscription=s;
             }
-        }
-        
-        
-        
+        }   
     }
     
     public String updateSettings() {
@@ -111,6 +133,9 @@ public class ConsultantSettingsMB implements Serializable {
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
         //HERE:
+        
+        
+        
         //ADD BANKS
         Set<Institution> institutionSet = new HashSet<>();
         Iterator it=idSelectedBankList.iterator();
@@ -119,6 +144,8 @@ public class ConsultantSettingsMB implements Serializable {
             Institution inst = idao.getInstitution( id );
             institutionSet.add( inst );
         } 
+        
+        
         //ADD INSTITUTIONS
         it=idSelectedInstitutionList.iterator();
         while ( it.hasNext() ) {  
@@ -126,8 +153,12 @@ public class ConsultantSettingsMB implements Serializable {
             Institution inst = idao.getInstitution( id );
             institutionSet.add( inst );
         }
+        
+        
         //ADD ALL INSTITUTIONS IN CONSULTANT
         consultant.setInstitutions(institutionSet);
+        
+        
         //ADD PRODUCT TYPES
         Set<ProductType> productTypeSet = new HashSet<>();
         it=idProductTypes.iterator();
@@ -137,30 +168,39 @@ public class ConsultantSettingsMB implements Serializable {
             productTypeSet.add(pt);
         }
         consultant.setProductTypes(productTypeSet);
+        
+        
         //ADD CONSULTANT REGION
         Region r=rdao.getRegion(idRegion);
         consultant.setRegion(r);
-        //ADD MAIN REGION
-        r=rdao.getRegion(idMainRegion);
+        
+        
+        Set<Address> addressSet = new HashSet<>();
+        
+        Region mr=rdao.getRegion(idMainRegion);
+        mainAddress.setRegion(mr);
+        addressSet.add(mainAddress);
+        
+        Region ir=rdao.getRegion(idInvoiceRegion);
+        invoiceAddress.setRegion(ir);
+        addressSet.add(invoiceAddress);
+        
+        consultant.setAddresses(addressSet);
         
         AddressDAO adao=new AddressDAO();
+        adao.update(mainAddress);
+        adao.update(invoiceAddress);
         
-        //ADD INVOICE REGION
-        r=rdao.getRegion(idInvoiceRegion);
+       
+        invoiceData.setAddress(invoiceAddress);
+        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        iddao.update(invoiceData);
         
-        //ADD SUBSCRIPTION TYPE
-        if(idSubscriptionType!=null)
-        {
-        SubscriptionTypeDAO stdao = new SubscriptionTypeDAO();
-        SubscriptionType subscriptionType = stdao.getSubscriptionType(idSubscriptionType);
         
-        SubscriptionDAO sdao=new SubscriptionDAO();
-        }
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
         cdao.update(consultant);
         //UPDATE USER
-        
 
         return "/consultant/consultantMainPage?faces-redirect=true";
     }
@@ -269,7 +309,29 @@ public class ConsultantSettingsMB implements Serializable {
     public void setIdSubscriptionType(Integer idSubscriptionType) {
         this.idSubscriptionType = idSubscriptionType;
     }
+
+    public Address getMainAddress() {
+        return mainAddress;
+    }
+
+    public void setMainAddress(Address mainAddress) {
+        this.mainAddress = mainAddress;
+    }
+
+    public Address getInvoiceAddress() {
+        return invoiceAddress;
+    }
+
+    public void setInvoiceAddress(Address invoiceAddress) {
+        this.invoiceAddress = invoiceAddress;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
     
-    
-   
 }
