@@ -80,9 +80,8 @@
 
                                 <div class="field">
                                     <h:outputText id="confirmPassword" class="label" value="Potwierdź hasło"/> 
-                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}"> 
-                                        <p:ajax event="keyup" update="passwordCheckMessage"/>
-                                        <f:validator validatorId="com.efsf.sf.util.SamePasswordValidator" />
+                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" validator="#{consultantCreateMB.validateSamePassword}"> 
+                                        <p:ajax event="keyup" update="passwordCheckMessage"/> 
                                     </h:inputSecret>
                                     <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
                                 </div>

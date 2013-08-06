@@ -7,7 +7,6 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.ClientCase;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import sun.audio.AudioPlayer;
 
 /**
  *
@@ -44,9 +43,11 @@ public class NewMain {
           
         ClientCaseDAO ccdao=new ClientCaseDAO();
         @SuppressWarnings("unchecked")
-        List<ClientCase> list=ccdao.last5CasesSelectedClient(38);
-        ClientCase cc=list.get(0);
-        System.out.println(cc.getGoal());
+        List<ClientCase> list=ccdao.currentCasesSelectedClient(38); //ccdao.awaitingCasesSelectedClient(38); //ccdao.last5CasesSelectedClient(38);
+        
+        //ClientCase cc=list.get(0);
+        //System.out.println(cc.getGoal());
+        
         System.out.println(list.size());    
         
           
