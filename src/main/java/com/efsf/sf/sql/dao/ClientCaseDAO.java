@@ -62,6 +62,8 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch ba.employmentType as empltype2 "
                  + "left join fetch clt.requiredDocumentses as rd "        
                  + "where cs.beginDate <= :dateNow "
+                 + "and cs.endDate >= :dateNow "
+                 + "and cstats.idCaseStatus = 1 "
                  + "order by cs.beginDate desc, cs.idClientCase desc");
          
          q.setParameter("dateNow", new DateTime().toDate());

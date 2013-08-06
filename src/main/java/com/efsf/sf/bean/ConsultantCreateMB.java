@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -25,6 +26,9 @@ import javax.faces.validator.ValidatorException;
 public class ConsultantCreateMB implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @ManagedProperty(value="#{loginMB}")
+    private LoginMB loginMB;
+    
     //ConsultantCreateAccount
     private User user = new User();
     private Consultant consultant = new Consultant();
@@ -154,7 +158,7 @@ public class ConsultantCreateMB implements Serializable {
         UserDAO udao = new UserDAO();
         udao.update(user);
         
-        
+        loginMB.setConsultant(cdao.getCounsultantConnectedToUser(user.getIdUser()));
         
         //CLEAR ALL FIELDS
         clearFields();
@@ -341,6 +345,14 @@ public class ConsultantCreateMB implements Serializable {
 
     public void setIdSubscriptionType(Integer idSubscriptionType) {
         this.idSubscriptionType = idSubscriptionType;
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
     }
 
     
