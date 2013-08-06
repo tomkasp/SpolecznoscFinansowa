@@ -91,10 +91,10 @@ public class ClientCaseDAO implements Serializable {
          
     //     Query q = session.createQuery("from ClientCase c left outer join fetch c.productType as p left outer join fetch c.client as cil left outer join cil.addresses as add");
          Query q = session.createQuery("FROM ClientCase as cs "
-                 + "join fetch cs.client as clt "
-                 + "join fetch cs.productType as pt "      
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.productType as pt "      
                  + "left join fetch cs.consultants as consul "
-                 + "join fetch clt.addresses as addr "
+                 + "left join fetch clt.addresses as addr "
                  + "left join fetch clt.incomes as inc "
                  + "left join fetch clt.incomeBusinessActivities as ba "
                  + "left join fetch inc.branch as br "
