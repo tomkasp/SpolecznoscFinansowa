@@ -7,48 +7,45 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.hibernate.Session;
 
-
 @ManagedBean
 @SessionScoped
 public class ObligationDAO {
 
-    
-    
-
     public ObligationDAO() {
     }
-    
-        public Obligation getObligation(int id)
-    {
+
+    public Obligation getObligation(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         Obligation ob = (Obligation) session.get(Obligation.class, id);
-                
+
         session.getTransaction().commit();
         session.close();
-        
+
         return ob;
-        
+
     }
-    
-    public List obligationList(){
+
+    public List obligationList() {
         List<Obligation> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         lista = session.createQuery("from Obligation").list();
-        
+
         session.getTransaction().commit();
         session.close();
         return lista;
     }
-    
-    
-    public void addObligation(Obligation ob){
+
+    public void save(Obligation ob) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
         
+        session.save(ob);
         
-        
+        session.getTransaction().commit();
+        session.close();
     }
-    
 }

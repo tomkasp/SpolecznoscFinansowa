@@ -19,10 +19,11 @@ public class ClientCaseMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB login;
     private int idTypProduktu;
+    private int idTypProduktuObligation;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
-    
+    private ProductTypeDAO ptd = new ProductTypeDAO();
     /**
      * Creates a new instance of ClientCaseMB
      */
@@ -34,7 +35,14 @@ public class ClientCaseMB implements Serializable {
     
     public void addObligation(){
         
+        obligation.setClient(login.getClient());
+        obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
         
+        ObligationDAO obdao = new ObligationDAO();
+        obdao.save(obligation);
+        
+        
+        obligation = new Obligation();
     }
     
     
@@ -42,7 +50,7 @@ public class ClientCaseMB implements Serializable {
     public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
-            ProductTypeDAO ptd = new ProductTypeDAO();
+            
             ClientDAO cd = new ClientDAO();
 
             //pamietac o zabraniu punktow z klienta!
@@ -97,6 +105,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setObligation(Obligation obligation) {
         this.obligation = obligation;
+    }
+
+    public int getIdTypProduktuObligation() {
+        return idTypProduktuObligation;
+    }
+
+    public void setIdTypProduktuObligation(int idTypProduktuObligation) {
+        this.idTypProduktuObligation = idTypProduktuObligation;
     }
 
 
