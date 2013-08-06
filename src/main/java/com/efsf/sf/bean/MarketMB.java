@@ -208,7 +208,7 @@ public class MarketMB implements Serializable
                  }
             }
             consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
+            consultantDao.merge(consultant);
             observedModelsEmploymentType = new ArrayList();
             observedModelsBranch = new ArrayList();
             makeObservedModels();
@@ -242,7 +242,7 @@ public class MarketMB implements Serializable
             }
              
             ConsultantDAO consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
+            consultantDao.merge(consultant);
             
             loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
             
@@ -265,7 +265,7 @@ public class MarketMB implements Serializable
             alreadyApplied = false;
             consultant.getClientCases().add(selectedObservedCase);
             ConsultantDAO consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
+            consultantDao.merge(consultant);
             
             loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
             
@@ -367,6 +367,10 @@ public class MarketMB implements Serializable
                 break;
             }
         }
+        
+        observedModelsEmploymentType = new ArrayList();
+        observedModelsBranch = new ArrayList();
+        makeObservedModels();
     }
     
     public void revokeApplication()
@@ -382,6 +386,10 @@ public class MarketMB implements Serializable
                 break;
             }
         }
+        
+        appliedModelsEmploymentType = new ArrayList();
+        appliedModelsBranch = new ArrayList();
+        makeAppliedModels();
     }
     
     public List<ClientCase> getClientCaseList() {
