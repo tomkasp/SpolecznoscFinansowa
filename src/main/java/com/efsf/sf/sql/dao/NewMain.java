@@ -4,12 +4,10 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.Address;
-import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.Consultant;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import sun.audio.AudioPlayer;
 
 /**
  *
@@ -41,12 +39,16 @@ public class NewMain {
 //        AddressDAO adao=new AddressDAO();
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
-//
-        
+            
+          
+          
         ClientCaseDAO ccdao=new ClientCaseDAO();
         @SuppressWarnings("unchecked")
-        List<ClientCase> list=ccdao.last5CasesSelectedClient(31);
+        List<ClientCase> list=ccdao.last5CasesSelectedClient(38);
         ClientCase cc=list.get(0);
-        System.out.println(cc.getClient().getIdClient());
+        System.out.println(cc.getGoal());
+        System.out.println(list.size());    
+        
+          
     }
 }

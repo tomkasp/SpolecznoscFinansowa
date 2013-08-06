@@ -71,10 +71,6 @@
                                 </h:outputText>  
                             </p:column>  
                             
-                            <p:column headerText="Numer klienta"> 
-                                <h:outputText  value="#{row.client.idClient}"/>
-                            </p:column>
-
                             <p:column headerText="Postęp">  
                                 <h:outputText  value="#{row.phase}"/>
                             </p:column> 
@@ -120,12 +116,11 @@
                             <p:column headerText="Koniec aukcji"> 
                                 <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                             </p:column> 
-
-<!--                            <p:column headerText=""> 
+                            
+                            
+<!--                        <p:column headerText=""> 
                                 <h:outputText  value=" "/>
                             </p:column> -->
-
-                           
 
                         </p:dataTable>
                 
