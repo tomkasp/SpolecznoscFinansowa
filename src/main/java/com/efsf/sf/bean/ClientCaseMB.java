@@ -27,27 +27,27 @@ public class ClientCaseMB implements Serializable {
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
-    private List<Obligation> listaObligacji = new ArrayList<>();
+    private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
     /**
      * Creates a new instance of ClientCaseMB
      */
 
     public ClientCaseMB(){
-//        listaObligacji = obdao.obligationList(login.getClient().getIdClient());
     }    
     
-    
-    public void pobierzListeObligacji(){ 
+    public List<Obligation> getObligationListForCurrentClient(){ 
+        setObligationList(obdao.obligationList(login.getClient().getIdClient()));
+        return obligationList;
     }
     
+    //zwraca liste zobowiazan dla danego klienta w sesji
+    
+    
     public void addObligation(){
-        setListaObligacji((List<Obligation>) obdao.obligationList());
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
-        
         obdao.save(obligation);
-        
         obligation = new Obligation();
     }
     
@@ -121,12 +121,13 @@ public class ClientCaseMB implements Serializable {
         this.idTypProduktuObligation = idTypProduktuObligation;
     }
 
-    public List<Obligation> getListaObligacji() {
-        return listaObligacji;
+    
+    public List<Obligation> getObligationList() {
+        return obligationList;
     }
 
-    public void setListaObligacji(List<Obligation> listaObligacji) {
-        this.listaObligacji = listaObligacji;
+    public void setObligationList(List<Obligation> obligationList) {
+        this.obligationList = obligationList;
     }
 
    

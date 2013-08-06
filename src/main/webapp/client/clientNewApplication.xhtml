@@ -153,7 +153,7 @@
                             <!-- 
                             podpiac tabele wynikow!!!
                             -->
-                            <p:dataTable value="#{clientCaseMB.listaObligacji}" var="lo" rowIndexVar="wiersz">
+                            <p:dataTable value="#{clientCaseMB.pobierzListeObligacji()}" var="lo" rowIndexVar="wiersz">
                                 <p:column headerText="Lp">  
                                     #{wiersz+1}
                                 </p:column>  
