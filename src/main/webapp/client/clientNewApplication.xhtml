@@ -153,30 +153,37 @@
                             <!-- 
                             podpiac tabele wynikow!!!
                             -->
-                            <p:dataTable value="">
+                            <p:dataTable value="#{clientCaseMB.listaObligacji}" var="lo" rowIndexVar="wiersz">
                                 <p:column headerText="Lp">  
+                                    #{wiersz+1}
                                 </p:column>  
 
                                 <p:column headerText="Rodzaj">  
+                                    <h:outputText value="#{lo.obligationKind}" />
                                 </p:column>  
 
                                 <p:column headerText="Wygasa">    
+                                    <h:outputText value="#{lo.beginDate}" />
                                 </p:column>  
 
-                                <p:column headerText="Rata">  
+                                <p:column headerText="Rata"> 
+                                    <h:outputText value="#{lo.actualPrice}" />
                                 </p:column>  
 
                                 <p:column headerText="Kwota">  
+                                    <h:outputText value="#{lo.repayment}" />
                                 </p:column> 
 
                                 <p:column headerText="Zaległe"  >  
+                                    <h:outputText value="#{lo.active}" />
+                                                  
                                 </p:column> 
 
                             </p:dataTable>
 
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
-                                <p:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();" /> 
+                                <p:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
 
                                 <h:form>
                                     <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
@@ -199,7 +206,7 @@
                                             <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
                                             
                                             <h:outputText value="Tytulem"/>
-                                            <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.name}"/>
+                                            <h:inputText value="#{clientCaseMB.obligation.name}"/>
 
                                             <h:outputText value="Aktualne"/>
                                             <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
@@ -233,9 +240,10 @@
 
                     <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
 
-                    <p:dataTable> 
+                    <p:dataTable > 
 
-                        <p:column headerText="Lp">  
+                        <p:column headerText="Lp" >  
+                           
                         </p:column> 
 
                         <p:column headerText="Numer klienta">  
