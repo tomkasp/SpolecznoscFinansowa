@@ -137,6 +137,7 @@ public class MarketMB implements Serializable
     public void rowClick(ClientCase cs)
     {
         selectedCase = cs;
+        System.out.println("Klik " + cs.getIdClientCase());
     }
    
     
@@ -161,6 +162,11 @@ public class MarketMB implements Serializable
     
     public void pollData()
     {
+        selectedCase = null;
+        selectedLastCase = null;
+        selectedObservedCase = null;
+        selectedAppliedCase = null;
+        
          // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
          loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
          reloadCases();
