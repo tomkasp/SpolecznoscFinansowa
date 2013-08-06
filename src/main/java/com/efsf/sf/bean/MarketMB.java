@@ -138,8 +138,8 @@ public class MarketMB implements Serializable
     
     public void reloadCases()
     {
-        // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
-        loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
+       
+       
         
         modelsEmploymentType = new ArrayList();
         modelsBranch= new ArrayList();   
@@ -151,6 +151,13 @@ public class MarketMB implements Serializable
         }
 
         System.out.println("Pobrano"); 
+    }
+    
+    public void pollData()
+    {
+         // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
+         loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
+         reloadCases();
     }
     
     
