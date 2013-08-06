@@ -88,8 +88,43 @@ public class ClientCaseDAO implements Serializable {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
+        
+         Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.productType as pt "      
+                 + "left join fetch cs.consultants as consul "
+                 + "left join fetch clt.addresses as addr "
+                 + "left join fetch clt.incomes as inc "
+                 + "left join fetch clt.incomeBusinessActivities as ba "
+                 + "left join fetch inc.branch as br "
+                 + "left join fetch inc.employmentType as empltype "
+                 + "left join fetch ba.branch as br2 "
+                 + "left join fetch ba.employmentType as empltype2 "
+                 + "left join fetch clt.requiredDocumentses as rd "
+                 + "where cs.beginDate <= :dateNow "
+                 + "and cs.endDate >= :dateNow "
+                 + "and clt.idClient = :fk "
+                 + "and cs.caseStatus = 1 "
+                 + "order by cs.beginDate desc, cs.idClientCase desc ");
          
-    //     Query q = session.createQuery("from ClientCase c left outer join fetch c.productType as p left outer join fetch c.client as cil left outer join cil.addresses as add");
+         q.setParameter( "dateNow", new DateTime().toDate() );
+         q.setParameter("fk", fkClient );
+         q.setMaxResults(5);
+         
+         list = q.list();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         return list;
+    }
+
+    public List awaitingCasesSelectedClient(Integer fkClient)
+    {
+         List<ClientCase> list;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+         
          Query q = session.createQuery("FROM ClientCase as cs "
                  + "left join fetch cs.client as clt "
                  + "left join fetch cs.productType as pt "      
@@ -104,20 +139,51 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch clt.requiredDocumentses as rd "
                  + "where cs.beginDate <= :dateNow "
                  + "and clt.idClient = :fk "
-                 + "order by cs.beginDate desc, cs.idClientCase desc");
+                 + "and cs.caseStatus = 2 "
+                 + "order by cs.beginDate desc, cs.idClientCase desc ");
          
          q.setParameter( "dateNow", new DateTime().toDate() );
          q.setParameter("fk", fkClient );
-         q.setMaxResults(5);
          
          list = q.list();
          
          session.getTransaction().commit();
          session.close();
-         
          return list;
     }
-
+    
+    public List currentCasesSelectedClient(Integer fkClient)
+    {
+         List<ClientCase> list;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+         
+         Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.productType as pt "      
+                 + "left join fetch cs.consultants as consul "
+                 + "left join fetch clt.addresses as addr "
+                 + "left join fetch clt.incomes as inc "
+                 + "left join fetch clt.incomeBusinessActivities as ba "
+                 + "left join fetch inc.branch as br "
+                 + "left join fetch inc.employmentType as empltype "
+                 + "left join fetch ba.branch as br2 "
+                 + "left join fetch ba.employmentType as empltype2 "
+                 + "left join fetch clt.requiredDocumentses as rd "
+                 + "where cs.beginDate <= :dateNow "
+                 + "and clt.idClient = :fk "
+                 + "and cs.caseStatus > 2 "
+                 + "order by cs.beginDate desc, cs.idClientCase desc ");
+         
+         q.setParameter( "dateNow", new DateTime().toDate() );
+         q.setParameter("fk", fkClient );
+         
+         list = q.list();
+         
+         session.getTransaction().commit();
+         session.close();
+         return list;
+    }
     
    
 }

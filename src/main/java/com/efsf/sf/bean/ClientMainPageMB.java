@@ -25,6 +25,8 @@ public class ClientMainPageMB implements Serializable {
     
     private List<ClientCase> clientCaseList = new ArrayList();
     
+    private List<ClientCase> awaitingClientCaseList = new ArrayList();
+    
     ClientCaseDAO caseDao = new ClientCaseDAO();
 
     private Converters converters =  new Converters();
@@ -44,6 +46,7 @@ public class ClientMainPageMB implements Serializable {
         modelsBranch= new ArrayList();
         
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
+        
         System.out.println("SIZA: "+loginMB.getClient().getIdClient() );
         for (int i = 0; i<clientCaseList.size(); i++)
         {
@@ -54,6 +57,24 @@ public class ClientMainPageMB implements Serializable {
         System.out.println("Pobrano"); 
     }
         
+    public void reloadCases2()
+    {
+        modelsEmploymentType = new ArrayList();
+        
+        modelsBranch = new ArrayList();
+        
+        awaitingClientCaseList = caseDao.awaitingCasesSelectedClient( loginMB.getClient().getIdClient() );
+        
+        System.out.println("SIZA: "+loginMB.getClient().getIdClient() );
+        for (int i = 0; i<awaitingClientCaseList.size(); i++)
+        {
+            modelsEmploymentType.add( showAllClientsEmploymentTypes( awaitingClientCaseList.get(i).getClient() ) );
+            modelsBranch.add( showAllClientsBranches( awaitingClientCaseList.get(i).getClient() ) );
+        }
+        
+        System.out.println("Pobrano"); 
+    }
+    
      public int countConsultantApplications(ClientCase cs)
     { 
         Set<Consultant> cons = cs.getConsultants();
@@ -216,6 +237,15 @@ public class ClientMainPageMB implements Serializable {
 
     public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
         this.selectedCaseIncomeTable = selectedCaseIncomeTable;
+    }
+
+    public List<ClientCase> getAwaitingClientCaseList() {
+        reloadCases2();
+        return awaitingClientCaseList;
+    }
+
+    public void setAwaitingClientCaseList(List<ClientCase> awaitingClientCaseList) {
+        this.awaitingClientCaseList = awaitingClientCaseList;
     }
      
     

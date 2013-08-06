@@ -24,10 +24,9 @@ public class EmailValidator implements Validator {
     
    @Override
    public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
-
+      
       UserDAO udao=new UserDAO();
       Boolean ifEmailExist=udao.ifEmailExist(value.toString());
-      
       if(!ifEmailExist){
          FacesContext context = FacesContext.getCurrentInstance();
          ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
