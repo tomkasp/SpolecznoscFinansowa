@@ -5,11 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-
+      xmlns:f="http://java.sun.com/jsf/core" >
+    
     <body>
-
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - ekran główny </ui:define> 
             <ui:define name="top"> 
@@ -52,11 +50,11 @@
                 </div>
 
                 <div style="min-height: 63px;">
-                    <h:graphicImage  id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                    <h:graphicImage id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
                     <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Klient 00123 wybrał Ciebie do prowadzenia sprawy kredytowej nr. 3306. Czy akceptujesz zgłoszenie?" /> 
 
                     <h:link  class="floatR redX wideButton marginT10" value="Nie akceptuję"> 
-                        <!--                                <p:graphicImage style="width:20%" value="../resources/images/x.png" /> -->
+                        <!-- <p:graphicImage style="width:20%" value="../resources/images/x.png" /> -->
                     </h:link>
 
                     <h:link  class="floatR greyButton wideButton marginT10" value="Akceptuję" outcome="/consultant/consultantMainPage.xhtml"/>
@@ -70,9 +68,9 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedCase}" selectionMode="single" >
+                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedLastCase}" selectionMode="single" >
           
-                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick()}"/> 
+                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedLastCase)}"/> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
                             
                             <p:column headerText="Numer sprawy">  
@@ -135,20 +133,101 @@
                                 <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
                             </p:column> 
 
-<!--                            <p:column headerText=""> 
+                            <!--  <p:column headerText=""> 
                                 <h:outputText  value=" "/>
                             </p:column> -->
 
                            
 
                         </p:dataTable>
+                   
+                        <p:poll interval="60" listener="#{marketMB.pollData()}" update="lastCases traced applied" /> 
+                    
                     </div>
 
-                    <h:link disabled="#{empty marketMB.selectedCase}" class="topMenuButton greyButton wideButton" value="Akceptuj" outcome="/index"/>
-                    <h:commandButton class="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase()}">
-                        <f:ajax execute="lastCases" render="traced" />
-                    </h:commandButton>
+                    <p:commandButton disabled="#{empty marketMB.selectedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase()}" oncomplete="confirmed.show();" >
+                        <p:ajax update="applied lastCases traced" />
+                    </p:commandButton>
+                    <p:commandButton disabled="#{empty marketMB.selectedCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase()}" oncomplete="confirmedObserved.show();">
+                         <p:ajax update="applied lastCases traced" />
+                    </p:commandButton>
                     <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/consultant/consultantMarket"/>
+
+                    
+                    <div class="marginT50">
+
+                    <h4>ZGŁOSZENIA</h4>
+
+                    <p:dataTable id="applied" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedAppliedCase}" selectionMode="single" >
+
+                        <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedAppliedCase)}"/> 
+                        <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+
+                        <p:column headerText="Numer sprawy">  
+                            <h:outputText  value="#{row.idClientCase}"/>
+                        </p:column>  
+
+                        <p:column headerText="Data dodania">    
+                            <h:outputText  value="#{row.beginDate}">
+                                <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                            </h:outputText>  
+                        </p:column>  
+
+                        <p:column headerText="Numer klienta"> 
+                            <h:outputText  value="#{row.client.idClient}"/>
+                        </p:column>
+
+                        <p:column headerText="Postęp">  
+                            <h:outputText  value="#{row.phase}"/>
+                        </p:column> 
+
+                        <p:column headerText="Rodzaj kredytu"  >
+                            <h:outputText  value="#{row.productType.name}"/>
+                        </p:column> 
+
+                        <p:column headerText="BIK">  
+                            <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                        </p:column> 
+
+                        <p:column headerText="Kod pocztowy">  
+                            <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                        </p:column>
+
+                        <p:column headerText="Wiek">  
+                                 <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                        </p:column>
+
+                        <p:column headerText="Typ zatrudnienia">
+                            <h:outputText rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                            <h:selectOneMenu rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                <f:selectItems value="#{marketMB.appliedModelsEmploymentType.get(rowNumber)}" />
+                            </h:selectOneMenu>
+                        </p:column>
+
+                        <p:column headerText="Branża">  
+                            <h:outputText rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                            <h:selectOneMenu rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                <f:selectItems value="#{marketMB.appliedModelsBranch.get(rowNumber)}" />
+                            </h:selectOneMenu>
+                        </p:column>
+
+                        <p:column headerText="Trudność kredytu"> 
+                            <h:outputText  value="#{row.difficulty}"/>
+                        </p:column>
+
+                        <p:column headerText="Ilość doradców"> 
+                            <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                        </p:column>
+
+                        <p:column headerText="Koniec aukcji"> 
+                            <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                        </p:column> 
+                    </p:dataTable>
+                </div>
+
+                <p:commandButton disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                     <f:ajax execute="applied" render="applied" />
+                </p:commandButton>
 
                     <div class="marginT50">
 
@@ -305,7 +384,7 @@
 
                                             <p:dataTable id="traced" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedObservedCase}" selectionMode="single" >
 
-                                                <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick()}"/> 
+                                                <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedObservedCase)}"/> 
                                                 <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
 
                                                 <p:column headerText="Numer sprawy">  
@@ -370,12 +449,12 @@
                                             </p:dataTable>
                                         </div>
                                         
-                                        <h:commandButton class="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.traceCase()}">
-                                             <f:ajax execute="traced" render="traced" />
-                                        </h:commandButton>
-                                        <h:commandButton class="topMenuButton greyButton wideButton" value="Usuń" action="#{marketMB.stopObserve()}">
-                                             <f:ajax execute="traced" render="traced" />
-                                        </h:commandButton>
+                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToObservedCase()}" oncomplete="confirmed.show();">
+                                              <p:ajax update="applied lastCases traced" />
+                                        </p:commandButton>
+                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
+                                             
+                                        </p:commandButton>
 
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>
@@ -404,10 +483,76 @@
 
                                             </p:dataTable>
                                         </div>
+                                        
+                                        <!-- DIALOGS -->
+                                        
+                                            <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                                                <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
+                                                    Twoje zgłoszenie do sprawy #{marketMB.selectedCase.idClientCase} zostało zatwierdzone.
+                                                </h:panelGroup>
 
+                                                <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
+                                                    Do tego zlecenia zgłosiłeś się już wcześniej. 
+                                                </h:panelGroup>
+
+                                                <div> 
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
+                                                        <p:ajax update="applied"/>
+                                                    </h:commandButton>
+                                                </div>
+                                             </p:dialog>
+
+                                             <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                                                <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
+                                                    Od teraz śledzisz sprawę numer:  #{marketMB.selectedCase.idClientCase}.
+                                                </h:panelGroup>
+
+                                                <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
+                                                    Już obserwujesz tą sprawę! 
+                                                </h:panelGroup>
+
+                                                <div> 
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
+                                                        <p:ajax update="traced"/>
+                                                    </h:commandButton>
+                                                </div>
+                                             </p:dialog>
+
+                                             <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                                <h:panelGroup class="fontGrey">
+                                                    Czy napewno chcesz usunąć element z listy?
+                                                </h:panelGroup>
+
+                                                <div> 
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication()}" onclick="revokeApp.hide()" >
+                                                        <p:ajax update="applied"/>
+                                                    </h:commandButton>
+
+                                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
+                                                        <p:ajax update="applied"/>
+                                                    </h:commandButton>
+                                                </div>
+                                             </p:dialog>
+                                        
+                                             <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                                <h:panelGroup class="fontGrey">
+                                                    Czy napewno chcesz usunąć element z listy?
+                                                </h:panelGroup>
+
+                                                <div> 
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve()}" onclick="revokeObs.hide()" >
+                                                        <p:ajax update="traced"/>
+                                                    </h:commandButton>
+
+                                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
+                                                        <p:ajax update="traced"/>
+                                                    </h:commandButton>
+                                                </div>
+                                             </p:dialog>
+                                        
                                         </h:form>
 
-                                        </ui:define>           
-                                        </ui:composition>
-                                        </body>
-                                        </html>
+                            </ui:define>           
+                  </ui:composition>
+        </body>
+ </html>

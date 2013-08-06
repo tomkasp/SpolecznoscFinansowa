@@ -26,6 +26,20 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
     }
+    
+    public ClientCase read(int idClientCase)
+    {
+        ClientCase cs;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        cs = (ClientCase) session.get(ClientCase.class, idClientCase);
+        
+        session.getTransaction().commit();
+        session.close();
+                
+        return cs;  
+    }
 
     public List last5Cases()
     {
@@ -73,6 +87,26 @@ public class ClientCaseDAO implements Serializable {
          Query q = session.createQuery("from Consultant as c "
                  + "join fetch c.clientCases_2 as cc2 "
                  + "where c.idConsultant = :consultantID and cc2.idClientCase = :caseID");
+         q.setParameter("caseID", caseID);
+         q.setParameter("consultantID", consultantID);
+         
+         flag =  q.list().isEmpty();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         return !flag;
+    }
+    
+     public boolean doesConsultantAppliedToCase(int consultantID, int caseID)
+    {
+         boolean flag;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+         
+         Query q = session.createQuery("from Consultant as c "
+                 + "join fetch c.clientCases as cc "
+                 + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
          q.setParameter("caseID", caseID);
          q.setParameter("consultantID", consultantID);
          
