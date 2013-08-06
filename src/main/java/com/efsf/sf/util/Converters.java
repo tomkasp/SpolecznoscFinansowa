@@ -4,6 +4,7 @@
  */
 package com.efsf.sf.util;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,7 +15,7 @@ import org.joda.time.Hours;
  *
  * @author XaI
  */
-public class Converters 
+public class Converters implements Serializable
 {
     public int ageFromBirthDate(Date birthDate)
     {
