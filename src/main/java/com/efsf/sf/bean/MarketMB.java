@@ -17,6 +17,7 @@ import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -43,8 +44,7 @@ public class MarketMB implements Serializable
     private List<ClientCase> clientCaseList = new ArrayList();
     
     private Converters converters =  new Converters();
-    
-    
+      
     ClientCaseDAO caseDao = new ClientCaseDAO();
    
     private ClientCase selectedCase;
@@ -54,14 +54,6 @@ public class MarketMB implements Serializable
     
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
-
-    public ClientCase getSelectedAppliedCase() {
-        return selectedAppliedCase;
-    }
-
-    public void setSelectedAppliedCase(ClientCase selectedAppliedCase) {
-        this.selectedAppliedCase = selectedAppliedCase;
-    }
     
     ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> modelsBranch = new ArrayList();
@@ -73,8 +65,26 @@ public class MarketMB implements Serializable
     private ArrayList<Set<String>> appliedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
+
+    //MARKET VIEW FIELDS!
     
- 
+    private int phaseMin = 0;
+    private int phaseMax = 100;
+    
+    private int ageMin = 0; 
+    private int ageMax = 99;
+    
+    private int difficultyMin = 0;
+    private int difficultyMax = 10;
+    
+    private int branchId = 0;
+    private int regionId = 0;
+    
+    private ArrayList<Integer> incomeIds = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8));
+    private ArrayList<Integer> businessIds = new ArrayList<Integer>(Arrays.asList(9,10,11,12,13));
+    
+    List<ClientCase> allMarket = new ArrayList();
+    
     public MarketMB()
     {
         reloadCases(); 
@@ -102,7 +112,6 @@ public class MarketMB implements Serializable
         }
     }
     
-   
     public void makeAppliedModels()
     {
         Set<ClientCase> cs = loginMB.getConsultant().getClientCases();
@@ -138,9 +147,6 @@ public class MarketMB implements Serializable
     
     public void reloadCases()
     {
-       
-       
-        
         modelsEmploymentType = new ArrayList();
         modelsBranch= new ArrayList();   
         clientCaseList =  caseDao.last5Cases();
@@ -490,6 +496,94 @@ public class MarketMB implements Serializable
 
     public void setAlreadyObserved(boolean alreadyObserved) {
         this.alreadyObserved = alreadyObserved;
+    }
+
+    public ClientCase getSelectedAppliedCase() {
+        return selectedAppliedCase;
+    }
+
+    public void setSelectedAppliedCase(ClientCase selectedAppliedCase) {
+        this.selectedAppliedCase = selectedAppliedCase;
+    }
+
+    public int getPhaseMin() {
+        return phaseMin;
+    }
+
+    public void setPhaseMin(int phaseMin) {
+        this.phaseMin = phaseMin;
+    }
+
+    public int getPhaseMax() {
+        return phaseMax;
+    }
+
+    public void setPhaseMax(int phaseMax) {
+        this.phaseMax = phaseMax;
+    }
+
+    public int getAgeMin() {
+        return ageMin;
+    }
+
+    public void setAgeMin(int ageMin) {
+        this.ageMin = ageMin;
+    }
+
+    public int getAgeMax() {
+        return ageMax;
+    }
+
+    public void setAgeMax(int ageMax) {
+        this.ageMax = ageMax;
+    }
+
+    public int getDifficultyMin() {
+        return difficultyMin;
+    }
+
+    public void setDifficultyMin(int difficultyMin) {
+        this.difficultyMin = difficultyMin;
+    }
+
+    public int getDifficultyMax() {
+        return difficultyMax;
+    }
+
+    public void setDifficultyMax(int difficultyMax) {
+        this.difficultyMax = difficultyMax;
+    }
+
+    public ArrayList<Integer> getIncomeIds() {
+        return incomeIds;
+    }
+
+    public void setIncomeIds(ArrayList<Integer> incomeIds) {
+        this.incomeIds = incomeIds;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public int getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
+    }
+
+    public ArrayList<Integer> getBusinessIds() {
+        return businessIds;
+    }
+
+    public void setBusinessIds(ArrayList<Integer> businessIds) {
+        this.businessIds = businessIds;
     }
     
     
