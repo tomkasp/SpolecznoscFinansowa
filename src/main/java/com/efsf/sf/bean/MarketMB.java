@@ -192,21 +192,8 @@ public class MarketMB implements Serializable
         if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
         {
             alreadyObserved=false;
-            if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
-            {
-                 consultant.getClientCases_2().add(selectedLastCase);
+            consultant.getClientCases_2().add(selectedLastCase);
 
-            }
-            else
-            {
-                 for (ClientCase cc : consultant.getClientCases())
-                 {
-                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
-                     {
-                         consultant.getClientCases_2().add(cc);
-                     }
-                 }
-            }
             consultantDao = new ConsultantDAO();
             consultantDao.merge(consultant);
             observedModelsEmploymentType = new ArrayList();
@@ -226,21 +213,7 @@ public class MarketMB implements Serializable
         if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
         {     
             alreadyApplied = false;
-            if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
-            {
-                consultant.getClientCases().add(selectedLastCase);
-            }
-            else
-            {
-                 for (ClientCase cc : consultant.getClientCases_2())
-                 {
-                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
-                     {
-                         consultant.getClientCases().add(cc);
-                     }
-                 }
-            }
-             
+            consultant.getClientCases().add(selectedLastCase);
             ConsultantDAO consultantDao = new ConsultantDAO();
             consultantDao.merge(consultant);
             
