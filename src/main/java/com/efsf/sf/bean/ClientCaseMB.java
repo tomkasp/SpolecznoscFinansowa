@@ -7,7 +7,9 @@ package com.efsf.sf.bean;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -18,30 +20,34 @@ public class ClientCaseMB implements Serializable {
 
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB login;
+    
     private int idTypProduktu;
     private int idTypProduktuObligation;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
+    private List<Obligation> obligationList = new ArrayList<>();
+    ObligationDAO obdao = new ObligationDAO();
     /**
      * Creates a new instance of ClientCaseMB
      */
 
     public ClientCaseMB(){
-        
     }    
+    
+    public List<Obligation> getObligationListForCurrentClient(){ 
+        setObligationList(obdao.obligationList(login.getClient().getIdClient()));
+        return obligationList;
+    }
+    
+    //zwraca liste zobowiazan dla danego klienta w sesji
     
     
     public void addObligation(){
-        
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
-        
-        ObligationDAO obdao = new ObligationDAO();
         obdao.save(obligation);
-        
-        
         obligation = new Obligation();
     }
     
@@ -114,6 +120,19 @@ public class ClientCaseMB implements Serializable {
     public void setIdTypProduktuObligation(int idTypProduktuObligation) {
         this.idTypProduktuObligation = idTypProduktuObligation;
     }
+
+    
+    public List<Obligation> getObligationList() {
+        return obligationList;
+    }
+
+    public void setObligationList(List<Obligation> obligationList) {
+        this.obligationList = obligationList;
+    }
+
+   
+
+    
 
 
     
