@@ -4,11 +4,13 @@
  */
 package com.efsf.sf.collection;
 
+import java.io.Serializable;
+
 /**
  *
  * @author XaI
  */
-public class IncomeData 
+public class IncomeData implements Serializable
 {
     private String employmentType;
     private String branch;

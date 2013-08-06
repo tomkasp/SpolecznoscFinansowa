@@ -26,6 +26,20 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
     }
+    
+    public ClientCase read(int idClientCase)
+    {
+        ClientCase cs;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        cs = (ClientCase) session.get(ClientCase.class, idClientCase);
+        
+        session.getTransaction().commit();
+        session.close();
+                
+        return cs;  
+    }
 
     public List last5Cases()
     {
@@ -82,7 +96,26 @@ public class ClientCaseDAO implements Serializable {
          return !flag;
     }
     
-     
+     public boolean doesConsultantAppliedToCase(int consultantID, int caseID)
+    {
+         boolean flag;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+         
+         Query q = session.createQuery("from Consultant as c "
+                 + "join fetch c.clientCases as cc "
+                 + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
+         q.setParameter("caseID", caseID);
+         q.setParameter("consultantID", consultantID);
+         
+         flag =  q.list().isEmpty();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         return !flag;
+    }
+    
     public List last5CasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
@@ -118,7 +151,7 @@ public class ClientCaseDAO implements Serializable {
          
          return list;
     }
-
+    
     public List awaitingCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
@@ -172,7 +205,7 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch clt.requiredDocumentses as rd "
                  + "where cs.beginDate <= :dateNow "
                  + "and clt.idClient = :fk "
-                 + "and cs.caseStatus > 2 "
+                 + "and cs.caseStatus > 1 "
                  + "order by cs.beginDate desc, cs.idClientCase desc ");
          
          q.setParameter( "dateNow", new DateTime().toDate() );
@@ -186,4 +219,7 @@ public class ClientCaseDAO implements Serializable {
     }
     
    
+    
+    
+    
 }

@@ -93,7 +93,9 @@ public class ConsultantDAO {
         
         Query q  = session.createQuery("FROM Consultant c "
                 + " JOIN Fetch c.user as u "
-                + "LEFT JOIN FETCH c.clientCases_2 as cs " 
+                + "LEFT JOIN FETCH c.clientCases_2 as cs2 " 
+                + "LEFT JOIN FETCH c.clientCases as cs "
+                
                 + "left join fetch cs.client as clt "
                 + "left join fetch cs.productType as pt "      
                 + "left join fetch cs.consultants as consul "
@@ -106,6 +108,20 @@ public class ConsultantDAO {
                 + "left join fetch ba.branch as br2 "
                 + "left join fetch ba.employmentType as empltype2 "
                 + "left join fetch clt.requiredDocumentses as rd "  
+                
+                + "left join fetch cs2.client as clt2 "
+                + "left join fetch cs2.productType as pt2 "      
+                + "left join fetch cs2.consultants as consul2 "
+                + "left join fetch clt2.addresses as addr2 "
+                + "left join fetch cs2.caseStatus as cstats2 "
+                + "left join fetch clt2.incomes as inc2 "
+                + "left join fetch clt2.incomeBusinessActivities as ba2 "
+                + "left join fetch inc2.branch as br2 "
+                + "left join fetch inc2.employmentType as empltype2 "
+                + "left join fetch ba2.branch as br22 "
+                + "left join fetch ba2.employmentType as empltype22 "
+                + "left join fetch clt2.requiredDocumentses as rd2 "  
+                
                 + "where u.idUser = :userId");
         
         q.setParameter("userId", userId);
