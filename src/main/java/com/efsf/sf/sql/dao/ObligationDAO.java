@@ -28,14 +28,13 @@ public class ObligationDAO implements Serializable{
 
     }
 
-    public List obligationList() {
+    public List obligationList(Integer idUser) {
         List<Obligation> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        lista = session.createQuery("from Obligation").list();
-        
-        System.out.println("dlugosc listy:"+lista.size());
+        lista = session.createQuery("from Obligation ob join fetch ob.client cl where cl.idClient= :user ").setParameter("user",idUser).list();
+                
         session.getTransaction().commit();
         session.close();
         return lista;
