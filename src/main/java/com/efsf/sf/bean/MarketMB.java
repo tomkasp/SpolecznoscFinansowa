@@ -44,16 +44,33 @@ public class MarketMB implements Serializable
     
     private Converters converters =  new Converters();
     
+    
     ClientCaseDAO caseDao = new ClientCaseDAO();
    
     private ClientCase selectedCase;
+    private ClientCase selectedLastCase;
     private ClientCase selectedObservedCase;
+    private ClientCase selectedAppliedCase;
+    
+    private boolean alreadyApplied = false;
+    private boolean alreadyObserved = false;
+
+    public ClientCase getSelectedAppliedCase() {
+        return selectedAppliedCase;
+    }
+
+    public void setSelectedAppliedCase(ClientCase selectedAppliedCase) {
+        this.selectedAppliedCase = selectedAppliedCase;
+    }
     
     ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> modelsBranch = new ArrayList();
     
     private ArrayList<Set<String>> observedModelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> observedModelsBranch = new ArrayList();
+    
+    private ArrayList<Set<String>> appliedModelsEmploymentType = new ArrayList();
+    private ArrayList<Set<String>> appliedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
@@ -63,8 +80,15 @@ public class MarketMB implements Serializable
         reloadCases(); 
     }
     
+    
     @PostConstruct
-    public void makeModels()
+    public void fillModels()
+    {
+        makeObservedModels();
+        makeAppliedModels();
+    }
+    
+    public void makeObservedModels()
     {
         Set<ClientCase> cs = loginMB.getConsultant().getClientCases_2();
         
@@ -74,7 +98,22 @@ public class MarketMB implements Serializable
         {
             Client client = i.next().getClient();
             observedModelsEmploymentType.add(showAllClientsEmploymentTypes(client));
-            observedModelsBranch.add(showAllClientsBranches(client));
+            observedModelsBranch.add(showAllClientsBranches(client));  
+        }
+    }
+    
+   
+    public void makeAppliedModels()
+    {
+        Set<ClientCase> cs = loginMB.getConsultant().getClientCases();
+        
+        Iterator<ClientCase> i = cs.iterator();
+        
+        while (i.hasNext())
+        {
+            Client client = i.next().getClient();
+            appliedModelsEmploymentType.add(showAllClientsEmploymentTypes(client));
+            appliedModelsBranch.add(showAllClientsBranches(client));  
         }
     }
             
@@ -86,9 +125,9 @@ public class MarketMB implements Serializable
         FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
     }
     
-    public void rowClick()
+    public void rowClick(ClientCase cs)
     {
-        System.out.println("1 raz: " + selectedCase.getIdClientCase());
+        selectedCase = cs;
     }
    
     
@@ -99,13 +138,12 @@ public class MarketMB implements Serializable
     
     public void reloadCases()
     {
+        // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
+        loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
         
         modelsEmploymentType = new ArrayList();
-
-        modelsBranch= new ArrayList();
-        
+        modelsBranch= new ArrayList();   
         clientCaseList =  caseDao.last5Cases();
-        
         for (int i = 0; i<clientCaseList.size(); i++)
         {
             modelsEmploymentType.add(showAllClientsEmploymentTypes(clientCaseList.get(i).getClient()));
@@ -114,6 +152,8 @@ public class MarketMB implements Serializable
 
         System.out.println("Pobrano"); 
     }
+    
+    
     
     
     // I THINK THERE SHOULD BE CLASS LIKE MARKET UTIL MADE BECAUSE SUCH METHODS PROBS COULD BE USED SOMEWHERE ELSE TOO
@@ -129,15 +169,94 @@ public class MarketMB implements Serializable
     public void traceCase()
     {
         Consultant consultant = loginMB.getConsultant();
-        
-        if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(),selectedCase.getIdClientCase()))
+        ConsultantDAO consultantDao;
+        if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
         {
-            consultant.getClientCases_2().add(selectedCase);
-            ConsultantDAO consultantDao = new ConsultantDAO();
+            alreadyObserved=false;
+            if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
+            {
+                 consultant.getClientCases_2().add(selectedLastCase);
+
+            }
+            else
+            {
+                 for (ClientCase cc : consultant.getClientCases())
+                 {
+                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
+                     {
+                         consultant.getClientCases_2().add(cc);
+                     }
+                 }
+            }
+            consultantDao = new ConsultantDAO();
             consultantDao.update(consultant);
             observedModelsEmploymentType = new ArrayList();
             observedModelsBranch = new ArrayList();
-            makeModels();
+            makeObservedModels();
+        }
+        else
+        {
+            alreadyObserved = true;
+        }
+    }
+    
+    public void applyToCase()
+    {
+        Consultant consultant = loginMB.getConsultant();
+   
+        if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
+        {     
+            alreadyApplied = false;
+            if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
+            {
+                consultant.getClientCases().add(selectedLastCase);
+            }
+            else
+            {
+                 for (ClientCase cc : consultant.getClientCases_2())
+                 {
+                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
+                     {
+                         consultant.getClientCases().add(cc);
+                     }
+                 }
+            }
+             
+            ConsultantDAO consultantDao = new ConsultantDAO();
+            consultantDao.update(consultant);
+            
+            loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
+            
+            appliedModelsEmploymentType = new ArrayList();
+            appliedModelsBranch = new ArrayList();
+            makeAppliedModels();
+        }
+        else
+        {
+            alreadyApplied = true;
+        }
+    }
+    
+    public void applyToObservedCase()
+    {
+        Consultant consultant = loginMB.getConsultant();
+        
+        if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),selectedObservedCase.getIdClientCase()))
+        {
+            alreadyApplied = false;
+            consultant.getClientCases().add(selectedObservedCase);
+            ConsultantDAO consultantDao = new ConsultantDAO();
+            consultantDao.update(consultant);
+            
+            loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
+            
+            appliedModelsEmploymentType = new ArrayList();
+            appliedModelsBranch = new ArrayList();
+            makeAppliedModels();
+        }
+        else
+        {
+            alreadyApplied = true;
         }
     }
     
@@ -231,6 +350,21 @@ public class MarketMB implements Serializable
         }
     }
     
+    public void revokeApplication()
+    {
+        ConsultantDAO consultantDao = new ConsultantDAO();
+        for (ClientCase cc : loginMB.getConsultant().getClientCases())
+        {
+            if (cc.getIdClientCase() == selectedAppliedCase.getIdClientCase())
+            {
+                loginMB.getConsultant().getClientCases().remove(cc);
+                consultantDao.update(loginMB.getConsultant());
+                selectedAppliedCase = null;
+                break;
+            }
+        }
+    }
+    
     public List<ClientCase> getClientCaseList() {
         return clientCaseList;
     }
@@ -309,6 +443,46 @@ public class MarketMB implements Serializable
 
     public void setSelectedObservedCase(ClientCase selectedObservedCase) {
         this.selectedObservedCase = selectedObservedCase;
+    }
+
+    public ArrayList<Set<String>> getAppliedModelsEmploymentType() {
+        return appliedModelsEmploymentType;
+    }
+
+    public void setAppliedModelsEmploymentType(ArrayList<Set<String>> appliedModelsEmploymentType) {
+        this.appliedModelsEmploymentType = appliedModelsEmploymentType;
+    }
+
+    public ArrayList<Set<String>> getAppliedModelsBranch() {
+        return appliedModelsBranch;
+    }
+
+    public void setAppliedModelsBranch(ArrayList<Set<String>> appliedModelsBranch) {
+        this.appliedModelsBranch = appliedModelsBranch;
+    }
+
+    public ClientCase getSelectedLastCase() {
+        return selectedLastCase;
+    }
+
+    public void setSelectedLastCase(ClientCase selectedLastCase) {
+        this.selectedLastCase = selectedLastCase;
+    }
+
+    public boolean isAlreadyApplied() {
+        return alreadyApplied;
+    }
+
+    public void setAlreadyApplied(boolean alreadyApplied) {
+        this.alreadyApplied = alreadyApplied;
+    }
+
+    public boolean isAlreadyObserved() {
+        return alreadyObserved;
+    }
+
+    public void setAlreadyObserved(boolean alreadyObserved) {
+        this.alreadyObserved = alreadyObserved;
     }
     
     
