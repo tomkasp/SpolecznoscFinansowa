@@ -124,9 +124,13 @@
                                     
                                     <div class="field"> 
                                         <h:outputText class="label" value="Premium"/> 
-                                        <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
+                                        <p:selectBooleanCheckbox onchange="dlg2.show();" disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
+                                            
                                     </div>
-                                    
+                                    <p:dialog id="basicDialog2" header="Premium" widgetVar="dlg2" rendered="true">
+                                        Sprawa premium zabierze Ci 30 szalonych punktów!
+                                        <h:commandButton type="reset" value="OK" onclick="dlg2.hide();"/>
+                                    </p:dialog>
                                     
                                     
                                 </h:panelGroup>
