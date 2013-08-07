@@ -11,9 +11,11 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -53,6 +55,11 @@ public class ClientCaseMB implements Serializable {
         obdao.save(obligation);
         obligation = new Obligation();
     }
+    
+    public void addMessage() {  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
+    }
+    
     
     public Boolean premiumPointsChecking(){
         

@@ -92,7 +92,7 @@
                                         </h:inputText>
                                         <h:message for="freeResourcesValue" errorClass="invalid" id="freeResourcesValueMessage" />
                                     </div>
-                                    
+
                                     <div class="field"> 
                                         <h:outputText class="label" value="Oczekiwana rata:"/>
                                         <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
@@ -103,12 +103,12 @@
                                         <h:message for="expectedInstalment" errorClass="invalid" id="expectedInstalmentMessage" />
                                     </div>
 
-                                    
+
                                     <div class="field"> 
                                         <h:outputText class="label" value="Cel:"/>
                                         <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
                                     </div>
-                                    
+
                                     <div class="field"> 
                                         <h:outputText class="label" value="notatka"/>
                                         <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
@@ -121,18 +121,22 @@
                                             <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                         </p:selectOneMenu>
                                     </div>
-                                    
+
                                     <div class="field"> 
                                         <h:outputText class="label" value="Premium"/> 
-                                        <p:selectBooleanCheckbox onchange="dlg2.show();" disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
-                                            
+                                        <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" >
+                                            <p:ajax update="msg" listener="#{clientCaseMB.addMessage()}"/> 
+                                        </p:selectBooleanCheckbox>
+
                                     </div>
+                                    <p:growl id="msg" />
+
                                     <p:dialog id="basicDialog2" header="Premium" widgetVar="dlg2" rendered="true">
                                         Sprawa premium zabierze Ci 30 szalonych punktów!
                                         <h:commandButton type="reset" value="OK" onclick="dlg2.hide();"/>
                                     </p:dialog>
-                                    
-                                    
+
+
                                 </h:panelGroup>
 
 
@@ -209,12 +213,12 @@
                                 </p:column> 
 
                             </p:dataTable>
+                            <h:form>
+                                <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
-                            <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
+                                      <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
 
-                                  <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
 
-                                  <h:form>
                                       <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
 
                                           <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
@@ -251,16 +255,16 @@
 
 
                                       </p:dialog>
-                                  </h:form>
-                              </div>
-
-                              <div id="buttonsBox3">
-
-                                  <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
 
                                   </div>
+                                </h:form>
+                                <div id="buttonsBox3">
 
-                              </div>
+                                    <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
