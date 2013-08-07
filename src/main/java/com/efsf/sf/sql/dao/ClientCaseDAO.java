@@ -257,6 +257,14 @@ public class ClientCaseDAO implements Serializable {
                     + "order by cs.beginDate desc, cs.idClientCase desc");
          }
          
+         if (incomes.isEmpty())
+         {
+             incomes.add("");
+         }
+         if (business.isEmpty())
+         {
+             business.add("");
+         }
          q.setParameterList("incomes", incomes);
          q.setParameterList("business", business);
          q.setParameter("dateNow", new DateTime().toDate());

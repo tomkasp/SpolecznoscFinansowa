@@ -98,7 +98,6 @@ public class MarketMB implements Serializable
     public MarketMB()
     {
         reloadCases(); 
-        
     }
     
     
@@ -180,6 +179,7 @@ public class MarketMB implements Serializable
     
     public void loadMarket()
     {
+        selectedMarketCase = null;
         marketModelsEmploymentType = new ArrayList();
         marketModelsBranch= new ArrayList(); 
         allMarket = caseDao.getCasesWithMarketFilter(phaseMin,phaseMax,ageMin,ageMax,difficultyMin,difficultyMax,branchId,regionId,incomeIds,businessIds);
@@ -209,10 +209,12 @@ public class MarketMB implements Serializable
          reloadCases();
     }
     
-    
-    
-    
-    // I THINK THERE SHOULD BE CLASS LIKE MARKET UTIL MADE BECAUSE SUCH METHODS PROBS COULD BE USED SOMEWHERE ELSE TOO
+    public void unselectEmployment()
+    {
+        businessIds = new ArrayList();
+        incomeIds = new ArrayList();
+    }
+     
     public int countConsultantApplications(ClientCase cs)
     { 
         Set<Consultant> cons = cs.getConsultants();
