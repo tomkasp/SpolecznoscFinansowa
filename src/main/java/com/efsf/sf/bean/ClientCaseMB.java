@@ -30,6 +30,8 @@ public class ClientCaseMB implements Serializable {
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
+    
+    private int premium = 30;
     /**
      * Creates a new instance of ClientCaseMB
      */
@@ -53,7 +55,7 @@ public class ClientCaseMB implements Serializable {
     }
     
     public Boolean premiumPointsChecking(){
-        int premium = 30;
+        
         if(login.getClient().getPoints() < premium){
             return true;
         }
@@ -70,7 +72,13 @@ public class ClientCaseMB implements Serializable {
             ClientDAO cd = new ClientDAO();
 
             //pamietac o zabraniu punktow z klienta!
-            cd.decrementPoints(login.getClient());
+            if(clientCase.getPremium()){
+                cd.decrementPoints(login.getClient(),premium);
+            }
+            else{
+                cd.decrementPoints(login.getClient(),1);
+            }
+            
             login.getClient().setPoints(login.getClient().getPoints() - 1);
 
             //ucinanie do dwoch miejsc po przecinku bez zaokrlaglania!
