@@ -29,9 +29,7 @@
                             </div>
                    </ui:define>
                    <ui:define name="content">
-                       
-                   
-                       
+                      
                        <h:form id="marketForm">
                         <div id="profileBar" class="profileBarThin" >
                             
@@ -42,43 +40,61 @@
                            <div id="spaceFiller" > </div>
                            <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
                        </div>
+                           
                        <div>
                            <h4> PARAMETRY </h4>
                        </div>
-                           
-                           
-                           
-                       <div class="marginTB20">
+                      
+                       <div>
                            <h:panelGroup class="marketLeft">    
                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
-                               <h:inputText class="fontBlack smallCenterInput"  value="#{marketMB.phaseMin}" >
-                                   <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}"/>
+                               <h:inputText id="phaseMin" class="fontBlack smallCenterInput"  value="#{marketMB.phaseMin}"  >
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                   <f:validateLongRange maximum="100" />
                                </h:inputText>
-                               <h:inputText class="fontBlack smallCenterInput" value="#{marketMB.phaseMax}" >
-                                   <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
-                               </h:inputText>
+                               <h:inputText id="phaseMax" class="fontBlack smallCenterInput" value="#{marketMB.phaseMax}" >
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                   <f:validateLongRange maximum="100" />
+                               </h:inputText> 
                            </h:panelGroup>     
                            <h:panelGroup class="marginLR30">
                                <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
-                               <h:inputText class="fontBlack smallCenterInput"  value="#{marketMB.ageMin}" >
-                                   <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
+                               <h:inputText id="ageMin" class="fontBlack smallCenterInput"  value="#{marketMB.ageMin}" >
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                   <f:validateLongRange maximum="100" />
                                </h:inputText>
-                               <h:inputText class="fontBlack smallCenterInput" value="#{marketMB.ageMax}" >
-                                    <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
+                               <h:inputText id="ageMax" class="fontBlack smallCenterInput" value="#{marketMB.ageMax}" >
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                   <f:validateLongRange maximum="100" />
                                </h:inputText>
                                <h:outputText class="fontGrey marginLR30" value="lat" /> 
                            </h:panelGroup> 
                            <h:panelGroup>
                                <h:outputText class="fontGrey marginLR30" value="Trudność" /> 
-                               <h:inputText class="fontBlack smallCenterInput"  value="#{marketMB.difficultyMin}" > 
-                                   <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
+                               <h:inputText id="diffMin" class="fontBlack smallCenterInput"  value="#{marketMB.difficultyMin}" > 
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                   <f:validateLongRange maximum="100" />
                                </h:inputText>
-                               <h:inputText class="fontBlack smallCenterInput" value="#{marketMB.difficultyMax}" >
-                                    <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
+                               <h:inputText id="diffMax" class="fontBlack smallCenterInput" value="#{marketMB.difficultyMax}" >
+                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                   <f:convertNumber integerOnly="true" maxIntegerDigits="2" />
+                                   <f:validateLongRange maximum="10" />
                                </h:inputText>
                            </h:panelGroup> 
                        </div>    
-                       <div style="min-height: 50px;">
+                       <h:message for="phaseMin" id="phaseMinMessage" errorClass="invalid2" errorStyle="left: 110px" />
+                       <h:message for="phaseMax" id="phaseMaxMessage" errorClass="invalid2" errorStyle="left: 180px" />
+                       <h:message for="ageMin" id="ageMinMessage" errorClass="invalid2" errorStyle="left: 450px" />
+                       <h:message for="ageMax" id="ageMaxMessage" errorClass="invalid2" errorStyle="left: 520px" />
+                       <h:message for="diffMin" id="diffMinMessage" errorClass="invalid2" errorStyle="left: 820px" />
+                       <h:message for="diffMax" id="diffMaxMessage" errorClass="invalid2" errorStyle="left: 885px" />
+                       
+                       <div style="min-height: 50px; margin-top: 20px;">
                            <h:panelGroup style="margin-right: 10px">
                                <h:outputText class="floatL fontGrey marginLR30" value="Branża" /> 
                                <p:selectOneMenu styleClass="floatL" value="#{marketMB.branchId}">
@@ -101,29 +117,33 @@
                                </p:selectOneMenu>
                            </h:panelGroup>    
                        </div>
+                       
+                       
                            
-                       <p:overlayPanel id="employmentPanel" style="width:330px;" for="employmentButton" hideEffect="fade" >
+                       <p:overlayPanel id="employmentPanel" widgetVar="overlay" style="width:330px;" for="employmentButton" hideEffect="fade" >
                            <p:tabView id="tabView">
                                <p:tab id="tabIncome" title="Umowy">
                                    <p:panel>
                                         <p:selectManyCheckbox styleClass="fontGrey" value="#{marketMB.incomeIds}" layout="pageDirection">
-                                            <f:ajax execute="@form" render="@form" listener="#{marketMB.loadMarket()}" />
+                                           
                                             <f:selectItems value="#{dictionaryMB.income}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
+                                            
                                         </p:selectManyCheckbox>
                                    </p:panel>
                                 </p:tab>
                                 <p:tab id="tabBusiness" title="Działalność gosp.">
-                                        <p:selectManyCheckbox styleClass="fontGrey"  value="#{marketMB.businessIds}" layout="pageDirection">
-                                            <f:ajax execute="@form" render="@form" listener="#{marketMB.loadMarket()}" />
+                                        <p:selectManyCheckbox styleClass="fontGrey"  value="#{marketMB.businessIds}" layout="pageDirection">  
                                             <f:selectItems value="#{dictionaryMB.businessActivity}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
                                         </p:selectManyCheckbox>
-                                    
                                 </p:tab>
                            
                            </p:tabView>
                            <h:panelGroup>
-                               <h:link class="redX floatL" style="color: red" value="Wyczyść" />
-                               <h:link class="greyButton floatR" style="color: #000000" value="Wybierz"/>  
+                               <p:commandButton styleClass="redX floatL" style="color: red" update="employmentPanel" value="Wyczyść" action="#{marketMB.unselectEmployment()}" oncomplete="overlay.show();" >
+                                  
+                               </p:commandButton>
+                               
+                               <p:commandButton styleClass="greyButton floatR" update="@form" value="Wybierz" action="#{marketMB.loadMarket()}"/>  
                            </h:panelGroup>
                        </p:overlayPanel> 
                            
