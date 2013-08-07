@@ -92,22 +92,23 @@
                                         </h:inputText>
                                         <h:message for="freeResourcesValue" errorClass="invalid" id="freeResourcesValueMessage" />
                                     </div>
-
-                                    <div class="field"> 
-                                        <h:outputText class="label" value="Cel:"/>
-                                        <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
-                                    </div>
-
+                                    
                                     <div class="field"> 
                                         <h:outputText class="label" value="Oczekiwana rata:"/>
                                         <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
                                             <f:converter converterId="javax.faces.BigDecimal"    />
-                                            <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
+                                            <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
                                             <p:ajax  event="keyup" update="expectedInstalmentMessage" />
                                         </h:inputText>
                                         <h:message for="expectedInstalment" errorClass="invalid" id="expectedInstalmentMessage" />
                                     </div>
 
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Cel:"/>
+                                        <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                    </div>
+                                    
                                     <div class="field"> 
                                         <h:outputText class="label" value="notatka"/>
                                         <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
@@ -119,8 +120,15 @@
                                         <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
                                             <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                         </p:selectOneMenu>
-
                                     </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Premium"/> 
+                                        <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
+                                    </div>
+                                    
+                                    
+                                    
                                 </h:panelGroup>
 
 
