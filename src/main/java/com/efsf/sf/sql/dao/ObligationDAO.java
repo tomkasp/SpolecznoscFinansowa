@@ -2,6 +2,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Obligation;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,7 +10,7 @@ import org.hibernate.Session;
 
 @ManagedBean
 @SessionScoped
-public class ObligationDAO {
+public class ObligationDAO implements Serializable{
 
     public ObligationDAO() {
     }
@@ -27,13 +28,13 @@ public class ObligationDAO {
 
     }
 
-    public List obligationList() {
+    public List obligationListForClient(Integer idUser) {
         List<Obligation> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        lista = session.createQuery("from Obligation").list();
-
+        lista = session.createQuery("from Obligation ob join fetch ob.client cl where cl.idClient= :user ").setParameter("user",idUser).list();
+                
         session.getTransaction().commit();
         session.close();
         return lista;

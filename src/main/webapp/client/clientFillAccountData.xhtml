@@ -23,6 +23,7 @@
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
                         <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index">
+                            <!-- SOMEWHERE ON THE PAGE IT IS EXECUTED EVERY TIME PAGE IS RENDERED -->
                              <f:event listener="#{createClientMB.notRequired2}" type="preRenderComponent" />
                         </h:link>
                     </h:panelGroup>

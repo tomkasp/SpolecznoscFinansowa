@@ -71,6 +71,17 @@ public class ConsultantDAO {
         session.close();
         }
     }
+    
+    public void merge(Consultant consultant) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().begin();
+        
+        session.merge(consultant);
+        
+        session.getTransaction().commit();
+        session.close();
+        
+    }
 
     public void delete(Consultant consultant) {
 

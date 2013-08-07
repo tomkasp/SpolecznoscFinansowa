@@ -47,7 +47,7 @@ public class ClientDAO {
         session.close();    
     }
      
-    public void decrementPoints(Client client){
+    public void decrementPoints(Client client,Integer p){
         //odejmowanie punktow po dodaniu wniosku
         
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -55,7 +55,7 @@ public class ClientDAO {
         
         Client cli = (Client)session.load(Client.class, client.getIdClient());
         points = cli.getPoints();
-        points --;
+        points = points-p;
         cli.setPoints(points);
         session.save(cli);
         
@@ -88,6 +88,33 @@ public class ClientDAO {
         session.getTransaction().commit();
         
         session.close();
+    }
+    
+    public Client getClientWithIncomes(int idClient)
+    {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction().begin();
+                
+                Query q = session.createQuery("FROM Client as clt "
+                     + "left join fetch clt.incomes as inc "
+                     + "left join fetch clt.incomeBusinessActivities as ba "
+                     + "left join fetch inc.branch as br "
+                     + "left join fetch inc.employmentType as empltype "
+                     + "left join fetch ba.branch as br2 "
+                     + "left join fetch ba.employmentType as empltype2 "
+                     + "where clt.idClient = :id");
+                
+                q.setParameter("id", idClient);
+                
+                Client client = (Client) q.list().get(0);
+        
+                
+                
+                session.getTransaction().commit();
+
+                session.close();
+
+                return client;
     }
     
     
