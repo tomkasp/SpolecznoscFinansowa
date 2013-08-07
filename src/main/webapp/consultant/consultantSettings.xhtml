@@ -33,20 +33,22 @@
                 <h:form>
 
                     <div id="profileBar" class="profilBar">
-                        <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
-                        <div id="spaceFiller" style="min-height: 128px"> 
-                            <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
-                        </div>
-
-                        <div>     
-                            <h5> Stanisław Nowy </h5> 
-                            <h:outputText class="profileText" value="nr. doradcy:" />
-                            <h5> 000001 </h5>
-                            <h:outputText class="profileText" value="Twój ranking:" /> 
-                            <h5> 123/123456 (+12) </h5>
-                        </div>
+                    <div id="spaceFiller"> 
+                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
                     </div>
+
+                    <div>     
+                        <h5> #{loginMB.consultant.name} &nbsp; #{loginMB.consultant.lastName} </h5> 
+                        <h:outputText class="profileText" value="nr. doradcy:" />
+                        <h5> #{loginMB.consultant.user.login} </h5>
+                        <h:outputText class="profileText" value="Twój ranking:" /> 
+                        <h5> #{marketMB.clientCaseList.size()}/100 </h5>
+                    </div>
+                </div>
+                    
+                    
                     <div class="marginT10">
                         <h3 style="display: inline">Witaj Stanisław Nowy. Dziękujemy za wykupienie wersji </h3>
                         <h:outputText class="bluePRO" style="display:inline;" value="PRO." /> 

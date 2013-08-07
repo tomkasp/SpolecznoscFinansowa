@@ -173,7 +173,7 @@ public class MarketMB implements Serializable
             modelsEmploymentType.add(showAllClientsEmploymentTypes(clientCaseList.get(i).getClient()));
             modelsBranch.add(showAllClientsBranches(clientCaseList.get(i).getClient()));
         }
-
+        
         System.out.println("Pobrano"); 
     }
     
