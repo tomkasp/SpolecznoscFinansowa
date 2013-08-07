@@ -150,10 +150,8 @@
 
                             <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
 
-                            <!-- 
-                            podpiac tabele wynikow!!!
-                            -->
-                            <p:dataTable value="#{clientCaseMB.pobierzListeObligacji()}" var="lo" rowIndexVar="wiersz">
+                            
+                            <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" var="lo" rowIndexVar="wiersz">
                                 <p:column headerText="Lp">  
                                     #{wiersz+1}
                                 </p:column>  
@@ -183,7 +181,7 @@
 
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
-                                <p:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
+                                <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
 
                                 <h:form>
                                     <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
@@ -217,8 +215,8 @@
                                             </h:selectOneMenu>
 
                                         </h:panelGrid>
-                                        <h:commandButton value="Anuluj" type="reset" onclick="zobDial.hide();"/>
-                                        <h:commandButton value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
+                                        <h:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial.hide();"/>
+                                        <h:commandButton style="float:right;" value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
 
 
                                     </p:dialog>
@@ -292,7 +290,6 @@
                 <div style="min-height: 30px;">
 
                 </div>
-
 
 
             </ui:define>           
