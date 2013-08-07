@@ -6,7 +6,6 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 

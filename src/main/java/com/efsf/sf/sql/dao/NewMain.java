@@ -4,10 +4,10 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.Address;
-import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.Consultant;
+import com.efsf.sf.sql.entity.CaseStatus;
+import com.efsf.sf.sql.entity.ClientCase;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  *
@@ -20,11 +20,11 @@ public class NewMain {
      */
     public static void main(String[] args) throws NoSuchAlgorithmException {
         
-          ConsultantDAO cdao=new ConsultantDAO(); 
-          Consultant c=cdao.readConsultantForSettings(18);     
-          
-          System.out.println( c.getAddresses().iterator().next().getIdAddress() );
-          
+//        ConsultantDAO cdao=new ConsultantDAO(); 
+//        Consultant c=cdao.readConsultantForSettings(18);     
+//          
+//        System.out.println( c.getAddresses().iterator().next().getIdAddress() );
+//          
 //        ClientDAO cdao=new ClientDAO();
 //        Client c=cdao.read(1);
 //         
@@ -39,6 +39,22 @@ public class NewMain {
 //        AddressDAO adao=new AddressDAO();
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
+            
+          
+//          
+//        ClientCaseDAO ccdao=new ClientCaseDAO();
+//        @SuppressWarnings("unchecked")
+//        List<ClientCase> list=ccdao.finishedCasesSelectedClient(38); //ccdao.awaitingCasesSelectedClient(38); //ccdao.last5CasesSelectedClient(38);
 //        
+//        //ClientCase cc=list.get(0);
+//        System.out.println(list.size());
+//        
+        //System.out.println(list.size());    
+        
+          
+        
+        CaseStatusDAO csdao=new CaseStatusDAO();
+        CaseStatus cs=csdao.read(8);
+        System.out.println(cs.getIdCaseStatus());
     }
 }
