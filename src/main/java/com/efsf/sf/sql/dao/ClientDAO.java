@@ -48,7 +48,7 @@ public class ClientDAO {
         session.close();    
     }
      
-    public void decrementPoints(Client client){
+    public void decrementPoints(Client client,Integer p){
         //odejmowanie punktow po dodaniu wniosku
         
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -56,7 +56,7 @@ public class ClientDAO {
         
         Client cli = (Client)session.load(Client.class, client.getIdClient());
         points = cli.getPoints();
-        points --;
+        points = points-p;
         cli.setPoints(points);
         session.save(cli);
         
