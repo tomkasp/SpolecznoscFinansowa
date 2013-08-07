@@ -36,8 +36,8 @@ public class ClientCaseMB implements Serializable {
     public ClientCaseMB(){
     }    
     
-    public List<Obligation> getObligationListForCurrentClient(){ 
-        setObligationList(obdao.obligationList(login.getClient().getIdClient()));
+    public List<Obligation> retrieveObligationListForCurrentClient(){ 
+        setObligationList(obdao.obligationListForClient(login.getClient().getIdClient()));
         return obligationList;
     }
     
