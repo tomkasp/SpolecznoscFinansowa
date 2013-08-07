@@ -28,7 +28,7 @@ public class ObligationDAO implements Serializable{
 
     }
 
-    public List obligationList(Integer idUser) {
+    public List obligationListForClient(Integer idUser) {
         List<Obligation> lista;
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
