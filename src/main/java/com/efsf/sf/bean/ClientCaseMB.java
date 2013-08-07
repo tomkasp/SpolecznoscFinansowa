@@ -52,6 +52,15 @@ public class ClientCaseMB implements Serializable {
         obligation = new Obligation();
     }
     
+    public Boolean premiumPointsChecking(){
+        int premium = 30;
+        if(login.getClient().getPoints() < premium){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     
     public void addCase() {
