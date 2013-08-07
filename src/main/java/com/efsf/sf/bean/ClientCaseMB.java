@@ -72,7 +72,7 @@ public class ClientCaseMB implements Serializable {
     }
     
     
-    public void addCase() {
+    public void addCase(){
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
             
