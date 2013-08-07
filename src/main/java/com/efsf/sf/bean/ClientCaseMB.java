@@ -7,6 +7,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +64,11 @@ public class ClientCaseMB implements Serializable {
             cd.decrementPoints(login.getClient());
             login.getClient().setPoints(login.getClient().getPoints() - 1);
 
+            //ucinanie do dwoch miejsc po przecinku bez zaokrlaglania!
+            clientCase.setConsolidationValue(clientCase.getConsolidationValue().setScale(2,RoundingMode.DOWN));
+            clientCase.setFreeResourcesValue(clientCase.getFreeResourcesValue().setScale(2,RoundingMode.DOWN));
+            clientCase.setExpectedInstalment(clientCase.getExpectedInstalment().setScale(2,RoundingMode.DOWN));
+            
             clientCase.setProductType(ptd.getProductType(idTypProduktu));
             clientCase.setClient(login.getClient());
             clientCase.setPhase(1);
