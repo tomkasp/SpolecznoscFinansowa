@@ -6,10 +6,12 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
+import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
+import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
@@ -17,6 +19,7 @@ import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -38,12 +41,15 @@ public class MarketMB implements Serializable
     
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
-     
+    
+    @ManagedProperty(value="#{dictionaryMB}")
+    private DictionaryMB dictionaryMB;
+    
+    
     private List<ClientCase> clientCaseList = new ArrayList();
     
     private Converters converters =  new Converters();
-    
-    
+      
     ClientCaseDAO caseDao = new ClientCaseDAO();
    
     private ClientCase selectedCase;
@@ -53,14 +59,6 @@ public class MarketMB implements Serializable
     
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
-
-    public ClientCase getSelectedAppliedCase() {
-        return selectedAppliedCase;
-    }
-
-    public void setSelectedAppliedCase(ClientCase selectedAppliedCase) {
-        this.selectedAppliedCase = selectedAppliedCase;
-    }
     
     ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> modelsBranch = new ArrayList();
@@ -72,11 +70,37 @@ public class MarketMB implements Serializable
     private ArrayList<Set<String>> appliedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
-   
+
+    //MARKET VIEW FIELDS!
+    
+    private int phaseMin = 0;
+    private int phaseMax = 100;
+    
+    private int ageMin = 0; 
+    private int ageMax = 99;
+    
+    private int difficultyMin = 0;
+    private int difficultyMax = 10;
+    
+    private int branchId = 0;
+    private int regionId = 0;
+    
+    private ArrayList<String> incomeIds = new ArrayList();
+    private ArrayList<String> businessIds = new ArrayList();
+
+    private ArrayList<Set<String>> marketModelsEmploymentType = new ArrayList();
+    private ArrayList<Set<String>> marketModelsBranch = new ArrayList();
+    
+    private List<ClientCase> allMarket = new ArrayList();
+    
+    private ClientCase selectedMarketCase;
+    
     public MarketMB()
     {
         reloadCases(); 
     }
+    
+    
     
     
     @PostConstruct
@@ -84,6 +108,11 @@ public class MarketMB implements Serializable
     {
         makeObservedModels();
         makeAppliedModels();
+        
+        for (EmploymentType et : dictionaryMB.getIncome())
+            incomeIds.add(et.getShortcut());
+        for (EmploymentType ba : dictionaryMB.getBusinessActivity())
+            businessIds.add(ba.getShortcut());  
     }
     
     public void makeObservedModels()
@@ -100,7 +129,6 @@ public class MarketMB implements Serializable
         }
     }
     
-   
     public void makeAppliedModels()
     {
         Set<ClientCase> cs = loginMB.getConsultant().getClientCases();
@@ -126,6 +154,7 @@ public class MarketMB implements Serializable
     public void rowClick(ClientCase cs)
     {
         selectedCase = cs;
+        System.out.println("Klik " + cs.getIdClientCase());
     }
    
     
@@ -136,9 +165,6 @@ public class MarketMB implements Serializable
     
     public void reloadCases()
     {
-       
-       
-        
         modelsEmploymentType = new ArrayList();
         modelsBranch= new ArrayList();   
         clientCaseList =  caseDao.last5Cases();
@@ -151,17 +177,44 @@ public class MarketMB implements Serializable
         System.out.println("Pobrano"); 
     }
     
+    public void loadMarket()
+    {
+        selectedMarketCase = null;
+        marketModelsEmploymentType = new ArrayList();
+        marketModelsBranch= new ArrayList(); 
+        allMarket = caseDao.getCasesWithMarketFilter(phaseMin,phaseMax,ageMin,ageMax,difficultyMin,difficultyMax,branchId,regionId,incomeIds,businessIds);
+        for (int i = 0; i<allMarket.size(); i++)
+        {
+            marketModelsEmploymentType.add(showAllClientsEmploymentTypes(allMarket.get(i).getClient()));
+            marketModelsBranch.add(showAllClientsBranches(allMarket.get(i).getClient()));
+        }
+    }
+    
+    public String toMarket()
+    {  
+        selectedMarketCase = null;
+        loadMarket();
+        return "/consultant/consultantMarket?faces-redirect=true";
+    }
+    
     public void pollData()
     {
+        selectedCase = null;
+        selectedLastCase = null;
+        selectedObservedCase = null;
+        selectedAppliedCase = null;
+        
          // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
          loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
          reloadCases();
     }
     
-    
-    
-    
-    // I THINK THERE SHOULD BE CLASS LIKE MARKET UTIL MADE BECAUSE SUCH METHODS PROBS COULD BE USED SOMEWHERE ELSE TOO
+    public void unselectEmployment()
+    {
+        businessIds = new ArrayList();
+        incomeIds = new ArrayList();
+    }
+     
     public int countConsultantApplications(ClientCase cs)
     { 
         Set<Consultant> cons = cs.getConsultants();
@@ -171,30 +224,17 @@ public class MarketMB implements Serializable
             return cons.size();
     }
     
-    public void traceCase()
+    public void traceCase(ClientCase cs)
     {
         Consultant consultant = loginMB.getConsultant();
         ConsultantDAO consultantDao;
-        if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
+        if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(),cs.getIdClientCase()))
         {
             alreadyObserved=false;
-            if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
-            {
-                 consultant.getClientCases_2().add(selectedLastCase);
+            consultant.getClientCases_2().add(cs);
 
-            }
-            else
-            {
-                 for (ClientCase cc : consultant.getClientCases())
-                 {
-                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
-                     {
-                         consultant.getClientCases_2().add(cc);
-                     }
-                 }
-            }
             consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
+            consultantDao.merge(consultant);
             observedModelsEmploymentType = new ArrayList();
             observedModelsBranch = new ArrayList();
             makeObservedModels();
@@ -205,53 +245,16 @@ public class MarketMB implements Serializable
         }
     }
     
-    public void applyToCase()
+    public void applyToCase(ClientCase cs)
     {
         Consultant consultant = loginMB.getConsultant();
    
-        if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),selectedLastCase.getIdClientCase()))
+        if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),cs.getIdClientCase()))
         {     
             alreadyApplied = false;
-            if (!caseDao.doesConsultantObserveCase(consultant.getIdConsultant(), selectedLastCase.getIdClientCase()))
-            {
-                consultant.getClientCases().add(selectedLastCase);
-            }
-            else
-            {
-                 for (ClientCase cc : consultant.getClientCases_2())
-                 {
-                     if (cc.getIdClientCase().equals(selectedLastCase.getIdClientCase()))
-                     {
-                         consultant.getClientCases().add(cc);
-                     }
-                 }
-            }
-             
+            consultant.getClientCases().add(cs);
             ConsultantDAO consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
-            
-            loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
-            
-            appliedModelsEmploymentType = new ArrayList();
-            appliedModelsBranch = new ArrayList();
-            makeAppliedModels();
-        }
-        else
-        {
-            alreadyApplied = true;
-        }
-    }
-    
-    public void applyToObservedCase()
-    {
-        Consultant consultant = loginMB.getConsultant();
-        
-        if (!caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(),selectedObservedCase.getIdClientCase()))
-        {
-            alreadyApplied = false;
-            consultant.getClientCases().add(selectedObservedCase);
-            ConsultantDAO consultantDao = new ConsultantDAO();
-            consultantDao.update(consultant);
+            consultantDao.merge(consultant);
             
             loginMB.setConsultant(consultantDao.getCounsultantConnectedToUser(loginMB.getIdUser()));
             
@@ -329,12 +332,14 @@ public class MarketMB implements Serializable
        
         selectedCaseIncomeTable = new ArrayList();
         
-        for (Income i : selectedCase.getClient().getIncomes())
+        Client client = new ClientDAO().getClientWithIncomes(selectedCase.getClient().getIdClient());
+        
+        for (Income i : client.getIncomes())
         {
             selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
         }
         
-        for (IncomeBusinessActivity i : selectedCase.getClient().getIncomeBusinessActivities())
+        for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
         {
             selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
         }
@@ -353,6 +358,10 @@ public class MarketMB implements Serializable
                 break;
             }
         }
+        
+        observedModelsEmploymentType = new ArrayList();
+        observedModelsBranch = new ArrayList();
+        makeObservedModels();
     }
     
     public void revokeApplication()
@@ -368,6 +377,10 @@ public class MarketMB implements Serializable
                 break;
             }
         }
+        
+        appliedModelsEmploymentType = new ArrayList();
+        appliedModelsBranch = new ArrayList();
+        makeAppliedModels();
     }
     
     public List<ClientCase> getClientCaseList() {
@@ -488,6 +501,134 @@ public class MarketMB implements Serializable
 
     public void setAlreadyObserved(boolean alreadyObserved) {
         this.alreadyObserved = alreadyObserved;
+    }
+
+    public ClientCase getSelectedAppliedCase() {
+        return selectedAppliedCase;
+    }
+
+    public void setSelectedAppliedCase(ClientCase selectedAppliedCase) {
+        this.selectedAppliedCase = selectedAppliedCase;
+    }
+
+    public int getPhaseMin() {
+        return phaseMin;
+    }
+
+    public void setPhaseMin(int phaseMin) {
+        this.phaseMin = phaseMin;
+    }
+
+    public int getPhaseMax() {
+        return phaseMax;
+    }
+
+    public void setPhaseMax(int phaseMax) {
+        this.phaseMax = phaseMax;
+    }
+
+    public int getAgeMin() {
+        return ageMin;
+    }
+
+    public void setAgeMin(int ageMin) {
+        this.ageMin = ageMin;
+    }
+
+    public int getAgeMax() {
+        return ageMax;
+    }
+
+    public void setAgeMax(int ageMax) {
+        this.ageMax = ageMax;
+    }
+
+    public int getDifficultyMin() {
+        return difficultyMin;
+    }
+
+    public void setDifficultyMin(int difficultyMin) {
+        this.difficultyMin = difficultyMin;
+    }
+
+    public int getDifficultyMax() {
+        return difficultyMax;
+    }
+
+    public void setDifficultyMax(int difficultyMax) {
+        this.difficultyMax = difficultyMax;
+    }
+
+    public ArrayList<String> getIncomeIds() {
+        return incomeIds;
+    }
+
+    public void setIncomeIds(ArrayList<String> incomeIds) {
+        this.incomeIds = incomeIds;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    public int getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
+    }
+
+    public ArrayList<String> getBusinessIds() {
+        return businessIds;
+    }
+
+    public void setBusinessIds(ArrayList<String> businessIds) {
+        this.businessIds = businessIds;
+    }
+
+    public List<ClientCase> getAllMarket() {
+        return allMarket;
+    }
+
+    public void setAllMarket(List<ClientCase> allMarket) {
+        this.allMarket = allMarket;
+    }
+
+    public ArrayList<Set<String>> getMarketModelsEmploymentType() {
+        return marketModelsEmploymentType;
+    }
+
+    public void setMarketModelsEmploymentType(ArrayList<Set<String>> marketModelsEmploymentType) {
+        this.marketModelsEmploymentType = marketModelsEmploymentType;
+    }
+
+    public ArrayList<Set<String>> getMarketModelsBranch() {
+        return marketModelsBranch;
+    }
+
+    public void setMarketModelsBranch(ArrayList<Set<String>> marketModelsBranch) {
+        this.marketModelsBranch = marketModelsBranch;
+    }
+
+    public DictionaryMB getDictionaryMB() {
+        return dictionaryMB;
+    }
+
+    public void setDictionaryMB(DictionaryMB dictionaryMB) {
+        this.dictionaryMB = dictionaryMB;
+    }
+
+    public ClientCase getSelectedMarketCase() {
+        return selectedMarketCase;
+    }
+
+    public void setSelectedMarketCase(ClientCase selectedMarketCase) {
+        this.selectedMarketCase = selectedMarketCase;
     }
     
     

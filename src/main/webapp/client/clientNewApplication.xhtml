@@ -35,30 +35,30 @@
 
             <ui:define name="content">
 
-                <h:form>
 
-                    <div id="profileBar" class="profilBar">
-                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
-                        <div id="spaceFiller" > </div>
-                        <div>     
-                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
-                            <h:outputText class="profileText" value="nr. klienta:" />
-                            <h5> #{loginMB.client.user.login} </h5>
-                            <h:outputText class="profileText" value="Stan konta:" />
-                            <h5> #{loginMB.client.points} / 5 </h5>
-                        </div>
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5> #{loginMB.client.user.login} </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5> #{loginMB.client.points} / 5 </h5>
                     </div>
+                </div>
 
 
-                    <div>
+                <div>
 
-                        <div class="contentBox" style="margin-bottom: 30px;">
+                    <div class="contentBox" style="margin-bottom: 30px;">
 
-                            <div class="leftBox">
+                        <div class="leftBox">
 
-                                <h3 class="greenLeftBorder"> Nowy wniosek </h3>
-
+                            <h3 class="greenLeftBorder"> Nowy wniosek </h3>
+                            <h:form>  
                                 <h:panelGroup >
                                     <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
                                         <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
@@ -73,218 +73,257 @@
                                         </p:calendar>
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
-                                        <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
-                                            <f:convertNumber maxFractionDigits="2" />
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                        <h:inputText maxlength="13"  required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"  > 
+                                            <f:converter converterId="javax.faces.BigDecimal"   />
+                                            <f:validateDoubleRange minimum="0.01" maximum="9999999999.99"  />
                                             <p:ajax  event="keyup" update="consolidationValueMessage" />
-
                                         </h:inputText>
                                         <h:message for="consolidationValue" errorClass="invalid" id="consolidationValueMessage" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  
-                                        <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}" /> 
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Kwota wolne środki:"/>  
+                                        <h:inputText maxlength="13" id="freeResourcesValue" value="#{clientCaseMB.clientCase.freeResourcesValue}" > 
+                                            <f:converter converterId="javax.faces.BigDecimal"   />
+                                            <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
+                                            <p:ajax  event="keyup" update="freeResourcesValueMessage" />
+                                        </h:inputText>
+                                        <h:message for="freeResourcesValue" errorClass="invalid" id="freeResourcesValueMessage" />
+                                    </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Oczekiwana rata:"/>
+                                        <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
+                                            <f:converter converterId="javax.faces.BigDecimal"    />
+                                            <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
+                                            <p:ajax  event="keyup" update="expectedInstalmentMessage" />
+                                        </h:inputText>
+                                        <h:message for="expectedInstalment" errorClass="invalid" id="expectedInstalmentMessage" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Cel:"/>
-                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Cel:"/>
+                                        <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
                                     </div>
-
-                                    <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>
-                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"/> 
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="notatka"/>
+                                        <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
+                                            <f:validateLength maximum="100" minimum="20"/>
+                                        </h:inputTextarea>    
                                     </div>
-
-                                    <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
 
                                     <div class="field"> <h:outputText class="label" value="Rodzaj produktu"/> 
                                         <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
                                             <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                         </p:selectOneMenu>
-
                                     </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Premium"/> 
+                                        <p:selectBooleanCheckbox onchange="dlg2.show();" disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
+                                            
+                                    </div>
+                                    <p:dialog id="basicDialog2" header="Premium" widgetVar="dlg2" rendered="true">
+                                        Sprawa premium zabierze Ci 30 szalonych punktów!
+                                        <h:commandButton type="reset" value="OK" onclick="dlg2.hide();"/>
+                                    </p:dialog>
+                                    
+                                    
                                 </h:panelGroup>
 
 
                                 <h:commandButton  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
-                                <h:commandButton  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" /> 
 
-                                <p:dialog id="basicDialog" header="Wyczerpany limit " widgetVar="dlg1" rendered="true">  
-                                    <h:outputText value="Niestety wyczerpałeś już swój limit punktów na dodawanie wniosków. Doładuj punkty i wypełnij wniosek ponownie!" />  
+
+                                <p:dialog id="basicDialog" header="Doładuj konto." widgetVar="dlg1" rendered="true">  
+                                    <h:panelGrid columns="1">
+                                        <h:outputText value="Niestety wyczerpałeś już swój limit punktów na dodawanie wniosków. Doładuj punkty i wypełnij wniosek ponownie." />  
+                                        <h:commandButton type="reset" value="OK" onclick="dlg1.hide();"/>
+                                    </h:panelGrid>
                                 </p:dialog>  
+                            </h:form>        
+                            <h:commandButton  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" /> 
+                        </div>   
 
 
+                        <div class="rightBox" style="width: 50%;">
 
+                            <h4 class="greenLeftBorder"> Koszt punktów: </h4>
 
+                            <h4 class="greenLeftBorder"> PUNKTY - Jak działa i co za ile </h4>
+                            <div>
 
-
-
-
-                            </div>   
-
-
-                            <div class="rightBox" style="width: 50%;">
-
-                                <h4 class="greenLeftBorder"> Koszt punktów: </h4>
-
-                                <h4 class="greenLeftBorder"> PUNKTY - Jak działa i co za ile </h4>
-                                <div>
-
-                                    Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-
-                                </div>
-
-                                <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIKu </h4>
-                                <div style="margin-bottom: 30px;">
-
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-
-                                </div>
-
-                                <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Posiadam raport BIK"/> </div>
-                                <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Nie posiadam raportu BIK"/> </div>
-
-                                <div id="buttonsBox1" style="margin-top: 30px;">
-
-                                    <h:link class="greyButton wideButton" value="Więcej o usłudze" style="margin-right: 20px; width: 190px;"/>
-
-                                    <h:link class="greyButton wideButton" value="Wykup usługe skanowania BIKu" style="width: 190px;"/>
-
-                                </div>
-
-                                <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
-
-
-                                <p:dataTable>
-                                    <p:column headerText="Lp">  
-                                    </p:column>  
-
-                                    <p:column headerText="Rodzaj">  
-                                    </p:column>  
-
-                                    <p:column headerText="Wygasa">    
-                                    </p:column>  
-
-                                    <p:column headerText="Rata">  
-                                    </p:column>  
-
-                                    <p:column headerText="Kwota">  
-                                    </p:column> 
-
-                                    <p:column headerText="Zaległe"  >  
-                                    </p:column> 
-
-                                </p:dataTable>
-
-                                <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
-
-                                    <p:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();" /> 
-
-
-                                    <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
-                                        <h:form>
-                                            <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
-
-                                                <h:outputText value="Rodzaj zobowiązania"/>
-                                                <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
-                                                    <f:selectItem itemLabel="Bankowe" itemValue="b"/>
-                                                    <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
-                                                </h:selectOneMenu>
-
-                                                <h:outputText value="Wygasa:"/>
-                                                <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
-
-                                                <h:outputText value="Rata:"/>
-                                                <h:inputText value="#{clientCaseMB.obligation.actualPrice}"/>
-
-                                                <h:outputText value="Kwota:"/>
-                                                <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
-
-                                                <h:outputText value="Aktualne"/>
-                                                <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
-
-                                                <h:outputText value="Rodzaj produktu"/> 
-                                                <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
-                                                    <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
-                                                </h:selectOneMenu>
-
-                                            </h:panelGrid>
-                                            <h:commandButton value="Anuluj" type="reset" onclick="zobDial.hide();"/>
-                                            <h:commandButton value="Dodaj" onclick="zobDial.hide();" action="#{clientCaseMB.addObligation}"/>
-
-                                        </h:form>     
-                                    </p:dialog>
-                                </div>
-
-                                <div id="buttonsBox3">
-
-                                    <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
-
-                                </div>
+                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
 
                             </div>
 
+                            <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIKu </h4>
+                            <div style="margin-bottom: 30px;">
+
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+
+                            </div>
+
+                            <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Posiadam raport BIK"/> </div>
+                            <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Nie posiadam raportu BIK"/> </div>
+
+                            <div id="buttonsBox1" style="margin-top: 30px;">
+
+                                <h:link class="greyButton wideButton" value="Więcej o usłudze" style="margin-right: 20px; width: 190px;"/>
+
+                                <h:link class="greyButton wideButton" value="Wykup usługe skanowania BIKu" style="width: 190px;"/>
+
+                            </div>
+
+                            <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
+
+
+                            <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" var="lo" rowIndexVar="wiersz">
+                                <p:column headerText="Lp">  
+                                    #{wiersz+1}
+                                </p:column>  
+
+                                <p:column headerText="Rodzaj">  
+                                    <h:outputText value="#{lo.obligationKind}" />
+                                </p:column>  
+
+                                <p:column headerText="Wygasa">    
+                                    <h:outputText value="#{lo.beginDate}" />
+                                </p:column>  
+
+                                <p:column headerText="Rata"> 
+                                    <h:outputText value="#{lo.actualPrice}" />
+                                </p:column>  
+
+                                <p:column headerText="Kwota">  
+                                    <h:outputText value="#{lo.repayment}" />
+                                </p:column> 
+
+                                <p:column headerText="Zaległe"  >  
+                                    <h:outputText value="#{lo.active}" />
+
+                                </p:column> 
+
+                            </p:dataTable>
+
+                            <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
+
+                                  <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
+
+                                  <h:form>
+                                      <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
+
+                                          <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
+
+                                              <h:outputText value="Rodzaj zobowiązania"/>
+                                              <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
+                                                  <f:selectItem itemLabel="Bankowe" itemValue="b"/>
+                                                  <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
+                                              </h:selectOneMenu>
+
+                                              <h:outputText value="Wygasa:"/>
+                                              <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
+
+                                              <h:outputText value="Rata:"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.actualPrice}"/>
+
+                                              <h:outputText value="Kwota:"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
+
+                                              <h:outputText value="Tytulem"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.name}"/>
+
+                                              <h:outputText value="Aktualne"/>
+                                              <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
+
+                                              <h:outputText value="Rodzaj produktu"/> 
+                                              <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
+                                                  <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                                              </h:selectOneMenu>
+
+                                          </h:panelGrid>
+                                          <h:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial.hide();"/>
+                                          <h:commandButton style="float:right;" value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
+
+
+                                      </p:dialog>
+                                  </h:form>
+                              </div>
+
+                              <div id="buttonsBox3">
+
+                                  <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
+
+                                  </div>
+
+                              </div>
+
+                            </div>
+
+                            <div class="greenLine" ></div>  
+
+
+                            <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
+
+                            <p:dataTable > 
+
+                                <p:column headerText="Lp" >  
+
+                                </p:column> 
+
+                                <p:column headerText="Numer klienta">  
+                                </p:column>  
+
+                                <p:column headerText="Data dodania">    
+                                </p:column>  
+
+                                <p:column headerText="Numer sprawy">  
+                                </p:column>  
+
+                                <p:column headerText="Postęp">  
+                                </p:column> 
+
+                                <p:column headerText="Rodzaj kredytu"  >  
+                                </p:column> 
+
+                                <p:column headerText="BIK">  
+                                </p:column> 
+
+                                <p:column headerText="Kod pocztowy">  
+                                </p:column>
+
+                                <p:column headerText="Wiek">  
+                                </p:column>
+
+                                <p:column headerText="Typ zatrudnienia">  
+                                </p:column>
+
+                                <p:column headerText="Branża">  
+                                </p:column>
+
+                                <p:column headerText="Trudności kredytu">  
+                                </p:column>
+
+                                <p:column headerText="Ilość doradców">  
+                                </p:column>                  
+
+                                <p:column headerText="Koniec aukcji">  
+                                </p:column>      
+
+
+                            </p:dataTable>
                         </div>
 
-                        <div class="greenLine" ></div>  
+                        <div style="min-height: 30px;">
+
+                        </div>
 
 
-                        <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
-
-                        <p:dataTable> 
-
-                            <p:column headerText="Lp">  
-                            </p:column> 
-
-                            <p:column headerText="Numer klienta">  
-                            </p:column>  
-
-                            <p:column headerText="Data dodania">    
-                            </p:column>  
-
-                            <p:column headerText="Numer sprawy">  
-                            </p:column>  
-
-                            <p:column headerText="Postęp">  
-                            </p:column> 
-
-                            <p:column headerText="Rodzaj kredytu"  >  
-                            </p:column> 
-
-                            <p:column headerText="BIK">  
-                            </p:column> 
-
-                            <p:column headerText="Kod pocztowy">  
-                            </p:column>
-
-                            <p:column headerText="Wiek">  
-                            </p:column>
-
-                            <p:column headerText="Typ zatrudnienia">  
-                            </p:column>
-
-                            <p:column headerText="Branża">  
-                            </p:column>
-
-                            <p:column headerText="Trudności kredytu">  
-                            </p:column>
-
-                            <p:column headerText="Ilość doradców">  
-                            </p:column>                  
-
-                            <p:column headerText="Koniec aukcji">  
-                            </p:column>      
-
-
-                        </p:dataTable>
-                    </div>
-
-                    <div style="min-height: 30px;">
-
-                    </div>
-
-                </h:form>      
-
-            </ui:define>           
-        </ui:composition>
-    </body>
-</html>
+                    </ui:define>           
+                </ui:composition>
+            </body>
+        </html>
