@@ -254,7 +254,7 @@ ul{
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
-    min-height:150px
+    /*min-height:150px*/
 }
 
 li{
@@ -325,6 +325,10 @@ input
 .ui-button
 {
     margin: 0 !important;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active .ui-state-focus {
+    background: #0793F0;
 }
 
 

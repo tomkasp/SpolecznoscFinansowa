@@ -41,7 +41,7 @@
                     </div>
 
                     <div>     
-                        <h5> #{loginMB.consultant.name} &nbsp; #{loginMB.consultant.lastName} </h5> 
+                        <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
                         <h:outputText class="profileText" value="nr. doradcy:" />
                         <h5> #{loginMB.consultant.user.login} </h5>
                         <h:outputText class="profileText" value="Twój ranking:" /> 
@@ -141,7 +141,7 @@
 
                         </p:dataTable>
                    
-                        <p:poll interval="60" listener="#{marketMB.pollData()}" update="lastCases traced applied" /> 
+                        <p:poll interval="120" listener="#{marketMB.pollData()}" update="@form" /> 
                     
                     </div>
 
