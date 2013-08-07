@@ -3,6 +3,7 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.entity.ProductType;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +14,7 @@ import org.hibernate.classic.Session;
  *
  * @author admin
  */
-public class ProductTypeDAO {
+public class ProductTypeDAO implements Serializable{
    
     public ProductType getProductType(int id)
     {

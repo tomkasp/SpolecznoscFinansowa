@@ -7,6 +7,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,8 @@ public class ClientCaseMB implements Serializable {
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
+    
+    private int premium = 30;
     /**
      * Creates a new instance of ClientCaseMB
      */
@@ -51,6 +54,15 @@ public class ClientCaseMB implements Serializable {
         obligation = new Obligation();
     }
     
+    public Boolean premiumPointsChecking(){
+        
+        if(login.getClient().getPoints() < premium){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     
     public void addCase() {
@@ -60,9 +72,20 @@ public class ClientCaseMB implements Serializable {
             ClientDAO cd = new ClientDAO();
 
             //pamietac o zabraniu punktow z klienta!
-            cd.decrementPoints(login.getClient());
+            if(clientCase.getPremium()){
+                cd.decrementPoints(login.getClient(),premium);
+            }
+            else{
+                cd.decrementPoints(login.getClient(),1);
+            }
+            
             login.getClient().setPoints(login.getClient().getPoints() - 1);
 
+            //ucinanie do dwoch miejsc po przecinku bez zaokrlaglania!
+            clientCase.setConsolidationValue(clientCase.getConsolidationValue().setScale(2,RoundingMode.DOWN));
+            clientCase.setFreeResourcesValue(clientCase.getFreeResourcesValue().setScale(2,RoundingMode.DOWN));
+            clientCase.setExpectedInstalment(clientCase.getExpectedInstalment().setScale(2,RoundingMode.DOWN));
+            
             clientCase.setProductType(ptd.getProductType(idTypProduktu));
             clientCase.setClient(login.getClient());
             clientCase.setPhase(1);
