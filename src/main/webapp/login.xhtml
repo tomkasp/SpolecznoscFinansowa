@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
      
     <body>
@@ -11,7 +12,15 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> SF - Logowanie </ui:define> 
             <ui:define name="content">
-                <h:form>   
+                
+           
+
+            <p:dialog modal="true" widgetVar="statusDialog" style="padding-bottom: 0px; height: 100px" height="100px" draggable="false" closable="false">  
+                    <div class="circle"></div>
+                    <div class="circle1"></div> 
+            </p:dialog>  
+            
+            <h:form>   
             <div class="contentBox" >
                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
@@ -45,8 +54,9 @@
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <h:commandLink class="blueButton buttonMargin" value="Zaloguj" action="#{loginMB.login()}"/>
-                    
+                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" action="#{loginMB.login()}" onclick="statusDialog.show();" oncomplete="statusDialog.hide();">
+          
+                    </p:commandLink>
                     
                 </div>
                 

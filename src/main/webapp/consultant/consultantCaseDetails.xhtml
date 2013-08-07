@@ -102,6 +102,22 @@
                             </div>
 
                             <div class="rightInlineBox">
+                                <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus == 1}" >
+                                    <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
+                                    <div class="solidText"> 
+                                         Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
+                                    </div>  
+                                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedCase)}" oncomplete="confirmed.show();" /> 
+                                    <div style="min-height: 50px"></div>
+                                    <h4> OBSERWUJ SPRAWĘ </h4>
+                                    <div class="solidText"> 
+                                         Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
+                                    </div>  
+                                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();" />
+                  
+                  
+                                </h:panelGroup>
+                                
                                 <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" >
                                     <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
 
@@ -142,6 +158,40 @@
                                 </h:panelGroup>
                             </div>
                         </div>
+                        
+                        <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->   
+                        <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                            <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
+                                Twoje zgłoszenie do sprawy #{marketMB.selectedCase.idClientCase} zostało zatwierdzone.
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
+                                Do tego zlecenia zgłosiłeś się już wcześniej. 
+                            </h:panelGroup>
+
+                            <div> 
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
+                                    
+                                </h:commandButton>
+                            </div>
+                         </p:dialog>
+
+                         <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                            <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
+                                Od teraz śledzisz sprawę numer:  #{marketMB.selectedCase.idClientCase}.
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
+                                Już obserwujesz tą sprawę! 
+                            </h:panelGroup>
+
+                            <div> 
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
+                                   
+                                </h:commandButton>
+                            </div>
+                         </p:dialog>
+                        
                     </ui:define>
         </ui:composition>
     </body>

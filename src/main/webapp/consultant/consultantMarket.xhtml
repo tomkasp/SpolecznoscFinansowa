@@ -14,6 +14,8 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
                   <ui:define name="title"> Doradca - giełda </ui:define> 
+                 
+                  
                   <ui:define name="top"> 
                             <div class="topbarLogo">
                                 <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
@@ -143,8 +145,9 @@
                                   
                                </p:commandButton>
                                
-                               <p:commandButton styleClass="greyButton floatR" update="@form" value="Wybierz" action="#{marketMB.loadMarket()}"/>  
+                               <p:commandButton id="chooseEmpl" styleClass="greyButton floatR" update="@form" value="Wybierz" action="#{marketMB.loadMarket()}"/>  
                            </h:panelGroup>
+                           <p:defaultCommand target="chooseEmpl" />
                        </p:overlayPanel> 
                            
                        <div class="marginT10">
