@@ -73,35 +73,62 @@
                                         </p:calendar>
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji:"/>  
-                                        <h:inputText required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"> 
-                                            <f:convertNumber maxFractionDigits="2" />
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                        <h:inputText maxlength="13"  required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"  > 
+                                            <f:converter converterId="javax.faces.BigDecimal"   />
+                                            <f:validateDoubleRange minimum="0.01" maximum="9999999999.99"  />
                                             <p:ajax  event="keyup" update="consolidationValueMessage" />
-
                                         </h:inputText>
                                         <h:message for="consolidationValue" errorClass="invalid" id="consolidationValueMessage" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki:"/>  
-                                        <h:inputText value="#{clientCaseMB.clientCase.freeResourcesValue}" /> 
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Kwota wolne środki:"/>  
+                                        <h:inputText maxlength="13" id="freeResourcesValue" value="#{clientCaseMB.clientCase.freeResourcesValue}" > 
+                                            <f:converter converterId="javax.faces.BigDecimal"   />
+                                            <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
+                                            <p:ajax  event="keyup" update="freeResourcesValueMessage" />
+                                        </h:inputText>
+                                        <h:message for="freeResourcesValue" errorClass="invalid" id="freeResourcesValueMessage" />
+                                    </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Oczekiwana rata:"/>
+                                        <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
+                                            <f:converter converterId="javax.faces.BigDecimal"    />
+                                            <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
+                                            <p:ajax  event="keyup" update="expectedInstalmentMessage" />
+                                        </h:inputText>
+                                        <h:message for="expectedInstalment" errorClass="invalid" id="expectedInstalmentMessage" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Cel:"/>
-                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Cel:"/>
+                                        <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
                                     </div>
-
-                                    <div class="field"> <h:outputText class="label" value="Oczekiwana rata:"/>
-                                        <h:inputText required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"/> 
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="notatka"/>
+                                        <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
+                                            <f:validateLength maximum="100" minimum="20"/>
+                                        </h:inputTextarea>    
                                     </div>
-
-                                    <div class="field"> <h:outputText class="label" value="notatka"/>  <h:inputTextarea  cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" /> </div>
 
                                     <div class="field"> <h:outputText class="label" value="Rodzaj produktu"/> 
                                         <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
                                             <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                         </p:selectOneMenu>
-
                                     </div>
+                                    
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Premium"/> 
+                                        <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" />
+                                    </div>
+                                    
+                                    
+                                    
                                 </h:panelGroup>
 
 
@@ -150,7 +177,7 @@
 
                             <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
 
-                            
+
                             <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" var="lo" rowIndexVar="wiersz">
                                 <p:column headerText="Lp">  
                                     #{wiersz+1}
@@ -174,125 +201,125 @@
 
                                 <p:column headerText="Zaległe"  >  
                                     <h:outputText value="#{lo.active}" />
-                                                  
+
                                 </p:column> 
 
                             </p:dataTable>
 
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
-                                <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
+                                  <h:commandButton  value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
 
-                                <h:form>
-                                    <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
+                                  <h:form>
+                                      <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
 
-                                        <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
+                                          <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
 
-                                            <h:outputText value="Rodzaj zobowiązania"/>
-                                            <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
-                                                <f:selectItem itemLabel="Bankowe" itemValue="b"/>
-                                                <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
-                                            </h:selectOneMenu>
+                                              <h:outputText value="Rodzaj zobowiązania"/>
+                                              <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
+                                                  <f:selectItem itemLabel="Bankowe" itemValue="b"/>
+                                                  <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
+                                              </h:selectOneMenu>
 
-                                            <h:outputText value="Wygasa:"/>
-                                            <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
+                                              <h:outputText value="Wygasa:"/>
+                                              <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
 
-                                            <h:outputText value="Rata:"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.actualPrice}"/>
+                                              <h:outputText value="Rata:"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.actualPrice}"/>
 
-                                            <h:outputText value="Kwota:"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
-                                            
-                                            <h:outputText value="Tytulem"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.name}"/>
+                                              <h:outputText value="Kwota:"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
 
-                                            <h:outputText value="Aktualne"/>
-                                            <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
+                                              <h:outputText value="Tytulem"/>
+                                              <h:inputText value="#{clientCaseMB.obligation.name}"/>
 
-                                            <h:outputText value="Rodzaj produktu"/> 
-                                            <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
-                                                <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
-                                            </h:selectOneMenu>
+                                              <h:outputText value="Aktualne"/>
+                                              <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
 
-                                        </h:panelGrid>
-                                        <h:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial.hide();"/>
-                                        <h:commandButton style="float:right;" value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
+                                              <h:outputText value="Rodzaj produktu"/> 
+                                              <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
+                                                  <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                                              </h:selectOneMenu>
+
+                                          </h:panelGrid>
+                                          <h:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial.hide();"/>
+                                          <h:commandButton style="float:right;" value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
 
 
-                                    </p:dialog>
-                                </h:form>
+                                      </p:dialog>
+                                  </h:form>
+                              </div>
+
+                              <div id="buttonsBox3">
+
+                                  <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
+
+                                  </div>
+
+                              </div>
+
                             </div>
 
-                            <div id="buttonsBox3">
+                            <div class="greenLine" ></div>  
 
-                                <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
 
-                            </div>
+                            <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
+
+                            <p:dataTable > 
+
+                                <p:column headerText="Lp" >  
+
+                                </p:column> 
+
+                                <p:column headerText="Numer klienta">  
+                                </p:column>  
+
+                                <p:column headerText="Data dodania">    
+                                </p:column>  
+
+                                <p:column headerText="Numer sprawy">  
+                                </p:column>  
+
+                                <p:column headerText="Postęp">  
+                                </p:column> 
+
+                                <p:column headerText="Rodzaj kredytu"  >  
+                                </p:column> 
+
+                                <p:column headerText="BIK">  
+                                </p:column> 
+
+                                <p:column headerText="Kod pocztowy">  
+                                </p:column>
+
+                                <p:column headerText="Wiek">  
+                                </p:column>
+
+                                <p:column headerText="Typ zatrudnienia">  
+                                </p:column>
+
+                                <p:column headerText="Branża">  
+                                </p:column>
+
+                                <p:column headerText="Trudności kredytu">  
+                                </p:column>
+
+                                <p:column headerText="Ilość doradców">  
+                                </p:column>                  
+
+                                <p:column headerText="Koniec aukcji">  
+                                </p:column>      
+
+
+                            </p:dataTable>
+                        </div>
+
+                        <div style="min-height: 30px;">
 
                         </div>
 
-                    </div>
 
-                    <div class="greenLine" ></div>  
-
-
-                    <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
-
-                    <p:dataTable > 
-
-                        <p:column headerText="Lp" >  
-                           
-                        </p:column> 
-
-                        <p:column headerText="Numer klienta">  
-                        </p:column>  
-
-                        <p:column headerText="Data dodania">    
-                        </p:column>  
-
-                        <p:column headerText="Numer sprawy">  
-                        </p:column>  
-
-                        <p:column headerText="Postęp">  
-                        </p:column> 
-
-                        <p:column headerText="Rodzaj kredytu"  >  
-                        </p:column> 
-
-                        <p:column headerText="BIK">  
-                        </p:column> 
-
-                        <p:column headerText="Kod pocztowy">  
-                        </p:column>
-
-                        <p:column headerText="Wiek">  
-                        </p:column>
-
-                        <p:column headerText="Typ zatrudnienia">  
-                        </p:column>
-
-                        <p:column headerText="Branża">  
-                        </p:column>
-
-                        <p:column headerText="Trudności kredytu">  
-                        </p:column>
-
-                        <p:column headerText="Ilość doradców">  
-                        </p:column>                  
-
-                        <p:column headerText="Koniec aukcji">  
-                        </p:column>      
-
-
-                    </p:dataTable>
-                </div>
-
-                <div style="min-height: 30px;">
-
-                </div>
-
-
-            </ui:define>           
-        </ui:composition>
-    </body>
-</html>
+                    </ui:define>           
+                </ui:composition>
+            </body>
+        </html>
