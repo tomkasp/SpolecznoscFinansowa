@@ -26,7 +26,7 @@ public class CaseStatus  implements java.io.Serializable {
 
      private Integer idCaseStatus;
      private String name;
-     private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
+     private Set<ClientCase> clientCases = new HashSet<>(0);
 
     public CaseStatus() {
     }

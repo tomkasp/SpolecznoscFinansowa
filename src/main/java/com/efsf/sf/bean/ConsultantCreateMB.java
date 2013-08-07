@@ -54,15 +54,15 @@ public class ConsultantCreateMB implements Serializable {
 
     public String savePart1() {
         UserDAO udao = new UserDAO();
-
+        
         //SET USER TYPE:
         user.setType(2);
         user.setLogin(String.valueOf(new Date().getTime()));
         user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
-        user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
+        user.setLogin( ( "000000" + Integer.toString(user.getIdUser())).substring( Integer.toString( user.getIdUser() ).length() ) );
         udao.update(user);
-
+        
         WorkingPlaceDAO wpdao = new WorkingPlaceDAO();
         WorkingPlace wp = (WorkingPlace) wpdao.workingPlaceList().get(3);
         if (wp != null) {
@@ -164,6 +164,7 @@ public class ConsultantCreateMB implements Serializable {
         clearFields();
 
         return "/consultant/consultantMainPage?faces-redirect=true";
+        
     }
     
     private void clearFields(){
@@ -191,8 +192,8 @@ public class ConsultantCreateMB implements Serializable {
     {
         String password = (String) value;
 
-//        UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
-//        confirmPassword = (String) otherInput.getSubmittedValue();
+      //  UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
+      //  confirmPassword = (String) otherInput.getSubmittedValue();
       
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
