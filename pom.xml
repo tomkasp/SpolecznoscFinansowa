@@ -16,15 +16,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>2.1.1-b04</version>
-        </dependency>
+	<groupId>com.sun.faces</groupId>
+	<artifactId>jsf-api</artifactId>
+	<version>2.1.24</version>
+</dependency>
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>2.1.1-b04</version>
-        </dependency>
+	<groupId>com.sun.faces</groupId>
+	<artifactId>jsf-impl</artifactId>
+	<version>2.1.24</version>
+</dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
