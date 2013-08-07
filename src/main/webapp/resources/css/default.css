@@ -676,9 +676,17 @@ p:column {
     clear: both;
 }
 
+.invalid2{
+    color: red;
+    font-weight: bold;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    position: absolute;
+}
+
+
 .calendar{
     width: 206px;
-    
 }
 
 .hasDatepicker
