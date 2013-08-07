@@ -91,6 +91,33 @@ public class ClientDAO {
         session.close();
     }
     
+    public Client getClientWithIncomes(int idClient)
+    {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction().begin();
+                
+                Query q = session.createQuery("FROM Client as clt "
+                     + "left join fetch clt.incomes as inc "
+                     + "left join fetch clt.incomeBusinessActivities as ba "
+                     + "left join fetch inc.branch as br "
+                     + "left join fetch inc.employmentType as empltype "
+                     + "left join fetch ba.branch as br2 "
+                     + "left join fetch ba.employmentType as empltype2 "
+                     + "where clt.idClient = :id");
+                
+                q.setParameter("id", idClient);
+                
+                Client client = (Client) q.list().get(0);
+        
+                
+                
+                session.getTransaction().commit();
+
+                session.close();
+
+                return client;
+    }
+    
     
     
 
