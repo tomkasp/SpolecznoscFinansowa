@@ -145,13 +145,13 @@
                     
                     </div>
 
-                    <p:commandButton disabled="#{empty marketMB.selectedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase()}" oncomplete="confirmed.show();" >
+                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton disabled="#{empty marketMB.selectedCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase()}" oncomplete="confirmedObserved.show();">
+                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();">
                          <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <h:link class="topMenuButton greyButton wideButton" value="Pokaż wszystkie" outcome="/consultant/consultantMarket"/>
+                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{marketMB.toMarket()}"/>
 
                     
                     <div class="marginT50">
@@ -449,7 +449,7 @@
                                             </p:dataTable>
                                         </div>
                                         
-                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToObservedCase()}" oncomplete="confirmed.show();">
+                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                                               <p:ajax update="applied lastCases traced" />
                                         </p:commandButton>
                                         <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
