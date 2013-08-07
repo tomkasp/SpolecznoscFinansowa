@@ -4,6 +4,7 @@
  */
 package com.efsf.sf.sql.dao;
 
+import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -40,16 +41,20 @@ public class NewMain {
 //        System.out.println(a.getIdAddress());
             
           
+//          
+//        ClientCaseDAO ccdao=new ClientCaseDAO();
+//        @SuppressWarnings("unchecked")
+//        List<ClientCase> list=ccdao.finishedCasesSelectedClient(38); //ccdao.awaitingCasesSelectedClient(38); //ccdao.last5CasesSelectedClient(38);
+//        
+//        //ClientCase cc=list.get(0);
+//        System.out.println(list.size());
+//        
+        //System.out.println(list.size());    
+        
           
-        ClientCaseDAO ccdao=new ClientCaseDAO();
-        @SuppressWarnings("unchecked")
-        List<ClientCase> list=ccdao.currentCasesSelectedClient(38); //ccdao.awaitingCasesSelectedClient(38); //ccdao.last5CasesSelectedClient(38);
         
-        //ClientCase cc=list.get(0);
-        //System.out.println(cc.getGoal());
-        
-        System.out.println(list.size());    
-        
-          
+        CaseStatusDAO csdao=new CaseStatusDAO();
+        CaseStatus cs=csdao.read(8);
+        System.out.println(cs.getIdCaseStatus());
     }
 }
