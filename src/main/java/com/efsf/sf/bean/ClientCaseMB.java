@@ -74,12 +74,14 @@ public class ClientCaseMB implements Serializable {
             //pamietac o zabraniu punktow z klienta!
             if(clientCase.getPremium()){
                 cd.decrementPoints(login.getClient(),premium);
+                login.getClient().setPoints(login.getClient().getPoints() - premium);
             }
             else{
                 cd.decrementPoints(login.getClient(),1);
+                login.getClient().setPoints(login.getClient().getPoints() - 1);
             }
             
-            login.getClient().setPoints(login.getClient().getPoints() - 1);
+            
 
             //ucinanie do dwoch miejsc po przecinku bez zaokrlaglania!
             clientCase.setConsolidationValue(clientCase.getConsolidationValue().setScale(2,RoundingMode.DOWN));
