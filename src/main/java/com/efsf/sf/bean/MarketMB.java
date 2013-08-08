@@ -640,7 +640,5 @@ public class MarketMB implements Serializable
     public void setSelectedMarketCase(ClientCase selectedMarketCase) {
         this.selectedMarketCase = selectedMarketCase;
     }
-    
-    
-    
+
 }

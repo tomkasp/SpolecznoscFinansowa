@@ -229,7 +229,7 @@
                     </p:dataTable>
                 </div>
 
-                <p:commandButton disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                <p:commandButton id="deleteApplied" disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
                      <f:ajax execute="applied" render="applied" />
                 </p:commandButton>
 
@@ -453,10 +453,10 @@
                                             </p:dataTable>
                                         </div>
                                         
-                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                                        <p:commandButton  disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                                               <p:ajax update="applied lastCases traced" />
                                         </p:commandButton>
-                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
+                                        <p:commandButton id="deleteObservedButton" disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
                                              
                                         </p:commandButton>
 
@@ -529,7 +529,7 @@
 
                                                 <div> 
                                                     <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
-                                                        <p:ajax update="applied"/>
+                                                        <p:ajax update="applied deleteApplied"/>
                                                     </h:commandButton>
 
                                                     <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
@@ -545,7 +545,7 @@
 
                                             <div> 
                                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve(marketMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
-                                                    <p:ajax update="traced"/>
+                                                    <p:ajax update="traced deleteObservedButton"/>
                                                 </h:commandButton>
 
                                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
