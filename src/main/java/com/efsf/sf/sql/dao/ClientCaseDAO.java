@@ -504,6 +504,32 @@ public class ClientCaseDAO implements Serializable {
          return list;
     }
     
+    public ClientCase getClientCaseWithConsultantDetails(int idClientCase)
+    {
+                 ClientCase cs;    
+                 Session session = HibernateUtil.getSessionFactory().openSession();
+                 session.beginTransaction();
+        
+                 Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.productType as pt "      
+                 + "left join fetch cs.consultants as consul "
+                 + "left join fetch cs.caseStatus as cstatus "
+                 + "left join fetch consul.consultantRatings as crs "
+                 + "left join fetch consul.addresses as addr "        
+                 + "where cs.idClientCase = :id" );
+                 
+                 q.setParameter("id", idClientCase);
+                 
+                 cs = (ClientCase) q.list().get(0);
+                 
+                 session.getTransaction().commit();
+                 session.close();
+                 
+                 return cs;
+                 
+    }
+    
    
     
         
