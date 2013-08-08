@@ -134,6 +134,36 @@ public class UserDAO {
         return false;
     }
     
+    public int checkLogin(String email,String password) {
+
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query q = null;
+            q = session.createQuery("FROM User WHERE email = :email ");
+            q.setParameter("email", email);
+            
+            @SuppressWarnings("unchecked")
+            ArrayList<User> resultList = (ArrayList<User>) q.list();
+            if ( !resultList.isEmpty() ) {
+                User user=resultList.get(0);
+                if( user.getPassword().equals(password) )
+                {
+                    return 1;
+                }
+                else{
+                    return 0;//wrong password
+                }
+            }
+            
+            
+        } catch (JDBCConnectionException e) {}
+        finally {
+            session.close();
+        }
+        return -1;//wrong email
+    }
+    
     public Client getClientConnectedToUser(int userId)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
