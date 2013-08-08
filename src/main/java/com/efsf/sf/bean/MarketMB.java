@@ -261,11 +261,16 @@ public class MarketMB implements Serializable
             appliedModelsEmploymentType = new ArrayList();
             appliedModelsBranch = new ArrayList();
             makeAppliedModels();
+            
+            //It was the fastest way :) 
+            reloadCases();
         }
         else
         {
             alreadyApplied = true;
         }
+        
+        
     }
     
     public Set<String> showAllClientsEmploymentTypes(Client client)
@@ -362,6 +367,7 @@ public class MarketMB implements Serializable
         observedModelsEmploymentType = new ArrayList();
         observedModelsBranch = new ArrayList();
         makeObservedModels();
+        selectedObservedCase = null;
     }
     
     public void revokeApplication()
@@ -381,6 +387,7 @@ public class MarketMB implements Serializable
         appliedModelsEmploymentType = new ArrayList();
         appliedModelsBranch = new ArrayList();
         makeAppliedModels();
+        selectedAppliedCase = null;
     }
     
     public List<ClientCase> getClientCaseList() {

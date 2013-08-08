@@ -148,7 +148,7 @@
                     <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();">
+                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                          <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{marketMB.toMarket()}"/>
