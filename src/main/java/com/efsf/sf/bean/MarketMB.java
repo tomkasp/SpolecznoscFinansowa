@@ -268,9 +268,7 @@ public class MarketMB implements Serializable
         else
         {
             alreadyApplied = true;
-        }
-        
-        
+        } 
     }
     
     public Set<String> showAllClientsEmploymentTypes(Client client)
@@ -294,7 +292,15 @@ public class MarketMB implements Serializable
         return types;
     }
     
+    public boolean doesConsultantObserveCase(Consultant consultant, ClientCase clientCase)
+    {
+        return caseDao.doesConsultantObserveCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
+    }
     
+    public boolean doesAppliedToCase(Consultant consultant, ClientCase clientCase)
+    {
+        return caseDao.doesConsultantAppliedToCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
+    }
     
     public Set<String> showAllClientsBranches(Client client)
     {
@@ -350,15 +356,15 @@ public class MarketMB implements Serializable
         }
     }
     
-    public void stopObserve()
+    public void stopObserve(ClientCase clientCase)
     {
         ConsultantDAO consultantDao = new ConsultantDAO();
         for (ClientCase cc : loginMB.getConsultant().getClientCases_2())
         {
-            if (cc.getIdClientCase() == selectedObservedCase.getIdClientCase())
+            if (cc.getIdClientCase().equals(clientCase.getIdClientCase()))
             {
                 loginMB.getConsultant().getClientCases_2().remove(cc);
-                consultantDao.update(loginMB.getConsultant());
+                consultantDao.merge(loginMB.getConsultant());
                 selectedObservedCase = null;
                 break;
             }
@@ -370,15 +376,15 @@ public class MarketMB implements Serializable
         selectedObservedCase = null;
     }
     
-    public void revokeApplication()
+    public void revokeApplication(ClientCase clientCase)
     {
         ConsultantDAO consultantDao = new ConsultantDAO();
         for (ClientCase cc : loginMB.getConsultant().getClientCases())
         {
-            if (cc.getIdClientCase() == selectedAppliedCase.getIdClientCase())
+            if (cc.getIdClientCase().equals(clientCase.getIdClientCase()))
             {
                 loginMB.getConsultant().getClientCases().remove(cc);
-                consultantDao.update(loginMB.getConsultant());
+                consultantDao.merge(loginMB.getConsultant());
                 selectedAppliedCase = null;
                 break;
             }
