@@ -131,9 +131,9 @@
                                         <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" >
                                             <p:ajax update="msg"  listener="#{clientCaseMB.addMessage()}" /> 
                                         </p:selectBooleanCheckbox>
-
+                                        <p:growl id="msg" severity="info, warn"  />
                                     </div>
-                                    <p:growl id="msg"  />
+
 
                                     <p:dialog id="basicDialog2" header="Premium" widgetVar="dlg2" rendered="true">
                                         Sprawa premium zabierze Ci 30 szalonych punktów!
@@ -155,6 +155,9 @@
                                 </p:dialog>  
 
                                 <h:commandButton action="false" rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
+
+
+
 
                             </h:form>        
 
@@ -236,21 +239,18 @@
                                                 <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
                                             </h:selectOneMenu>
 
-                                            <h:outputText value="Wygasa:" id="dialogBegin">
-                                                <p:calendar required="true" value="#{clientCaseMB.obligation.beginDate}"/>
+                                            <h:outputText value="Wygasa:"/>
+                                            <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
 
-                                                <p:ajax event="keyup" update="dialogBeginMessage"/>
-                                            </h:outputText>
-                                            <h:message for="dialogBegin" errorClass="invalid" id="dialogBeginMessage" />
-
-
-                                            <h:outputText id="actualPrice" value="Rata:"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.actualPrice}">
+                                            <h:outputText  id="actualPrice" value="Rata:"/>
+                                            <h:inputText required="true" value="#{clientCaseMB.obligation.actualPrice}">
                                                 <f:converter converterId="javax.faces.BigDecimal"    />
-                                                <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
-                                                <p:ajax event="keyup" update="actualPriceMessage"/>
+                                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
+                                                <p:ajax event="keyup" update="actualPriceMessage" />
                                             </h:inputText>    
-                                            <h:message for="actualPrice" id="actualPriceMessage" />
+<h:message  for="actualPrice" id="actualPriceMessage" />
+                                           
+                                            
 
                                             <h:outputText value="Kwota:"/>
                                             <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
