@@ -5,14 +5,17 @@ import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -38,6 +41,10 @@ public class ClientMainPageMB implements Serializable {
 
     private Converters converters = new Converters();
     
+    private ClientCase selectedCase;
+    
+    private ClientCase lastSelectedCase;
+    
     private ClientCase awaitingSelectedCase;
     
     private ClientCase currentSelectedCase;
@@ -50,6 +57,18 @@ public class ClientMainPageMB implements Serializable {
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
 
+    
+
+    @PostConstruct
+    public void fillTables()
+    {
+        reloadCases();
+        reloadCases2();
+        reloadCases3();
+        reloadCases4();
+        reloadCases5();
+        reloadCases6();
+    }
    
     public void reloadCases()
     {
@@ -107,7 +126,7 @@ public class ClientMainPageMB implements Serializable {
     }   
         
      public Set<String> showAllClientsEmploymentTypes(Client client)
-    {
+     {
         HashSet<String> types = new HashSet<>();
         if (client.getIncomes() != null)
         {
@@ -126,9 +145,7 @@ public class ClientMainPageMB implements Serializable {
         
         return types;
     }
-    
-    
-    
+     
     public Set<String> showAllClientsBranches(Client client)
     {
         HashSet<String> types = new HashSet<>();
@@ -166,6 +183,19 @@ public class ClientMainPageMB implements Serializable {
                 return true;
             }   
         }   
+    }
+    
+    public void rowDoubleClick(ClientCase cs) throws IOException
+    {
+        selectedCase = cs;
+        System.out.println("2 razy: "  + selectedCase.getIdClientCase());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
+    }
+    
+    public void rowClick(ClientCase cs)
+    {
+        selectedCase = cs;
+        System.out.println("Klik " + cs.getIdClientCase());
     }
 
 //     public void fillSelectedCaseIncomeTable() {
@@ -211,7 +241,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getClientCaseList() {
-        reloadCases();
+//        reloadCases();
         return clientCaseList;
     }
 
@@ -262,7 +292,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getAwaitingClientCaseList() {
-        reloadCases2();
+//        reloadCases2();
         return awaitingClientCaseList;
     }
 
@@ -271,7 +301,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getCurrentClientCaseList() {
-        reloadCases3();
+//        reloadCases3();
         return currentClientCaseList;
     }
 
@@ -280,7 +310,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getFinishedClientCaseList() {
-        reloadCases4();
+//        reloadCases4();
         return finishedClientCaseList;
     }
 
@@ -289,7 +319,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getPremiumClientCaseList() {
-        reloadCases5();
+//        reloadCases5();
         return premiumClientCaseList;
     }
 
@@ -298,7 +328,7 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getAllClientCaseList() {
-        reloadCases6();
+//        reloadCases6();
         return allClientCaseList;
     }
 
@@ -328,6 +358,22 @@ public class ClientMainPageMB implements Serializable {
 
     public void setFinishedSelectedCase(ClientCase finishedSelectedCase) {
         this.finishedSelectedCase = finishedSelectedCase;
+    }
+
+    public ClientCase getSelectedCase() {
+        return selectedCase;
+    }
+
+    public void setSelectedCase(ClientCase selectedCase) {
+        this.selectedCase = selectedCase;
+    }
+
+    public ClientCase getLastSelectedCase() {
+        return lastSelectedCase;
+    }
+
+    public void setLastSelectedCase(ClientCase lastSelectedCase) {
+        this.lastSelectedCase = lastSelectedCase;
     }
 
     

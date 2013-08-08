@@ -74,8 +74,11 @@
 
                     <div id="last">
                         <h:form>
-                            <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" emptyMessage="Nie ma żadnych spraw" >
+                            <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
+                                <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.lastSelectedCase)}"/> 
+                                <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}"/>
+                                
                                 <p:column headerText="Data dodania">    
                                     <h:outputText  value="#{row.beginDate}">
                                         <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -146,7 +149,7 @@
 
                         <h:form>
 
-                            <p:dataTable id="allCases" value="#{clientMainPageMB.allClientCaseList}"  var="row" emptyMessage="Nie ma żadnych spraw">
+                            <p:dataTable id="allCases" value="#{clientMainPageMB.allClientCaseList}"  var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
                                 <p:column headerText="Data dodania">    
                                     <h:outputText  value="#{row.beginDate}">
