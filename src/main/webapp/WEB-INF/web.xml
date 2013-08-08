@@ -14,6 +14,7 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>cruze</param-value>
     </context-param>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -31,4 +32,15 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/faces/client/*</url-pattern>
+    </filter-mapping>
+ 
+    
 </web-app>
