@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.util;
+package com.efsf.sf.util.validator;
 
-
+import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -17,22 +17,23 @@ import javax.faces.validator.ValidatorException;
  * @author WR1EI1
  */
 
-@FacesValidator("com.efsf.sf.util.ComboBoxNoInputValidator")
-public class ComboBoxNoInputValidator implements Validator {
+@FacesValidator("com.efsf.sf.util.DuplicateEmailValidator")
+public class DuplicateEmailValidator implements Validator {
     
    @Override
    public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
 
+      UserDAO udao=new UserDAO();
+      Boolean ifEmailExist=udao.ifEmailExist(value.toString());
       
-      
-      
-      if( (Integer) value == 0){
+      if(ifEmailExist){
          FacesContext context = FacesContext.getCurrentInstance();
          ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-         FacesMessage msg =  new FacesMessage(bundle.getString("comboBoxNoInput"),bundle.getString("comboBoxNoInput"));
+         FacesMessage msg =  new FacesMessage(bundle.getString("duplicateEmails"),bundle.getString("duplicateEmails"));
          msg.setSeverity(FacesMessage.SEVERITY_ERROR);
          throw new ValidatorException(msg);
       }
+      
 
    }
  
