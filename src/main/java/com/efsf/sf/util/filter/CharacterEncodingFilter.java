@@ -1,4 +1,4 @@
-package com.efsf.sf.util;
+package com.efsf.sf.util.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
