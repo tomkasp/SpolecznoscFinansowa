@@ -8,13 +8,12 @@ import com.efsf.sf.sql.entity.User;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
 public class LoginMB implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    
     private String email;
     private String password;
     private boolean isLogged = false;
@@ -44,7 +43,7 @@ public class LoginMB implements Serializable {
             System.out.println("login");
             if(type==1)
             {
-                return "/admin/adminMainPage"; 
+                return "/admin/adminMainPage?faces-redirect=true"; 
             }
              if(type==2)
             { 
@@ -58,10 +57,10 @@ public class LoginMB implements Serializable {
                 
                 this.activeAddingApp=this.checkNewAppActivity();
                 
-                return "/client/clientMainPage";  
+                return "/client/clientMainPage?faces-redirect=true";  
             } 
         }
-        return "/login"; 
+        return "/login?faces-redirect=true"; 
     }
 
     
@@ -75,9 +74,9 @@ public class LoginMB implements Serializable {
     }
     public String logout() {
         isLogged = false;
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
-        return "/login";
+        return "/login?faces-redirect=true";
     }
     
   

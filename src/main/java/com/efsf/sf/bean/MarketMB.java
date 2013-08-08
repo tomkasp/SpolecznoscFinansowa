@@ -100,9 +100,6 @@ public class MarketMB implements Serializable
         reloadCases(); 
     }
     
-    
-    
-    
     @PostConstruct
     public void fillModels()
     {
