@@ -17,39 +17,30 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginFilter implements Filter {
 
-	/**
-         * 
-	 * Checks if user is logged in. If not it redirects to the login.xhtml page.
-	 */
     @Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// Get the loginBean from session attribute
+		
 		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
-		// For the first application request there is no loginBean in the session so user needs to log in
-		// For other requests loginBean is present but we need to check if user has logged in successfully
-		if ( loginBean == null || !loginBean.isIsLogged() ) {
+		
+		if ( loginBean == null || !loginBean.isIsLogged()  ) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(contextPath + "/login.xhtml");
-                        System.out.println("");
-                        System.out.println("");
-                        System.out.println("");
-                        System.out.println("NO LOGIN!");
+			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
+                        System.out.println("NO LOGGED AS CLIENT!");
 		}
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("LOGIN!");
-		chain.doFilter(request, response);	
+                
+                if(loginBean.getType()==3)//LOGGED AS CLIENT
+                {
+		chain.doFilter(request, response);
+                }
+                
 	}
 
     @Override
 	public void init(FilterConfig config) throws ServletException {
-		// Nothing to do here!
 	}
 
     @Override
 	public void destroy() {
-		// Nothing to do here!
 	}	
 	
 }

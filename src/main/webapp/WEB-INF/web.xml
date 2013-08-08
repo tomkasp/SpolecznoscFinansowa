@@ -41,6 +41,4 @@
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/faces/client/*</url-pattern>
     </filter-mapping>
- 
-    
-</web-app>
+    </web-app>
