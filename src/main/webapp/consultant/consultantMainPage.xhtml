@@ -528,7 +528,7 @@
                                                 </h:panelGroup>
 
                                                 <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication()}" onclick="revokeApp.hide()" >
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
                                                         <p:ajax update="applied"/>
                                                     </h:commandButton>
 
@@ -544,7 +544,7 @@
                                             </h:panelGroup>
 
                                             <div> 
-                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve()}" onclick="revokeObs.hide()" >
+                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve(marketMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
                                                     <p:ajax update="traced"/>
                                                 </h:commandButton>
 
