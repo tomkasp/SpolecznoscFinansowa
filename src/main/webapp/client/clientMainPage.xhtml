@@ -20,16 +20,23 @@
                     <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
                     <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
-
+                
+              <h:form>
                 <div class="topbarMenuGreen">
+              
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
+                          
+                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" />
                         <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+                       
                     </h:panelGroup>
+                
                 </div>
+              </h:form>
+                
             </ui:define>
 
             <ui:define name="content">
