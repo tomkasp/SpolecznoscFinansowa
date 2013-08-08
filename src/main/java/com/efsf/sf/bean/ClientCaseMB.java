@@ -32,7 +32,6 @@ public class ClientCaseMB implements Serializable {
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
-    private int i =1;
     private int premium = 30;
     /**
      * Creates a new instance of ClientCaseMB
@@ -56,16 +55,12 @@ public class ClientCaseMB implements Serializable {
         obligation = new Obligation();
     }
     
-    public void addMessage() { 
+    public void addMessage(){ 
         
-        if(i==1){
+       if(clientCase.getPremium()){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
-            i=0;
         }
-        if(i==0){
-            i=1;
-        }
-    
+        
     }
     
     public Boolean premiumPointsChecking(){
@@ -113,7 +108,7 @@ public class ClientCaseMB implements Serializable {
             clientCase = new ClientCase();
             
         }
-        return "client/clientMainPage.xhtml";
+        return "/client/clientMainPage.xhtml";
     }
 
     public Date getCurrentDate() {
