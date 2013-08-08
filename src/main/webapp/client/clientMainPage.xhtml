@@ -387,9 +387,9 @@
 
                         <p:dataTable id="finishedCases" value="#{clientMainPageMB.finishedClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.finishedSelectedCase}" selectionMode="single" >
 
-                            <f:ajax event="rowSelect" render="@form" />
-                            <f:ajax event="rowUnselect" render="@form" />
-
+                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.finishedSelectedCase)}"/> 
+                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}"/>
+\
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>

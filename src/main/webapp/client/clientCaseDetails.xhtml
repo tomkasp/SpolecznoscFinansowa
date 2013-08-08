@@ -48,7 +48,7 @@
                 </div>
 
 
-                <h3> Sprawa numer: #{clientMainPageMB.selectedCase.idClientCase} </h3>
+                <h3> Sprawa numer: #{clientViewedCaseMB.clientCase.idClientCase} </h3>
 
                 <div>
                     <div class="leftInlineBox">
@@ -58,40 +58,40 @@
                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kwota zobowiązania"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.freeResourcesValue + clientMainPageMB.selectedCase.consolidationValue}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.freeResourcesValue + clientMainPageMB.selectedCase.consolidationValue}" /> 
                                 </div>
                                 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Cel"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.goal}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.goal}" /> 
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Rodzaj kredytu"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.productType.name}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.productType.name}" /> 
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Wielkość raty"/>
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.expectedInstalment}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.expectedInstalment}" />
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Data wystawienia na giełdę"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.beginDate}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.beginDate}" /> 
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Koniec aukcji"/>  
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.endDate}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.endDate}" />
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Notatka"/>  
-                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none"  disabled="true" value="#{clientMainPageMB.selectedCase.note}" />
+                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{clientViewedCaseMB.clientCase.note}" />
                                 </div>
                             </div>
                             
-                            <h:panelGroup rendered="#{clientMainPageMB.selectedCase.consultant}" >
+                            <h:panelGroup rendered="#{clientCaseMB.clientCase.consultant}" >
                             <h4> DANE DORADCY</h4>
                             <div class="marginLRT30">   
                                 <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Jan" /> </div>
@@ -105,26 +105,28 @@
 
                     <div class="rightInlineBox">
                         <h:form>
-                        <h:panelGroup rendered="#{clientMainPageMB.selectedCase.caseStatus.idCaseStatus == 1}" >
+                        <h:panelGroup rendered="#{clientViewedCaseMB.clientCase.caseStatus.idCaseStatus == 1}" >
                             <h4> DOSTĘPNI DORADCY </h4>
-                            <p:dataTable id="consultantsTable" value="#{fakeBean.harmonogram}" var="data" emptyMessage="brak klientów!" 
-                                         rowKey="#{data.pozostało}">
-                                <p:column headerText="Termin spłaty">  
-                                    <h:outputText value="#{data.termin}" /> 
+                            <p:dataTable id="consultantsTable" value="#{clientViewedCaseMB.castConsultantSetToArray(clientViewedCaseMB.clientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" >
+                                <p:column headerText="Nazwisko">  
+                                    <h:outputText value="#{row.lastName}" /> 
                                 </p:column>  
 
-                                <p:column headerText="Kwota">  
-                                    <h:outputText value="#{data.kwota2}" /> 
+                                <p:column headerText="Imie">  
+                                    <h:outputText value="#{row.name}" /> 
                                 </p:column>  
 
-                                <p:column headerText="Pozostało">    
-                                    <h:outputText value="#{data.pozostało}" /> 
+                                <p:column headerText="Doświadczenie">    
+                                    <h:outputText value="#{row.expirience}" /> 
+                                </p:column>  
+                                
+                                <p:column headerText="Średnia Ocena">    
+                                    <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" /> 
                                 </p:column>  
 
-                                <p:column headerText="Spłacono">  
-                                    <h:outputText value="#{data.spłacono}" /> 
-                                </p:column>    
                              </p:dataTable>
+                            <p:commandButton styleClass="wideButton greyButton floatR" id="przydziel" value="Przydziel"/>
+
                         </h:panelGroup>
                         <h:panelGroup rendered="#{clientMainPageMB.selectedCase.caseStatus.idCaseStatus == 9}">
                             <h4> NASTĘPNA RATA </h4>
