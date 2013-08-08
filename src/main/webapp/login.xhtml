@@ -16,8 +16,14 @@
            
 
             <p:dialog modal="true" widgetVar="statusDialog" style="padding-bottom: 0px; height: 100px" height="100px" draggable="false" closable="false">  
-                    <div class="circle"></div>
-                    <div class="circle1"></div> 
+                <div class="bubblingG">
+                    <span id="bubblingG_1">
+                    </span>
+                    <span id="bubblingG_2">
+                    </span>
+                    <span id="bubblingG_3">
+                    </span>
+                </div> 
             </p:dialog>  
             
             <h:form>   
@@ -54,7 +60,7 @@
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" action="#{loginMB.login()}" onclick="statusDialog.show();" oncomplete="statusDialog.hide();">
+                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();">
           
                     </p:commandLink>
                     
