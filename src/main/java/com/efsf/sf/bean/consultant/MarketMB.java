@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.consultant;
 
+import com.efsf.sf.bean.DictionaryMB;
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
