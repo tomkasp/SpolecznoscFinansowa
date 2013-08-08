@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -13,8 +14,20 @@
             
             <ui:define name="content">
                 
-                <h:form>
-                    
+           
+
+            <p:dialog modal="true" widgetVar="statusDialog" header="Logowanie..." style="padding-bottom: 0px; max-height: 100px" height="100px" draggable="false" closable="false">  
+                <div class="bubblingG">
+                    <span id="bubblingG_1">
+                    </span>
+                    <span id="bubblingG_2">
+                    </span>
+                    <span id="bubblingG_3">
+                    </span>
+                </div> 
+            </p:dialog>  
+            
+            <h:form>   
             <div class="contentBox" >
                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
@@ -48,8 +61,9 @@
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <h:commandLink class="blueButton buttonMargin" value="Zaloguj" action="#{loginMB.login()}"/>
-                    
+                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();">
+          
+                    </p:commandLink>
                     
                 </div>
                 
