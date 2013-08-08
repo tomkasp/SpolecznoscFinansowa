@@ -112,7 +112,7 @@
                                     <div class="field"> 
                                         <h:outputText class="label" value="notatka"/>
                                         <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
-                                            <f:validateLength maximum="100" minimum="20"/>
+                                            <f:validateLength maximum="100"/>
                                         </h:inputTextarea>    
                                     </div>
 
@@ -125,7 +125,7 @@
                                     <div class="field"> 
                                         <h:outputText class="label" value="Premium"/> 
                                         <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" >
-                                            <p:ajax update="msg" listener="#{clientCaseMB.addMessage()}"/> 
+                                            <p:ajax update="msg"  listener="#{clientCaseMB.addMessage()}" /> 
                                         </p:selectBooleanCheckbox>
 
                                     </div>
