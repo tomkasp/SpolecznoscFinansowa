@@ -1,5 +1,6 @@
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.consultant;
 
+import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
