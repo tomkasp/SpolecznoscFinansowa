@@ -15,23 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author WR1EI1
  */
-public class LoginFilter implements Filter {
+public class LoginConsultantFilter implements Filter {
 
     @Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
 		
-		if ( loginBean == null || !loginBean.isIsLogged()  ) {
+		if ( loginBean == null || !loginBean.isIsLogged() || loginBean.getType()!=2 )//IF NO CONSULTANT
+                {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
-                        System.out.println("NO LOGGED AS CLIENT!");
+                        System.out.println("NO LOGGED AS CONSULTANT");
 		}
                 
-                if(loginBean.getType()==3)//LOGGED AS CLIENT
-                {
 		chain.doFilter(request, response);
-                }
                 
 	}
 
