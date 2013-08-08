@@ -31,13 +31,16 @@ public class LoginMB implements Serializable {
     }
 
     public String login() {
-
+        
+        System.out.println(isLogged);
+        
         UserDAO userDao=new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
         if ( user!=null ) {
             isLogged = true;
+            System.out.println("LOGGED?: "+isLogged);
             type = user.getType();
             idUser = user.getIdUser();
             System.out.println("login");

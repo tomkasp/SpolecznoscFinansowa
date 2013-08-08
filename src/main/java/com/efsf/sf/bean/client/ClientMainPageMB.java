@@ -1,5 +1,6 @@
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.client;
 
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
@@ -198,21 +199,6 @@ public class ClientMainPageMB implements Serializable {
         System.out.println("Klik " + cs.getIdClientCase());
     }
 
-//     public void fillSelectedCaseIncomeTable() {
-//       
-//        selectedCaseIncomeTable = new ArrayList<>();
-//        
-//        for (Income i : selectedCase.getClient().getIncomes())
-//        {
-//            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
-//        }
-//        
-//        for (IncomeBusinessActivity i : selectedCase.getClient().getIncomeBusinessActivities())
-//        {
-//            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
-//        }
-//        
-//    }
      
      public String backOffAwaiting(){
          CaseStatusDAO csdao = new CaseStatusDAO();
@@ -231,6 +217,13 @@ public class ClientMainPageMB implements Serializable {
          currentSelectedCase=null;
      return "/client/clientMainPage.xhtml";
      }
+     
+    //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
+    public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
+    {
+        return new ArrayList<ClientCase>(csSet);
+    }
+    
     
     public LoginMB getLoginMB() {
         return loginMB;
