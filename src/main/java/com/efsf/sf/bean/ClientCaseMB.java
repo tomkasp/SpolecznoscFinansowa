@@ -32,7 +32,7 @@ public class ClientCaseMB implements Serializable {
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
-    
+    private int i =1;
     private int premium = 30;
     /**
      * Creates a new instance of ClientCaseMB
@@ -56,10 +56,17 @@ public class ClientCaseMB implements Serializable {
         obligation = new Obligation();
     }
     
-    public void addMessage() {  
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
-    }
+    public void addMessage() { 
+        
+        if(i==1){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
+            i=0;
+        }
+        if(i==0){
+            i=1;
+        }
     
+    }
     
     public Boolean premiumPointsChecking(){
         
@@ -72,7 +79,7 @@ public class ClientCaseMB implements Serializable {
     }
     
     
-    public void addCase(){
+    public String addCase(){
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
             
@@ -88,8 +95,6 @@ public class ClientCaseMB implements Serializable {
                 login.getClient().setPoints(login.getClient().getPoints() - 1);
             }
             
-            
-
             //ucinanie do dwoch miejsc po przecinku bez zaokrlaglania!
             clientCase.setConsolidationValue(clientCase.getConsolidationValue().setScale(2,RoundingMode.DOWN));
             clientCase.setFreeResourcesValue(clientCase.getFreeResourcesValue().setScale(2,RoundingMode.DOWN));
@@ -106,7 +111,9 @@ public class ClientCaseMB implements Serializable {
                 login.setActiveAddingApp(false);
             }
             clientCase = new ClientCase();
+            
         }
+        return "client/clientMainPage.xhtml";
     }
 
     public Date getCurrentDate() {

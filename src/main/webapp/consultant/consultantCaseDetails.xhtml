@@ -102,20 +102,45 @@
                             </div>
 
                             <div class="rightInlineBox">
+                                <h:form id="rightColumn">
                                 <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus == 1}" >
-                                    <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
-                                    <div class="solidText"> 
-                                         Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
-                                    </div>  
-                                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedCase)}" oncomplete="confirmed.show();" /> 
-                                    <div style="min-height: 50px"></div>
-                                    <h4> OBSERWUJ SPRAWĘ </h4>
-                                    <div class="solidText"> 
-                                         Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
-                                    </div>  
-                                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();" />
-                  
-                  
+                                    <h:panelGroup rendered="#{!marketMB.doesAppliedToCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                        <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
+                                        <div class="solidText"> 
+                                             Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
+                                        </div>
+                                        <div style="min-height: 50px"></div>
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedCase)}" oncomplete="confirmed.show();" /> 
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{marketMB.doesAppliedToCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                        <h4> WYCOFAJ ZGŁOSZENIE </h4>
+                                        <div class="solidText"> 
+                                             Klient jeszcze nie zaakceptował Ciebie jako swojego doradcy. <br /> W dalszym ciągu możesz wycofać sprawę. 
+                                        </div>
+                                        <div style="min-height: 50px"></div>
+                                        <p:commandButton type="button" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                                            
+                                        </p:commandButton>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{!marketMB.doesConsultantObserveCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                        
+                                        <h4> OBSERWUJ SPRAWĘ </h4>
+                                        <div class="solidText"> 
+                                             Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
+                                        </div>
+                                        <div style="min-height: 50px"></div>
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();" />
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup rendered="#{marketMB.doesConsultantObserveCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                        <div style="min-height: 50px"></div>
+                                        <h4> ANULUJ OBSERWOWANIE</h4>
+                                        <div class="solidText"> 
+                                             Ta sprawa Cię dłużej nie interesuje? Usuń ją z listy obserwowanych spraw!
+                                        </div>
+                                        <div style="min-height: 50px"></div>
+                                        <p:commandButton styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
+                                    </h:panelGroup>
                                 </h:panelGroup>
                                 
                                 <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" >
@@ -156,10 +181,12 @@
                                     </div>  
                                     <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
                                 </h:panelGroup>
+                                </h:form>
                             </div>
                         </div>
                         
-                        <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->   
+                        <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
+                        <h:form>
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
                                 Twoje zgłoszenie do sprawy #{marketMB.selectedCase.idClientCase} zostało zatwierdzone.
@@ -171,7 +198,7 @@
 
                             <div> 
                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
-                                    
+                                    <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
                             </div>
                          </p:dialog>
@@ -187,11 +214,43 @@
 
                             <div> 
                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
-                                   
+                                   <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
                             </div>
                          </p:dialog>
                         
+                         <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz usunąć element z listy?
+                                </h:panelGroup>
+
+                                <div> 
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedCase)}" onclick="revokeApp.hide()" >
+                                        <f:ajax execute="@this" render=":rightColumn" />
+                                    </h:commandButton>
+
+                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
+                                       
+                                    </h:commandButton>
+                                </div>
+                         </p:dialog>
+                                        
+                        <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                            <h:panelGroup class="fontGrey">
+                                Czy napewno chcesz usunąć element z listy?
+                            </h:panelGroup>
+
+                            <div> 
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{marketMB.stopObserve(marketMB.selectedCase)}" onclick="revokeObs.hide()" >
+                                    <f:ajax execute="@this" render=":rightColumn" />
+                                </h:commandButton>
+
+                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
+                                   
+                                </h:commandButton>
+                            </div>
+                       </p:dialog>
+                       </h:form>
                     </ui:define>
         </ui:composition>
     </body>

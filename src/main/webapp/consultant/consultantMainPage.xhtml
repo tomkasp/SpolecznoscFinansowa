@@ -18,15 +18,17 @@
                     <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
 
+               <h:form>
                 <div class="topbarMenuBlue">
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/consultant/consultantSettings"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
                     </h:panelGroup>
                 </div>
+               </h:form>
             </ui:define>
 
             <ui:define name="content">
@@ -59,10 +61,12 @@
 
                     <h:link  class="floatR greyButton wideButton marginT10" value="Akceptuję" outcome="/consultant/consultantMainPage.xhtml"/>
                 </div>
+                
+   
 
 
                 <h:form>
-
+                   
                     <div class="bottomTable">
 
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
@@ -225,7 +229,7 @@
                     </p:dataTable>
                 </div>
 
-                <p:commandButton disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                <p:commandButton id="deleteApplied" disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
                      <f:ajax execute="applied" render="applied" />
                 </p:commandButton>
 
@@ -449,10 +453,10 @@
                                             </p:dataTable>
                                         </div>
                                         
-                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                                        <p:commandButton  disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                                               <p:ajax update="applied lastCases traced" />
                                         </p:commandButton>
-                                        <p:commandButton disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
+                                        <p:commandButton id="deleteObservedButton" disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
                                              
                                         </p:commandButton>
 
@@ -524,8 +528,8 @@
                                                 </h:panelGroup>
 
                                                 <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication()}" onclick="revokeApp.hide()" >
-                                                        <p:ajax update="applied"/>
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
+                                                        <p:ajax update="applied deleteApplied"/>
                                                     </h:commandButton>
 
                                                     <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
@@ -534,21 +538,24 @@
                                                 </div>
                                              </p:dialog>
                                         
-                                             <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                                                <h:panelGroup class="fontGrey">
-                                                    Czy napewno chcesz usunąć element z listy?
-                                                </h:panelGroup>
+                                        <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                            <h:panelGroup class="fontGrey">
+                                                Czy napewno chcesz usunąć element z listy?
+                                            </h:panelGroup>
 
-                                                <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve()}" onclick="revokeObs.hide()" >
-                                                        <p:ajax update="traced"/>
-                                                    </h:commandButton>
+                                            <div> 
+                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve(marketMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
+                                                    <p:ajax update="traced deleteObservedButton"/>
+                                                </h:commandButton>
 
-                                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
-                                                        <p:ajax update="traced"/>
-                                                    </h:commandButton>
-                                                </div>
-                                             </p:dialog>
+                                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
+                                                    <p:ajax update="traced"/>
+                                                </h:commandButton>
+                                            </div>
+                                       </p:dialog>
+
+                                        
+
                                         
                                         </h:form>
 
