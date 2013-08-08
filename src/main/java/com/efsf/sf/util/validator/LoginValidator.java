@@ -39,7 +39,6 @@ public class LoginValidator implements Validator {
       UserDAO udao=new UserDAO();
       int loginStatus=udao.checkLogin(email, password);
       
-      
       if(loginStatus==-1){
          FacesContext context = FacesContext.getCurrentInstance();
          ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
