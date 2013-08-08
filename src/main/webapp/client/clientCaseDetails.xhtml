@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
 
 
@@ -53,16 +52,45 @@
 
                 <div>
                     <div class="leftInlineBox">
-                        <h:form>
+                        <h:form id="leftForm">
                             <h4> DANE SPRAWY </h4>
                             <div class="marginLRT30">        
-                                <div class="field"> <h:outputText class="label" value="Pierwotna kwota zobowiązania"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="50 000 PLN" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="samochód" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="hipoteczny" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Wielkość raty"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="700.00 PLN" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Data otrzymania kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="30-05-2013" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Okres"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="5 lat" /> </div>
+                               
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Kwota zobowiązania"/> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.freeResourcesValue + clientMainPageMB.selectedCase.consolidationValue}" /> 
+                                </div>
+                                
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Cel"/> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.goal}" /> 
+                                </div>
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Rodzaj kredytu"/> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.productType.name}" /> 
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Wielkość raty"/>
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.expectedInstalment}" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Data wystawienia na giełdę"/> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.beginDate}" /> 
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Koniec aukcji"/>  
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientMainPageMB.selectedCase.endDate}" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Notatka"/>  
+                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none"  disabled="true" value="#{clientMainPageMB.selectedCase.note}" />
+                                </div>
                             </div>
+                            
                             <h:panelGroup rendered="#{clientMainPageMB.selectedCase.consultant}" >
                             <h4> DANE DORADCY</h4>
                             <div class="marginLRT30">   
@@ -76,7 +104,29 @@
                     </div>
 
                     <div class="rightInlineBox">
-                        <h:panelGroup>
+                        <h:form>
+                        <h:panelGroup rendered="#{clientMainPageMB.selectedCase.caseStatus.idCaseStatus == 1}" >
+                            <h4> DOSTĘPNI DORADCY </h4>
+                            <p:dataTable id="consultantsTable" value="#{fakeBean.harmonogram}" var="data" emptyMessage="brak klientów!" 
+                                         rowKey="#{data.pozostało}">
+                                <p:column headerText="Termin spłaty">  
+                                    <h:outputText value="#{data.termin}" /> 
+                                </p:column>  
+
+                                <p:column headerText="Kwota">  
+                                    <h:outputText value="#{data.kwota2}" /> 
+                                </p:column>  
+
+                                <p:column headerText="Pozostało">    
+                                    <h:outputText value="#{data.pozostało}" /> 
+                                </p:column>  
+
+                                <p:column headerText="Spłacono">  
+                                    <h:outputText value="#{data.spłacono}" /> 
+                                </p:column>    
+                             </p:dataTable>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{clientMainPageMB.selectedCase.caseStatus.idCaseStatus == 9}">
                             <h4> NASTĘPNA RATA </h4>
 
                             <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
@@ -145,6 +195,7 @@
                                 </p:column>      
                             </p:dataTable>
                         </h:panelGroup>
+                       </h:form>
                     </div>
                 </div>
                 <div style="width: 100%; height: 2px;" ></div>
