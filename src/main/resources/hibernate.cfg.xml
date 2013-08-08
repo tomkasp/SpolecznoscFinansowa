@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
-    <property name="hibernate.connection.username">SFuser</property>
-    <property name="hibernate.connection.password">SFuser123</property>
-    <property name="hibernate.show_sql">true</property>
-    <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
-    <mapping class="com.efsf.sf.sql.entity.Address"/>
-    <mapping class="com.efsf.sf.sql.entity.Subscription"/>
-    <mapping class="com.efsf.sf.sql.entity.Education"/>
-    <mapping class="com.efsf.sf.sql.entity.Income"/>
-    <mapping class="com.efsf.sf.sql.entity.CaseRating"/>
-    <mapping class="com.efsf.sf.sql.entity.ProductDetails"/>
-    <mapping class="com.efsf.sf.sql.entity.EmploymentType"/>
-    <mapping class="com.efsf.sf.sql.entity.Consultant"/>
-    <mapping class="com.efsf.sf.sql.entity.InvoiceData"/>
-    <mapping class="com.efsf.sf.sql.entity.RequiredDocuments"/>
-    <mapping class="com.efsf.sf.sql.entity.SubscriptionType"/>
-    <mapping class="com.efsf.sf.sql.entity.IdentyficationDocument"/>
-    <mapping class="com.efsf.sf.sql.entity.IncomeBusinessActivity"/>
-    <mapping class="com.efsf.sf.sql.entity.User"/>
-    <mapping class="com.efsf.sf.sql.entity.Obligation"/>
-    <mapping class="com.efsf.sf.sql.entity.Region"/>
-    <mapping class="com.efsf.sf.sql.entity.ProductType"/>
-    <mapping class="com.efsf.sf.sql.entity.ConsultantRating"/>
-    <mapping class="com.efsf.sf.sql.entity.Product"/>
-    <mapping class="com.efsf.sf.sql.entity.Client"/>
-    <mapping class="com.efsf.sf.sql.entity.Institution"/>
-    <mapping class="com.efsf.sf.sql.entity.Branch"/>
-    <mapping class="com.efsf.sf.sql.entity.Message"/>
-    <mapping class="com.efsf.sf.sql.entity.CaseStatus"/>
-    <mapping class="com.efsf.sf.sql.entity.ClientCase"/>
-    <mapping class="com.efsf.sf.sql.entity.MaritalStatus"/>
-    <mapping class="com.efsf.sf.sql.entity.Newsletter"/>
-  </session-factory>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.username">SFuser</property>
+        <property name="hibernate.connection.password">SFuser123</property>
+        <property name="hibernate.show_sql">true</property>
+    
+        <property name="c3p0.acquire_increment">10</property>
+        <property name="c3p0.idle_test_periods">10</property>
+        <property name="c3p0.min_size">10</property>
+        <property name="c3p0.max_size">25</property>
+        <property name="c3p0.max_statements">0</property>
+        <property name="c3p0.timeout">20</property>
+        <property name="c3p0.unreturnedConnectionTimeout">3</property>
+    
+        <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
+        <mapping class="com.efsf.sf.sql.entity.Address"/>
+        <mapping class="com.efsf.sf.sql.entity.Subscription"/>
+        <mapping class="com.efsf.sf.sql.entity.Education"/>
+        <mapping class="com.efsf.sf.sql.entity.Income"/>
+        <mapping class="com.efsf.sf.sql.entity.CaseRating"/>
+        <mapping class="com.efsf.sf.sql.entity.ProductDetails"/>
+        <mapping class="com.efsf.sf.sql.entity.EmploymentType"/>
+        <mapping class="com.efsf.sf.sql.entity.Consultant"/>
+        <mapping class="com.efsf.sf.sql.entity.InvoiceData"/>
+        <mapping class="com.efsf.sf.sql.entity.RequiredDocuments"/>
+        <mapping class="com.efsf.sf.sql.entity.SubscriptionType"/>
+        <mapping class="com.efsf.sf.sql.entity.IdentyficationDocument"/>
+        <mapping class="com.efsf.sf.sql.entity.IncomeBusinessActivity"/>
+        <mapping class="com.efsf.sf.sql.entity.User"/>
+        <mapping class="com.efsf.sf.sql.entity.Obligation"/>
+        <mapping class="com.efsf.sf.sql.entity.Region"/>
+        <mapping class="com.efsf.sf.sql.entity.ProductType"/>
+        <mapping class="com.efsf.sf.sql.entity.ConsultantRating"/>
+        <mapping class="com.efsf.sf.sql.entity.Product"/>
+        <mapping class="com.efsf.sf.sql.entity.Client"/>
+        <mapping class="com.efsf.sf.sql.entity.Institution"/>
+        <mapping class="com.efsf.sf.sql.entity.Branch"/>
+        <mapping class="com.efsf.sf.sql.entity.Message"/>
+        <mapping class="com.efsf.sf.sql.entity.CaseStatus"/>
+        <mapping class="com.efsf.sf.sql.entity.ClientCase"/>
+        <mapping class="com.efsf.sf.sql.entity.MaritalStatus"/>
+        <mapping class="com.efsf.sf.sql.entity.Newsletter"/>
+    </session-factory>
 </hibernate-configuration>

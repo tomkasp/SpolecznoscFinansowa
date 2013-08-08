@@ -43,190 +43,190 @@
                     });
                 </script>
 
-             
 
-                    
-                    
-                    <div id="profileBar" class="profilBar">
-                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
 
-                        <div id="spaceFiller" > </div>
-                        <div>     
-                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
-                            <h:outputText class="profileText" value="nr. klienta:" />
-                            <h5> #{loginMB.client.user.login} </h5>
-                            <h:outputText class="profileText" value="Stan konta:" />
-                            <h5> #{loginMB.client.points} / 5 </h5>
-                        </div>
+
+
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                    <div id="spaceFiller" > </div>
+                    <div>     
+                        <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
+                        <h:outputText class="profileText" value="nr. klienta:" />
+                        <h5> #{loginMB.client.user.login} </h5>
+                        <h:outputText class="profileText" value="Stan konta:" />
+                        <h5> #{loginMB.client.points} / 5 </h5>
+                    </div>
+                </div>
+
+
+                <div class="marginT50">
+
+                    <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
+
+
+                    <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
+
+                    <div id="last">
+                        <h:form>
+                            <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" emptyMessage="Nie ma żadnych spraw" >
+
+                                <p:column headerText="Data dodania">    
+                                    <h:outputText  value="#{row.beginDate}">
+                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                    </h:outputText>  
+                                </p:column>  
+
+                                <p:column headerText="Numer sprawy">  
+                                    <h:outputText  value="#{row.idClientCase}"/>
+                                </p:column>  
+
+                                <p:column headerText="Postęp">  
+                                    <h:outputText  value="#{row.phase}"/>
+                                </p:column> 
+
+                                <p:column headerText="Rodzaj kredytu"  >
+                                    <h:outputText  value="#{row.productType.name}"/>
+                                </p:column> 
+
+                                <p:column headerText="BIK">
+                                    <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                                </p:column> 
+
+                                <p:column headerText="Kod pocztowy">  
+                                    <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                                </p:column>
+
+                                <p:column headerText="Wiek">  
+                                    <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                </p:column>
+
+                                <p:column headerText="Typ zatrudnienia">
+                                    <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
+                                    <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
+                                        <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
+                                    </h:selectOneMenu>
+                                </p:column>
+
+                                <p:column headerText="Branża"> 
+                                    <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
+                                    <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
+                                        <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
+                                    </h:selectOneMenu>
+                                </p:column>
+
+                                <p:column headerText="Trudność kredytu"> 
+                                    <h:outputText  value="#{row.difficulty}"/>
+                                </p:column>
+
+                                <p:column headerText="Ilość doradców"> 
+                                    <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
+                                </p:column>
+
+                                <p:column headerText="Koniec aukcji"> 
+                                    <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                                </p:column> 
+
+                                <!--                        <p:column headerText=""> 
+                                                                <h:outputText  value=" "/>
+                                                            </p:column> -->
+
+                            </p:dataTable>
+                            <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
+
+                        </h:form>
                     </div>
 
+                    <div id="all" style="display: none;">
 
-                    <div class="marginT50">
+                        <h:form>
 
-                        <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
-
-
-                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
-
-                        <div id="last">
-                               <h:form>
-                        <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" emptyMessage="Nie ma żadnych spraw" >
-
-                            <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}">
-                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                                </h:outputText>  
-                            </p:column>  
-
-                            <p:column headerText="Numer sprawy">  
-                                <h:outputText  value="#{row.idClientCase}"/>
-                            </p:column>  
-
-                            <p:column headerText="Postęp">  
-                                <h:outputText  value="#{row.phase}"/>
-                            </p:column> 
-
-                            <p:column headerText="Rodzaj kredytu"  >
-                                <h:outputText  value="#{row.productType.name}"/>
-                            </p:column> 
-
-                            <p:column headerText="BIK">
-                                <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                            </p:column> 
-
-                            <p:column headerText="Kod pocztowy">  
-                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                            </p:column>
-
-                            <p:column headerText="Wiek">  
-                                <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                            </p:column>
-
-                            <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Branża"> 
-                                <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Trudność kredytu"> 
-                                <h:outputText  value="#{row.difficulty}"/>
-                            </p:column>
-
-                            <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
-                            </p:column>
-
-                            <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
-                            </p:column> 
-
-                            <!--                        <p:column headerText=""> 
-                                                            <h:outputText  value=" "/>
-                                                        </p:column> -->
-
-                        </p:dataTable>
-                             <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
-                             
-                               </h:form>
-                        </div>
-                        
-                        <div id="all" style="display: none;">
-                           
-                               <h:form>
-                            
                             <p:dataTable id="allCases" value="#{clientMainPageMB.allClientCaseList}"  var="row" emptyMessage="Nie ma żadnych spraw">
 
-                            <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}">
-                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                                </h:outputText>  
-                            </p:column>  
+                                <p:column headerText="Data dodania">    
+                                    <h:outputText  value="#{row.beginDate}">
+                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                    </h:outputText>  
+                                </p:column>  
 
-                            <p:column headerText="Numer sprawy">  
-                                <h:outputText  value="#{row.idClientCase}"/>
-                            </p:column>  
+                                <p:column headerText="Numer sprawy">  
+                                    <h:outputText  value="#{row.idClientCase}"/>
+                                </p:column>  
 
-                            <p:column headerText="Postęp">  
-                                <h:outputText  value="#{row.phase}"/>
-                            </p:column> 
+                                <p:column headerText="Postęp">  
+                                    <h:outputText  value="#{row.phase}"/>
+                                </p:column> 
 
-                            <p:column headerText="Rodzaj kredytu"  >
-                                <h:outputText  value="#{row.productType.name}"/>
-                            </p:column> 
+                                <p:column headerText="Rodzaj kredytu"  >
+                                    <h:outputText  value="#{row.productType.name}"/>
+                                </p:column> 
 
-                            <p:column headerText="BIK">
-                                <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                            </p:column> 
+                                <p:column headerText="BIK">
+                                    <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                                </p:column> 
 
-                            <p:column headerText="Kod pocztowy">  
-                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                            </p:column>
+                                <p:column headerText="Kod pocztowy">  
+                                    <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                                </p:column>
 
-                            <p:column headerText="Wiek">  
-                                <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                            </p:column>
+                                <p:column headerText="Wiek">  
+                                    <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                </p:column>
 
-                            <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
+                                <p:column headerText="Typ zatrudnienia">
+                                    <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
+                                    <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
+                                        <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
+                                    </h:selectOneMenu>
+                                </p:column>
 
-                            <p:column headerText="Branża"> 
-                                <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
+                                <p:column headerText="Branża"> 
+                                    <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
+                                    <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
+                                        <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
+                                    </h:selectOneMenu>
+                                </p:column>
 
-                            <p:column headerText="Trudność kredytu"> 
-                                <h:outputText  value="#{row.difficulty}"/>
-                            </p:column>
+                                <p:column headerText="Trudność kredytu"> 
+                                    <h:outputText  value="#{row.difficulty}"/>
+                                </p:column>
 
-                            <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
-                            </p:column>
+                                <p:column headerText="Ilość doradców"> 
+                                    <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
+                                </p:column>
 
-                            <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
-                            </p:column> 
+                                <p:column headerText="Koniec aukcji"> 
+                                    <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                                </p:column> 
 
-                            <!--                        <p:column headerText=""> 
-                                                            <h:outputText  value=" "/>
-                                                        </p:column> -->
+                                <!--                        <p:column headerText=""> 
+                                                                <h:outputText  value=" "/>
+                                                            </p:column> -->
 
-                            
-                            
-                        </p:dataTable>
-                             <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż tylko ostatnie</button>
-                       
-                               </h:form>
-                        </div>    
-                        
-                    </div>
 
-                   
-                    
-                    <div  class="marginT50">
-                        
-                        <h4>OCZEKUJĄCE</h4>
-                        
-                        <h:form>
-                           
+
+                            </p:dataTable>
+                            <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż tylko ostatnie</button>
+
+                        </h:form>
+                    </div>    
+
+                </div>
+
+
+
+                <div  class="marginT50">
+
+                    <h4>OCZEKUJĄCE</h4>
+
+                    <h:form>
+
                         <p:dataTable id="awaitingCases" value="#{clientMainPageMB.awaitingClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingSelectedCase}" selectionMode="single" >
 
                             <f:ajax event="rowSelect" render="@form" />
                             <f:ajax event="rowUnselect" render="@form" />
-                            
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -284,27 +284,27 @@
                             </p:column>
 
                         </p:dataTable>
-                        
-                       
-                         <c:if test="#{clientMainPageMB.awaitingSelectedCase!=null}" var="costam">
-                               <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
-                         </c:if>
-                        
-                           </h:form>   
-                        
-                    </div>
 
-                    <div class="marginT50">
 
-                      <h:form>
-                        
+                        <c:if test="#{clientMainPageMB.awaitingSelectedCase!=null}" var="costam">
+                            <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
+                        </c:if>
+
+                    </h:form>   
+
+                </div>
+
+                <div class="marginT50">
+
+                    <h:form>
+
                         <h4> TRWAJĄCE </h4>               
 
                         <p:dataTable id="currentCases" value="#{clientMainPageMB.currentClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.currentSelectedCase}" selectionMode="single" >
 
                             <f:ajax event="rowSelect" render="@form" />
                             <f:ajax event="rowUnselect" render="@form" />
-                            
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -357,31 +357,29 @@
                                 <h:outputText value="#{row.caseStatus.name}" />
                             </p:column>                     
                         </p:dataTable>
-                   
+
                         <c:if test="#{clientMainPageMB.currentSelectedCase!=null}" var="costam">
-                             <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/consultant/consultantMessages"/>
-                             <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
-                         </c:if>
-                        
-                    
-                        
-                           </h:form>
-                    
-                    </div>
+                            <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/consultant/consultantMessages"/>
+                            <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
+                        </c:if>
 
-                   
+                    </h:form>
 
-                    <div class="marginT50">
+                </div>
 
-                      <h:form>  
-                        
+
+
+                <div class="marginT50">
+
+                    <h:form>  
+
                         <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
 
                         <p:dataTable id="finishedCases" value="#{clientMainPageMB.finishedClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.finishedSelectedCase}" selectionMode="single" >
 
                             <f:ajax event="rowSelect" render="@form" />
                             <f:ajax event="rowUnselect" render="@form" />
-                            
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -445,7 +443,7 @@
                             <p:column  headerText="Ocena doradcy">  
                                 <h:outputText style="color: red;" value="4.9" />
                             </p:column> 
-                            
+
                             <p:column headerText="Status">  
                                 <h:outputText value="#{row.caseStatus.name}" />
                             </p:column> 
@@ -453,17 +451,18 @@
                         </p:dataTable>
 
                         <c:if test="#{clientMainPageMB.finishedSelectedCase!=null}" var="costam">
-                              <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
-                         </c:if>
+                            <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
+                        </c:if>
                         
-                      </h:form>  
-                        
-                    </div>
-                    
-                    <div>
-                        
-                        <h:form>
-                        
+               
+                    </h:form>  
+
+                </div>
+
+                <div>
+
+                    <h:form>
+
                         <h4> PREMIUM </h4>
 
                         <p:dataTable id="awaitingCase" value="#{clientMainPageMB.awaitingClientCaseList}" var="row" emptyMessage="Nie ma żadnych spraw" >
@@ -529,24 +528,19 @@
                             </p:column>      
 
                             <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
-                            
+
                                 <h:outputText value=" " />
-                            
+
                             </p:column>      
 
-                       
+
                         </p:dataTable>
-                        
-                        </h:form>
-                        
-                    </div>
 
-                    <div class="marginB30">
+                    </h:form>
 
-                    </div>
+                </div>
 
                 
-
             </ui:define>           
         </ui:composition>
     </body>

@@ -32,5 +32,7 @@ public class RequiredCheckboxValidator implements Validator
             throw new ValidatorException(msg);
         }
     }
+    
+    
 }
     
