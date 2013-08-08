@@ -107,7 +107,8 @@
                         <h:form>
                         <h:panelGroup rendered="#{clientViewedCaseMB.clientCase.caseStatus.idCaseStatus == 1}" >
                             <h4> DOSTĘPNI DORADCY </h4>
-                            <p:dataTable id="consultantsTable" value="#{clientViewedCaseMB.castConsultantSetToArray(clientViewedCaseMB.clientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" >
+                            <p:dataTable id="consultantsTable" value="#{clientViewedCaseMB.castConsultantSetToArray(clientViewedCaseMB.clientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{clientMainPageMB.selectedConsultant}" selectionMode="single" >
+     
                                 <p:column headerText="Nazwisko">  
                                     <h:outputText value="#{row.lastName}" /> 
                                 </p:column>  
