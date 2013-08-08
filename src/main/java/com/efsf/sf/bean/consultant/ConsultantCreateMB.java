@@ -1,5 +1,7 @@
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.consultant;
 
+import com.efsf.sf.bean.DictionaryMB;
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
@@ -81,6 +83,12 @@ public class ConsultantCreateMB implements Serializable {
             SubscriptionDAO sdao = new SubscriptionDAO();
             sdao.save(subscription);
         }
+        
+        loginMB.setUser(user);
+        loginMB.setConsultant(consultant);
+        loginMB.setIsLogged(true);
+        loginMB.setType(2);
+        
         return "/consultant/consultantFillAccountData?faces-redirect=true";
         
     }

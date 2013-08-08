@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.client;
 
+import com.efsf.sf.bean.DictionaryMB;
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.EducationDAO;
@@ -176,6 +178,8 @@ public class CreateClientMB implements Serializable
         
         loginMB.setUser(user);
         loginMB.setClient(client);
+        loginMB.setIsLogged(true);
+        loginMB.setType(3);
         
         return "/client/clientFillAccountData?faces-redirect=true";
     }
