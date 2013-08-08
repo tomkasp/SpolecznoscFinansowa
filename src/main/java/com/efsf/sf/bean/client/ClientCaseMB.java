@@ -34,6 +34,9 @@ public class ClientCaseMB implements Serializable {
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
     private int premium = 30;
+    
+    
+    
     /**
      * Creates a new instance of ClientCaseMB
      */
@@ -166,9 +169,4 @@ public class ClientCaseMB implements Serializable {
     }
 
    
-
-    
-
-
-    
 }
