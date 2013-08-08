@@ -52,16 +52,19 @@
                     
                     <div class="field"> 
                         <h:outputText class="label" value="E-mail:"/> 
-                        <h:inputText id="email" value="#{loginMB.email}">  
-			<f:validator validatorId="com.efsf.sf.util.EmailValidator" />
+                        <h:inputText id="email" value="#{loginMB.email}" required="true">  
+			<f:validator validatorId="LoginValidator" />
+                        <f:attribute name="password" value="#{password}" />
                         </h:inputText>
-                        
-                        
                     </div>
                     
                     <div class="field"> 
                         <h:outputText class="label" value="Hasło:"/> 
-                        <h:inputSecret id="password" value="#{loginMB.password}"/> 
+                        <h:inputSecret id="password" value="#{loginMB.password}" required="true" 
+                         binding="#{password}">
+                        </h:inputSecret>
+                        
+                        <h:message style=" float: left; margin-left: 205px;" class="label" for="email" errorClass="invalid" id="emailMessage" />
                     </div>
                     
                     <div class="field"> 

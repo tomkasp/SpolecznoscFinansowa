@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.util;
+package com.efsf.sf.util.validator;
 
-import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -17,24 +16,23 @@ import javax.faces.validator.ValidatorException;
  *
  * @author XaI
  */
-@FacesValidator("com.efsf.sf.util.EmptyIncomeTableValidator")
-public class EmptyIncomeTableValidator implements Validator {
-    
-   @Override
-   public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
-      
-       System.out.println("");
-       
-        if (value.toString().equals("true"))
-        {
-            FacesContext context = FacesContext.getCurrentInstance();
+@FacesValidator("com.efsf.sf.validator.RequiredCheckboxValidator")
+public class RequiredCheckboxValidator implements Validator 
+{
+
+    @Override
+    public void validate(FacesContext context, UIComponent component, Object value)
+        throws ValidatorException
+    {
+        if (value == null || value.equals(Boolean.FALSE)) {
+            context = FacesContext.getCurrentInstance();
             ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-            FacesMessage msg =  new FacesMessage(bundle.getString("emptyTable"),bundle.getString("emptyTable"));
+            FacesMessage msg =  new FacesMessage(bundle.getString("requiredCheckbox"),bundle.getString("requiredCheckbox"));
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-            
-
-   }
+    }
+    
+    
 }
- 
+    
