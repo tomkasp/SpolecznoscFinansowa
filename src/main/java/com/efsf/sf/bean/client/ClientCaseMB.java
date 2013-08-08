@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.client;
 
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;

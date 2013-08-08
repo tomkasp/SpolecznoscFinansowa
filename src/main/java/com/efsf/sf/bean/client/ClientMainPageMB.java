@@ -1,5 +1,6 @@
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.client;
 
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
