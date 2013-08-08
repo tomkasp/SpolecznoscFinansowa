@@ -37,7 +37,6 @@ public class LoginValidator implements Validator {
       password=Security.sha1(password);
        
       UserDAO udao=new UserDAO();
-      
       int loginStatus=udao.checkLogin(email, password);
       
       
