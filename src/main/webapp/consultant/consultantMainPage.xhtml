@@ -59,10 +59,12 @@
 
                     <h:link  class="floatR greyButton wideButton marginT10" value="Akceptuję" outcome="/consultant/consultantMainPage.xhtml"/>
                 </div>
+                
+   
 
 
                 <h:form>
-
+                   
                     <div class="bottomTable">
 
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
@@ -534,21 +536,24 @@
                                                 </div>
                                              </p:dialog>
                                         
-                                             <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                                                <h:panelGroup class="fontGrey">
-                                                    Czy napewno chcesz usunąć element z listy?
-                                                </h:panelGroup>
+                                        <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                            <h:panelGroup class="fontGrey">
+                                                Czy napewno chcesz usunąć element z listy?
+                                            </h:panelGroup>
 
-                                                <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve()}" onclick="revokeObs.hide()" >
-                                                        <p:ajax update="traced"/>
-                                                    </h:commandButton>
+                                            <div> 
+                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve()}" onclick="revokeObs.hide()" >
+                                                    <p:ajax update="traced"/>
+                                                </h:commandButton>
 
-                                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
-                                                        <p:ajax update="traced"/>
-                                                    </h:commandButton>
-                                                </div>
-                                             </p:dialog>
+                                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
+                                                    <p:ajax update="traced"/>
+                                                </h:commandButton>
+                                            </div>
+                                       </p:dialog>
+
+                                        
+
                                         
                                         </h:form>
 
