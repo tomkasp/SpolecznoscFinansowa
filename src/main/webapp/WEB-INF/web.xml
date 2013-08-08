@@ -31,13 +31,14 @@
     
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
-        <filter-class> com.efsf.sf.util.CharacterEncodingFilter</filter-class>
+        <filter-class> com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
     </filter>
     
     <filter>
         <filter-name>LoginClientFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.LoginClientFilter</filter-class>
     </filter>
+    
     <filter-mapping>
         <filter-name>LoginClientFilter</filter-name>
         <url-pattern>/faces/client/*</url-pattern>

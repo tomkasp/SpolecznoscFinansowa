@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.efsf.sf.util;
+package com.efsf.sf.util.validator;
 
 import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
@@ -24,13 +24,11 @@ public class SamePasswordValidator implements Validator {
     @Override
      public void validate(FacesContext context, UIComponent toValidate, Object value) 
     {
+        
         String password = (String) value;
-
         //UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
         String confirmPassword = (String) toValidate.getAttributes().get("password");
-      
         System.out.println(confirmPassword);
-        
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
