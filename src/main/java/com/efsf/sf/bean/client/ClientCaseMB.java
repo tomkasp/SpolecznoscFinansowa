@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped
@@ -42,7 +43,9 @@ public class ClientCaseMB implements Serializable {
     }    
     
     public List<Obligation> retrieveObligationListForCurrentClient(){ 
+        
         setObligationList(obdao.obligationListForClient(login.getClient().getIdClient()));
+        
         return obligationList;
     }
     
@@ -50,10 +53,14 @@ public class ClientCaseMB implements Serializable {
     
     
     public void addObligation(){
+        //RequestContext.getCurrentInstance().execute("zobDial.show()");
+        
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
         obdao.save(obligation);
+        System.out.println("wykonano save....");
         obligation = new Obligation();
+        System.out.println("data:"+ obligation.getBeginDate());
     }
     
     public void addMessage(){ 
@@ -82,7 +89,7 @@ public class ClientCaseMB implements Serializable {
             ClientDAO cd = new ClientDAO();
 
             //pamietac o zabraniu punktow z klienta!
-            if(clientCase.getPremium()){
+            if(clientCase.getPremium()!=null && clientCase.getPremium()){
                 cd.decrementPoints(login.getClient(),premium);
                 login.getClient().setPoints(login.getClient().getPoints() - premium);
             }
