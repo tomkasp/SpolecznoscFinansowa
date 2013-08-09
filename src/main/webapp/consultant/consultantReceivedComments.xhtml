@@ -54,7 +54,8 @@
 
 
                     <h3>Lista otrzymanych komentarzy</h3>
-                    <p:dataTable value="#{consultantRatesMB.consulantRates}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie masz żadnych komentarzy" selectionMode="single">
+                    <h:form> 
+                        <p:dataTable value="#{consultantRatesMB.consulantRates}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie masz żadnych komentarzy" selection="#{consultantRatesMB.clientCase}" selectionMode="single">
 
                         <p:ajax event="rowSelect" listener="#{consultantRatesMB.onRowSelect()}"/>
                         
@@ -78,6 +79,7 @@
                         </p:column> 
 
                     </p:dataTable>
+                    </h:form> 
                 </div>
 
                 <div class="rightTable">
