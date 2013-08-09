@@ -158,6 +158,16 @@ public class ClientCaseMB implements Serializable {
         return new ArrayList<Consultant>(cSet);
     }
     
+    public boolean checkLoggedConsultantAccessToCase()
+    {
+        ClientCaseDAO caseDao = new ClientCaseDAO();
+        List list = caseDao.getSelectedCaseWithConsultant(selectedClientCase.getIdClientCase(), login.getConsultant().getIdConsultant());
+        if (list != null && list.size() > 0)
+            return true;
+        else
+            return false;                   
+    }
+    
     public void assignConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
