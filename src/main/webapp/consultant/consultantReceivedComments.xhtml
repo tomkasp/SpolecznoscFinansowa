@@ -54,26 +54,32 @@
 
 
                     <h3>Lista otrzymanych komentarzy</h3>
-                    <p:dataTable>
-                        <p:column headerText=" ">  
-                        </p:column>  
+                    <h:form> 
+                        <p:dataTable value="#{consultantRatesMB.consulantRates}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie masz żadnych komentarzy" selection="#{consultantRatesMB.clientCase}" selectionMode="single">
 
+                        <p:ajax event="rowSelect" listener="#{consultantRatesMB.onRowSelect()}"/>
+                        
                         <p:column headerText="Od Kogo">  
+                            <h:outputText  value="#{row.client.lastName}"/>
                         </p:column>  
 
                         <p:column headerText="Typ">    
                         </p:column>  
 
-                        <p:column headerText="Śr.ocena">  
+                        <p:column headerText="Śr.ocena"> 
+                            <h:outputText  value="#{row.caseRating.average}"/>
                         </p:column>  
 
                         <p:column headerText="Data">  
+                            <h:outputText  value="#{row.caseRating.commentDate}"/>
                         </p:column> 
 
-                        <p:column headerText="Nr. Transakcji"  >  
+                        <p:column headerText="Nr. Transakcji" >
+                            <h:outputText  value="#{row.idClientCase}"/>
                         </p:column> 
 
                     </p:dataTable>
+                    </h:form> 
                 </div>
 
                 <div class="rightTable">
