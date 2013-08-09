@@ -58,6 +58,7 @@ public class MarketMB implements Serializable
     private ClientCase selectedLastCase;
     private ClientCase selectedObservedCase;
     private ClientCase selectedAppliedCase;
+    private ClientCase selectedOwnedCase;
     
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
@@ -70,6 +71,9 @@ public class MarketMB implements Serializable
     
     private ArrayList<Set<String>> appliedModelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> appliedModelsBranch = new ArrayList();
+    
+    private ArrayList<Set<String>> ownedModelsEmploymentType = new ArrayList();
+    private ArrayList<Set<String>> ownedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
 
@@ -641,6 +645,30 @@ public class MarketMB implements Serializable
 
     public void setSelectedMarketCase(ClientCase selectedMarketCase) {
         this.selectedMarketCase = selectedMarketCase;
+    }
+
+    public ClientCase getSelectedOwnedCase() {
+        return selectedOwnedCase;
+    }
+
+    public void setSelectedOwnedCase(ClientCase selectedOwnedCase) {
+        this.selectedOwnedCase = selectedOwnedCase;
+    }
+
+    public ArrayList<Set<String>> getOwnedModelsEmploymentType() {
+        return ownedModelsEmploymentType;
+    }
+
+    public void setOwnedModelsEmploymentType(ArrayList<Set<String>> ownedModelsEmploymentType) {
+        this.ownedModelsEmploymentType = ownedModelsEmploymentType;
+    }
+
+    public ArrayList<Set<String>> getOwnedModelsBranch() {
+        return ownedModelsBranch;
+    }
+
+    public void setOwnedModelsBranch(ArrayList<Set<String>> ownedModelsBranch) {
+        this.ownedModelsBranch = ownedModelsBranch;
     }
 
 }
