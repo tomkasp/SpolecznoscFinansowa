@@ -4,6 +4,7 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
+import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
@@ -25,6 +26,9 @@ public class ClientMainPageMB implements Serializable {
 
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
+    
+    @ManagedProperty(value="#{clientCaseMB}")
+    private ClientCaseMB clientCaseMB;
     
     private List<ClientCase> clientCaseList = new ArrayList<>();
     
@@ -59,10 +63,8 @@ public class ClientMainPageMB implements Serializable {
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
     
     //Here is holder for last consultant selected in the case details view
-    
-   
-    
-
+    private Integer newPoints;
+  
     @PostConstruct
     public void fillTables()
     {
@@ -190,15 +192,14 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void rowDoubleClick(ClientCase cs) throws IOException
-    {
-        selectedCase = cs;
-        System.out.println("2 razy: "  + selectedCase.getIdClientCase());
+    {   
+        System.out.println("2 razy: "  +  clientCaseMB.getSelectedClientCase().getIdClientCase());
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
     }
     
     public void rowClick(ClientCase cs)
     {
-        selectedCase = cs;
+        clientCaseMB.setSelectedClientCase(cs);
         System.out.println("Klik " + cs.getIdClientCase());
     }
 
@@ -227,6 +228,15 @@ public class ClientMainPageMB implements Serializable {
         return new ArrayList<ClientCase>(csSet);
     }
     
+    public void addPoints(){
+        Client currentClient=loginMB.getClient();
+        int currentPoints=currentClient.getPoints();
+        currentClient.setPoints(currentPoints+newPoints);
+        ClientDAO cdao=new ClientDAO();
+        cdao.update(currentClient);   
+        newPoints=null;
+        System.out.println("UDAO SIE!");
+    }
     
     public LoginMB getLoginMB() {
         return loginMB;
@@ -372,7 +382,20 @@ public class ClientMainPageMB implements Serializable {
         this.lastSelectedCase = lastSelectedCase;
     }
 
+    public ClientCaseMB getClientCaseMB() {
+        return clientCaseMB;
+    }
 
+    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
+        this.clientCaseMB = clientCaseMB;
+    }
+
+
+    public void setNewPoints(Integer newPoints) {
+        this.newPoints = newPoints;
+    }
+
+    
     
      
     
