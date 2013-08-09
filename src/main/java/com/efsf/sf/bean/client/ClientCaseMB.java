@@ -18,7 +18,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped
@@ -27,10 +26,8 @@ public class ClientCaseMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB login;
     
-    @ManagedProperty(value="#{clientMainPageMB}")
-    private ClientMainPageMB clientMainPageMB;
-    
-    
+
+        
     private int idTypProduktu;
     private int idTypProduktuObligation;
     
@@ -152,14 +149,32 @@ public class ClientCaseMB implements Serializable {
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
-            selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(clientMainPageMB.getSelectedCase().getIdClientCase());
+            selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
             selectedConsultant = null;
          }
+    }
+    
+    public void loadCaseClientsDetails()
+    {   FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isPostback() && !facesContext.isValidationFailed())
+        {
+             selectedClientCase = new ClientCaseDAO().getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+        }
     }
     
     public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
     {
         return new ArrayList<Consultant>(cSet);
+    }
+    
+    public boolean checkLoggedConsultantAccessToCase()
+    {
+        ClientCaseDAO caseDao = new ClientCaseDAO();
+        List list = caseDao.getSelectedCaseWithConsultant(selectedClientCase.getIdClientCase(), login.getConsultant().getIdConsultant());
+        if (list != null && list.size() > 0)
+            return true;
+        else
+            return false;                   
     }
     
     public void assignConsultant()
@@ -224,14 +239,6 @@ public class ClientCaseMB implements Serializable {
 
     public void setObligationList(List<Obligation> obligationList) {
         this.obligationList = obligationList;
-    }
-
-    public ClientMainPageMB getClientMainPageMB() {
-        return clientMainPageMB;
-    }
-
-    public void setClientMainPageMB(ClientMainPageMB clientMainPageMB) {
-        this.clientMainPageMB = clientMainPageMB;
     }
 
     public ClientCase getSelectedClientCase() {
