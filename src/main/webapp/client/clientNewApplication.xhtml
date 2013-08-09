@@ -106,7 +106,11 @@
 
                                     <div class="field"> 
                                         <h:outputText class="label" value="Cel:"/>
-                                        <h:inputText maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}"/> 
+                                        <h:inputText id="goal" maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}">
+                                            <f:validateLength maximum="255"/>
+                                            <p:ajax event="keyup" update="goalMessage" />
+                                        </h:inputText>
+                                        <h:message for="goal" errorClass="invalid" id="goalMessage" />
                                     </div>
 
                                     <div class="field"> 
@@ -127,9 +131,9 @@
                                         <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" >
                                             <p:ajax update="msg"  listener="#{clientCaseMB.addMessage()}" /> 
                                         </p:selectBooleanCheckbox>
-
+                                        <p:growl id="msg" severity="info, warn"  />
                                     </div>
-                                    <p:growl id="msg"  />
+
 
                                     <p:dialog id="basicDialog2" header="Premium" widgetVar="dlg2" rendered="true">
                                         Sprawa premium zabierze Ci 30 szalonych punktów!
@@ -149,14 +153,14 @@
                                         <h:commandButton type="reset" value="OK" onclick="dlg1.hide();"/>
                                     </h:panelGrid>
                                 </p:dialog>  
-                                
-                                     <h:commandButton action="false" rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
-                                         
-                                     
-                                
-                               
+
+                                <h:commandButton action="false" rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
+
+
+
+
                             </h:form>        
-                            
+
                         </div>   
 
 
@@ -192,7 +196,7 @@
                             <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
 
 
-                            <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" var="lo" rowIndexVar="wiersz">
+                            <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="lo" rowIndexVar="wiersz">
                                 <p:column headerText="Lp">  
                                     #{wiersz+1}
                                 </p:column>  
@@ -223,11 +227,12 @@
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
 
-                                <h:form> 
-                                    <h:commandButton type="button" value="Dodaj zobowiązanie" onclick="zobDial.show();"  /> 
-                                    <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial" rendered="true">  
-
-                                        <h:panelGrid class="obligationDialogBox" columns="2" cellspacing="5" >
+                                <h:form>
+                                    <p:commandButton value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
+                                </h:form>
+                                    <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial2" rendered="true">  
+                                        <h:form id="costam23">
+                                        <h:panelGrid  class="obligationDialogBox" columns="2" cellspacing="5" >
 
                                             <h:outputText value="Rodzaj zobowiązania"/>
                                             <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
@@ -236,10 +241,17 @@
                                             </h:selectOneMenu>
 
                                             <h:outputText value="Wygasa:"/>
-                                            <p:calendar value="#{clientCaseMB.obligation.beginDate}"/>
+                                            <p:calendar effect="slide" value="#{clientCaseMB.obligation.beginDate}"/>
 
                                             <h:outputText value="Rata:"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.actualPrice}"/>
+                                            <h:inputText required="true" id="actualPrice" value="#{clientCaseMB.obligation.actualPrice}">
+                                                <f:converter converterId="javax.faces.BigDecimal"    />
+                                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
+                                                <p:ajax event="keyup" update="actualPriceMessage" />
+                                            </h:inputText>    
+                                            
+                                            <h:outputText />
+                                            <h:message errorClass="invalid"  for="actualPrice" id="actualPriceMessage" />
 
                                             <h:outputText value="Kwota:"/>
                                             <h:inputText value="#{clientCaseMB.obligation.repayment}"/>
@@ -254,16 +266,16 @@
                                             <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
                                                 <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                             </h:selectOneMenu>
-                                            <h:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial.hide();"/>
-                                            <h:commandButton style="float:right;" value="Dodaj"  action="#{clientCaseMB.addObligation}"/>
-
+                                            <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
+                                            <p:commandButton update=":obligationTable costam23" oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
+                                            
 
                                         </h:panelGrid>
 
 
-
+                                          </h:form>  
                                     </p:dialog>
-                                </h:form>
+                                
                             </div>
                             <div id="buttonsBox3">
 
