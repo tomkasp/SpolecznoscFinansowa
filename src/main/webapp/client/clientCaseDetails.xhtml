@@ -198,7 +198,7 @@
                                 </p:column>      
                             </p:dataTable>
                             
-                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" action="#{caseRatingMB.showRatePage(clientMainPageMB.selectedCase.idClientCase)}"> 
+                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
                                 
                             </p:commandLink> 
                             
