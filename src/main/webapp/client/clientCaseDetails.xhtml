@@ -126,7 +126,7 @@
                                 </p:column>  
 
                              </p:dataTable>
-                            <p:commandButton rendered="#{empty marketMB.selectedAppliedCase}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
+                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
 
                         </h:panelGroup>
                         <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
