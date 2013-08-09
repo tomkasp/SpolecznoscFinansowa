@@ -92,13 +92,12 @@
                                 </div>
                             </div>
                             
-                            <h:panelGroup rendered="#{!clientCaseMB.selectedClientCase.consultant eq null}" >
+                            <h:panelGroup rendered="#{!(clientCaseMB.selectedClientCase.consultant eq null)}" >
                             <h4> DANE DORADCY</h4>
                             <div class="marginLRT30">   
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Jan" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Kazimierczak" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="jan_kaz@go2.pl" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="607 887 392" /> </div>                                         
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.name}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.lastName}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].phone : clientCaseMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
                             </div>    
                             </h:panelGroup>
                         </h:form>
@@ -127,7 +126,7 @@
                                 </p:column>  
 
                              </p:dataTable>
-                            <p:commandButton styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
+                            <p:commandButton rendered="#{empty marketMB.selectedAppliedCase}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
 
                         </h:panelGroup>
                         <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
