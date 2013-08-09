@@ -237,19 +237,25 @@
 
                         <h4> MOJE PROWADZONE SPRAWY </h4>
 
-                        <p:dataTable id="owned" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedOwnedCase}" selectionMode="single" >
+                        <p:dataTable id="owned" value="#{marketMB.ownedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedOwnedCase}" selectionMode="single" >
 
-                            <p:column headerText="Numer klienta">  
-                                <h:outputText  value="#{row.client.idClient}"/>
-                            </p:column>  
-
-                            <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}"/>
-                            </p:column>  
-
+                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedOwnedCase)}"/> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                     
+                            
                             <p:column headerText="Numer sprawy">
                                 <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
+ 
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>
+                            </p:column>  
+
+                            <p:column headerText="Numer klienta">  
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column> 
 
                             <p:column headerText="Postęp">  
                                 <h:outputText  value="#{row.phase}"/>
@@ -272,16 +278,16 @@
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.appliedModelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{marketMB.ownedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.ownedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.ownedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.ownedModelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.appliedModelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{marketMB.ownedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.ownedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.ownedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.ownedModelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -291,7 +297,7 @@
 
                    
                             <p:column headerText="Status">  
-                                <h:outputText value="#{row.caseStatus.name}"  >
+                                <h:outputText value="#{row.caseStatus.name}" />
                             </p:column>  
                             
                         </p:dataTable>

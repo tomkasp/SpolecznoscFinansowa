@@ -43,23 +43,22 @@
                                 <h:outputText class="profileText" value="nr. doradcy:" />
                                 <h5> #{loginMB.consultant.user.login} </h5>
                                 <h:outputText class="profileText" value="Twój ranking:" /> 
-                                <h5> #{marketMB.clientCaseList.size()}/100 </h5>
+                                <h5> /100 </h5>
                             </div>
                         </div>
                         
-                        <h3> Sprawa numer: #{marketMB.selectedCase.idClientCase} </h3>
-                        
+                        <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} </h3>
+                        <h:panelGroup rendered="false" 
                         <div style="min-height: 160px">
                             <div class="leftInlineBox">
                                 <h:form>
                                     <h4> DANE KLIENTA </h4>
                                     <div class="marginLRT30">        
-                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="Tomasz" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="Nowak" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="73042300170" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="23.04.1973" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="tomas07@gmail.com" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="677983023" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.name}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.lastName}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.pesel}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.birthDate}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.addresses.toArray()[0].phone}" /> </div>
                                     </div>
                                     
                                     <h4> DANE O ZATRUDNIENIU </h4>
@@ -86,16 +85,16 @@
                                     <div class="marginLRT30">        
                                         <div class="field"> 
                                             <h:outputText class="label" value="Data rozpoczęcia"/>  
-                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.beginDate}" > 
+                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" > 
                                                 <f:convertDateTime type="date"  pattern="dd-MM-yyyy" />
                                             </h:inputText>
                                         </div>
-                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.caseStatus.name}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.goal}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.freeResourcesValue}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.consolidationValue}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.expectedInstalment}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{marketMB.selectedCase.productType.name}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.caseStatus.name}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consolidationValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.expectedInstalment}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.productType.name}" /> </div>
                                     </div>
                                 
                                 </h:form>
@@ -103,16 +102,16 @@
 
                             <div class="rightInlineBox">
                                 <h:form id="rightColumn">
-                                <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus == 1}" >
-                                    <h:panelGroup rendered="#{!marketMB.doesAppliedToCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
+                                    <h:panelGroup rendered="#{!marketMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
                                              Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedCase)}" oncomplete="confirmed.show();" /> 
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
                                     </h:panelGroup>
-                                    <h:panelGroup rendered="#{marketMB.doesAppliedToCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                    <h:panelGroup rendered="#{marketMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <h4> WYCOFAJ ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
                                              Klient jeszcze nie zaakceptował Ciebie jako swojego doradcy. <br /> W dalszym ciągu możesz wycofać sprawę. 
@@ -122,17 +121,17 @@
                                             
                                         </p:commandButton>
                                     </h:panelGroup>
-                                    <h:panelGroup rendered="#{!marketMB.doesConsultantObserveCase(loginMB.consultant, marketMB.selectedCase)}" >
-                                        
+                                    <h:panelGroup rendered="#{!marketMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
+                                        <div style="min-height: 50px"></div>
                                         <h4> OBSERWUJ SPRAWĘ </h4>
                                         <div class="solidText"> 
                                              Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedCase)}" oncomplete="confirmedObserved.show();" />
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmedObserved.show();" />
                                     </h:panelGroup>
                                     
-                                    <h:panelGroup rendered="#{marketMB.doesConsultantObserveCase(loginMB.consultant, marketMB.selectedCase)}" >
+                                    <h:panelGroup rendered="#{marketMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <div style="min-height: 50px"></div>
                                         <h4> ANULUJ OBSERWOWANIE</h4>
                                         <div class="solidText"> 
@@ -143,7 +142,7 @@
                                     </h:panelGroup>
                                 </h:panelGroup>
                                 
-                                <h:panelGroup rendered="#{marketMB.selectedCase.caseStatus.idCaseStatus > 1}" >
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
                                     <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
 
 
@@ -189,7 +188,7 @@
                         <h:form>
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
-                                Twoje zgłoszenie do sprawy #{marketMB.selectedCase.idClientCase} zostało zatwierdzone.
+                                Twoje zgłoszenie do sprawy #{clientCaseMB.selectedClientCase.idClientCase} zostało zatwierdzone.
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
@@ -205,7 +204,7 @@
 
                          <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
-                                Od teraz śledzisz sprawę numer:  #{marketMB.selectedCase.idClientCase}.
+                                Od teraz śledzisz sprawę numer:  #{clientCaseMB.selectedClientCase.idClientCase}.
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
@@ -225,7 +224,7 @@
                                 </h:panelGroup>
 
                                 <div> 
-                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedCase)}" onclick="revokeApp.hide()" >
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.revokeApplication(clientCaseMB.selectedClientCase)}" onclick="revokeApp.hide()" >
                                         <f:ajax execute="@this" render=":rightColumn" />
                                     </h:commandButton>
 
@@ -241,7 +240,7 @@
                             </h:panelGroup>
 
                             <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{marketMB.stopObserve(marketMB.selectedCase)}" onclick="revokeObs.hide()" >
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{marketMB.stopObserve(clientCaseMB.selectedClientCase)}" onclick="revokeObs.hide()" >
                                     <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
 

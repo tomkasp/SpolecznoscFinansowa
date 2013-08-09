@@ -26,6 +26,9 @@ public class ClientMainPageMB implements Serializable {
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
     
+    @ManagedProperty(value="#{clientCaseMB}")
+    private ClientCaseMB clientCaseMB;
+    
     private List<ClientCase> clientCaseList = new ArrayList<>();
     
     private List<ClientCase> awaitingClientCaseList = new ArrayList<>();
@@ -190,15 +193,14 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void rowDoubleClick(ClientCase cs) throws IOException
-    {
-        selectedCase = cs;
-        System.out.println("2 razy: "  + selectedCase.getIdClientCase());
+    {   
+        System.out.println("2 razy: "  +  clientCaseMB.getSelectedClientCase().getIdClientCase());
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
     }
     
     public void rowClick(ClientCase cs)
     {
-        selectedCase = cs;
+        clientCaseMB.setSelectedClientCase(cs);
         System.out.println("Klik " + cs.getIdClientCase());
     }
 
@@ -370,6 +372,14 @@ public class ClientMainPageMB implements Serializable {
 
     public void setLastSelectedCase(ClientCase lastSelectedCase) {
         this.lastSelectedCase = lastSelectedCase;
+    }
+
+    public ClientCaseMB getClientCaseMB() {
+        return clientCaseMB;
+    }
+
+    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
+        this.clientCaseMB = clientCaseMB;
     }
 
 
