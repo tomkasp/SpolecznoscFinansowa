@@ -195,44 +195,49 @@
 
                             <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA </h4>
 
+                            <h:form id="obligationForm">
+                                <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="row" rowKey="#{row.idObligation}"
+                                             selection="#{clientCaseMB.selectedObligation}" selectionMode="single">
 
-                            <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="lo" rowIndexVar="wiersz">
-                                <p:column headerText="Lp">  
-                                    #{wiersz+1}
-                                </p:column>  
+                                    <p:column headerText="Lp">  
+                                        #{wiersz+1}
+                                    </p:column>  
 
-                                <p:column headerText="Rodzaj">  
-                                    <h:outputText value="#{lo.obligationKind}" />
-                                </p:column>  
+                                    <p:column headerText="Rodzaj">  
+                                        #{row.obligationKind}
+                                    </p:column>  
 
-                                <p:column headerText="Wygasa">    
-                                    <h:outputText value="#{lo.beginDate}" />
-                                </p:column>  
+                                    <p:column headerText="Wygasa">    
+                                        #{row.beginDate}
+                                    </p:column>  
 
-                                <p:column headerText="Rata"> 
-                                    <h:outputText value="#{lo.actualPrice}" />
-                                </p:column>  
+                                    <p:column headerText="Rata"> 
+                                        #{row.actualPrice}
+                                    </p:column>  
 
-                                <p:column headerText="Kwota">  
-                                    <h:outputText value="#{lo.repayment}" />
-                                </p:column> 
+                                    <p:column headerText="Kwota">  
+                                        #{row.repayment}
+                                    </p:column> 
 
-                                <p:column headerText="Zaległe"  >  
-                                    <h:form>
-                                    <h:selectBooleanCheckbox value="#{lo.active}" disabled="true" />
-                                    </h:form>    
-                                </p:column> 
+                                    <p:column headerText="Zaległe"  >  
 
-                            </p:dataTable>
+                                        <h:selectBooleanCheckbox value="#{row.active}" disabled="true" />
 
+                                    </p:column> 
+
+                                </p:dataTable>
+                                <h:panelGrid columns="2" >
+                                    <p:commandButton style="margin:0 30px;" value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
+                                    <p:commandButton style="margin:0 30px;" value="Usuń" update="@form" action="#{clientCaseMB.delObligation}" />
+                                </h:panelGrid>
+                                
+                            </h:form>
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
 
-                                <h:form>
-                                    <p:commandButton value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
-                                </h:form>
-                                    <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial2" rendered="true">  
-                                        <h:form id="costam23">
+
+                                <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial2" rendered="true">  
+                                    <h:form id="costam23">
                                         <h:panelGrid  class="obligationDialogBox" columns="2" cellspacing="5" >
 
                                             <h:outputText value="Rodzaj zobowiązania"/>
@@ -250,20 +255,20 @@
                                                 <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
                                                 <p:ajax event="keyup" update="actualPriceMessage" />
                                             </h:inputText>    
-                                            
+
                                             <h:outputText />
                                             <h:message errorClass="invalid"  for="actualPrice" id="actualPriceMessage" />
 
                                             <h:outputText value="Kwota:"/>
                                             <h:inputText required="true" id="repayment" value="#{clientCaseMB.obligation.repayment}">
-                                                 <f:converter converterId="javax.faces.BigDecimal"    />
+                                                <f:converter converterId="javax.faces.BigDecimal"    />
                                                 <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
                                                 <p:ajax event="keyup" update="repaymentMessage" />
                                             </h:inputText>
                                             <h:outputText />
                                             <h:message errorClass="invalid"  for="repayment" id="repaymentMessage" />
-                                            
-                                            
+
+
                                             <h:outputText value="Tytulem"/>
                                             <h:inputText value="#{clientCaseMB.obligation.name}"/>
 
@@ -275,15 +280,15 @@
                                                 <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                             </h:selectOneMenu>
                                             <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
-                                            <p:commandButton update=":obligationTable costam23" oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
-                                            
+                                            <p:commandButton update=":obligationForm:obligationTable costam23 " oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
+
 
                                         </h:panelGrid>
 
 
-                                          </h:form>  
-                                    </p:dialog>
-                                
+                                    </h:form>  
+                                </p:dialog>
+
                             </div>
                             <div id="buttonsBox3">
 
