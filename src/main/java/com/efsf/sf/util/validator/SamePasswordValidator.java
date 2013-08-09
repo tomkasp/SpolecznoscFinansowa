@@ -4,11 +4,13 @@
  */
 package com.efsf.sf.util.validator;
 
+import com.efsf.sf.bean.consultant.ConsultantCreateMB;
 import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
@@ -18,17 +20,24 @@ import javax.faces.validator.ValidatorException;
  * @author WR1EI1
  */
 
-@FacesValidator("com.efsf.sf.util.SamePasswordValidator")
+@FacesValidator("SamePasswordValidator")
 public class SamePasswordValidator implements Validator {
     
     @Override
      public void validate(FacesContext context, UIComponent toValidate, Object value) 
     {
         
-        String password = (String) value;
-        //UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
-        String confirmPassword = (String) toValidate.getAttributes().get("password");
-        System.out.println(confirmPassword);
+        String password = value.toString();
+ 
+	  UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
+         
+          UIInput uiInputConfirmPassword = (UIInput) toValidate.getAttributes()
+		.get("password");
+	  String confirmPassword = uiInputConfirmPassword.getSubmittedValue()
+		.toString();    
+            
+        System.out.println("VALUE: "+confirmPassword);
+        
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
