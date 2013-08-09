@@ -57,7 +57,10 @@ public class ClientMainPageMB implements Serializable {
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
-
+    
+    //Here is holder for last consultant selected in the case details view
+    
+    private Consultant selectedConsultant;
     
 
     @PostConstruct
@@ -367,6 +370,14 @@ public class ClientMainPageMB implements Serializable {
 
     public void setLastSelectedCase(ClientCase lastSelectedCase) {
         this.lastSelectedCase = lastSelectedCase;
+    }
+
+    public Consultant getSelectedConsultant() {
+        return selectedConsultant;
+    }
+
+    public void setSelectedConsultant(Consultant selectedConsultant) {
+        this.selectedConsultant = selectedConsultant;
     }
 
     
