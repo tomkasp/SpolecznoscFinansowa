@@ -20,23 +20,46 @@
                     <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
                     <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
-                
-              <h:form>
-                <div class="topbarMenuGreen">
-              
-                    <h:panelGroup>
-                          
-                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" />
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                       
-                    </h:panelGroup>
-                
-                </div>
-              </h:form>
-                
+
+                <h:form>
+                    <div class="topbarMenuGreen">
+
+                        <h:panelGroup>
+
+
+                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/client/clientSettings"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                            <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Doładuj konto" update=":dialog1" oncomplete="dodaj.show()" />
+                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+
+                        </h:panelGroup>
+
+                    </div>
+
+                </h:form>
+
+                <p:dialog id="dialog1" header="Dodaj punkty" widgetVar="dodaj" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+
+                    <h:form id="form">
+
+                        <div > 
+                            <p:selectOneButton value="#{clientMainPageMB.newPoints}" required="true">  
+                                <f:selectItem itemLabel="5 Punktów" itemValue="5" />  
+                                <f:selectItem itemLabel="30 Punktów" itemValue="30" />  
+                                <f:selectItem itemLabel="100 Punktów" itemValue="100" />  
+                            </p:selectOneButton>  
+                        </div>      
+
+                        <div style=" margin-top: 20px;">
+                            <p:commandButton style="margin-top: 10px; float: left;" value="Anuluj" type="button" onclick="dodaj.hide()" />
+                            <p:commandButton style="margin-top: 10px; float: right;" ajax="true" update=":test"  value="Dodaj" type="submit" oncomplete="if (!args.validationFailed) dodaj.hide()" action="#{clientMainPageMB.addPoints()}" />     
+                        </div>
+
+                    </h:form>
+
+                </p:dialog>   
+
             </ui:define>
 
             <ui:define name="content">
@@ -51,19 +74,22 @@
                 </script>
 
 
-                <div id="profileBar" class="profilBar">
-                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+                <h:form id="test">
 
-                    <div id="spaceFiller" > </div>
-                    <div>     
-                        <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
-                        <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5> #{loginMB.client.user.login} </h5>
-                        <h:outputText class="profileText" value="Stan konta:" />
-                        <h5> #{loginMB.client.points} / 5 </h5>
+                    <div id="profileBar" class="profilBar">
+                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                        <div id="spaceFiller" > </div>
+                        <div>     
+                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
+                            <h:outputText class="profileText" value="nr. klienta:" />
+                            <h5> #{loginMB.client.user.login} </h5>
+                            <h:outputText class="profileText" value="Stan konta:" />
+                            <h5 > #{loginMB.client.points} / 5 </h5>
+                        </div>
                     </div>
-                </div>
 
+                </h:form>
 
                 <div class="marginT50">
 
@@ -78,7 +104,7 @@
 
                                 <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.lastSelectedCase)}"/> 
                                 <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}"/>
-                                
+
                                 <p:column headerText="Data dodania">    
                                     <h:outputText  value="#{row.beginDate}">
                                         <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -233,7 +259,7 @@
 
                             <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.awaitingSelectedCase)}"/> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}"/>
-                                
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -311,7 +337,7 @@
 
                             <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.currentSelectedCase)}"/> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}"/>
-                                
+
 
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
@@ -387,7 +413,7 @@
 
                             <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.finishedSelectedCase)}"/> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}"/>
-\
+                            \
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -461,8 +487,8 @@
                         <c:if test="#{clientMainPageMB.finishedSelectedCase!=null}" var="costam">
                             <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                         </c:if>
-                        
-               
+
+
                     </h:form>  
 
                 </div>
@@ -537,7 +563,7 @@
 
                             <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
 
-                               <h:outputText value=" " />
+                                <h:outputText value=" " />
 
                             </p:column>      
 
@@ -548,7 +574,7 @@
 
                 </div>
 
-                
+
             </ui:define>           
         </ui:composition>
     </body>
