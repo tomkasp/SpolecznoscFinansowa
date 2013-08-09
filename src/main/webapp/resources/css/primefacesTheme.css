@@ -147,3 +147,7 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 .obligationDialogBox .hasDatepicker{
     width:162px;
 }
+
+.ui-state-disabled{
+   opacity: 1;
+}
