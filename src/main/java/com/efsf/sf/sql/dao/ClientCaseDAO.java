@@ -5,6 +5,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -532,6 +533,36 @@ public class ClientCaseDAO implements Serializable {
                  return cs;    
     }
     
+    public ClientCase getClientCaseWithClientDetails(int idClientCase)
+    {
+                 ClientCase cs;    
+                 Session session = HibernateUtil.getSessionFactory().openSession();
+                 session.beginTransaction();
+        
+                 Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.productType as pt "   
+                 + "left join fetch cs.caseStatus as cstatus "
+                 + "left join fetch clt.addresses as addr "
+                 + "left join fetch clt.incomes as inc "
+                 + "left join fetch clt.incomeBusinessActivities as ba "
+                 + "left join fetch inc.branch as br "
+                 + "left join fetch inc.employmentType as empltype "
+                 + "left join fetch ba.branch as br2 "
+                 + "left join fetch ba.employmentType as empltype2 "
+                 + "left join fetch clt.requiredDocumentses as rd "        
+                 + "where cs.idClientCase = :id" );
+                 
+                 q.setParameter("id", idClientCase);
+                 
+                 cs = (ClientCase) q.list().get(0);
+                 
+                 session.getTransaction().commit();
+                 session.close();
+                 
+                 return cs;    
+    }
+    
     public List<ClientCase> ownedCasesSelectedConsultant(Integer fkConsultant)
     {
          List<ClientCase> list;
@@ -541,7 +572,7 @@ public class ClientCaseDAO implements Serializable {
          Query q = session.createQuery("FROM ClientCase as cs "
                  + "left join fetch cs.client as clt "
                  + "left join fetch cs.productType as pt "   
-                 + "left join fetch cs.consultant as consult"
+                 + "left join fetch cs.consultant as cons "
                  + "left join fetch cs.caseStatus as cstatus "
                  + "left join fetch clt.addresses as addr "
                  + "left join fetch clt.incomes as inc "
@@ -551,7 +582,7 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch ba.branch as br2 "
                  + "left join fetch ba.employmentType as empltype2 "
                  + "left join fetch clt.requiredDocumentses as rd "
-                 + "where consult.idConsultant = :fk "
+                 + "where cons.idConsultant = :fk "
                  + "and cs.caseStatus > 1 "
                  + "and cs.caseStatus < 8 "
                  + "order by cs.beginDate desc, cs.idClientCase desc ");
@@ -559,6 +590,11 @@ public class ClientCaseDAO implements Serializable {
          q.setParameter("fk", fkConsultant);
          
          list = q.list();
+         
+         Set s = new HashSet<ClientCase>(list);
+         list.clear();
+         list.addAll(s);
+             
          
          session.getTransaction().commit();
          session.close();
@@ -574,5 +610,4 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
     }
-    
 }

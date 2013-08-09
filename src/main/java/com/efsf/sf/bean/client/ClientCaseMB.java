@@ -18,7 +18,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped
@@ -27,10 +26,8 @@ public class ClientCaseMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB login;
     
-    @ManagedProperty(value="#{clientMainPageMB}")
-    private ClientMainPageMB clientMainPageMB;
-    
-    
+
+        
     private int idTypProduktu;
     private int idTypProduktuObligation;
     private ClientCase clientCase = new ClientCase();
@@ -138,9 +135,17 @@ public class ClientCaseMB implements Serializable {
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
-            selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(clientMainPageMB.getSelectedCase().getIdClientCase());
+            selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
             selectedConsultant = null;
          }
+    }
+    
+    public void loadCaseClientsDetails()
+    {   FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isPostback() && !facesContext.isValidationFailed())
+        {
+             selectedClientCase = new ClientCaseDAO().getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+        }
     }
     
     public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
@@ -212,14 +217,6 @@ public class ClientCaseMB implements Serializable {
         this.obligationList = obligationList;
     }
 
-    public ClientMainPageMB getClientMainPageMB() {
-        return clientMainPageMB;
-    }
-
-    public void setClientMainPageMB(ClientMainPageMB clientMainPageMB) {
-        this.clientMainPageMB = clientMainPageMB;
-    }
-
     public ClientCase getSelectedClientCase() {
         return selectedClientCase;
     }
@@ -235,6 +232,7 @@ public class ClientCaseMB implements Serializable {
     public void setSelectedConsultant(Consultant selectedConsultant) {
         this.selectedConsultant = selectedConsultant;
     }
+
 
    
 }

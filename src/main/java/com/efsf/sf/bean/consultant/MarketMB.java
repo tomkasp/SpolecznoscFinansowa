@@ -6,6 +6,7 @@ package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
@@ -47,8 +48,12 @@ public class MarketMB implements Serializable
     @ManagedProperty(value="#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
     
+    @ManagedProperty(value="#{clientCaseMB}")
+    private ClientCaseMB clientCaseMB;
+    
     
     private List<ClientCase> clientCaseList = new ArrayList();
+    private List<ClientCase> ownedList = new ArrayList();
     
     private Converters converters =  new Converters();
       
@@ -76,6 +81,8 @@ public class MarketMB implements Serializable
     private ArrayList<Set<String>> ownedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
+    
+    
 
     //MARKET VIEW FIELDS!
     
@@ -109,6 +116,8 @@ public class MarketMB implements Serializable
     @PostConstruct
     public void fillModels()
     {
+        reloadOwnedTable();
+        
         makeObservedModels();
         makeAppliedModels();
         
@@ -132,6 +141,21 @@ public class MarketMB implements Serializable
         }
     }
     
+    public void reloadOwnedTable()
+    {
+        ownedList = caseDao.ownedCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
+        ownedModelsEmploymentType = new ArrayList();
+        ownedModelsBranch = new ArrayList();
+        for (int i = 0; i<ownedList.size(); i++)
+        {
+            ownedModelsEmploymentType.add(showAllClientsEmploymentTypes(ownedList.get(i).getClient()));
+            ownedModelsBranch.add(showAllClientsBranches(ownedList.get(i).getClient()));
+        }
+        
+        System.out.println("");
+    }
+    
+    
     public void makeAppliedModels()
     {
         Set<ClientCase> cs = loginMB.getConsultant().getClientCases();
@@ -145,18 +169,18 @@ public class MarketMB implements Serializable
             appliedModelsBranch.add(showAllClientsBranches(client));  
         }
     }
-            
+           
     
     public void rowDoubleClick() throws IOException
     {
-        System.out.println("2 razy: "  + selectedCase.getIdClientCase());
+        
         fillSelectedCaseIncomeTable();
         FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
     }
     
     public void rowClick(ClientCase cs)
     {
-        selectedCase = cs;
+        clientCaseMB.setSelectedClientCase(cs);
         System.out.println("Klik " + cs.getIdClientCase());
     }
    
@@ -210,6 +234,7 @@ public class MarketMB implements Serializable
          // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
          loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
          reloadCases();
+         reloadOwnedTable();
     }
     
     public void unselectEmployment()
@@ -346,7 +371,7 @@ public class MarketMB implements Serializable
        
         selectedCaseIncomeTable = new ArrayList();
         
-        Client client = new ClientDAO().getClientWithIncomes(selectedCase.getClient().getIdClient());
+        Client client = new ClientDAO().getClientWithIncomes(clientCaseMB.getSelectedClientCase().getClient().getIdClient());
         
         for (Income i : client.getIncomes())
         {
@@ -669,6 +694,22 @@ public class MarketMB implements Serializable
 
     public void setOwnedModelsBranch(ArrayList<Set<String>> ownedModelsBranch) {
         this.ownedModelsBranch = ownedModelsBranch;
+    }
+
+    public List<ClientCase> getOwnedList() {
+        return ownedList;
+    }
+
+    public void setOwnedList(List<ClientCase> ownedList) {
+        this.ownedList = ownedList;
+    }
+
+    public ClientCaseMB getClientCaseMB() {
+        return clientCaseMB;
+    }
+
+    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
+        this.clientCaseMB = clientCaseMB;
     }
 
 }
