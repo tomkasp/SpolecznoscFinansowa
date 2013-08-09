@@ -30,21 +30,23 @@ public class ClientCaseMB implements Serializable {
         
     private int idTypProduktu;
     private int idTypProduktuObligation;
+    
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
+    
+    
     private int premium = 30;
-    
-    
     
     // VIEW CASE DETAILS FIELDS 
     private ClientCase selectedClientCase;
     
     private Consultant selectedConsultant;
     
+    private Obligation selectedObligation;
     
     
     /**
@@ -60,6 +62,13 @@ public class ClientCaseMB implements Serializable {
         setObligationList(obdao.obligationListForClient(login.getClient().getIdClient()));
         
         return obligationList;
+    }
+   
+  public void delObligation(){
+        System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
+        obdao.deleteObligation(selectedObligation);
+        //obligation = new Obligation();
+        
     }
     
     //zwraca liste zobowiazan dla danego klienta w sesji
@@ -248,6 +257,13 @@ public class ClientCaseMB implements Serializable {
         this.selectedConsultant = selectedConsultant;
     }
 
+    public Obligation getSelectedObligation() {
+        return selectedObligation;
+    }
+
+    public void setSelectedObligation(Obligation selectedObligation) {
+        this.selectedObligation = selectedObligation;
+    }
 
    
 }
