@@ -102,8 +102,13 @@ public class ClientCaseMB implements Serializable {
             
             ClientDAO cd = new ClientDAO();
 
+            
+            if(clientCase.getPremium()==null){
+                clientCase.setPremium(false);
+            }
+                
             //pamietac o zabraniu punktow z klienta!
-            if(clientCase.getPremium()!=null && clientCase.getPremium()){
+            if(clientCase.getPremium()){
                 cd.decrementPoints(login.getClient(),premium);
                 login.getClient().setPoints(login.getClient().getPoints() - premium);
             }
