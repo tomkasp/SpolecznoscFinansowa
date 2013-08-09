@@ -84,8 +84,8 @@ public class ClientCase  implements java.io.Serializable {
        this.consultants_1 = consultants_1;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-    
+    @Id
+    @GeneratedValue(strategy=IDENTITY)
     @Column(name="id_clientCase", unique=true, nullable=false)
     public Integer getIdClientCase() {
         return this.idClientCase;
