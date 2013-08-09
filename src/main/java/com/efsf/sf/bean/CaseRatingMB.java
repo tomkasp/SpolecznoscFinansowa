@@ -21,8 +21,9 @@ public class CaseRatingMB implements Serializable {
         
         double average = 0;
         CaseRatingDAO dao = new CaseRatingDAO();
-
-        caseRating.setIdRating(clientCaseMB.getSelectedClientCase().getIdClientCase());
+        
+        caseRating.setClientCase(clientCaseMB.getSelectedClientCase());
+        //caseRating.setIdRating(clientCaseMB.getSelectedClientCase().getIdClientCase());
         average += caseRating.getCompetence() + caseRating.getContact()
                 + caseRating.getCulture() + caseRating.getDifficulty()
                 + caseRating.getPunctuality() + caseRating.getReliability()
@@ -40,7 +41,7 @@ public class CaseRatingMB implements Serializable {
         CaseRatingDAO dao = new CaseRatingDAO();
         return dao.isNotRated(clientCaseMB.getSelectedClientCase().getIdClientCase());
     }
-
+    
     public String showRatePage() {
         return "/client/clientConsultantRate";
     }
