@@ -69,19 +69,20 @@
                                     <h:message for="lastName" errorClass="invalid" id="lastNameMessage" />
                                 </div> 
 
-                                <div class="field"> 
+                                <div id="dupa" class="field"> 
                                     <h:outputText  class="label" value="Hasło"/> 
-                                    <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" > 
-                                        <f:validateLength minimum="8" maximum="20"/>
-                                        <p:ajax event="keyup" update="@form" />
+                                    <h:inputSecret id="confirmPassword" class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" >
+                                        <f:validateLength minimum="8" maximum="20" />
+                                        <f:ajax event="keyup" render="passwordCheck"/> 
                                     </h:inputSecret>
-                                    <h:outputText id="test" value="#{consultantCreateMB.confirmPassword}"/> 
-                                    <h:message for="password" errorClass="invalid" id="passwordMessage" />
+                                    <h:message for="confirmPassword" errorClass="invalid" id="passwordMessage" />
                                 </div>
 
                                 <div class="field">
-                                    <h:outputText id="confirmPassword" class="label" value="Potwierdź hasło"/> 
-                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" validator="#{consultantCreateMB.validateSamePassword}"> 
+                                    <h:outputText id="confirmPassword2" class="label" value="Potwierdź hasło"/> 
+                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" > 
+                                        <f:validateLength minimum="8" maximum="20" />
+                                        <f:validator validatorId="SamePasswordValidator"/>
                                         <p:ajax event="keyup" update="passwordCheckMessage"/> 
                                     </h:inputSecret>
                                     <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
