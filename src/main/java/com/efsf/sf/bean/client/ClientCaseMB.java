@@ -74,7 +74,7 @@ public class ClientCaseMB implements Serializable {
         
        if(clientCase.getPremium()){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
-        }
+       }
         
     }
     
@@ -132,6 +132,7 @@ public class ClientCaseMB implements Serializable {
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
             selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(clientMainPageMB.getSelectedCase().getIdClientCase());
+            selectedConsultant = null;
          }
     }
     

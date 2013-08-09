@@ -231,9 +231,9 @@
 
                         <p:dataTable id="awaitingCases" value="#{clientMainPageMB.awaitingClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingSelectedCase}" selectionMode="single" >
 
-                            <f:ajax event="rowSelect" render="@form" />
-                            <f:ajax event="rowUnselect" render="@form" />
-
+                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.awaitingSelectedCase)}"/> 
+                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}"/>
+                                
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -309,8 +309,9 @@
 
                         <p:dataTable id="currentCases" value="#{clientMainPageMB.currentClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.currentSelectedCase}" selectionMode="single" >
 
-                            <f:ajax event="rowSelect" render="@form" />
-                            <f:ajax event="rowUnselect" render="@form" />
+                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.currentSelectedCase)}"/> 
+                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}"/>
+                                
 
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
