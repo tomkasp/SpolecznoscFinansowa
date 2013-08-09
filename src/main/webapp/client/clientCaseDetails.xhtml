@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
-
+    
 
     <body>
 
@@ -14,7 +15,7 @@
             <ui:define name="title"> Klient - zakończona sprawa </ui:define> 
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
-
+                <f:event type="preRenderView" listener="#{clientCaseMB.loadCaseConsultantsDetails()}" />
 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
@@ -48,7 +49,7 @@
                 </div>
 
 
-                <h3> Sprawa numer: #{clientViewedCaseMB.clientCase.idClientCase} </h3>
+                <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} </h3>
 
                 <div>
                     <div class="leftInlineBox">
@@ -58,46 +59,45 @@
                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kwota zobowiązania"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.freeResourcesValue + clientMainPageMB.selectedCase.consolidationValue}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue + clientCaseMB.selectedClientCase.consolidationValue}" /> 
                                 </div>
                                 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Cel"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.goal}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> 
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Rodzaj kredytu"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.productType.name}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.productType.name}" /> 
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Wielkość raty"/>
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.expectedInstalment}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.expectedInstalment}" />
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Data wystawienia na giełdę"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.beginDate}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" /> 
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Koniec aukcji"/>  
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientViewedCaseMB.clientCase.endDate}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.endDate}" />
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Notatka"/>  
-                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{clientViewedCaseMB.clientCase.note}" />
+                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{clientCaseMB.selectedClientCase.note}" />
                                 </div>
                             </div>
                             
-                            <h:panelGroup rendered="#{clientCaseMB.clientCase.consultant}" >
-                            <h4> DANE DORADCY</h4>
+                            <h:panelGroup rendered="#{!(clientCaseMB.selectedClientCase.consultant eq null)}" >
+                            <h4>DANE DORADCY</h4>
                             <div class="marginLRT30">   
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Jan" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="Kazimierczak" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="jan_kaz@go2.pl" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="607 887 392" /> </div>                                         
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.name}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.lastName}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].phone : clientCaseMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
                             </div>    
                             </h:panelGroup>
                         </h:form>
@@ -105,9 +105,9 @@
 
                     <div class="rightInlineBox">
                         <h:form>
-                        <h:panelGroup rendered="#{clientViewedCaseMB.clientCase.caseStatus.idCaseStatus == 1}" >
+                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
                             <h4> DOSTĘPNI DORADCY </h4>
-                            <p:dataTable id="consultantsTable" value="#{clientViewedCaseMB.castConsultantSetToArray(clientViewedCaseMB.clientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{clientMainPageMB.selectedConsultant}" selectionMode="single" >
+                            <p:dataTable id="consultantsTable" value="#{clientCaseMB.castConsultantSetToArray(clientCaseMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{clientCaseMB.selectedConsultant}" selectionMode="single" >
      
                                 <p:column headerText="Nazwisko">  
                                     <h:outputText value="#{row.lastName}" /> 
@@ -126,10 +126,10 @@
                                 </p:column>  
 
                              </p:dataTable>
-                            <p:commandButton styleClass="wideButton greyButton floatR" id="przydziel" value="Przydziel"/>
+                            <p:commandButton rendered="#{empty marketMB.selectedAppliedCase}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
 
                         </h:panelGroup>
-                        <h:panelGroup rendered="#{clientMainPageMB.selectedCase.caseStatus.idCaseStatus == 9}">
+                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
                             <h4> NASTĘPNA RATA </h4>
 
                             <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
@@ -197,12 +197,18 @@
                                     <h:outputText value="#{data.spłacono}" /> 
                                 </p:column>      
                             </p:dataTable>
+                            
+                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
+                                
+                            </p:commandLink> 
+                            
                         </h:panelGroup>
                        </h:form>
                     </div>
                 </div>
                 <div style="width: 100%; height: 2px;" ></div>
             </ui:define>
+
         </ui:composition>
     </body>
 </html>
