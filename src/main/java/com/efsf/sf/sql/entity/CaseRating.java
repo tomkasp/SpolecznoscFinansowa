@@ -61,8 +61,7 @@ public class CaseRating  implements java.io.Serializable {
        this.commentDate = commentDate;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
-    
+    @Id
     @Column(name="id_rating", unique=true, nullable=false)
     public Integer getIdRating() {
         return this.idRating;

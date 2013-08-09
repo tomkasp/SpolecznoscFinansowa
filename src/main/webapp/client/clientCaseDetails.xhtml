@@ -93,7 +93,7 @@
                             </div>
                             
                             <h:panelGroup rendered="#{!(clientCaseMB.selectedClientCase.consultant eq null)}" >
-                            <h4> DANE DORADCY</h4>
+                            <h4>DANE DORADCY</h4>
                             <div class="marginLRT30">   
                                 <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.name}" /> </div>
                                 <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.lastName}" /> </div>
@@ -197,12 +197,18 @@
                                     <h:outputText value="#{data.spłacono}" /> 
                                 </p:column>      
                             </p:dataTable>
+                            
+                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
+                                
+                            </p:commandLink> 
+                            
                         </h:panelGroup>
                        </h:form>
                     </div>
                 </div>
                 <div style="width: 100%; height: 2px;" ></div>
             </ui:define>
+
         </ui:composition>
     </body>
 </html>
