@@ -24,7 +24,7 @@ import javax.faces.validator.ValidatorException;
 public class SamePasswordValidator implements Validator {
     
     @Override
-     public void validate(FacesContext context, UIComponent toValidate, Object value) 
+    public void validate(FacesContext context, UIComponent toValidate, Object value) 
     {
         
         System.out.println("DAWAJ!!!");

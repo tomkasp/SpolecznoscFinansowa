@@ -4,6 +4,7 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
+import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
@@ -59,10 +60,8 @@ public class ClientMainPageMB implements Serializable {
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
     
     //Here is holder for last consultant selected in the case details view
-    
-   
-    
-
+    private Integer newPoints;
+  
     @PostConstruct
     public void fillTables()
     {
@@ -227,6 +226,15 @@ public class ClientMainPageMB implements Serializable {
         return new ArrayList<ClientCase>(csSet);
     }
     
+    public void addPoints(){
+        Client currentClient=loginMB.getClient();
+        int currentPoints=currentClient.getPoints();
+        currentClient.setPoints(currentPoints+newPoints);
+        ClientDAO cdao=new ClientDAO();
+        cdao.update(currentClient);   
+        newPoints=null;
+        System.out.println("UDAO SIE!");
+    }
     
     public LoginMB getLoginMB() {
         return loginMB;
@@ -372,7 +380,15 @@ public class ClientMainPageMB implements Serializable {
         this.lastSelectedCase = lastSelectedCase;
     }
 
+    public Integer getNewPoints() {
+        return newPoints;
+    }
 
+    public void setNewPoints(Integer newPoints) {
+        this.newPoints = newPoints;
+    }
+
+    
     
      
     
