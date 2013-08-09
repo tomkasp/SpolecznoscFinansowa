@@ -8,6 +8,7 @@ import com.efsf.sf.sql.entity.User;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -77,7 +78,7 @@ public class LoginMB implements Serializable {
     }
     public String logout() {
         isLogged = false;
-        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/login?faces-redirect=true";
     }
