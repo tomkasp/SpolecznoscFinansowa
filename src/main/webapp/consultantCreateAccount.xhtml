@@ -73,8 +73,9 @@
                                     <h:outputText  class="label" value="Hasło"/> 
                                     <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" > 
                                         <f:validateLength minimum="8" maximum="20"/>
-                                        <p:ajax event="keyup" update="passwordMessage" />
+                                        <p:ajax event="keyup" update="@form" />
                                     </h:inputSecret>
+                                    <h:outputText id="test" value="#{consultantCreateMB.confirmPassword}"/> 
                                     <h:message for="password" errorClass="invalid" id="passwordMessage" />
                                 </div>
 
@@ -85,8 +86,6 @@
                                     </h:inputSecret>
                                     <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
                                 </div>
-
-
 
 
                                 <div class="field"> 
@@ -114,11 +113,11 @@
                             </div>
 
                             <div>
-                                <h:commandLink class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}"/>
+                                <h:commandLink class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
                             </div>
 
                             <div>
-                                <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" outcome="/client/clientCreateAccount"/>
+                                <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" outcome="/clientCreateAccount"/>
                             </div>
 
                         </h:form>

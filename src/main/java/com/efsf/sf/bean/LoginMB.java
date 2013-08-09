@@ -8,6 +8,7 @@ import com.efsf.sf.sql.entity.User;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -31,13 +32,16 @@ public class LoginMB implements Serializable {
     }
 
     public String login() {
-
+        
+        System.out.println(isLogged);
+        
         UserDAO userDao=new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
         if ( user!=null ) {
             isLogged = true;
+            System.out.println("LOGGED?: "+isLogged);
             type = user.getType();
             idUser = user.getIdUser();
             System.out.println("login");
@@ -74,7 +78,7 @@ public class LoginMB implements Serializable {
     }
     public String logout() {
         isLogged = false;
-        //FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/login?faces-redirect=true";
     }
