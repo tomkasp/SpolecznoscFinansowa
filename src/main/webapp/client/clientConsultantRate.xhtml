@@ -47,7 +47,7 @@
                         <h5> 3/5 pkt. </h5>
                     </div>
                 </div>
-                <h4>Komentujesz sprawę nr: 000103 </h4>
+                <h4>Komentujesz sprawę nr: <h:outputText value="#{caseRatingMB.caseId}" /></h4>
                 <h:form>
                 <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
                     
@@ -75,7 +75,11 @@
 
                         <h4>Zaufanie:</h4>
                         <p:rating value="#{caseRatingMB.caseRating.trust}" />
+                        
+                        <h4>Komentarz:</h4>
+                        <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 55px; width: 250px" value="#{caseRatingMB.caseRating.comment}" />
                     </h:panelGrid>
+                    
 
                 </div>
 
@@ -92,7 +96,7 @@
                 <div class="przyciskiDol marginT10">     
                     
                         <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit" onclick="dodaj.hide()" /> 
-                        <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" type="submit" onclick="PF('dlg').show()" action="#{caseRatingMB.saveRating()}"/> 
+                        <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" type="submit" action="#{caseRatingMB.saveRating()}"/> 
                               
                 </div>
                 </h:form> 

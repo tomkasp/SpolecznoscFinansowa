@@ -31,12 +31,12 @@ public class CaseRatingDAO {
         }
     }
     
-    public ClientCase getTestCase(){
+    public ClientCase getCase(Integer caseId){
         Session session = HibernateUtil.getSessionFactory().openSession();
         ClientCase clientCase = null;
         
         try{
-           clientCase =  (ClientCase) session.get(ClientCase.class, 4);
+           clientCase =  (ClientCase) session.get(ClientCase.class, caseId);
         }
         catch(HibernateException e)
         {}
