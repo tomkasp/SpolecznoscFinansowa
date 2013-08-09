@@ -58,8 +58,7 @@ public class MarketMB implements Serializable
     private Converters converters =  new Converters();
       
     ClientCaseDAO caseDao = new ClientCaseDAO();
-   
-    private ClientCase selectedCase;
+  
     private ClientCase selectedLastCase;
     private ClientCase selectedObservedCase;
     private ClientCase selectedAppliedCase;
@@ -226,7 +225,6 @@ public class MarketMB implements Serializable
     
     public void pollData()
     {
-        selectedCase = null;
         selectedLastCase = null;
         selectedObservedCase = null;
         selectedAppliedCase = null;
@@ -438,14 +436,6 @@ public class MarketMB implements Serializable
 
     public void setConverters(Converters converters) {
         this.converters = converters;
-    }
-
-    public ClientCase getSelectedCase() {
-        return selectedCase;
-    }
-
-    public void setSelectedCase(ClientCase selectedCase) {
-        this.selectedCase = selectedCase;
     }
     
     public ArrayList<Set<String>> getModelsEmploymentType() {

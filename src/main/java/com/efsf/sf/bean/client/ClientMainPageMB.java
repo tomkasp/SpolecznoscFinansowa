@@ -395,6 +395,9 @@ public class ClientMainPageMB implements Serializable {
         this.newPoints = newPoints;
     }
 
+    public Integer getNewPoints() {
+        return newPoints;
+    }
     
     
      

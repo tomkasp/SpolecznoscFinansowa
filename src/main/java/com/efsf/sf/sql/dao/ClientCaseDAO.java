@@ -610,4 +610,25 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
     }
+    
+    public List<ClientCase> getSelectedCaseWithConsultant(int idClientCase, int idConsultant)
+    {
+        
+        List<ClientCase>  list;
+    
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("From ClientCase as cc join fetch cc.consultant as cons where cc.idClientCase = :idClientCase and  cons.idConsultant = :idConsultant");
+        
+        q.setParameter("idConsultant", idConsultant);
+        q.setParameter("idClientCase", idClientCase);
+        list = q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+     
+        return list;
+    }
 }
+    
