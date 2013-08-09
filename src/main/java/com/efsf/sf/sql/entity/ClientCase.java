@@ -17,7 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,7 +49,7 @@ public class ClientCase  implements java.io.Serializable {
      private Integer viewCounter;
      private Integer difficulty;
      private Boolean premium;
-     private Set<CaseRating> caseRatings = new HashSet<CaseRating>(0);
+     private CaseRating caseRating;
      private Set<Consultant> consultants = new HashSet<Consultant>(0);
      private Set<Consultant> consultants_1 = new HashSet<Consultant>(0);
 
@@ -62,7 +62,8 @@ public class ClientCase  implements java.io.Serializable {
         this.caseStatus = caseStatus;
         this.productType = productType;
     }
-    public ClientCase(Consultant consultant, Client client, CaseStatus caseStatus, ProductType productType, ProductDetails productDetails, Date beginDate, Date endDate, Integer phase, BigDecimal consolidationValue, BigDecimal freeResourcesValue, String goal, BigDecimal expectedInstalment, String note, Integer viewCounter, Integer difficulty, Boolean premium, Set<CaseRating> caseRatings, Set<Consultant> consultants, Set<Consultant> consultants_1) {
+    
+    public ClientCase(Consultant consultant, Client client, CaseStatus caseStatus, ProductType productType, ProductDetails productDetails, Date beginDate, Date endDate, Integer phase, BigDecimal consolidationValue, BigDecimal freeResourcesValue, String goal, BigDecimal expectedInstalment, String note, Integer viewCounter, Integer difficulty, Boolean premium, CaseRating caseRating, Set<Consultant> consultants, Set<Consultant> consultants_1) {
        this.consultant = consultant;
        this.client = client;
        this.caseStatus = caseStatus;
@@ -79,13 +80,13 @@ public class ClientCase  implements java.io.Serializable {
        this.viewCounter = viewCounter;
        this.difficulty = difficulty;
        this.premium = premium;
-       this.caseRatings = caseRatings;
+       this.caseRating = caseRating;
        this.consultants = consultants;
        this.consultants_1 = consultants_1;
     }
    
-    @Id
-    @GeneratedValue(strategy=IDENTITY)
+    @Id @GeneratedValue(strategy=IDENTITY)
+    
     @Column(name="id_clientCase", unique=true, nullable=false)
     public Integer getIdClientCase() {
         return this.idClientCase;
@@ -238,14 +239,15 @@ public class ClientCase  implements java.io.Serializable {
     public void setPremium(Boolean premium) {
         this.premium = premium;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="clientCase")
-    public Set<CaseRating> getCaseRatings() {
-        return this.caseRatings;
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="clientCase")
+    public CaseRating getCaseRating() {
+        return this.caseRating;
     }
     
-    public void setCaseRatings(Set<CaseRating> caseRatings) {
-        this.caseRatings = caseRatings;
+    public void setCaseRating(CaseRating caseRating) {
+        this.caseRating = caseRating;
     }
+    
 @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinTable(name="clientCaseConsultantApplication", catalog="SpolecznoscFinansowa", joinColumns = { 
         @JoinColumn(name="fk_clientCaseCCCA", nullable=false, updatable=false) }, inverseJoinColumns = { 
