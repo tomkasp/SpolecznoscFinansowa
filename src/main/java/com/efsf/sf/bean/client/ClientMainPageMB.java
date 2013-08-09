@@ -60,7 +60,7 @@ public class ClientMainPageMB implements Serializable {
     
     //Here is holder for last consultant selected in the case details view
     
-    private Consultant selectedConsultant;
+   
     
 
     @PostConstruct
@@ -372,13 +372,6 @@ public class ClientMainPageMB implements Serializable {
         this.lastSelectedCase = lastSelectedCase;
     }
 
-    public Consultant getSelectedConsultant() {
-        return selectedConsultant;
-    }
-
-    public void setSelectedConsultant(Consultant selectedConsultant) {
-        this.selectedConsultant = selectedConsultant;
-    }
 
     
      
