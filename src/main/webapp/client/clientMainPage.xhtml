@@ -14,14 +14,20 @@
             <ui:define name="title"> Klient - ekran główny </ui:define> 
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
+                <h:form>
 
+                    <f:event type="preRenderView" listener="#{clientMainPageMB.reload()}" />
+                    <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
+               
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
                     <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
+                </h:form>
 
                 <h:form>
+                    
                     <div class="topbarMenuGreen">
 
                         <h:panelGroup>
@@ -108,13 +114,13 @@
                               Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
                         </div>
                         <h:commandButton class="marginTB20 floatL greyButton wideButton"  type="button" onclick="fillData.hide();" value="Nie" />
-                        <h:link class="marginTB20 floatR greyButton wideButton" value="Tak" outcome="clientSettings?faces-redirect=true" />
+                        <h:link class="marginTB20 floatR greyButton wideButton linkWidth" value="Tak" outcome="clientSettings?faces-redirect=true" />
                     </p:dialog> 
                     
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
-                        <h:form>
+                        <h:form id="lastForm">
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
                                 <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.lastSelectedCase)}"/> 
@@ -188,7 +194,7 @@
 
                     <div id="all" style="display: none;">
 
-                        <h:form>
+                        <h:form id="allForm">
 
                             <p:dataTable id="allCases" value="#{clientMainPageMB.allClientCaseList}"  var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
@@ -268,7 +274,7 @@
 
                     <h4>OCZEKUJĄCE</h4>
 
-                    <h:form>
+                    <h:form id="awaitingForm">
 
                         <p:dataTable id="awaitingCases" value="#{clientMainPageMB.awaitingClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingSelectedCase}" selectionMode="single" >
 
@@ -344,7 +350,7 @@
 
                 <div class="marginT50">
 
-                    <h:form>
+                    <h:form id="currentForm">
 
                         <h4> TRWAJĄCE </h4>               
 
@@ -420,7 +426,7 @@
 
                 <div class="marginT50">
 
-                    <h:form>  
+                    <h:form id="finishedForm">  
 
                         <h4>MOJE ZAKOŃCZONE SPRAWY</h4>
 
@@ -510,7 +516,7 @@
 
                 <div>
 
-                    <h:form>
+                    <h:form id="premiumForm">
 
                         <h4> PREMIUM </h4>
 
