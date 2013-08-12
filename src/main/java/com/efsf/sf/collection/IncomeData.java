@@ -15,6 +15,9 @@ public class IncomeData implements Serializable
     private String employmentType;
     private String branch;
     private double incomeNetto;
+    private int idIncome;
+    private int idIncomeBuisnessActivity;
+    
     
     public IncomeData(String employmentType, String branch, double incomeNetto) {
         this.employmentType = employmentType;
@@ -45,6 +48,21 @@ public class IncomeData implements Serializable
     public void setBranch(String branch) {
         this.branch = branch;
     }
-    
+
+    public int getIdIncome() {
+        return idIncome;
+    }
+
+    public void setIdIncome(int idIncome) {
+        this.idIncome = idIncome;
+    }
+
+    public int getIdIncomeBuisnessActivity() {
+        return idIncomeBuisnessActivity;
+    }
+
+    public void setIdIncomeBuisnessActivity(int idIncomeBuisnessActivity) {
+        this.idIncomeBuisnessActivity = idIncomeBuisnessActivity;
+    }
     
 }

@@ -5,7 +5,9 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -115,6 +117,43 @@ public class ClientDAO {
                 session.close();
 
                 return client;
+    }
+    
+    
+    public Client readClientForSettings(int id) {
+       
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Client client=null;
+        
+        try
+        {
+        session.beginTransaction().begin();
+        Query q = null;
+        q = session.createQuery("FROM Client c "
+                + " LEFT JOIN FETCH c.user as u "
+                + " LEFT JOIN FETCH c.maritalStatus as m "
+                + " LEFT JOIN FETCH c.education as e "
+                + " LEFT JOIN FETCH c.addresses as a "
+                + " LEFT JOIN FETCH c.incomes as i "
+                + " LEFT JOIN FETCH i.branch as br " 
+                + " LEFT JOIN FETCH i.employmentType as et " 
+                + " LEFT JOIN FETCH c.incomeBusinessActivities as iba "
+                + " LEFT JOIN FETCH iba.branch as br2 " 
+                + " LEFT JOIN FETCH iba.employmentType as et2 " 
+                + " WHERE id_client = :id ");
+        
+        q.setParameter("id", id);
+        client=(Client) q.list().get(0);
+        session.getTransaction().commit();
+        
+        }
+        catch(HibernateException exp)
+        {}
+        finally{   
+        session.close();
+        }
+
+        return client;
     }
     
     
