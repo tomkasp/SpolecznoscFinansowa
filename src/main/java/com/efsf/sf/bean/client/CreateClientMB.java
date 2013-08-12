@@ -339,7 +339,7 @@ public class CreateClientMB implements Serializable
         clientDao.update(client);
         
         if (areRequired)
-                return "/client/clientFinancialNeeds?faces-redirect=true";
+                return "/client/clientNewApplication?faces-redirect=true";
         else
                 return "/client/clientMainPage?faces-redirect=true";
     }

@@ -14,7 +14,18 @@ public class ObligationDAO implements Serializable{
 
     public ObligationDAO() {
     }
-
+    
+    public void deleteObligation(Obligation ob){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        session.delete(ob);
+        
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    
     public Obligation getObligation(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

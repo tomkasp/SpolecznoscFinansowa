@@ -66,11 +66,19 @@
 
                 <script>
                     $(document).ready(function(){
-                        $("button").click(function(){
-                            $(all).toggle();
-                            $(last).toggle();
+                        $("#hide").click(function(){
+                            $("#all").toggle();
+                            $("#last").toggle();
                         });
                     });
+                    
+                    $(document).ready(function(){
+                        $("#show").click(function(){
+                            $("#all").toggle();
+                            $("#last").toggle();    
+                        });
+                    });
+                    
                 </script>
 
 
@@ -93,9 +101,16 @@
 
                 <div class="marginT50">
 
-                    <h:link class="topMenuButton greyButton wideButton" value="Nowy wniosek" outcome="/client/clientNewApplication.xhtml"/>
+                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.checkRequirementsForNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
 
-
+                    <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <div class="fontGrey"> Do utworzenia nowego wniosku potrzebne są następujące informacje: <br /><br />
+                              Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
+                        </div>
+                        <h:commandButton class="marginTB20 floatL greyButton wideButton"  type="button" onclick="fillData.hide();" value="Nie" />
+                        <h:link class="marginTB20 floatR greyButton wideButton" value="Tak" outcome="clientSettings?faces-redirect=true" />
+                    </p:dialog> 
+                    
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
@@ -240,7 +255,7 @@
 
 
                             </p:dataTable>
-                            <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż tylko ostatnie</button>
+                            <button class="topMenuButton greyButton wideButton" type="reset" id="show">Pokaż tylko ostatnie</button>
 
                         </h:form>
                     </div>    

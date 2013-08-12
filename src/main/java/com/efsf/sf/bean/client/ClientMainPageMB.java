@@ -27,6 +27,9 @@ public class ClientMainPageMB implements Serializable {
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
     
+    @ManagedProperty(value="#{clientCaseMB}")
+    private ClientCaseMB clientCaseMB;
+    
     private List<ClientCase> clientCaseList = new ArrayList<>();
     
     private List<ClientCase> awaitingClientCaseList = new ArrayList<>();
@@ -58,9 +61,10 @@ public class ClientMainPageMB implements Serializable {
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
-    
-    //Here is holder for last consultant selected in the case details view
+   
     private Integer newPoints;
+    
+    private boolean requirementsFulfilled = true;
   
     @PostConstruct
     public void fillTables()
@@ -189,15 +193,14 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void rowDoubleClick(ClientCase cs) throws IOException
-    {
-        selectedCase = cs;
-        System.out.println("2 razy: "  + selectedCase.getIdClientCase());
+    {   
+        System.out.println("2 razy: "  +  clientCaseMB.getSelectedClientCase().getIdClientCase());
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
     }
     
     public void rowClick(ClientCase cs)
     {
-        selectedCase = cs;
+        clientCaseMB.setSelectedClientCase(cs);
         System.out.println("Klik " + cs.getIdClientCase());
     }
 
@@ -218,6 +221,24 @@ public class ClientMainPageMB implements Serializable {
          caseDao.updateClientCase(currentSelectedCase);
          currentSelectedCase=null;
      return "/client/clientMainPage.xhtml";
+     }
+     
+     public void checkRequirementsForNewApplication() throws IOException
+     {
+         ClientDAO clientDao = new ClientDAO();
+         Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
+         
+         if (client == null || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode() == null || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null ))
+         {
+             requirementsFulfilled = false;
+         }
+         else
+         {
+             requirementsFulfilled = true;
+             FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
+         }
+         
+     
      }
      
     //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
@@ -380,14 +401,30 @@ public class ClientMainPageMB implements Serializable {
         this.lastSelectedCase = lastSelectedCase;
     }
 
-    public Integer getNewPoints() {
-        return newPoints;
+    public ClientCaseMB getClientCaseMB() {
+        return clientCaseMB;
     }
+
+    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
+        this.clientCaseMB = clientCaseMB;
+    }
+
 
     public void setNewPoints(Integer newPoints) {
         this.newPoints = newPoints;
     }
 
+    public Integer getNewPoints() {
+        return newPoints;
+    }
+
+    public boolean isRequirementsFulfilled() {
+        return requirementsFulfilled;
+    }
+
+    public void setRequirementsFulfilled(boolean requirementsFulfilled) {
+        this.requirementsFulfilled = requirementsFulfilled;
+    }
     
     
      

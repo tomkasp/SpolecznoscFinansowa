@@ -24,13 +24,15 @@
                 </div>
 
                 <div class="topbarMenuGreen">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
-                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGroup>                    
+                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                        </h:panelGroup>
+                    </h:form>
                 </div>
             </ui:define>
 
@@ -109,6 +111,8 @@
                             <h4> DOSTĘPNI DORADCY </h4>
                             <p:dataTable id="consultantsTable" value="#{clientCaseMB.castConsultantSetToArray(clientCaseMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{clientCaseMB.selectedConsultant}" selectionMode="single" >
      
+                                <p:ajax event="rowSelect" update="@form" />
+                                        
                                 <p:column headerText="Nazwisko">  
                                     <h:outputText value="#{row.lastName}" /> 
                                 </p:column>  
