@@ -3,6 +3,7 @@ package com.efsf.sf.bean.consultant;
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.Security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -23,7 +24,7 @@ import javax.faces.validator.ValidatorException;
  */
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ConsultantSettingsMB implements Serializable {
     private static final long serialVersionUID = 1L;
     //Update Settings
@@ -32,7 +33,6 @@ public class ConsultantSettingsMB implements Serializable {
     private Integer idConsultant;
    
     private Consultant consultant; 
-    private String confirmPassword;
     
     private Integer idWorkingPlace;
     private List<Integer> idSelectedBankList = new ArrayList<>();
@@ -48,6 +48,10 @@ public class ConsultantSettingsMB implements Serializable {
     
     private Integer idSubscriptionType;
     private Subscription subscription;
+    
+    private String currentPassword;
+    private String newPassword;
+    private String confirmNewPassword;
     
     public ConsultantSettingsMB() { 
     }
@@ -200,15 +204,34 @@ public class ConsultantSettingsMB implements Serializable {
         return "/consultant/consultantMainPage?faces-redirect=true";
     }
     
-    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
-    {       
-        String password = (String) value;
-        if (!password.equals(confirmPassword)) {
-             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
-        throw new ValidatorException(message);
-        }      
-    }
+    
+      public String updatePassword() {
+         
+         UserDAO udao=new UserDAO();
+         User user=consultant.getUser();
+         user.setPassword(Security.sha1(newPassword));
+         udao.update(user);
+         
+         return "/consultant/consultantMainPage?faces-redirect=true";
+     }
 
+    public void validateCurrentPassword(FacesContext context, UIComponent toValidate, Object value) {
+        String password = (String) value;
+        password=Security.sha1(password);
+        if ( !password.equals( consultant.getUser().getPassword() ) ) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Obecne hasło jest niewłaściwe!", "Obecne hasło jest niewłaściwe!");
+            throw new ValidatorException(message);
+        }
+    }
+     
+    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
+        String password = (String) value;     
+        if (!password.equals(newPassword)) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
+            throw new ValidatorException(message);
+        }
+    }
+    
     public Integer getIdConsultant() {
         return idConsultant;
     }
@@ -223,14 +246,6 @@ public class ConsultantSettingsMB implements Serializable {
 
     public void setConsultant(Consultant consultant) {
         this.consultant = consultant;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public Integer getIdWorkingPlace() {
@@ -328,5 +343,31 @@ public class ConsultantSettingsMB implements Serializable {
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmNewPassword() {
+        return confirmNewPassword;
+    }
+
+    public void setConfirmNewPassword(String confirmNewPassword) {
+        this.confirmNewPassword = confirmNewPassword;
+    }
+    
+    
     
 }
