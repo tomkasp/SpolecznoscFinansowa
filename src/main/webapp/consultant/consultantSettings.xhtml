@@ -78,16 +78,7 @@
                                 <h:message styleClass="invalid" for="lastName"/>
                             </div>
                                  
-                                
-                              
-                              <div class="field"> 
-                                    <h:outputText  class="label" value="Hasło"/> 
-                                    <h:inputSecret id="password"  class="inputWidth" required="true" value="#{consultantSettingsMB.confirmPassword}" > 
-                                        <f:validateLength minimum="8" maximum="20"/>
-                                        <p:ajax event="keyup" update="passwordMessage" />
-                                    </h:inputSecret>
-                                    <h:message for="password" errorClass="invalid" id="passwordMessage" />
-                                </div>
+                               
                                
 
                                 <div class="field"> 
@@ -133,6 +124,8 @@
                             <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
 
                         </div>
+                        
+                       
 
                     </div>
                     <div>
@@ -281,6 +274,50 @@
                     </div>
                     
                 </h:form>   
+                
+                <div class="leftInlineBox">
+                
+                 <h:form> 
+                            
+                            <div class="marginLRT30">
+
+                                <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Obecne hasło"/>  
+                                    <h:inputSecret required="true" id="cPassword"  value="#{consultantSettingsMB.currentPassword}" validator="#{consultantSettingsMB.validateCurrentPassword}"> 
+                                    <f:validateLength minimum="8" maximum="20" />
+                                    <p:ajax event="keyup" update="currentPasswordMessage"/>
+                                    </h:inputSecret>
+                                    <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Nowe hasło"/> 
+                                    <h:inputSecret required="true" value="#{consultantSettingsMB.newPassword}" >
+                                    <f:validateLength minimum="8" maximum="20" />
+                                    <p:ajax event="keyup" update="confirmPasswordMessage" />
+                                    </h:inputSecret>
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Powtórz hasło"/> 
+                                    <h:inputSecret id="confirmPassword" required="true" value="#{consultantSettingsMB.confirmNewPassword}" validator="#{consultantSettingsMB.validateSamePassword}" > 
+                                    <f:validateLength minimum="8" maximum="20" />
+                                    <p:ajax event="keyup" update="confirmPasswordMessage"/>
+                                    </h:inputSecret>
+                                    <h:message for="confirmPassword" errorClass="invalid" id="confirmPasswordMessage" />
+                                </div>
+                                
+                                <div style="min-height: 40px"> 
+                                    <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{consultantSettingsMB.updatePassword()}"/>
+                                </div>
+
+                            </div>
+
+                </h:form>
+                    
+              </div>
 
             </ui:define>
             
