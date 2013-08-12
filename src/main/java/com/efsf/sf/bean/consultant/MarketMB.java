@@ -129,8 +129,9 @@ public class MarketMB implements Serializable
     public void reload()
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (!facesContext.isValidationFailed())
+        if (!facesContext.isValidationFailed() && !facesContext.isPostback())
         {
+            loginMB.setConsultant(new ConsultantDAO().getCounsultantConnectedToUser(loginMB.getIdUser()));
             reloadCases(); 
             reloadOwnedTable();
             makeObservedModels();

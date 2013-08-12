@@ -22,13 +22,15 @@
                             </div>
 
                             <div class="topbarMenuBlue">
-                                <h:panelGroup>
-                                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
-                                </h:panelGroup>
+                                <h:form>
+                                    <h:panelGroup>
+                                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                                            <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                                            <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
+                                    </h:panelGroup>
+                                </h:form>
                             </div>
                     </ui:define>
             
