@@ -227,8 +227,12 @@ img{border:0px;}
     margin:0px 80px;
     text-align:left;
     font-size:20px;
-    color:#545454;
-    
+    color:#545454;   
+}
+
+.linkWidth 
+{
+    min-width: 90px !important;
 }
 
 /** WATERMARK CSS!!! **/
@@ -294,7 +298,6 @@ input
 
 .ui-widget-content a {
     color: cornflowerblue;
-    min-width: 90px !important;
 }
 
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {

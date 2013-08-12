@@ -192,6 +192,15 @@ public class ClientMainPageMB implements Serializable {
         }   
     }
     
+    public void reload()
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isValidationFailed() && !facesContext.isPostback())
+        {
+            fillTables();
+        }
+    }
+    
     public void rowDoubleClick(ClientCase cs) throws IOException
     {   
         System.out.println("2 razy: "  +  clientCaseMB.getSelectedClientCase().getIdClientCase());
