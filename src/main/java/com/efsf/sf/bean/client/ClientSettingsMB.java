@@ -6,10 +6,13 @@ import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.EducationDAO;
+import com.efsf.sf.sql.dao.IncomeBusinessActivityDAO;
+import com.efsf.sf.sql.dao.IncomeDAO;
 import com.efsf.sf.sql.dao.MaritalStatusDAO;
 import com.efsf.sf.sql.dao.RegionDAO;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
+import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -29,282 +32,254 @@ import org.joda.time.DateTime;
 /**
  * @author WR1EI1
  */
-
 @ManagedBean
 @ViewScoped
 public class ClientSettingsMB implements Serializable {
+
     private static final long serialVersionUID = 1L;
     //Update Settings
-    
-    @ManagedProperty(value="#{loginMB.client.idClient}")
+    @ManagedProperty(value = "#{loginMB.client.idClient}")
     private Integer idClient;
-    
-    @ManagedProperty(value="#{loginMB}")
+    @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
-    
-    @ManagedProperty(value="#{dictionaryMB}")
+    @ManagedProperty(value = "#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
-   
-    private Client client; 
-    
+    private Client client;
     private String confirmPassword;
-    
     private Integer idMainRegion;
     private Address mainAddress = new Address();
-    
     private Integer idMartialStatus;
     private Integer idEducation;
-    
     ClientDAO clientDAO;
-    
     private ArrayList<IncomeData> incomeTable = new ArrayList<>();
-    
     //DIALOG 1
     private int incomeId;
     private int branchId;
     private boolean isIncome = true;
-    
     private Date currentDate = new DateTime().toDate();
-    
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
-    
     private Set<Income> incomeSet = new HashSet<>();
     private Set<IncomeBusinessActivity> businessSet = new HashSet<>();
-    
     private boolean tableEmpty = true;
-    
-    public ClientSettingsMB() { 
-        clientDAO=new ClientDAO();
-    }
- 
-    @PostConstruct
-    private void loadClient() {
-        
-        client=clientDAO.readClientForSettings(idClient);
-        
-        idMartialStatus=client.getMaritalStatus().getIdMaritalStatus();
-        idEducation=client.getEducation().getIdEducation();
-        
-        Iterator<Address> it=client.getAddresses().iterator();
-        while(it.hasNext()){
-        mainAddress=it.next();
-        idMainRegion=mainAddress.getRegion().getIdRegion();
-        }
-        
-        Iterator<Income> it2=client.getIncomes().iterator();
-        while(it2.hasNext()){
-        Income i=it2.next();
-        
-        IncomeData incomeData=new IncomeData(i.getEmploymentType().getName() , i.getBranch().getName() , i.getMonthlyNetto().longValue() );
-        incomeData.setIdIncome(i.getIdIncome());
-        incomeData.setIsIncome(true);
-        
-        incomeTable.add(incomeData);
-        incomeSet.add(income);
-        
-        }
-        //incomeSet= client.getIncomes();
-        
-        Iterator<IncomeBusinessActivity> it3=client.getIncomeBusinessActivities().iterator();
-        while(it3.hasNext()){
-        IncomeBusinessActivity iba=it3.next();
-        
-        IncomeData incomeData=new IncomeData(iba.getEmploymentType().getName() , iba.getBranch().getName() , iba.getIncomeLastYearNetto().longValue() );
-        incomeData.setIdIncome(iba.getIdIncomeBusinessActivity());
-        incomeData.setIsIncome(false);
-        
-        incomeTable.add(incomeData);
-        businessSet.add(iba);
-        
-        }
-        //businessSet= client.getIncomeBusinessActivities();
-        
-    }
-    
-    public String updateSettings() {
-        
-        MaritalStatusDAO msdao=new MaritalStatusDAO();
-        MaritalStatus newMaritalStatus=msdao.getMaritalStatus(idMartialStatus);
-        
-        EducationDAO edao=new EducationDAO();
-        Education newEducation=edao.getEducation(idEducation);
-        
-        client.setMaritalStatus(newMaritalStatus);
-        client.setEducation(newEducation);
-        
-        client.setIncomes(incomeSet);
-        client.setIncomeBusinessActivities(businessSet);
-        
-        clientDAO.update(client);
-        
-        
-        RegionDAO rdao=new RegionDAO();
-        Region mainRegion=rdao.getRegion(idMainRegion);
-        mainAddress.setRegion(mainRegion);
-        AddressDAO adao=new AddressDAO();
-        adao.update(mainAddress);
-        
-        
-        
-        return "/client/clientMainPage?faces-redirect=true";
-    }
-    
-    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
-    {       
-        String password = (String) value;
-        if (!password.equals(confirmPassword)) {
-             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
-        throw new ValidatorException(message);
-        }      
-    }
-    
-    public void deleteIncome(int idIncome,boolean isIncome){
-        
-        System.out.println("SIE ROBI"+incomeTable.size());
-        System.out.println("IS INCOME: "+isIncome);
-        System.out.println("ID: "+idIncome);
-        
-        Iterator<IncomeData> it=incomeTable.iterator();
-        while(it.hasNext()){
-            IncomeData incomeData=it.next();
-            if(incomeData.isIsIncome()==isIncome){
-                
-                if(incomeData.getIdIncome()==idIncome){
-                it.remove();
-                System.out.println("USUNIETO 1 !");
-                
-                }
-                
-                if(isIncome==true){
-                Iterator<Income> incomeIterator=incomeSet.iterator();
-                //System.out.println(ic);
-                while( incomeIterator.hasNext() ){
-                    
-                Income i=incomeIterator.next();
-                if(i.getIdIncome()==idIncome){
-                incomeIterator.remove();
-                System.out.println("USUNIETO 2 !");
-                }
-                
-                }
-                
-                }else{   
-                Iterator<IncomeBusinessActivity> businessIterator=businessSet.iterator();
-                
-                while( businessIterator.hasNext() ){
-                IncomeBusinessActivity iba=businessIterator.next();
-                if(iba.getIdIncomeBusinessActivity()==idIncome){
-                businessIterator.remove();
-                System.out.println("USUNIETO 3 !");
-                }
-                }
-                
-                }
-                
-            }
-            
-        }
-        
-        
-        
-        
-        System.out.println(incomeTable.size());
-      
+
+    public ClientSettingsMB() {
+        clientDAO = new ClientDAO();
     }
 
-    
-    
-    
-    
-    
-    
-    
+    @PostConstruct
+    private void loadClient() {
+
+        client = clientDAO.readClientForSettings(idClient);
+
+        idMartialStatus = client.getMaritalStatus().getIdMaritalStatus();
+        idEducation = client.getEducation().getIdEducation();
+
+        Iterator<Address> it = client.getAddresses().iterator();
+        while (it.hasNext()) {
+            mainAddress = it.next();
+            idMainRegion = mainAddress.getRegion().getIdRegion();
+        }
+
+        Iterator<Income> it2 = client.getIncomes().iterator();
+        while (it2.hasNext()) {
+            Income i = it2.next();
+
+            IncomeData incomeData = new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().longValue());
+            incomeData.setIdIncome(i.getIdIncome());
+            incomeData.setIsIncome(true);
+
+            incomeTable.add(incomeData);
+            //i.setClient(client);
+            incomeSet.add(i);
+
+
+        }
+        //incomeSet= client.getIncomes();
+
+        Iterator<IncomeBusinessActivity> it3 = client.getIncomeBusinessActivities().iterator();
+        while (it3.hasNext()) {
+            IncomeBusinessActivity iba = it3.next();
+
+            IncomeData incomeData = new IncomeData(iba.getEmploymentType().getName(), iba.getBranch().getName(), iba.getIncomeLastYearNetto().longValue());
+            incomeData.setIdIncome(iba.getIdIncomeBusinessActivity());
+            incomeData.setIsIncome(false);
+
+            incomeTable.add(incomeData);
+            //iba.setClient(client);
+            businessSet.add(iba);
+
+        }
+        //businessSet= client.getIncomeBusinessActivities();
+
+    }
+
+    public String updateSettings() {
+
+        MaritalStatusDAO msdao = new MaritalStatusDAO();
+        MaritalStatus newMaritalStatus = msdao.getMaritalStatus(idMartialStatus);
+
+        EducationDAO edao = new EducationDAO();
+        Education newEducation = edao.getEducation(idEducation);
+
+        client.setMaritalStatus(newMaritalStatus);
+        client.setEducation(newEducation);
+
+        IncomeDAO idao = new IncomeDAO();
+        Iterator<Income> it = client.getIncomes().iterator();
+        while (it.hasNext()) {
+            Income i = it.next();
+            idao.delete(i);
+        }
+        client.setIncomes(incomeSet);
+
+        IncomeBusinessActivityDAO ibadao = new IncomeBusinessActivityDAO();
+        Iterator<IncomeBusinessActivity> it2 = client.getIncomeBusinessActivities().iterator();
+        while (it2.hasNext()) {
+            IncomeBusinessActivity iba = it2.next();
+            ibadao.delete(iba);
+        }
+
+        client.setIncomeBusinessActivities(businessSet);
+
+        clientDAO.update(client);
+
+
+
+        RegionDAO rdao = new RegionDAO();
+        Region mainRegion = rdao.getRegion(idMainRegion);
+        mainAddress.setRegion(mainRegion);
+        AddressDAO adao = new AddressDAO();
+        adao.update(mainAddress);
+
+
+
+        return "/client/clientMainPage?faces-redirect=true";
+    }
+
+    public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
+        String password = (String) value;
+        if (!password.equals(confirmPassword)) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
+            throw new ValidatorException(message);
+        }
+    }
+
+    public void deleteIncome(int idIncome, boolean isIncome) {
+
+        System.out.println("SIE ROBI" + incomeTable.size());
+        System.out.println("IS INCOME: " + isIncome);
+        System.out.println("ID: " + idIncome);
+
+        Iterator<IncomeData> it = incomeTable.iterator();
+        while (it.hasNext()) {
+            IncomeData incomeData = it.next();
+            if (incomeData.isIsIncome() == isIncome) {
+
+                if (incomeData.getIdIncome() == idIncome) {
+                    it.remove();
+                    System.out.println("USUNIETO 1 !");
+
+                }
+
+                if (isIncome == true) {
+                    Iterator<Income> incomeIterator = incomeSet.iterator();
+
+                    while (incomeIterator.hasNext()) {
+
+                        Income i = incomeIterator.next();
+                        if (i.getIdIncome() == idIncome) {
+                            incomeIterator.remove();
+                            System.out.println("USUNIETO 2 !");
+                        }
+
+                    }
+
+                } else {
+                    Iterator<IncomeBusinessActivity> businessIterator = businessSet.iterator();
+
+                    while (businessIterator.hasNext()) {
+                        IncomeBusinessActivity iba = businessIterator.next();
+                        if (iba.getIdIncomeBusinessActivity() == idIncome) {
+                            businessIterator.remove();
+                            System.out.println("USUNIETO 3 !");
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+
+
+
+        System.out.println(incomeTable.size());
+
+    }
+
     //DIALOG 1:
-    
-    public void toIncome()
-    {
+    public void toIncome() {
         setIsIncome(true);
-       
+
     }
-    
-    public void toBusinessActivity()
-    {
+
+    public void toBusinessActivity() {
         setIsIncome(false);
-        
+
     }
-    
-    public void cleanDialog()
-    {
-       
+
+    public void cleanDialog() {
+
         income = new Income();
         branchId = 0;
         incomeId = 0;
     }
-    
-    public void addIncome()
-    {
-                EmploymentType et = null; 
-                for (EmploymentType i : dictionaryMB.getIncome() )
-                {
-                    if (i.getIdEmploymentType() == incomeId)
-                    {
-                        et = i;
-                        break;
-                    }
+
+    public void addIncome() {
+        EmploymentType et = null;
+        for (EmploymentType i : dictionaryMB.getIncome()) {
+            if (i.getIdEmploymentType() == incomeId) {
+                et = i;
+                break;
+            }
+        }
+
+        Branch b = null;
+
+        for (Branch i : dictionaryMB.getBranch()) {
+            if (i.getIdBranch() == branchId) {
+                b = i;
+                break;
+            }
+        }
+        if (isIncome) {
+            income.setBranch(b);
+            income.setEmploymentType(et);
+            income.setClient(loginMB.getClient());
+            tableEmpty = false;
+            incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));
+            incomeSet.add(income);
+            income = new Income();
+        } else {
+
+            for (EmploymentType i : dictionaryMB.getBusinessActivity()) {
+                if (i.getIdEmploymentType() == incomeId) {
+                    et = i;
+                    break;
                 }
-                
-                Branch b = null;
- 
-                for (Branch i : dictionaryMB.getBranch())
-                {
-                    if (i.getIdBranch() == branchId)
-                    {
-                        b = i;
-                        break;
-                    }
-                }
-                if (isIncome)
-                {
-                    income.setBranch(b);
-                    income.setEmploymentType(et);
-                    income.setClient(loginMB.getClient());
-                    tableEmpty = false;
-                    incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));   
-                    incomeSet.add(income);
-                    income = new Income();
-                }
-                else
-                {
-                    
-                    for (EmploymentType i : dictionaryMB.getBusinessActivity())
-                    {
-                          if (i.getIdEmploymentType() == incomeId)
-                          {
-                                 et = i;
-                                 break;
-                          }
-                    }
-                    business.setBranch(b);
-                    business.setEmploymentType(et);
-                    business.setClient(loginMB.getClient());
-                    tableEmpty = false;
-                    incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));        
-                    businessSet.add(business);
-                    business = new IncomeBusinessActivity();
-                }
+            }
+            business.setBranch(b);
+            business.setEmploymentType(et);
+            business.setClient(loginMB.getClient());
+            tableEmpty = false;
+            incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));
+            businessSet.add(business);
+            business = new IncomeBusinessActivity();
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public Integer getIdClient() {
         return idClient;
     }
@@ -384,7 +359,7 @@ public class ClientSettingsMB implements Serializable {
     public void setBranchId(int branchId) {
         this.branchId = branchId;
     }
-    
+
     public boolean isIsIncome() {
         return isIncome;
     }
@@ -449,8 +424,6 @@ public class ClientSettingsMB implements Serializable {
         this.businessSet = businessSet;
     }
 
-    
-
     public boolean isTableEmpty() {
         return tableEmpty;
     }
@@ -458,7 +431,4 @@ public class ClientSettingsMB implements Serializable {
     public void setTableEmpty(boolean tableEmpty) {
         this.tableEmpty = tableEmpty;
     }
-
-    
-    
 }
