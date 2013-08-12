@@ -23,7 +23,7 @@
 
                             <div class="topbarMenuBlue">
                                 <h:panelGroup>
-                                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
                                         <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
                                         <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
                                         <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
@@ -41,7 +41,7 @@
                             </div>
                             
                             <div>     
-                                <h5> #{loginMB.consultant.name} &nbsp; #{loginMB.consultant.lastName} </h5> 
+                                <h5> #{loginMB.consultant.name}  #{loginMB.consultant.lastName} </h5> 
                                 <h:outputText class="profileText" value="nr. doradcy:" />
                                 <h5> #{loginMB.consultant.user.login} </h5>
                                 <h:outputText class="profileText" value="Twój ranking:" /> 
@@ -49,8 +49,11 @@
                             </div>
                         </div>
                         
-                        <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} </h3>
-                        <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">
+                        <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} (#{clientCaseMB.selectedClientCase.caseStatus.name}) </h3>
+                        <h:panelGroup rendered="#{!clientCaseMB.checkLoggedConsultantAccessToCase() and !(clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
+                            Nie istnieje 
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
                         <div style="min-height: 160px">
                             <div class="leftInlineBox">
                                 <h:form>
@@ -91,7 +94,7 @@
                                                 <f:convertDateTime type="date"  pattern="dd-MM-yyyy" />
                                             </h:inputText>
                                         </div>
-                                        <div class="field"> <h:outputText class="label" value="Etap"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.caseStatus.name}" /> </div>
+                                        
                                         <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue}" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consolidationValue}" /> </div>
