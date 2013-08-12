@@ -53,7 +53,7 @@
 
                     <div class="leftInlineBox">
 
-                        <h:form> 
+                        <h:form id="form"> 
 
                             <div class="marginLRT30">
 
@@ -151,8 +151,9 @@
                                         <h:outputText value="#{data.incomeNetto}" />
                                     </p:column>  
 
-                                    <p:column headerText=" ">  
-                                        <p:commandLink value="Usuń" />
+                                    <p:column headerText="">  
+                                        <p:commandLink value="Usuń"  action="#{clientSettingsMB.deleteIncome(data.idIncome,data.isIncome)}" update=":form:table">
+                                        </p:commandLink>
                                     </p:column> 
                                 </p:dataTable>
 
@@ -301,7 +302,7 @@
                     <h:form>  
                         <p:commandButton  styleClass="floatL  wideButton marginTB20"  action="#{clientSettingsMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
 
-                        </p:commandButton>  #{c}
+                        </p:commandButton>  
 
                         <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientSettingsMB.toBusinessActivity()}" value="Działalność" >
 

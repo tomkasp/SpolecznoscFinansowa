@@ -7,16 +7,17 @@ package com.efsf.sf.collection;
 import java.io.Serializable;
 
 /**
- *
  * @author XaI
  */
+
 public class IncomeData implements Serializable
 {
+    private static final long serialVersionUID = 1L;
     private String employmentType;
     private String branch;
     private double incomeNetto;
     private int idIncome;
-    private int idIncomeBuisnessActivity;
+    private boolean isIncome;
     
     
     public IncomeData(String employmentType, String branch, double incomeNetto) {
@@ -25,6 +26,14 @@ public class IncomeData implements Serializable
         this.incomeNetto = incomeNetto;
     }
 
+    public IncomeData(String employmentType, String branch, double incomeNetto, int idIncome, boolean isIncome) {
+        this.employmentType = employmentType;
+        this.branch = branch;
+        this.incomeNetto = incomeNetto;
+        this.idIncome = idIncome;
+        this.isIncome = isIncome;
+    }
+    
     public double getIncomeNetto() {
         return incomeNetto;
     }
@@ -57,12 +66,16 @@ public class IncomeData implements Serializable
         this.idIncome = idIncome;
     }
 
-    public int getIdIncomeBuisnessActivity() {
-        return idIncomeBuisnessActivity;
+    public boolean isIsIncome() {
+        return isIncome;
     }
 
-    public void setIdIncomeBuisnessActivity(int idIncomeBuisnessActivity) {
-        this.idIncomeBuisnessActivity = idIncomeBuisnessActivity;
+    public void setIsIncome(boolean isIncome) {
+        this.isIncome = isIncome;
     }
+
+   
+
+    
     
 }
