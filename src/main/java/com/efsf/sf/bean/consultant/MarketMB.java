@@ -54,6 +54,7 @@ public class MarketMB implements Serializable
     
     private List<ClientCase> clientCaseList = new ArrayList();
     private List<ClientCase> ownedList = new ArrayList();
+    private List<ClientCase> finishedList = new ArrayList();
     
     private Converters converters =  new Converters();
       
@@ -63,6 +64,7 @@ public class MarketMB implements Serializable
     private ClientCase selectedObservedCase;
     private ClientCase selectedAppliedCase;
     private ClientCase selectedOwnedCase;
+    private ClientCase selectedFinishedCase;
     
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
@@ -78,6 +80,9 @@ public class MarketMB implements Serializable
     
     private ArrayList<Set<String>> ownedModelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> ownedModelsBranch = new ArrayList();
+    
+    private ArrayList<Set<String>> finishedModelsEmploymentType = new ArrayList();
+    private ArrayList<Set<String>> finishedModelsBranch = new ArrayList();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
@@ -116,7 +121,7 @@ public class MarketMB implements Serializable
     public void fillModels()
     {
         reloadOwnedTable();
-        
+        reloadFinishedTable();
         makeObservedModels();
         makeAppliedModels();
         
@@ -134,6 +139,7 @@ public class MarketMB implements Serializable
             loginMB.setConsultant(new ConsultantDAO().getCounsultantConnectedToUser(loginMB.getIdUser()));
             reloadCases(); 
             reloadOwnedTable();
+            reloadFinishedTable();
             makeObservedModels();
             makeAppliedModels();
         }
@@ -166,6 +172,21 @@ public class MarketMB implements Serializable
         
         System.out.println("");
     }
+    
+    public void reloadFinishedTable()
+    {
+        finishedList = caseDao.finishedCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
+        finishedModelsEmploymentType = new ArrayList();
+        finishedModelsBranch = new ArrayList();
+        for (int i = 0; i<finishedList.size(); i++)
+        {
+            finishedModelsEmploymentType.add(showAllClientsEmploymentTypes(finishedList.get(i).getClient()));
+            finishedModelsBranch.add(showAllClientsBranches(finishedList.get(i).getClient()));
+        }
+        
+        System.out.println("");
+    }
+    
     
     
     public void makeAppliedModels()
@@ -227,6 +248,31 @@ public class MarketMB implements Serializable
             marketModelsEmploymentType.add(showAllClientsEmploymentTypes(allMarket.get(i).getClient()));
             marketModelsBranch.add(showAllClientsBranches(allMarket.get(i).getClient()));
         }
+    }
+    
+    public void resetMarket()
+    {
+        phaseMin = 0;
+        phaseMax = 100;
+        ageMin = 0;
+        ageMax = 99;
+    
+        difficultyMin = 0;
+        difficultyMax = 10;
+    
+         branchId = 0;
+         regionId = 0;
+         
+         incomeIds = new ArrayList();
+         businessIds = new ArrayList();   
+         
+         for (EmploymentType et : dictionaryMB.getIncome())
+            incomeIds.add(et.getShortcut());
+         for (EmploymentType ba : dictionaryMB.getBusinessActivity())
+            businessIds.add(ba.getShortcut());  
+         
+         loadMarket();
+         
     }
     
     public String toMarket()
@@ -713,6 +759,38 @@ public class MarketMB implements Serializable
 
     public void setClientCaseMB(ClientCaseMB clientCaseMB) {
         this.clientCaseMB = clientCaseMB;
+    }
+
+    public ClientCase getSelectedFinishedCase() {
+        return selectedFinishedCase;
+    }
+
+    public void setSelectedFinishedCase(ClientCase selectedFinishedCase) {
+        this.selectedFinishedCase = selectedFinishedCase;
+    }
+
+    public ArrayList<Set<String>> getFinishedModelsEmploymentType() {
+        return finishedModelsEmploymentType;
+    }
+
+    public void setFinishedModelsEmploymentType(ArrayList<Set<String>> finishedModelsEmploymentType) {
+        this.finishedModelsEmploymentType = finishedModelsEmploymentType;
+    }
+
+    public ArrayList<Set<String>> getFinishedModelsBranch() {
+        return finishedModelsBranch;
+    }
+
+    public void setFinishedModelsBranch(ArrayList<Set<String>> finishedModelsBranch) {
+        this.finishedModelsBranch = finishedModelsBranch;
+    }
+
+    public List<ClientCase> getFinishedList() {
+        return finishedList;
+    }
+
+    public void setFinishedList(List<ClientCase> finishedList) {
+        this.finishedList = finishedList;
     }
 
 }
