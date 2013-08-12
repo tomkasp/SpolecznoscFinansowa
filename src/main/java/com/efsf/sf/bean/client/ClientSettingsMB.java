@@ -20,6 +20,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -30,7 +31,7 @@ import org.joda.time.DateTime;
  */
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ClientSettingsMB implements Serializable {
     private static final long serialVersionUID = 1L;
     //Update Settings
@@ -94,22 +95,30 @@ public class ClientSettingsMB implements Serializable {
         Iterator<Income> it2=client.getIncomes().iterator();
         while(it2.hasNext()){
         Income i=it2.next();
+        
         IncomeData incomeData=new IncomeData(i.getEmploymentType().getName() , i.getBranch().getName() , i.getMonthlyNetto().longValue() );
         incomeData.setIdIncome(i.getIdIncome());
+        incomeData.setIsIncome(true);
+        
         incomeTable.add(incomeData);
-        //incomeSet.add(income);
+        incomeSet.add(income);
+        
         }
-        incomeSet=(HashSet<Income>) client.getIncomes();
+        //incomeSet= client.getIncomes();
         
         Iterator<IncomeBusinessActivity> it3=client.getIncomeBusinessActivities().iterator();
         while(it3.hasNext()){
         IncomeBusinessActivity iba=it3.next();
+        
         IncomeData incomeData=new IncomeData(iba.getEmploymentType().getName() , iba.getBranch().getName() , iba.getIncomeLastYearNetto().longValue() );
-        incomeData.setIdIncomeBuisnessActivity(iba.getIdIncomeBusinessActivity());
+        incomeData.setIdIncome(iba.getIdIncomeBusinessActivity());
+        incomeData.setIsIncome(false);
+        
         incomeTable.add(incomeData);
-        //businessSet.add(iba);
+        businessSet.add(iba);
+        
         }
-        businessSet=(HashSet<IncomeBusinessActivity>) client.getIncomeBusinessActivities();
+        //businessSet= client.getIncomeBusinessActivities();
         
     }
     
@@ -148,6 +157,60 @@ public class ClientSettingsMB implements Serializable {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
         }      
+    }
+    
+    public void deleteIncome(int idIncome,boolean isIncome){
+        
+        System.out.println("SIE ROBI"+incomeTable.size());
+        System.out.println("IS INCOME: "+isIncome);
+        System.out.println("ID: "+idIncome);
+        
+        Iterator<IncomeData> it=incomeTable.iterator();
+        while(it.hasNext()){
+            IncomeData incomeData=it.next();
+            if(incomeData.isIsIncome()==isIncome){
+                
+                if(incomeData.getIdIncome()==idIncome){
+                it.remove();
+                System.out.println("USUNIETO 1 !");
+                
+                }
+                
+                if(isIncome==true){
+                Iterator<Income> incomeIterator=incomeSet.iterator();
+                //System.out.println(ic);
+                while( incomeIterator.hasNext() ){
+                    
+                Income i=incomeIterator.next();
+                if(i.getIdIncome()==idIncome){
+                incomeIterator.remove();
+                System.out.println("USUNIETO 2 !");
+                }
+                
+                }
+                
+                }else{   
+                Iterator<IncomeBusinessActivity> businessIterator=businessSet.iterator();
+                
+                while( businessIterator.hasNext() ){
+                IncomeBusinessActivity iba=businessIterator.next();
+                if(iba.getIdIncomeBusinessActivity()==idIncome){
+                businessIterator.remove();
+                System.out.println("USUNIETO 3 !");
+                }
+                }
+                
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        
+        System.out.println(incomeTable.size());
+      
     }
 
     
