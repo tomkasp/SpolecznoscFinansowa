@@ -294,6 +294,7 @@ input
 
 .ui-widget-content a {
     color: cornflowerblue;
+    min-width: 90px !important;
 }
 
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
