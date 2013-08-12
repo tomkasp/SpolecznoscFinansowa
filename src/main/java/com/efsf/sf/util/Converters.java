@@ -26,14 +26,19 @@ public class Converters implements Serializable
         int factor = 0;
         
         Calendar calBirth = new GregorianCalendar();
-        calBirth.setTime(birthDate);
-        if(cal.get(Calendar.DAY_OF_YEAR) < calBirth.get(Calendar.DAY_OF_YEAR)) {
-            factor = -1; 
+        if (birthDate != null)
+        {
+            calBirth.setTime(birthDate);
+            if(cal.get(Calendar.DAY_OF_YEAR) < calBirth.get(Calendar.DAY_OF_YEAR)) {
+              factor = -1; 
             
-        }
-        age = cal.get(Calendar.YEAR) - calBirth.get(Calendar.YEAR) + factor;
+            }
+            age = cal.get(Calendar.YEAR) - calBirth.get(Calendar.YEAR) + factor;
 
-        return age;
+            return age;
+        }
+        else
+            return 0;
     }
     
     public String hoursLeft(Date end)
