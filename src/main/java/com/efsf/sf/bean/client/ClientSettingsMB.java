@@ -10,9 +10,10 @@ import com.efsf.sf.sql.dao.IncomeBusinessActivityDAO;
 import com.efsf.sf.sql.dao.IncomeDAO;
 import com.efsf.sf.sql.dao.MaritalStatusDAO;
 import com.efsf.sf.sql.dao.RegionDAO;
+import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.Security;
 import java.io.Serializable;
-import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -45,7 +46,6 @@ public class ClientSettingsMB implements Serializable {
     @ManagedProperty(value = "#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
     private Client client;
-    private String confirmPassword;
     private Integer idMainRegion;
     private Address mainAddress = new Address();
     private Integer idMartialStatus;
@@ -62,6 +62,10 @@ public class ClientSettingsMB implements Serializable {
     private Set<Income> incomeSet = new HashSet<>();
     private Set<IncomeBusinessActivity> businessSet = new HashSet<>();
     private boolean tableEmpty = true;
+    
+    private String currentPassword;
+    private String newPassword;
+    private String confirmNewPassword;
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
@@ -144,27 +148,47 @@ public class ClientSettingsMB implements Serializable {
 
         clientDAO.update(client);
 
-
-
+        
         RegionDAO rdao = new RegionDAO();
         Region mainRegion = rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mainRegion);
         AddressDAO adao = new AddressDAO();
         adao.update(mainAddress);
 
-
-
+        
         return "/client/clientMainPage?faces-redirect=true";
     }
+    
+     public String updatePassword() {
+         
+         
+         UserDAO udao=new UserDAO();
+         User user=client.getUser();
+         user.setPassword(Security.sha1(newPassword));
+         udao.update(user);
+         
+         
+         return "/client/clientMainPage?faces-redirect=true";
+     }
 
+    public void validateCurrentPassword(FacesContext context, UIComponent toValidate, Object value) {
+        String password = (String) value;
+        password=Security.sha1(password);
+        if ( !password.equals( client.getUser().getPassword() ) ) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Obecne hasło jest niewłaściwe!", "Obecne hasło jest niewłaściwe!");
+            throw new ValidatorException(message);
+        }
+    }
+     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
-        if (!password.equals(confirmPassword)) {
+        if (!password.equals(newPassword)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
             throw new ValidatorException(message);
         }
     }
-
+    
+    
     public void deleteIncome(int idIncome, boolean isIncome) {
 
         System.out.println("SIE ROBI" + incomeTable.size());
@@ -295,15 +319,7 @@ public class ClientSettingsMB implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
+    
     public Integer getIdMainRegion() {
         return idMainRegion;
     }
@@ -431,4 +447,31 @@ public class ClientSettingsMB implements Serializable {
     public void setTableEmpty(boolean tableEmpty) {
         this.tableEmpty = tableEmpty;
     }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmNewPassword() {
+        return confirmNewPassword;
+    }
+
+    public void setConfirmNewPassword(String confirmNewPassword) {
+        this.confirmNewPassword = confirmNewPassword;
+    }
+    
+    
+    
 }
