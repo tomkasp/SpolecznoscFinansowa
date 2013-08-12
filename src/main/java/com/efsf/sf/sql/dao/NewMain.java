@@ -5,8 +5,12 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.CaseStatus;
+import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.Income;
+import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,8 +43,8 @@ public class NewMain {
 //        AddressDAO adao=new AddressDAO();
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
-            
-          
+//           
+//         
 //          
 //        ClientCaseDAO ccdao=new ClientCaseDAO();
 //        @SuppressWarnings("unchecked")
@@ -49,12 +53,12 @@ public class NewMain {
 //        //ClientCase cc=list.get(0);
 //        System.out.println(list.size());
 //        
-        //System.out.println(list.size());    
+//        System.out.println(list.size());    
         
-          
+        ClientDAO cdao=new ClientDAO();
+        Client client=cdao.readClientForSettings(50);
+        Iterator<Income> i=client.getIncomes().iterator();
+        System.out.println( "PRINTLN: "+i.next().getBranch().getName() );
         
-        CaseStatusDAO csdao=new CaseStatusDAO();
-        CaseStatus cs=csdao.read(8);
-        System.out.println(cs.getIdCaseStatus());
     }
 }

@@ -14,8 +14,8 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - ustawienia konta </ui:define> 
             <ui:define name="top"> 
+                
                 <h:outputStylesheet library="css" name="green.css" />
-
 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
@@ -23,14 +23,16 @@
                     <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
                 </div>
 
-
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
                         <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
                     </h:panelGroup>
                 </div>
+                
             </ui:define>
+            
             <ui:define name="content">
+                
                 <div id="profileBar" class="profilBar">
                     <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
                     <div id="spaceFiller"> </div>
@@ -48,54 +50,211 @@
                 </div>
 
                 <div style="min-height: 910px">
-                    <div class="leftThinerBox">
 
-                        <h4 class="greenLeftBorder">Użytkownik: Stanislaw_novy</h4> 
+                    <div class="leftInlineBox">
 
-                        <h:form>
+                        <h:form id="form"> 
+
                             <div class="marginLRT30">
-                                <div class="field"> <h:outputText class="label" value="Adres email"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field" style="margin: 0;"> <h:outputText class="label3" style="color: red" value="Na ten email będzie wysyłana wszelka korespondencja"/> </div>
-                                <div class="field" style="margin: 0;"> <h:outputText class="label3" style="color: red" value="dotycząca twojego konta."/> </div>                        
-                                <div class="field"> <h:outputText class="label" value="Rok urodzenia"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Dochód"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/> 
-                                    <p:selectOneMenu style="width: 57%" > 
-                                     <f:selectItem  itemValue="test" itemLabel="umowa o prace" />
-                                    </p:selectOneMenu>
+
+                               <h4>DANE PERSONALNE</h4> 
+                                
+                                <div class="field" style="margin-bottom: 60px;">
+                                    <h:outputText class="label" value="Adres email"/> 
+                                    <h:inputText class="inputWidth" value="#{clientSettingsMB.client.user.email}"/> 
+                                    <h:message for="name" errorClass="invalid" id="emailMessage" />
+                                    <h:outputText class="label3"  value="Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta."/> 
                                 </div>
-                                <div class="field"> <h:outputText class="label" value=""/>  <h:link class="greenLink" value="Działalność gospodarcza"/> </div>
-                                <div class="field"> <h:outputText class="label" value="Pensja"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Branża"/>  
-                                    <p:selectOneMenu style="width: 57%;" >
-                                         <f:selectItem  itemValue="test" itemLabel="budownictwo" />
-                                        </p:selectOneMenu>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Imię"/>  
+                                    <h:inputText id="name" class="inputWidth" required="true" value="#{clientSettingsMB.client.name}"> 
+                                        <f:validateLength minimum="3" maximum="20" />
+                                        <p:ajax event="keyup" update="nameMessage" />
+                                    </h:inputText>
+                                    <h:message for="name" errorClass="invalid" id="nameMessage" />
                                 </div>
-                                <div class="field"> <h:outputText class="label" value="Miasto"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Kod pocztowy"/>  <h:inputText class="inputWidth" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth" /> </div>
+
+                                <div class="field">
+                                    <h:outputText class="label" value="Nazwisko"/>  
+                                    <h:inputText required="true" id="surname" class="inputWidth" value="#{clientSettingsMB.client.lastName}" >
+                                        <f:validateLength minimum="3" maximum="20" />
+                                        <p:ajax event="keyup" update="surnameMessage" />
+                                    </h:inputText>
+                                    <h:message for="surname" errorClass="invalid" id="surnameMessage" />
+                                </div>
+
+                                <div class="field">
+                                    <h:outputText class="label" value="Płeć"/>
+                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{clientSettingsMB.client.sex}" > 
+                                        <f:selectItem itemLabel="K" itemValue="false" /> 
+                                        <f:selectItem itemLabel="M" itemValue="true" />
+                                    </p:selectOneRadio>
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Nazwisko rodowe"/>  
+                                    <h:inputText id="family" class="inputWidth" value="#{clientSettingsMB.client.familyName}" > 
+                                        <f:validateLength minimum="3" maximum="20" />
+                                        <p:ajax event="keyup" update="familyMessage" />
+                                    </h:inputText>
+                                    <h:message for="family" errorClass="invalid" id="familyMessage" />
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText  class="label" value="Data urodzenia"/> 
+                                    <p:calendar  pattern="dd-MM-yyyy" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{clientSettingsMB.client.birthDate}" >
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                        <p:ajax  event="keyup" update="birthDateMessage" />
+                                    </p:calendar>
+                                    <h:message for="birthDate" errorClass="invalid" id="birthDateMessage" />
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Pesel"/> 
+                                    <h:inputText id="pesel" class="inputWidth" value="#{clientSettingsMB.client.pesel}" >
+                                        <f:validateLength minimum="11" maximum="11" />
+                                        <f:convertNumber integerOnly="" />
+                                        <p:ajax event="keyup" update="peselMessage" />
+                                    </h:inputText>
+                                    <h:message for="pesel" errorClass="invalid" id="peselMessage" />
+                                </div>
+
+                                <div class="field"> <h:outputText class="label" value="Stan cywilny"/> 
+                                    <p:selectOneMenu style="width:214px" value="#{clientSettingsMB.idMartialStatus}">
+                                        <f:selectItems value="#{dictionaryMB.maritalStatus}" var="ms" itemLabel="#{ms.name}" itemValue="#{ms.idMaritalStatus}"   />
+                                    </p:selectOneMenu>    
+                                </div>
+
+                                <div class="field"> <h:outputText class="label" value="Wykształcenie"/> 
+                                    <p:selectOneMenu style="width:214px"  value="#{clientSettingsMB.idEducation}">
+                                        <f:selectItems value="#{dictionaryMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
+                                    </p:selectOneMenu>    
+                                </div>
                             </div>
+
+                            <div class="marginLR30">
+
+                                <h4>DANE O DOCHODACH</h4>
+
+                                <p:dataTable style="clear:both" id="table" value="#{clientSettingsMB.incomeTable}" var="data" emptyMessage="Nie dodano jeszcze żadnych dochodów" >
+
+                                    <p:column headerText="Rodzaj">  
+                                        <h:outputText  value="#{data.employmentType}" />
+                                    </p:column>  
+
+                                    <p:column headerText="Branża"> 
+                                        <h:outputText value="#{data.branch}" />
+                                    </p:column>  
+
+                                    <p:column headerText="Dochód">  
+                                        <h:outputText value="#{data.incomeNetto}" />
+                                    </p:column>  
+
+                                    <p:column headerText="">  
+                                        <p:commandLink value="Usuń"  action="#{clientSettingsMB.deleteIncome(data.idIncome,data.isIncome)}" update=":form:table">
+                                        </p:commandLink>
+                                    </p:column> 
+                                </p:dataTable>
+
+                                <p:commandLink styleClass="greyButton floatR" value="Dodaj" oncomplete="income.show()"  /> 
+
+                            </div>
+
+                            <div class="marginLR30" >
+
+                                <h4>DANE ADRESOWE</h4>
+                                
+                                
+                                <div class="field"> <h:outputText class="label" value="Województwo "/> 
+                                    <p:selectOneMenu id="region" style="width:214px"  value="#{clientSettingsMB.idMainRegion}">
+                                        <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
+                                        <f:validator disabled="#{!createClientMB.areRequired}" validatorId="com.efsf.sf.util.ComboBoxNoInputValidator" />
+
+                                        <p:ajax event="keyup" update="regionMessage" />
+                                    </p:selectOneMenu>    
+                                    <h:message for="region" errorClass="invalid" id="regionMessage" />
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Miasto"/> 
+                                    <h:inputText id="city" value="#{clientSettingsMB.mainAddress.city}" class="inputWidth" > 
+                                        <f:validateLength minimum="3" maximum="30" />
+                                        <p:ajax event="keyup" update="cityMessage" />
+                                    </h:inputText>
+                                    <h:message for="city" errorClass="invalid" id="cityMessage" />
+                                </div>
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Kod pocztowy"/> 
+                                    <h:inputText  id="zipCode" value="#{clientSettingsMB.mainAddress.zipCode}"  class="inputWidth" > 
+                                        <f:validateLength minimum="6" maximum="6" />
+                                        <p:ajax event="keyup" update="zipCodeMessage" />
+                                    </h:inputText>
+                                    <h:message for="zipCode" errorClass="invalid" id="zipCodeMessage" />
+                                </div>
+
+                                <div class="field">
+                                    <h:outputText class="label" value="Ulica"/> 
+                                    <h:inputText id="street" value="#{clientSettingsMB.mainAddress.street}" class="inputWidth" >
+                                        <f:validateLength minimum="3" maximum="30" />
+                                        <p:ajax event="keyup" update="streetMessage" />
+                                    </h:inputText>
+                                    <h:message for="street" errorClass="invalid" id="streetMessage" />
+                                </div>
+
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Numer domu"/> 
+                                    <h:inputText id="streetNumber" value="#{clientSettingsMB.mainAddress.houseNumber}" class="inputWidth" > 
+                                        <f:validateLength minimum="3" maximum="10" />
+                                        <p:ajax event="keyup" update="streetNumberMessage" />
+                                    </h:inputText>
+                                    <h:message for="streetNumber" errorClass="invalid" id="streetNumberMessage" /> 
+                                </div> 
+
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Telefon"/> 
+                                    <h:inputText id="phone" value="#{clientSettingsMB.mainAddress.phone}"  class="inputWidth" >
+                                        <f:validateLength minimum="7" maximum="20" />
+                                        <p:ajax event="keyup" update="phoneMessage" />
+                                    </h:inputText>
+                                    <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
+                                </div>
+
+                               <h:commandLink  class="floatR wideButton greyButton" value="Zapisz" action="#{clientSettingsMB.updateSettings()}" />
+                                
+                            </div>
+
+                            
                         </h:form>
-
-                        <h4>USTAW ZDJĘCIE</h4>
-
-                        <h:graphicImage class="photoChange" id="profil_logo_green_small" alt="could not be found."  value="/resources/images/profil_green.png" title="Profil Green Small" ></h:graphicImage>
-
-                        <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
-
-                        <h:inputText  class="label2 browseInput" style="width: 55%" value="przeglądaj..." />
-
-                        <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
-
 
                     </div>
 
                     <div class="rightWiderBox">
+                        
+                          <h:form> 
+                        
+                         <div class="marginLRT30">
+                             <h4>USTAW ZDJĘCIE</h4>
+                            <h:graphicImage class="photoChange" id="profil_logo_green_small" alt="could not be found."  value="/resources/images/profil_green.png" title="Profil Green Small" ></h:graphicImage>
+                            <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
+                            <h:inputText  class="label2 browseInput" style="width: 55%;"  value="przeglądaj..." />
+                            <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
+                         </div>
+                        
+                        <div class="marginLRT30">
+                            
                         <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
                         <div class="field"> <h:outputText class="label" value="Obecne hasło"/>  <h:inputSecret/> </div>
                         <div class="field"> <h:outputText class="label" value="Nowe hasło"/>  <h:inputSecret/> </div>
                         <div class="field"> <h:outputText class="label" value="Powtórz hasło"/>  <h:inputSecret/> </div>
                         <div style="min-height: 40px"> <h:link class="floatR greyButton wideButton" value="Zmień" outcome="/index"/> </div>
+                        
+                        </div>
+                        
+                        <div class="marginLRT30">      
+                              
                         <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
 
                         <div> <h:outputText class="redMessage marginL20" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
@@ -113,16 +272,252 @@
                         <div>
                             <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
                         </div>
+                        
+                      
 
                         <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
                         <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
 
-
+                          </div>
+                        
                         <div style="min-height: 360px;"> </div>
                         <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/>
+                        
+                      </h:form>
+                        
                     </div>
+                    
+                    
+                   
 
                 </div>
+
+
+
+
+
+
+
+                <p:dialog id="addBusiness"  style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="business" resizable="false" height="550" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                    <h:form>  
+                        <p:commandButton  styleClass="floatL  wideButton marginTB20"  action="#{clientSettingsMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
+
+                        </p:commandButton>  
+
+                        <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientSettingsMB.toBusinessActivity()}" value="Działalność" >
+
+                        </p:commandButton>             
+                        <h:panelGroup id="panel2">
+                            <div style="max-height: 400px; overflow-y: auto; clear: both;">
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Typ umowy"/> 
+                                    <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; float:right;" value="#{clientSettingsMB.incomeId}">
+                                        <f:selectItems value="#{dictionaryMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
+                                    </p:selectOneMenu>         
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Branża"/> 
+                                    <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; margin-left: 31px; float:right;" value="#{clientSettingsMB.branchId}">
+                                        <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                    </p:selectOneMenu>         
+                                </div>
+
+                                <div class="marginT10">  
+                                    <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
+                                    <p:calendar id="beginDate2" yearRange="1960:2030" maxdate="#{clientSettingsMB.currentDate}" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{clientSettingsMB.income.beginDate}"> 
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                        <p:ajax  event="keyup" update="beginDate2Message" />
+                                    </p:calendar>
+                                    <h:message for="beginDate2" errorClass="invalid" id="beginDate2Message" />
+                                </div> 
+
+                                <div class="marginT10"> 
+                                    <h:outputText  class="dialogLabel" value="Nr księgi przychodów i rozchodów"/>
+                                    <h:inputText id="ledger" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.revenueExpenceLedger}" style="width: 20%" > 
+                                        <f:validateLength minimum="3"/>
+                                        <p:ajax  event="keyup" update="ledgerMessage" />
+                                    </h:inputText>
+                                    <h:message for="ledger" errorClass="invalid" id="ledgerMessage" />
+
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Przychód w roku obecnym (brutto)"/>
+                                    <h:inputText id="currentIncomeBrutto"  class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearBrutto}" style="width: 20%" > 
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="currentIncomeBruttoMessage" />
+                                    </h:inputText>
+                                    <h:message for="currentIncomeBrutto" errorClass="invalid" id="currentIncomeBruttoMessage" />
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Przychód w roku obecnym (netto)"/>
+                                    <h:inputText id="currentIncomeNetto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearNetto}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (brutto)"/>
+                                    <h:inputText id="lastIncomeBrutto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearBrutto}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (netto)"/>
+                                    <h:inputText id="lastIncomeNetto" class="floatR marginT10 marginR5 " value="#{clientSettingsMB.business.incomeLastYearNetto}" style="width: 20%" /> 
+                                </div>
+
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Zaliczka na podatek dochodowy (6 miesięcy w przód)"/>
+                                    <h:inputText id="advance" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeTax6mthAdv}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Kwota zaległości ZUS"/>
+                                    <h:inputText id="ZUS" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueZus}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Kwota zaległości US"/>
+                                    <h:inputText id="US" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueUs}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Kwota zaległości KRD"/>
+                                    <h:inputText id="KRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueKrd}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Tytuł zaległości w KRD"/>
+                                    <h:inputText id="titleKRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.titleKrd}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Amortyzacja w roku bieżącym"/>
+                                    <h:inputText id="currentAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationCurrentYear}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Amortyzacja w roku ubiegłym"/>
+                                    <h:inputText id="lastAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationLastYear}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość stawki"/>
+                                    <h:inputText id="REvalue" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.rateRe}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku ubiegłym"/>
+                                    <h:inputText id="REincomeLast" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearRe}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku bieżącym"/>
+                                    <h:inputText id="REincomeCurrent" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearRe}" style="width: 20%" /> 
+                                </div> 
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (ostatni miesiąc)"/>
+                                    <h:inputText id="month1st" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue1mth}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (2 mies. wstecz)"/>
+                                    <h:inputText id="month2nd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue2mth}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (3 mies. wstecz)"/>
+                                    <h:inputText id="month3rd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue3mth}" style="width: 20%" /> 
+                                </div>
+
+                                <div class="marginT10"> 
+                                    <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość karty podatkowej"/>
+                                    <h:inputText id="card" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.constantAmountCard}" style="width: 20%" /> 
+                                </div>
+
+
+                            </div>
+                            
+                        </h:panelGroup>
+
+                        <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
+                        <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientSettingsMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
+                    
+                    </h:form>
+                    
+                </p:dialog>
+
+
+
+
+
+
+
+                <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="false" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
+                   
+                    <h:form> 
+                        
+                        <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientSettingsMB.toIncome()}" value="Umowa"  >
+
+                        </p:commandButton>
+
+                        <p:commandButton styleClass="floatR  wideButton marginTB20" action="#{clientSettingsMB.toBusinessActivity()}" value="Działalność" oncomplete="income.hide(); business.show()" >
+
+                        </p:commandButton>
+
+                        <h:panelGroup id="panel1">
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Typ umowy"/> 
+                                <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{clientSettingsMB.incomeId}">
+                                    <f:selectItems value="#{dictionaryMB.income}" var="empl" itemLabel="#{empl.name}" itemValue="#{empl.idEmploymentType}"   />
+                                </p:selectOneMenu>         
+                            </div>
+
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Branża"/> 
+                                <p:selectOneMenu styleClass="marginT10" style="width: 375px; margin-left: 31px; float:right;" value="#{clientSettingsMB.branchId}">
+                                    <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                </p:selectOneMenu>         
+                            </div>
+
+                            <div class="marginT10">  
+                                <h:outputText class="dialogLabel" value="Pracodawca"/> 
+                                <h:inputText id="employer" class="floatR marginT10" value="#{clientSettingsMB.income.employer}" style="width: 70%" >
+                                    <f:validateLength minimum="3" maximum="40" />
+                                    <p:ajax event="keyup" update="employerMessage" />
+                                </h:inputText>
+                                <h:message for="employer" errorClass="invalid" id="employerMessage" />
+                            </div>
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Dochód netto"/>
+                                <h:inputText id="incomeNetto" class="floatR marginT10"  style="width: 39%" value="#{clientSettingsMB.income.monthlyNetto}" >
+                                    <f:convertNumber maxFractionDigits="2" />
+                                    <p:ajax  event="keyup" update="incomeNettoMessage" />
+                                </h:inputText>
+                                <h:message for="incomeNetto" errorClass="invalid" id="incomeNettoMessage" />
+                            </div>
+
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Data rozpoczęcia"/> 
+                                <p:calendar id="beginDate" yearRange="1960:2030" maxdate="#{clientSettingsMB.currentDate}" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{clientSettingsMB.income.beginDate}"> 
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                    <p:ajax  event="keyup" update="beginDateMessage" />
+                                </p:calendar>
+                                <h:message for="beginDate" errorClass="invalid" id="beginDateMessage" />
+                            </div> 
+
+                        </h:panelGroup>
+                        <div>
+                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
+                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientSettingsMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                        </div>
+                        
+                    </h:form>
+                    
+                </p:dialog> 
+
             </ui:define>
         </ui:composition>
     </body>
