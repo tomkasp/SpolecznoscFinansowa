@@ -105,17 +105,19 @@
 
                 </h:form>
 
-                <div class="marginT50">
+                <div class="marginT50"> 
+                    <h:form>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
 
-                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.checkRequirementsForNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
+                        <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
 
-                    <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
-                        <div class="fontGrey"> Do utworzenia nowego wniosku potrzebne są następujące informacje: <br /><br />
-                              Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
-                        </div>
-                        <h:commandButton class="marginTB20 floatL greyButton wideButton"  type="button" onclick="fillData.hide();" value="Nie" />
-                        <h:link class="marginTB20 floatR greyButton wideButton linkWidth" value="Tak" outcome="clientSettings?faces-redirect=true" />
-                    </p:dialog> 
+                            <div class="fontGrey"> Do utworzenia nowego wniosku potrzebne są następujące informacje: <br /><br />
+                                  Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
+                            </div>
+                            <h:commandButton class="marginTB20 floatL greyButton wideButton"  type="button" onclick="fillData.hide();" value="Nie" />
+                            <h:link class="marginTB20 floatR greyButton wideButton linkWidth" value="Tak" outcome="clientSettings?faces-redirect=true" />
+                        </p:dialog> 
+                    </h:form>
                     
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
