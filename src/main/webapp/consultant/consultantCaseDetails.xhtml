@@ -184,6 +184,48 @@
                                          Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
                                     </div>  
                                     <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
+                                    
+                                    <div class="marginT50">
+                                        <h4> OCENA SPRAWY </h4>
+                                    </div>
+                                    
+                                        <div class="field">
+                                            <h:outputText class="label" value="Opinia klienta"/>
+                                            <h:inputTextarea class="inputWidth fontBlack" style="resize: none; width: 270px; height: 60px" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.comment}" />
+                                        </div>
+                                        <div class="field">
+                                            <h:outputText class="label" value="Opinię dodano"/>
+                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.commentDate}" />
+                                        </div>
+                                    
+                                        <div class="marginT50"></div>
+                                    
+                                        <h:outputText class="label" value="Kontakt"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.contact}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Kultura"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.culture}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Kompetencje"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.competence}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Czas"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.punctuality}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Rzetelność"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.reliability}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Szacunek"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.respect}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Trud"/> 
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.difficulty}" disabled="true"/>
+
+                                        <h:outputText class="label" value="Zaufanie"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.trust}" disabled="true"/>
+                                        
+                                        
+                                        
                                 </h:panelGroup>
                                 </h:form>
                             </div>
