@@ -126,6 +126,18 @@ public class MarketMB implements Serializable
             businessIds.add(ba.getShortcut());  
     }
     
+    public void reload()
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isValidationFailed())
+        {
+            reloadCases(); 
+            reloadOwnedTable();
+            makeObservedModels();
+            makeAppliedModels();
+        }
+    }
+    
     public void makeObservedModels()
     {
         Set<ClientCase> cs = loginMB.getConsultant().getClientCases_2();

@@ -147,11 +147,14 @@ public class ClientCaseMB implements Serializable {
     
     public void loadCaseClientsDetails()
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (!facesContext.isPostback() && !facesContext.isValidationFailed())
+        if (!facesContext.isValidationFailed())
         {
              selectedClientCase = new ClientCaseDAO().getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+             System.out.println("HAHA");
         }
     }
+    
+    
     
     public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
     {

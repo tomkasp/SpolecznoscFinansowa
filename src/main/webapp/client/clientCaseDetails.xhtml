@@ -25,7 +25,7 @@
 
                 <div class="topbarMenuGreen">
                     <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
                         <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>

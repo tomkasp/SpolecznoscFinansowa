@@ -11,6 +11,8 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - ekran główny </ui:define> 
             <ui:define name="top"> 
+                <f:event type="preRenderView" listener="#{marketMB.reload()}" />
+
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
@@ -493,7 +495,7 @@
                                         
                                             <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                                                 <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
-                                                    Twoje zgłoszenie do sprawy #{marketMB.selectedCase.idClientCase} zostało zatwierdzone.
+                                                    Twoje zgłoszenie do sprawy #{clientCaseMB.selectedClientCase.idClientCase} zostało zatwierdzone.
                                                 </h:panelGroup>
 
                                                 <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
@@ -509,7 +511,7 @@
 
                                              <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                                                 <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
-                                                    Od teraz śledzisz sprawę numer:  #{marketMB.selectedCase.idClientCase}.
+                                                    Od teraz śledzisz sprawę numer:  #{marketMB.selectedLastCase.idClientCase}.
                                                 </h:panelGroup>
 
                                                 <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
