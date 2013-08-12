@@ -54,12 +54,11 @@ public class NewMain {
 //        System.out.println(list.size());
 //        
 //        System.out.println(list.size());    
-//
         
         ClientDAO cdao=new ClientDAO();
         Client client=cdao.readClientForSettings(50);
         Iterator<Income> i=client.getIncomes().iterator();
-        System.out.println( "PRINTLN: "+i.next().getEmployer() );
+        System.out.println( "PRINTLN: "+i.next().getBranch().getName() );
         
     }
 }
