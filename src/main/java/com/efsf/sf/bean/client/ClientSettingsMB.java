@@ -3,7 +3,11 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
+import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.EducationDAO;
+import com.efsf.sf.sql.dao.MaritalStatusDAO;
+import com.efsf.sf.sql.dao.RegionDAO;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -63,8 +67,8 @@ public class ClientSettingsMB implements Serializable {
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
     
-    private HashSet<Income> incomeSet = new HashSet();
-    private HashSet<IncomeBusinessActivity> businessSet = new HashSet();
+    private HashSet<Income> incomeSet = new HashSet<>();
+    private HashSet<IncomeBusinessActivity> businessSet = new HashSet<>();
     
     private boolean tableEmpty = true;
     
@@ -104,6 +108,27 @@ public class ClientSettingsMB implements Serializable {
     }
     
     public String updateSettings() {
+        
+        MaritalStatusDAO msdao=new MaritalStatusDAO();
+        MaritalStatus newMaritalStatus=msdao.getMaritalStatus(idMartialStatus);
+        
+        EducationDAO edao=new EducationDAO();
+        Education newEducation=edao.getEducation(idEducation);
+        
+        client.setMaritalStatus(newMaritalStatus);
+        client.setEducation(newEducation);
+        
+        clientDAO.update(client);
+        
+        
+        
+        RegionDAO rdao=new RegionDAO();
+        Region mainRegion=rdao.getRegion(idMainRegion);
+        mainAddress.setRegion(mainRegion);
+        AddressDAO adao=new AddressDAO();
+        adao.update(mainAddress);
+        
+        
         
         return "/client/clientMainPage?faces-redirect=true";
     }
