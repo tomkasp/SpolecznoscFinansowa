@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -67,8 +68,8 @@ public class ClientSettingsMB implements Serializable {
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
     
-    private HashSet<Income> incomeSet = new HashSet<>();
-    private HashSet<IncomeBusinessActivity> businessSet = new HashSet<>();
+    private Set<Income> incomeSet = new HashSet<>();
+    private Set<IncomeBusinessActivity> businessSet = new HashSet<>();
     
     private boolean tableEmpty = true;
     
@@ -78,6 +79,7 @@ public class ClientSettingsMB implements Serializable {
  
     @PostConstruct
     private void loadClient() {
+        
         client=clientDAO.readClientForSettings(idClient);
         
         idMartialStatus=client.getMaritalStatus().getIdMaritalStatus();
@@ -95,15 +97,19 @@ public class ClientSettingsMB implements Serializable {
         IncomeData incomeData=new IncomeData(i.getEmploymentType().getName() , i.getBranch().getName() , i.getMonthlyNetto().longValue() );
         incomeData.setIdIncome(i.getIdIncome());
         incomeTable.add(incomeData);
+        //incomeSet.add(income);
         }
+        incomeSet=(HashSet<Income>) client.getIncomes();
         
         Iterator<IncomeBusinessActivity> it3=client.getIncomeBusinessActivities().iterator();
         while(it3.hasNext()){
-        IncomeBusinessActivity i=it3.next();
-        IncomeData incomeData=new IncomeData(i.getEmploymentType().getName() , i.getBranch().getName() , i.getIncomeLastYearNetto().longValue() );
-        incomeData.setIdIncomeBuisnessActivity(i.getIdIncomeBusinessActivity());
+        IncomeBusinessActivity iba=it3.next();
+        IncomeData incomeData=new IncomeData(iba.getEmploymentType().getName() , iba.getBranch().getName() , iba.getIncomeLastYearNetto().longValue() );
+        incomeData.setIdIncomeBuisnessActivity(iba.getIdIncomeBusinessActivity());
         incomeTable.add(incomeData);
+        //businessSet.add(iba);
         }
+        businessSet=(HashSet<IncomeBusinessActivity>) client.getIncomeBusinessActivities();
         
     }
     
@@ -118,8 +124,10 @@ public class ClientSettingsMB implements Serializable {
         client.setMaritalStatus(newMaritalStatus);
         client.setEducation(newEducation);
         
-        clientDAO.update(client);
+        client.setIncomes(incomeSet);
+        client.setIncomeBusinessActivities(businessSet);
         
+        clientDAO.update(client);
         
         
         RegionDAO rdao=new RegionDAO();
@@ -362,21 +370,23 @@ public class ClientSettingsMB implements Serializable {
         this.dictionaryMB = dictionaryMB;
     }
 
-    public HashSet<Income> getIncomeSet() {
+    public Set<Income> getIncomeSet() {
         return incomeSet;
     }
 
-    public void setIncomeSet(HashSet<Income> incomeSet) {
+    public void setIncomeSet(Set<Income> incomeSet) {
         this.incomeSet = incomeSet;
     }
 
-    public HashSet<IncomeBusinessActivity> getBusinessSet() {
+    public Set<IncomeBusinessActivity> getBusinessSet() {
         return businessSet;
     }
 
-    public void setBusinessSet(HashSet<IncomeBusinessActivity> businessSet) {
+    public void setBusinessSet(Set<IncomeBusinessActivity> businessSet) {
         this.businessSet = businessSet;
     }
+
+    
 
     public boolean isTableEmpty() {
         return tableEmpty;
