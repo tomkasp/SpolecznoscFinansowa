@@ -141,7 +141,7 @@ public class ClientCaseMB implements Serializable {
             clientCase = new ClientCase();
             
         }
-        return "/client/clientMainPage.xhtml";
+        return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
     
     // VIEW CASE METHODS 
