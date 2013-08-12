@@ -77,14 +77,11 @@ public class ConsultantSettingsMB implements Serializable {
             idProductTypes.add( pt.getIdProductType() );          
         }
         
-        
-        
         idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
         
         idRegion=consultant.getRegion().getIdRegion();
         
         InvoiceDataDAO iddao=new InvoiceDataDAO();
-        
         
         Iterator<Address> it3=consultant.getAddresses().iterator();
         
@@ -94,14 +91,12 @@ public class ConsultantSettingsMB implements Serializable {
             
             if(a.getType()==1)
             {   
-                
                 mainAddress=a;
                 idMainRegion=mainAddress.getRegion().getIdRegion();
                 //idMainRegion=1;
             }
             if(a.getType()==2)
-            {  
-                  
+            {      
                 invoiceAddress=a;
                 idInvoiceRegion=invoiceAddress.getRegion().getIdRegion();
                 //idInvoiceRegion=1;
@@ -134,7 +129,6 @@ public class ConsultantSettingsMB implements Serializable {
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
         //HERE:
-        
         
         
         //ADD BANKS
