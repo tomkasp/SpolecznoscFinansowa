@@ -185,8 +185,11 @@ public class ClientCaseMB implements Serializable {
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed())
         {
-             selectedClientCase = new ClientCaseDAO().getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+             ClientCaseDAO cdao = new ClientCaseDAO();
+             selectedClientCase = cdao.getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
              caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
+             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);
+             cdao.updateClientCase(selectedClientCase);
              System.out.println("HAHA");
         }
     }
