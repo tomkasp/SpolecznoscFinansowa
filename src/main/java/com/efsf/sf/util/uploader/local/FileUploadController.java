@@ -12,10 +12,11 @@ public class FileUploadController {
     public String upload(UploadedFile file, Integer folderId, String fileName) {
         String local = null;
 
-        String destination = "../webapps/ROOT/" + folderId.toString() + "/";
+        String destination = "../webapps/ROOT/TEMP_UPLOAD/" + folderId.toString() + "/";
 
-        if (file != null) {
-            System.out.println("Filename: " + file.getFileName());
+        if (file != null) 
+        {
+            System.out.println("Filename: " + file.getFileName() );
             String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));//wyłuskanie rozszerzenia pliku
             fileName = fileName + fileFormat;
             try {
@@ -51,6 +52,7 @@ public class FileUploadController {
     }
 
     private void copyFile(String destination, String fileName, InputStream in, Integer folderId) {
+        
         try {
             boolean folder = new File(destination).mkdirs();        
             try (OutputStream out = new FileOutputStream(new File(destination + fileName))) {
