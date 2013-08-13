@@ -32,7 +32,10 @@
             <ui:define name="content">
 
 
-                    <div class="topTitle">Stanisław Nowy</div>
+                <div class="topTitle">
+                    <h:outputText rendered="#{loginMB.type==2}" value="#{loginMB.consultant.name} #{loginMB.consultant.lastName}"/>
+                    <h:outputText rendered="#{loginMB.type==3}" value="#{loginMB.client.name} #{loginMB.client.lastName}"/>
+                </div>
 
                     <div class="contentBox" style="position: relative;">
                         
@@ -42,11 +45,12 @@
                         </div>
                         
                     </div>
-                    
+                    <h:form>
                     <div class="newsletter" style="margin: 25px 0;"> 
                             <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton buttonspace" value="OK"/> 
                      </div>
-                    
+                    </h:form>
+                        
                     <div class="contentBox">
                         
                         <h:form>                       
@@ -54,8 +58,7 @@
                         <div class="messagesBox"> 
 
                             <div class="messagesBoxContentLeft">
-
-                                <h4><h:outputText value="#{o.userByFkFromUser.email}"/></h4>
+                                    <h:outputText class="msgUserHeader headerColor#{o.userByFkFromUser.type}" value="#{o.userByFkFromUser.email}"/>  
                                 <p>
                                     <h:outputText value="#{o.message}"/>
                                 </p>
