@@ -5,7 +5,9 @@ import com.efsf.sf.sql.dao.MessageDAO;
 import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.entity.User;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,7 +31,7 @@ public class MessagesMB implements Serializable {
         this.userTo_id=userTo_id;
         MessageDAO dao = new MessageDAO();
         setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userTo_id));
-        markAsReaded(messages);
+        markListAsRead(messages);
         
         return "/common/messages";
     }
@@ -51,7 +53,7 @@ public class MessagesMB implements Serializable {
         showMessagesPage(userTo_id); 
     }
     
-    public void markAsReaded(List<Message> list){
+    public void markListAsRead(List<Message> list){
         GenericDao<Message> dao = new GenericDao(Message.class);
         for(Message m : list){
             if(m.getUserByFkToUser().getIdUser().equals(loginMB.getUser().getIdUser()))
@@ -61,6 +63,37 @@ public class MessagesMB implements Serializable {
             }
         }
     }
+    
+    public void markOneAsRead(Message m)
+    {
+        GenericDao<Message> dao = new GenericDao(Message.class);
+        m.setIsViewed(1);
+        dao.update(m);
+    }
+    
+    public ArrayList<Message> chooseUnreadConversationsAndSystemMessages(ArrayList<Message> messagesList)
+    {
+        HashSet<User> fromUsers = new HashSet();
+        ArrayList<Message> unreadConversations = new ArrayList();
+        for (Message m : messagesList)
+        {
+            if ( m.getIsSystem().equals(0) && !fromUsers.contains(m.getUserByFkFromUser()))
+            {
+                fromUsers.add(m.getUserByFkFromUser());
+                unreadConversations.add(m);         
+            }
+            else if (m.getIsSystem().equals(1))
+            {
+                unreadConversations.add(m);
+            }
+        }
+        
+        return unreadConversations;
+    }
+    
+    
+    
+    
 
 
     public void setLoginMB(LoginMB loginMB) {

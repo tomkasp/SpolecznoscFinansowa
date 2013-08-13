@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core" >
+
+    <body>
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Doradca - Wiadomości </ui:define> 
+            <ui:define name="top"> 
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <h:form>
+                    <div class="topbarMenuBlue">
+                        <h:panelGroup>
+                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/consultant/consultantSettings"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div id="profileBar" class="profilBar">
+                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+
+                    <div id="spaceFiller"> 
+                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
+                    </div>
+
+                    <div>     
+                        <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
+                        <h:outputText class="profileText" value="nr. doradcy:" />
+                        <h5> #{loginMB.consultant.user.login} </h5>
+                        <h:outputText class="profileText" value="Twój ranking:" /> 
+                        <h5> #{marketMB.clientCaseList.size()}/100 </h5>
+                    </div>
+                </div>
+                <div style="min-height: 50px">
+                <h3>Skrzynka odbiorcza</h3>                  
+                </div>
+
+                <h:panelGroup rendered="#{!(empty marketMB.premiumList)}" >
+                    <h:form> 
+                        <ui:repeat value="#{marketMB.premiumList}" var="o">
+                          <div style="min-height: 90px; border-bottom: red solid 5px">
+                            <h:graphicImage  class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Użytkownik #{o.client.idClient} wybrał Cię do prowadzenia sprawy kredytowej nr #{o.idClientCase}. Czy akceptujesz zgłoszenie? "/>
+                            <h:commandButton  class="floatR redX wideButton marginT10" value="Nie akceptuję" action="#{marketMB.revokeApplication(o)}" /> 
+                            <h:commandButton  class="floatR greyButton wideButton marginT10" value="Akceptuję" action="#{marketMB.acceptApplication(o)}" /> 
+                            <h:commandButton  class="floatR greyButton wideButton marginT10" value="Szczegóły" action="#{marketMB.toClientCaseDetails(o)}" /> 
+                          </div>
+                        </ui:repeat>
+                    </h:form>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{!(empty marketMB.unreadMessagesList)}" >
+                    <h:form> 
+                        <ui:repeat value="#{marketMB.unreadMessagesList}" var="o">
+                          
+                            <h:panelGroup rendered="#{o.isSystem == 1}" >
+                                <div style="min-height: 90px; border-bottom: #000000 solid 5px">
+                                  <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_black.png" title="RedEnvelope" ></h:graphicImage>
+                                  <h:outputText class="fontBlack floatL marginLRT30" value="#{o.sentDate}" >
+                                      <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                  </h:outputText>
+                                  <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
+                                  <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 57px;" value="OK" action="#{marketMB.acceptSystemMessage(o)}" />         
+                                </div>
+                            </h:panelGroup>   
+                            <h:panelGroup rendered="#{o.isSystem == 0}" >  
+                               <div style="min-height: 90px; border-bottom: #0793F0 solid 5px">
+                                  <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_blue.png" title="RedEnvelope" ></h:graphicImage>
+                                  <h:outputText class="fontBlue floatL marginLRT30" value="#{o.sentDate}" >
+                                      <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                  </h:outputText>
+                                  <h:outputText class="fontBlue floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
+                                  <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 57px;" value="Czytaj" action="#{marketMB.acceptSystemMessage(o)}" />         
+                                </div>
+                            </h:panelGroup>
+                        </ui:repeat>
+                    </h:form>
+                </h:panelGroup>
+
+
+
+
+
+                <div style="min-height: 50px"></div>
+            </ui:define>           
+        </ui:composition>
+    </body>
+</html>

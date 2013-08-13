@@ -6,17 +6,20 @@ package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.MessageDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
@@ -51,10 +54,16 @@ public class MarketMB implements Serializable
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
     
+    @ManagedProperty(value="#{messagesMB}")
+    private MessagesMB messagesMB;
+    
     
     private List<ClientCase> clientCaseList = new ArrayList();
     private List<ClientCase> ownedList = new ArrayList();
     private List<ClientCase> finishedList = new ArrayList();
+    
+    private List<ClientCase> premiumList = new ArrayList();
+    private ArrayList<Message> unreadMessagesList = new ArrayList();
     
     private Converters converters =  new Converters();
       
@@ -87,7 +96,6 @@ public class MarketMB implements Serializable
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
     
-
     //MARKET VIEW FIELDS!
     
     private int phaseMin = 0;
@@ -120,6 +128,8 @@ public class MarketMB implements Serializable
     @PostConstruct
     public void fillModels()
     {
+        loadPremiumAppliences();
+        loadUnreadMessages();
         reloadOwnedTable();
         reloadFinishedTable();
         makeObservedModels();
@@ -157,6 +167,16 @@ public class MarketMB implements Serializable
             observedModelsEmploymentType.add(showAllClientsEmploymentTypes(client));
             observedModelsBranch.add(showAllClientsBranches(client));  
         }
+    }
+    
+    public void loadPremiumAppliences()
+    {
+        premiumList = caseDao.premiumCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
+    }
+    
+    public void loadUnreadMessages()
+    {
+        unreadMessagesList =(ArrayList<Message>) new MessageDAO().getUnreadMessages(loginMB.getIdUser());
     }
     
     public void reloadOwnedTable()
@@ -282,6 +302,37 @@ public class MarketMB implements Serializable
         return "/consultant/consultantMarket?faces-redirect=true";
     }
     
+    public String toClientCaseDetails(ClientCase cc)
+    {
+        clientCaseMB.setSelectedClientCase(cc);
+        return "/consultant/consultantCaseDetails?faces-redirect=true";
+    }
+    
+    public void acceptPremiumApplication(ClientCase cc)
+    {
+       clientCaseMB.consultantAcceptPremium(cc);
+       premiumList.remove(cc);
+    }
+    
+    public void revokePremiumApplication(ClientCase cc)
+    {
+       premiumList.remove(cc);
+       clientCaseMB.consultantRevokePremium(cc);
+    }
+    
+    //move to message bean
+    public void acceptSystemMessage(Message m)
+    {
+        messagesMB.markOneAsRead(m);
+        unreadMessagesList.remove(m);
+    }
+
+    public String toViewMessages()
+    {
+        unreadMessagesList = messagesMB.chooseUnreadConversationsAndSystemMessages(unreadMessagesList);
+        return "/consultant/consultantViewMessages?faces-redirect=true";
+    }
+    
     public void pollData()
     {
         selectedLastCase = null;
@@ -308,7 +359,7 @@ public class MarketMB implements Serializable
         else
             return cons.size();
     }
-    
+      
     public void traceCase(ClientCase cs)
     {
         Consultant consultant = loginMB.getConsultant();
@@ -792,5 +843,31 @@ public class MarketMB implements Serializable
     public void setFinishedList(List<ClientCase> finishedList) {
         this.finishedList = finishedList;
     }
+
+    public List<ClientCase> getPremiumList() {
+        return premiumList;
+    }
+
+    public void setPremiumList(List<ClientCase> premiumList) {
+        this.premiumList = premiumList;
+    }
+
+    public ArrayList<Message> getUnreadMessagesList() {
+        return unreadMessagesList;
+    }
+
+    public void setUnreadMessagesList(ArrayList<Message> unreadMessagesList) {
+        this.unreadMessagesList = unreadMessagesList;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
+    }
+
+
 
 }
