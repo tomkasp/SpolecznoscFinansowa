@@ -5,7 +5,8 @@ import com.efsf.sf.util.uploader.local.FileUploadController;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -13,7 +14,7 @@ import org.primefaces.model.UploadedFile;
  */
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class ClientFileUploadMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,11 +22,33 @@ public class ClientFileUploadMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
-    private UploadedFile[] uploadedFiles = new UploadedFile[8];
+    private UploadedFile[] uploadedFiles = new DefaultUploadedFile[8];
     
     public ClientFileUploadMB() {
+        declare();
     }
 
+    public String save() {
+        
+            String[] lokalizacje = new String[8];
+            FileUploadController fuc = new FileUploadController();
+            
+            System.out.println();
+            System.out.println("UPLOADED FILE: "+ uploadedFiles[0] );
+            System.out.println(loginMB.getIdUser());
+            System.out.println();
+            
+            lokalizacje[0] = fuc.upload(uploadedFiles[0] , loginMB.getIdUser() , "idCard");    
+            
+        return "/client/clientMainPage?faces-redirect=true";
+    }
+    
+     private void declare() {
+        for(int i=0;i<uploadedFiles.length;i++){ 
+        uploadedFiles[i]=new DefaultUploadedFile();
+        }
+    }
+     
     public UploadedFile[] getUploadedFiles() {
         return uploadedFiles;
     }
@@ -34,15 +57,20 @@ public class ClientFileUploadMB implements Serializable {
         this.uploadedFiles = uploadedFiles;
     }  
     
-    public String save(){
-        
-        //ZALACZNIKI:
-            String[] lokalizacje = new String[8];
-            FileUploadController fuc = new FileUploadController();
-            
-               lokalizacje[0] = fuc.upload(uploadedFiles[0], loginMB.getIdUser() , "dowodTozsamosci");        
-            
-        return "";
+    public LoginMB getLoginMB() {
+        return loginMB;
     }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    
+    
+    
     
 }
