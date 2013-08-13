@@ -60,5 +60,18 @@
         <filter-name>LoginAdminFilter</filter-name>
         <url-pattern>/faces/admin/*</url-pattern>
     </filter-mapping>
+ 
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>512000</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
     
-    </web-app>
+</web-app>
