@@ -37,21 +37,7 @@
 
 
 
-                <div id="profileBar" class="profilBar">
-                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
-                    <div id="spaceFiller"> 
-                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
-                    </div>
-
-                    <div>     
-                        <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
-                        <h:outputText class="profileText" value="nr. doradcy:" />
-                        <h5> #{loginMB.consultant.user.login} </h5>
-                        <h:outputText class="profileText" value="Twój ranking:" /> 
-                        <h5> #{marketMB.clientCaseList.size()}/100 </h5>
-                    </div>
-                </div>
 
                 <div style="min-height: 63px;">
                     <h:graphicImage id="red_envelope" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
@@ -486,6 +472,7 @@
 
                                             </p:dataTable>
                                             <p:commandLink styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
+                                            <p:commandLink styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
                                         </div>
                                         
                                         <!-- DIALOGS -->
