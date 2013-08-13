@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Doradca - komentarze </ui:define> 
+            <ui:define name="top"> 
+                <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+                
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                
+
+                <div class="leftTable">
+
+
+                    <h3>Ranking najlepszych doradców</h3>
+                    <h:form> 
+                        <p:dataTable value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak doradców" selectionMode="single">
+                         
+                        <p:column headerText="Pozycja">  
+                            <h:outputText  value="#{rowNumber+1}"/>
+                        </p:column>  
+
+                        <p:column headerText="Doradca"> 
+                            <h:outputText  value="#{row.consultant.name} #{row.consultant.lastName}"/>
+                        </p:column>  
+
+                        <p:column headerText="Śr. ocena">  
+                            <h:outputText  value="#{row.average}">
+                                <f:convertNumber locale="en" pattern="#0.00" />
+                            </h:outputText>
+                        </p:column> 
+
+                    </p:dataTable>
+                    </h:form> 
+                </div>
+
+                <div style="clear:both;">
+                    
+                </div>
+            </ui:define>           
+        </ui:composition>
+    </body>
+</html>
