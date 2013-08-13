@@ -27,6 +27,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -56,7 +57,7 @@ public class CreateClientMB implements Serializable
     
     User user; 
     
-    
+    private int counter = 0;
     
     //General information
     
@@ -75,8 +76,7 @@ public class CreateClientMB implements Serializable
     private String sexString;
     private String pesel;
     private int birthPlace;
-    
-    
+
     private Date currentDate = new DateTime().toDate();
     private Date maxBirthDate = new DateTime().minusYears(18).toDate();
     
@@ -206,57 +206,51 @@ public class CreateClientMB implements Serializable
         incomeId = 0;
     }
     
-    public void addIncome()
-    {
-                EmploymentType et = null; 
-                for (EmploymentType i : dictionaryMB.getIncome())
-                {
-                    if (i.getIdEmploymentType() == incomeId)
-                    {
-                        et = i;
-                        break;
-                    }
+    public void addIncome() {
+        EmploymentType et = null;
+        for (EmploymentType i : dictionaryMB.getIncome()) {
+            if (i.getIdEmploymentType() == incomeId) {
+                et = i;
+                break;
+            }
+        }
+
+        Branch b = null;
+
+        for (Branch i : dictionaryMB.getBranch()) {
+            if (i.getIdBranch() == branchId) {
+                b = i;
+                break;
+            }
+        }
+        if (isIncome) {
+            income.setBranch(b);
+            income.setEmploymentType(et);
+            income.setClient(loginMB.getClient());
+            income.setIdIncome(counter);
+            tableEmpty = false;
+            incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue(), counter, true));
+            incomeSet.add(income);
+            income = new Income();
+        } else {
+
+            for (EmploymentType i : dictionaryMB.getBusinessActivity()) {
+                if (i.getIdEmploymentType() == incomeId) {
+                    et = i;
+                    break;
                 }
-                
-                Branch b = null;
- 
-                for (Branch i : dictionaryMB.getBranch())
-                {
-                    if (i.getIdBranch() == branchId)
-                    {
-                        b = i;
-                        break;
-                    }
-                }
-                if (isIncome)
-                {
-                    income.setBranch(b);
-                    income.setEmploymentType(et);
-                    income.setClient(loginMB.getClient());
-                    tableEmpty = false;
-                    incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));   
-                    incomeSet.add(income);
-                    income = new Income();
-                }
-                else
-                {
-                    
-                    for (EmploymentType i : dictionaryMB.getBusinessActivity())
-                    {
-                          if (i.getIdEmploymentType() == incomeId)
-                          {
-                                 et = i;
-                                 break;
-                          }
-                    }
-                    business.setBranch(b);
-                    business.setEmploymentType(et);
-                    business.setClient(loginMB.getClient());
-                    tableEmpty = false;
-                    incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));         
-                    businessSet.add(business);
-                    business = new IncomeBusinessActivity();
-                }
+            }
+            business.setBranch(b);
+            business.setEmploymentType(et);
+            business.setClient(loginMB.getClient());
+            business.setIdIncomeBusinessActivity(counter);
+            tableEmpty = false;
+            incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue(), counter, false));
+            businessSet.add(business);
+            business = new IncomeBusinessActivity();
+        }
+        isIncome = true;
+        counter++;
     }
     
     public void required()
@@ -333,6 +327,16 @@ public class CreateClientMB implements Serializable
         client.setBirthDate(birthDate);
         client.setPesel(pesel);
           
+        for (Income i : incomeSet)
+        {
+            i.setIdIncome(null);
+        }
+        
+        for (IncomeBusinessActivity i : businessSet)
+        {
+            i.setIdIncomeBusinessActivity(null);
+        }
+        
         client.setIncomes(incomeSet);
         client.setIncomeBusinessActivities(businessSet);
         
@@ -344,6 +348,41 @@ public class CreateClientMB implements Serializable
                 return "/client/clientMainPage?faces-redirect=true";
     }
 
+    //NOT MINE METHOD
+    public void deleteIncome(int idIncome, boolean isIncome) {
+
+        Iterator<IncomeData> it = incomeTable.iterator();
+        while (it.hasNext()) {
+            IncomeData incomeData = it.next();
+            if (incomeData.isIsIncome() == isIncome) {
+
+                if (incomeData.getIdIncome() == idIncome) {
+                    it.remove();
+                }
+                if (isIncome == true) {
+                    Iterator<Income> incomeIterator = incomeSet.iterator();
+                    while (incomeIterator.hasNext()) {
+
+                        Income i = incomeIterator.next();
+                        if (i.getIdIncome() == idIncome) {
+                            incomeIterator.remove();
+                        }
+                    }
+                } else {
+                    Iterator<IncomeBusinessActivity> businessIterator = businessSet.iterator();
+                    while (businessIterator.hasNext()) {
+                        IncomeBusinessActivity iba = businessIterator.next();
+                        if (iba.getIdIncomeBusinessActivity() == idIncome) {
+                            businessIterator.remove();
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+    }
  
     
     public void toIncome()

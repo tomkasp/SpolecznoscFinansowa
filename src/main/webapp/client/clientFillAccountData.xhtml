@@ -141,8 +141,9 @@
                                         <h:outputText value="#{data.incomeNetto}" />
                                     </p:column>  
 
-                                    <p:column headerText=" ">  
-                                        <p:commandLink value="Usuń" />
+                                    <p:column headerText="">  
+                                        <p:commandLink value="Usuń"  action="#{createClientMB.deleteIncome(data.idIncome,data.isIncome)}" update=":generalForm:table">
+                                        </p:commandLink>
                                     </p:column> 
                                 </p:dataTable>
 
