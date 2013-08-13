@@ -57,7 +57,6 @@ public class ClientMainPageMB implements Serializable {
     private ClientCase finishedSelectedCase;
     
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList<>();
-    
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
@@ -76,6 +75,9 @@ public class ClientMainPageMB implements Serializable {
         reloadCases5();
         reloadCases6();
         checkRequirementsForNewApplication();
+        
+        modelsEmploymentType.add( showAllClientsEmploymentTypes( loginMB.getClient() ) );
+        modelsBranch.add( showAllClientsBranches( loginMB.getClient() ) );
     }
    
     public void reloadCases()
@@ -84,11 +86,6 @@ public class ClientMainPageMB implements Serializable {
         modelsBranch = new ArrayList<>();
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
         
-        if(!clientCaseList.isEmpty())
-        {
-            modelsEmploymentType.add( showAllClientsEmploymentTypes( clientCaseList.get(0).getClient() ) );
-            modelsBranch.add( showAllClientsBranches( clientCaseList.get(0).getClient() ) );
-        }
         System.out.println("Pobrano"); 
     }
         
