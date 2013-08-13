@@ -53,6 +53,7 @@
 
                         
                             <div class="marginLRT30">
+                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Imię"/>  
                                     <h:inputText id="name" class="inputWidth" required="true" value="#{createClientMB.name}"> 
@@ -140,8 +141,9 @@
                                         <h:outputText value="#{data.incomeNetto}" />
                                     </p:column>  
 
-                                    <p:column headerText=" ">  
-                                        <p:commandLink value="Usuń" />
+                                    <p:column headerText="">  
+                                        <p:commandLink value="Usuń"  action="#{createClientMB.deleteIncome(data.idIncome,data.isIncome)}" update=":generalForm:table">
+                                        </p:commandLink>
                                     </p:column> 
                                 </p:dataTable>
 

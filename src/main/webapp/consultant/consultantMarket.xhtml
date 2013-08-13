@@ -149,7 +149,7 @@
                            </h:panelGroup>
                            <p:defaultCommand target="chooseEmpl" />
                        </p:overlayPanel> 
-                           
+                       <div style="min-height: 20px;"><p:commandButton styleClass="floatR greyButton" update="@form" value="Resetuj filtr" action="#{marketMB.resetMarket()}" /> </div>
                        <div class="marginT10">
                            <p:dataTable id="marketTable" value="#{marketMB.allMarket}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedMarketCase}" selectionMode="single" >
           

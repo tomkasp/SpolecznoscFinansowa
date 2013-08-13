@@ -307,160 +307,153 @@
 
                     <div class="marginT50">
 
-                        <h4>ZAKOŃCZONE SPRAWY </h4>
+                        <h4> ZAKOŃCZONE SPRAWY </h4>
 
-                        <p:dataTable var="row" value="#{fakeBean2.fdh3}" style="color: green">
+                        <p:dataTable id="finished" value="#{marketMB.finishedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedFinishedCase}" selectionMode="single" >
 
-                               
-                                        <p:column  headerText="" >  
-                                            <p:selectBooleanCheckbox value="#{row.selected}"  style="color: green"/>
-                                        </p:column>  
+                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedFinishedCase)}"/> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                     
+                            
+                            <p:column headerText="Numer sprawy">
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
+ 
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>
+                            </p:column>  
 
-                                        <p:column headerText="Lp">  
-                                                <h:outputText  value="#{row.lp}" style="color: green"/>
-                                        </p:column>  
+                            <p:column headerText="Numer klienta">  
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column> 
 
-                                        <p:column headerText="Numer klienta"> 
-                                            <h:outputText  value="#{row.numerKlienta}" style="color: green"/>
-                                        </p:column>  
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
 
-                                        <p:column headerText="Data dodania"> 
-                                            <h:outputText  value="#{row.dataDodania}" style="color: green"/>   
-                                        </p:column>  
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
 
-                                        <p:column headerText="Numer sprawy"> 
-                                            <h:outputText  value="#{row.numerSprawy}" style="color: green"/> 
-                                        </p:column>  
+                            <p:column headerText="BIK">  
+                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>
+                            </p:column> 
 
-                                        <p:column headerText="Postęp">  
-                                            <h:outputText  value="#{row.postęp}" style="color: green"/>
-                                        </p:column> 
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
 
-                                        <p:column headerText="Rodzaj kredytu"  >
-                                            <h:outputText  value="#{row.rodzajKredytu}" style="color: green"/>  
-                                        </p:column> 
+                            <p:column headerText="Wiek">  
+                                <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
 
-                                        <p:column headerText="BIK">  
-                                            <h:outputText  value="#{row.bik}" style="color: green"/>
-                                        </p:column> 
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{marketMB.finishedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.finishedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.finishedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.finishedModelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                                        <p:column headerText="Kod pocztowy">
-                                            <h:outputText  value="#{row.kodPocztowy}" style="color: green"/>  
-                                        </p:column>
+                            <p:column headerText="Branża">  
+                                <h:outputText rendered="#{marketMB.finishedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.finishedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.finishedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.finishedModelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                                        <p:column headerText="Wiek">  
-                                            <h:outputText  value="#{row.wiek}" style="color: green"/>
-                                        </p:column>
+                            <p:column headerText="Trudność kredytu"> 
+                                  <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Ocena"> 
+                                <h:outputText rendered="#{row.caseRating eq null}" value="Poproś o ocenę"/>
+                                <h:outputText rendered="#{!(row.caseRating eq null)}" value="#{row.caseRating.average}" />
+                            </p:column>
 
-                                        <p:column headerText="Typ zatrudnienia">
-                                            <h:outputText  value="#{row.typZatrudnienia}" style="color: green"/>  
-                                        </p:column>
+                        </p:dataTable>
+                    </div>
 
-                                        <p:column headerText="Branża">  
-                                            <h:outputText  value="#{row.branża}" style="color: green"/>
-                                        </p:column>
+                    <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
-                                        <p:column headerText="Trudności kredytu">
-                                            <h:outputText  value="#{row.trudnościKredytu}" style="color: green"/>  
-                                        </p:column>
+                    <div class="marginT50">
 
-                                        <p:column headerText="Ilość doradców">  
-                                            <h:outputText  value="#{row.ilośćDoradców}" style="color: green"/>
-                                        </p:column>
+                        <h4>OBSERWOWANE</h4>
 
-                                        <p:column headerText="Umowa">  
-                                            <h:outputText  value="#{row.umowa}" style="color: green"/>
-                                        </p:column>  
+                        <p:dataTable id="traced" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedObservedCase}" selectionMode="single" >
 
-                                        <p:column headerText="Kwota">  
-                                            <h:outputText  value="#{row.kwota}" style="color: green"/>
-                                        </p:column> 
+                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedObservedCase)}"/> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
 
-                                        <p:column headerText="Ocena">  
-                                            <h:outputText  value="#{row.ocenaDoradcy}" style="color: green"/>
-                                        </p:column>                  
-                                        </p:dataTable>
-                                        </div>
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
 
-                                        <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
 
-                                        <div class="marginT50">
+                            <p:column headerText="Numer klienta"> 
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column>
 
-                                            <h4>OBSERWOWANE</h4>
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
 
-                                            <p:dataTable id="traced" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedObservedCase}" selectionMode="single" >
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
 
-                                                <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedObservedCase)}"/> 
-                                                <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                            <p:column headerText="BIK">  
+                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
 
-                                                <p:column headerText="Numer sprawy">  
-                                                    <h:outputText  value="#{row.idClientCase}"/>
-                                                </p:column>  
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
 
-                                                <p:column headerText="Data dodania">    
-                                                    <h:outputText  value="#{row.beginDate}">
-                                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                                                    </h:outputText>  
-                                                </p:column>  
+                            <p:column headerText="Wiek">  
+                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
 
-                                                <p:column headerText="Numer klienta"> 
-                                                    <h:outputText  value="#{row.client.idClient}"/>
-                                                </p:column>
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.observedModelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                                                <p:column headerText="Postęp">  
-                                                    <h:outputText  value="#{row.phase}"/>
-                                                </p:column> 
+                            <p:column headerText="Branża">  
+                                <h:outputText rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.observedModelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                                                <p:column headerText="Rodzaj kredytu"  >
-                                                    <h:outputText  value="#{row.productType.name}"/>
-                                                </p:column> 
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
 
-                                                <p:column headerText="BIK">  
-                                                    <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                                                </p:column> 
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                            </p:column>
 
-                                                <p:column headerText="Kod pocztowy">  
-                                                    <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                                                </p:column>
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
+                        </p:dataTable>
+                    </div>
 
-                                                <p:column headerText="Wiek">  
-                                                         <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                                                </p:column>
+                    <p:commandButton  disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                          <p:ajax update="applied lastCases traced" />
+                    </p:commandButton>
+                    <p:commandButton id="deleteObservedButton" disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
 
-                                                <p:column headerText="Typ zatrudnienia">
-                                                    <h:outputText rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                                    <h:selectOneMenu rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                                        <f:selectItems value="#{marketMB.observedModelsEmploymentType.get(rowNumber)}" />
-                                                    </h:selectOneMenu>
-                                                </p:column>
-
-                                                <p:column headerText="Branża">  
-                                                    <h:outputText rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                                    <h:selectOneMenu rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                                        <f:selectItems value="#{marketMB.observedModelsBranch.get(rowNumber)}" />
-                                                    </h:selectOneMenu>
-                                                </p:column>
-
-                                                <p:column headerText="Trudność kredytu"> 
-                                                    <h:outputText  value="#{row.difficulty}"/>
-                                                </p:column>
-
-                                                <p:column headerText="Ilość doradców"> 
-                                                    <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
-                                                </p:column>
-
-                                                <p:column headerText="Koniec aukcji"> 
-                                                    <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
-                                                </p:column> 
-                                            </p:dataTable>
-                                        </div>
-                                        
-                                        <p:commandButton  disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
-                                              <p:ajax update="applied lastCases traced" />
-                                        </p:commandButton>
-                                        <p:commandButton id="deleteObservedButton" disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
-                                             
-                                        </p:commandButton>
+                    </p:commandButton>
 
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>

@@ -64,7 +64,7 @@ public class ClientMainPageMB implements Serializable {
    
     private Integer newPoints;
     
-    private boolean requirementsFulfilled = true;
+    private boolean requirementsFulfilled = false;
   
     @PostConstruct
     public void fillTables()
@@ -75,6 +75,7 @@ public class ClientMainPageMB implements Serializable {
         reloadCases4();
         reloadCases5();
         reloadCases6();
+        checkRequirementsForNewApplication();
     }
    
     public void reloadCases()
@@ -232,7 +233,14 @@ public class ClientMainPageMB implements Serializable {
      return "/client/clientMainPage.xhtml";
      }
      
-     public void checkRequirementsForNewApplication() throws IOException
+     public void redirectNewApplication() throws IOException
+     {
+         if (requirementsFulfilled)
+              FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
+         
+     }
+     
+     public void checkRequirementsForNewApplication()
      {
          ClientDAO clientDao = new ClientDAO();
          Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
@@ -244,12 +252,8 @@ public class ClientMainPageMB implements Serializable {
          else
          {
              requirementsFulfilled = true;
-             FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
          }
-         
-     
      }
-     
     //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
