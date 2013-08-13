@@ -3,6 +3,7 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
 
@@ -23,6 +24,41 @@ public class MessageDAO extends GenericDao<Message>{
         session.getTransaction().commit();
         session.close();
         return lista;
-    }    
+    } 
+    
+    public List<Message> getUnreadMessages(int userId) 
+    {
+        List<Message> list;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Query q =  session.createQuery("from Message as m "
+                + "join fetch m.userByFkFromUser as usFrom "
+                + "left join fetch usFrom.consultants as con "
+                + "left join fetch usFrom.clients as clt "
+                + "where fk_toUser= :userId and isViewed = 0 order by sentDate desc");
+        q.setParameter("userId", userId);
+        list = q.list();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
+    
+    public List<Message> getReadMessages(int userId) 
+    {
+        List<Message> list;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Query q =  session.createQuery("from Message where fk_toUser= :userId and isViewed = 1 order by sentDate desc ");
+        q.setParameter("userId", userId);
+        list = q.list();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
+    
+    
+            
     
 }

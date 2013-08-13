@@ -211,6 +211,20 @@ public class ClientCaseMB implements Serializable {
             return false;                   
     }
     
+    public void consultantAcceptPremium(ClientCase cc)
+    {
+        cc.setConsultants(null);
+        cc.setConsultants_1(null);
+        cc.setCaseStatus(new CaseStatusDAO().read(2));
+        new ClientCaseDAO().updateClientCase(cc);
+    }
+    
+    public void consultantRevokePremium(ClientCase cc)
+    {
+        cc.setConsultant(null);
+        new ClientCaseDAO().updateClientCase(cc);
+    }
+    
     public void assignConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
