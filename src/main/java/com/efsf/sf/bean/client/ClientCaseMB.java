@@ -4,6 +4,7 @@
  */
 package com.efsf.sf.bean.client;
 
+import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -26,6 +28,8 @@ public class ClientCaseMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB login;
     
+    @ManagedProperty(value = "#{dictionaryMB}")
+    private DictionaryMB dictionaryMB;
 
         
     private int idTypProduktu;
@@ -48,6 +52,10 @@ public class ClientCaseMB implements Serializable {
     
     private Obligation selectedObligation;
     
+    private ArrayList<CaseStatus> statusModel = new ArrayList();
+    
+    private int caseStatusID;
+    
     
     /**
      * Creates a new instance of ClientCaseMB
@@ -56,6 +64,18 @@ public class ClientCaseMB implements Serializable {
     public ClientCaseMB(){
         
     }    
+    
+    @PostConstruct
+    public void setModels()
+    {
+        for (CaseStatus cs : dictionaryMB.getCaseStatus())
+        {
+            if(cs.getIdCaseStatus() >= 2 && cs.getIdCaseStatus() != 8)
+            {
+                statusModel.add(cs);
+            }
+        }
+    }
     
     public List<Obligation> retrieveObligationListForCurrentClient(){ 
         
@@ -144,6 +164,13 @@ public class ClientCaseMB implements Serializable {
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
     
+    public void changeCaseStatus()
+    {
+        CaseStatus cs = new CaseStatusDAO().read(caseStatusID);
+        selectedClientCase.setCaseStatus(cs);
+        new ClientCaseDAO().updateClientCase(selectedClientCase);
+    }
+    
     // VIEW CASE METHODS 
     public void loadCaseConsultantsDetails()
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -158,7 +185,11 @@ public class ClientCaseMB implements Serializable {
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed())
         {
-             selectedClientCase = new ClientCaseDAO().getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+             ClientCaseDAO cdao = new ClientCaseDAO();
+             selectedClientCase = cdao.getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
+             caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
+             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);
+             cdao.updateClientCase(selectedClientCase);
              System.out.println("HAHA");
         }
     }
@@ -266,6 +297,30 @@ public class ClientCaseMB implements Serializable {
 
     public void setSelectedObligation(Obligation selectedObligation) {
         this.selectedObligation = selectedObligation;
+    }
+
+    public ArrayList<CaseStatus> getStatusModel() {
+        return statusModel;
+    }
+
+    public void setStatusModel(ArrayList<CaseStatus> statusModel) {
+        this.statusModel = statusModel;
+    }
+
+    public DictionaryMB getDictionaryMB() {
+        return dictionaryMB;
+    }
+
+    public void setDictionaryMB(DictionaryMB dictionaryMB) {
+        this.dictionaryMB = dictionaryMB;
+    }
+
+    public int getCaseStatusID() {
+        return caseStatusID;
+    }
+
+    public void setCaseStatusID(int caseStatusID) {
+        this.caseStatusID = caseStatusID;
     }
 
    
