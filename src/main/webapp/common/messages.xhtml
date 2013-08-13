@@ -31,20 +31,9 @@
 
             <ui:define name="content">
 
-
-                <div class="topTitle">
-                    <h:outputText rendered="#{loginMB.type==2}" value="#{loginMB.consultant.name} #{loginMB.consultant.lastName}"/>
-                    <h:outputText rendered="#{loginMB.type==3}" value="#{loginMB.client.name} #{loginMB.client.lastName}"/>
-                </div>
-
-                    <div class="contentBox" style="position: relative;">
-                        
-                        <div>
-                            <h:graphicImage id="mail_logo" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
-                            <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
-                        </div>
-                        
-                    </div>
+                  
+                    <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
+                   
                     <h:form>
                     <div class="newsletter" style="margin: 25px 0;"> 
                             <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton buttonspace" value="OK"/> 
