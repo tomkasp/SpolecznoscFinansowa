@@ -133,6 +133,14 @@
                              <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
 
                         </h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus>=2}" >    
+                                    <div class="marginT50">
+                                        <h4> WIADOMOŚCI </h4>
+                                    </div>
+                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(clientCaseMB.selectedClientCase.consultant.user.idUser)}"/>
+                        </h:panelGroup>            
+                                    
                         <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
                             <h4> NASTĘPNA RATA </h4>
 
