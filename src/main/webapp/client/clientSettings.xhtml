@@ -321,7 +321,22 @@
                             <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/>
 
                         </h:form>
+                        
+                        <h:form>
+                        
+                        <h1>Wymagane dokumenty</h1>  
+                            <p class="pole">
+                                <h:outputLabel class="idCardLabel">Dowód tożsamości: </h:outputLabel>       
+                                <p:fileUpload id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple"  > 
+                                    <f:validator validatorId="uploadValidator" />
+                                </p:fileUpload>
+                            </p>
 
+                            <p> <h:message for="idCardUpload" class="message" /> </p>
+                           
+                            <p:commandButton ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20" value="Zapisz" type="submit" action="#{ clientFileUploadMB.save() }" />      
+                            
+                        </h:form>
 
                     </div>
 

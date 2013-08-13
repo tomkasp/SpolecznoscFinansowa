@@ -23,12 +23,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
+import org.primefaces.model.UploadedFile;
 
 /**
  * @author WR1EI1
@@ -66,6 +66,9 @@ public class ClientSettingsMB implements Serializable {
     private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
+    
+    private int idCounter=0;
+    
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
@@ -128,21 +131,71 @@ public class ClientSettingsMB implements Serializable {
 
         client.setMaritalStatus(newMaritalStatus);
         client.setEducation(newEducation);
-
+        
+        
+        //INCOME
         IncomeDAO idao = new IncomeDAO();
-        Iterator<Income> it = client.getIncomes().iterator();
-        while (it.hasNext()) {
-            Income i = it.next();
-            idao.delete(i);
+        Iterator<Income> IncomeIT = client.getIncomes().iterator();
+        while (IncomeIT.hasNext()) {
+            Iterator<Income> incomeSetIT = incomeSet.iterator();
+            boolean isExist=false;
+            
+            Income i = IncomeIT.next();
+            
+            while(incomeSetIT.hasNext())
+            {
+                
+                Income i2=incomeSetIT.next();
+                System.out.println("ID1 "+i.getIdIncome());
+                System.out.println("ID2 "+i2.getIdIncome());
+                if(i.getIdIncome() == i2.getIdIncome()){
+                isExist=true;
+                }
+                
+            }
+            
+            if(!isExist){
+                idao.delete(i);
+                System.out.println("USUNIETO!!!! ");
+              }
+            
+            
         }
+        
+        Iterator<Income> incomeSetIT = incomeSet.iterator();
+        while(incomeSetIT.hasNext())
+            {  
+                Income i2=incomeSetIT.next();
+                if(i2.getIdIncome()<0){
+                i2.setIdIncome(null);
+              }
+                
+            }
         client.setIncomes(incomeSet);
 
+        
+        //INCOME BUSINESS ACTIVITY:
         IncomeBusinessActivityDAO ibadao = new IncomeBusinessActivityDAO();
         Iterator<IncomeBusinessActivity> it2 = client.getIncomeBusinessActivities().iterator();
         while (it2.hasNext()) {
+            
+            
             IncomeBusinessActivity iba = it2.next();
             ibadao.delete(iba);
+            
+            
         }
+        
+        
+        Iterator<IncomeBusinessActivity> incomeBASetIT = businessSet.iterator();
+        while(incomeBASetIT.hasNext())
+            {  
+                IncomeBusinessActivity i2=incomeBASetIT.next();
+                if(i2.getIdIncomeBusinessActivity()<0){
+                i2.setIdIncomeBusinessActivity(null);
+              }
+                
+            }
 
         client.setIncomeBusinessActivities(businessSet);
 
@@ -232,12 +285,24 @@ public class ClientSettingsMB implements Serializable {
 
                 }
 
+            }else{
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             }
+            
+            
 
         }
-
-
-
 
         System.out.println(incomeTable.size());
 
@@ -262,6 +327,8 @@ public class ClientSettingsMB implements Serializable {
     }
 
     public void addIncome() {
+        idCounter=idCounter-1;
+        System.out.println("COUNTER: "+idCounter);
         EmploymentType et = null;
         for (EmploymentType i : dictionaryMB.getIncome()) {
             if (i.getIdEmploymentType() == incomeId) {
@@ -279,11 +346,17 @@ public class ClientSettingsMB implements Serializable {
             }
         }
         if (isIncome) {
+            income.setIdIncome(idCounter);
+            
             income.setBranch(b);
             income.setEmploymentType(et);
             income.setClient(loginMB.getClient());
             tableEmpty = false;
-            incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));
+            IncomeData incomeData=new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue());
+            incomeData.setIdIncome(income.getIdIncome());
+            incomeData.setIsIncome(true);
+            incomeTable.add(incomeData);
+            //incomeTable.add(new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue()));
             incomeSet.add(income);
             income = new Income();
         } else {
@@ -294,11 +367,18 @@ public class ClientSettingsMB implements Serializable {
                     break;
                 }
             }
+            business.setIdIncomeBusinessActivity(idCounter);
+            
             business.setBranch(b);
             business.setEmploymentType(et);
             business.setClient(loginMB.getClient());
             tableEmpty = false;
-            incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));
+            
+            IncomeData incomeData=new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue());
+            incomeData.setIdIncome(business.getIdIncomeBusinessActivity());
+            incomeData.setIsIncome(false);
+            incomeTable.add(incomeData);
+            //incomeTable.add(new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue()));
             businessSet.add(business);
             business = new IncomeBusinessActivity();
         }

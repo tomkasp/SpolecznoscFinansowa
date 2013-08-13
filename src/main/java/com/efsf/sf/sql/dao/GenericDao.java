@@ -43,6 +43,19 @@ public class GenericDao<T> {
         session.close();
         return lista;
     }
+    
+    public List getAllInOrder(String field, String order_type){
+        List<T> lista;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        lista = session.createQuery("from " + getMyTypeAsString() + 
+                " order by "+field+" "+order_type).list();
+
+        session.getTransaction().commit();
+        session.close();
+        return lista;
+    }
 
     public List getWhere(String field, String value) {
         List<T> lista;

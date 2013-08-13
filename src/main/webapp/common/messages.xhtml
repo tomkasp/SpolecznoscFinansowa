@@ -31,22 +31,15 @@
 
             <ui:define name="content">
 
-
-                    <div class="topTitle">Stanisław Nowy</div>
-
-                    <div class="contentBox" style="position: relative;">
-                        
-                        <div>
-                            <h:graphicImage id="mail_logo" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
-                            <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
-                        </div>
-                        
-                    </div>
-                    
+                  
+                    <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
+                   
+                    <h:form>
                     <div class="newsletter" style="margin: 25px 0;"> 
                             <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton buttonspace" value="OK"/> 
                      </div>
-                    
+                    </h:form>
+                        
                     <div class="contentBox">
                         
                         <h:form>                       
@@ -54,8 +47,7 @@
                         <div class="messagesBox"> 
 
                             <div class="messagesBoxContentLeft">
-
-                                <h4><h:outputText value="#{o.userByFkFromUser.email}"/></h4>
+                                    <h:outputText class="msgUserHeader headerColor#{o.userByFkFromUser.type}" value="#{o.userByFkFromUser.email}"/>  
                                 <p>
                                     <h:outputText value="#{o.message}"/>
                                 </p>
