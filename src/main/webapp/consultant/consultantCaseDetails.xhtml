@@ -50,11 +50,12 @@
                                 <h5> /100 </h5>
                             </div>
                         </div>
-                        
-                        <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} (#{clientCaseMB.selectedClientCase.caseStatus.name}) </h3>
-                        <h:panelGroup rendered="#{!clientCaseMB.checkLoggedConsultantAccessToCase() and !(clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
-                            Nie istnieje 
-                        </h:panelGroup>
+                        <h:form id="titleForm">
+                          <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} (#{clientCaseMB.selectedClientCase.caseStatus.name}) </h3>
+                           <h:panelGroup rendered="#{!clientCaseMB.checkLoggedConsultantAccessToCase() and !(clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
+                             Jeśli widzisz ten ekran to znaczy, że nie zostałeś wybrany do prowadzenia tej sprawy i straciłeś do niej dostęp
+                          </h:panelGroup>
+                        </h:form>
                         <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
                         <div style="min-height: 160px">
                             <div class="leftInlineBox">
@@ -150,14 +151,32 @@
                                 </h:panelGroup>
                                 
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
-                                    <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
-
-
+                                   <h4> USTAW STATUS SPRAWY </h4>
                                    <div class="solidText"> 
-                                         Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
-                                    </div>  
-                                    <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
-
+                                         Zaktualizuj bieżący status sprawy dzięki czemu klient będzie widział, że sprawa postępuje:
+                                   </div> 
+                                   <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{clientCaseMB.caseStatusID}" >
+                                       <f:selectItems value="#{clientCaseMB.statusModel}" var="entry" itemLabel="#{entry.name}" itemValue="#{entry.idCaseStatus}" /> 
+                                   </p:selectOneMenu>
+                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{clientCaseMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
+                                   
+                                   <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
+                                       <div class="fontGrey"> Status sprawy został zaktualizowany </div>
+                                   
+                                       <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="statusChange.hide()"  >
+                                           <f:ajax  execute="@this" render="@all" /> 
+                                       </h:commandButton>
+                                   
+                                   </p:dialog>
+                                   
+                                   
+                                   <div style="clear:both">
+                                        <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
+                                        <div class="solidText"> 
+                                             Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
+                                        </div>  
+                                        <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
+                                   </div>
 
                                    <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
                                           <p:column headerText="Nazwa instytucji">  
@@ -186,7 +205,8 @@
                                          Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
                                     </div>  
                                     <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
-                                    
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}" >
                                     <div class="marginT50">
                                         <h4> OCENA SPRAWY </h4>
                                     </div>
