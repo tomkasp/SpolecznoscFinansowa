@@ -36,6 +36,16 @@ public class ConsultantRating  implements java.io.Serializable {
      private Integer rateCount;
 
     public ConsultantRating() {
+        contact=0.0;
+        culture=0.0;
+        competence=0.0;
+        punctuality=0.0;
+        reliability=0.0;
+        respect=0.0;
+        difficulty=0.0;
+        trust=0.0;
+        average=0.0;
+        rateCount=0;
     }
 
 	
@@ -66,7 +76,7 @@ public class ConsultantRating  implements java.io.Serializable {
     public void setIdConsultantRating(Integer idConsultantRating) {
         this.idConsultantRating = idConsultantRating;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="id_consultantRating", unique=true, nullable=false, insertable=false, updatable=false)
     public Consultant getConsultant() {
         return this.consultant;

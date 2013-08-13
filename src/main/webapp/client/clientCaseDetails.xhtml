@@ -134,7 +134,7 @@
 
                         </h:panelGroup>
                         
-                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus>=2}" >    
+                            <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; clientCaseMB.selectedClientCase.consultant!=null}" >    
                                     <div class="marginT50">
                                         <h4> WIADOMOŚCI </h4>
                                     </div>
