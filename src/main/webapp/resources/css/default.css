@@ -307,9 +307,16 @@ p:column {
 }
 
 .messagesBox{
-    border-bottom: 4px solid #5297cb;
     overflow: hidden; 
-    margin-bottom: 20px;
+}
+
+.messagesBox:nth-child(even)
+{
+background:#F0F5F5;
+} 
+
+.messagesBox:nth-child{
+    background: #CCCCCC;
 }
 
 .messagesBoxContentLeft{
@@ -318,7 +325,7 @@ p:column {
 }
 
 .messagesBoxContentRight{
-    margin-top: 75px;
+    margin-top: 25px;
     margin-left: 5%;
     width: 40%;
     float: right;;
@@ -329,7 +336,8 @@ p:column {
 }
 
 .messagesGrayRectangle{
-    border:1px solid #dddddd;
+    font-size: 10px;
+    font-weight: bold;
     padding: 6px;
 }
 
