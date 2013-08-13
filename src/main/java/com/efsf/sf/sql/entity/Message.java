@@ -30,6 +30,8 @@ public class Message  implements java.io.Serializable {
      private User userByFkToUser;
      private String message;
      private Date sentDate;
+     private Integer isSystem;
+     private Integer isViewed;
 
     public Message() {
     }
@@ -57,7 +59,7 @@ public class Message  implements java.io.Serializable {
     public void setIdMessage(Integer idMessage) {
         this.idMessage = idMessage;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="fk_fromUser", nullable=false)
     public User getUserByFkFromUser() {
         return this.userByFkFromUser;
@@ -66,7 +68,7 @@ public class Message  implements java.io.Serializable {
     public void setUserByFkFromUser(User userByFkFromUser) {
         this.userByFkFromUser = userByFkFromUser;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="fk_toUser", nullable=false)
     public User getUserByFkToUser() {
         return this.userByFkToUser;
@@ -95,7 +97,24 @@ public class Message  implements java.io.Serializable {
     }
 
 
+    public Integer getIsSystem() {
+        return isSystem;
+    }
 
+
+    public void setIsSystem(Integer isSystem) {
+        this.isSystem = isSystem;
+    }
+
+
+    public Integer getIsViewed() {
+        return isViewed;
+    }
+
+
+    public void setIsViewed(Integer isViewed) {
+        this.isViewed = isViewed;
+    }
 
 }
 
