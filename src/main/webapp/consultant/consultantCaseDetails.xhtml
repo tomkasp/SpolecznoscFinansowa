@@ -206,12 +206,14 @@
                                     </div>  
                                     <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
                                 </h:panelGroup>
-                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}" >
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus >= 2}" >    
                                     <div class="marginT50">
                                         <h4> WIADOMOŚCI </h4>
                                     </div>
                                     <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(clientCaseMB.selectedClientCase.client.user.idUser)}"/>
-                                
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}" >
+                                    
                   
                                     <div class="marginT50">
                                         <h4> OCENA SPRAWY </h4>
