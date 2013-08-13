@@ -28,6 +28,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
+import org.primefaces.model.UploadedFile;
 
 /**
  * @author WR1EI1
@@ -67,6 +68,7 @@ public class ClientSettingsMB implements Serializable {
     private String confirmNewPassword;
     
     private int idCounter=0;
+    
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
