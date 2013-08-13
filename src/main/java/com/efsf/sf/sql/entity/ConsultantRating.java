@@ -66,7 +66,7 @@ public class ConsultantRating  implements java.io.Serializable {
     public void setIdConsultantRating(Integer idConsultantRating) {
         this.idConsultantRating = idConsultantRating;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="id_consultantRating", unique=true, nullable=false, insertable=false, updatable=false)
     public Consultant getConsultant() {
         return this.consultant;
