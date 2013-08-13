@@ -43,7 +43,7 @@ public class ClientCaseMB implements Serializable {
     ObligationDAO obdao = new ObligationDAO();
     
     
-    private int premium = 30;
+    private int premium = 6;
     
     // VIEW CASE DETAILS FIELDS 
     private ClientCase selectedClientCase;
@@ -85,7 +85,7 @@ public class ClientCaseMB implements Serializable {
     }
    
   public void delObligation(){
-        System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
+        //System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
         obdao.deleteObligation(selectedObligation);
         //obligation = new Obligation();
         
@@ -106,7 +106,7 @@ public class ClientCaseMB implements Serializable {
     public void addMessage(){ 
         
        if(clientCase.getPremium()){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci 30 punktów!"));  
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci " + premium + " punktów!"));  
        }
         
     }

@@ -31,17 +31,6 @@
                 
              <h:form>
 
-                <div id="profileBar" class="profilBar">
-                    <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-
-                    <div id="spaceFiller"> </div>
-                    <div>     
-                        <h5> #{consultantCreateMB.consultant.name} #{consultantCreateMB.consultant.lastName} </h5> 
-                        <h:outputText class="profileText" value="nr. doradcy:" />
-                        <h5> #{consultantCreateMB.user.login} </h5>
-                    </div>
-                </div>
-
                 <div style="min-height: 325px;">
                     <div class="leftThinerBox">
                         <h3> Uzupelnij swoje dane </h3>
@@ -249,62 +238,82 @@
                 </div>
                 
                 
+                
+
+
+                <div class="bottomTable" >
+
+                        <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
+
+
+                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}"  var="row" emptyMessage="Nie ma żadnych spraw" >
+          
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
+                            
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
+                            
+                            <p:column headerText="Numer klienta"> 
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column>
+
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
+
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
+
+                            <p:column headerText="BIK">  
+                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
+
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
+                           
+                            <p:column headerText="Wiek">  
+                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
+
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.modelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Branża">  
+                                <h:outputText rendered="#{marketMB.modelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{marketMB.modelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
+
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                            </p:column>
+
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
+
+                        </p:dataTable>
+                   
+                       
+                    </div>
+
                 </h:form>
-
-
-                <div class="bottomTable">
-
-                    <h4> PODGLĄD GIEŁDY </h4>
-                    <p:dataTable>
-                        <p:column headerText="Lp">  
-                        </p:column>  
-
-                        <p:column headerText="Numer klienta">  
-                        </p:column>  
-
-                        <p:column headerText="Data dodania">    
-                        </p:column>  
-
-                        <p:column headerText="Numer sprawy">  
-                        </p:column>  
-
-                        <p:column headerText="Postęp">  
-                        </p:column> 
-
-                        <p:column headerText="Rodzaj kredytu"  >  
-                        </p:column> 
-
-                        <p:column headerText="BIK">  
-                        </p:column> 
-
-                        <p:column headerText="Kod pocztowy">  
-                        </p:column>
-
-                        <p:column headerText="Wiek">  
-                        </p:column>
-
-                        <p:column headerText="Typ zatrudnienia">  
-                        </p:column>
-
-                        <p:column headerText="Branża">  
-                        </p:column>
-
-                        <p:column headerText="Trudności kredytu">  
-                        </p:column>
-
-                        <p:column headerText="Ilość doradców">  
-                        </p:column>
-
-                        <p:column headerText="Koniec aukcji">  
-                        </p:column>  
-
-                    </p:dataTable>
-
-                    <div style="min-height: 50px;"> <h:link class ="blueButton wideButton floatR marginTB20" value="Akceptuj zaznaczone" outcome="/consultant/consultantMainPage"/> </div>
-
-                </div>
-
-
 
             </ui:define>
 
