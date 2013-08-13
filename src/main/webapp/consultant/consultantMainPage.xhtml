@@ -458,30 +458,35 @@
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>
                                             
-                                            <p:dataTable var="row" value="#{fakeBean2.rdh}">
+                                            <p:dataTable var="row" value="#{consultantRatesMB.scoreBoard}">
 
                                                 <p:column headerText="">  
-                                                    <h:outputText  value="#{row.typOceny}"/>
+                                                    <h:outputText  value="#{row.title}"/>
                                                 </p:column>  
 
                                                 <p:column headerText="Twój wynik"> 
-                                                    <h:outputText  value="#{row.twojWynik}"/>
+                                                    <h:outputText  value="#{row.score}">
+                                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                                    </h:outputText>
                                                 </p:column>  
 
                                                 <p:column headerText="Średnia wszystkich doradców">  
-                                                    <h:outputText  value="#{row.sredniaDoradcow}"/>
+                                                    <h:outputText  value="#{row.average_score}">
+                                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                                    </h:outputText>
                                                 </p:column>  
 
                                                 <p:column headerText="Najlepszy wynik">  
-                                                    <h:outputText  value="#{row.najlepszyWynik}"/>
+                                                    <h:outputText  value="#{row.max_score}"/>
                                                 </p:column>  
 
                                                 <p:column headerText="Najgorszy wynik">  
-                                                    <h:outputText  value="#{row.najgorszyWynik}"/>
+                                                    <h:outputText  value="#{row.min_score}"/>
                                                 </p:column> 
 
                                             </p:dataTable>
                                             <p:commandLink styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
+                                            <p:commandLink styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
                                         </div>
                                         
                                         <!-- DIALOGS -->
