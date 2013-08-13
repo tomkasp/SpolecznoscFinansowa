@@ -197,8 +197,11 @@
 
                             <h:form id="obligationForm">
                                 <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="row" rowKey="#{row.idObligation}"
-                                             selection="#{clientCaseMB.selectedObligation}" selectionMode="single">
-
+                                             selection="#{clientCaseMB.selectedObligation}"  selectionMode="single" >
+                                    
+                                    <p:ajax event="rowSelect" update=":obligationForm:deleteBtn" />
+                                    <p:ajax event="rowUnselect" update=":obligationForm:deleteBtn" />
+                                    
                                     <p:column headerText="Lp">  
                                         #{wiersz+1}
                                     </p:column>  
@@ -228,9 +231,23 @@
                                 </p:dataTable>
                                 <h:panelGrid columns="2" >
                                     <p:commandButton style="margin:0 30px;" value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
-                                    <p:commandButton style="margin:0 30px;" value="Usuń" update="@form" action="#{clientCaseMB.delObligation}" />
+                                    <p:commandButton id="deleteBtn" style="margin:0 30px;" disabled="#{clientCaseMB.selectedObligation==null}" value="Usuń" onclick="confirmation.show();" type="button" />
                                 </h:panelGrid>
-                                
+
+                                <p:confirmDialog message="Czy na pewno chcesz usunąć zaznaczone zobowiązanie?"  
+                                                  hideEffect="explode"  
+                                                 header="Usuwanie zobowiązania." severity="alert" widgetVar="confirmation">  
+                                    
+                                    <p:commandButton value="TAK" style="width:100px;margin:0 100px 0 0;" oncomplete="confirmation.hide()"  
+                                                     update="@form" action="#{clientCaseMB.delObligation}" />  
+                                        <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
+                                        
+                                   
+                                    
+
+                                </p:confirmDialog>  
+
+
                             </h:form>
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
