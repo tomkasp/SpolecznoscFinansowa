@@ -169,7 +169,15 @@ public class UserDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
         
-        Query q  = session.createQuery("FROM Client c JOIN Fetch c.user as u where u.idUser = :userId");
+        Query q  = session.createQuery("FROM Client c "
+                + "JOIN Fetch c.user as u "
+                + "LEFT JOIN fetch c.incomes as inc "
+                + "LEFT JOIN fetch c.incomeBusinessActivities as ba "
+                + "left join fetch inc.branch as br "
+                + "left join fetch inc.employmentType as empltype "
+                + "left join fetch ba.branch as br2 "
+                + "left join fetch ba.employmentType as empltype2 "
+                + "where u.idUser = :userId");
         q.setParameter("userId", userId);
         
         Client result = (Client) q.list().get(0);
