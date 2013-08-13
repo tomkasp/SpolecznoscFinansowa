@@ -52,8 +52,23 @@
                     </div>
                 </div>
         </h:panelGroup>    
-            
-            <ui:insert name="content">Content</ui:insert>
+        <h:panelGroup rendered="#{loginMB.client!=null}"> 
+            <h:form id="test">
+                 <div id="profileBar" class="profilBar">
+                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+
+                        <div id="spaceFiller" > </div>
+                        <div>     
+                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
+                            <h:outputText class="profileText" value="nr. klienta:" />
+                            <h5> #{loginMB.client.user.login} </h5>
+                            <h:outputText class="profileText" value="Stan konta:" />
+                            <h5 > #{loginMB.client.points} / 5 </h5>
+                        </div>
+                   </div>
+            </h:form>    
+        </h:panelGroup>    
+           <ui:insert name="content">Content</ui:insert>
         </div>
         
 
