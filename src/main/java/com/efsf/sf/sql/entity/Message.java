@@ -42,11 +42,13 @@ public class Message  implements java.io.Serializable {
         this.userByFkToUser = userByFkToUser;
         this.message = message;
     }
-    public Message(User userByFkFromUser, User userByFkToUser, String message, Date sentDate) {
+    public Message(User userByFkFromUser, User userByFkToUser, String message, Date sentDate, Integer isSystem, Integer isViewed) {
        this.userByFkFromUser = userByFkFromUser;
        this.userByFkToUser = userByFkToUser;
        this.message = message;
        this.sentDate = sentDate;
+       this.isSystem = isSystem;
+       this.isViewed = isViewed;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
