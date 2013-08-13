@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Doradca - wiadomości </ui:define> 
+            <ui:define name="top"> 
+                <div class="topbarLogo">
+                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                                <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+                                <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+              </div>
+
+                <div class="topbarMenuBlue">
+                    <h:panelGroup>
+                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
+                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+
+
+                    <div class="topTitle">Stanisław Nowy</div>
+
+                    <div class="contentBox" style="position: relative;">
+                        
+                        <div>
+                            <h:graphicImage id="mail_logo" alt="could not be found"  value="/resources/images/mail.png"></h:graphicImage>
+                            <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="newsletter" style="margin: 25px 0;"> 
+                            <h:inputText class="label2" value="wyszukaj"/> <h:link class="greyButton buttonspace" value="OK"/> 
+                     </div>
+                    
+                    <div class="contentBox">
+                        
+                        <h:form>                       
+                        <ui:repeat var="o" value="#{messagesMB.messages}">   
+                        <div class="messagesBox"> 
+
+                            <div class="messagesBoxContentLeft">
+
+                                <h4><h:outputText value="#{o.userByFkFromUser.email}"/></h4>
+                                <p>
+                                    <h:outputText value="#{o.message}"/>
+                                </p>
+
+
+                            </div>
+
+                            <div class="messagesBoxContentRight">
+                                <h:outputText class="messagesGrayRectangle" value="#{o.sentDate}">
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy HH:mm" timeZone="GMT+2"/>
+                                </h:outputText>
+                                
+                            </div>
+
+                        </div>
+                        </ui:repeat>
+                        
+                        
+                        <div class="marginT50"></div>
+                        
+                            <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 70px; width: 750px" value="#{messagesMB.message}"/>
+                            <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Odpowiedź" type="submit" update="@(form)" ajax="true" action="#{messagesMB.sendAnswer()}"/>
+                        </h:form>
+                       <div class="marginT50"></div>
+                    </div>
+
+                
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>
