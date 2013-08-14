@@ -29,6 +29,10 @@ public class MessagesMB implements Serializable {
     
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
+    
+    @ManagedProperty(value = "#{dictionaryMB}")
+    private DictionaryMB dictionaryMB;
+    
 
     public String showMessagesPage(int userTo_id) {
         
@@ -131,9 +135,20 @@ public class MessagesMB implements Serializable {
         return readConversationsList;
     }
     
-    public void generateSystemMessage()
-    {
+    public void generateSystemMessage(String text, int toUserId, Object[] params)
+    {   
+        GenericDao<Message> dao = new GenericDao(Message.class);
+        GenericDao<User> user_dao = new GenericDao(User.class);
+        Message msg = new Message();
         
+        msg.setMessage(String.format(text, params));
+        msg.setSentDate(new Date());
+        msg.setUserByFkFromUser(loginMB.getUser());
+        msg.setUserByFkToUser(user_dao.getById(toUserId));
+        msg.setIsViewed(0);
+        msg.setIsSystem(1);
+        
+        dao.save(msg);
     }
     
      
@@ -188,6 +203,14 @@ public class MessagesMB implements Serializable {
 
     public void setReadConversations(ArrayList<Message> readConversations) {
         this.readConversations = readConversations;
+    }
+
+    public DictionaryMB getDictionaryMB() {
+        return dictionaryMB;
+    }
+
+    public void setDictionaryMB(DictionaryMB dictionaryMB) {
+        this.dictionaryMB = dictionaryMB;
     }
 
 }
