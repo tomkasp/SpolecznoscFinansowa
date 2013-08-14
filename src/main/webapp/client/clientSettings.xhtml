@@ -32,24 +32,29 @@
             </ui:define>
 
             <ui:define name="content">
-
-                <div id="profileBar" class="profilBar">
-                    <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
-                    <div id="spaceFiller"> </div>
-                    <div>     
-                        <h5 class="greenRightBorder"> Tomasz Nowak </h5> 
-                        <h:outputText class="profileText" value="nr. klienta:" />
-                        <h5 class="greenRightBorder"> 000120 </h5>
-                        <h:outputText class="profileText" value="Stan konta:" />
-                        <h5 class="greenRightBorder"> 3/5 pkt. </h5>
-                    </div>
-                </div>
+                
+                <script>
+                    $(document).ready(function(){
+                        $("#toggle1").click(function(){
+                            $("#all").toggle();
+                            $("#last").toggle();
+                        });
+                    });
+                    
+                    $(document).ready(function(){
+                        $("#toggle2").click(function(){
+                            $("#all").toggle();
+                            $("#last").toggle();    
+                        });
+                    });
+                    
+                </script>
 
                 <div class="marginT50">
                     <h3 class="greenLeftBorder"> Ustawienie konta </h3>
                 </div>
 
-                <div style="min-height: 910px">
+                <div style="min-height: 1700px">
 
                     <div class="leftInlineBox">
 
@@ -222,16 +227,15 @@
                                     <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
                                 </div>
 
-                                <h:commandLink  class="floatR wideButton greyButton" value="Zapisz" action="#{clientSettingsMB.updateSettings()}" />
+                                <h:commandLink  class ="greenButton wideButton floatR marginTB20"  value="Zapisz" action="#{clientSettingsMB.updateSettings()}" />
 
                             </div>
-
 
                         </h:form>
 
                     </div>
 
-                    <div class="rightWiderBox">
+                    <div class="rightWiderBox" >
 
                         <h:form> 
 
@@ -247,37 +251,37 @@
 
 
                         <h:form> 
-                            
+
                             <div class="marginLRT30">
 
                                 <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
-                                
+
                                 <div class="field">
                                     <h:outputText class="label" value="Obecne hasło"/>  
                                     <h:inputSecret required="true" id="cPassword"  value="#{clientSettingsMB.currentPassword}" validator="#{clientSettingsMB.validateCurrentPassword}"> 
-                                    <f:validateLength minimum="8" maximum="20" />
-                                    <p:ajax event="keyup" update="currentPasswordMessage"/>
+                                        <f:validateLength minimum="8" maximum="20" />
+                                        <p:ajax event="keyup" update="currentPasswordMessage"/>
                                     </h:inputSecret>
                                     <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
                                 </div>
-                                
+
                                 <div class="field">
                                     <h:outputText class="label" value="Nowe hasło"/> 
                                     <h:inputSecret required="true" value="#{clientSettingsMB.newPassword}" >
-                                    <f:validateLength minimum="8" maximum="20" />
-                                    <p:ajax event="keyup" update="confirmPasswordMessage"/>
+                                        <f:validateLength minimum="8" maximum="20" />
+                                        <p:ajax event="keyup" update="confirmPasswordMessage"/>
                                     </h:inputSecret>
                                 </div>
-                                
+
                                 <div class="field">
                                     <h:outputText class="label" value="Powtórz hasło"/> 
                                     <h:inputSecret id="confirmPassword" required="true" value="#{clientSettingsMB.confirmNewPassword}" validator="#{clientSettingsMB.validateSamePassword}" > 
-                                    <f:validateLength minimum="8" maximum="20" />
-                                    <p:ajax event="keyup" update="confirmPasswordMessage"/>
+                                        <f:validateLength minimum="8" maximum="20" />
+                                        <p:ajax event="keyup" update="confirmPasswordMessage"/>
                                     </h:inputSecret>
                                     <h:message for="confirmPassword" errorClass="invalid" id="confirmPasswordMessage" />
                                 </div>
-                                
+
                                 <div style="min-height: 40px"> 
                                     <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{clientSettingsMB.updatePassword()}"/>
                                 </div>
@@ -294,8 +298,12 @@
 
                                 <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
 
-                                <div> <h:outputText class="redMessage marginL20" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> </div>
-                                <div> <h:outputText class="redMessage marginL20" value="Zaktualizuj swój raport BIK." /> </div>
+                                <div> 
+                                    <h:outputText class="redMessage marginL20" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> 
+                                </div>
+                                <div>
+                                    <h:outputText class="redMessage marginL20" value="Zaktualizuj swój raport BIK." /> 
+                                </div>
                                 <div class="marginTB20">
                                     <div> <h:outputText class="fontGrey marginL20" value="Wgraj zeskanowany raport BIK w postaci .zip." /> </div>    
                                     <div> <h:outputText class="fontGrey marginL20 wordSpace" value="Dowiedz się" />
@@ -305,36 +313,95 @@
                                     <div> <h:outputText  class="fontGrey marginL20" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
                                     <div> <h:link class="redMessage marginL20 wordSpace" value="kliknij tutaj." /> </div>
                                 </div>
-
-                                <div>
-                                    <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
-                                </div>
-
-
-
-                                <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
-                                <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
+                                
 
                             </div>
-
-                            <div style="min-height: 360px;"> </div>
-                            <h:link class ="greenButton wideButton floatR marginTB20" value="Zapisz zmiany" outcome="/index"/>
-
+  
+                            <div class="marginLRT30">
+                                <div class="marginTB20">
+                                    <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
+                                </div>
+                                <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
+                                <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
+                            </div>
+                            
                         </h:form>
-                        
-                        <h:form>
-                        
-                        <h1>Wymagane dokumenty</h1>  
-                            <p class="pole">
-                                <h:outputLabel class="idCardLabel">Dowód tożsamości: </h:outputLabel>       
-                                <p:fileUpload id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple"  > 
-                                    <f:validator validatorId="uploadValidator" />
-                                </p:fileUpload>
-                            </p>
 
-                            <p> <h:message for="idCardUpload" class="message" /> </p>
+                        <h:form id="uploadForm" enctype="multipart/form-data">
+                            
+                            <div class="marginLRT30" style="height: 1500px; margin-top: 120px;" >     
+                                
+                                <h4>WYMAGANE DOKUMENTY</h4>
+                                
+                                 <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel" id="idCardLabel">Dowód tożsamości: </h:outputLabel>       
+                                    <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    
+                                    <h:message for="idCardUpload"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel" id="idIncomeStatementLabel">Zaświadczenie o zarobkach: </h:outputLabel>       
+                                    <p:fileUpload styleClass="greyButton" id="idIncomeStatement" value="#{ clientFileUploadMB.uploadedFiles[1] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idIncomeStatement"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idDeathCertificateLabel">Akt zgonu współmałżonka: </h:outputLabel>       
+                                    <p:fileUpload   styleClass="greyButton" id="idDeathCertificate" value="#{ clientFileUploadMB.uploadedFiles[2] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idDeathCertificate"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idMariageSettlementLabel">Intercyza: </h:outputLabel>       
+                                    <p:fileUpload   styleClass="greyButton" id="idMariageSettlement" value="#{ clientFileUploadMB.uploadedFiles[3] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idMariageSettlement"  errorClass="invalid" /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idDivorceActLabel">Akt rozwodu: </h:outputLabel>       
+                                    <p:fileUpload   styleClass="greyButton" id="idDivorceAct" value="#{ clientFileUploadMB.uploadedFiles[4] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idDivorceAct"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idSeparationActLabel">Akt separacji: </h:outputLabel>       
+                                    <p:fileUpload  styleClass="greyButton"  id="idSeparationAct" value="#{ clientFileUploadMB.uploadedFiles[5] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idSeparationAct"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idTitleDeadLabel">Akt własności: </h:outputLabel>       
+                                    <p:fileUpload  styleClass="greyButton"  id="idTitleDead" value="#{ clientFileUploadMB.uploadedFiles[6] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idTitleDead"  errorClass="invalid"  /> 
+                                 </div>
+                                
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel"  id="idBIGLabel">BIK: </h:outputLabel>       
+                                    <p:fileUpload  styleClass="greyButton"  id="idBIK" value="#{ clientFileUploadMB.uploadedFiles[7] }" mode="simple"  > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    <h:message for="idBIK"  errorClass="invalid"  /> 
+                                 </div>
+
+                                
+                                <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Zapisz" type="submit" action="#{ clientFileUploadMB.save() }" />      
                            
-                            <p:commandButton ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20" value="Zapisz" type="submit" action="#{ clientFileUploadMB.save() }" />      
+                            </div>
                             
                         </h:form>
 

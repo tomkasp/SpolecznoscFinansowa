@@ -1,4 +1,4 @@
-package com.efsf.sf.util.uploader.local;
+package com.efsf.sf.util.uploader.ftp;
 
 import java.util.Arrays;
 import javax.faces.application.FacesMessage;
