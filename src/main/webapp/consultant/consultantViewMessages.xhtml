@@ -93,7 +93,9 @@
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
                                       <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" />         
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >         
+                                         <f:ajax execute="@all" render="@all" />
+                                      </h:commandButton>
                                     </div>
                                 </h:panelGroup>   
                                 <h:panelGroup rendered="#{o.isSystem == 0}" >  
@@ -104,7 +106,8 @@
                                       </h:outputText>
                                       <h:outputText class="fontBlue floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
                                       <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
-                                    </div>
+
+                                   </div>
                                 </h:panelGroup>
                             </ui:repeat> 
                         </h:form>

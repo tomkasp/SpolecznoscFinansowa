@@ -39,7 +39,7 @@
                 </div>
                 <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList)}" >
                     <h4> Nieprzeczytane </h4>    
-                        <h:form> 
+                        <h:form id="unread"> 
                             <ui:repeat value="#{messagesMB.unreadMessagesList}" var="o">
 
                                 <h:panelGroup rendered="#{o.isSystem == 1}" >
@@ -49,7 +49,9 @@
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
                                       <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" />         
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >     
+                                        <f:ajax execute="@all" render="@all" />
+                                      </h:commandButton>
                                     </div>
                                 </h:panelGroup>   
                                 <h:panelGroup  rendered="#{o.isSystem == 0}" >  
