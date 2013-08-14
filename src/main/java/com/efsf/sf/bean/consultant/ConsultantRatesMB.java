@@ -54,6 +54,8 @@ public class ConsultantRatesMB implements Serializable{
     public List<ScoreBoardRow> getScoreBoard() {
        GenericDao<ConsultantRating> dao = new GenericDao(ConsultantRating.class); 
        ConsultantRating rating=dao.getById(idConsultant);
+       if(rating==null) rating=new ConsultantRating();
+       
        List<ConsultantRating> ratingAll=dao.getAll();
        
        CaseRatingDAO caseDAO=new CaseRatingDAO();
