@@ -35,6 +35,7 @@
 
                             <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
                             <h:link class="topMenuButton greyButton wideButton" value="Najlepsi doaradcy" outcome="/common/scoreBoard"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
                             <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
                             <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Doładuj konto" update=":dialog1" oncomplete="dodaj.show()" />
                             <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
@@ -87,6 +88,17 @@
                     
                 </script>
 
+                <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList) }" >
+                    <h:form> 
+                        <div style="min-height: 80px; border-bottom: green 4px solid">
+                            <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{marketMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
+                                
+                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
+                        </div>
+                    </h:form>
+                </h:panelGroup>
+                
 
                 <div class="marginT50"> 
                     <h:form>

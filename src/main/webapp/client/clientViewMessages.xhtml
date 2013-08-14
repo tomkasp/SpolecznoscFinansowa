@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core" >
+
+    <body>
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Klient - Wiadomości </ui:define> 
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
+                <f:event listener="#{messagesMB.reloadMessageBox()}" type="preRenderView" />
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+                </div>
+
+                <h:form>
+                    <div class="topbarMenuGreen">
+                        <h:panelGroup>
+                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
+                        </h:panelGroup>
+                    </div>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+
+                <div style="min-height: 50px">
+                <h3>Skrzynka odbiorcza</h3>                  
+                </div>
+                <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList)}" >
+                    <h4> Nieprzeczytane </h4>    
+                        <h:form> 
+                            <ui:repeat value="#{messagesMB.unreadMessagesList}" var="o">
+
+                                <h:panelGroup rendered="#{o.isSystem == 1}" >
+                                    <div style="min-height: 90px; border-bottom: #000000 solid 5px">
+                                      <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_black.png" title="BlackEnvelope" ></h:graphicImage>
+                                      <h:outputText class="fontBlack floatL marginLRT30" value="#{o.sentDate}" >
+                                          <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                      </h:outputText>
+                                      <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" />         
+                                    </div>
+                                </h:panelGroup>   
+                                <h:panelGroup  rendered="#{o.isSystem == 0}" >  
+                                   <div style="min-height: 90px; border-bottom: green solid 5px">
+                                      <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_green.png" title="GreenEnvelope" ></h:graphicImage>
+                                      <h:outputText class="fontBlue floatL marginLRT30" style="color: green" value="#{o.sentDate}" >
+                                          <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                      </h:outputText>
+                                      <h:outputText class="fontBlue floatL marginLRT30" style="color: green" value="Rozmowa z #{o.userByFkFromUser.consultants.toArray()[0].name} #{o.userByFkFromUser.consultants.toArray()[0].lastName}" />
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
+                                    </div>
+                                </h:panelGroup>
+                            </ui:repeat> 
+                        </h:form>
+                    </h:panelGroup>
+                <h:panelGroup rendered="#{!(empty messagesMB.readConversations)}" >
+                    <h4> Przeczytane </h4>
+                    <h:form> 
+                        <ui:repeat value="#{messagesMB.readConversations}" var="o">             
+                            <div style="min-height: 90px; border-bottom: #ADA6A5 solid 5px">
+                               <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_grey.png" title="RedEnvelope" ></h:graphicImage>
+                               <h:outputText class="fontGrey floatL marginLRT30" value="#{o.sentDate}" >
+                                   <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                               </h:outputText>
+                               <h:outputText rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.consultants.toArray()[0].name} #{o.userByFkFromUser.consultants.toArray()[0].lastName}" />
+                               <h:outputText rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkToUser.consultants.toArray()[0].name} #{o.userByFkToUser.consultants.toArray()[0].lastName}" />
+        
+                               <h:commandButton rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />   
+                               <h:commandButton rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkToUser.idUser)}" />  
+                             </div>   
+                        </ui:repeat> 
+                    </h:form>
+                </h:panelGroup>
+
+                <div style="min-height: 50px"></div>
+            </ui:define>           
+        </ui:composition>
+    </body>
+</html>
