@@ -50,7 +50,14 @@ public class MessageDAO extends GenericDao<Message>{
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Query q =  session.createQuery("from Message where fk_toUser= :userId and isViewed = 1 order by sentDate desc ");
+        Query q =  session.createQuery("FROM Message as m "
+                + "join fetch m.userByFkFromUser as usFrom "
+                + "join fetch m.userByFkToUser as usTo "
+                + "left join fetch usFrom.consultants as con "
+                + "left join fetch usFrom.clients as clt "              
+                + "left join fetch usTo.consultants as con2 "
+                + "left join fetch usTo.clients as clt2 "              
+                + "where ((fk_toUser = :userId and isViewed = 1) or fk_fromUser = :userId) and isSystem = 0 order by sentDate desc");
         q.setParameter("userId", userId);
         list = q.list();
         session.getTransaction().commit();

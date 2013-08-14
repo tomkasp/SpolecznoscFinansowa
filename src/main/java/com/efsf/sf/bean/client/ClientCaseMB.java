@@ -6,6 +6,7 @@ package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
@@ -55,6 +56,8 @@ public class ClientCaseMB implements Serializable {
     private ArrayList<CaseStatus> statusModel = new ArrayList();
     
     private int caseStatusID;
+    
+    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
     
     /**
@@ -188,11 +191,30 @@ public class ClientCaseMB implements Serializable {
              ClientCaseDAO cdao = new ClientCaseDAO();
              selectedClientCase = cdao.getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
              caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
-             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);
+             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
              cdao.updateClientCase(selectedClientCase);
+             fillSelectedCaseIncomeTable();
              System.out.println("HAHA");
         }
     }
+    
+    public void fillSelectedCaseIncomeTable() {
+       
+        selectedCaseIncomeTable = new ArrayList();
+        
+        Client client = new ClientDAO().getClientWithIncomes(getSelectedClientCase().getClient().getIdClient());
+        
+        for (Income i : client.getIncomes())
+        {
+            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
+        }
+        
+        for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
+        {
+            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
+        }
+    }
+    
     
     
     
@@ -335,6 +357,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setCaseStatusID(int caseStatusID) {
         this.caseStatusID = caseStatusID;
+    }
+
+    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
+        return selectedCaseIncomeTable;
+    }
+
+    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
+        this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
    

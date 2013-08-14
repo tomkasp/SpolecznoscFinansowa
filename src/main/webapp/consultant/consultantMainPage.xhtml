@@ -34,30 +34,21 @@
             </ui:define>
 
             <ui:define name="content">
-
-
-
-
-
                
-                <h:panelGroup rendered="#{!(empty marketMB.premiumList) or !(empty marketMB.unreadMessagesList) }" >
+                <h:panelGroup rendered="#{!(empty marketMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
                     <h:form> 
-                        <div style="min-height: 63px;">
+                        <div style="min-height: 80px; border-bottom: #0793F0 4px solid">
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz #{marketMB.premiumList.size() + marketMB.unreadMessagesList.size()} nieprzeczytanych wiadomości." /> 
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{marketMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
                                 
-                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{marketMB.toViewMessages()}" />  
+                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
                         </div>
                     </h:form>
                 </h:panelGroup>
                          
-                
-   
-
-
                 <h:form>
                    
-                    <div class="bottomTable">
+                    <div>
 
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
