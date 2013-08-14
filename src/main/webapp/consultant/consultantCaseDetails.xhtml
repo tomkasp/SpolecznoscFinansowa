@@ -45,7 +45,7 @@
                         <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
                         <div style="min-height: 160px">
                             <div class="leftInlineBox">
-                                <h:form>
+                                <h:form id="leftColumn">
                                     <h4> DANE KLIENTA </h4>
                                     <div class="marginLRT30">        
                                         <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.name}" /> </div>
@@ -57,7 +57,7 @@
                                     
                                     <h4> DANE O ZATRUDNIENIU </h4>
                                     <div class="marginTB20" >   
-                                        <p:dataTable style="clear:both" id="table" value="#{marketMB.selectedCaseIncomeTable}" var="data" emptyMessage="Klient nie zdefiniował żadnych informacji." >
+                                        <p:dataTable style="clear:both" id="table" value="#{clientCaseMB.selectedCaseIncomeTable}" var="data" emptyMessage="Klient nie zdefiniował żadnych informacji." >
                                     
                                             <p:column headerText="Rodzaj">  
                                                 <h:outputText  value="#{data.employmentType}" />
@@ -96,7 +96,7 @@
 
                             <div class="rightInlineBox">
                                 <h:form id="rightColumn">
-                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
+                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and clientCaseMB.selectedClientCase.consultant eq null}" >
                                     <h:panelGroup rendered="#{!marketMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
@@ -135,7 +135,15 @@
                                         <p:commandButton styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
                                     </h:panelGroup>
                                 </h:panelGroup>
-                                
+                                    <h:panelGroup style="color: red" rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(clientCaseMB.selectedClientCase.consultant eq null)}" >
+                                        <h4> PODEJMIJ DECYZJĘ </h4>
+                                        <div class="solidText"> 
+                                            Dana sprawa jest sprawą Premium i klient chce właśnie Ciebie do prowadzenia sprawy. <br /><br /> Podejmij decyzję teraz. Pamiętaj odrzucenie sprawy premium skutkuje w utracie rankingu. 
+                                        </div>
+                                        <div style="min-height: 30px"></div>
+                                        <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  oncomplete="revokePremiumDialog.show();"/> 
+                                        <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
+                                    </h:panelGroup>
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
                                    <h4> USTAW STATUS SPRAWY </h4>
                                    <div class="solidText"> 
@@ -312,6 +320,35 @@
                                 </h:commandButton>
                             </div>
                        </p:dialog>
+                            
+                            
+                       <p:dialog id="acceptPremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="acceptPremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz zaakceptować sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
+                                </h:panelGroup>
+
+                                <div> 
+                                   <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.consultantAcceptPremium(clientCaseMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
+                                        <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                   </h:commandButton>
+
+                                   <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
+                                </div>
+                     </p:dialog>
+                            
+                     <p:dialog id="revokePremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokePremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz odrzucić sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
+                                </h:panelGroup>
+
+                                <div> 
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{clientCaseMB.consultantRevokePremium(clientCaseMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
+                                      <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                </h:commandButton>
+                                    
+                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
+                                </div>
+                     </p:dialog>
                        </h:form>
                        </h:panelGroup>
                     </ui:define>

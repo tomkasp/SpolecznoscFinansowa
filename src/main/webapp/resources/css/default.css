@@ -82,6 +82,21 @@ p:column {
     margin: 24px 3px;   
 }
 
+.uploaderLabel{
+    float: left;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
+    text-align: right;
+    margin: 3px;
+    margin-right: 5px;
+    width: 450px; 
+    text-align: left;
+}
+
 .label{
     float: left;
     width: 40%;

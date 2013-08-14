@@ -20,7 +20,7 @@ public class FileUploadController {
             String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));//wyłuskanie rozszerzenia pliku
             fileName = fileName + fileFormat;
             try {
-                copyFile(destination, fileName, file.getInputstream(), folderId);
+                copyFile( destination , fileName , file.getInputstream() );
                 local = fileName;
                 System.out.println(local);
             } catch (IOException e) {
@@ -30,7 +30,7 @@ public class FileUploadController {
         } else {
             return null;
         }
-
+        
     }
 
     public String upload(UploadedFile file, Integer folderId) {
@@ -40,7 +40,7 @@ public class FileUploadController {
 
         if (file != null) {
             try {
-                copyFile(destination, file.getFileName(), file.getInputstream(), folderId);
+                copyFile( destination , file.getFileName() , file.getInputstream() );
                 local = file.getFileName();
                 // local="http://localhost:8084/upload/" + folderId.toString() + "/"  + file1.getFileName();
                 System.out.println(local);
@@ -51,7 +51,7 @@ public class FileUploadController {
         return local;
     }
 
-    private void copyFile(String destination, String fileName, InputStream in, Integer folderId) {
+    private void copyFile(String destination, String fileName, InputStream in) {
         
         try {
             boolean folder = new File(destination).mkdirs();        
@@ -65,8 +65,7 @@ public class FileUploadController {
                 out.flush();
             }
 
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
 
     }
 

@@ -1,6 +1,7 @@
 package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
@@ -29,6 +30,9 @@ public class ClientMainPageMB implements Serializable {
     
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
+    
+    @ManagedProperty(value="#{messagesMB}")
+    private MessagesMB messagesMB;
     
     private List<ClientCase> clientCaseList = new ArrayList<>();
     
@@ -66,26 +70,29 @@ public class ClientMainPageMB implements Serializable {
     private boolean requirementsFulfilled = false;
   
     @PostConstruct
+    public void makeModels()
+    {
+        modelsEmploymentType.add( showAllClientsEmploymentTypes( loginMB.getClient() ) );
+        modelsBranch.add( showAllClientsBranches( loginMB.getClient() ) );
+    }
+    
     public void fillTables()
     {
+        
         reloadCases();
         reloadCases2();
         reloadCases3();
         reloadCases4();
         reloadCases5();
         reloadCases6();
-        checkRequirementsForNewApplication();
-        
-        modelsEmploymentType.add( showAllClientsEmploymentTypes( loginMB.getClient() ) );
-        modelsBranch.add( showAllClientsBranches( loginMB.getClient() ) );
+        messagesMB.loadUnreadMessages();
+        checkRequirementsForNewApplication(); 
+
     }
    
     public void reloadCases()
     {
-        modelsEmploymentType = new ArrayList<>();
-        modelsBranch = new ArrayList<>();
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
-        
         System.out.println("Pobrano"); 
     }
         
@@ -434,6 +441,14 @@ public class ClientMainPageMB implements Serializable {
 
     public void setRequirementsFulfilled(boolean requirementsFulfilled) {
         this.requirementsFulfilled = requirementsFulfilled;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
     }
     
     
