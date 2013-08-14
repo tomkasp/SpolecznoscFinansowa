@@ -22,7 +22,7 @@ public class MessagesMB implements Serializable {
     private String message;
     private int userTo_id;
     
-    private HashSet<User> unreadUsers;
+    private HashSet<Integer> unreadUsers;
     
     private ArrayList<Message> unreadMessagesList = new ArrayList();
     private ArrayList<Message> readConversations = new ArrayList();
@@ -96,9 +96,9 @@ public class MessagesMB implements Serializable {
         ArrayList<Message> unreadConversations = new ArrayList();
         for (Message m : messagesList)
         {
-            if ( m.getIsSystem().equals(0) && !unreadUsers.contains(m.getUserByFkFromUser()))
+            if ( m.getIsSystem().equals(0) && !unreadUsers.contains(m.getUserByFkFromUser().getIdUser()))
             {
-                unreadUsers.add(m.getUserByFkFromUser());
+                unreadUsers.add(m.getUserByFkFromUser().getIdUser());
                 unreadConversations.add(m);         
             }
             else if (m.getIsSystem().equals(1))
@@ -116,12 +116,12 @@ public class MessagesMB implements Serializable {
         ArrayList<Message> readConversationsList = new ArrayList();
         for (Message m : messagesList)
         {
-            if ( !unreadUsers.contains(m.getUserByFkFromUser()) && !fromUsers.contains(m.getUserByFkFromUser()) && !(m.getUserByFkFromUser().getIdUser().equals(loginMB.getIdUser())))
+            if ( !unreadUsers.contains(m.getUserByFkFromUser().getIdUser()) && !fromUsers.contains(m.getUserByFkFromUser()) && !(m.getUserByFkFromUser().getIdUser().equals(loginMB.getIdUser())))
             {
                 fromUsers.add(m.getUserByFkFromUser());
                 readConversationsList.add(m);         
             }
-            if ( !unreadUsers.contains(m.getUserByFkToUser()) && !(fromUsers.contains(m.getUserByFkToUser())) && !(m.getUserByFkToUser().getIdUser().equals(loginMB.getIdUser())))
+            if ( !unreadUsers.contains(m.getUserByFkToUser().getIdUser()) && !(fromUsers.contains(m.getUserByFkToUser())) && !(m.getUserByFkToUser().getIdUser().equals(loginMB.getIdUser())))
             {
                 fromUsers.add(m.getUserByFkToUser());
                 readConversationsList.add(m);
@@ -145,7 +145,10 @@ public class MessagesMB implements Serializable {
 
     public String toViewMessages()
     { 
-        return "/consultant/consultantViewMessages?faces-redirect=true";
+        if (loginMB.getType().equals(2))
+            return "/consultant/consultantViewMessages?faces-redirect=true";
+        else
+            return "/client/clientViewMessages?faces-redirect=true";
     }
     
     public void setLoginMB(LoginMB loginMB) {
