@@ -27,7 +27,7 @@ ui-dialog-content ui-widget-content {
 
 .ui-dialog .ui-dialog-title{
     color: black;  
-    border-left: 3px solid rgb(85,184,103);
+    border-left: 3px solid #0793F0;
     padding-left: 10px;
     font-size: 18px;
 }

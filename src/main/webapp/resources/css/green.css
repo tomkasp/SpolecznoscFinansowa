@@ -76,6 +76,13 @@ h6{
     font-weight: bold;
 }
 
+.ui-dialog .ui-dialog-title{
+    color: black;  
+    border-left: 3px solid rgb(85,184,103);
+    padding-left: 10px;
+    font-size: 18px;
+}
+
 
 
 TR.ui-widget-content.ui-datatable-odd.ui-state-highlight{   

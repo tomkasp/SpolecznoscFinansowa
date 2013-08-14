@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.efsf.sf.util.uploader.ftp;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.primefaces.model.UploadedFile;
 
 /**
  * @author WR1EI1
@@ -21,8 +17,37 @@ public class FileUploaderFTP {
       private int port = 89;
       private String user = "rice";
       private String pass = "rice123";
+  
+    public String upload(UploadedFile file, Integer folderId, String fileName) {
+        
+        String ftpPath="rice/SF/USERS/"+folderId+"/";
+        
+        makeDirectory(ftpPath);
+        
+        if ( file != null ) 
+        {
+            String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));//wyłuskanie rozszerzenia pliku
+            fileName = fileName + fileFormat;
+            try {
+                
+                System.out.println("upload start");
+                
+                UploadFTP( file.getInputstream(),ftpPath + fileName );
+                
+                System.out.println("upload success!!!");
+                
+            } catch (IOException e) {}
+            return ftpPath;
+        } else {
+            
+            System.out.println("file is null!!!");
+                
+            return null;
+        }
+        
+    }  
     
-    public String Upload(String sourcePath,String ftpPath) {
+    private String UploadFTP(InputStream inputStream,String ftpPath) {
  
         FTPClient ftpClient = new FTPClient();
         
@@ -39,13 +64,11 @@ public class FileUploaderFTP {
             
             System.out.println(4);
  
-            File firstLocalFile = new File(sourcePath);
             System.out.println(5);
  
-            String firstRemoteFile =ftpPath;
+            String firstRemoteFile = ftpPath;
             System.out.println(6);
             
-            InputStream inputStream = new FileInputStream(firstLocalFile);
             System.out.println(7);
             
             ftpClient.setBufferSize(0);
@@ -62,7 +85,6 @@ public class FileUploaderFTP {
  
         } catch (IOException ex) {
             System.out.println("Error: " + ex.getMessage());
-            ex.printStackTrace();
         } finally {
             try {
                 if (ftpClient.isConnected()) {
@@ -70,15 +92,12 @@ public class FileUploaderFTP {
                     ftpClient.disconnect();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
             }
             System.out.println(10);
         }
         return "";
        
-        
     }
-    
     
      public boolean makeDirectory(String pathname) {
  
@@ -96,7 +115,7 @@ public class FileUploaderFTP {
             done = ftpClient.makeDirectory(pathname);
             
             if (done) { System.out.println("Success!"); }
-            else{ System.out.println("Katalog istnieje!"); };
+            else{ System.out.println("directory does not exist!"); };
             
  
         } catch (IOException ex) {
@@ -114,7 +133,6 @@ public class FileUploaderFTP {
         }
         return done;
     }
-    
     
     public String getServer() {
         return server;
