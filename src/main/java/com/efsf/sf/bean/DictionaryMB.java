@@ -23,6 +23,7 @@ public class DictionaryMB implements Serializable{
     /**
      * Creates a new instance of DictionaryMB
      */
+       
     
     private List<Region> region;
     private List<Education> education;
@@ -40,6 +41,8 @@ public class DictionaryMB implements Serializable{
     
     
     public DictionaryMB() {
+        
+        
         RegionDAO reg = new RegionDAO();
         region = reg.regionList();
         

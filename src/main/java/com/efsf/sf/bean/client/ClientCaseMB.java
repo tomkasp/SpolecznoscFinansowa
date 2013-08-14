@@ -6,6 +6,7 @@ package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
@@ -14,6 +15,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -31,6 +33,12 @@ public class ClientCaseMB implements Serializable {
     
     @ManagedProperty(value = "#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
+    
+    @ManagedProperty(value = "#{messagesMB}")
+    private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private ResourceBundle bundle;
 
         
     private int idTypProduktu;
@@ -238,12 +246,18 @@ public class ClientCaseMB implements Serializable {
         cc.setConsultants(null);
         cc.setConsultants_1(null);
         cc.setCaseStatus(new CaseStatusDAO().read(2));
+        
+        messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_ACCEPT_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
+        
         new ClientCaseDAO().updateClientCase(cc);
     }
     
     public void consultantRevokePremium(ClientCase cc)
     {
         cc.setConsultant(null);
+        
+        messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_REVOKE_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
+     
         new ClientCaseDAO().updateClientCase(cc);
     }
     
@@ -256,6 +270,9 @@ public class ClientCaseMB implements Serializable {
         selectedClientCase.setConsultants(null);
         selectedClientCase.setConsultants_1(null);
         caseDao.updateClientCase(selectedClientCase);  
+        
+        messagesMB.generateSystemMessage(bundle.getString("CLIENT_SELECTED_CONSULTANT"), selectedConsultant.getUser().getIdUser(), new Object[] {login.getClient().getIdClient(), selectedClientCase.getIdClientCase()});
+     
     }
 
     public Date getCurrentDate() {
@@ -365,6 +382,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
         this.selectedCaseIncomeTable = selectedCaseIncomeTable;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
     }
 
    

@@ -328,7 +328,7 @@
                                 </h:panelGroup>
 
                                 <div> 
-                                   <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.acceptPremiumApplication(clientCaseMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
+                                   <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.consultantAcceptPremium(clientCaseMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
                                         <f:ajax execute="@this" render=":rightColumn :leftColumn" />
                                    </h:commandButton>
 
@@ -342,7 +342,7 @@
                                 </h:panelGroup>
 
                                 <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokePremiumApplication(clientCaseMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{clientCaseMB.consultantRevokePremium(clientCaseMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
                                       <f:ajax execute="@this" render=":rightColumn :leftColumn" />
                                 </h:commandButton>
                                     

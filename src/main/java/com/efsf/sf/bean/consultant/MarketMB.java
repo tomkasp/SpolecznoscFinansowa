@@ -8,27 +8,28 @@ import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.bean.client.ClientCaseMB;
-import com.efsf.sf.collection.IncomeData;
+
 import com.efsf.sf.sql.dao.ClientCaseDAO;
-import com.efsf.sf.sql.dao.ClientDAO;
+
 import com.efsf.sf.sql.dao.ConsultantDAO;
-import com.efsf.sf.sql.dao.MessageDAO;
+
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
-import com.efsf.sf.sql.entity.Message;
+
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -56,6 +57,9 @@ public class MarketMB implements Serializable
     
     @ManagedProperty(value="#{messagesMB}")
     private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private ResourceBundle bundle;
     
     
     private List<ClientCase> clientCaseList = new ArrayList();
@@ -380,6 +384,8 @@ public class MarketMB implements Serializable
             appliedModelsEmploymentType = new ArrayList();
             appliedModelsBranch = new ArrayList();
             makeAppliedModels();
+            
+            messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[] {loginMB.getConsultant().getIdConsultant(), cs.getIdClientCase()});
             
             //It was the fastest way :) 
             reloadCases();
@@ -825,6 +831,14 @@ public class MarketMB implements Serializable
 
     public void setSelectedPremiumCase(ClientCase selectedPremiumCase) {
         this.selectedPremiumCase = selectedPremiumCase;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 
 
