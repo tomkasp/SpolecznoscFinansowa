@@ -392,5 +392,13 @@ public class ClientCaseMB implements Serializable {
         this.messagesMB = messagesMB;
     }
 
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
    
 }
