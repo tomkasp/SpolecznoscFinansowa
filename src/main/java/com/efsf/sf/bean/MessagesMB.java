@@ -22,6 +22,10 @@ public class MessagesMB implements Serializable {
     private String message;
     private int userTo_id;
     
+    private HashSet<User> unreadUsers;
+    
+    private ArrayList<Message> unreadMessagesList = new ArrayList();
+    private ArrayList<Message> readConversations = new ArrayList();
     
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
@@ -34,6 +38,15 @@ public class MessagesMB implements Serializable {
         markListAsRead(messages);
         
         return "/common/messages";
+    }
+    
+    public void reloadMessageBox()
+    {
+        MessageDAO messageDao = new MessageDAO();
+        unreadMessagesList =(ArrayList<Message>) messageDao.getUnreadMessages(loginMB.getIdUser());
+        unreadMessagesList = chooseUnreadConversationsAndSystemMessages(unreadMessagesList);
+        readConversations = (ArrayList<Message>) messageDao.getReadMessages(loginMB.getIdUser());
+        readConversations = chooseReadConversations(readConversations);
     }
 
     public void sendAnswer(){
@@ -64,6 +77,12 @@ public class MessagesMB implements Serializable {
         }
     }
     
+    public void loadUnreadMessages()
+    {
+        MessageDAO messageDao = new MessageDAO();
+        unreadMessagesList =(ArrayList<Message>) messageDao.getUnreadMessages(loginMB.getIdUser());
+    }
+    
     public void markOneAsRead(Message m)
     {
         GenericDao<Message> dao = new GenericDao(Message.class);
@@ -73,13 +92,13 @@ public class MessagesMB implements Serializable {
     
     public ArrayList<Message> chooseUnreadConversationsAndSystemMessages(ArrayList<Message> messagesList)
     {
-        HashSet<User> fromUsers = new HashSet();
+        unreadUsers = new HashSet();
         ArrayList<Message> unreadConversations = new ArrayList();
         for (Message m : messagesList)
         {
-            if ( m.getIsSystem().equals(0) && !fromUsers.contains(m.getUserByFkFromUser()))
+            if ( m.getIsSystem().equals(0) && !unreadUsers.contains(m.getUserByFkFromUser()))
             {
-                fromUsers.add(m.getUserByFkFromUser());
+                unreadUsers.add(m.getUserByFkFromUser());
                 unreadConversations.add(m);         
             }
             else if (m.getIsSystem().equals(1))
@@ -91,11 +110,44 @@ public class MessagesMB implements Serializable {
         return unreadConversations;
     }
     
+    public ArrayList<Message> chooseReadConversations(ArrayList<Message> messagesList)
+    {
+        HashSet<User> fromUsers = new HashSet();
+        ArrayList<Message> readConversationsList = new ArrayList();
+        for (Message m : messagesList)
+        {
+            if ( !unreadUsers.contains(m.getUserByFkFromUser()) && !fromUsers.contains(m.getUserByFkFromUser()) && !(m.getUserByFkFromUser().getIdUser().equals(loginMB.getIdUser())))
+            {
+                fromUsers.add(m.getUserByFkFromUser());
+                readConversationsList.add(m);         
+            }
+            if ( !unreadUsers.contains(m.getUserByFkToUser()) && !(fromUsers.contains(m.getUserByFkToUser())) && !(m.getUserByFkToUser().getIdUser().equals(loginMB.getIdUser())))
+            {
+                fromUsers.add(m.getUserByFkToUser());
+                readConversationsList.add(m);
+            }
+        }
+        
+        return readConversationsList;
+    }
     
+    public void generateSystemMessage()
+    {
+        
+    }
     
-    
+     
+    public void acceptSystemMessage(Message m)
+    {
+        markOneAsRead(m);
+        unreadMessagesList.remove(m);
+    }
 
-
+    public String toViewMessages()
+    { 
+        return "/consultant/consultantViewMessages?faces-redirect=true";
+    }
+    
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
@@ -117,6 +169,22 @@ public class MessagesMB implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public ArrayList<Message> getUnreadMessagesList() {
+        return unreadMessagesList;
+    }
+
+    public void setUnreadMessagesList(ArrayList<Message> unreadMessagesList) {
+        this.unreadMessagesList = unreadMessagesList;
+    }
+
+    public ArrayList<Message> getReadConversations() {
+        return readConversations;
+    }
+
+    public void setReadConversations(ArrayList<Message> readConversations) {
+        this.readConversations = readConversations;
     }
 
 }
