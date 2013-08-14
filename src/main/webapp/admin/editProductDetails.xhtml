@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Admin - ekran główny </ui:define> 
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h3>Edytuj szczegóły produktu</h3>
+                <h:form> 
+                    <div class="leftBox"> 
+         
+                        <div class="field"> <h:outputText class="label" value="Min. dochód brutto"/><p:inputText value="#{productsMB.selectedProductDetails.amountBruttoMin}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Max. dochód brutto"/><p:inputText value="#{productsMB.selectedProductDetails.amountBruttoMax}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Min. czas kredytu"/><p:inputText value="#{productsMB.selectedProductDetails.loanTimeMin}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Max. czas kredytu"/><p:inputText value="#{productsMB.selectedProductDetails.loanTimeMax}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Min. wiek klienta"/><p:inputText value="#{productsMB.selectedProductDetails.clientAgeMin}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Max. wiek klienta"/><p:inputText value="#{productsMB.selectedProductDetails.clientAgeMax}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Min. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMin}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Max. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMax}"/></div>
+  
+                    </div>
+
+                    <div class="rightBox" style="margin:20px;">
+                        <div class="field"> <h:outputText class="label" value="Min. czas uzyskiwania dochodów"/><p:inputText value="#{productsMB.selectedProductDetails.oodwmMin}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Max. czas uzyskiwania dochodów"/><p:inputText value="#{productsMB.selectedProductDetails.oodwmMax}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Rekomendacja"/><p:selectBooleanButton value="#{productsMB.selectedProductDetails.recomendation}" onLabel="Tak" offLabel="Nie" />  </div>
+                        <div class="field"> <h:outputText class="label" value="Szczegóły rekomendacji"/><p:inputTextarea value="#{productsMB.selectedProductDetails.recomendationDetails}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Wymagane dokumenty"/><p:inputTextarea value="#{productsMB.selectedProductDetails.requiredDocuments}"/></div>
+                    </div>
+                    
+                    <div class="przyciskiDol marginT10">     
+
+                        <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit"/> 
+                        <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" type="submit"/> 
+
+                    </div>
+                </h:form> 
+
+                <div class="marginT50"></div>   
+            </ui:define>           
+        </ui:composition>
+
+
+    </body>
+</html>

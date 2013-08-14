@@ -6,6 +6,8 @@ package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MessagesMB;
+import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -30,6 +33,12 @@ public class ClientCaseMB implements Serializable {
     
     @ManagedProperty(value = "#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
+    
+    @ManagedProperty(value = "#{messagesMB}")
+    private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private ResourceBundle bundle;
 
         
     private int idTypProduktu;
@@ -55,6 +64,8 @@ public class ClientCaseMB implements Serializable {
     private ArrayList<CaseStatus> statusModel = new ArrayList();
     
     private int caseStatusID;
+    
+    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
     
     /**
@@ -188,11 +199,30 @@ public class ClientCaseMB implements Serializable {
              ClientCaseDAO cdao = new ClientCaseDAO();
              selectedClientCase = cdao.getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
              caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
-             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);
+             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
              cdao.updateClientCase(selectedClientCase);
+             fillSelectedCaseIncomeTable();
              System.out.println("HAHA");
         }
     }
+    
+    public void fillSelectedCaseIncomeTable() {
+       
+        selectedCaseIncomeTable = new ArrayList();
+        
+        Client client = new ClientDAO().getClientWithIncomes(getSelectedClientCase().getClient().getIdClient());
+        
+        for (Income i : client.getIncomes())
+        {
+            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
+        }
+        
+        for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
+        {
+            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
+        }
+    }
+    
     
     
     
@@ -211,6 +241,26 @@ public class ClientCaseMB implements Serializable {
             return false;                   
     }
     
+    public void consultantAcceptPremium(ClientCase cc)
+    {
+        cc.setConsultants(null);
+        cc.setConsultants_1(null);
+        cc.setCaseStatus(new CaseStatusDAO().read(2));
+        
+        messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_ACCEPT_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
+        
+        new ClientCaseDAO().updateClientCase(cc);
+    }
+    
+    public void consultantRevokePremium(ClientCase cc)
+    {
+        cc.setConsultant(null);
+        
+        messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_REVOKE_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
+     
+        new ClientCaseDAO().updateClientCase(cc);
+    }
+    
     public void assignConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
@@ -220,6 +270,9 @@ public class ClientCaseMB implements Serializable {
         selectedClientCase.setConsultants(null);
         selectedClientCase.setConsultants_1(null);
         caseDao.updateClientCase(selectedClientCase);  
+        
+        messagesMB.generateSystemMessage(bundle.getString("CLIENT_SELECTED_CONSULTANT"), selectedConsultant.getUser().getIdUser(), new Object[] {login.getClient().getIdClient(), selectedClientCase.getIdClientCase()});
+     
     }
 
     public Date getCurrentDate() {
@@ -321,6 +374,30 @@ public class ClientCaseMB implements Serializable {
 
     public void setCaseStatusID(int caseStatusID) {
         this.caseStatusID = caseStatusID;
+    }
+
+    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
+        return selectedCaseIncomeTable;
+    }
+
+    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
+        this.selectedCaseIncomeTable = selectedCaseIncomeTable;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 
    

@@ -6,26 +6,31 @@ package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.bean.client.ClientCaseMB;
-import com.efsf.sf.collection.IncomeData;
+
 import com.efsf.sf.sql.dao.ClientCaseDAO;
-import com.efsf.sf.sql.dao.ClientDAO;
+
 import com.efsf.sf.sql.dao.ConsultantDAO;
+
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -51,10 +56,19 @@ public class MarketMB implements Serializable
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
     
+    @ManagedProperty(value="#{messagesMB}")
+    private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private ResourceBundle bundle;
+    
     
     private List<ClientCase> clientCaseList = new ArrayList();
     private List<ClientCase> ownedList = new ArrayList();
     private List<ClientCase> finishedList = new ArrayList();
+    
+    private List<ClientCase> premiumList = new ArrayList();
+    
     
     private Converters converters =  new Converters();
       
@@ -84,10 +98,9 @@ public class MarketMB implements Serializable
     private ArrayList<Set<String>> finishedModelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> finishedModelsBranch = new ArrayList();
     
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
     
-
+    
     //MARKET VIEW FIELDS!
     
     private int phaseMin = 0;
@@ -112,19 +125,16 @@ public class MarketMB implements Serializable
     
     private ClientCase selectedMarketCase;
     
+    private ClientCase selectedPremiumCase;
+    
     public MarketMB()
     {
-        reloadCases(); 
+        
     }
     
     @PostConstruct
     public void fillModels()
     {
-        reloadOwnedTable();
-        reloadFinishedTable();
-        makeObservedModels();
-        makeAppliedModels();
-        
         for (EmploymentType et : dictionaryMB.getIncome())
             incomeIds.add(et.getShortcut());
         for (EmploymentType ba : dictionaryMB.getBusinessActivity())
@@ -136,13 +146,13 @@ public class MarketMB implements Serializable
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed() && !facesContext.isPostback())
         {
-            loginMB.setConsultant(new ConsultantDAO().getCounsultantConnectedToUser(loginMB.getIdUser()));
-            reloadCases(); 
-            reloadOwnedTable();
-            reloadFinishedTable();
-            makeObservedModels();
-            makeAppliedModels();
+            pollData();
         }
+    }
+    
+    public void selectPremiumCase(ClientCase cc)
+    {
+        selectedPremiumCase = cc;
     }
     
     public void makeObservedModels()
@@ -158,6 +168,13 @@ public class MarketMB implements Serializable
             observedModelsBranch.add(showAllClientsBranches(client));  
         }
     }
+    
+    public void loadPremiumAppliences()
+    {
+        premiumList = caseDao.premiumCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
+    }
+    
+
     
     public void reloadOwnedTable()
     {
@@ -205,9 +222,7 @@ public class MarketMB implements Serializable
            
     
     public void rowDoubleClick() throws IOException
-    {
-        
-        fillSelectedCaseIncomeTable();
+    { 
         FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
     }
     
@@ -282,6 +297,25 @@ public class MarketMB implements Serializable
         return "/consultant/consultantMarket?faces-redirect=true";
     }
     
+    public String toClientCaseDetails(ClientCase cc)
+    {
+        clientCaseMB.setSelectedClientCase(cc);
+        return "/consultant/consultantCaseDetails?faces-redirect=true";
+    }
+    
+    public void acceptPremiumApplication(ClientCase cc)
+    {
+       clientCaseMB.consultantAcceptPremium(cc);
+       premiumList.remove(cc);
+    }
+    
+    public void revokePremiumApplication(ClientCase cc)
+    {
+       premiumList.remove(cc);
+       clientCaseMB.consultantRevokePremium(cc);
+    }
+    
+
     public void pollData()
     {
         selectedLastCase = null;
@@ -289,9 +323,14 @@ public class MarketMB implements Serializable
         selectedAppliedCase = null;
         
          // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
-         loginMB.setConsultant((new ConsultantDAO()).getCounsultantConnectedToUser(loginMB.getIdUser()));
-         reloadCases();
-         reloadOwnedTable();
+            loginMB.setConsultant(new ConsultantDAO().getCounsultantConnectedToUser(loginMB.getIdUser()));
+            loadPremiumAppliences();
+            messagesMB.loadUnreadMessages();
+            reloadCases(); 
+            reloadOwnedTable();
+            reloadFinishedTable();
+            makeObservedModels();
+            makeAppliedModels();
     }
     
     public void unselectEmployment()
@@ -308,7 +347,7 @@ public class MarketMB implements Serializable
         else
             return cons.size();
     }
-    
+      
     public void traceCase(ClientCase cs)
     {
         Consultant consultant = loginMB.getConsultant();
@@ -346,6 +385,8 @@ public class MarketMB implements Serializable
             appliedModelsEmploymentType = new ArrayList();
             appliedModelsBranch = new ArrayList();
             makeAppliedModels();
+            
+            messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[] {loginMB.getConsultant().getIdConsultant(), cs.getIdClientCase()});
             
             //It was the fastest way :) 
             reloadCases();
@@ -424,23 +465,7 @@ public class MarketMB implements Serializable
         }   
     }
     
-    public void fillSelectedCaseIncomeTable() {
-       
-        selectedCaseIncomeTable = new ArrayList();
-        
-        Client client = new ClientDAO().getClientWithIncomes(clientCaseMB.getSelectedClientCase().getClient().getIdClient());
-        
-        for (Income i : client.getIncomes())
-        {
-            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
-        }
-        
-        for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
-        {
-            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
-        }
-    }
-    
+
     public void stopObserve(ClientCase clientCase)
     {
         ConsultantDAO consultantDao = new ConsultantDAO();
@@ -511,14 +536,6 @@ public class MarketMB implements Serializable
 
     public void setModelsBranch(ArrayList<Set<String>> modelsBranch) {
         this.modelsBranch = modelsBranch;
-    }
-
-    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
-        return selectedCaseIncomeTable;
-    }
-
-    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
-        this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
     public LoginMB getLoginMB() {
@@ -792,5 +809,39 @@ public class MarketMB implements Serializable
     public void setFinishedList(List<ClientCase> finishedList) {
         this.finishedList = finishedList;
     }
+
+    public List<ClientCase> getPremiumList() {
+        return premiumList;
+    }
+
+    public void setPremiumList(List<ClientCase> premiumList) {
+        this.premiumList = premiumList;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
+    }
+
+    public ClientCase getSelectedPremiumCase() {
+        return selectedPremiumCase;
+    }
+
+    public void setSelectedPremiumCase(ClientCase selectedPremiumCase) {
+        this.selectedPremiumCase = selectedPremiumCase;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
+
 
 }

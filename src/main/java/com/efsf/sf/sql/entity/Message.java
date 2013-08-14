@@ -35,8 +35,8 @@ public class Message  implements java.io.Serializable {
 
     public Message() {
     }
-
-	
+   	
+    
     public Message(User userByFkFromUser, User userByFkToUser, String message) {
         this.userByFkFromUser = userByFkFromUser;
         this.userByFkToUser = userByFkToUser;
