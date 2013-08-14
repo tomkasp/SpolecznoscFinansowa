@@ -31,7 +31,8 @@ public class Product  implements java.io.Serializable {
      private String productName;
      private Integer parentProduct;
      private Set<ProductDetails> productDetailses = new HashSet<ProductDetails>(0);
-
+     private Integer isActive=1;
+     
     public Product() {
     }
 
@@ -90,6 +91,16 @@ public class Product  implements java.io.Serializable {
     
     public void setProductDetailses(Set<ProductDetails> productDetailses) {
         this.productDetailses = productDetailses;
+    }
+
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 

@@ -45,7 +45,8 @@ public class ProductDetails  implements java.io.Serializable {
      private String recomendationDetails;
      private String requiredDocuments;
      private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
-
+     private Integer isActive=1;
+     
     public ProductDetails() {
     }
 
@@ -236,6 +237,16 @@ public class ProductDetails  implements java.io.Serializable {
     
     public void setClientCases(Set<ClientCase> clientCases) {
         this.clientCases = clientCases;
+    }
+
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 
