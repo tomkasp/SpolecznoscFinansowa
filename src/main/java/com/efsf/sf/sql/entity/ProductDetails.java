@@ -86,7 +86,7 @@ public class ProductDetails  implements java.io.Serializable {
     public void setIdProductDetail(Integer idProductDetail) {
         this.idProductDetail = idProductDetail;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="fk_employmentType", nullable=false)
     public EmploymentType getEmploymentType() {
         return this.employmentType;
@@ -104,7 +104,7 @@ public class ProductDetails  implements java.io.Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="fk_productType", nullable=false)
     public ProductType getProductType() {
         return this.productType;
