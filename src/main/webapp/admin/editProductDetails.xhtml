@@ -25,7 +25,7 @@
                 <h3>Edytuj szczegóły produktu</h3>
                 <h:form> 
                     <div class="leftBox"> 
-         
+
                         <div class="field"> <h:outputText class="label" value="Min. dochód brutto"/><p:inputText value="#{productsMB.selectedProductDetails.amountBruttoMin}"/></div>
                         <div class="field"> <h:outputText class="label" value="Max. dochód brutto"/><p:inputText value="#{productsMB.selectedProductDetails.amountBruttoMax}"/></div>
                         <div class="field"> <h:outputText class="label" value="Min. czas kredytu"/><p:inputText value="#{productsMB.selectedProductDetails.loanTimeMin}"/></div>
@@ -34,26 +34,44 @@
                         <div class="field"> <h:outputText class="label" value="Max. wiek klienta"/><p:inputText value="#{productsMB.selectedProductDetails.clientAgeMax}"/></div>
                         <div class="field"> <h:outputText class="label" value="Min. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMin}"/></div>
                         <div class="field"> <h:outputText class="label" value="Max. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMax}"/></div>
-  
+
+                        <div class="field"> <h:outputText class="label" value="Aktualność"/>
+                            <p:selectOneMenu value="#{productsMB.selectedProductDetails.isActive}">  
+                                <f:selectItem itemLabel="Aktywne" itemValue="1" />  
+                                <f:selectItem itemLabel="Nieaktywne" itemValue="0" />
+                            </p:selectOneMenu> 
+                        </div> 
                     </div>
 
                     <div class="rightBox" style="margin:20px;">
+                        <div class="field"> <h:outputText class="label" value="Typ produktu"/>
+                            <p:selectOneMenu value="#{productsMB.productTypeId}">   
+                                <f:selectItems value="#{productsMB.listOfProductTypes}" var="c" itemLabel="#{c.name}" itemValue="#{c.idProductType}" />
+                            </p:selectOneMenu>  
+
+                        </div>
+                        <div class="field"> <h:outputText class="label" value="Typ zatrudnienia"/>
+                            <p:selectOneMenu value="#{productsMB.employementTypeId}">  
+                                <f:selectItems value="#{productsMB.listOfEmployementTypes}" var="c" itemLabel="#{c.shortcut}" itemValue="#{c.idEmploymentType}" />
+                            </p:selectOneMenu>  
+                        </div>  
                         <div class="field"> <h:outputText class="label" value="Min. czas uzyskiwania dochodów"/><p:inputText value="#{productsMB.selectedProductDetails.oodwmMin}"/></div>
                         <div class="field"> <h:outputText class="label" value="Max. czas uzyskiwania dochodów"/><p:inputText value="#{productsMB.selectedProductDetails.oodwmMax}"/></div>
                         <div class="field"> <h:outputText class="label" value="Rekomendacja"/><p:selectBooleanButton value="#{productsMB.selectedProductDetails.recomendation}" onLabel="Tak" offLabel="Nie" />  </div>
                         <div class="field"> <h:outputText class="label" value="Szczegóły rekomendacji"/><p:inputTextarea value="#{productsMB.selectedProductDetails.recomendationDetails}"/></div>
-                            <div class="field"> <h:outputText class="label" value="Wymagane dokumenty"/><p:inputTextarea value="#{productsMB.selectedProductDetails.requiredDocuments}"/></div>
-                    </div>
-                    
-                    <div class="przyciskiDol marginT10">     
-
-                        <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit"/> 
-                        <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" type="submit"/> 
+                        <div class="field"> <h:outputText class="label" value="Wymagane dokumenty"/><p:inputTextarea value="#{productsMB.selectedProductDetails.requiredDocuments}"/></div>
+                        <div class="przyciskiDol marginT10">     
+                            <p:commandLink styleClass="wideButton greyButton floatR" style="color: black;" value="Anuluj" action="#{productsMB.showDetails()}" type="submit"/>
+                            <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" action="#{productsMB.saveDetails()}" type="submit"/>
+                        </div>
 
                     </div>
+
+
                 </h:form> 
 
-                <div class="marginT50"></div>   
+                <div class="marginT50"></div> 
+                <div class="marginT50"></div>
             </ui:define>           
         </ui:composition>
 
