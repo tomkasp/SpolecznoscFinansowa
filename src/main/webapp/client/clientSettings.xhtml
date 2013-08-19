@@ -326,12 +326,19 @@
                             </div>
                             
                         </h:form>
+                        
+                        <h:form id="downloadForm">
+                            
+                            <h:commandLink class="floatR greyButton wideButton" target="_blank" value="OTWORZ PLIK" action="#{clientFileUploadMB.load()  }"/>
+                               
+                        </h:form>
 
                         <h:form id="uploadForm" enctype="multipart/form-data">
                             
                             <div class="marginLRT30" style="height: 1500px; margin-top: 120px;" >     
                                 
                                 <h4>WYMAGANE DOKUMENTY</h4>
+                                
                                 
                                  <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel" id="idCardLabel">Dowód tożsamości: </h:outputLabel>       

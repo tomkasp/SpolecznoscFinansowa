@@ -3,11 +3,16 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.RequiredDocuments;
+import com.efsf.sf.util.downloader.FtpDownloader;
 import com.efsf.sf.util.uploader.ftp.FileUploaderFTP;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.UploadedFile;
 
@@ -78,6 +83,14 @@ public class ClientFileUploadMB implements Serializable {
             rddao.saveOrUpdate(rd);
             
         return "/client/clientMainPage?faces-redirect=true";
+    }
+    
+    public void load() throws IOException{
+        
+        FtpDownloader ftpd=new FtpDownloader();
+        //ftpd.downLoad("rice/SF/USERS/123/", "idCard.pdf"); 
+        ftpd.downLoad(100, 172); 
+        
     }
     
      private void declare() {
