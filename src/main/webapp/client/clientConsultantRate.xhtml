@@ -13,27 +13,6 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - uzupełnij dane </ui:define> 
-            <ui:define name="top"> 
-                <h:outputStylesheet library="css" name="green.css" />
-
-
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-                <div class="topbarMenuGreen">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Doładuj konto" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-            </ui:define>
-
             <ui:define name="content">
 
                 <h4>Komentujesz sprawę nr: <h:outputText value="#{caseRatingMB.clientCaseMB.selectedClientCase.idClientCase}" /></h4>

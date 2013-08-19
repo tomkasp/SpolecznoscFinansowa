@@ -29,8 +29,8 @@ public class ConsultantRatesMB implements Serializable{
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
     
-    @ManagedProperty(value="#{marketMB}")
-    private MarketMB marketMB;
+    @ManagedProperty(value="#{consultantMainPageMB}")
+    private ConsultantMainPageMB consultantMainPageMB;
     
     private ClientCase clientCase;
     private List<ScoreBoardRow> scoreBoard;
@@ -46,8 +46,7 @@ public class ConsultantRatesMB implements Serializable{
     }
      
    public void onRowSelect() throws IOException { 
-        clientCaseMB.setSelectedClientCase(clientCase);
-        marketMB.rowDoubleClick();
+        consultantMainPageMB.rowDoubleClick(clientCase);
         
     }
    
@@ -101,17 +100,6 @@ public class ConsultantRatesMB implements Serializable{
     public void setClientCaseMB(ClientCaseMB clientCaseMB) {
         this.clientCaseMB = clientCaseMB;
     }
-
-
-    public MarketMB getMarketMB() {
-        return marketMB;
-    }
-
-
-    public void setMarketMB(MarketMB marketMB) {
-        this.marketMB = marketMB;
-    }
-
 
     public void setScoreBoard(List<ScoreBoardRow> scoreBoard) {
         this.scoreBoard = scoreBoard;
@@ -175,5 +163,14 @@ public class ConsultantRatesMB implements Serializable{
         return result;        
         
     }
+
+    public ConsultantMainPageMB getConsultantMainPageMB() {
+        return consultantMainPageMB;
+    }
+
+    public void setConsultantMainPageMB(ConsultantMainPageMB consultantMainPageMB) {
+        this.consultantMainPageMB = consultantMainPageMB;
+    }
     
+
 }
