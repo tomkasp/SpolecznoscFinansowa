@@ -25,7 +25,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ConsultantProfileMB {
 
-    @ManagedProperty(value="clientCaseMB")
+    @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
     
     private ArrayList<ClientCase> casesRated = new ArrayList();
@@ -86,6 +86,14 @@ public class ConsultantProfileMB {
 
     public void setCasesRated(ArrayList<ClientCase> casesRated) {
         this.casesRated = casesRated;
+    }
+
+    public ClientCaseMB getClientCaseMB() {
+        return clientCaseMB;
+    }
+
+    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
+        this.clientCaseMB = clientCaseMB;
     }
       
     
