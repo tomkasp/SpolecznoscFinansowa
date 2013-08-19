@@ -13,24 +13,9 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
 
-            
+
             <ui:define name="title"> Klient - dodaj potrzebę </ui:define> 
-            <ui:define name="top"> 
-                <h:outputStylesheet library="css" name="green.css" />
 
-
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-                <div class="topbarMenuGreen">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-            </ui:define>
             <ui:define name="content">
 
                 <div style="min-height: 560px">
@@ -43,22 +28,22 @@
                             <div class="marginLRT30" >
                                 <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  
                                     <p:selectOneMenu style="width: 200px"> 
-                                     <f:selectItem  itemValue="konsolidacyjny" itemLabel="konsolidacyjny" />
-                                     <f:selectItem  itemValue="hipoteka" itemLabel="hipoteka" />
-                                     <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
-                                     <f:selectItem  itemValue="leasing" itemLabel="leasing" />
-                                     <f:selectItem  itemValue="gotówkowy" itemLabel="gotówkowy" />
-                                     <f:selectItem  itemValue="firmowy" itemLabel="firmowy" />
-                                      
+                                        <f:selectItem  itemValue="konsolidacyjny" itemLabel="konsolidacyjny" />
+                                        <f:selectItem  itemValue="hipoteka" itemLabel="hipoteka" />
+                                        <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
+                                        <f:selectItem  itemValue="leasing" itemLabel="leasing" />
+                                        <f:selectItem  itemValue="gotówkowy" itemLabel="gotówkowy" />
+                                        <f:selectItem  itemValue="firmowy" itemLabel="firmowy" />
+
                                     </p:selectOneMenu>
-                                
+
                                 </div>
                                 <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/> 
                                     <p:selectOneMenu style="width: 137px">
-                                         <f:selectItem  itemValue="lat" itemLabel="lat" />
-                                         <f:selectItem  itemValue="miesięcy" itemLabel="miesięcy" />
-                                         <f:selectItem  itemValue="dni" itemLabel="dni" />
-                                         
+                                        <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                        <f:selectItem  itemValue="miesięcy" itemLabel="miesięcy" />
+                                        <f:selectItem  itemValue="dni" itemLabel="dni" />
+
                                     </p:selectOneMenu> 
                                 </div>
                             </div>
@@ -79,12 +64,12 @@
                         </div>
 
                         <h:link class="greyButton oneColumnLengthButton" value="Chcę wykupić usługę skanowania BIKu" outcome="/consultant/consultantCreateAccount"/>
-                        
+
                         <div class="marginTB20 centerLink" >
                             <h:link class="greenLink " value="Więcej o usłudze" />   
                         </div>
-                        
-                        
+
+
                     </div> 
 
                     <div class="rightWiderBox">
@@ -97,7 +82,7 @@
                         <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
 
                         <p:dataTable id="dataTable1" value="#{fakeBean.zobowiazania}" var="data" emptyMessage="brak klientów!" 
-                                 rowKey="#{data.lp}">
+                                     rowKey="#{data.lp}">
                             <p:column headerText="Lp">  
                                 <h:outputText value="#{data.lp}" /> 
                             </p:column>   
@@ -119,7 +104,7 @@
                             </p:column> 
 
                             <p:column headerText="Zaległe"  >  
-                                 <h:outputText value="#{data.zalegle}" />
+                                <h:outputText value="#{data.zalegle}" />
                             </p:column> 
                         </p:dataTable>
                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/client/clientAddObligation"/>
@@ -154,11 +139,11 @@
                         </p:column> 
 
                         <p:column headerText="Rodzaj kredytu"  > 
-                            
+
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                            
+
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy"> 

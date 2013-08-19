@@ -10,76 +10,55 @@
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - Wiadomości </ui:define> 
-            <ui:define name="top"> 
-                <f:event listener="#{messagesMB.reloadMessageBox()}" type="preRenderView" />
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-                <h:form>
-                    <div class="topbarMenuBlue">
-                        <h:panelGroup>
-                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Edytuj dane" outcome="/consultant/consultantSettings"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
-                        </h:panelGroup>
-                    </div>
-                </h:form>
-            </ui:define>
 
             <ui:define name="content">
 
                 <div style="min-height: 50px">
-                <h3>Skrzynka odbiorcza</h3>                  
+                    <h3>Skrzynka odbiorcza</h3>                  
                 </div>
                 <h:panelGroup rendered="#{!(empty marketMB.premiumList) or !(empty messagesMB.unreadMessagesList)}" >
                     <h4> Nieprzeczytane </h4>
                     <h:panelGroup rendered="#{!(empty marketMB.premiumList)}" >   
                         <h:form> 
                             <ui:repeat value="#{marketMB.premiumList}" var="o">
-                              <div style="min-height: 90px; border-bottom: red solid 5px">
-                                <h:graphicImage  class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                                <h:outputText class="redMessage floatL marginLRT30"  value="Uwaga! Użytkownik #{o.client.idClient} wybrał Cię do prowadzenia sprawy kredytowej nr #{o.idClientCase}. Czy akceptujesz zgłoszenie? "/>
-                                <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  action="#{marketMB.selectPremiumCase(o)}" oncomplete="revokePremiumDialog.show();"/> 
-                                <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję" action="#{marketMB.selectPremiumCase(o)}" oncomplete="acceptPremiumDialog.show();" /> 
-                                <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Szczegóły" action="#{marketMB.toClientCaseDetails(o)}" /> 
-                              </div>     
+                                <div style="min-height: 90px; border-bottom: red solid 5px">
+                                    <h:graphicImage  class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                                    <h:outputText class="redMessage floatL marginLRT30"  value="Uwaga! Użytkownik #{o.client.idClient} wybrał Cię do prowadzenia sprawy kredytowej nr #{o.idClientCase}. Czy akceptujesz zgłoszenie? "/>
+                                    <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  action="#{marketMB.selectPremiumCase(o)}" oncomplete="revokePremiumDialog.show();"/> 
+                                    <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję" action="#{marketMB.selectPremiumCase(o)}" oncomplete="acceptPremiumDialog.show();" /> 
+                                    <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Szczegóły" action="#{marketMB.toClientCaseDetails(o)}" /> 
+                                </div>     
                             </ui:repeat>
-                            
+
                             <p:dialog id="acceptPremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="acceptPremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
                                 <h:panelGroup class="fontGrey">
                                     Czy napewno chcesz zaakceptować sprawę nr #{marketMB.selectedPremiumCase.idClientCase}?
                                 </h:panelGroup>
 
                                 <div> 
-                                   <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.acceptPremiumApplication(marketMB.selectedPremiumCase)}" onclick="acceptPremiumDialog.hide()" >
-                                   
-                                   </h:commandButton>
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.acceptPremiumApplication(marketMB.selectedPremiumCase)}" onclick="acceptPremiumDialog.hide()" >
 
-                                   <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
+                                    </h:commandButton>
+
+                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
                                 </div>
                             </p:dialog>
-                            
+
                             <p:dialog id="revokePremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokePremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
                                 <h:panelGroup class="fontGrey">
                                     Czy napewno chcesz odrzucić sprawę nr #{marketMB.selectedPremiumCase.idClientCase}?
                                 </h:panelGroup>
 
                                 <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;"  value="Tak" action="#{marketMB.revokePremiumApplication(marketMB.selectedPremiumCase)}" onclick="revokePremiumDialog.hide()" >          
-                                
-                                </h:commandButton>
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;"  value="Tak" action="#{marketMB.revokePremiumApplication(marketMB.selectedPremiumCase)}" onclick="revokePremiumDialog.hide()" >          
 
-                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokePremiumDialog.hide()"  />
+                                    </h:commandButton>
+
+                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokePremiumDialog.hide()"  />
                                 </div>
-                             </p:dialog>
-                            
-                            
+                            </p:dialog>
+
+
                         </h:form>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList)}" >
@@ -88,26 +67,26 @@
 
                                 <h:panelGroup rendered="#{o.isSystem == 1}" >
                                     <div style="min-height: 90px; border-bottom: #000000 solid 5px">
-                                      <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_black.png" title="RedEnvelope" ></h:graphicImage>
-                                      <h:outputText class="fontBlack floatL marginLRT30" value="#{o.sentDate}" >
-                                          <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
-                                      </h:outputText>
-                                      <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >         
-                                         <f:ajax execute="@all" render="@all" />
-                                      </h:commandButton>
+                                        <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_black.png" title="RedEnvelope" ></h:graphicImage>
+                                        <h:outputText class="fontBlack floatL marginLRT30" value="#{o.sentDate}" >
+                                            <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                        </h:outputText>
+                                        <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
+                                        <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >         
+                                            <f:ajax execute="@all" render="@all" />
+                                        </h:commandButton>
                                     </div>
                                 </h:panelGroup>   
                                 <h:panelGroup rendered="#{o.isSystem == 0}" >  
-                                   <div style="min-height: 90px; border-bottom: #0793F0 solid 5px">
-                                      <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_blue.png" title="RedEnvelope" ></h:graphicImage>
-                                      <h:outputText class="fontBlue floatL marginLRT30" value="#{o.sentDate}" >
-                                          <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
-                                      </h:outputText>
-                                      <h:outputText class="fontBlue floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
+                                    <div style="min-height: 90px; border-bottom: #0793F0 solid 5px">
+                                        <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_blue.png" title="RedEnvelope" ></h:graphicImage>
+                                        <h:outputText class="fontBlue floatL marginLRT30" value="#{o.sentDate}" >
+                                            <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                        </h:outputText>
+                                        <h:outputText class="fontBlue floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
+                                        <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
 
-                                   </div>
+                                    </div>
                                 </h:panelGroup>
                             </ui:repeat> 
                         </h:form>
@@ -118,16 +97,16 @@
                     <h:form> 
                         <ui:repeat value="#{messagesMB.readConversations}" var="o">             
                             <div style="min-height: 90px; border-bottom: #ADA6A5 solid 5px">
-                               <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_grey.png" title="RedEnvelope" ></h:graphicImage>
-                               <h:outputText class="fontGrey floatL marginLRT30" value="#{o.sentDate}" >
-                                   <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
-                               </h:outputText>
-                               <h:outputText rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
-                               <h:outputText rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkToUser.clients.toArray()[0].name} #{o.userByFkToUser.clients.toArray()[0].lastName}" />
-        
-                               <h:commandButton rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />   
-                               <h:commandButton rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkToUser.idUser)}" />  
-                             </div>   
+                                <h:graphicImage class="floatL" style="margin-left: 10px; margin-top: 10px" alt="could not be found."  value="/resources/images/mail_grey.png" title="RedEnvelope" ></h:graphicImage>
+                                <h:outputText class="fontGrey floatL marginLRT30" value="#{o.sentDate}" >
+                                    <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
+                                </h:outputText>
+                                <h:outputText rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
+                                <h:outputText rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkToUser.clients.toArray()[0].name} #{o.userByFkToUser.clients.toArray()[0].lastName}" />
+
+                                <h:commandButton rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />   
+                                <h:commandButton rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkToUser.idUser)}" />  
+                            </div>   
                         </ui:repeat> 
                     </h:form>
                 </h:panelGroup>

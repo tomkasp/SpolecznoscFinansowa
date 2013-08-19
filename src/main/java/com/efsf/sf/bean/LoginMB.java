@@ -78,6 +78,9 @@ public class LoginMB implements Serializable {
     }
     public String logout() {
         isLogged = false;
+        type=-1;
+        client=null;
+        consultant=null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/login?faces-redirect=true";
