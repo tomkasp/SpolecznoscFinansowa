@@ -28,11 +28,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
-import org.primefaces.model.UploadedFile;
 
 /**
  * @author WR1EI1
  */
+
 @ManagedBean
 @ViewScoped
 public class ClientSettingsMB implements Serializable {
