@@ -172,4 +172,5 @@ public class ConsultantRatesMB implements Serializable{
         this.consultantMainPageMB = consultantMainPageMB;
     }
     
+
 }

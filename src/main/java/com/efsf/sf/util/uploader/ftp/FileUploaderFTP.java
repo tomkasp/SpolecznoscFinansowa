@@ -37,7 +37,7 @@ public class FileUploaderFTP {
                 System.out.println("upload success!!!");
                 
             } catch (IOException e) {}
-            return ftpPath;
+            return fileName;
         } else {
             
             System.out.println("file is null!!!");

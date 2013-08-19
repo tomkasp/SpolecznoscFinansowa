@@ -10,31 +10,10 @@
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - ekran główny </ui:define> 
-            <ui:define name="top"> 
-                <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
 
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-               <h:form>
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-               </h:form>
-            </ui:define>
 
             <ui:define name="content">
-               
+               <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
                 <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
                     <h:form> 
                         <div style="min-height: 80px; border-bottom: #0793F0 4px solid">

@@ -67,7 +67,6 @@ h6{
 .profilBar
 {
     border-bottom: green 4px solid;
-    min-height: 150px;
 }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight 
