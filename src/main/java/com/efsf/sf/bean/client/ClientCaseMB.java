@@ -51,6 +51,8 @@ public class ClientCaseMB implements Serializable {
     private List<Obligation> obligationList = new ArrayList<>();
     ObligationDAO obdao = new ObligationDAO();
     
+    private boolean alreadyApplied = false;
+    private boolean alreadyObserved = false;
     
     private int premium = 6;
     
@@ -271,8 +273,84 @@ public class ClientCaseMB implements Serializable {
         selectedClientCase.setConsultants_1(null);
         caseDao.updateClientCase(selectedClientCase);  
         
-        messagesMB.generateSystemMessage(bundle.getString("CLIENT_SELECTED_CONSULTANT"), selectedConsultant.getUser().getIdUser(), new Object[] {login.getClient().getIdClient(), selectedClientCase.getIdClientCase()});
-     
+        messagesMB.generateSystemMessage(bundle.getString("CLIENT_SELECTED_CONSULTANT"), selectedConsultant.getUser().getIdUser(), new Object[] {login.getClient().getIdClient(), selectedClientCase.getIdClientCase()}); 
+    }
+    
+    public boolean doesConsultantObserveCase(Consultant consultant, ClientCase clientCase)
+    {
+        return new ClientCaseDAO().doesConsultantObserveCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
+    }
+    
+    public boolean doesAppliedToCase(Consultant consultant, ClientCase clientCase)
+    {
+        return new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
+    }
+    
+    public void stopObserve(ClientCase clientCase)
+    {
+        ConsultantDAO consultantDao = new ConsultantDAO();
+        for (ClientCase cc : login.getConsultant().getClientCases_2())
+        {
+            if (cc.getIdClientCase().equals(clientCase.getIdClientCase()))
+            {
+                login.getConsultant().getClientCases_2().remove(cc);
+                consultantDao.merge(login.getConsultant()); 
+                break;
+            }
+        }        
+    }
+    
+    public void revokeApplication(ClientCase clientCase)
+    {
+        ConsultantDAO consultantDao = new ConsultantDAO();
+        for (ClientCase cc : login.getConsultant().getClientCases())
+        {
+            if (cc.getIdClientCase().equals(clientCase.getIdClientCase()))
+            {
+                login.getConsultant().getClientCases().remove(cc);
+                consultantDao.merge(login.getConsultant());
+                break;
+            }
+        }
+    }
+    
+    public void traceCase(ClientCase cs)
+    {
+        Consultant consultant = login.getConsultant();
+        ConsultantDAO consultantDao;
+        if (!new ClientCaseDAO().doesConsultantObserveCase(consultant.getIdConsultant(),cs.getIdClientCase()))
+        {   
+            alreadyObserved = false;
+            consultant.getClientCases_2().add(cs);
+            consultantDao = new ConsultantDAO();
+            consultantDao.merge(consultant);
+            
+        }
+        else
+        {
+            alreadyObserved = true;
+        }
+    }
+    
+    public void applyToCase(ClientCase cs)
+    {
+        Consultant consultant = login.getConsultant();
+   
+        if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(),cs.getIdClientCase()))
+        {     
+            alreadyApplied = false;
+            consultant.getClientCases().add(cs);
+            ConsultantDAO consultantDao = new ConsultantDAO();
+            consultantDao.merge(consultant);
+            
+            login.setConsultant(consultantDao.getCounsultantConnectedToUser(login.getIdUser()));
+            
+            messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cs.getIdClientCase()});
+        }
+        else
+        {
+            alreadyApplied = true;
+        } 
     }
 
     public Date getCurrentDate() {
@@ -398,6 +476,22 @@ public class ClientCaseMB implements Serializable {
 
     public void setBundle(ResourceBundle bundle) {
         this.bundle = bundle;
+    }
+
+    public boolean isAlreadyApplied() {
+        return alreadyApplied;
+    }
+
+    public void setAlreadyApplied(boolean alreadyApplied) {
+        this.alreadyApplied = alreadyApplied;
+    }
+
+    public boolean isAlreadyObserved() {
+        return alreadyObserved;
+    }
+
+    public void setAlreadyObserved(boolean alreadyObserved) {
+        this.alreadyObserved = alreadyObserved;
     }
 
    

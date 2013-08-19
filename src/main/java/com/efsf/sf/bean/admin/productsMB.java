@@ -1,9 +1,11 @@
 package com.efsf.sf.bean.admin;
 
 import com.efsf.sf.sql.dao.GenericDao;
+import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
+import com.efsf.sf.sql.entity.ProductType;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,14 @@ public class productsMB implements Serializable {
     private Institution selectedInstitution=new Institution();
     private Product selectedProduct=new Product();    
     private ProductDetails selectedProductDetails;
+    
+    private Integer productTypeId;
+    private Integer employementTypeId;
+    
+    
+     public String adminMainPage(){
+        return "/admin/adminMainPage?faces-redirect=true";
+    }   
 
     public List<Institution> getInstitutions() {
         GenericDao<Institution> dao = new GenericDao(Institution.class);
@@ -36,7 +46,6 @@ public class productsMB implements Serializable {
     public void loadProducts() {
         GenericDao<Product> dao = new GenericDao(Product.class);
         setProducts((List<Product>) dao.getWhere("fk_institution", String.valueOf(selectedInstitution.getIdInstitution())));
-
     }
     
     public Map<String, String> getProductsAsHashMap() {
@@ -49,13 +58,53 @@ public class productsMB implements Serializable {
         return result;
     }
     
+    public List<EmploymentType> getListOfEmployementTypes() {
+
+        GenericDao<EmploymentType> dao = new GenericDao(EmploymentType.class);
+        List<EmploymentType> list=dao.getAll();
+   
+        return list;
+    }
+    
+    public List<ProductType> getListOfProductTypes() {
+
+        GenericDao<ProductType> dao = new GenericDao(ProductType.class);
+        List<ProductType> list=dao.getAll();
+
+        return list;
+    }    
+    
     public String showDetails(){
         return "/admin/productDetails";
     }
     
     public String editDetails(){
+        setEmployementTypeId(selectedProductDetails.getEmploymentType().getIdEmploymentType());
+        setProductTypeId(selectedProductDetails.getProductType().getIdProductType());
         return "/admin/editProductDetails";
-    }    
+    }
+    
+    public String addDetails(){
+        selectedProductDetails=new ProductDetails();
+        selectedProductDetails.setRecomendation(true);
+        return "/admin/editProductDetails";
+    }
+    
+    public String saveDetails(){
+        GenericDao<ProductDetails> dao = new GenericDao(ProductDetails.class);
+        GenericDao<EmploymentType> dao2 = new GenericDao(EmploymentType.class);
+        GenericDao<ProductType> dao3 = new GenericDao(ProductType.class);
+        
+        selectedProductDetails.setEmploymentType(dao2.getById(employementTypeId));
+        selectedProductDetails.setProductType(dao3.getById(productTypeId));
+        
+        if(selectedProductDetails.getProduct()==null){
+            selectedProductDetails.setProduct(selectedProduct);
+        }
+        
+        dao.saveOrUpdate(selectedProductDetails);
+        return "/admin/productDetails";
+    }
     
     public void addInstitution(){
        GenericDao<Institution> dao = new GenericDao(Institution.class);
@@ -68,12 +117,16 @@ public class productsMB implements Serializable {
        dao.update(selectedInstitution);
     }  
     
+
     public void addProduct(){
+        selectedProduct=new Product();
+        selectedProduct.setInstitution(selectedInstitution);
+    }   
+    
+    public void saveProduct(){
        GenericDao<Product> dao = new GenericDao(Product.class);
-       newProduct.setInstitution(selectedInstitution);
-       dao.save(newProduct); 
+       dao.saveOrUpdate(selectedProduct); 
        loadProducts();
-       newProduct=new Product();
     }    
 
     public List<Product> getProducts() {
@@ -124,5 +177,21 @@ public class productsMB implements Serializable {
 
     public void setNewProduct(Product newProduct) {
         this.newProduct = newProduct;
+    }
+
+    public Integer getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Integer productTypeId) {
+        this.productTypeId = productTypeId;
+    }
+
+    public Integer getEmployementTypeId() {
+        return employementTypeId;
+    }
+
+    public void setEmployementTypeId(Integer employementTypeId) {
+        this.employementTypeId = employementTypeId;
     }
 }

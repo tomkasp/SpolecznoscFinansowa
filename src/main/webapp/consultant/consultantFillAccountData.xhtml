@@ -11,20 +11,7 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - uzupełnij dane </ui:define> 
-            <ui:define name="top"> 
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
 
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/login"/>
-                    </h:panelGroup>
-                </div>
-            </ui:define>
 
             <ui:define name="content">
 
@@ -246,7 +233,7 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}"  var="row" emptyMessage="Nie ma żadnych spraw" >
+                        <p:dataTable id="lastCases" value="#{consultantMainPageMB.clientCaseList}"  var="row" emptyMessage="Nie ma żadnych spraw" >
           
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -271,7 +258,7 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
@@ -279,20 +266,20 @@
                             </p:column>
                            
                             <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.modelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.modelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.modelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.modelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.modelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -301,11 +288,11 @@
                             </p:column>
 
                             <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
                             </p:column>
 
                             <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                             </p:column> 
 
                         </p:dataTable>

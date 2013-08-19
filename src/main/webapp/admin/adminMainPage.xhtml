@@ -89,26 +89,27 @@
                     </p:dialog>
 
                     <p:dialog widgetVar="prodcutDlg" width="500px" height="300px">
-
-                        <h:form>
-                            <h3>Dodaj nowy produkt</h3>   
-                            <div class="field"> <h:outputText class="label" value="Nazwa produktu"/><p:inputText value="#{productsMB.newProduct.productName}"/></div>
+                        <h:form id="prodDial">
+                            <h3><h:outputText rendered="#{productsMB.selectedProduct.idProduct==null}" value="Dodaj nowy "/>
+                                <h:outputText rendered="#{productsMB.selectedProduct.idProduct!=null}" value="Edytuj "/>
+                                produkt
+                            </h3>   
+                            <div class="field"> <h:outputText class="label" value="Nazwa produktu"/><p:inputText value="#{productsMB.selectedProduct.productName}"/></div>
                             <div class="field"><h:outputText class="label" value="Produkt nadrzędny"/>
-                                <p:selectOneMenu value="#{productsMB.newProduct.parentProduct}">  
+                                <p:selectOneMenu value="#{productsMB.selectedProduct.parentProduct}">  
                                     <f:selectItem itemLabel="Brak" itemValue=""/>  
                                     <f:selectItems value="#{productsMB.productsAsHashMap}" />  
                                 </p:selectOneMenu>  
                             </div>  
                             <div class="field"> <h:outputText class="label" value="Aktualność"/>
-                                <p:selectOneMenu value="#{productsMB.newProduct.isActive}">  
+                                <p:selectOneMenu value="#{productsMB.selectedProduct.isActive}">  
                                     <f:selectItem itemLabel="Aktywny" itemValue="1" />  
                                     <f:selectItem itemLabel="Nieaktywny" itemValue="0" />
                                 </p:selectOneMenu> 
                             </div>   
                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="prodcutDlg.hide()"/>
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj" update=":prodList" onclick="prodcutDlg.hide()" action="#{productsMB.addProduct()}"/>
+                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zapisz" update=":prodList" onclick="prodcutDlg.hide()" action="#{productsMB.saveProduct()}"/>
                         </h:form> 
-
                     </p:dialog>
 
                 </div>
@@ -121,9 +122,14 @@
                                 <h:outputText  value="#{row.productName}"/>
                             </p:column>  
 
+                           <p:column headerText="Aktywny"> 
+                                <h:outputLabel value="Tak" rendered="#{row.isActive==1}"/>
+                                <h:outputLabel value="Nie" rendered="#{row.isActive==0}"/>
+                            </p:column>   
+                            
                         </p:dataTable>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj produkty" action="#{productsMB.institutions}"/>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj produkt" onclick="prodcutDlg.show();"/>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj produkt" update=":prodDial" onclick="prodcutDlg.show();"/>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj produkt" update=":prodDial" ajax="true" immediate="true" onclick="prodcutDlg.show();" action="#{productsMB.addProduct()}"/>
                         <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Szczegóły produktu" action="#{productsMB.showDetails}"/>
                     </h:form> 
                 </div>               

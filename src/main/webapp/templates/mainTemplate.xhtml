@@ -2,75 +2,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="normalize.css" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css" />
         <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <title><ui:insert name="title">Facelets Template</ui:insert></title>
-        
     </h:head>
 
     <h:body>
 
         <div id="top">
             <ui:insert name="top">
-                
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                </div>
-                
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                            <h:link class ="topMenuButton greyButton" value="Logowanie" outcome="/index"/>
-                            <h:link class ="topMenuButton greyButton" value="Zarejestruj się za darmo" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
+
+                <h:panelGroup rendered="#{loginMB.type==2}">
+                    <ui:include src="consultantTop.xhtml"/> 
+                </h:panelGroup>
+
+                <h:outputStylesheet rendered="#{loginMB.type==3}" library="css" name="green.css" />  
+
+                <h:panelGroup rendered="#{loginMB.type==3}">
+                    <ui:include src="clientTop.xhtml"/> 
+                </h:panelGroup>
 
             </ui:insert>
         </div>
 
         <div id="content" class="center_content">
-        <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
-               <div id="profileBar" class="profilBar">
-                    <h:graphicImage class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
+            <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
+                <div id="profileBar" class="profilBar">
 
-                    <div id="spaceFiller"> 
+                    <div> 
                         <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za" /> <h:outputText class="boldDays" value="18 dni" />
                     </div>
 
                     <div>     
                         <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
-                        <h:outputText class="profileText" value="nr. użytkownika:" />
+
+                        <div class="right">
+                      <h:outputText class="profileText" value="nr. użytkownika:" />
                         <h5> #{loginMB.consultant.user.login} </h5>
                         <h:outputText class="profileText" value="Twój ranking:" /> 
-                        <h5> #{marketMB.clientCaseList.size()}/100 </h5>
+                        <h5> 99/100 </h5>
+                        </div>
+
                     </div>
                 </div>
-        </h:panelGroup>    
-        <h:panelGroup rendered="#{loginMB.client!=null}"> 
-            <h:form id="test">
-                 <div id="profileBar" class="profilBar">
-                        <h:graphicImage class="profilLogo" id="profil_logo_green" alt="could not be found."  value="/resources/images/profil_green.png" title="Profile Green" ></h:graphicImage>
+            </h:panelGroup>    
+            <h:panelGroup rendered="#{loginMB.client!=null}"> 
+                <h:form id="test">
+                    <div id="profileBar" class="profilBar">
 
-                        <div id="spaceFiller" > </div>
                         <div>     
-                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5> 
-                            <h:outputText class="profileText" value="nr. użytkownika:" />
-                            <h5> #{loginMB.client.user.login} </h5>
-                            <h:outputText class="profileText" value="Stan konta:" />
-                            <h5 > #{loginMB.client.points} / 5 </h5>
+                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5>
+                            <div class="right">
+                                <h:outputText class="profileText" value="nr. użytkownika:" />
+                                <h5> #{loginMB.client.user.login} </h5>
+                                <h:outputText class="profileText" value="Stan konta:" />
+                                <h5 > #{loginMB.client.points}</h5>
+                            </div>
                         </div>
-                   </div>
-            </h:form>    
-        </h:panelGroup>    
-           <ui:insert name="content">Content</ui:insert>
+                    </div>
+                </h:form>   
+            </h:panelGroup>    
+            <ui:insert name="content">Content</ui:insert>
         </div>
-        
+
 
         <div id="bottom">
             <ui:insert name="bottom">    

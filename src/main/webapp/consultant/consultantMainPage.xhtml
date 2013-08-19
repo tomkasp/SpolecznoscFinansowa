@@ -10,36 +10,15 @@
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - ekran główny </ui:define> 
-            <ui:define name="top"> 
-                <f:event type="preRenderView" listener="#{marketMB.reload()}" />
 
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-               <h:form>
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                        <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-               </h:form>
-            </ui:define>
 
             <ui:define name="content">
-               
-                <h:panelGroup rendered="#{!(empty marketMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
+               <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
+                <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
                     <h:form> 
                         <div style="min-height: 80px; border-bottom: #0793F0 4px solid">
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{marketMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{consultantMainPageMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
                                 
                             <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
                         </div>
@@ -53,10 +32,10 @@
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
-                        <p:dataTable id="lastCases" value="#{marketMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedLastCase}" selectionMode="single" >
+                        <p:dataTable id="lastCases" value="#{consultantMainPageMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedLastCase}" selectionMode="single" >
           
-                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedLastCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}"/>
                             
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -81,7 +60,7 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
@@ -89,20 +68,20 @@
                             </p:column>
                            
                             <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.modelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.modelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.modelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.modelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.modelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.modelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.modelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.modelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -111,42 +90,36 @@
                             </p:column>
 
                             <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
                             </p:column>
 
                             <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                             </p:column> 
-
-                            <!--  <p:column headerText=""> 
-                                <h:outputText  value=" "/>
-                            </p:column> -->
-
-                           
 
                         </p:dataTable>
                    
-                        <p:poll interval="120" listener="#{marketMB.pollData()}" update="@form" /> 
+                        <p:poll interval="120" listener="#{consultantMainPageMB.pollData()}" update="@form" /> 
                     
                     </div>
 
-                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(marketMB.selectedLastCase)}" oncomplete="confirmed.show();" >
+                    <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton disabled="#{empty marketMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(marketMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
+                    <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                          <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{marketMB.toMarket()}"/>
+                    <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
+                    <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
 
-                    
                     <div class="marginT50">
 
                     <h4>ZGŁOSZENIA</h4>
 
-                    <p:dataTable id="applied" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedAppliedCase}" selectionMode="single" >
+                    <p:dataTable id="applied" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
 
-                        <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedAppliedCase)}"/> 
-                        <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                        <p:ajax event="rowSelect" update="@form" />
+                        <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}"/>
 
                         <p:column headerText="Numer sprawy">  
                             <h:outputText  value="#{row.idClientCase}"/>
@@ -171,7 +144,7 @@
                         </p:column> 
 
                         <p:column headerText="BIK">  
-                            <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy">  
@@ -179,20 +152,20 @@
                         </p:column>
 
                         <p:column headerText="Wiek">  
-                                 <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                 <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                         </p:column>
 
                         <p:column headerText="Typ zatrudnienia">
-                            <h:outputText rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                            <h:selectOneMenu rendered="#{marketMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                <f:selectItems value="#{marketMB.appliedModelsEmploymentType.get(rowNumber)}" />
+                            <h:outputText rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                            <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                <f:selectItems value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber)}" />
                             </h:selectOneMenu>
                         </p:column>
 
                         <p:column headerText="Branża">  
-                            <h:outputText rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                            <h:selectOneMenu rendered="#{marketMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                <f:selectItems value="#{marketMB.appliedModelsBranch.get(rowNumber)}" />
+                            <h:outputText rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                            <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                <f:selectItems value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber)}" />
                             </h:selectOneMenu>
                         </p:column>
 
@@ -201,27 +174,30 @@
                         </p:column>
 
                         <p:column headerText="Ilość doradców"> 
-                            <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                            <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
                         </p:column>
 
                         <p:column headerText="Koniec aukcji"> 
-                            <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                            <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                         </p:column> 
                     </p:dataTable>
                 </div>
 
-                <p:commandButton id="deleteApplied" disabled="#{empty marketMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                <p:commandButton id="deleteApplied" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
                      <f:ajax execute="applied" render="applied" />
                 </p:commandButton>
+                    
+                <p:commandButton id="detailsAppliedButton" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}" />
+
 
                     <div class="marginT50">
 
                         <h4> MOJE PROWADZONE SPRAWY </h4>
 
-                        <p:dataTable id="owned" value="#{marketMB.ownedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedOwnedCase}" selectionMode="single" >
+                        <p:dataTable id="owned" value="#{consultantMainPageMB.ownedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedOwnedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedOwnedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}"/>
                      
                             
                             <p:column headerText="Numer sprawy">
@@ -247,7 +223,7 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
@@ -255,20 +231,20 @@
                             </p:column>
 
                             <p:column headerText="Wiek">  
-                                <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.ownedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.ownedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.ownedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.ownedModelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.ownedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.ownedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.ownedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.ownedModelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.ownedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.ownedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.ownedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.ownedModelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.ownedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.ownedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.ownedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.ownedModelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -283,15 +259,18 @@
                             
                         </p:dataTable>
                     </div>
+                    
+                    <p:commandButton id="detailsOwnedButton" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
+
 
                     <div class="marginT50">
 
                         <h4> ZAKOŃCZONE SPRAWY </h4>
 
-                        <p:dataTable id="finished" value="#{marketMB.finishedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedFinishedCase}" selectionMode="single" >
+                        <p:dataTable id="finished" value="#{consultantMainPageMB.finishedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedFinishedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedFinishedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}"/>
                      
                             
                             <p:column headerText="Numer sprawy">
@@ -317,7 +296,7 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
@@ -325,20 +304,20 @@
                             </p:column>
 
                             <p:column headerText="Wiek">  
-                                <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.finishedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.finishedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.finishedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.finishedModelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.finishedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.finishedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.finishedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.finishedModelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.finishedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.finishedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.finishedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.finishedModelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.finishedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.finishedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.finishedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.finishedModelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -353,17 +332,18 @@
 
                         </p:dataTable>
                     </div>
-
+                    
+                    <p:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
                     <div class="marginT50">
 
                         <h4>OBSERWOWANE</h4>
 
-                        <p:dataTable id="traced" value="#{marketMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedObservedCase}" selectionMode="single" >
+                        <p:dataTable id="traced" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{marketMB.rowClick(marketMB.selectedObservedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{marketMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}"/>
 
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -388,7 +368,7 @@
                             </p:column> 
 
                             <p:column headerText="BIK">  
-                                <h:outputText  value="#{marketMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
                             </p:column> 
 
                             <p:column headerText="Kod pocztowy">  
@@ -396,20 +376,20 @@
                             </p:column>
 
                             <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{marketMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.observedModelsEmploymentType.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
                             <p:column headerText="Branża">  
-                                <h:outputText rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{marketMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{marketMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{marketMB.observedModelsBranch.get(rowNumber)}" />
+                                <h:outputText rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber)}" />
                                 </h:selectOneMenu>
                             </p:column>
 
@@ -418,21 +398,26 @@
                             </p:column>
 
                             <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{marketMB.countConsultantApplications(row)}" />
+                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
                             </p:column>
 
                             <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{marketMB.converters.hoursLeft(row.endDate)}"/>        
+                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                             </p:column> 
                         </p:dataTable>
                     </div>
 
-                    <p:commandButton  disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{marketMB.applyToCase(marketMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                    
+                    
+                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                           <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton id="deleteObservedButton" disabled="#{empty marketMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
-
+                    
+                    <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" > 
                     </p:commandButton>
+                    
+                    <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
+
 
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>
@@ -471,11 +456,11 @@
                                         <!-- DIALOGS -->
                                         
                                             <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                                                <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
+                                                <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
                                                     Twoje zgłoszenie do sprawy zostało zatwierdzone.
                                                 </h:panelGroup>
 
-                                                <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
+                                                <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
                                                     Do tego zlecenia zgłosiłeś się już wcześniej. 
                                                 </h:panelGroup>
 
@@ -487,11 +472,11 @@
                                              </p:dialog>
 
                                              <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                                                <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
-                                                    Od teraz śledzisz sprawę numer:  #{marketMB.selectedLastCase.idClientCase}.
+                                                <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
+                                                    Od teraz śledzisz sprawę numer:  #{consultantMainPageMB.selectedLastCase.idClientCase}.
                                                 </h:panelGroup>
 
-                                                <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
+                                                <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
                                                     Już obserwujesz tą sprawę! 
                                                 </h:panelGroup>
 
@@ -508,7 +493,7 @@
                                                 </h:panelGroup>
 
                                                 <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.revokeApplication(marketMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
+                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.revokeAppliedCase(consultantMainPageMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
                                                         <p:ajax update="applied deleteApplied"/>
                                                     </h:commandButton>
 
@@ -524,7 +509,7 @@
                                             </h:panelGroup>
 
                                             <div> 
-                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{marketMB.stopObserve(marketMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
+                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.stopObserveCase(consultantMainPageMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
                                                     <p:ajax update="traced deleteObservedButton"/>
                                                 </h:commandButton>
 
