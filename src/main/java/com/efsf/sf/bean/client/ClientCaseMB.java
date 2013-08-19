@@ -258,6 +258,8 @@ public class ClientCaseMB implements Serializable {
     {
         cc.setConsultant(null);
         
+        
+        
         messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_REVOKE_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
      
         new ClientCaseDAO().updateClientCase(cc);
