@@ -56,7 +56,7 @@ public class FtpDownloader {
             response.setContentType("application/octet-stream");
             //response.setHeader("Content-Length", String.valueOf(is.available()));
             //response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
-            response.setHeader("Content-Disposition","attachment;filename=\"WszystkieDokumentyKredytu_nr" + 172 + ".pdf\"");
+            response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
 
             BufferedInputStream input = null;
             BufferedOutputStream output = null;
