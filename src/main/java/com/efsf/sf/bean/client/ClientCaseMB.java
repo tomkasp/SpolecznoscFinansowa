@@ -10,6 +10,7 @@ import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class ClientCaseMB implements Serializable {
     private MessagesMB messagesMB;
     
     @ManagedProperty("#{msg}")
-    private ResourceBundle bundle;
+    private transient ResourceBundle bundle;
 
         
     private int idTypProduktu;
@@ -190,7 +191,6 @@ public class ClientCaseMB implements Serializable {
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
             selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
-            selectedConsultant = null;
          }
     }
     
@@ -204,7 +204,6 @@ public class ClientCaseMB implements Serializable {
              selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
              cdao.updateClientCase(selectedClientCase);
              fillSelectedCaseIncomeTable();
-             System.out.println("HAHA");
         }
     }
     
@@ -312,6 +311,12 @@ public class ClientCaseMB implements Serializable {
                 break;
             }
         }
+    }
+    
+    public void rowDoubleClick(Consultant cos) throws IOException
+    {   
+        setSelectedConsultant(cos);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("clientConsultantProfileView.xhtml"); 
     }
     
     public void traceCase(ClientCase cs)

@@ -37,6 +37,8 @@ public class CaseRatingMB implements Serializable {
         return "/client/clientCaseDetails";
     }
     
+    
+    
     public boolean isNotRated(){
         CaseRatingDAO dao = new CaseRatingDAO();
         return dao.isNotRated(clientCaseMB.getSelectedClientCase().getIdClientCase());

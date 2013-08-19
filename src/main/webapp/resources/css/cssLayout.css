@@ -263,9 +263,9 @@ ul{
 
 li{
     color:black;
-    margin:0px 0 3px 0px;
+    margin:0px 0 0px 0px;
     
-    padding:8px 0 0 0;
+    padding:5px 0 5px 0;
 }
 
 li.headerList{
