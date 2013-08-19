@@ -520,7 +520,10 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch cs.consultants as consul "
                  + "left join fetch cs.caseStatus as cstatus "
                  + "left join fetch consul.consultantRatings as crs "
-                 + "left join fetch consul.addresses as addr "        
+                 + "left join fetch consul.addresses as addr "     
+                 + "left join fetch consul.institutions as inst "
+                 + "left join fetch consul.workingPlace as work "
+                 + "left join fetch consul.productTypes as ptypes "
                  + "where cs.idClientCase = :id" );
                  
                  q.setParameter("id", idClientCase);

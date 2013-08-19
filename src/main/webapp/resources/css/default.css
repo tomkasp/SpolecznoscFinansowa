@@ -621,6 +621,10 @@ background:#F0F5F5;
     float: right;
 }
 
+.right{
+    float: right;
+}
+
 .redX {
     border-top-color: #ADA6A5 !important;
     border-right-color: #ADA6A5 !important;
@@ -738,6 +742,11 @@ background:#F0F5F5;
 #test{
     display: inline;
     width: 30%;
+}
+
+#listOverflow{
+    max-height: 200px;
+    overflow-x: auto;
 }
 
 
@@ -876,6 +885,8 @@ animation-delay:1.1s;
 .area{
     width: 300px;
 }
+
+
 
 @-moz-keyframes bounce_circular3dG{
 0%{
