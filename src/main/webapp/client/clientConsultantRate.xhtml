@@ -13,63 +13,62 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - uzupełnij dane </ui:define> 
-
             <ui:define name="content">
 
                 <h4>Komentujesz sprawę nr: <h:outputText value="#{caseRatingMB.clientCaseMB.selectedClientCase.idClientCase}" /></h4>
                 <h:form>
-                    <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
+                <div class="leftBox" style="width: 38%; padding:0px 50px;"> 
+                    
+                    <h:panelGrid columns="2" cellpadding="0"> 
+                        <h4>Kontakt:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.contact}" />
 
-                        <h:panelGrid columns="2" cellpadding="0"> 
-                            <h4>Kontakt:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.contact}" />
+                        <h4>Kultura:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.culture}" />
 
-                            <h4>Kultura:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.culture}" />
+                        <h4>Kompetencje:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.competence}" />
 
-                            <h4>Kompetencje:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.competence}" />
+                        <h4>Czas:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.punctuality}" />
 
-                            <h4>Czas:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.punctuality}" />
+                        <h4>Rzetelność:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.reliability}" />
 
-                            <h4>Rzetelność:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.reliability}" />
+                        <h4>Szacunek:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.respect}" />
 
-                            <h4>Szacunek:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.respect}" />
+                        <h4>Trud:</h4>  
+                        <p:rating value="#{caseRatingMB.caseRating.difficulty}" />
 
-                            <h4>Trud:</h4>  
-                            <p:rating value="#{caseRatingMB.caseRating.difficulty}" />
+                        <h4>Zaufanie:</h4>
+                        <p:rating value="#{caseRatingMB.caseRating.trust}" />
+                        
+                        <h4>Komentarz:</h4>
+                        <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 55px; width: 250px" value="#{caseRatingMB.caseRating.comment}" />
+                    </h:panelGrid>
+                    
 
-                            <h4>Zaufanie:</h4>
-                            <p:rating value="#{caseRatingMB.caseRating.trust}" />
+                </div>
 
-                            <h4>Komentarz:</h4>
-                            <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 55px; width: 250px" value="#{caseRatingMB.caseRating.comment}" />
-                        </h:panelGrid>
+                <div class="rightBox" style="margin:20px;">
+                    <h4>Pamiętaj!</h4>
+                    Ocena doradcy musi być adekwatna do stanu faktycznego! 
+                    Każda krzywdząca opinia może zostać przez doradcę podważona, 
+                    a w niektórych przypadkach unieważniona. Jeśli sytuacja będzie
+                    się powtarzać, konto klienta może zostać tymczasowo zablokowane.
 
+                    <p>Uzupełnij dane zgodnie z prawdą.</p>
 
-                    </div>
-
-                    <div class="rightBox" style="margin:20px;">
-                        <h4>Pamiętaj!</h4>
-                        Ocena doradcy musi być adekwatna do stanu faktycznego! 
-                        Każda krzywdząca opinia może zostać przez doradcę podważona, 
-                        a w niektórych przypadkach unieważniona. Jeśli sytuacja będzie
-                        się powtarzać, konto klienta może zostać tymczasowo zablokowane.
-
-                        <p>Uzupełnij dane zgodnie z prawdą.</p>
-
-                    </div>
-                    <div class="przyciskiDol marginT10">     
-
+                </div>
+                <div class="przyciskiDol marginT10">     
+                    
                         <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit" onclick="dodaj.hide()" /> 
                         <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" type="submit" action="#{caseRatingMB.saveRating()}"/> 
-
-                    </div>
+                              
+                </div>
                 </h:form> 
-
+       
                 <div style="clear: both;">
 
                 </div>

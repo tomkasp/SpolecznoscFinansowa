@@ -10,163 +10,163 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Doradca - szczegóły sprawy </ui:define> 
+                  <ui:define name="title"> Doradca - szczegóły sprawy </ui:define> 
 
-            <ui:define name="content">
-                <f:event type="preRenderView" listener="#{clientCaseMB.loadCaseClientsDetails()}" />
-
-                <h:form id="titleForm">
-                    <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} (#{clientCaseMB.selectedClientCase.caseStatus.name}) </h3>
-                    <h:panelGroup rendered="#{!clientCaseMB.checkLoggedConsultantAccessToCase() and !(clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
-                        Jeśli widzisz ten ekran to znaczy, że nie zostałeś wybrany do prowadzenia tej sprawy i straciłeś do niej dostęp
-                    </h:panelGroup>
-                </h:form>
-                <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
-                    <div style="min-height: 160px">
-                        <div class="leftInlineBox">
-                            <h:form id="leftColumn">
-                                <h4> DANE KLIENTA </h4>
-                                <div class="marginLRT30">        
-                                    <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.name}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.lastName}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.pesel}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.birthDate}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.addresses.toArray()[0].phone}" /> </div>
-                                </div>
-
-                                <h4> DANE O ZATRUDNIENIU </h4>
-                                <div class="marginTB20" >   
-                                    <p:dataTable style="clear:both" id="table" value="#{clientCaseMB.selectedCaseIncomeTable}" var="data" emptyMessage="Klient nie zdefiniował żadnych informacji." >
-
-                                        <p:column headerText="Rodzaj">  
-                                            <h:outputText  value="#{data.employmentType}" />
-                                        </p:column>  
-
-                                        <p:column headerText="Branża"> 
-                                            <h:outputText value="#{data.branch}" />
-                                        </p:column>  
-
-                                        <p:column headerText="Dochód">  
-                                            <h:outputText value="#{data.incomeNetto}" />
-                                        </p:column>  
-
-                                    </p:dataTable>
-
-                                </div>    
-
-                                <h4> DANE SPRAWY </h4>
-                                <div class="marginLRT30">        
-                                    <div class="field"> 
-                                        <h:outputText class="label" value="Data rozpoczęcia"/>  
-                                        <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" > 
-                                            <f:convertDateTime type="date"  pattern="dd-MM-yyyy" />
-                                        </h:inputText>
+            
+                    <ui:define name="content">
+                         <f:event type="preRenderView" listener="#{clientCaseMB.loadCaseClientsDetails()}" />
+                        <h:form id="titleForm">
+                          <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} (#{clientCaseMB.selectedClientCase.caseStatus.name}) </h3>
+                           <h:panelGroup rendered="#{!clientCaseMB.checkLoggedConsultantAccessToCase() and !(clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
+                             Jeśli widzisz ten ekran to znaczy, że nie zostałeś wybrany do prowadzenia tej sprawy i straciłeś do niej dostęp
+                          </h:panelGroup>
+                        </h:form>
+                        <h:panelGroup rendered="#{clientCaseMB.checkLoggedConsultantAccessToCase() or clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
+                        <div style="min-height: 160px">
+                            <div class="leftInlineBox">
+                                <h:form id="leftColumn">
+                                    <h4> DANE KLIENTA </h4>
+                                    <div class="marginLRT30">        
+                                        <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.name}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.lastName}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="PESEL"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.pesel}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data Urodzenia"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.birthDate}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.client.addresses.toArray()[0].phone}" /> </div>
                                     </div>
+                                    
+                                    <h4> DANE O ZATRUDNIENIU </h4>
+                                    <div class="marginTB20" >   
+                                        <p:dataTable style="clear:both" id="table" value="#{clientCaseMB.selectedCaseIncomeTable}" var="data" emptyMessage="Klient nie zdefiniował żadnych informacji." >
+                                    
+                                            <p:column headerText="Rodzaj">  
+                                                <h:outputText  value="#{data.employmentType}" />
+                                            </p:column>  
 
-                                    <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consolidationValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.expectedInstalment}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.productType.name}" /> </div>
-                                </div>
+                                            <p:column headerText="Branża"> 
+                                                <h:outputText value="#{data.branch}" />
+                                            </p:column>  
 
-                            </h:form>
-                        </div>
+                                            <p:column headerText="Dochód">  
+                                                <h:outputText value="#{data.incomeNetto}" />
+                                            </p:column>  
+ 
+                                        </p:dataTable>
+                                         
+                                    </div>    
+                                        
+                                    <h4> DANE SPRAWY </h4>
+                                    <div class="marginLRT30">        
+                                        <div class="field"> 
+                                            <h:outputText class="label" value="Data rozpoczęcia"/>  
+                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" > 
+                                                <f:convertDateTime type="date"  pattern="dd-MM-yyyy" />
+                                            </h:inputText>
+                                        </div>
+                                        
+                                        <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consolidationValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.expectedInstalment}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.productType.name}" /> </div>
+                                    </div>
+                                
+                                </h:form>
+                            </div>
 
-                        <div class="rightInlineBox">
-                            <h:form id="rightColumn">
+                            <div class="rightInlineBox">
+                                <h:form id="rightColumn">
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and clientCaseMB.selectedClientCase.consultant eq null}" >
-                                    <h:panelGroup rendered="#{!marketMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
+                                    <h:panelGroup rendered="#{!clientCaseMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
-                                            Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
+                                             Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{marketMB.applyToCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
                                     </h:panelGroup>
-                                    <h:panelGroup rendered="#{marketMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
+                                    <h:panelGroup rendered="#{clientCaseMB.doesAppliedToCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <h4> WYCOFAJ ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
-                                            Klient jeszcze nie zaakceptował Ciebie jako swojego doradcy. <br /> W dalszym ciągu możesz wycofać sprawę. 
+                                             Klient jeszcze nie zaakceptował Ciebie jako swojego doradcy. <br /> W dalszym ciągu możesz wycofać sprawę. 
                                         </div>
                                         <div style="min-height: 50px"></div>
                                         <p:commandButton type="button" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
-
+                                            
                                         </p:commandButton>
                                     </h:panelGroup>
-                                    <h:panelGroup rendered="#{!marketMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
+                                    <h:panelGroup rendered="#{!clientCaseMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <div style="min-height: 50px"></div>
                                         <h4> OBSERWUJ SPRAWĘ </h4>
                                         <div class="solidText"> 
-                                            Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
+                                             Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{marketMB.traceCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmedObserved.show();" />
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(clientCaseMB.selectedClientCase)}" oncomplete="confirmedObserved.show();" />
                                     </h:panelGroup>
-
-                                    <h:panelGroup rendered="#{marketMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
+                                    
+                                    <h:panelGroup rendered="#{clientCaseMB.doesConsultantObserveCase(loginMB.consultant, clientCaseMB.selectedClientCase)}" >
                                         <div style="min-height: 50px"></div>
                                         <h4> ANULUJ OBSERWOWANIE</h4>
                                         <div class="solidText"> 
-                                            Ta sprawa Cię dłużej nie interesuje? Usuń ją z listy obserwowanych spraw!
+                                             Ta sprawa Cię dłużej nie interesuje? Usuń ją z listy obserwowanych spraw!
                                         </div>
                                         <div style="min-height: 50px"></div>
                                         <p:commandButton styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
                                     </h:panelGroup>
                                 </h:panelGroup>
-                                <h:panelGroup style="color: red" rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(clientCaseMB.selectedClientCase.consultant eq null)}" >
-                                    <h4> PODEJMIJ DECYZJĘ </h4>
-                                    <div class="solidText"> 
-                                        Dana sprawa jest sprawą Premium i klient chce właśnie Ciebie do prowadzenia sprawy. <br /><br /> Podejmij decyzję teraz. Pamiętaj odrzucenie sprawy premium skutkuje w utracie rankingu. 
-                                    </div>
-                                    <div style="min-height: 30px"></div>
-                                    <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  oncomplete="revokePremiumDialog.show();"/> 
-                                    <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
-                                </h:panelGroup>
+                                    <h:panelGroup style="color: red" rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(clientCaseMB.selectedClientCase.consultant eq null)}" >
+                                        <h4> PODEJMIJ DECYZJĘ </h4>
+                                        <div class="solidText"> 
+                                            Dana sprawa jest sprawą Premium i klient chce właśnie Ciebie do prowadzenia sprawy. <br /><br /> Podejmij decyzję teraz. Pamiętaj odrzucenie sprawy premium skutkuje w utracie rankingu. 
+                                        </div>
+                                        <div style="min-height: 30px"></div>
+                                        <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  oncomplete="revokePremiumDialog.show();"/> 
+                                        <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
+                                    </h:panelGroup>
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
-                                    <h4> USTAW STATUS SPRAWY </h4>
-                                    <div class="solidText"> 
-                                        Zaktualizuj bieżący status sprawy dzięki czemu klient będzie widział, że sprawa postępuje:
-                                    </div> 
-                                    <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{clientCaseMB.caseStatusID}" >
-                                        <f:selectItems value="#{clientCaseMB.statusModel}" var="entry" itemLabel="#{entry.name}" itemValue="#{entry.idCaseStatus}" /> 
-                                    </p:selectOneMenu>
-                                    <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{clientCaseMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
-
-                                    <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
-                                        <div class="fontGrey"> Status sprawy został zaktualizowany </div>
-
-                                        <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="statusChange.hide()"  >
-                                            <f:ajax  execute="@this" render="@all" /> 
-                                        </h:commandButton>
-
-                                    </p:dialog>
-
-
-                                    <div style="clear:both">
+                                   <h4> USTAW STATUS SPRAWY </h4>
+                                   <div class="solidText"> 
+                                         Zaktualizuj bieżący status sprawy dzięki czemu klient będzie widział, że sprawa postępuje:
+                                   </div> 
+                                   <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{clientCaseMB.caseStatusID}" >
+                                       <f:selectItems value="#{clientCaseMB.statusModel}" var="entry" itemLabel="#{entry.name}" itemValue="#{entry.idCaseStatus}" /> 
+                                   </p:selectOneMenu>
+                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{clientCaseMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
+                                   
+                                   <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
+                                       <div class="fontGrey"> Status sprawy został zaktualizowany </div>
+                                   
+                                       <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="statusChange.hide()"  >
+                                           <f:ajax  execute="@this" render="@all" /> 
+                                       </h:commandButton>
+                                   
+                                   </p:dialog>
+                                   
+                                   
+                                   <div style="clear:both">
                                         <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
                                         <div class="solidText"> 
-                                            Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
+                                             Ta funkcja pozwoli Ci wybrać najlepszą ofertę jaką możesz zaproponować klientowi
                                         </div>  
                                         <div style="min-height: 80px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Znajdź" outcome="/index"/> </div>
-                                    </div>
+                                   </div>
 
-                                    <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
-                                        <p:column headerText="Nazwa instytucji">  
+                                   <p:dataTable emptyMessage="Oferta nie została jeszcze wygenerowana.">
+                                          <p:column headerText="Nazwa instytucji">  
 
-                                        </p:column>  
+                                          </p:column>  
 
-                                        <p:column headerText="Nazwa oferty">  
+                                          <p:column headerText="Nazwa oferty">  
 
-                                        </p:column>  
+                                          </p:column>  
 
-                                        <p:column headerText="Trafność">    
+                                          <p:column headerText="Trafność">    
 
-                                        </p:column>  
+                                          </p:column>  
 
-                                        <p:column headerText="">  
+                                          <p:column headerText="">  
 
-                                        </p:column>    
+                                          </p:column>    
                                     </p:dataTable>
 
 
@@ -175,7 +175,7 @@
                                         <h4> GENERUJ UMOWY </h4>
                                     </div>
                                     <div class="solidText"> 
-                                        Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
+                                         Ta funkcja wygeneruje umowy niezbędne do dalszej realizacji sprawy (dokumenty zostaną wygenerowane w formacie pdf).
                                     </div>  
                                     <div style="min-height: 40px"> <h:link class="marginTB20 floatR greyButton wideButton" value="Generuj umowy" outcome="/index"/> </div>
                                 </h:panelGroup>
@@ -186,62 +186,62 @@
                                     <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(clientCaseMB.selectedClientCase.client.user.idUser)}"/>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}" >
-
-
+                                    
+                  
                                     <div class="marginT50">
                                         <h4> OCENA SPRAWY </h4>
                                     </div>
+                                    
+                                        <div class="field">
+                                            <h:outputText class="label" value="Opinia klienta"/>
+                                            <h:inputTextarea class="inputWidth fontBlack" style="resize: none; width: 270px; height: 60px" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.comment}" />
+                                        </div>
+                                        <div class="field">
+                                            <h:outputText class="label" value="Opinię dodano"/>
+                                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.commentDate}" />
+                                        </div>
+                                    
+                                        <div class="marginT50"></div>
+                                    
+                                        <h:outputText class="label" value="Kontakt"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.contact}" disabled="true"/>
 
-                                    <div class="field">
-                                        <h:outputText class="label" value="Opinia klienta"/>
-                                        <h:inputTextarea class="inputWidth fontBlack" style="resize: none; width: 270px; height: 60px" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.comment}" />
-                                    </div>
-                                    <div class="field">
-                                        <h:outputText class="label" value="Opinię dodano"/>
-                                        <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.caseRating.commentDate}" />
-                                    </div>
+                                        <h:outputText class="label" value="Kultura"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.culture}" disabled="true"/>
 
-                                    <div class="marginT50"></div>
+                                        <h:outputText class="label" value="Kompetencje"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.competence}" disabled="true"/>
 
-                                    <h:outputText class="label" value="Kontakt"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.contact}" disabled="true"/>
+                                        <h:outputText class="label" value="Czas"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.punctuality}" disabled="true"/>
 
-                                    <h:outputText class="label" value="Kultura"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.culture}" disabled="true"/>
+                                        <h:outputText class="label" value="Rzetelność"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.reliability}" disabled="true"/>
 
-                                    <h:outputText class="label" value="Kompetencje"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.competence}" disabled="true"/>
+                                        <h:outputText class="label" value="Szacunek"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.respect}" disabled="true"/>
 
-                                    <h:outputText class="label" value="Czas"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.punctuality}" disabled="true"/>
+                                        <h:outputText class="label" value="Trud"/> 
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.difficulty}" disabled="true"/>
 
-                                    <h:outputText class="label" value="Rzetelność"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.reliability}" disabled="true"/>
-
-                                    <h:outputText class="label" value="Szacunek"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.respect}" disabled="true"/>
-
-                                    <h:outputText class="label" value="Trud"/> 
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.difficulty}" disabled="true"/>
-
-                                    <h:outputText class="label" value="Zaufanie"/>
-                                    <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.trust}" disabled="true"/>
-
-
-
+                                        <h:outputText class="label" value="Zaufanie"/>
+                                        <p:rating value="#{clientCaseMB.selectedClientCase.caseRating.trust}" disabled="true"/>
+                                        
+                                        
+                                        
                                 </h:panelGroup>
-                            </h:form>
+                                </h:form>
+                            </div>
                         </div>
-                    </div>
-
-                    <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
-                    <h:form>
+                        
+                        <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
+                        <h:form>
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:panelGroup rendered="#{!marketMB.alreadyApplied}" class="fontGrey">
+                            <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
                                 Twoje zgłoszenie do sprawy #{clientCaseMB.selectedClientCase.idClientCase} zostało zatwierdzone.
                             </h:panelGroup>
 
-                            <h:panelGroup rendered="#{marketMB.alreadyApplied}" class="fontGrey">
+                            <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
                                 Do tego zlecenia zgłosiłeś się już wcześniej. 
                             </h:panelGroup>
 
@@ -250,88 +250,88 @@
                                     <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
                             </div>
-                        </p:dialog>
+                         </p:dialog>
 
-                        <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:panelGroup rendered="#{!marketMB.alreadyObserved}" class="fontGrey">
+                         <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                            <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
                                 Od teraz śledzisz sprawę numer:  #{clientCaseMB.selectedClientCase.idClientCase}.
                             </h:panelGroup>
 
-                            <h:panelGroup rendered="#{marketMB.alreadyObserved}" class="fontGrey">
+                            <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
                                 Już obserwujesz tą sprawę! 
                             </h:panelGroup>
 
                             <div> 
                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
-                                    <f:ajax execute="@this" render=":rightColumn" />
+                                   <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
                             </div>
-                        </p:dialog>
+                         </p:dialog>
+                        
+                         <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz usunąć element z listy?
+                                </h:panelGroup>
 
-                        <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                            <h:panelGroup class="fontGrey">
-                                Czy napewno chcesz usunąć element z listy?
-                            </h:panelGroup>
+                                <div> 
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.revokeApplication(clientCaseMB.selectedClientCase)}" onclick="revokeApp.hide()" >
+                                        <f:ajax execute="@this" render=":rightColumn" />
+                                    </h:commandButton>
 
-                            <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{marketMB.revokeApplication(clientCaseMB.selectedClientCase)}" onclick="revokeApp.hide()" >
-                                    <f:ajax execute="@this" render=":rightColumn" />
-                                </h:commandButton>
-
-                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
-
-                                </h:commandButton>
-                            </div>
-                        </p:dialog>
-
+                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
+                                       
+                                    </h:commandButton>
+                                </div>
+                         </p:dialog>
+                                        
                         <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
                             <h:panelGroup class="fontGrey">
                                 Czy napewno chcesz usunąć element z listy?
                             </h:panelGroup>
 
                             <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{marketMB.stopObserve(clientCaseMB.selectedClientCase)}" onclick="revokeObs.hide()" >
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{clientCaseMB0o.stopObserve(clientCaseMB.selectedClientCase)}" onclick="revokeObs.hide()" >
                                     <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
 
                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
-
+                                   
                                 </h:commandButton>
                             </div>
-                        </p:dialog>
+                       </p:dialog>
+                            
+                            
+                       <p:dialog id="acceptPremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="acceptPremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz zaakceptować sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
+                                </h:panelGroup>
 
+                                <div> 
+                                   <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.consultantAcceptPremium(clientCaseMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
+                                        <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                   </h:commandButton>
 
-                        <p:dialog id="acceptPremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="acceptPremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                            <h:panelGroup class="fontGrey">
-                                Czy napewno chcesz zaakceptować sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
-                            </h:panelGroup>
+                                   <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
+                                </div>
+                     </p:dialog>
+                            
+                     <p:dialog id="revokePremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokePremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                                <h:panelGroup class="fontGrey">
+                                    Czy napewno chcesz odrzucić sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
+                                </h:panelGroup>
 
-                            <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.consultantAcceptPremium(clientCaseMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
-                                    <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                <div> 
+                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{clientCaseMB.consultantRevokePremium(clientCaseMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
+                                      <f:ajax execute="@this" render=":rightColumn :leftColumn" />
                                 </h:commandButton>
-
+                                    
                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
-                            </div>
-                        </p:dialog>
-
-                        <p:dialog id="revokePremiumCase" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokePremiumDialog" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                            <h:panelGroup class="fontGrey">
-                                Czy napewno chcesz odrzucić sprawę nr #{clientCaseMB.selectedClientCase.idClientCase}?
-                            </h:panelGroup>
-
-                            <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{clientCaseMB.consultantRevokePremium(clientCaseMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
-                                    <f:ajax execute="@this" render=":rightColumn :leftColumn" />
-                                </h:commandButton>
-
-                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
-                            </div>
-                        </p:dialog>
-                    </h:form>
-                </h:panelGroup>
-            </ui:define>
+                                </div>
+                     </p:dialog>
+                       </h:form>
+                       </h:panelGroup>
+                    </ui:define>
         </ui:composition>
     </body>
 </html>  
-
+    

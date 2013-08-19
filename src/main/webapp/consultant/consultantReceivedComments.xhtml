@@ -12,6 +12,7 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - komentarze </ui:define> 
 
+
             <ui:define name="content">
 
                 <h4> Witaj Stanisław Nowy. Dziękujemy za wykupienie wersji PRO. </h4>
@@ -23,28 +24,28 @@
                     <h:form> 
                         <p:dataTable value="#{consultantRatesMB.consulantRates}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie masz żadnych komentarzy" selection="#{consultantRatesMB.clientCase}" selectionMode="single">
 
-                            <p:ajax event="rowSelect" listener="#{consultantRatesMB.onRowSelect()}"/>
+                        <p:ajax event="rowSelect" listener="#{consultantRatesMB.onRowSelect()}"/>
+                        
+                        <p:column headerText="Od Kogo">  
+                            <h:outputText  value="#{row.client.lastName}"/>
+                        </p:column>  
 
-                            <p:column headerText="Od Kogo">  
-                                <h:outputText  value="#{row.client.lastName}"/>
-                            </p:column>  
+                        <p:column headerText="Typ">    
+                        </p:column>  
 
-                            <p:column headerText="Typ">    
-                            </p:column>  
+                        <p:column headerText="Śr.ocena"> 
+                            <h:outputText  value="#{row.caseRating.average}"/>
+                        </p:column>  
 
-                            <p:column headerText="Śr.ocena"> 
-                                <h:outputText  value="#{row.caseRating.average}"/>
-                            </p:column>  
+                        <p:column headerText="Data">  
+                            <h:outputText  value="#{row.caseRating.commentDate}"/>
+                        </p:column> 
 
-                            <p:column headerText="Data">  
-                                <h:outputText  value="#{row.caseRating.commentDate}"/>
-                            </p:column> 
+                        <p:column headerText="Nr. Transakcji" >
+                            <h:outputText  value="#{row.idClientCase}"/>
+                        </p:column> 
 
-                            <p:column headerText="Nr. Transakcji" >
-                                <h:outputText  value="#{row.idClientCase}"/>
-                            </p:column> 
-
-                        </p:dataTable>
+                    </p:dataTable>
                     </h:form> 
                 </div>
 
@@ -58,7 +59,7 @@
                         <li class="regularList">Odwiedź nasz blog by dowiedzieć się więcej</li>
                     </ul>
 
-
+                    
                     <ul>
                         <li class="headerList">Statystyki konta</li>
                         <li class="regularList">Klienci</li>
@@ -66,7 +67,7 @@
                         <li class="regularList">Średnia ocena</li>
                         <li class="regularList">Komentarze</li>
                     </ul>
-
+                    
                     <ul>
                         <li class="headerList">Klucz Api</li>
                         <li class="regularList">Klucz ten daje dostęp do API Społeczności Finansowej</li>
@@ -80,7 +81,7 @@
                 </div>
 
                 <div style="clear:both;">
-
+                    
                 </div>
             </ui:define>           
         </ui:composition>

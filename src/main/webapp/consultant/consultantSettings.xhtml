@@ -14,7 +14,7 @@
             <ui:define name="content">
 
                 <h:form>
-
+                    
                     <div class="marginT10">
                         <h3 style="display: inline">Witaj Stanisław Nowy. Dziękujemy za wykupienie wersji </h3>
                         <h:outputText class="bluePRO" style="display:inline;" value="PRO." /> 
@@ -30,22 +30,22 @@
 
                             <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
 
-                            <div class="marginLRT30">
+                          <div class="marginLRT30">
 
-                                <div class="field">
-                                    <h:outputText class="label" value="Imię"/> 
-                                    <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
-                                    <h:message styleClass="invalid" for="name"/>
-                                </div>
+                            <div class="field">
+                                <h:outputText class="label" value="Imię"/> 
+                                <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
+                                <h:message styleClass="invalid" for="name"/>
+                            </div>
 
-                                <div class="field">
-                                    <h:outputText class="label" value="Nazwisko"/>
-                                    <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
-                                    <h:message styleClass="invalid" for="lastName"/>
-                                </div>
-
-
-
+                            <div class="field">
+                                <h:outputText class="label" value="Nazwisko"/>
+                                <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
+                                <h:message styleClass="invalid" for="lastName"/>
+                            </div>
+                                 
+                               
+                               
 
                                 <div class="field"> 
                                     <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p>                                    
@@ -56,42 +56,42 @@
                                     </h:inputText>
                                     <h:message for="email" errorClass="invalid" id="emailMessage" />
                                 </div>
+                              
+                               <div class="field">
+                                <h:outputText class="label" value="Staż w branży"/> 
+                                <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}"/>
+                                <h:message styleClass="invalid" for="expirience"/>
+                               </div>
 
-                                <div class="field">
-                                    <h:outputText class="label" value="Staż w branży"/> 
-                                    <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}"/>
-                                    <h:message styleClass="invalid" for="expirience"/>
-                                </div>
+                               <div class="field"> 
+                                <h:outputText class="label" value="Miejsce zatrudnienia"/>
+                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantSettingsMB.idWorkingPlace}">
+                                    <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
+                                </p:selectOneMenu> 
+                                <h:message styleClass="invalid" for="workingPlace"/>
+                              </div>
 
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                    <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantSettingsMB.idWorkingPlace}">
-                                        <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
-                                    </p:selectOneMenu> 
-                                    <h:message styleClass="invalid" for="workingPlace"/>
-                                </div>
-
-                            </div>
-
+                          </div>
+                            
 
                         </div>
 
                         <div class="rightWiderBox">
                             <h4 style="margin: 0;">USTAW ZDJECIE</h4>
-
+                            
                             <h:graphicImage class="photoChange" id="profil_logo_blue_small" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
 
                             <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
 
                             <h:inputText  class="label2 browseInput"  value="przeglądaj..." />
-
+                            
                             <h:link class="floatR greyButton wideButton" value="Wczytaj" />
 
                             <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
 
                         </div>
-
-
+                        
+                       
 
                     </div>
                     <div>
@@ -238,55 +238,55 @@
                     <div style="min-height: 40px; margin-bottom: 30px;"> 
                         <h:commandLink class ="blueButton wideButton floatR marginTB20" value="Zapisz zmiany" action="#{consultantSettingsMB.updateSettings()}"/>                       
                     </div>
-
+                    
                 </h:form>   
-
+                
                 <div class="leftInlineBox">
+                
+                 <h:form> 
+                            
+                            <div class="marginLRT30">
 
-                    <h:form> 
-
-                        <div class="marginLRT30">
-
-                            <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
-
-                            <div class="field">
-                                <h:outputText class="label" value="Obecne hasło"/>  
-                                <h:inputSecret required="true" id="cPassword"  value="#{consultantSettingsMB.currentPassword}" validator="#{consultantSettingsMB.validateCurrentPassword}"> 
+                                <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Obecne hasło"/>  
+                                    <h:inputSecret required="true" id="cPassword"  value="#{consultantSettingsMB.currentPassword}" validator="#{consultantSettingsMB.validateCurrentPassword}"> 
                                     <f:validateLength minimum="8" maximum="20" />
                                     <p:ajax event="keyup" update="currentPasswordMessage"/>
-                                </h:inputSecret>
-                                <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
-                            </div>
-
-                            <div class="field">
-                                <h:outputText class="label" value="Nowe hasło"/> 
-                                <h:inputSecret required="true" value="#{consultantSettingsMB.newPassword}" >
+                                    </h:inputSecret>
+                                    <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Nowe hasło"/> 
+                                    <h:inputSecret required="true" value="#{consultantSettingsMB.newPassword}" >
                                     <f:validateLength minimum="8" maximum="20" />
                                     <p:ajax event="keyup" update="confirmPasswordMessage" />
-                                </h:inputSecret>
-                            </div>
-
-                            <div class="field">
-                                <h:outputText class="label" value="Powtórz hasło"/> 
-                                <h:inputSecret id="confirmPassword" required="true" value="#{consultantSettingsMB.confirmNewPassword}" validator="#{consultantSettingsMB.validateSamePassword}" > 
+                                    </h:inputSecret>
+                                </div>
+                                
+                                <div class="field">
+                                    <h:outputText class="label" value="Powtórz hasło"/> 
+                                    <h:inputSecret id="confirmPassword" required="true" value="#{consultantSettingsMB.confirmNewPassword}" validator="#{consultantSettingsMB.validateSamePassword}" > 
                                     <f:validateLength minimum="8" maximum="20" />
                                     <p:ajax event="keyup" update="confirmPasswordMessage"/>
-                                </h:inputSecret>
-                                <h:message for="confirmPassword" errorClass="invalid" id="confirmPasswordMessage" />
+                                    </h:inputSecret>
+                                    <h:message for="confirmPassword" errorClass="invalid" id="confirmPasswordMessage" />
+                                </div>
+                                
+                                <div style="min-height: 40px"> 
+                                    <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{consultantSettingsMB.updatePassword()}"/>
+                                </div>
+
                             </div>
 
-                            <div style="min-height: 40px"> 
-                                <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{consultantSettingsMB.updatePassword()}"/>
-                            </div>
-
-                        </div>
-
-                    </h:form>
-
-                </div>
+                </h:form>
+                    
+              </div>
 
             </ui:define>
-
+            
         </ui:composition>
     </body>
 </html>

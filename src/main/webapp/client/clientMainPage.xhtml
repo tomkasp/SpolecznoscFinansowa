@@ -12,43 +12,43 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - ekran główny </ui:define> 
-
+            
 
             <ui:define name="content">
 
                 <script>
-                    $(document).ready(function() {
-                        $("#hide").click(function() {
+                    $(document).ready(function(){
+                        $("#hide").click(function(){
                             $("#all").toggle();
                             $("#last").toggle();
                         });
                     });
-
-                    $(document).ready(function() {
-                        $("#show").click(function() {
+                    
+                    $(document).ready(function(){
+                        $("#show").click(function(){
                             $("#all").toggle();
-                            $("#last").toggle();
+                            $("#last").toggle();    
                         });
                     });
-
+                    
                 </script>
 
                 <h:form>
-                    <f:event type="preRenderView" listener="#{clientMainPageMB.reload()}" />
+                   <f:event type="preRenderView" listener="#{clientMainPageMB.reload()}" />
                     <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
                 </h:form>
-
+                
                 <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList) }" >
                     <h:form> 
                         <div style="min-height: 80px; border-bottom: green 4px solid">
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{marketMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
-
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość:  #{messagesMB.unreadMessagesList.size()}" /> 
+                                
                             <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
                         </div>
                     </h:form>
                 </h:panelGroup>
-
+                
 
                 <div class="marginT50"> 
                     <h:form>
@@ -57,20 +57,20 @@
                         <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
 
                             <div class="fontGrey"> Do utworzenia nowego wniosku potrzebne są następujące informacje: <br /><br />
-                                Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
+                                  Data urodzenia <br /> PESEL   <br /> Informacje o dochodach <br /> Województwo <br /> Kod pocztowy <br /> <br /> Czy chcesz uzupełnić swoje dane teraz?                                                              
                             </div>
                             <h:commandButton class="marginTB20 floatL greyButton wideButton"  type="button" onclick="fillData.hide();" value="Nie" />
                             <h:link class="marginTB20 floatR greyButton wideButton linkWidth" value="Tak" outcome="clientSettings?faces-redirect=true" />
                         </p:dialog> 
                     </h:form>
-
+                    
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
                         <h:form id="lastForm">
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
-                                <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.lastSelectedCase)}"/> 
+                                <p:ajax event="rowSelect" update="@form"/> 
                                 <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}"/>
 
                                 <p:column headerText="Data dodania">    
@@ -129,13 +129,11 @@
                                     <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                                 </p:column> 
 
-                                <!--                        <p:column headerText=""> 
-                                                                <h:outputText  value=" "/>
-                                                            </p:column> -->
 
                             </p:dataTable>
                             <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
-
+                            <p:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
+                   
                         </h:form>
                     </div>
 
@@ -144,6 +142,9 @@
                         <h:form id="allForm">
 
                             <p:dataTable id="allCases" value="#{clientMainPageMB.allClientCaseList}"  var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
+
+                                <p:ajax event="rowSelect" update="@form"/> 
+                                <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}"/>
 
                                 <p:column headerText="Data dodania">    
                                     <h:outputText  value="#{row.beginDate}">
@@ -209,7 +210,7 @@
 
                             </p:dataTable>
                             <button class="topMenuButton greyButton wideButton" type="reset" id="show">Pokaż tylko ostatnie</button>
-
+                            <p:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
                         </h:form>
                     </div>    
 
@@ -225,7 +226,7 @@
 
                         <p:dataTable id="awaitingCases" value="#{clientMainPageMB.awaitingClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingSelectedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.awaitingSelectedCase)}"/> 
+                            <p:ajax event="rowSelect"  update="@form" /> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}"/>
 
                             <p:column headerText="Data dodania">    
@@ -290,7 +291,8 @@
                         <c:if test="#{clientMainPageMB.awaitingSelectedCase!=null}" var="costam">
                             <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
                         </c:if>
-
+                        <p:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}" />
+                     
                     </h:form>   
 
                 </div>
@@ -303,7 +305,7 @@
 
                         <p:dataTable id="currentCases" value="#{clientMainPageMB.currentClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.currentSelectedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.currentSelectedCase)}"/> 
+                            <p:ajax event="rowSelect" update="@form" /> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}"/>
 
 
@@ -361,10 +363,11 @@
                         </p:dataTable>
 
                         <c:if test="#{clientMainPageMB.currentSelectedCase!=null}" var="costam">
-                            <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/consultant/consultantMessages"/>
+                            <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
                             <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
                         </c:if>
-
+                        <p:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
+                     
                     </h:form>
 
                 </div>
@@ -379,9 +382,9 @@
 
                         <p:dataTable id="finishedCases" value="#{clientMainPageMB.finishedClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.finishedSelectedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect"  listener="#{clientMainPageMB.rowClick(clientMainPageMB.finishedSelectedCase)}"/> 
+                            <p:ajax event="rowSelect" update="@form"/> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}"/>
-                            \
+                            
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -455,6 +458,8 @@
                         <c:if test="#{clientMainPageMB.finishedSelectedCase!=null}" var="costam">
                             <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                         </c:if>
+                        <p:commandButton disabled="#{empty clientMainPageMB.finishedSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}" />
+                     
 
 
                     </h:form>  
@@ -467,8 +472,11 @@
 
                         <h4> PREMIUM </h4>
 
-                        <p:dataTable id="awaitingCase" value="#{clientMainPageMB.premiumClientCaseList}" var="row" emptyMessage="Nie ma żadnych spraw" >
+                        <p:dataTable id="premiumCases" value="#{clientMainPageMB.premiumClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.premiumSelectedCase}" selectionMode="single" >
 
+                            <p:ajax event="rowSelect" update="@form"/> 
+                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}"/>
+                                                        
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -537,7 +545,8 @@
 
 
                         </p:dataTable>
-
+                        <p:commandButton disabled="#{empty clientMainPageMB.premiumSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}" />
+                     
                     </h:form>
 
                 </div>
