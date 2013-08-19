@@ -1,0 +1,41 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.efsf.sf.sql.dao;
+
+import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.ConsultantRating;
+import com.efsf.sf.sql.util.HibernateUtil;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+/**
+ *
+ * @author XaI
+ */
+public class ConsultantRatingDAO 
+{
+       
+    public ConsultantRating getConsultantRatings(Integer consultantId)
+    {
+         ConsultantRating cr = null;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+
+         Query q = session.createQuery("FROM ConsultantRating as CR "       
+         + "where con.idConsultant = :consultantId ");
+         
+         q.setParameter("consultantId", consultantId);
+
+         List l = q.list();
+         if (l != null)
+            cr = (ConsultantRating) q.list().get(0);
+
+         
+         
+         session.close();
+
+         return cr;
+    }
+}
