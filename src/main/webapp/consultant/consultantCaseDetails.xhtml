@@ -124,6 +124,31 @@
                                         <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
                                     </h:panelGroup>
                                 <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
+                                   <h4> DOKUMENTY KLIENTA </h4>
+                                   <div>
+                                       <h:panelGrid columns="4">
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Dowód tożsamości"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Zaświadczenie o zarobkach"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Akt zgonu współmałżonka"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Intercyza"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Akt rozwodu"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText  value="Akt separacji"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText  value="Akt własności"/>
+                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText  value="BIK"/>
+                                           
+                                           
+                                       </h:panelGrid> 
+                                   </div>
+                                   
+                                    
                                    <h4> USTAW STATUS SPRAWY </h4>
                                    <div class="solidText"> 
                                          Zaktualizuj bieżący status sprawy dzięki czemu klient będzie widział, że sprawa postępuje:

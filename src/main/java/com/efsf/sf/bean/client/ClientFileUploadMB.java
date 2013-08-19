@@ -39,8 +39,16 @@ public class ClientFileUploadMB implements Serializable {
     
     @PostConstruct
     private void loadRequiredDocuments() {
-        RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
-        requiredDocuments = requiredDocumentsDAO.readForFkClient( loginMB.getClient().getIdClient() );
+        if(loginMB.getClient()!=null)
+        {
+            RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
+            requiredDocuments = requiredDocumentsDAO.readForFkClient( loginMB.getClient().getIdClient() );
+        }
+        if(requiredDocuments==null)
+        {
+            requiredDocuments=new RequiredDocuments();
+        }
+            
     }
     
 
@@ -95,35 +103,35 @@ public class ClientFileUploadMB implements Serializable {
     }
     
     public void load1() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getIdCard() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getIdCard() ); 
     }
     
     public void load2() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getIncomeStatement() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getIncomeStatement() ); 
     }
    
     public void load3() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getDeathCertificate() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getDeathCertificate() ); 
     }
     
     public void load4() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getMariageSettlement() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getMariageSettlement() ); 
     }
     
     public void load5() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getDivorceAct() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getDivorceAct() ); 
     }
     
     public void load6() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getSeparationAct() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getSeparationAct() ); 
     }
     
     public void load7() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getTitleDeed() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getTitleDeed() ); 
     }
     
     public void load8() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/123/", requiredDocuments.getBik() ); 
+        ftpd.downLoad("rice/SF/USERS/"+loginMB.getIdUser()+"/", requiredDocuments.getBik() ); 
     }
     
      private void declare() {

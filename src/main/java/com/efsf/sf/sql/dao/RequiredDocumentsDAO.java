@@ -46,7 +46,10 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         Query q=session.createQuery("FROM RequiredDocuments WHERE fk_client = :id");
         q.setParameter("id", fk_client);
+        if(!q.list().isEmpty())
+        {
         requiredDocuments = (RequiredDocuments) q.list().get(0);
+        }
         session.getTransaction().commit();
         }
         catch(HibernateException exp)
