@@ -736,6 +736,11 @@ background:#F0F5F5;
     width: 30%;
 }
 
+#listOverflow{
+    max-height: 200px;
+    overflow-x: auto;
+}
+
 
 /*WAITING INDICATOR*/
 #circular3dG{
@@ -872,6 +877,8 @@ animation-delay:1.1s;
 .area{
     width: 300px;
 }
+
+
 
 @-moz-keyframes bounce_circular3dG{
 0%{
