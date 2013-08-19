@@ -12,62 +12,7 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - ekran główny </ui:define> 
-            <ui:define name="top"> 
-                <h:outputStylesheet library="css" name="green.css" />
-                <h:form>
-
-                    <f:event type="preRenderView" listener="#{clientMainPageMB.reload()}" />
-                    <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
-               
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-                </h:form>
-
-                <h:form>
-                    
-                    <div class="topbarMenuGreen">
-
-                        <h:panelGroup>
-
-
-                            <h:commandLink class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Najlepsi doaradcy" outcome="/common/scoreBoard"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
-                            <h:link class="topMenuButton greyButton wideButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
-                            <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Doładuj konto" update=":dialog1" oncomplete="dodaj.show()" />
-                            <h:link class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-
-                        </h:panelGroup>
-
-                    </div>
-
-                </h:form>
-
-                <p:dialog id="dialog1" header="Dodaj punkty" widgetVar="dodaj" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
-
-                    <h:form id="form">
-
-                        <div > 
-                            <p:selectOneButton value="#{clientMainPageMB.newPoints}" required="true">  
-                                <f:selectItem itemLabel="5 Punktów" itemValue="5" />  
-                                <f:selectItem itemLabel="30 Punktów" itemValue="30" />  
-                                <f:selectItem itemLabel="100 Punktów" itemValue="100" />  
-                            </p:selectOneButton>  
-                        </div>      
-
-                        <div style=" margin-top: 20px;">
-                            <p:commandButton style="margin-top: 10px; float: left;" value="Anuluj" type="button" onclick="dodaj.hide()" />
-                            <p:commandButton style="margin-top: 10px; float: right;" ajax="true" update=":test"  value="Dodaj" type="submit" oncomplete="if (!args.validationFailed) dodaj.hide()" action="#{clientMainPageMB.addPoints()}" />     
-                        </div>
-
-                    </h:form>
-
-                </p:dialog>   
-
-            </ui:define>
+            
 
             <ui:define name="content">
 
@@ -88,6 +33,11 @@
                     
                 </script>
 
+                <h:form>
+                   <f:event type="preRenderView" listener="#{clientMainPageMB.reload()}" />
+                    <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
+                </h:form>
+                
                 <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList) }" >
                     <h:form> 
                         <div style="min-height: 80px; border-bottom: green 4px solid">

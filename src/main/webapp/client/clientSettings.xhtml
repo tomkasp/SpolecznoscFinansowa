@@ -13,52 +13,53 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - ustawienia konta </ui:define> 
-            <ui:define name="top"> 
 
-                <h:outputStylesheet library="css" name="green.css" />
-
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
-                    <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
-                </div>
-
-                <div class="topbarMenuGreen">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Wyloguj" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-
-            </ui:define>
 
             <ui:define name="content">
-                
+                                   
                 <script>
-                    $(document).ready(function(){
-                        $("#toggle1").click(function(){
-                            $("#all").toggle();
-                            $("#last").toggle();
-                        });
-                    });
                     
                     $(document).ready(function(){
-                        $("#toggle2").click(function(){
-                            $("#all").toggle();
-                            $("#last").toggle();    
+                        $("#uploadButton1").click(function(){
+                            $("#upload1").toggle();
+                        });
+                        $("#uploadButton2").click(function(){
+                            $("#upload2").toggle();
+                        });
+                        $("#uploadButton3").click(function(){
+                            $("#upload3").toggle();
+                        });
+                        $("#uploadButton4").click(function(){
+                            $("#upload4").toggle();
+                        });
+                        $("#uploadButton5").click(function(){
+                            $("#upload5").toggle();
+                        });
+                        $("#uploadButton6").click(function(){
+                            $("#upload6").toggle();
+                        });
+                        $("#uploadButton7").click(function(){
+                            $("#upload7").toggle();
+                        });
+                        $("#uploadButton8").click(function(){
+                            $("#upload8").toggle();
                         });
                     });
-                    
+
                 </script>
 
+                
+                 
+                
                 <div class="marginT50">
                     <h3 class="greenLeftBorder"> Ustawienie konta </h3>
                 </div>
 
-                <div style="min-height: 1700px">
-
+                <div style="height:auto;">
+                   
                     <div class="leftInlineBox">
 
-                        <h:form id="form"> 
+                        <h:form id="form1"> 
 
                             <div class="marginLRT30">
 
@@ -157,7 +158,7 @@
                                     </p:column>  
 
                                     <p:column headerText="">  
-                                        <p:commandLink value="Usuń"  action="#{clientSettingsMB.deleteIncome(data.idIncome,data.isIncome)}" update=":form:table">
+                                        <p:commandLink value="Usuń"  action="#{clientSettingsMB.deleteIncome(data.idIncome,data.isIncome)}" update=":form1:table">
                                         </p:commandLink>
                                     </p:column> 
                                 </p:dataTable>
@@ -235,7 +236,7 @@
 
                     </div>
 
-                    <div class="rightWiderBox" >
+                    <div class="rightInlineBox" >
 
                         <h:form> 
 
@@ -313,10 +314,10 @@
                                     <div> <h:outputText  class="fontGrey marginL20" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
                                     <div> <h:link class="redMessage marginL20 wordSpace" value="kliknij tutaj." /> </div>
                                 </div>
-                                
+
 
                             </div>
-  
+
                             <div class="marginLRT30">
                                 <div class="marginTB20">
                                     <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
@@ -324,92 +325,170 @@
                                 <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
                                 <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
                             </div>
-                            
-                        </h:form>
-                        
-                        <h:form id="downloadForm">
-                            
-                            <h:commandLink class="floatR greyButton wideButton" target="_blank" value="OTWORZ PLIK" action="#{clientFileUploadMB.load()  }"/>
-                               
+
                         </h:form>
 
-                        <h:form id="uploadForm" enctype="multipart/form-data">
-                            
-                            <div class="marginLRT30" style="height: 1500px; margin-top: 120px;" >     
-                                
+                        <h:form id="downloadForm">
+
+                           
+
+                        </h:form>
+
+                        <h:form id="uploadForm" enctype="multipart/form-data" >
+
+                            <div class="marginLRT30" style=" margin-top: 40px;">     
+
                                 <h4>WYMAGANE DOKUMENTY</h4>
-                                
-                                
-                                 <div class="marginTB20">
-                                    <h:outputLabel class="uploaderLabel" id="idCardLabel">Dowód tożsamości: </h:outputLabel>       
-                                    <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple"  > 
-                                        <f:validator validatorId="fileUploadValidator" />
-                                    </p:fileUpload>
-                                    
-                                    <h:message for="idCardUpload"  errorClass="invalid"  /> 
-                                 </div>
-                                
+
                                 <div class="marginTB20">
-                                    <h:outputLabel class="uploaderLabel" id="idIncomeStatementLabel">Zaświadczenie o zarobkach: </h:outputLabel>       
-                                    <p:fileUpload styleClass="greyButton" id="idIncomeStatement" value="#{ clientFileUploadMB.uploadedFiles[1] }" mode="simple"  > 
+                                    <h:outputLabel class="uploaderLabel" id="idCardLabel">Dowód tożsamości: </h:outputLabel>     
+                                   
+                                    <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }">
+                                    <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                    </h:commandLink>
+
+                                     <span id="uploadButton1"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                    <div id="upload1" style="display:none;">
+                                    <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                    </div>
+                                     <h:message for="idCardUpload"  errorClass="invalid" /> 
+                                    
+                                </div>
+                               
+                                <div class="marginTB20">
+                                    <h:outputLabel class="uploaderLabel" id="idIncomeStatementLabel">Zaświadczenie o zarobkach: </h:outputLabel>   
+                                    
+                                     <h:commandLink target="_blank" action="#{ clientFileUploadMB.load2() }">
+                                     <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.incomeStatement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                     </h:commandLink>
+                                    
+                                    <span id="uploadButton2"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                    <div id="upload2" style="display:none;">
+                                    <p:fileUpload styleClass="greyButton" id="idIncomeStatement" value="#{ clientFileUploadMB.uploadedFiles[1] }" mode="simple" > 
+                                        <f:validator validatorId="fileUploadValidator" />
+                                    </p:fileUpload>
+                                    </div>
                                     <h:message for="idIncomeStatement"  errorClass="invalid"  /> 
-                                 </div>
-                                
+                                     
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idDeathCertificateLabel">Akt zgonu współmałżonka: </h:outputLabel>       
-                                    <p:fileUpload   styleClass="greyButton" id="idDeathCertificate" value="#{ clientFileUploadMB.uploadedFiles[2] }" mode="simple"  > 
+                                    
+                                     <h:commandLink target="_blank" action="#{ clientFileUploadMB.load3() }">
+                                     <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.deathCertificate!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                     </h:commandLink>
+                                    
+                                    <span id="uploadButton3"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                    <div id="upload3" style="display:none;">
+                                    <p:fileUpload   styleClass="greyButton" id="idDeathCertificate" value="#{ clientFileUploadMB.uploadedFiles[2] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                    </div>
                                     <h:message for="idDeathCertificate"  errorClass="invalid"  /> 
-                                 </div>
-                                
+                                    
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idMariageSettlementLabel">Intercyza: </h:outputLabel>       
-                                    <p:fileUpload   styleClass="greyButton" id="idMariageSettlement" value="#{ clientFileUploadMB.uploadedFiles[3] }" mode="simple"  > 
+                                    
+                                     <h:commandLink target="_blank" action="#{ clientFileUploadMB.load4() }">
+                                     <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                     </h:commandLink>
+                                    
+                                    <span id="uploadButton4"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                     <div id="upload4" style="display:none;">
+                                    <p:fileUpload   styleClass="greyButton" id="idMariageSettlement" value="#{ clientFileUploadMB.uploadedFiles[3] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                      </div>
                                     <h:message for="idMariageSettlement"  errorClass="invalid" /> 
-                                 </div>
-                                
+                                    
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idDivorceActLabel">Akt rozwodu: </h:outputLabel>       
-                                    <p:fileUpload   styleClass="greyButton" id="idDivorceAct" value="#{ clientFileUploadMB.uploadedFiles[4] }" mode="simple"  > 
+                                   
+                                      <h:commandLink target="_blank" action="#{ clientFileUploadMB.load5() }">
+                                      <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                      </h:commandLink>
+                                    
+                                    <span id="uploadButton5"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                     <div id="upload5" style="display:none;">
+                                    <p:fileUpload   styleClass="greyButton" id="idDivorceAct" value="#{ clientFileUploadMB.uploadedFiles[4] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                     </div>
                                     <h:message for="idDivorceAct"  errorClass="invalid"  /> 
-                                 </div>
-                                
+                                    
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idSeparationActLabel">Akt separacji: </h:outputLabel>       
-                                    <p:fileUpload  styleClass="greyButton"  id="idSeparationAct" value="#{ clientFileUploadMB.uploadedFiles[5] }" mode="simple"  > 
+                                    
+                                     <h:commandLink target="_blank" action="#{ clientFileUploadMB.load6() }">
+                                     <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                     </h:commandLink>
+                                    
+                                    <span id="uploadButton6"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                     <div id="upload6" style="display:none;">
+                                    <p:fileUpload  styleClass="greyButton"  id="idSeparationAct" value="#{ clientFileUploadMB.uploadedFiles[5] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                     </div>
                                     <h:message for="idSeparationAct"  errorClass="invalid"  /> 
-                                 </div>
-                                
+                                    
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idTitleDeadLabel">Akt własności: </h:outputLabel>       
-                                    <p:fileUpload  styleClass="greyButton"  id="idTitleDead" value="#{ clientFileUploadMB.uploadedFiles[6] }" mode="simple"  > 
+                                    
+                                      <h:commandLink target="_blank" action="#{ clientFileUploadMB.load7() }">
+                                      <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                      </h:commandLink>
+                                    
+                                    <span id="uploadButton7"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                    <div id="upload7" style="display:none;">
+                                    <p:fileUpload  styleClass="greyButton"  id="idTitleDead" value="#{ clientFileUploadMB.uploadedFiles[6] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                    </div>
                                     <h:message for="idTitleDead"  errorClass="invalid"  /> 
-                                 </div>
-                                
+                                    
+                                </div>
+
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idBIGLabel">BIK: </h:outputLabel>       
-                                    <p:fileUpload  styleClass="greyButton"  id="idBIK" value="#{ clientFileUploadMB.uploadedFiles[7] }" mode="simple"  > 
+                                    
+                                      <h:commandLink target="_blank" action="#{ clientFileUploadMB.load8() }">
+                                      <h:graphicImage rendered="#{clientFileUploadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                      </h:commandLink>
+                                    
+                                    <span id="uploadButton8"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                     
+                                    <div id="upload8" style="display:none;">
+                                    <p:fileUpload  styleClass="greyButton"  id="idBIK" value="#{ clientFileUploadMB.uploadedFiles[7] }" mode="simple" > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
+                                    </div>
                                     <h:message for="idBIK"  errorClass="invalid"  /> 
-                                 </div>
+                                    
+                                </div>
 
-                                
+
                                 <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Zapisz" type="submit" action="#{ clientFileUploadMB.save() }" />      
-                           
+
                             </div>
-                            
+
                         </h:form>
 
                     </div>
@@ -436,6 +515,7 @@
                         </p:commandButton>             
                         <h:panelGroup id="panel2">
                             <div style="max-height: 400px; overflow-y: auto; clear: both;">
+
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Typ umowy"/> 
                                     <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; float:right;" value="#{clientSettingsMB.incomeId}">

@@ -198,6 +198,7 @@ p:column {
     margin: 15px 0px 15px 0px;
     min-height: 300px;
     float: right;
+    
 }
 
 .leftInlineBox
@@ -552,7 +553,6 @@ background:#F0F5F5;
 .profilBar
 {
     border-bottom: dodgerblue 4px solid;
-    min-height: 150px;
 }
 
 .profileBarThin
@@ -615,6 +615,10 @@ background:#F0F5F5;
 {
     max-width: 60px;
     text-align: center;
+}
+
+.right{
+    float: right;
 }
 
 .redX {

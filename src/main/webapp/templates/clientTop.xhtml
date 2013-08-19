@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:form>
+
+        <div class="topbarLogo">
+            <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+            <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+            <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+        </div>
+    </h:form>
+
+    <h:form>
+
+        <div class="topbarMenuGreen">
+
+            <h:panelGroup>
+
+
+                <h:commandLink class="topMenuButton greyButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                <h:link class="topMenuButton greyButton" value="Najlepsi doaradcy" outcome="/common/scoreBoard"/>
+                <h:link class="topMenuButton greyButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
+                <h:link class="topMenuButton greyButton" value="Usuń konto" outcome="/client/clientDeleteAccount"/>
+                <p:commandLink styleClass="topMenuButton greyButton" value="Doładuj konto" update=":dialog1" oncomplete="dodaj.show()" />
+                <h:link class="topMenuButton greyButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+
+            </h:panelGroup>
+
+        </div>
+
+    </h:form>
+
+    <p:dialog id="dialog1" header="Dodaj punkty" widgetVar="dodaj" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+
+        <h:form>
+
+            <div > 
+                <p:selectOneButton value="#{clientMainPageMB.newPoints}" required="true">  
+                    <f:selectItem itemLabel="5 Punktów" itemValue="5" />  
+                    <f:selectItem itemLabel="30 Punktów" itemValue="30" />  
+                    <f:selectItem itemLabel="100 Punktów" itemValue="100" />  
+                </p:selectOneButton>  
+            </div>      
+
+            <div style=" margin-top: 20px;">
+                <p:commandButton style="margin-top: 10px; float: left;" value="Anuluj" type="button" onclick="dodaj.hide()" />
+                <p:commandButton style="margin-top: 10px; float: right;" ajax="true" update=":test"  value="Dodaj" type="submit" oncomplete="if (!args.validationFailed) dodaj.hide()" action="#{clientMainPageMB.addPoints()}" />     
+            </div>
+
+        </h:form>
+
+    </p:dialog>
+</html>

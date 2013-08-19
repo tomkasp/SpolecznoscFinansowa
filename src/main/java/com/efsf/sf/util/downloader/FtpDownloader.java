@@ -14,7 +14,7 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FtpDownloader {
 
-    public void downLoad2(String filePath,String fileName) throws IOException {
+    public void downLoad(String filePath,String fileName) throws IOException {
 
         FTPClient client = new FTPClient();
         String remoteFile = null;
@@ -22,10 +22,10 @@ public class FtpDownloader {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
           
-            remoteFile = "rice/" + 100 + " Klient/" + 172 + " Kredyt/WszystkieDokumentyKredytu_nr" + 172 + ".pdf";
-            //remoteFile = filePath+fileName;
+            //remoteFile = "rice/" + 100 + " Klient/" + 172 + " Kredyt/WszystkieDokumentyKredytu_nr" + 172 + ".pdf";
+            remoteFile = filePath+fileName;
             
-             //outStream = new FileOutputStream("WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf");
+            //outStream = new FileOutputStream("WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf");
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);        
             //remoteFile = "rice/tee.txt";
@@ -87,7 +87,7 @@ public class FtpDownloader {
         }
     }
     
-   public void downLoad(int nrklienta, int nrkredytu) throws IOException {
+   public void downLoad2(int nrklienta, int nrkredytu) throws IOException {
 
         FTPClient client = new FTPClient();
         FileOutputStream outStream = null;
