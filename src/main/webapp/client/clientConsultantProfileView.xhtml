@@ -45,16 +45,16 @@
                                     <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.expirience}" /> 
                                 </div>
                                 
-                                <div class="field"> 
+                                <div class="field marginB30"> 
                                     <h:outputText class="label" value="Zatrudnienie"/> 
                                     <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.workingPlace.name}" /> 
                                 </div>
                                 <h4> OBSŁUGIWANE BANKI</h4>
-                                <p:dataList styleClass="fontGrey listOverflow" value="#{consultantProfileMB.selectBanksFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
+                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectBanksFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
                                     #{inst.name} 
                                 </p:dataList> 
                                 <h4> INNE OBSŁUGIWANE INSTUTYCJE</h4>
-                                <p:dataList styleClass="fontGrey listOverflow" value="#{consultantProfileMB.selectOtherInsFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
+                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectOtherInsFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
                                     #{inst.name} 
                                 </p:dataList> 
                                 
@@ -110,6 +110,14 @@
                                     <h:outputText class="label" value="Zaufanie"/> 
                                     <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].trust}" /> 
                                 </div>
+                             
+                             
+                             <h4> KOMENTARZE </h4>
+
+                             <p:dataList styleClass="fontGrey listOverflow" value="#{consultantProfileMB.casesRated}" var="inst" >  
+                                  #{inst.caseRating.commentDate} <br />  #{inst.caseRating.comment} 
+                             </p:dataList> 
+                             
                             </h:panelGroup>
                             
                         </h:form>

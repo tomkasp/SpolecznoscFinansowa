@@ -100,7 +100,8 @@
                                 </p:column>  
 
                              </p:dataTable>
-                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" id="przydziel" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
+                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
+                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{clientCaseMB.rowDoubleClick(clientCaseMB.selectedConsultant)}"/>
 
                         </h:panelGroup>
                         
