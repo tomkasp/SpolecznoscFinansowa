@@ -869,6 +869,10 @@ animation-delay:1.1s;
     border-left: 3px solid green;
 }
 
+.area{
+    width: 300px;
+}
+
 @-moz-keyframes bounce_circular3dG{
 0%{
 -moz-transform:scale(1)}

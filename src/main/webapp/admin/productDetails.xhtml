@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Admin - ekran główny </ui:define> 
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+
+            </ui:define>
+
+            <ui:define name="content">
+                 
+                    <h3>Szczegóły produktów</h3>
+                    <h:form id="instList"> 
+                        <p:dataTable value="#{productsMB.productDetails}" rowKey="#{row.idProductDetail}" var="row" emptyMessage="Brak szczegółów produktu" selection="#{productsMB.selectedProductDetails}" selectionMode="single" paginator="true" rows="15">
+                              
+                            <p:column headerText="Min. Brutto"> 
+                                <h:outputText value="#{row.amountBruttoMin}" />  
+                            </p:column>
+                            <p:column headerText="Max. Brutto"> 
+                                <h:outputText value="#{row.amountBruttoMax}" />  
+                            </p:column>
+                            <p:column headerText="Min. Czas"> 
+                                <h:outputText value="#{row.loanTimeMin}" />  
+                            </p:column>        
+                            <p:column headerText="Max. Czas"> 
+                                <h:outputText value="#{row.loanTimeMax}" />  
+                            </p:column>
+                            <p:column headerText="Min. Wiek"> 
+                                <h:outputText value="#{row.clientAgeMin}" />  
+                            </p:column>        
+                            <p:column headerText="Max. Wiek"> 
+                                <h:outputText value="#{row.clientAgeMax}" />  
+                            </p:column>
+                            <p:column headerText="Rekomendacja"> 
+                                <h:outputText rendered="#{row.recomendation}" value="Tak" />
+                                <h:outputText rendered="#{!row.recomendation}" value="Nie" />  
+                            </p:column>                               
+                           
+
+                        </p:dataTable>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Powrót" action="#{productsMB.adminMainPage()}"/> 
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj" action="#{productsMB.editDetails()}"/>                        
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj" action="#{productsMB.addDetails()}"/>
+
+                    </h:form> 
+
+                    <div class="marginT50"></div>   
+            </ui:define>           
+        </ui:composition>
+
+
+    </body>
+</html>
