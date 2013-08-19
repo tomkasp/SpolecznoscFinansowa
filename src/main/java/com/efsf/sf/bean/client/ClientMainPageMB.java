@@ -60,6 +60,8 @@ public class ClientMainPageMB implements Serializable {
     
     private ClientCase finishedSelectedCase;
     
+    private ClientCase premiumSelectedCase;
+    
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList<>();
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
     
@@ -208,16 +210,9 @@ public class ClientMainPageMB implements Serializable {
     
     public void rowDoubleClick(ClientCase cs) throws IOException
     {   
-        System.out.println("2 razy: "  +  clientCaseMB.getSelectedClientCase().getIdClientCase());
+        clientCaseMB.setSelectedClientCase(cs);
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
     }
-    
-    public void rowClick(ClientCase cs)
-    {
-        clientCaseMB.setSelectedClientCase(cs);
-        System.out.println("Klik " + cs.getIdClientCase());
-    }
-
      
      public String backOffAwaiting(){
          CaseStatusDAO csdao = new CaseStatusDAO();
@@ -449,6 +444,14 @@ public class ClientMainPageMB implements Serializable {
 
     public void setMessagesMB(MessagesMB messagesMB) {
         this.messagesMB = messagesMB;
+    }
+
+    public ClientCase getPremiumSelectedCase() {
+        return premiumSelectedCase;
+    }
+
+    public void setPremiumSelectedCase(ClientCase premiumSelectedCase) {
+        this.premiumSelectedCase = premiumSelectedCase;
     }
     
     
