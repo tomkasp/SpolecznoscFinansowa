@@ -21,6 +21,10 @@
         <div id="top">
             <ui:insert name="top">
 
+                <h:panelGroup rendered="#{loginMB.type==1}">
+                    <ui:include src="adminTop.xhtml"/> 
+                </h:panelGroup>
+                
                 <h:panelGroup rendered="#{loginMB.type==2}">
                     <ui:include src="consultantTop.xhtml"/> 
                 </h:panelGroup>
