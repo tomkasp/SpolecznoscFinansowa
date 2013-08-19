@@ -149,8 +149,8 @@
                        <div class="marginT10">
                            <p:dataTable id="marketTable" value="#{marketMB.allMarket}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedMarketCase}" selectionMode="single" >
           
-                            <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(marketMB.selectedMarketCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form"  /> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(marketMB.selectedMarketCase)}"/>
                             
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -226,12 +226,14 @@
                                <p:commandButton disabled="#{empty marketMB.selectedMarketCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(marketMB.selectedMarketCase)}" oncomplete="confirmedObserved.show();" >
 
                                 </p:commandButton> 
+                               <p:commandButton id="detailsMarketButton" disabled="#{empty marketMB.selectedMarketCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(marketMB.selectedMarketCase)}" />
+
                            </div>
                            
                         <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->   
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
-                                Twoje zgłoszenie do sprawy #{marketMB.selectedMarketCase} zostało zatwierdzone.
+                                Twoje zgłoszenie do sprawy #{marketMB.selectedMarketCase.idClientCase} zostało zatwierdzone.
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">

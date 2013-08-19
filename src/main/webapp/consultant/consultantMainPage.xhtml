@@ -55,8 +55,8 @@
 
                         <p:dataTable id="lastCases" value="#{consultantMainPageMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedLastCase}" selectionMode="single" >
           
-                            <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(consultantMainPageMB.selectedLastCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}"/>
                             
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -131,15 +131,16 @@
                          <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
-        
+                    <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
+
                     <div class="marginT50">
 
                     <h4>ZGŁOSZENIA</h4>
 
                     <p:dataTable id="applied" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
 
-                        <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(consultantMainPageMB.selectedAppliedCase)}"/> 
-                        <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                        <p:ajax event="rowSelect" update="@form" />
+                        <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}"/>
 
                         <p:column headerText="Numer sprawy">  
                             <h:outputText  value="#{row.idClientCase}"/>
@@ -206,6 +207,9 @@
                 <p:commandButton id="deleteApplied" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
                      <f:ajax execute="applied" render="applied" />
                 </p:commandButton>
+                    
+                <p:commandButton id="detailsAppliedButton" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}" />
+
 
                     <div class="marginT50">
 
@@ -213,8 +217,8 @@
 
                         <p:dataTable id="owned" value="#{consultantMainPageMB.ownedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedOwnedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(consultantMainPageMB.selectedOwnedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}"/>
                      
                             
                             <p:column headerText="Numer sprawy">
@@ -276,6 +280,9 @@
                             
                         </p:dataTable>
                     </div>
+                    
+                    <p:commandButton id="detailsOwnedButton" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
+
 
                     <div class="marginT50">
 
@@ -283,8 +290,8 @@
 
                         <p:dataTable id="finished" value="#{consultantMainPageMB.finishedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedFinishedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(consultantMainPageMB.selectedFinishedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}"/>
                      
                             
                             <p:column headerText="Numer sprawy">
@@ -346,17 +353,18 @@
 
                         </p:dataTable>
                     </div>
-
+                    
+                    <p:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
                     <div class="marginT50">
 
                         <h4>OBSERWOWANE</h4>
 
-                        <p:dataTable id="traced" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
+                        <p:dataTable id="traced" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
 
-                            <p:ajax event="rowSelect" update="@form" listener="#{consultantMainPageMB.rowClick(consultantMainPageMB.selectedObservedCase)}"/> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick()}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}"/>
 
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
@@ -420,12 +428,17 @@
                         </p:dataTable>
                     </div>
 
+                    
+                    
                     <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                           <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" >
-
+                    
+                    <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" > 
                     </p:commandButton>
+                    
+                    <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
+
 
                                         <div class="marginT50 marginB30">
                                             <h4> PODSUMOWANIE RANKINGU </h4>

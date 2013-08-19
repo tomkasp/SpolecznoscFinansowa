@@ -176,18 +176,12 @@ public class ConsultantMainPageMB {
         }
     }
     
-    public void rowDoubleClick() throws IOException
+    public void rowDoubleClick(ClientCase cs) throws IOException
     { 
+        clientCaseMB.setSelectedClientCase(cs);
         FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
     }
-    
-    public void rowClick(ClientCase cs)
-    {
-        clientCaseMB.setSelectedClientCase(cs);
-        System.out.println("Klik " + cs.getIdClientCase());
-    }
-    
-        
+          
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
         return new ArrayList<ClientCase>(csSet);

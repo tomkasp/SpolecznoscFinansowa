@@ -69,12 +69,16 @@
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Data wystawienia na giełdę"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" > 
+                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
+                                    </h:inputText>
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Koniec aukcji"/>  
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.endDate}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.endDate}" >
+                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
+                                    </h:inputText>
                                 </div>
                                 
                                 <div class="field">
