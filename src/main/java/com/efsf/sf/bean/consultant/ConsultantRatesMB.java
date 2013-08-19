@@ -46,8 +46,7 @@ public class ConsultantRatesMB implements Serializable{
     }
      
    public void onRowSelect() throws IOException { 
-        clientCaseMB.setSelectedClientCase(clientCase);
-        consultantMainPageMB.rowDoubleClick();
+        consultantMainPageMB.rowDoubleClick(clientCase);
         
     }
    
