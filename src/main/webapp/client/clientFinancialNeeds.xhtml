@@ -13,7 +13,7 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
 
-
+            
             <ui:define name="title"> Klient - dodaj potrzebę </ui:define> 
 
             <ui:define name="content">
@@ -28,22 +28,22 @@
                             <div class="marginLRT30" >
                                 <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  
                                     <p:selectOneMenu style="width: 200px"> 
-                                        <f:selectItem  itemValue="konsolidacyjny" itemLabel="konsolidacyjny" />
-                                        <f:selectItem  itemValue="hipoteka" itemLabel="hipoteka" />
-                                        <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
-                                        <f:selectItem  itemValue="leasing" itemLabel="leasing" />
-                                        <f:selectItem  itemValue="gotówkowy" itemLabel="gotówkowy" />
-                                        <f:selectItem  itemValue="firmowy" itemLabel="firmowy" />
-
+                                     <f:selectItem  itemValue="konsolidacyjny" itemLabel="konsolidacyjny" />
+                                     <f:selectItem  itemValue="hipoteka" itemLabel="hipoteka" />
+                                     <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
+                                     <f:selectItem  itemValue="leasing" itemLabel="leasing" />
+                                     <f:selectItem  itemValue="gotówkowy" itemLabel="gotówkowy" />
+                                     <f:selectItem  itemValue="firmowy" itemLabel="firmowy" />
+                                      
                                     </p:selectOneMenu>
-
+                                
                                 </div>
                                 <div class="field"> <h:outputText class="label" value="Okres"/> <p:inputText styleClass="floatL wordSpace"  size="4"/> 
                                     <p:selectOneMenu style="width: 137px">
-                                        <f:selectItem  itemValue="lat" itemLabel="lat" />
-                                        <f:selectItem  itemValue="miesięcy" itemLabel="miesięcy" />
-                                        <f:selectItem  itemValue="dni" itemLabel="dni" />
-
+                                         <f:selectItem  itemValue="lat" itemLabel="lat" />
+                                         <f:selectItem  itemValue="miesięcy" itemLabel="miesięcy" />
+                                         <f:selectItem  itemValue="dni" itemLabel="dni" />
+                                         
                                     </p:selectOneMenu> 
                                 </div>
                             </div>
@@ -64,12 +64,12 @@
                         </div>
 
                         <h:link class="greyButton oneColumnLengthButton" value="Chcę wykupić usługę skanowania BIKu" outcome="/consultant/consultantCreateAccount"/>
-
+                        
                         <div class="marginTB20 centerLink" >
                             <h:link class="greenLink " value="Więcej o usłudze" />   
                         </div>
-
-
+                        
+                        
                     </div> 
 
                     <div class="rightWiderBox">
@@ -82,7 +82,7 @@
                         <h4 class="greenLeftBorder"> OBECNE ZOBOWIĄZANIA</h4>
 
                         <p:dataTable id="dataTable1" value="#{fakeBean.zobowiazania}" var="data" emptyMessage="brak klientów!" 
-                                     rowKey="#{data.lp}">
+                                 rowKey="#{data.lp}">
                             <p:column headerText="Lp">  
                                 <h:outputText value="#{data.lp}" /> 
                             </p:column>   
@@ -104,7 +104,7 @@
                             </p:column> 
 
                             <p:column headerText="Zaległe"  >  
-                                <h:outputText value="#{data.zalegle}" />
+                                 <h:outputText value="#{data.zalegle}" />
                             </p:column> 
                         </p:dataTable>
                         <h:link class="floatR greyButton wideButton" value="Dodaj zobowiązanie" outcome="/client/clientAddObligation"/>
@@ -139,11 +139,11 @@
                         </p:column> 
 
                         <p:column headerText="Rodzaj kredytu"  > 
-
+                            
                         </p:column> 
 
                         <p:column headerText="BIK">  
-
+                            
                         </p:column> 
 
                         <p:column headerText="Kod pocztowy"> 

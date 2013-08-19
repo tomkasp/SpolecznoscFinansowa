@@ -14,23 +14,24 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - ustawienia konta </ui:define> 
 
+
             <ui:define name="content">
-
+                
                 <script>
-                    $(document).ready(function() {
-                        $("#toggle1").click(function() {
+                    $(document).ready(function(){
+                        $("#toggle1").click(function(){
                             $("#all").toggle();
                             $("#last").toggle();
                         });
                     });
-
-                    $(document).ready(function() {
-                        $("#toggle2").click(function() {
+                    
+                    $(document).ready(function(){
+                        $("#toggle2").click(function(){
                             $("#all").toggle();
-                            $("#last").toggle();
+                            $("#last").toggle();    
                         });
                     });
-
+                    
                 </script>
 
                 <div class="marginT50">
@@ -296,10 +297,10 @@
                                     <div> <h:outputText  class="fontGrey marginL20" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
                                     <div> <h:link class="redMessage marginL20 wordSpace" value="kliknij tutaj." /> </div>
                                 </div>
-
+                                
 
                             </div>
-
+  
                             <div class="marginLRT30">
                                 <div class="marginTB20">
                                     <h:inputText  class="label2 browseInput"  style="width: 97%" value="przeglądaj..." />
@@ -307,92 +308,92 @@
                                 <h:link  class="floatR wideButton greyButton" value="Zapisz" outcome="/index"/>
                                 <h:link  class="floatR wideButton redX" value="Anuluj" outcome="/index" />
                             </div>
-
+                            
                         </h:form>
-
+                        
                         <h:form id="downloadForm">
-
+                            
                             <h:commandLink class="floatR greyButton wideButton" target="_blank" value="OTWORZ PLIK" action="#{clientFileUploadMB.load()  }"/>
-
+                               
                         </h:form>
 
                         <h:form id="uploadForm" enctype="multipart/form-data">
-
+                            
                             <div class="marginLRT30" style="height: 1500px; margin-top: 120px;" >     
-
+                                
                                 <h4>WYMAGANE DOKUMENTY</h4>
-
-
-                                <div class="marginTB20">
+                                
+                                
+                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel" id="idCardLabel">Dowód tożsamości: </h:outputLabel>       
                                     <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ clientFileUploadMB.uploadedFiles[0] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
-
+                                    
                                     <h:message for="idCardUpload"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel" id="idIncomeStatementLabel">Zaświadczenie o zarobkach: </h:outputLabel>       
                                     <p:fileUpload styleClass="greyButton" id="idIncomeStatement" value="#{ clientFileUploadMB.uploadedFiles[1] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idIncomeStatement"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idDeathCertificateLabel">Akt zgonu współmałżonka: </h:outputLabel>       
                                     <p:fileUpload   styleClass="greyButton" id="idDeathCertificate" value="#{ clientFileUploadMB.uploadedFiles[2] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idDeathCertificate"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idMariageSettlementLabel">Intercyza: </h:outputLabel>       
                                     <p:fileUpload   styleClass="greyButton" id="idMariageSettlement" value="#{ clientFileUploadMB.uploadedFiles[3] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idMariageSettlement"  errorClass="invalid" /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idDivorceActLabel">Akt rozwodu: </h:outputLabel>       
                                     <p:fileUpload   styleClass="greyButton" id="idDivorceAct" value="#{ clientFileUploadMB.uploadedFiles[4] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idDivorceAct"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idSeparationActLabel">Akt separacji: </h:outputLabel>       
                                     <p:fileUpload  styleClass="greyButton"  id="idSeparationAct" value="#{ clientFileUploadMB.uploadedFiles[5] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idSeparationAct"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idTitleDeadLabel">Akt własności: </h:outputLabel>       
                                     <p:fileUpload  styleClass="greyButton"  id="idTitleDead" value="#{ clientFileUploadMB.uploadedFiles[6] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idTitleDead"  errorClass="invalid"  /> 
-                                </div>
-
+                                 </div>
+                                
                                 <div class="marginTB20">
                                     <h:outputLabel class="uploaderLabel"  id="idBIGLabel">BIK: </h:outputLabel>       
                                     <p:fileUpload  styleClass="greyButton"  id="idBIK" value="#{ clientFileUploadMB.uploadedFiles[7] }" mode="simple"  > 
                                         <f:validator validatorId="fileUploadValidator" />
                                     </p:fileUpload>
                                     <h:message for="idBIK"  errorClass="invalid"  /> 
-                                </div>
+                                 </div>
 
-
+                                
                                 <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Zapisz" type="submit" action="#{ clientFileUploadMB.save() }" />      
-
+                           
                             </div>
-
+                            
                         </h:form>
 
                     </div>

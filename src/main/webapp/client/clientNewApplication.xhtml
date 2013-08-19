@@ -14,8 +14,9 @@
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - nowy wniosek </ui:define> 
 
-            <ui:define name="content">
 
+            <ui:define name="content">
+                
                 <div>
 
                     <div class="contentBox" style="margin-bottom: 30px;">
@@ -163,10 +164,10 @@
                             <h:form id="obligationForm">
                                 <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="row" rowKey="#{row.idObligation}"
                                              selection="#{clientCaseMB.selectedObligation}"  selectionMode="single" >
-
+                                    
                                     <p:ajax event="rowSelect" update=":obligationForm:deleteBtn" />
                                     <p:ajax event="rowUnselect" update=":obligationForm:deleteBtn" />
-
+                                    
                                     <p:column headerText="Lp">  
                                         #{wiersz+1}
                                     </p:column>  
@@ -200,15 +201,15 @@
                                 </h:panelGrid>
 
                                 <p:confirmDialog message="Czy na pewno chcesz usunąć zaznaczone zobowiązanie?"  
-                                                 hideEffect="explode"  
+                                                  hideEffect="explode"  
                                                  header="Usuwanie zobowiązania." severity="alert" widgetVar="confirmation">  
-
+                                    
                                     <p:commandButton value="TAK" style="width:100px;margin:0 100px 0 0;" oncomplete="confirmation.hide()"  
                                                      update="@form" action="#{clientCaseMB.delObligation}" />  
-                                    <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
-
-
-
+                                        <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
+                                        
+                                   
+                                    
 
                                 </p:confirmDialog>  
 

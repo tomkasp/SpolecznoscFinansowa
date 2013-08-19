@@ -10,80 +10,80 @@
 
 
     <body>
-
+        
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - dodaj zobowiązanie </ui:define> 
 
             <ui:define name="content">
 
                 <h:form>
-                    <div class="contentBox">
+                <div class="contentBox">
 
-                        <h2 class="greenLeftBorder">Dodaj zobowiązanie</h2>
+                    <h2 class="greenLeftBorder">Dodaj zobowiązanie</h2>
 
-                        <div class="leftBox">
+                    <div class="leftBox">
 
-                            <div class="field"> <h:outputText class="label" value="Rodzaj zobowiązania:"/>  
-                                <p:selectOneMenu style="width: 230px;">
-                                    <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field"> <h:outputText class="label" value="Data podpisania umowy:"/>  
-                                <p:calendar/>
-                            </div>
-                            <div class="field"> <h:outputText class="label" value="Kwota zobowiązania:"/>  <p:inputText value="3000" style="width: 220px;"/> </div>
-                            <div class="field"> <h:outputText class="label" value="Rata:"/>  <p:inputText value="700" style="width: 220px;"/> </div>
-                            <div class="field"> <h:outputText class="label" value="Okres spłaty:"/> 
-                                <p:inputText value="8" style="width: 60px; margin-right: 10px; float: left;"/>  
-                                <p:selectOneMenu style="width: 150px;">
-                                    <f:selectItem  itemValue="lat" itemLabel="lat" />
-                                </p:selectOneMenu>  
-                            </div>
-                            <div class="field"> <h:outputText class="label" value="Ilość dni spóźnienia:"/> 
-                                <p:inputText value="16"/> 
-                            </div>
-                            <div class="field"> <h:outputText class="label"/>  
-                                <h:link class="greyButton buttonspace" value="Dodaj zobowiązanie" outcome="/client/clientFinancialNeeds.xhtml"/>
-                                <h:link class="greyButton" value="Anuluj" outcome="/client/clientFinancialNeeds.xhtml"/> 
-                            </div>
-
+                        <div class="field"> <h:outputText class="label" value="Rodzaj zobowiązania:"/>  
+                            <p:selectOneMenu style="width: 230px;">
+                                <f:selectItem  itemValue="chwilówka" itemLabel="chwilówka" />
+                            </p:selectOneMenu>
                         </div>
-
-
-                        <div class="rightBox">
-
-                            <h4 class="greenLeftBorder">Obecne zobowiązanie</h4>
-
-                            <p:dataTable rows="10" style="width: 500px;" emptyMessage="brak wyników!">  
-
-                                <p:column headerText="Lp">  
-                                </p:column>  
-
-                                <p:column headerText="Rodzaj">  
-                                </p:column>  
-
-                                <p:column headerText="Wygasa">  
-                                </p:column>  
-
-                                <p:column headerText="Rata">    
-                                </p:column>  
-
-                                <p:column headerText="Kwota">  
-                                </p:column>  
-
-                                <p:column headerText="Zaległa">  
-                                </p:column> 
-
-                            </p:dataTable>
-
-                            <h:link class="greyButton buttonMargin buttonRight"  value="Dodaj zobowiązanie"/>
-
-
+                        <div class="field"> <h:outputText class="label" value="Data podpisania umowy:"/>  
+                            <p:calendar/>
+                        </div>
+                        <div class="field"> <h:outputText class="label" value="Kwota zobowiązania:"/>  <p:inputText value="3000" style="width: 220px;"/> </div>
+                        <div class="field"> <h:outputText class="label" value="Rata:"/>  <p:inputText value="700" style="width: 220px;"/> </div>
+                        <div class="field"> <h:outputText class="label" value="Okres spłaty:"/> 
+                            <p:inputText value="8" style="width: 60px; margin-right: 10px; float: left;"/>  
+                            <p:selectOneMenu style="width: 150px;">
+                                <f:selectItem  itemValue="lat" itemLabel="lat" />
+                            </p:selectOneMenu>  
+                        </div>
+                        <div class="field"> <h:outputText class="label" value="Ilość dni spóźnienia:"/> 
+                            <p:inputText value="16"/> 
+                        </div>
+                        <div class="field"> <h:outputText class="label"/>  
+                            <h:link class="greyButton buttonspace" value="Dodaj zobowiązanie" outcome="/client/clientFinancialNeeds.xhtml"/>
+                            <h:link class="greyButton" value="Anuluj" outcome="/client/clientFinancialNeeds.xhtml"/> 
                         </div>
 
                     </div>
 
-                </h:form>
+
+                    <div class="rightBox">
+
+                        <h4 class="greenLeftBorder">Obecne zobowiązanie</h4>
+
+                        <p:dataTable rows="10" style="width: 500px;" emptyMessage="brak wyników!">  
+
+                            <p:column headerText="Lp">  
+                            </p:column>  
+
+                            <p:column headerText="Rodzaj">  
+                            </p:column>  
+
+                            <p:column headerText="Wygasa">  
+                            </p:column>  
+
+                            <p:column headerText="Rata">    
+                            </p:column>  
+
+                            <p:column headerText="Kwota">  
+                            </p:column>  
+
+                            <p:column headerText="Zaległa">  
+                            </p:column> 
+
+                        </p:dataTable>
+
+                        <h:link class="greyButton buttonMargin buttonRight"  value="Dodaj zobowiązanie"/>
+
+
+                    </div>
+
+                </div>
+
+              </h:form>
 
 
             </ui:define>
