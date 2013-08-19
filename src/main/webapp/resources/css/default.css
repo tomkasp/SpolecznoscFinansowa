@@ -621,6 +621,10 @@ background:#F0F5F5;
     float: right;
 }
 
+.right{
+    float: right;
+}
+
 .redX {
     border-top-color: #ADA6A5 !important;
     border-right-color: #ADA6A5 !important;
