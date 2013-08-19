@@ -188,9 +188,9 @@ public class ClientCaseMB implements Serializable {
     // VIEW CASE METHODS 
     public void loadCaseConsultantsDetails()
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
-        selectedConsultant = null;
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
+            selectedConsultant = null;
             selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
          }
     }
