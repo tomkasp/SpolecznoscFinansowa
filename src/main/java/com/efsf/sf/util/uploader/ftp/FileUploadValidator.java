@@ -38,11 +38,11 @@ public class FileUploadValidator implements Validator {
                 throw new ValidatorException(msg);
         }
         
-        if (file1.getSize() > 5000000) //wielkość w Bajtach
+        if (file1.getSize() > 25000000) //wielkość w Bajtach
         {
             FacesMessage msg =
                     new FacesMessage("Plik jest za duży",
-                    "Maksymalna wielkość pliku to 5MB!");
+                    "Maksymalna wielkość pliku to 25MB!");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

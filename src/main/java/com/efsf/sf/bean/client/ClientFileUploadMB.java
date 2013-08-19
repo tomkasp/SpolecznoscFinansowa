@@ -8,6 +8,7 @@ import com.efsf.sf.util.uploader.ftp.FileUploaderFTP;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -31,9 +32,18 @@ public class ClientFileUploadMB implements Serializable {
     
     private UploadedFile[] uploadedFiles = new DefaultUploadedFile[8];
     
+    private RequiredDocuments requiredDocuments = new RequiredDocuments();
+    
     public ClientFileUploadMB() {
         declare();
     }
+    
+    @PostConstruct
+    private void loadRequiredDocuments() {
+        RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
+        requiredDocuments = requiredDocumentsDAO.readForFkClient( loginMB.getClient().getIdClient() );
+    }
+    
 
     public String save() {
             String[] locations = new String[8];
@@ -117,6 +127,14 @@ public class ClientFileUploadMB implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public RequiredDocuments getRequiredDocuments() {
+        return requiredDocuments;
+    }
+
+    public void setRequiredDocuments(RequiredDocuments requiredDocuments) {
+        this.requiredDocuments = requiredDocuments;
     }
 
     
