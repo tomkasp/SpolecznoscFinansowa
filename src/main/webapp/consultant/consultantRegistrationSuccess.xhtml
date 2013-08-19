@@ -4,62 +4,49 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
 
-     
+
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - powodzenie rejestracji </ui:define> 
-            <ui:define name="top"> 
-               <div class="topbarLogo">
-                                <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                                <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-               </div>
 
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="/index"/>
-                        <h:link class="topMenuButton greyButton wideButton" value="Zarejestruj się za darmo" outcome="/index"/>
-                    </h:panelGroup>
-                </div>
-            </ui:define>
-            
-            
+
             <ui:define name="content">
-                
+
                 <div class="navibar"> Jesteś tutaj: <h:link value="Strona główna"/> > <h:link value="Porady"/> </div>
-                
+
                 <h:form>
-                
-                <div class="newsletter">
-                    <h:inputText class="label2" value="wpisz email aby dostać Newsletter" />
-                    <h:link class="blueButton" style="margin-left: 2px;" value="Akceptuj"/> 
-                </div>
-                
-                </h:form>
-                
-                
-                
-                <div class="contentBox"> 
-                    
-                    <h2>Dziękujemy za wypełnienie formularza</h2>
-                    
-                   
-                    <h4>Twoje dane zostały wysłane</h4>
-                    
-                    <div style="margin-left: 15px;">
-                    Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
-                    W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
-                    wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
+
+                    <div class="newsletter">
+                        <h:inputText class="label2" value="wpisz email aby dostać Newsletter" />
+                        <h:link class="blueButton" style="margin-left: 2px;" value="Akceptuj"/> 
                     </div>
-                    
-                    
+
+                </h:form>
+
+
+
+                <div class="contentBox"> 
+
+                    <h2>Dziękujemy za wypełnienie formularza</h2>
+
+
+                    <h4>Twoje dane zostały wysłane</h4>
+
+                    <div style="margin-left: 15px;">
+                        Czekaj na telefon od naszego konsultanta który skontaktuje się z Tobą w ciągu 24 godzin.
+                        W międzyczasie zachęcamy do relaksacyjnego zwiedzania naszego portalu, poznanie tajników inwestycji,
+                        wypróbowania wersji PREMIUM, lub poczytania forum użytkowników.
+                    </div>
+
+
                 </div>
-                
-                
-                 
+
+
+
             </ui:define>
 
-            
+
 
         </ui:composition>
 
