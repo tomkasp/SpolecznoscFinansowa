@@ -92,7 +92,7 @@
                     <h:form> 
                         <div style="min-height: 80px; border-bottom: green 4px solid">
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{marketMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość:  #{messagesMB.unreadMessagesList.size()}" /> 
                                 
                             <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
                         </div>
