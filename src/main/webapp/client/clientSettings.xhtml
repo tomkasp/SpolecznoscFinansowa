@@ -128,13 +128,13 @@
 
                                 <div class="field"> <h:outputText class="label" value="Stan cywilny"/> 
                                     <p:selectOneMenu style="width:214px" value="#{clientSettingsMB.idMartialStatus}">
-                                        <f:selectItems value="#{dictionaryMB.maritalStatus}" var="ms" itemLabel="#{ms.name}" itemValue="#{ms.idMaritalStatus}"   />
+                                        <f:selectItems value="#{dictionaryItemsMB.maritalStatus}" var="ms" itemLabel="#{ms.name}" itemValue="#{ms.idMaritalStatus}"   />
                                     </p:selectOneMenu>    
                                 </div>
 
                                 <div class="field"> <h:outputText class="label" value="Wykształcenie"/> 
                                     <p:selectOneMenu style="width:214px"  value="#{clientSettingsMB.idEducation}">
-                                        <f:selectItems value="#{dictionaryMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
+                                        <f:selectItems value="#{dictionaryItemsMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
                                     </p:selectOneMenu>    
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
 
                                 <div class="field"> <h:outputText class="label" value="Województwo "/> 
                                     <p:selectOneMenu id="region" style="width:214px"  value="#{clientSettingsMB.idMainRegion}">
-                                        <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
+                                        <f:selectItems value="#{dictionaryItemsMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
                                         <f:validator disabled="#{!createClientMB.areRequired}" validatorId="com.efsf.sf.util.ComboBoxNoInputValidator" />
 
                                         <p:ajax event="keyup" update="regionMessage" />
@@ -530,14 +530,14 @@
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Typ umowy"/> 
                                     <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; float:right;" value="#{clientSettingsMB.incomeId}">
-                                        <f:selectItems value="#{dictionaryMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
+                                        <f:selectItems value="#{dictionaryItemsMB.businessActivity}" var="bi" itemLabel="#{bi.name}" itemValue="#{bi.idEmploymentType}"   />
                                     </p:selectOneMenu>         
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Branża"/> 
                                     <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; margin-left: 31px; float:right;" value="#{clientSettingsMB.branchId}">
-                                        <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                        <f:selectItems value="#{dictionaryItemsMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
                                     </p:selectOneMenu>         
                                 </div>
 
@@ -689,14 +689,14 @@
                             <div class="marginT10"> 
                                 <h:outputText class="dialogLabel" value="Typ umowy"/> 
                                 <p:selectOneMenu styleClass="marginT10" style="width: 375px; float:right;" value="#{clientSettingsMB.incomeId}">
-                                    <f:selectItems value="#{dictionaryMB.income}" var="empl" itemLabel="#{empl.name}" itemValue="#{empl.idEmploymentType}"   />
+                                    <f:selectItems value="#{dictionaryItemsMB.income}" var="empl" itemLabel="#{empl.name}" itemValue="#{empl.idEmploymentType}"   />
                                 </p:selectOneMenu>         
                             </div>
 
                             <div class="marginT10"> 
                                 <h:outputText class="dialogLabel" value="Branża"/> 
                                 <p:selectOneMenu styleClass="marginT10" style="width: 375px; margin-left: 31px; float:right;" value="#{clientSettingsMB.branchId}">
-                                    <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                    <f:selectItems value="#{dictionaryItemsMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
                                 </p:selectOneMenu>         
                             </div>
 

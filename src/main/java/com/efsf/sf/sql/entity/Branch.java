@@ -30,7 +30,8 @@ public class Branch  implements java.io.Serializable {
      private String name;
      private Set<Income> incomes = new HashSet<Income>(0);
      private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
-
+     private Integer isActive=1;
+          
     public Branch() {
     }
 
@@ -78,6 +79,16 @@ public class Branch  implements java.io.Serializable {
     
     public void setIncomeBusinessActivities(Set<IncomeBusinessActivity> incomeBusinessActivities) {
         this.incomeBusinessActivities = incomeBusinessActivities;
+    }
+
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 

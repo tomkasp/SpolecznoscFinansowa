@@ -27,6 +27,7 @@ public class MaritalStatus  implements java.io.Serializable {
      private Integer idMaritalStatus;
      private String name;
      private Set<Client> clients = new HashSet<Client>(0);
+     private Integer isActive=1;
 
     public MaritalStatus() {
     }
@@ -62,6 +63,14 @@ public class MaritalStatus  implements java.io.Serializable {
     
     public void setClients(Set<Client> clients) {
         this.clients = clients;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 
