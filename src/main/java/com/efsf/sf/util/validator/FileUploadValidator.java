@@ -1,4 +1,4 @@
-package com.efsf.sf.util.uploader.ftp;
+package com.efsf.sf.util.validator;
 
 import java.util.Arrays;
 import javax.faces.application.FacesMessage;

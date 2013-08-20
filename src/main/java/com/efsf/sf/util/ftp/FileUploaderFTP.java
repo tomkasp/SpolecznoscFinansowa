@@ -1,5 +1,5 @@
 
-package com.efsf.sf.util.uploader.ftp;
+package com.efsf.sf.util.ftp;
 
 import java.io.IOException;
 import java.io.InputStream;

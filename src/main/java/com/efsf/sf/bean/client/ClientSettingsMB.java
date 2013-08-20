@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -69,6 +70,7 @@ public class ClientSettingsMB implements Serializable {
     
     private int idCounter=0;
     
+    private String email;
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
@@ -118,7 +120,8 @@ public class ClientSettingsMB implements Serializable {
 
         }
         //businessSet= client.getIncomeBusinessActivities();
-
+        email = client.getUser().getEmail();
+        
     }
 
     public String updateSettings() {
@@ -131,7 +134,6 @@ public class ClientSettingsMB implements Serializable {
 
         client.setMaritalStatus(newMaritalStatus);
         client.setEducation(newEducation);
-        
         
         //INCOME
         IncomeDAO idao = new IncomeDAO();
@@ -158,8 +160,7 @@ public class ClientSettingsMB implements Serializable {
                 idao.delete(i);
                 System.out.println("USUNIETO!!!! ");
               }
-            
-            
+             
         }
         
         Iterator<Income> incomeSetIT = incomeSet.iterator();
@@ -173,19 +174,15 @@ public class ClientSettingsMB implements Serializable {
             }
         client.setIncomes(incomeSet);
 
-        
         //INCOME BUSINESS ACTIVITY:
         IncomeBusinessActivityDAO ibadao = new IncomeBusinessActivityDAO();
         Iterator<IncomeBusinessActivity> it2 = client.getIncomeBusinessActivities().iterator();
         while (it2.hasNext()) {
-            
-            
+             
             IncomeBusinessActivity iba = it2.next();
             ibadao.delete(iba);
             
-            
         }
-        
         
         Iterator<IncomeBusinessActivity> incomeBASetIT = businessSet.iterator();
         while(incomeBASetIT.hasNext())
@@ -200,26 +197,27 @@ public class ClientSettingsMB implements Serializable {
         client.setIncomeBusinessActivities(businessSet);
 
         clientDAO.update(client);
-
+        
+        UserDAO udao=new UserDAO();
+        udao.update(client.getUser());
         
         RegionDAO rdao = new RegionDAO();
         Region mainRegion = rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mainRegion);
         AddressDAO adao = new AddressDAO();
         adao.update(mainAddress);
-
         
-        return "/client/clientMainPage?faces-redirect=true";
+        loginMB.setClient(client);
+
+        return "/client/clientSettings?faces-redirect=true";
     }
     
      public String updatePassword() {
-         
          
          UserDAO udao=new UserDAO();
          User user=client.getUser();
          user.setPassword(Security.sha1(newPassword));
          udao.update(user);
-         
          
          return "/client/clientMainPage?faces-redirect=true";
      }
@@ -240,6 +238,30 @@ public class ClientSettingsMB implements Serializable {
             throw new ValidatorException(message);
         }
     }
+    
+   public void validateEmail(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+
+      UserDAO udao=new UserDAO();
+      Boolean ifEmailExist=udao.ifEmailExist(value.toString());
+      
+      System.out.println("111 "+value.toString() );
+      System.out.println("222 "+email ); 
+      
+      if( value.toString().equals( email ) )
+      {
+      ifEmailExist=false;
+      }
+      
+      if(ifEmailExist){
+         FacesContext context = FacesContext.getCurrentInstance();
+         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+         FacesMessage msg =  new FacesMessage(bundle.getString("duplicateEmails"),bundle.getString("duplicateEmails"));
+         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+         throw new ValidatorException(msg);
+      }
+      
+
+   }
     
     
     public void deleteIncome(int idIncome, boolean isIncome) {
