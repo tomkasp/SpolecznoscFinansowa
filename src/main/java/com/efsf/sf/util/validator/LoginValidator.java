@@ -6,8 +6,6 @@ package com.efsf.sf.util.validator;
 
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.util.Security;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
