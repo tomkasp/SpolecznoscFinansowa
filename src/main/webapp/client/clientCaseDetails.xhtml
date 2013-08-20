@@ -96,7 +96,9 @@
                                 </p:column>  
                                 
                                 <p:column headerText="Średnia Ocena">    
-                                    <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" /> 
+                                    <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" > 
+                                        <f:convertNumber maxFractionDigits="2"/>
+                                    </h:outputText>
                                 </p:column>  
 
                              </p:dataTable>
