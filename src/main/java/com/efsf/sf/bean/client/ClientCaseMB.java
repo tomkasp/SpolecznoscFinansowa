@@ -188,9 +188,9 @@ public class ClientCaseMB implements Serializable {
     // VIEW CASE METHODS 
     public void loadCaseConsultantsDetails()
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
-        selectedConsultant = null;
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
+            selectedConsultant = null;
             selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
          }
     }
@@ -257,6 +257,8 @@ public class ClientCaseMB implements Serializable {
     public void consultantRevokePremium(ClientCase cc)
     {
         cc.setConsultant(null);
+        
+        
         
         messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_REVOKE_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
      
