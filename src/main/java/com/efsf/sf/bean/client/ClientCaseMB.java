@@ -62,6 +62,8 @@ public class ClientCaseMB implements Serializable {
     
     private Consultant selectedConsultant;
     
+    private Consultant selectedPremiumConsultant;
+    
     private Obligation selectedObligation;
     
     private ArrayList<CaseStatus> statusModel = new ArrayList();
@@ -69,6 +71,8 @@ public class ClientCaseMB implements Serializable {
     private int caseStatusID;
     
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
+    
+    private ArrayList<Consultant> premiumConsultants = new ArrayList<Consultant>();
     
     
     /**
@@ -256,13 +260,42 @@ public class ClientCaseMB implements Serializable {
     
     public void consultantRevokePremium(ClientCase cc)
     {
-        cc.setConsultant(null);
+     
         
+        cc.setConsultant(null);  
+        ConsultantRating conRating = new ConsultantRatingDAO().getConsultantRatings(login.getConsultant().getIdConsultant());
         
+        if (conRating == null)
+            conRating = new ConsultantRating(login.getConsultant(), -0.5,  -0.5,  -0.5,  -0.5,  -0.5,  -0.5,  -0.5,  -0.5,  -0.5, 0);
+        else
+        {
+            conRating.setAverage(conRating.getAverage()-0.5);
+            conRating.setCompetence(conRating.getCompetence()-0.5);
+            conRating.setContact(conRating.getContact()-0.5);
+            conRating.setCulture(conRating.getCulture()-0.5);
+            conRating.setDifficulty(conRating.getDifficulty()-0.5);
+            conRating.setPunctuality(conRating.getPunctuality()-0.5);
+            conRating.setReliability(conRating.getReliability()-0.5);
+            conRating.setRespect(conRating.getRespect()-0.5);
+            conRating.setTrust(conRating.getTrust()-0.5);
+        }
+        
+        GenericDao<ConsultantRating> consRatingDao = new GenericDao(ConsultantRating.class);
+        
+        consRatingDao.saveOrUpdate(conRating);
         
         messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_REVOKE_PREMIUM"), cc.getClient().getUser().getIdUser(), new Object[] {login.getConsultant().getIdConsultant(), cc.getIdClientCase()});
      
         new ClientCaseDAO().updateClientCase(cc);
+    }
+    
+    
+    public void assignPremiumConsultant()
+    {
+        ClientCaseDAO caseDao = new ClientCaseDAO();
+        CaseStatusDAO statusDao = new CaseStatusDAO();
+        selectedClientCase.setConsultant(selectedPremiumConsultant);
+        caseDao.updateClientCase(selectedClientCase);  
     }
     
     public void assignConsultant()
@@ -500,6 +533,22 @@ public class ClientCaseMB implements Serializable {
 
     public void setAlreadyObserved(boolean alreadyObserved) {
         this.alreadyObserved = alreadyObserved;
+    }
+
+    public ArrayList<Consultant> getPremiumConsultants() {
+        return premiumConsultants;
+    }
+
+    public void setPremiumConsultants(ArrayList<Consultant> premiumConsultants) {
+        this.premiumConsultants = premiumConsultants;
+    }
+
+    public Consultant getSelectedPremiumConsultant() {
+        return selectedPremiumConsultant;
+    }
+
+    public void setSelectedPremiumConsultant(Consultant selectedPremiumConsultant) {
+        this.selectedPremiumConsultant = selectedPremiumConsultant;
     }
 
    
