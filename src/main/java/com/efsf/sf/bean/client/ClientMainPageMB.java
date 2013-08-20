@@ -229,6 +229,10 @@ public class ClientMainPageMB implements Serializable {
          currentSelectedCase.setCaseStatus(cs);
          caseDao.updateClientCase(currentSelectedCase);
          currentSelectedCase=null;
+         
+         reloadCases3();
+         reloadCases4();
+         
      return "/client/clientMainPage.xhtml";
      }
      

@@ -421,7 +421,7 @@ public class ClientCaseDAO implements Serializable {
                  + "where cs.beginDate <= :dateNow "
                  + "and clt.idClient = :fk "
                  + "and cs.caseStatus >= 2 "
-                 + "and cs.caseStatus <= 8 "
+                 + "and cs.caseStatus <= 7 "
                  + "order by cs.beginDate desc, cs.idClientCase desc ");
          
          q.setParameter( "dateNow", new DateTime().toDate() );

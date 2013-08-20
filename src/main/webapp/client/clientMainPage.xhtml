@@ -364,7 +364,7 @@
 
                         <c:if test="#{clientMainPageMB.currentSelectedCase!=null}" var="costam">
                             <h:link class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
-                            <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
+                            <h:commandLink class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }" />
                         </c:if>
                         <p:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
                      
