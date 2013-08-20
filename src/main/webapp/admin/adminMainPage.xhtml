@@ -21,6 +21,31 @@
             </ui:define>
 
             <ui:define name="content">
+                
+                <p:panelGrid columns="4" style="border: none">  
+                    
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    
+                    <p:commandLink value="Produkty i insytucje"/>
+                    <p:commandLink value="Typy produktów" action="#{dictionaryItemsMB.showDictionary(0)}"/>
+                    <p:commandLink value="Branże działalności" action="#{dictionaryItemsMB.showDictionary(1)}"/>
+                    <p:commandLink value="Statusy spraw" action="#{dictionaryItemsMB.showDictionary(2)}"/>
+                    
+                    
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:graphicImage value="/resources/images/sample_icon.png" width="128px" height="128px"/>
+                    <h:outputText/>
+                    
+                    <p:commandLink value="Kategorie edukacji" action="#{dictionaryItemsMB.showDictionary(3)}"/>
+                    <p:commandLink value="Stan cywilny" action="#{dictionaryItemsMB.showDictionary(4)}"/>
+                    <p:commandLink value="Miejsca pracy konsultantów" action="#{dictionaryItemsMB.showDictionary(5)}"/>  
+                    <h:outputText/>
+                </p:panelGrid> 
+
                 <div class="leftInlineBox">  
                     <h3>Instytucje</h3>
                     <h:form id="instList"> 

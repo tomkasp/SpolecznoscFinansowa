@@ -88,7 +88,7 @@
 
                                     <div class="field"> <h:outputText class="label" value="Rodzaj produktu"/> 
                                         <p:selectOneMenu value="#{clientCaseMB.idTypProduktu}">
-                                            <f:selectItems value="#{dictionaryItemsMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                                            <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                         </p:selectOneMenu>
                                     </div>
 
@@ -260,7 +260,7 @@
 
                                             <h:outputText value="Rodzaj produktu"/> 
                                             <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
-                                                <f:selectItems value="#{dictionaryItemsMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                                                <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
                                             </h:selectOneMenu>
                                             <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
                                             <p:commandButton update=":obligationForm:obligationTable costam23 " oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
