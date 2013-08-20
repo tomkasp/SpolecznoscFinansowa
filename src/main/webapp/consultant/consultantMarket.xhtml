@@ -82,14 +82,14 @@
                                <h:outputText class="floatL fontGrey marginLR30" value="Branża" /> 
                                <p:selectOneMenu styleClass="floatL" value="#{marketMB.branchId}">
                                      <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
-                                     <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                     <f:selectItems value="#{dictionaryItemsMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
                                </p:selectOneMenu> 
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 10px">
                                <h:outputText class="fontGrey floatL" style="margin-left: 24px; margin-right: 18px" value="Region" /> 
                                <p:selectOneMenu id="region" styleClass="floatL"  value="#{marketMB.regionId}">
                                     <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
-                                    <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />  
+                                    <f:selectItems value="#{dictionaryItemsMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />  
                                </p:selectOneMenu>
                            </h:panelGroup>  
                            
@@ -109,14 +109,14 @@
                                    <p:panel>
                                         <p:selectManyCheckbox styleClass="fontGrey" value="#{marketMB.incomeIds}" layout="pageDirection">
                                            
-                                            <f:selectItems value="#{dictionaryMB.income}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
+                                            <f:selectItems value="#{dictionaryItemsMB.income}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
                                             
                                         </p:selectManyCheckbox>
                                    </p:panel>
                                 </p:tab>
                                 <p:tab id="tabBusiness" title="Działalność gosp.">
                                         <p:selectManyCheckbox styleClass="fontGrey"  value="#{marketMB.businessIds}" layout="pageDirection">  
-                                            <f:selectItems value="#{dictionaryMB.businessActivity}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
+                                            <f:selectItems value="#{dictionaryItemsMB.businessActivity}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
                                         </p:selectManyCheckbox>
                                 </p:tab>
                            
