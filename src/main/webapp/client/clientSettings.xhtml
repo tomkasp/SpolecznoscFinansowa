@@ -67,8 +67,11 @@
 
                                 <div class="field" style="margin-bottom: 60px;">
                                     <h:outputText class="label" value="Adres email"/> 
-                                    <h:inputText class="inputWidth" value="#{clientSettingsMB.client.user.email}"/> 
-                                    <h:message for="name" errorClass="invalid" id="emailMessage" />
+                                    <h:inputText id="email" class="inputWidth" value="#{clientSettingsMB.client.user.email}" validator="#{clientSettingsMB.validateEmail}">
+                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /> 
+                                        <p:ajax event="keyup" update="emailMessage"/>
+                                    </h:inputText>
+                                    <h:message for="email" errorClass="invalid" id="emailMessage" /> 
                                     <h:outputText class="label3"  value="Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta."/> 
                                 </div>
 
@@ -92,7 +95,7 @@
 
                                 <div class="field">
                                     <h:outputText class="label" value="Płeć"/>
-                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{clientSettingsMB.client.sex}" > 
+                                    <p:selectOneRadio style="font-weight: bold;" id="sex" value="#{clientSettingsMB.client.sex}" >
                                         <f:selectItem itemLabel="K" itemValue="false" /> 
                                         <f:selectItem itemLabel="M" itemValue="true" />
                                     </p:selectOneRadio>
@@ -209,7 +212,6 @@
                                     <h:message for="street" errorClass="invalid" id="streetMessage" />
                                 </div>
 
-
                                 <div class="field"> 
                                     <h:outputText class="label" value="Numer domu"/> 
                                     <h:inputText id="streetNumber" value="#{clientSettingsMB.mainAddress.houseNumber}" class="inputWidth" > 
@@ -228,7 +230,7 @@
                                     <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
                                 </div>
 
-                                <h:commandLink  class ="greenButton wideButton floatR marginTB20"  value="Zapisz" action="#{clientSettingsMB.updateSettings()}" />
+                                <h:commandLink  class ="greenButton wideButton floatR marginTB20"  value="Zapisz ustawienia" action="#{clientSettingsMB.updateSettings()}" />
 
                             </div>
 
@@ -244,7 +246,7 @@
                                 <h4>USTAW ZDJĘCIE</h4>
                                 <h:graphicImage class="photoChange" id="profil_logo_green_small" alt="could not be found."  value="/resources/images/profil_green.png" title="Profil Green Small" ></h:graphicImage>
                                 <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
-                                <h:inputText  class="label2 browseInput" style="width: 55%;"  value="przeglądaj..." />
+                                <h:inputText  class="label2 browseInput" style="width: 54%; display: inline;"  value="przeglądaj..." />
                                 <h:link class="wideButton redX browseButton" value="Usuń zdjęcie" />
                             </div>
 
@@ -277,7 +279,7 @@
                                 <div class="field">
                                     <h:outputText class="label" value="Powtórz hasło"/> 
                                     <h:inputSecret id="confirmPassword" required="true" value="#{clientSettingsMB.confirmNewPassword}" validator="#{clientSettingsMB.validateSamePassword}" > 
-                                        <f:validateLength minimum="8" maximum="20" />
+                                        <f:validateLength minimum="8" maximum="20"/>
                                         <p:ajax event="keyup" update="confirmPasswordMessage"/>
                                     </h:inputSecret>
                                     <h:message for="confirmPassword" errorClass="invalid" id="confirmPasswordMessage" />
@@ -320,11 +322,16 @@
 
                             <div class="marginLRT30">  
 
+                                 <h:outputLabel class="uploaderLabel" id="bikLabel">Dodaj lub przeglądaj raport BIK</h:outputLabel>     
+                                
                                     <h:commandLink target="_blank" action="#{ fileDownloadMB.load8() }">
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton8"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                 <span id="uploadButton8"> 
+                                     <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" />
+                                     <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />                              
+                                 </span>
 
                                       <span id="upload8" style="display:none; float: right;">
                                         <p:fileUpload  styleClass="greyButton"  id="idBIK" value="#{ fileUploadMB.uploadedFiles[7] }" mode="simple" > 
@@ -351,7 +358,10 @@
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton1"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton1"> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />                                                                 
+                                    </span>
 
                                     <span id="upload1" style="display:none; float: right;">
                                         <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ fileUploadMB.uploadedFiles[0] }" mode="simple" > 
@@ -369,7 +379,10 @@
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton2"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton2"> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement!=null}"  alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />               
+                                    </span>
 
                                       <span id="upload2" style="display:none; float: right;">
                                         <p:fileUpload styleClass="greyButton" id="idIncomeStatement" value="#{ fileUploadMB.uploadedFiles[1] }" mode="simple" > 
@@ -387,7 +400,10 @@
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton3"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton3">
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate==null}"  alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate!=null}"   alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />        
+                                    </span>
 
                                       <span id="upload3" style="display:none; float: right;">
                                         <p:fileUpload   styleClass="greyButton" id="idDeathCertificate" value="#{ fileUploadMB.uploadedFiles[2] }" mode="simple" > 
@@ -405,7 +421,10 @@
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton4"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton4">
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />   
+                                    </span>
 
                                      <span id="upload4" style="display:none; float: right;">
                                         <p:fileUpload   styleClass="greyButton" id="idMariageSettlement" value="#{ fileUploadMB.uploadedFiles[3] }" mode="simple" > 
@@ -423,7 +442,10 @@
                                         <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton5"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton5"> 
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.divorceAct==null}"  alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.divorceAct!=null}"  alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />   
+                                    </span>
 
                                       <span id="upload5" style="display:none; float: right;">
                                         <p:fileUpload   styleClass="greyButton" id="idDivorceAct" value="#{ fileUploadMB.uploadedFiles[4] }" mode="simple" > 
@@ -441,7 +463,10 @@
                                         <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton6"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton6">
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.separationAct==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" />
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" /> 
+                                    </span>
 
                                       <span id="upload6" style="display:none; float: right;">
                                         <p:fileUpload  styleClass="greyButton"  id="idSeparationAct" value="#{ fileUploadMB.uploadedFiles[5] }" mode="simple" > 
@@ -459,7 +484,10 @@
                                         <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                     </h:commandLink>
 
-                                    <span id="uploadButton7"> <h:graphicImage alt="could not be found."  value="/resources/icons/File-New-icon.png" /> </span>
+                                    <span id="uploadButton7"> 
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.titleDeed==null}" alt="could not be found."  value="/resources/icons/File-New-icon.png" /> 
+                                        <h:graphicImage rendered="#{ fileDownloadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" /> 
+                                    </span>
 
                                       <span id="upload7" style="display:none; float: right;">
                                         <p:fileUpload  styleClass="greyButton"  id="idTitleDead" value="#{ fileUploadMB.uploadedFiles[6] }" mode="simple" > 
@@ -473,7 +501,7 @@
                                 
 
 
-                                <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Zapisz" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
+                                <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
 
                                 
                             </div>
