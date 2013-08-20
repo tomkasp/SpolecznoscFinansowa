@@ -46,6 +46,8 @@ public class ClientMainPageMB implements Serializable {
     
     private List<ClientCase> allClientCaseList = new ArrayList<>();
     
+    private List<ClientCase> awaitingForMarketClientCaseList = new ArrayList<>();
+    
     private ClientCaseDAO caseDao = new ClientCaseDAO();
 
     private Converters converters = new Converters();
@@ -87,6 +89,7 @@ public class ClientMainPageMB implements Serializable {
         reloadCases4();
         reloadCases5();
         reloadCases6();
+        reloadCases7();
         messagesMB.loadUnreadMessages();
         checkRequirementsForNewApplication(); 
 
@@ -101,31 +104,37 @@ public class ClientMainPageMB implements Serializable {
     public void reloadCases2()
     {
         awaitingClientCaseList = caseDao.awaitingCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
+        System.out.println("Pobrano2"); 
     }
     
      public void reloadCases3()
     {     
         currentClientCaseList = caseDao.currentCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
+        System.out.println("Pobrano3"); 
     }
     
      public void reloadCases4()
     {
         finishedClientCaseList = caseDao.finishedCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
+        System.out.println("Pobrano4"); 
     }
      
      public void reloadCases5()
     {
         premiumClientCaseList = caseDao.premiumCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
+        System.out.println("Pobrano5"); 
     }
      
     public void reloadCases6()
     {
         allClientCaseList = caseDao.allActiveCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
+        System.out.println("Pobrano6"); 
+    }
+    
+    public void reloadCases7()
+    {
+        awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
+        System.out.println("Pobrano7"); 
     }
      
      public int countConsultantApplications(ClientCase cs)
@@ -456,6 +465,14 @@ public class ClientMainPageMB implements Serializable {
 
     public void setPremiumSelectedCase(ClientCase premiumSelectedCase) {
         this.premiumSelectedCase = premiumSelectedCase;
+    }
+
+    public List<ClientCase> getAwaitingForMarketClientCaseList() {
+        return awaitingForMarketClientCaseList;
+    }
+
+    public void setAwaitingForMarketClientCaseList(List<ClientCase> awaitingForMarketClientCaseList) {
+        this.awaitingForMarketClientCaseList = awaitingForMarketClientCaseList;
     }
     
     
