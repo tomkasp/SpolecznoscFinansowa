@@ -127,22 +127,23 @@
                                    <h4> DOKUMENTY KLIENTA </h4>
                                    <div>
                                        <h:panelGrid columns="4">
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText value="Dowód tożsamości"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText value="Zaświadczenie o zarobkach"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText value="Akt zgonu współmałżonka"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText value="Intercyza"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText value="Akt rozwodu"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText  value="Akt separacji"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
-                                           <h:outputText  value="Akt własności"/>
-                                           <h:commandLink target="_blank" action="#{ clientFileUploadMB.load1() }"> <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load8() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
                                            <h:outputText  value="BIK"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load1() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Dowód tożsamości"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load2() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Zaświadczenie o zarobkach"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load3() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Akt zgonu współmałżonka"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load4() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Intercyza"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load5() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText value="Akt rozwodu"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load6() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText  value="Akt separacji"/>
+                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load7() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:outputText  value="Akt własności"/>
+                                           
                                            
                                            
                                        </h:panelGrid> 
