@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Admin - ekran główny </ui:define> 
+            <ui:define name="top"> 
+                <h:outputStylesheet library="css" name="green.css" />
+
+                <div class="topbarLogo">
+                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+
+            </ui:define>
+
+            <ui:define name="content">
+                 
+                
+                    <p:dialog widgetVar="dlg" width="500px" height="300px">
+                        <h:form id="prodDial">
+                            <h3><h:outputText rendered="#{productsMB.selectedProduct.idProduct==null}" value="Dodaj nową "/>
+                                <h:outputText rendered="#{productsMB.selectedProduct.idProduct!=null}" value="Edytuj "/>
+                                wartość
+                            </h3>   
+                            <div class="field"> <h:outputText class="label" value="Nazwa"/><p:inputText value="#{dictionaryItemsMB.item.name}"/></div>
+
+                            <div class="field"> <h:outputText class="label" value="Aktualność"/>
+                                <p:selectOneMenu value="#{dictionaryItemsMB.item.isActive}">  
+                                    <f:selectItem itemLabel="Aktywny" itemValue="1" />  
+                                    <f:selectItem itemLabel="Nieaktywny" itemValue="0" />
+                                </p:selectOneMenu> 
+                            </div>   
+                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="dlg.hide()"/>
+                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zapisz" update=":values" onclick="dlg.hide()" action="#{dictionaryItemsMB.saveItem()}"/>
+                        </h:form> 
+                    </p:dialog>
+                
+                    <h3>Edytuj słownik</h3>
+                    <h:form id="values"> 
+                        <p:dataTable value="#{dictionaryItemsMB.items}" rowKey="#{row.id}" var="row" selection="#{dictionaryItemsMB.item}" emptyMessage="Brak danych" selectionMode="single" paginator="true" rows="15">
+                              
+                            <p:column headerText="Nazwa"> 
+                                <h:outputText value="#{row.name}" />  
+                            </p:column>
+                            <p:column headerText="Aktywny"> 
+                                <h:outputLabel value="Tak" rendered="#{row.isActive==1}"/>
+                                <h:outputLabel value="Nie" rendered="#{row.isActive==0}"/>
+                            </p:column>   
+                            
+                        </p:dataTable>
+                        
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Powrót" action="#{productsMB.adminMainPage()}"/> 
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj wartość" update=":prodDial" onclick="dlg.show();"/>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj wartość" update=":prodDial" ajax="true" immediate="true" onclick="dlg.show();" action="#{dictionaryItemsMB.addItem()}"/>
+
+                    </h:form> 
+
+                    <div class="marginT50"></div>   
+            </ui:define>           
+        </ui:composition>
+
+
+    </body>
+</html>

@@ -28,6 +28,7 @@ public class Region  implements java.io.Serializable {
      private String region;
      private Set<Address> addresses = new HashSet<Address>(0);
      private Set<Consultant> consultants = new HashSet<Consultant>(0);
+     private Integer isActive=1;
 
     public Region() {
     }
@@ -72,6 +73,14 @@ public class Region  implements java.io.Serializable {
     
     public void setConsultants(Set<Consultant> consultants) {
         this.consultants = consultants;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 

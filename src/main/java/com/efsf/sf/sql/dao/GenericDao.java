@@ -97,6 +97,20 @@ public class GenericDao<T> {
 
     }    
     
+        public void saveOrUpdateObject(Object obj) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction().begin();
+            session.saveOrUpdate(obj);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+        } finally {
+            session.close();
+        }
+
+    } 
+    
     public void update(T obj) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
