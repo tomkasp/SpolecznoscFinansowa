@@ -3,7 +3,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.RequiredDocuments;
-import com.efsf.sf.util.uploader.ftp.FileUploaderFTP;
+import com.efsf.sf.util.ftp.FileUploaderFTP;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
