@@ -3,7 +3,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.RequiredDocuments;
-import com.efsf.sf.util.downloader.FtpDownloader;
+import com.efsf.sf.util.ftp.FtpDownloader;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
