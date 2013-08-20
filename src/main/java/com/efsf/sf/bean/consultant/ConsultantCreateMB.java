@@ -85,6 +85,7 @@ public class ConsultantCreateMB implements Serializable {
         }
         
         loginMB.setUser(user);
+        loginMB.setIdUser(user.getIdUser());
         loginMB.setConsultant(consultant);
         loginMB.setIsLogged(true);
         loginMB.setType(2);

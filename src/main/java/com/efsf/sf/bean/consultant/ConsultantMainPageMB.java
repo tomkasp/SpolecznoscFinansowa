@@ -56,20 +56,15 @@ public class ConsultantMainPageMB {
     private List<ClientCase> ownedList = new ArrayList();
     private List<ClientCase> finishedList = new ArrayList();
     private List<ClientCase> premiumList = new ArrayList();
-    
-    
-    private Converters converters =  new Converters();
       
+    private Converters converters =  new Converters(); 
     private ClientCaseDAO caseDao = new ClientCaseDAO();
-  
     private ClientCase selectedLastCase;
     private ClientCase selectedObservedCase;
     private ClientCase selectedAppliedCase;
     private ClientCase selectedOwnedCase;
     private ClientCase selectedFinishedCase;
-    
-
-    
+      
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> modelsBranch = new ArrayList();
     

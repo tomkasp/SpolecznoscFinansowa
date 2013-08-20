@@ -301,7 +301,7 @@
                                       
                                   </p:commandButton>             
                                 <h:panelGroup id="panel2">
-                                  <div style="max-height: 400px; overflow-y: auto; clear: both;">
+                                  <div style="max-height: 470px; overflow-y: auto; clear: both;">
                                   <div class="marginT10"> 
                                       <h:outputText class="dialogLabel" value="Typ umowy"/> 
                                       <p:selectOneMenu styleClass="marginT10 marginR5" style="width: 375px; float:right;" value="#{createClientMB.incomeId}">
@@ -434,12 +434,12 @@
                                 </div>
                                  </h:panelGroup>
                                     
-                                  <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
-                                  <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
+                                  <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 20px !important" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
+                                  <p:commandButton styleClass="floatR wideButton" style="margin-top:20px !important;" action="#{createClientMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
                           </h:form>
                 </p:dialog>
                 
-                <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="false" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
+                <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="false" height="240" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:form> 
                                 <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{createClientMB.toIncome()}" value="Umowa"  >
                                     
@@ -492,8 +492,8 @@
                                
                                    </h:panelGroup>
                                   <div>
-                                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
-                                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{createClientMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 20px !important" action="#{createClientMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
+                                            <p:commandButton styleClass="floatR wideButton" style="margin-top:20px !important;" action="#{createClientMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
                                   </div>
                             </h:form>
                 </p:dialog>     
