@@ -112,6 +112,18 @@
                         </h:form> 
                     </p:dialog>
 
+                    
+                    <h3>Edytuj słowniki</h3>
+                    <h:form>
+                    <h:panelGrid width="300px" columns="2">
+                    <p:commandLink value="Typy produktów" action="#{dictionaryItemsMB.showDictionary(0)}"/>
+                    <p:commandLink value="Branże działalności" action="#{dictionaryItemsMB.showDictionary(1)}"/>
+                    <p:commandLink value="Statusy spraw" action="#{dictionaryItemsMB.showDictionary(2)}"/>
+                    <p:commandLink value="Kategorie edukacji" action="#{dictionaryItemsMB.showDictionary(3)}"/>
+                    <p:commandLink value="Stan cywilny" action="#{dictionaryItemsMB.showDictionary(4)}"/>
+                    <p:commandLink value="Miejsca pracy konsultantów" action="#{dictionaryItemsMB.showDictionary(5)}"/>                
+                    </h:panelGrid>
+                    </h:form>    
                 </div>
                 <div class="rightInlineBox">  
                     <h3>Produkty w ofercie</h3>
