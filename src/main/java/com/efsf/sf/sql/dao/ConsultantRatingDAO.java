@@ -23,16 +23,14 @@ public class ConsultantRatingDAO
          ConsultantRating cr = null;
          Session session = HibernateUtil.getSessionFactory().openSession();
 
-         Query q = session.createQuery("FROM ConsultantRating as CR "       
-         + "where con.idConsultant = :consultantId ");
+         Query q = session.createQuery("FROM ConsultantRating as cr left join fetch cr.consultant as cons "       
+         + "where cons.idConsultant = :consultantId ");
          
          q.setParameter("consultantId", consultantId);
 
          List l = q.list();
          if (l != null)
-            cr = (ConsultantRating) q.list().get(0);
-
-         
+            cr = (ConsultantRating) q.list().get(0);         
          
          session.close();
 
