@@ -35,6 +35,7 @@
                         <p:dataTable id="lastCases" value="#{consultantMainPageMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedLastCase}" selectionMode="single" >
           
                             <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}"/>
                             
                             <p:column headerText="Numer sprawy">  
@@ -119,6 +120,7 @@
                     <p:dataTable id="applied" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
 
                         <p:ajax event="rowSelect" update="@form" />
+                        <p:ajax event="rowUnselect" update="@form" /> 
                         <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}"/>
 
                         <p:column headerText="Numer sprawy">  
@@ -197,6 +199,7 @@
                         <p:dataTable id="owned" value="#{consultantMainPageMB.ownedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedOwnedCase}" selectionMode="single" >
 
                             <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}"/>
                      
                             
@@ -270,6 +273,7 @@
                         <p:dataTable id="finished" value="#{consultantMainPageMB.finishedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedFinishedCase}" selectionMode="single" >
 
                             <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}"/>
                      
                             
@@ -343,6 +347,7 @@
                         <p:dataTable id="traced" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
 
                             <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}"/>
 
                             <p:column headerText="Numer sprawy">  
