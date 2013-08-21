@@ -185,8 +185,7 @@
                             </p:dataTable>
 
 
-
-                            <h4 style="margin-top: 80px;"> Ocena doradcy </h4>
+                             <h:outputLabel rendered="#{caseRatingMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
 
                             
                             <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
