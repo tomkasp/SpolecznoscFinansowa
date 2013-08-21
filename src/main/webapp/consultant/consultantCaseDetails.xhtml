@@ -127,25 +127,53 @@
                                    <h4> DOKUMENTY KLIENTA </h4>
                                    <div>
                                        <h:panelGrid columns="4">
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load8() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.bik==null}" target="_blank" action="#{ fileDownloadMB.load8() }">
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.bik==null}"  style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText  value="BIK"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load1() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.idCard==null}" target="_blank" action="#{ fileDownloadMB.load1() }">
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText value="Dowód tożsamości"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load2() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.incomeStatement==null}" target="_blank" action="#{ fileDownloadMB.load2() }"> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.incomeStatement==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText value="Zaświadczenie o zarobkach"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load3() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.deathCertificate==null}" target="_blank" action="#{ fileDownloadMB.load3() }">
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.deathCertificate==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText value="Akt zgonu współmałżonka"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load4() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.mariageSettlement==null}" target="_blank" action="#{ fileDownloadMB.load4() }">
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.mariageSettlement==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText value="Intercyza"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load5() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.mariageSettlement==null}" target="_blank" action="#{ fileDownloadMB.load5() }"> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText value="Akt rozwodu"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load6() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.separationAct==null}" target="_blank" action="#{ fileDownloadMB.load6() }"> 
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.separationAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.separationAct==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText  value="Akt separacji"/>
-                                           <h:commandLink target="_blank" action="#{ fileDownloadMB.load7() }"> <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" /> </h:commandLink>
+                                           
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.titleDeed==null}" target="_blank" action="#{ fileDownloadMB.load7() }">
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.titleDeed!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                               <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.titleDeed==null}"  style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                           </h:commandLink>
                                            <h:outputText  value="Akt własności"/>
-                                           
-                                           
-                                           
                                        </h:panelGrid> 
                                    </div>
                                    
@@ -316,7 +344,7 @@
                             </h:panelGroup>
 
                             <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{clientCaseMB0o.stopObserve(clientCaseMB.selectedClientCase)}" onclick="revokeObs.hide()" >
+                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button"   value="Tak" action="#{clientCaseMB.stopObserve(clientCaseMB.selectedClientCase)}" onclick="revokeObs.hide()" >
                                     <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
 

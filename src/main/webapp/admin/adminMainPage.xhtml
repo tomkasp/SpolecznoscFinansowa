@@ -21,118 +21,36 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="leftInlineBox">  
-                    <h3>Instytucje</h3>
-                    <h:form id="instList"> 
-                        <p:dataTable value="#{productsMB.institutions}" rowKey="#{row.idInstitution}" var="row" emptyMessage="Brak doradców" selection="#{productsMB.selectedInstitution}" selectionMode="single" paginator="true" rows="10">
-                            <p:ajax event="rowSelect" listener="#{productsMB.loadProducts}"  update=":prodList"/>    
-
-                            <p:column headerText="Instytucja"> 
-                                <h:outputText value="#{row.name}" />  
-                            </p:column>
-
-                            <p:column headerText="Aktywna"> 
-                                <h:outputLabel value="Tak" rendered="#{row.isActive==1}"/>
-                                <h:outputLabel value="Nie" rendered="#{row.isActive==0}"/>
-                            </p:column>                            
-
-                        </p:dataTable>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj instytucję" update=":edtInstForm" onclick="dlgEditInst.show()"/>                        
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj Instytucję" onclick="dlg.show()"/>
-
-                    </h:form>
-
-                    <p:dialog widgetVar="dlg" width="400px" height="300px">
-
-                        <h:form>
-                            <h3>Dodaj nową instytucję</h3>   
-                            <div class="field"> <h:outputText class="label" value="Nazwa Instytucji"/><p:inputText value="#{productsMB.newInstitution.name}"/></div>
-                            <div class="field"> <h:outputText class="label" value="Typ Instytucji"/>
-                                <p:selectOneMenu value="#{productsMB.newInstitution.type}">  
-                                    <f:selectItem itemLabel="Bank" itemValue="0" />  
-                                    <f:selectItem itemLabel="Instytucja parabankowa" itemValue="1" />
-                                </p:selectOneMenu> 
-                            </div>
-                            <div class="field"> <h:outputText class="label" value="Aktualność"/>
-                                <p:selectOneMenu value="#{productsMB.newInstitution.isActive}">  
-                                    <f:selectItem itemLabel="Aktywna" itemValue="1" />  
-                                    <f:selectItem itemLabel="Nieaktywna" itemValue="0" />
-                                </p:selectOneMenu> 
-                            </div>                                   
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="dlg.hide()"/>
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj" update=":instList" onclick="dlg.hide()" action="#{productsMB.addInstitution()}"/>
-                        </h:form> 
-
-                    </p:dialog>
-
-                    <p:dialog widgetVar="dlgEditInst" width="400px" height="300px">
-
-                        <h:form id="edtInstForm">
-                            <h3>Edytuj instytucję</h3>   
-                            <div class="field"> <h:outputText class="label" value="Nazwa Instytucji"/><p:inputText value="#{productsMB.selectedInstitution.name}"/></div>
-                            <div class="field"> <h:outputText class="label" value="Typ Instytucji"/>
-                                <p:selectOneMenu value="#{productsMB.selectedInstitution.type}">  
-                                    <f:selectItem itemLabel="Bank" itemValue="0" />  
-                                    <f:selectItem itemLabel="Instytucja parabankowa" itemValue="1" />
-                                </p:selectOneMenu>
-                            </div>
-                            <div class="field"> <h:outputText class="label" value="Aktualność"/>
-                                <p:selectOneMenu value="#{productsMB.selectedInstitution.isActive}">  
-                                    <f:selectItem itemLabel="Aktywna" itemValue="1" />  
-                                    <f:selectItem itemLabel="Nieaktywna" itemValue="0" />
-                                </p:selectOneMenu> 
-                            </div>                                 
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="dlgEditInst.hide()"/>
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="OK" update=":instList" onclick="dlgEditInst.hide()" action="#{productsMB.updateInstitution()}"/>
-                        </h:form> 
-
-                    </p:dialog>
-
-                    <p:dialog widgetVar="prodcutDlg" width="500px" height="300px">
-                        <h:form id="prodDial">
-                            <h3><h:outputText rendered="#{productsMB.selectedProduct.idProduct==null}" value="Dodaj nowy "/>
-                                <h:outputText rendered="#{productsMB.selectedProduct.idProduct!=null}" value="Edytuj "/>
-                                produkt
-                            </h3>   
-                            <div class="field"> <h:outputText class="label" value="Nazwa produktu"/><p:inputText value="#{productsMB.selectedProduct.productName}"/></div>
-                            <div class="field"><h:outputText class="label" value="Produkt nadrzędny"/>
-                                <p:selectOneMenu value="#{productsMB.selectedProduct.parentProduct}">  
-                                    <f:selectItem itemLabel="Brak" itemValue=""/>  
-                                    <f:selectItems value="#{productsMB.productsAsHashMap}" />  
-                                </p:selectOneMenu>  
-                            </div>  
-                            <div class="field"> <h:outputText class="label" value="Aktualność"/>
-                                <p:selectOneMenu value="#{productsMB.selectedProduct.isActive}">  
-                                    <f:selectItem itemLabel="Aktywny" itemValue="1" />  
-                                    <f:selectItem itemLabel="Nieaktywny" itemValue="0" />
-                                </p:selectOneMenu> 
-                            </div>   
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="prodcutDlg.hide()"/>
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zapisz" update=":prodList" onclick="prodcutDlg.hide()" action="#{productsMB.saveProduct()}"/>
-                        </h:form> 
-                    </p:dialog>
-
-                </div>
-                <div class="rightInlineBox">  
-                    <h3>Produkty w ofercie</h3>
-                    <h:form id="prodList"> 
-                        <p:dataTable value="#{productsMB.products}" rowKey="#{row.idProduct}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak produktów" selection="#{productsMB.selectedProduct}" selectionMode="single" paginator="true" rows="10">
-
-                            <p:column headerText="Nazwa produktu"> 
-                                <h:outputText  value="#{row.productName}"/>
-                            </p:column>  
-
-                           <p:column headerText="Aktywny"> 
-                                <h:outputLabel value="Tak" rendered="#{row.isActive==1}"/>
-                                <h:outputLabel value="Nie" rendered="#{row.isActive==0}"/>
-                            </p:column>   
-                            
-                        </p:dataTable>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Edytuj produkt" update=":prodDial" onclick="prodcutDlg.show();"/>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj produkt" update=":prodDial" ajax="true" immediate="true" onclick="prodcutDlg.show();" action="#{productsMB.addProduct()}"/>
-                        <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Szczegóły produktu" action="#{productsMB.showDetails}"/>
-                    </h:form> 
-                </div>               
+                
+            <h3>Panel Administratora</h3>    
+                
+                <h:form>
+                <p:panelGrid columns="4" styleClass="noBorder centerGrid">  
+                    
+                    <p:commandLink action="#{productsMB.showProductPage()}"><h:graphicImage value="/resources/admin/produkty.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(0)}"><h:graphicImage value="/resources/admin/kredyty.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(1)}"><h:graphicImage value="/resources/admin/dzialalnosci.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(2)}"><h:graphicImage value="/resources/admin/status.png" width="128px" height="128px"/></p:commandLink> 
+                    
+                    <p:commandLink value="Produkty i insytucje"/>
+                    <p:commandLink value="Typy produktów" action="#{dictionaryItemsMB.showDictionary(0)}"/>
+                    <p:commandLink value="Branże działalności" action="#{dictionaryItemsMB.showDictionary(1)}"/>
+                    <p:commandLink value="Statusy spraw" action="#{dictionaryItemsMB.showDictionary(2)}"/>
+                    
+                    
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(3)}"><h:graphicImage value="/resources/admin/wyksztalcenie.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(4)}"><h:graphicImage value="/resources/admin/stan_cywilny.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{dictionaryItemsMB.showDictionary(5)}"><h:graphicImage value="/resources/admin/miejsca_pracy.png" width="128px" height="128px"/></p:commandLink> 
+                    <h:outputText/>
+                    
+                    <p:commandLink value="Kategorie edukacji" action="#{dictionaryItemsMB.showDictionary(3)}"/>
+                    <p:commandLink value="Stan cywilny" action="#{dictionaryItemsMB.showDictionary(4)}"/>
+                    <p:commandLink value="Miejsca pracy konsultantów" action="#{dictionaryItemsMB.showDictionary(5)}"/>  
+                    <h:outputText/>
+                </p:panelGrid> 
+                </h:form>  
+   
+              
             </ui:define>           
         </ui:composition>
 

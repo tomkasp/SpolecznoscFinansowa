@@ -27,6 +27,7 @@ public class CaseStatus  implements java.io.Serializable {
      private Integer idCaseStatus;
      private String name;
      private Set<ClientCase> clientCases = new HashSet<>(0);
+     private Integer isActive=1;
 
     public CaseStatus() {
     }
@@ -62,6 +63,16 @@ public class CaseStatus  implements java.io.Serializable {
     
     public void setClientCases(Set<ClientCase> clientCases) {
         this.clientCases = clientCases;
+    }
+
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 

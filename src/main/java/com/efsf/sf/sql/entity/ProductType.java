@@ -33,6 +33,7 @@ public class ProductType  implements java.io.Serializable {
      private Set<Obligation> obligations = new HashSet<Obligation>(0);
      private Set<ProductDetails> productDetailses = new HashSet<ProductDetails>(0);
      private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
+     private Integer isActive=1;
 
     public ProductType() {
     }
@@ -98,6 +99,15 @@ public class ProductType  implements java.io.Serializable {
     
     public void setClientCases(Set<ClientCase> clientCases) {
         this.clientCases = clientCases;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 

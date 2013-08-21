@@ -10,15 +10,18 @@ import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.SubscriptionDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
+import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +31,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  *
@@ -56,20 +61,15 @@ public class ConsultantMainPageMB {
     private List<ClientCase> ownedList = new ArrayList();
     private List<ClientCase> finishedList = new ArrayList();
     private List<ClientCase> premiumList = new ArrayList();
-    
-    
-    private Converters converters =  new Converters();
       
+    private Converters converters =  new Converters(); 
     private ClientCaseDAO caseDao = new ClientCaseDAO();
-  
     private ClientCase selectedLastCase;
     private ClientCase selectedObservedCase;
     private ClientCase selectedAppliedCase;
     private ClientCase selectedOwnedCase;
     private ClientCase selectedFinishedCase;
-    
-
-    
+      
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
     private ArrayList<Set<String>> modelsBranch = new ArrayList();
     
@@ -350,6 +350,24 @@ public class ConsultantMainPageMB {
             else
                 return true;   
         }   
+    }
+    
+    public int subscriptionDeadline(){   
+        int days=0;
+        
+        SubscriptionDAO sdao = new SubscriptionDAO();
+        Subscription s =sdao.loadFkConsultant( loginMB.getConsultant().getIdConsultant() );
+        
+        Date d1=s.getDateTo();
+        DateTime dataTime=new DateTime();
+        DateTime dataTime2=new DateTime(d1);
+        
+        days=Days.daysBetween(dataTime, dataTime2).getDays();
+        if(days<0){
+        days=0;
+        }
+        
+        return days;
     }
 
     public ClientCaseDAO getCaseDao() {
