@@ -445,8 +445,8 @@
                             </p:column> 
 
                             <p:column  headerText="Ocena doradcy">  
-                                <h:outputText rendered="#{clientMainPageMB.giveMeConsultantAverage(  row.consultant.idConsultant  )>0}" style="color: red;" value="#{clientMainPageMB.giveMeConsultantAverage(  row.consultant.idConsultant  )}" >
-                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                <h:outputText style="color: red;" value="#{row.caseRating.average}" >
+                                    <f:convertNumber maxFractionDigits="2"/>
                                 </h:outputText>
                             </p:column> 
 
@@ -536,7 +536,7 @@
 
                             <p:column headerText="Ilość wyświetleń">  
                                 <h:outputText value="#{row.viewCounter}" />
-                            </p:column>    
+                            </p:column>      
 
                             <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
 
