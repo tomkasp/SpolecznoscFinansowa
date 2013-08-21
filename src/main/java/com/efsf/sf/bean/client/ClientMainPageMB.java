@@ -79,8 +79,7 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void fillTables()
-    {
-        
+    {    
         reloadCases();
         reloadCases2();
         reloadCases3();
@@ -89,7 +88,6 @@ public class ClientMainPageMB implements Serializable {
         reloadCases6();
         messagesMB.loadUnreadMessages();
         checkRequirementsForNewApplication(); 
-
     }
    
     public void reloadCases()
@@ -244,7 +242,7 @@ public class ClientMainPageMB implements Serializable {
          ClientDAO clientDao = new ClientDAO();
          Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
          
-         if (client == null || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode() == null || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null ))
+         if (client == null || client.getAddresses() == null || client.getAddresses().isEmpty() || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode().equals("") || ((Address) client.getAddresses().toArray()[0]).getRegion().getIdRegion().equals(0) || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null ))
          {
              requirementsFulfilled = false;
          }

@@ -162,8 +162,13 @@ public class ClientCaseMB implements Serializable {
 
     public void changeCaseStatus() {
         CaseStatus cs = new CaseStatusDAO().read(caseStatusID);
+        String before = selectedClientCase.getCaseStatus().getName();
+        
         selectedClientCase.setCaseStatus(cs);
         new ClientCaseDAO().updateClientCase(selectedClientCase);
+        String after = selectedClientCase.getCaseStatus().getName();
+        
+        messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {before, after});
     }
 
     // VIEW CASE METHODS 
