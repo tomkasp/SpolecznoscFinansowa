@@ -1,6 +1,7 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
@@ -63,6 +64,12 @@ public class LoginMB implements Serializable {
                 
                 return "/client/clientMainPage?faces-redirect=true";  
             } 
+            
+            if(type==11||type==12||type==13)
+            {
+                return "/common/activateAccount?faces-redirect=true";  
+            } 
+            
         }
         return "/login?faces-redirect=true"; 
     }
@@ -81,11 +88,39 @@ public class LoginMB implements Serializable {
         type=-1;
         client=null;
         consultant=null;
+        user=null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/login?faces-redirect=true";
     }
     
+    public String deactivateUser(){
+        if(user.getType()==1)
+        {user.setType(11);}
+        if(user.getType()==2)
+        {user.setType(12);}
+        if(user.getType()==3)
+        {user.setType(13);}
+        
+        GenericDao<User> udao=new GenericDao(User.class);
+        udao.update(user);
+        
+        return logout();
+    }
+    
+    public String activateUser(){
+        if(user.getType()==11)
+        {user.setType(11);}
+        if(user.getType()==12)
+        {user.setType(2);}
+        if(user.getType()==13)
+        {user.setType(3);}
+        
+        GenericDao<User> udao=new GenericDao(User.class);
+        udao.update(user);
+        
+        return login();
+    }
   
     public String getEmail() {
         return email;

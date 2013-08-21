@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml"> 
+             <ui:define name="title"> SF - Logowanie </ui:define> 
+            
+            <ui:define name="top">
+
+                    <div class="topbarLogo">
+                        <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    </div>
+
+            </ui:define>
+            <ui:define name="content">
+
+                <div class="leftInlineBox"> 
+                    <h:form>
+
+                        <h2>Aktywuj konto</h2>
+                        <h4>Możesz w dowolnym momencie aktywować swoje konto w ciągu kilku sekund.
+                            Twój dotychczasowy dorobek oraz punkty zostaną automatycznie przywrócone w serwisie.</h4>
+                        
+                        <h:link styleClass="greyButton" id="button1" value="Powrót do strony logowania" outcome="/login?faces-redirect=true"/> 
+                        <h:commandLink styleClass="greyButton" id="button2" value="Aktywuj konto teraz" action="#{ loginMB.activateUser() }"/> 
+                   
+                    </h:form>
+                </div>
+
+            </ui:define>
+            
+        </ui:composition>
+
+    </body>
+</html>

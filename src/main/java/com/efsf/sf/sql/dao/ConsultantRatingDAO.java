@@ -5,9 +5,11 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.ConsultantRating;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -15,25 +17,30 @@ import org.hibernate.Session;
  *
  * @author XaI
  */
-public class ConsultantRatingDAO 
-{
-       
-    public ConsultantRating getConsultantRatings(Integer consultantId)
-    {
-         ConsultantRating cr = null;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+public class ConsultantRatingDAO {
 
-         Query q = session.createQuery("FROM ConsultantRating as cr left join fetch cr.consultant as cons "       
-         + "where cons.idConsultant = :consultantId ");
-         
-         q.setParameter("consultantId", consultantId);
+    public ConsultantRating getConsultantRatings(Integer consultantId) {
+        ConsultantRating cr = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-         List l = q.list();
-         if (l != null)
-            cr = (ConsultantRating) q.list().get(0);         
-         
-         session.close();
+        try {
+            Query q = session.createQuery("FROM ConsultantRating as cr left join fetch cr.consultant as cons "
+                    + "where cons.idConsultant = :consultantId ");
 
-         return cr;
+            q.setParameter("consultantId", consultantId);
+
+            List l = q.list();
+            if (!l.isEmpty()) {
+                cr = (ConsultantRating) q.list().get(0);
+            }
+
+        } catch (HibernateException exp) {
+        } finally {
+            session.close();
+        }
+
+
+
+        return cr;
     }
 }

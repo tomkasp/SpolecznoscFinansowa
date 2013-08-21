@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">         
+            
+            <ui:define name="content">
+
+                <div class="leftInlineBox"> 
+                    <h:form>
+
+                        <h2>Dezaktywuj konto</h2>
+                        <h4>Możesz w dowolnym momencie dezaktywować swoje konto. A w przyszłości w ciągu kilku sekund wznowić jego działanie jeśli zajdzie taka potrzeba. Twój dotychczasowy dorobek oraz punkty zostaną wtedy automatycznie przywrócone w serwisie.</h4>
+
+                        <p:commandLink styleClass="greyButton" id="viewButton3" value="Dezaktywuj" update=":dialog3"  oncomplete="usun.show()"/> 
+                    </h:form>
+                </div>
+
+                <p:dialog id="dialog3" 
+                          header="Dezaktywuj"  widgetVar="usun" resizable="tfalse"  
+                          height="330" width="560" showEffect="clip" hideEffect="fold" modal="true">  
+
+                    <h:form>
+                        
+                        <div class="centerFillBox" style="color: black; border: 0px; ">
+
+                            <div>
+                                <h6>Wybrałeś usunięcie konta: <h:outputLabel value="#{loginMB.client.name} #{loginMB.client.lastName}"/> Nr: <h:outputLabel value="#{loginMB.user.login}"/> </h6>   
+                            </div>
+
+                            <p>
+                                Wiele osób tymczasowo dezaktywuje konta. Ta opcja jest elastyczna i umożliwia opuszczenie serwisu i powrót do niego w dowolnej chwili. W przypadku dezaktywacji konta:
+                                <ul>
+                                    <li>Inni użytkownicy portalu nie będą mogli wyszukać Twojego konta w serwisie. Niektóre informacje, np. wysłane przez Ciebie wiadomości, mogą nadal być widoczne dla innych osób.</li>
+                                    <li>Informacje zawarte w Twoim profilu  zostaną przez nas zachowane na wypadek Twojego powrotu do grona użytkowników serwisu. Gdy zdecydujesz się ponownie aktywować konto, informacje powrócą na Twoją stronę. </li>
+                                </ul> 
+                            </p>
+
+                            <h6>Czy napewno chcesz dezaktywować konto?</h6>
+
+                        </div> 
+
+                        <div class="przyciskiDol" style="margin-top: 20px;">                  
+                            <p:commandLink styleClass="greyButton" style="color: black;" value="Anuluj" type="submit" onclick="usun.hide()" /> 
+                            <h:commandLink styleClass="greyButton" style="color: red;" value="Dezaktywuj" outcome="/index" action="#{ loginMB.deactivateUser() }" /> 
+                        </div>
+                        
+                    </h:form> 
+
+                </p:dialog>  
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
