@@ -5,7 +5,6 @@ import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
