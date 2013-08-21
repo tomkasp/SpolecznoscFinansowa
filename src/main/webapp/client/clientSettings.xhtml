@@ -57,7 +57,7 @@
 
                 <div style="height:auto;">
 
-                    <div class="leftInlineBox">
+                    <div class="leftInlineBox" >
 
                         <h:form id="form1"> 
 
@@ -215,14 +215,14 @@
                                 <div class="field"> 
                                     <h:outputText class="label" value="Numer domu"/> 
                                     <h:inputText id="streetNumber" value="#{clientSettingsMB.mainAddress.houseNumber}" class="inputWidth" > 
-                                        <f:validateLength minimum="3" maximum="10" />
+                                        <f:validateLength minimum="1" maximum="10" />
                                         <p:ajax event="keyup" update="streetNumberMessage" />
                                     </h:inputText>
                                     <h:message for="streetNumber" errorClass="invalid" id="streetNumberMessage" /> 
                                 </div> 
 
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Telefon"/> 
+                                <div class="field" > 
+                                    <h:outputText class="label" value="Telefon" /> 
                                     <h:inputText id="phone" value="#{clientSettingsMB.mainAddress.phone}"  class="inputWidth" >
                                         <f:validateLength minimum="7" maximum="20" />
                                         <p:ajax event="keyup" update="phoneMessage" />
@@ -230,19 +230,21 @@
                                     <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
                                 </div>
 
-                                <h:commandLink  class ="greenButton wideButton floatR marginTB20"  value="Zapisz ustawienia" action="#{clientSettingsMB.updateSettings()}" />
-
+                                 
                             </div>
 
+                            <h:commandLink style="margin-top: 60px;" class ="greenButton wideButton floatR marginTB20"  value="Zapisz ustawienia" action="#{clientSettingsMB.updateSettings()}" />
+  
                         </h:form>
-
+                        
                     </div>
 
+                    
                     <div class="rightInlineBox" >
 
-                        <h:form> 
+                        <h:form > 
 
-                            <div class="marginLRT30">
+                            <div class="marginLRT30" style="display: none;">
                                 <h4>USTAW ZDJĘCIE</h4>
                                 <h:graphicImage class="photoChange" id="profil_logo_green_small" alt="could not be found."  value="/resources/images/profil_green.png" title="Profil Green Small" ></h:graphicImage>
                                 <h:outputText class="fontGrey photoChangeText" value="Twoje zdjęcie musi być zapisane jako plik graficzny (JPG, JPEG, GIF, PNG), a rozmiar nie może przekroczyć 5MB." ></h:outputText>
@@ -297,8 +299,6 @@
                         
                         <h:form id="uploadForm" enctype="multipart/form-data" >
 
-                           
-
                             <div class="marginLRT30">  
 
                                  <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
@@ -328,7 +328,7 @@
                         
 
                        
-                            <div class="marginLRT30" style=" margin-top: 40px;">     
+                            <div class="marginLRT30">     
 
                                 <h4>WYMAGANE DOKUMENTY</h4>
 
@@ -478,15 +478,13 @@
                                     <h:message for="idTitleDead"  errorClass="invalid"  /> 
 
                                 </div>
-
                                 
-
-
-                                <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
-
-                                
+                               
                             </div>
 
+                             <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
+
+                            
                         </h:form>
 
                     </div>
