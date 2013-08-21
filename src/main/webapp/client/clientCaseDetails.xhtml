@@ -163,63 +163,31 @@
 
                             <h4> HARMONOGRAM SPŁAT </h4>
 
-                            <p:dataTable id="dataTable2" value="#{fakeBean.harmonogram}" var="data" emptyMessage="brak klientów!" 
-                                         rowKey="#{data.pozostało}">
+                            <p:dataTable id="dataTable2" value="#{clientCaseMB.schedule}" var="row" emptyMessage="brak klientów!" 
+                                         rowKey="#{row.toPay}" paginator="true" rows="15">
                                 <p:column headerText="Termin spłaty">  
-                                    <h:outputText value="#{data.termin}" /> 
+                                    <h:outputText value="#{row.paymentDate}">
+                                       <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
                                 </p:column>  
 
                                 <p:column headerText="Kwota">  
-                                    <h:outputText value="#{data.kwota2}" /> 
+                                    <h:outputText value="#{row.amount}" /> 
                                 </p:column>  
 
                                 <p:column headerText="Pozostało">    
-                                    <h:outputText value="#{data.pozostało}" /> 
+                                    <h:outputText value="#{row.toPay}" /> 
                                 </p:column>  
 
                                 <p:column headerText="Spłacono">  
-                                    <h:outputText value="#{data.spłacono}" /> 
+                                    <h:outputText value="#{row.alreadyPayed}" /> 
                                 </p:column>    
                             </p:dataTable>
-                            <p:commandLink styleClass="wideButton greyButton floatR" id="viewButton3" value="Dodaj spłatę"  oncomplete="dodaj.show()"/>
-
-                            <p:dialog id="dialog3"  styleClass="dialog"
-                                      header="Dodaj spłatę"  widgetVar="dodaj" resizable="tfalse"  
-                                      height="160" width="400" showEffect="clip" hideEffect="fold" modal="true">  
-
-                                <div class="dialogFillBox" >
-                                    <div class="field"> <h:outputText class="label" value="Kwota spłaty"/>  <h:inputText  /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Data spłaty"/>  <h:inputText  /> </div>
-                                </div>
-
-                                <div class="przyciskiDol marginT10">                  
-                                    <p:commandLink styleClass="wideButton greyButton floatL" style="color: black;" value="Anuluj" type="submit" onclick="dodaj.hide()" /> 
-                                    <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź"   type="submit" onclick="dodaj.hide()" /> 
-                                </div>
-
-                            </p:dialog>
 
 
-                            <h4 style="margin-top: 80px;"> HISTORIA SPŁAT </h4>
 
-                            <p:dataTable id="dataTable3" value="#{fakeBean.splacono}" var="data" emptyMessage="brak klientów!" >
+                            <h4 style="margin-top: 80px;"> Ocena doradcy </h4>
 
-                                <p:column headerText="Data wpłaty">  
-                                    <h:outputText value="#{data.termin}" /> 
-                                </p:column>  
-
-                                <p:column headerText="Kwota">  
-                                    <h:outputText value="#{data.kwota2}" /> 
-                                </p:column>  
-
-                                <p:column headerText="Pozostało">    
-                                    <h:outputText value="#{data.pozostało}" /> 
-                                </p:column>  
-
-                                <p:column headerText="Spłacono">  
-                                    <h:outputText value="#{data.spłacono}" /> 
-                                </p:column>      
-                            </p:dataTable>
                             
                             <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
                                 
