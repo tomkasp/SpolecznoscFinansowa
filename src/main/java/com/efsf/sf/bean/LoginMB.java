@@ -5,6 +5,7 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.util.Security;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,9 +29,8 @@ public class LoginMB implements Serializable {
     
     private Boolean activeAddingApp;
     
-    public LoginMB() {  
-    }
 
+   
     public String login() {
         
         System.out.println(isLogged);
