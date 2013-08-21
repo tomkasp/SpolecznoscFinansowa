@@ -108,7 +108,6 @@ public class LoginMB implements Serializable {
         return logout();
     }
     
-    
     public String activateUser(){
         if(user.getType()==11)
         {user.setType(11);}

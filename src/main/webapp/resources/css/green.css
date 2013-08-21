@@ -73,7 +73,6 @@ h6{
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight 
 {
     color: green;
-    font-weight: bold;
 }
 
 .ui-dialog .ui-dialog-title{
