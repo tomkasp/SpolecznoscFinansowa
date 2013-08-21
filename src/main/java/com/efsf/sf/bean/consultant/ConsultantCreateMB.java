@@ -5,6 +5,7 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.SendMail;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,11 +55,11 @@ public class ConsultantCreateMB implements Serializable {
     public ConsultantCreateMB() {
     }
 
-    public String savePart1() {
+    public String savePart1() throws Exception {
         UserDAO udao = new UserDAO();
         
         //SET USER TYPE:
-        user.setType(2);
+        user.setType(22);
         user.setLogin(String.valueOf(new Date().getTime()));
         user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
@@ -84,16 +85,12 @@ public class ConsultantCreateMB implements Serializable {
             sdao.save(subscription);
         }
         
-        loginMB.setUser(user);
-        loginMB.setIdUser(user.getIdUser());
-        loginMB.setConsultant(consultant);
-        loginMB.setIsLogged(true);
-        loginMB.setType(2);
-        
+        SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser());
+                
         return "/consultant/consultantFillAccountData?faces-redirect=true";
         
     }
-
+    
     public String savePart2() {
 
         DictionaryMB dictionaryMB = new DictionaryMB();
