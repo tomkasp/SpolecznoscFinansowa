@@ -25,6 +25,7 @@ import javax.persistence.UniqueConstraint;
 )
 public class Branch  implements java.io.Serializable {
 
+//    long serialVersionUID=3424L;
 
      private Integer idBranch;
      private String name;
