@@ -446,7 +446,9 @@
                             </p:column> 
 
                             <p:column  headerText="Ocena doradcy">  
-                                <h:outputText style="color: red;" value="4.9" />
+                                <h:outputText style="color: red;" value="#{row.caseRating.average}" >
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                </h:outputText>
                             </p:column> 
 
                             <p:column headerText="Status">  
@@ -534,7 +536,7 @@
                             </p:column> 
 
                             <p:column headerText="Ilość wyświetleń">  
-                                <h:outputText value="7" />
+                                <h:outputText value="#{row.viewCounter}" />
                             </p:column>      
 
                             <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  

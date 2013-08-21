@@ -169,6 +169,14 @@ public class CreateClientMB implements Serializable
         client.setMaritalStatus(maritalDao.getMaritalStatus(0));
         client.setPoints(5);
         
+        address.setClient(client);
+        address.setCountry("Polska");
+        address.setHouseNumber("");
+        address.setRegion(dictionaryMB.getRegion().get(0));
+        addressSet.add(address);
+        
+        client.setAddresses(addressSet);
+        
         userDao.save(user);
         clientDao.save(client);
         
@@ -180,7 +188,7 @@ public class CreateClientMB implements Serializable
         loginMB.setClient(client);
         loginMB.setIsLogged(true);
         loginMB.setType(3);
-        
+        loginMB.setActiveAddingApp(true);
         return "/client/clientFillAccountData?faces-redirect=true";
     }
         
@@ -302,22 +310,23 @@ public class CreateClientMB implements Serializable
             }
         }
         
-        if(!(regionId == 0 && address.getCity() == null && address.getHouseNumber() == null  && address.getPhone() == null  
-                 && address.getStreet() == null  && address.getZipCode() == null ))
-        {
-            address.setClient(client);
-            address.setCountry("Polska");
-            addressSet.add(address);
-            client.setAddresses(addressSet);
-        }
+  //      if(!(regionId == 0 && address.getCity().equals("") && address.getHouseNumber().equals("")  && address.getPhone().equals("") 
+  //               && address.getStreet().equals("")  && address.getZipCode().equals("") ))
+  //      {
+        addressSet.clear();
+        address.setClient(client);
+        address.setCountry("Polska");
+        addressSet.add(address);
+        client.setAddresses(addressSet);
+//
         
-        if(sexString != null && sexString.equals("true"))
+        if(sexString != null && sexString.equals("true") && !sexString.equals(""))
         {
             client.setSex(true);
         }
-        else if(sexString != null && sexString.equals("false"))
+        else if(sexString != null && sexString.equals("false") && !sexString.equals(""))
         {
-            client.setSex(true);
+            client.setSex(false);
         }
         
         

@@ -128,7 +128,8 @@ public class ClientDAO {
                 Query q = session.createQuery("FROM Client as clt "
                      + "left join fetch clt.incomes as inc "
                      + "left join fetch clt.incomeBusinessActivities as ba "
-                     + "join fetch clt.addresses as addr "
+                     + "left join fetch clt.addresses as addr "
+                     + "left join fetch addr.region as reg "
                      + "where clt.idClient = :id");
     
                 q.setParameter("id", idClient);
