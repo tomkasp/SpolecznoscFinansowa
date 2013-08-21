@@ -6,6 +6,7 @@ import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.ConsultantRatingDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
@@ -135,6 +136,19 @@ public class ClientMainPageMB implements Serializable {
     {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
         System.out.println("Pobrano7"); 
+    }
+    
+    public double giveMeConsultantAverage(int consultantId)
+    {
+        ConsultantRatingDAO crdao = new ConsultantRatingDAO();
+        ConsultantRating cr = crdao.getConsultantRatings(consultantId);
+        if(cr!=null){
+        return cr.getAverage();
+        }
+        else{
+        return 0;
+        }
+        
     }
      
      public int countConsultantApplications(ClientCase cs)

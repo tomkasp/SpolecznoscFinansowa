@@ -297,31 +297,12 @@
                         
                         <h:form id="uploadForm" enctype="multipart/form-data" >
 
-                            <div class="marginLRT30">      
-
-                                <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
-
-                                <div> 
-                                    <h:outputText class="redMessage marginL20" value="UWAGA! Minęła ważność Twojego raportu BIK!" /> 
-                                </div>
-                                <div>
-                                    <h:outputText class="redMessage marginL20" value="Zaktualizuj swój raport BIK." /> 
-                                </div>
-                                <div class="marginTB20">
-                                    <div> <h:outputText class="fontGrey marginL20" value="Wgraj zeskanowany raport BIK w postaci .zip." /> </div>    
-                                    <div> <h:outputText class="fontGrey marginL20 wordSpace" value="Dowiedz się" />
-                                        <h:link class="redMessage" value="jak to zrobić." /> </div>
-                                </div>
-                                <div class="marginTB20">
-                                    <div> <h:outputText  class="fontGrey marginL20" value="Jeżeli posiadasz raport BIK w formacie PDF," /> </div>    
-                                    <div> <h:link class="redMessage marginL20 wordSpace" value="kliknij tutaj." /> </div>
-                                </div>
-
-
-                            </div>
+                           
 
                             <div class="marginLRT30">  
 
+                                 <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
+                                
                                  <h:outputLabel class="uploaderLabel" id="bikLabel">Dodaj lub przeglądaj raport BIK</h:outputLabel>     
                                 
                                     <h:commandLink target="_blank" action="#{ fileDownloadMB.load8() }">
