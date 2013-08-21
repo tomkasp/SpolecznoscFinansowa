@@ -14,35 +14,88 @@
 
 
             <ui:define name="content">
-                
 
-                <div class="leftTable">
+
+                <div>
 
 
                     <h3>Ranking najlepszych doradców</h3>
                     <h:form> 
-                        <p:dataTable value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak doradców" selectionMode="single">
-                         
-                        <p:column headerText="Pozycja">  
-                            <h:outputText  value="#{rowNumber+1}"/>
-                        </p:column>  
+                        <p:dataTable style="width: auto;" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak doradców" selectionMode="single">
 
-                        <p:column headerText="Doradca"> 
-                            <h:outputText  value="#{row.consultant.name} #{row.consultant.lastName}"/>
-                        </p:column>  
+                            <p:column headerText="Pozycja">  
+                                <h:outputText  value="#{rowNumber+1}"/>
+                            </p:column>  
+                            
+                            <p:column headerText="Doradca" > 
+                                <h:outputText  value="#{row.consultant.name} #{row.consultant.lastName}"/>
+                            </p:column>  
 
-                        <p:column headerText="Śr. ocena">  
-                            <h:outputText  value="#{row.average}">
-                                <f:convertNumber locale="en" pattern="#0.00" />
-                            </h:outputText>
-                        </p:column> 
+                            <p:column headerText="Kontakt">  
+                                <h:outputText  value="#{row.contact}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column> 
 
-                    </p:dataTable>
+                            <p:column headerText="Kultura">  
+                                <h:outputText  value="#{row.culture}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Kompetencje">  
+                                <h:outputText  value="#{row.competence}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Punktualność">  
+                                <h:outputText  value="#{row.punctuality}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Niezawodność">  
+                                <h:outputText  value="#{row.reliability}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Respekt">  
+                                <h:outputText  value="#{row.respect}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Trudność">  
+                                <h:outputText  value="#{row.difficulty}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Zaufanie">  
+                                <h:outputText  value="#{row.trust}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>
+                            
+                           <p:column headerText="L. ocen">  
+                                 <h:outputText  value="#{row.rateCount}" >
+                                    <f:convertNumber locale="en" pattern="#0" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Śr. ocena" width="100">  
+                                <h:outputText  value="#{row.average}" style="color:  #00a01a;">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column> 
+
+                        </p:dataTable>
                     </h:form> 
                 </div>
 
                 <div style="clear:both;">
-                    
+
                 </div>
             </ui:define>           
         </ui:composition>
