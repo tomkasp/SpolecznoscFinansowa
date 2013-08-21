@@ -30,7 +30,6 @@
                             $("#last").toggle();    
                         });
                     });
-                    
                 </script>
 
                 <h:form>
@@ -446,7 +445,9 @@
                             </p:column> 
 
                             <p:column  headerText="Ocena doradcy">  
-                                <h:outputText style="color: red;" value="4.9" />
+                                <h:outputText rendered="#{clientMainPageMB.giveMeConsultantAverage(  row.consultant.idConsultant  )>0}" style="color: red;" value="#{clientMainPageMB.giveMeConsultantAverage(  row.consultant.idConsultant  )}" >
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
                             </p:column> 
 
                             <p:column headerText="Status">  

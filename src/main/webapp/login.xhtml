@@ -20,9 +20,7 @@
 
             </ui:define>
             <ui:define name="content">
-                
-           
-
+              
              <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px ; background: none; box-shadow: 0 0 0;" height="145px" draggable="false" closable="false">  
                 <div id="circular3dG">
                    <div id="circular3d_1G" class="circular3dG">
@@ -82,7 +80,7 @@
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
                     <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();">
-          
+                        
                     </p:commandLink>
                     
                 </div>
