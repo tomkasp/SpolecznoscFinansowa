@@ -1,3 +1,9 @@
+.ui-panelgrid td {
+background-color: white !important;
+font-weight: bold;
+text-align: center;
+}
+
 
 .ui-widget-content.ui-datatable-even{
     background: none repeat scroll 0 0 #E7E3E3;

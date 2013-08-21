@@ -28,6 +28,9 @@ public class productsMB implements Serializable {
     private Integer productTypeId;
     private Integer employementTypeId;
     
+    public String showProductPage(){
+        return "/admin/products?faces-redirect=true";  
+    }
     
      public String adminMainPage(){
         return "/admin/adminMainPage?faces-redirect=true";
