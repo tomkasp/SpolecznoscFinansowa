@@ -27,6 +27,7 @@ public class Education  implements java.io.Serializable {
      private Integer idEducation;
      private String name;
      private Set<Client> clients = new HashSet<Client>(0);
+     private Integer isActive=1;
 
     public Education() {
     }
@@ -64,7 +65,14 @@ public class Education  implements java.io.Serializable {
         this.clients = clients;
     }
 
+    public Integer getIsActive() {
+        return isActive;
+    }
 
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
 
 
 }

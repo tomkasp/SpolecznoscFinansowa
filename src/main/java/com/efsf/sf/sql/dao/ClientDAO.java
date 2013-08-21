@@ -106,7 +106,9 @@ public class ClientDAO {
         session.close();
     }
 
+
     public Client getClientWithIncomes(int idClient) {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
 
@@ -132,28 +134,31 @@ public class ClientDAO {
         return client;
     }
 
-    public Client checkClientForNewApplication(int idClient) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction().begin();
-
-        Query q = session.createQuery("FROM Client as clt "
-                + "left join fetch clt.incomes as inc "
-                + "left join fetch clt.incomeBusinessActivities as ba "
-                + "join fetch clt.addresses as addr "
-                + "where clt.idClient = :id");
-
-        q.setParameter("id", idClient);
-
-        List list = q.list();
-
-        session.getTransaction().commit();
-        session.close();
-
-        if (list != null && list.size() > 0) {
-            return (Client) list.get(0);
-        }
-        return null;
-    }
+     public Client checkClientForNewApplication(int idClient)
+     {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction().begin();
+                
+                Query q = session.createQuery("FROM Client as clt "
+                     + "left join fetch clt.incomes as inc "
+                     + "left join fetch clt.incomeBusinessActivities as ba "
+                     + "left join fetch clt.addresses as addr "
+                     + "left join fetch addr.region as reg "
+                     + "where clt.idClient = :id");
+    
+                q.setParameter("id", idClient);
+     
+                List list = q.list();
+                                
+                session.getTransaction().commit();
+                session.close();
+                
+                if (list != null && list.size() > 0)
+                {
+                    return (Client) list.get(0);
+                }
+                return null;         
+     }
 
     public Client readClientForSettings(int id) {
 

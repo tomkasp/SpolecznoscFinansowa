@@ -1,3 +1,11 @@
+.noBorder tbody tr td{
+   border-style: none; 
+}
+
+.centerGrid{
+    margin: 0 auto;
+}
+
 img{border:0px;}
 
 #top {

@@ -29,7 +29,7 @@
                                       <h:outputText class="fontBlack floatL marginLRT30" value="#{o.sentDate}" >
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
-                                      <h:outputText class="fontBlack floatL marginLRT30" value="#{o.message}" />
+                                      <h:outputText class="fontBlack floatL marginLRT30" style="width: 50%" value="#{o.message}" />
                                       <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >     
                                         <f:ajax execute="@all" render="@all" />
                                       </h:commandButton>
@@ -41,8 +41,8 @@
                                       <h:outputText class="fontBlue floatL marginLRT30" style="color: green" value="#{o.sentDate}" >
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
-                                      <h:outputText class="fontBlue floatL marginLRT30" style="color: green" value="Rozmowa z #{o.userByFkFromUser.consultants.toArray()[0].name} #{o.userByFkFromUser.consultants.toArray()[0].lastName}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
+                                      <h:outputText class="fontBlue floatL marginLRT30" style="color: green; width: 50%" value="Rozmowa z #{o.userByFkFromUser.consultants.toArray()[0].name} #{o.userByFkFromUser.consultants.toArray()[0].lastName}" />
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px; " value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
                                     </div>
                                 </h:panelGroup>
                             </ui:repeat> 

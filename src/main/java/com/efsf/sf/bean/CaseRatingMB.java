@@ -5,6 +5,7 @@ import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.entity.CaseRating;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -15,6 +16,13 @@ public class CaseRatingMB implements Serializable {
 
     @ManagedProperty(value = "#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
+    
+    @ManagedProperty(value = "#{messagesMB}")
+    private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
+    
     private CaseRating caseRating = new CaseRating();
 
     public String saveRating() {
@@ -33,6 +41,8 @@ public class CaseRatingMB implements Serializable {
         caseRating.setAverage(average);
         caseRating.setCommentDate(new Date());
         dao.save(caseRating);
+        
+        messagesMB.generateSystemMessage(bundle.getString("CASE_RATED"), clientCaseMB.getSelectedClientCase().getConsultant().getUser().getIdUser(), new Object[] {clientCaseMB.getSelectedClientCase().getIdClientCase()} );
         
         return "/client/clientCaseDetails";
     }
@@ -60,5 +70,21 @@ public class CaseRatingMB implements Serializable {
 
     public void setClientCaseMB(ClientCaseMB clientCaseMB) {
         this.clientCaseMB = clientCaseMB;
+    }
+
+    public MessagesMB getMessagesMB() {
+        return messagesMB;
+    }
+
+    public void setMessagesMB(MessagesMB messagesMB) {
+        this.messagesMB = messagesMB;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 }

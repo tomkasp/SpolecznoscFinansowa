@@ -44,6 +44,7 @@ h6{
     padding: 0px 5px;
     min-height: 500px;
     border-bottom: 4px solid green;
+    padding-bottom: 20px;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active .ui-state-focus {
