@@ -104,7 +104,7 @@ public class CaseViewMB {
         new ClientCaseDAO().updateClientCase(selectedClientCase);
         String after = selectedClientCase.getCaseStatus().getName();
         
-        messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {before, after});
+        messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {clientCaseId, before, after});
     }
     
     public void fillSelectedCaseIncomeTable() {
