@@ -55,11 +55,11 @@ public class CaseViewMB {
     private Consultant selectedPremiumConsultant;
     private int caseStatusID;
     
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
+    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList();
     
-    private ArrayList<Consultant> premiumConsultants = new ArrayList<Consultant>();
+    private ArrayList<Consultant> premiumConsultants = new ArrayList();
     
-    private List<ScheduleItem> schedule = new ArrayList<ScheduleItem>();
+    private List<ScheduleItem> schedule = new ArrayList();
     
     public CaseViewMB() {
     }
@@ -135,7 +135,7 @@ public class CaseViewMB {
     
     public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
     {
-        return new ArrayList<Consultant>(cSet);
+        return new ArrayList(cSet);
     }
     
     public void assignPremiumConsultant()
@@ -268,7 +268,7 @@ public class CaseViewMB {
         Integer payementNumber = 0;
         Double toPay = 0.0, total = 0.0;
         Double instalment = 0.0;
-        schedule=new ArrayList<ScheduleItem>();
+        schedule=new ArrayList();
         
         total = selectedClientCase.getConsolidationValue().doubleValue();
 
