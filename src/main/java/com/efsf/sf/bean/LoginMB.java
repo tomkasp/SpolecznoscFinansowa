@@ -30,7 +30,7 @@ public class LoginMB implements Serializable {
     private Consultant consultant;
     
     private Boolean activeAddingApp;
-    
+     
     public String login() {
         
         System.out.println(isLogged);
@@ -39,13 +39,14 @@ public class LoginMB implements Serializable {
         ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
+        type = user.getType();
         if ( user!=null ) {
             
             if(type.equals(Settings.ADMIN_ACTIVE)||type.equals(Settings.CLIENT_ACTIVE)||type.equals(Settings.CONSULTANT_ACTIVE))
             {
                 isLogged = true;
                 System.out.println("LOGGED?: "+isLogged);
-                type = user.getType();
+                
                 idUser = user.getIdUser();
                 System.out.println("login");
             }
