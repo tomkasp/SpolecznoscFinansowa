@@ -97,43 +97,36 @@ public class ClientMainPageMB implements Serializable {
     public void reloadCases()
     {
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
     }
         
     public void reloadCases2()
     {
         awaitingClientCaseList = caseDao.awaitingCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano2"); 
     }
     
      public void reloadCases3()
     {     
         currentClientCaseList = caseDao.currentCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano3"); 
     }
     
      public void reloadCases4()
     {
         finishedClientCaseList = caseDao.finishedCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano4"); 
     }
      
      public void reloadCases5()
     {
         premiumClientCaseList = caseDao.premiumCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano5"); 
     }
      
     public void reloadCases6()
     {
         allClientCaseList = caseDao.allActiveCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano6"); 
     }
     
     public void reloadCases7()
     {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
-        System.out.println("Pobrano7"); 
     }
     
     public double giveMeConsultantAverage(int consultantId)
@@ -290,7 +283,6 @@ public class ClientMainPageMB implements Serializable {
         ClientDAO cdao=new ClientDAO();
         cdao.update(currentClient);   
         newPoints=null;
-        System.out.println("UDAO SIE!");
     }
     
     public LoginMB getLoginMB() {

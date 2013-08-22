@@ -191,7 +191,7 @@ public class ClientDAO {
         List l = q.list();
         setKlienci(new String[10]);
 
-        System.out.println("dlugosc tab l.size(): " + l.size());
+
 //        while (it.hasNext()) {
         //Object rows[] = (Object[]) it.next();
 

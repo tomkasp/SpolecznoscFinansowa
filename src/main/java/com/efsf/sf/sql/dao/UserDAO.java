@@ -50,7 +50,7 @@ public class UserDAO {
         } catch (JDBCConnectionException e) {
             FacesContext context = FacesContext.getCurrentInstance();
             ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-            System.out.println(bundle.getString("failed3"));
+           
         } finally {
             session.close();
         }
