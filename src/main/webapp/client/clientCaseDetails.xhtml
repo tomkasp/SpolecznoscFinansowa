@@ -166,7 +166,7 @@
 
                             <h4> HARMONOGRAM SPŁAT </h4>
 
-                            <p:dataTable id="dataTable2" value="#{clientCaseMB.schedule}" var="row" emptyMessage="brak klientów!" 
+                            <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak klientów!" 
                                          rowKey="#{row.toPay}" paginator="true" rows="15">
                                 <p:column headerText="Termin spłaty">  
                                     <h:outputText value="#{row.paymentDate}">
@@ -187,15 +187,9 @@
                                 </p:column>    
                             </p:dataTable>
 
+                             <h:outputLabel rendered="#{caseViewMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
 
-                             <h:outputLabel rendered="#{caseRatingMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
-
-<<<<<<< HEAD
                             <h4 style="margin-top: 80px;"> Ocena doradcy </h4>
-
-=======
-
->>>>>>> branch 'master' of https://github.com/madejson/SpolecznoscFinansowa.git
                             
                             <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseViewMB.isNotRated()}" action="#{caseViewMB.toRateCase()}"> 
                                 

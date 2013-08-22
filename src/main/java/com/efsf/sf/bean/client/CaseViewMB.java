@@ -7,6 +7,7 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.collection.IncomeData;
+import com.efsf.sf.collection.ScheduleItem;
 import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
@@ -19,6 +20,7 @@ import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -56,6 +58,8 @@ public class CaseViewMB {
     private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
     
     private ArrayList<Consultant> premiumConsultants = new ArrayList<Consultant>();
+    
+    private List<ScheduleItem> schedule = new ArrayList<ScheduleItem>();
     
     public CaseViewMB() {
     }
@@ -257,5 +261,46 @@ public class CaseViewMB {
 
     public void setClientCaseMB(ClientCaseMB clientCaseMB) {
         this.clientCaseMB = clientCaseMB;
+    }
+    
+    
+    public List<ScheduleItem> getSchedule() {
+        Integer payementNumber = 0;
+        Double toPay = 0.0, total = 0.0;
+        Double instalment = 0.0;
+        schedule=new ArrayList<ScheduleItem>();
+        
+        total = selectedClientCase.getConsolidationValue().doubleValue();
+
+        if (selectedClientCase.getFreeResourcesValue() != null) {
+            total += selectedClientCase.getFreeResourcesValue().doubleValue();
+        }
+
+        if (selectedClientCase.getExpectedInstalment() != null) {
+            instalment = selectedClientCase.getExpectedInstalment().doubleValue();
+            payementNumber = (int) (total / instalment);
+
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(selectedClientCase.getEndDate());
+            toPay = total;
+
+            for (int i = 0; i < payementNumber; i++) {
+                toPay -= instalment;
+                cal.add(Calendar.MONTH, 1);
+                schedule.add(new ScheduleItem(cal.getTime(), instalment, total - toPay, toPay));
+            }
+
+            if (toPay > 0) {
+                cal.add(Calendar.MONTH, 1);
+                schedule.add(new ScheduleItem(cal.getTime(), toPay, total, 0.0));
+            }
+        }
+
+        return schedule;
+    }
+
+    public void setSchedule(List<ScheduleItem> schedule) {
+        this.schedule = schedule;
     }
 }

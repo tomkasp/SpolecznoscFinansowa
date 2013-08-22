@@ -7,6 +7,7 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
+import com.efsf.sf.collection.ScheduleItem;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
@@ -52,7 +53,7 @@ public class ClientCaseMB implements Serializable {
     private ArrayList<CaseStatus> statusModel = new ArrayList();
       
     private ClientCase currentlyRatedCase;
-    
+
     /**
      * Creates a new instance of ClientCaseMB
      */
@@ -372,53 +373,5 @@ public class ClientCaseMB implements Serializable {
 
     public void setCurrentlyRatedCase(ClientCase currentlyRatedCase) {
         this.currentlyRatedCase = currentlyRatedCase;
-    }
-
-    public Consultant getSelectedPremiumConsultant() {
-        return selectedPremiumConsultant;
-    }
-
-    public void setSelectedPremiumConsultant(Consultant selectedPremiumConsultant) {
-        this.selectedPremiumConsultant = selectedPremiumConsultant;
-    }
-
-    public List<ScheduleItem> getSchedule() {
-        Integer payementNumber = 0;
-        Double toPay = 0.0, total = 0.0;
-        Double instalment = 0.0;
-        schedule=new ArrayList<ScheduleItem>();
-        
-        total = selectedClientCase.getConsolidationValue().doubleValue();
-
-        if (selectedClientCase.getFreeResourcesValue() != null) {
-            total += selectedClientCase.getFreeResourcesValue().doubleValue();
-        }
-
-        if (selectedClientCase.getExpectedInstalment() != null) {
-            instalment = selectedClientCase.getExpectedInstalment().doubleValue();
-            payementNumber = (int) (total / instalment);
-
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(selectedClientCase.getEndDate());
-            toPay = total;
-
-            for (int i = 0; i < payementNumber; i++) {
-                toPay -= instalment;
-                cal.add(Calendar.MONTH, 1);
-                schedule.add(new ScheduleItem(cal.getTime(), instalment, total - toPay, toPay));
-            }
-
-            if (toPay > 0) {
-                cal.add(Calendar.MONTH, 1);
-                schedule.add(new ScheduleItem(cal.getTime(), toPay, total, 0.0));
-            }
-        }
-
-        return schedule;
-    }
-
-    public void setSchedule(List<ScheduleItem> schedule) {
-        this.schedule = schedule;
     }
 }

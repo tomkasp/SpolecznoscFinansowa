@@ -18,11 +18,7 @@
                 <f:event type="preRenderView" listener="#{caseViewMB.loadCaseClientsDetails()}" />
                 <h:form id="titleForm">
                     <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} (#{caseViewMB.selectedClientCase.caseStatus.name}) </h3>
-                    <h:panelGroup rendered="#{!caseViewMB.checkLoggedConsultantAccessToCase() and !(caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1) }" >
-                        Jeśli widzisz ten ekran to znaczy, że nie zostałeś wybrany do prowadzenia tej sprawy i straciłeś do niej dostęp
-                    </h:panelGroup>
-                </h:form>
-                <h:panelGroup rendered="#{caseViewMB.checkLoggedConsultantAccessToCase() or caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1 }">                   
+                </h:form>            
                     <div style="min-height: 160px">
                         <div class="leftInlineBox">
                             <h:form id="leftColumn">
@@ -115,7 +111,7 @@
                                         <p:commandButton styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
                                     </h:panelGroup>
                                 </h:panelGroup>
-                                    <h:panelGroup style="color: red" rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(clientCaseMB.selectedClientCase.consultant eq null)}" >
+                                    <h:panelGroup style="color: red" rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(caseViewMB.selectedClientCase.consultant eq null)}" >
                                         <h4> PODEJMIJ DECYZJĘ </h4>
                                         <div class="solidText"> 
                                             Dana sprawa jest sprawą Premium i klient chce właśnie Ciebie do prowadzenia sprawy. <br /><br /> Podejmij decyzję teraz. Pamiętaj odrzucenie sprawy premium skutkuje w utracie rankingu. 
@@ -124,7 +120,7 @@
                                         <p:commandButton  styleClass="floatR redX wideButton" update="@this" style="margin-top: 17px !important" value="Nie akceptuję"  oncomplete="revokePremiumDialog.show();"/> 
                                         <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
                                     </h:panelGroup>
-                                <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
+                                <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
                                    <h4> DOKUMENTY KLIENTA </h4>
                                    <div>
                                        <h:panelGrid columns="4">
@@ -183,10 +179,10 @@
                                    <div class="solidText"> 
                                          Zaktualizuj bieżący status sprawy dzięki czemu klient będzie widział, że sprawa postępuje:
                                    </div> 
-                                   <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{clientCaseMB.caseStatusID}" >
+                                   <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{caseViewMB.caseStatusID}" >
                                        <f:selectItems value="#{clientCaseMB.statusModel}" var="entry" itemLabel="#{entry.name}" itemValue="#{entry.idCaseStatus}" /> 
                                    </p:selectOneMenu>
-                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{clientCaseMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
+                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{caseViewMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
                                    
                                    <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
                                        <div class="fontGrey"> Status sprawy został zaktualizowany </div>
@@ -238,7 +234,7 @@
                                     <div class="marginT50">
                                         <h4> WIADOMOŚCI </h4>
                                     </div>
-                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(caseViewMB.selectedClientCase.client.user.idUser)}"/>
+                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.toConversation(caseViewMB.selectedClientCase.client.user.idUser)}"/>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}" >
 
@@ -375,8 +371,7 @@
                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
                             </div>
                         </p:dialog>
-                    </h:form>
-                </h:panelGroup>
+                    </h:form>            
             </ui:define>
         </ui:composition>
     </body>
