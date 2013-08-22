@@ -570,7 +570,7 @@
 
                         <h4> SPRAWY OCZEKUJĄCE NA ROZPOCZĘCIE </h4>
 
-                        <p:dataTable id="awaitingMarketTable" value="#{clientMainPageMB.awaitingForMarketClientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
+                        <p:dataTable id="awaitingMarketTable" value="#{clientMainPageMB.awaitingForMarketClientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingForMarketSelectedCase}" selectionMode="single" >
 
                             <p:ajax event="rowSelect" update=":awaitingMarketForm:awaitingMarketTableButtonBar"/> 
                             <p:ajax event="rowUnselect" update=":awaitingMarketForm:awaitingMarketTableButtonBar"/> 
@@ -636,7 +636,7 @@
                         </p:dataTable>
 
                         <h:panelGroup id="awaitingMarketTableButtonBar">
-                            <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
+                            <h:commandButton disabled="#{empty clientMainPageMB.awaitingForMarketSelectedCase}" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingForMarketSelectedCase)}" />
                         </h:panelGroup>
 
                     </h:form>
