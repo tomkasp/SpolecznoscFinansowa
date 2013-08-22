@@ -3,6 +3,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
@@ -24,10 +25,10 @@ public class RegistrationMB implements Serializable{
         User u = dao.getById(getId());
 
         if (u != null && Security.sha1(u.getEmail()).equals(getToken())) {
-            if (u.getType() == 22) {
-                u.setType(2);
-            } else if (u.getType() == 33) {
-                u.setType(3);
+            if (u.getType() == Settings.CONSULTANT_UNVERIFIED) {
+                u.setType(Settings.CONSULTANT_ACTIVE);
+            } else if (u.getType() == Settings.CLIENT_UNVERIFIED) {
+                u.setType(Settings.CLIENT_ACTIVE);
             }
 
             dao.update(u);

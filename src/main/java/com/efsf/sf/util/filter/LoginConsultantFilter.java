@@ -1,6 +1,7 @@
 package com.efsf.sf.util.filter;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,8 +22,8 @@ public class LoginConsultantFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
-		
-		if ( loginBean == null || !loginBean.isIsLogged() || loginBean.getType()!=2 )//IF NO CONSULTANT
+
+		if ( loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE)  )//IF NO CONSULTANT
                 {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
