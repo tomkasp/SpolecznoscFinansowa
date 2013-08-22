@@ -87,6 +87,7 @@ public class ConsultantMainPageMB {
     
     private ClientCase selectedPremiumCase;
     
+    
     /**
      * Creates a new instance of ConsultantMainPageMB
      */
@@ -178,8 +179,8 @@ public class ConsultantMainPageMB {
     
     public void rowDoubleClick(ClientCase cs) throws IOException
     { 
-        clientCaseMB.setSelectedClientCase(cs);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
+    //    clientCaseMB.setSelectedClientCase(cs);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()); 
     }
           
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
@@ -203,8 +204,8 @@ public class ConsultantMainPageMB {
     
     public String toClientCaseDetails(ClientCase cc)
     {
-        clientCaseMB.setSelectedClientCase(cc);
-        return "/consultant/consultantCaseDetails?faces-redirect=true";
+   //     clientCaseMB.setSelectedClientCase(cc);
+        return "/consultant/consultantCaseDetails?faces-redirect=true&clientCaseId=" + cc.getIdClientCase();
     }
     
     // This method may be moved to ClientCaseMB

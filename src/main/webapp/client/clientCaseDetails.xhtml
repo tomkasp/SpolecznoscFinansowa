@@ -10,13 +10,16 @@
     
 
     <body>
-
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - zakończona sprawa </ui:define> 
             <ui:define name="content">
-                 <f:event type="preRenderView" listener="#{clientCaseMB.loadCaseConsultantsDetails()}" />
+                
+                 <f:metadata>         
+                    <f:viewParam name="clientCaseId" value="#{caseViewMB.clientCaseId}" />
+                 </f:metadata>
+                 <f:event type="preRenderView" listener="#{caseViewMB.loadCaseConsultantsDetails()}" />
 
-                <h3> Sprawa numer: #{clientCaseMB.selectedClientCase.idClientCase} </h3>
+                 <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} </h3>
 
                 <div>
                     <div class="leftInlineBox">
@@ -26,49 +29,49 @@
                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kwota zobowiązania"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.freeResourcesValue + clientCaseMB.selectedClientCase.consolidationValue}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
                                 </div>
                                 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Cel"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.goal}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> 
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Rodzaj kredytu"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.productType.name}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> 
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Wielkość raty"/>
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.expectedInstalment}" />
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" />
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Data wystawienia na giełdę"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.beginDate}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.beginDate}" > 
                                         <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
                                     </h:inputText>
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Koniec aukcji"/>  
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.endDate}" >
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.endDate}" >
                                         <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
                                     </h:inputText>
                                 </div>
                                 
                                 <div class="field">
                                     <h:outputText class="label" value="Notatka"/>  
-                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{clientCaseMB.selectedClientCase.note}" />
+                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
                                 </div>
                             </div>
                             
-                            <h:panelGroup rendered="#{!(clientCaseMB.selectedClientCase.consultant eq null)}" >
+                            <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null)}" >
                             <h4>DANE DORADCY</h4>
                             <div class="marginLRT30">   
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.name}" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedClientCase.consultant.lastName}" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? clientCaseMB.selectedClientCase.consultant.addresses.toArray()[0].phone : clientCaseMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
+                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
+                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].phone : caseViewMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
                             </div>    
                             </h:panelGroup>
                         </h:form>
@@ -76,13 +79,13 @@
 
                     <div class="rightInlineBox">
                         <h:form>
-                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
-                            <h:panelGroup  rendered="#{clientCaseMB.selectedClientCase.premium and clientCaseMB.selectedClientCase.consultant eq null }" >
+                        <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
+                            <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
                                 <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
-                                <p:dataTable id="premiumConsultantsTable" value="#{clientCaseMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{clientCaseMB.selectedPremiumConsultant}" selectionMode="single" >
+                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
                                 
                                     <p:ajax event="rowSelect" update="@form" />
-                                    <p:ajax event="rowDblselect" update="@form" listener="#{clientCaseMB.rowDoubleClick(clientCaseMB.selectedPremiumConsultant)}" />     
+                                    <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
                                     
                                     <p:column headerText="Nazwisko">  
                                         <h:outputText value="#{row.lastName}" /> 
@@ -103,23 +106,23 @@
                                     </p:column>  
                                     
                                 </p:dataTable>
-                                <p:commandButton disabled="#{empty clientCaseMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{clientCaseMB.assignPremiumConsultant()}"/>
-                                <p:commandButton disabled="#{empty clientCaseMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{clientCaseMB.rowDoubleClick(clientCaseMB.selectedPremiumConsultant)}"/>     
+                                <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{caseViewMB.assignPremiumConsultant()}"/>
+                                <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}"/>     
                                 <div style="min-height: 20px"> </div> 
                             
                             </h:panelGroup>
                             
-                            <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.premium and clientCaseMB.selectedClientCase.consultant != null }" >
+                            <h:panelGroup rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant != null }" >
                                 <h4> PREMIUM: </h4>
                                 <div class="solidText">
-                                   Wysłałeś zapytanie prowadzenia sprawy do <b> doradcy nr #{clientCaseMB.selectedClientCase.consultant.idConsultant}.  </b> 
+                                   Wysłałeś zapytanie prowadzenia sprawy do <b> doradcy nr #{caseViewMB.selectedClientCase.consultant.idConsultant}.  </b> 
                                 </div>
                             </h:panelGroup>    
                             <h4> DOSTĘPNI DORADCY </h4>
-                            <p:dataTable id="consultantsTable" value="#{clientCaseMB.castConsultantSetToArray(clientCaseMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{clientCaseMB.selectedConsultant}" selectionMode="single" >
+                            <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single" >
      
                                 <p:ajax event="rowSelect" update="@form" />
-                                <p:ajax event="rowDblselect" update="@form" listener="#{clientCaseMB.rowDoubleClick(clientCaseMB.selectedConsultant)}" />     
+                                <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}" />     
                                 
                                 <p:column headerText="Nazwisko">  
                                     <h:outputText value="#{row.lastName}" /> 
@@ -140,19 +143,19 @@
                                 </p:column>  
 
                              </p:dataTable>
-                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Przydziel" action="#{clientCaseMB.assignConsultant()}"/>
-                             <p:commandButton disabled="#{empty clientCaseMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{clientCaseMB.rowDoubleClick(clientCaseMB.selectedConsultant)}"/>
+                             <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Przydziel" action="#{caseViewMB.assignConsultant()}"/>
+                             <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}"/>
 
                         </h:panelGroup>
                         
-                            <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; clientCaseMB.selectedClientCase.consultant!=null}" >    
+                            <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; caseViewMB.selectedClientCase.consultant!=null}" >    
                                     <div class="marginT50">
                                         <h4> WIADOMOŚCI </h4>
                                     </div>
-                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(clientCaseMB.selectedClientCase.consultant.user.idUser)}"/>
+                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(caseViewMB.selectedClientCase.consultant.user.idUser)}"/>
                         </h:panelGroup>            
                                     
-                        <h:panelGroup rendered="#{clientCaseMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
+                        <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
                             <h4> NASTĘPNA RATA </h4>
 
                             <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
@@ -163,7 +166,7 @@
 
                             <h4> HARMONOGRAM SPŁAT </h4>
 
-                            <p:dataTable id="dataTable2" value="#{clientCaseMB.schedule}" var="row" emptyMessage="brak klientów!" 
+                            <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak klientów!" 
                                          rowKey="#{row.toPay}" paginator="true" rows="15">
                                 <p:column headerText="Termin spłaty">  
                                     <h:outputText value="#{row.paymentDate}">
@@ -184,11 +187,11 @@
                                 </p:column>    
                             </p:dataTable>
 
+                             <h:outputLabel rendered="#{caseViewMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
 
-                             <h:outputLabel rendered="#{caseRatingMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
-
+                            <h4 style="margin-top: 80px;"> Ocena doradcy </h4>
                             
-                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseRatingMB.isNotRated()}" action="#{caseRatingMB.showRatePage()}"> 
+                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseViewMB.isNotRated()}" action="#{caseViewMB.toRateCase()}"> 
                                 
                             </p:commandLink> 
                             

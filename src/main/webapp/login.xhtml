@@ -20,8 +20,10 @@
 
             </ui:define>
             <ui:define name="content">
-              
-             <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px ; background: none; box-shadow: 0 0 0;" height="145px" draggable="false" closable="false">  
+             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />      
+           
+
+             <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px" height="145px" draggable="false" closable="false">  
                 <div id="circular3dG">
                    <div id="circular3d_1G" class="circular3dG">
                    </div>
@@ -43,7 +45,7 @@
             </p:dialog>  
             
             <h:form>   
-            <div class="contentBox" >
+             <div class="contentBox">
                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
                 </div>
@@ -79,10 +81,9 @@
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();">
-                        
+                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();"> 
                     </p:commandLink>
-                    
+   
                 </div>
                 
                 
@@ -98,7 +99,7 @@
               </div>
                     
                  </h:form> 
-                
+                   
             </ui:define>
 
         </ui:composition>

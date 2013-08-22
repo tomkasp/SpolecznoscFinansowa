@@ -18,11 +18,11 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class MessagesMB implements Serializable {
     
-    private List<Message> messages;
-    private String message;
-    private int userTo_id;
+
     
     private HashSet<Integer> unreadUsers;
+    
+    private Integer id_ToUser;
     
     private ArrayList<Message> unreadMessagesList = new ArrayList();
     private ArrayList<Message> readConversations = new ArrayList();
@@ -33,16 +33,6 @@ public class MessagesMB implements Serializable {
     @ManagedProperty(value = "#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
     
-
-    public String showMessagesPage(int userTo_id) {
-        
-        this.userTo_id=userTo_id;
-        MessageDAO dao = new MessageDAO();
-        setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userTo_id));
-        markListAsRead(messages);
-        
-        return "/common/messages";
-    }
     
     public void reloadMessageBox()
     {
@@ -52,24 +42,13 @@ public class MessagesMB implements Serializable {
         readConversations = (ArrayList<Message>) messageDao.getReadMessages(loginMB.getIdUser());
         readConversations = chooseReadConversations(readConversations);
     }
-
-    public void sendAnswer(){
-        
-        GenericDao<Message> dao = new GenericDao(Message.class);
-        GenericDao<User> user_dao = new GenericDao(User.class);
-        Message msg=new Message();
-        msg.setMessage(message);
-        msg.setSentDate(new Date());
-        msg.setUserByFkFromUser(loginMB.getUser());
-        msg.setUserByFkToUser(user_dao.getById(userTo_id));
-        msg.setIsViewed(0);
-        msg.setIsSystem(0);
-        dao.save(msg);
-        message="";
-       
-        showMessagesPage(userTo_id); 
-    }
     
+    public String toConversation(Integer id)
+    {
+        id_ToUser = id;
+        return "/common/messages.xhtml?faces-redirect=true";
+    }
+
     public void markListAsRead(List<Message> list){
         GenericDao<Message> dao = new GenericDao(Message.class);
         for(Message m : list){
@@ -169,26 +148,7 @@ public class MessagesMB implements Serializable {
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
-
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
+   
     public ArrayList<Message> getUnreadMessagesList() {
         return unreadMessagesList;
     }
@@ -211,6 +171,14 @@ public class MessagesMB implements Serializable {
 
     public void setDictionaryMB(DictionaryMB dictionaryMB) {
         this.dictionaryMB = dictionaryMB;
+    }
+
+    public Integer getId_ToUser() {
+        return id_ToUser;
+    }
+
+    public void setId_ToUser(Integer id_ToUser) {
+        this.id_ToUser = id_ToUser;
     }
 
 }
