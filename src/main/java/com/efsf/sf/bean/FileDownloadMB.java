@@ -1,6 +1,6 @@
 package com.efsf.sf.bean;
 
-import com.efsf.sf.bean.client.ClientCaseMB;
+import com.efsf.sf.bean.client.CaseViewMB;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.util.ftp.FtpDownloader;
@@ -24,8 +24,8 @@ public class FileDownloadMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
-    @ManagedProperty(value = "#{clientCaseMB}")
-    private ClientCaseMB clientCaseMB;
+    @ManagedProperty(value = "#{caseViewMB}")
+    private CaseViewMB caseViewMB;
     
     private RequiredDocuments requiredDocuments;
     
@@ -46,8 +46,8 @@ public class FileDownloadMB implements Serializable {
         }
         else{
             RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
-            requiredDocuments = requiredDocumentsDAO.readForFkClient( clientCaseMB.getSelectedClientCase().getClient().getIdClient() );
-            idUser=clientCaseMB.getSelectedClientCase().getClient().getUser().getIdUser();
+            requiredDocuments = requiredDocumentsDAO.readForFkClient( caseViewMB.getSelectedClientCase().getClient().getIdClient() );
+            idUser=caseViewMB.getSelectedClientCase().getClient().getUser().getIdUser();
             
         }
         if(requiredDocuments==null){
@@ -97,14 +97,6 @@ public class FileDownloadMB implements Serializable {
         this.loginMB = loginMB;
     }
 
-    public ClientCaseMB getClientCaseMB() {
-        return clientCaseMB;
-    }
-
-    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
-        this.clientCaseMB = clientCaseMB;
-    }
-    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -115,6 +107,14 @@ public class FileDownloadMB implements Serializable {
 
     public void setRequiredDocuments(RequiredDocuments requiredDocuments) {
         this.requiredDocuments = requiredDocuments;
+    }
+
+    public CaseViewMB getCaseViewMB() {
+        return caseViewMB;
+    }
+
+    public void setCaseViewMB(CaseViewMB caseViewMB) {
+        this.caseViewMB = caseViewMB;
     }
 
 }

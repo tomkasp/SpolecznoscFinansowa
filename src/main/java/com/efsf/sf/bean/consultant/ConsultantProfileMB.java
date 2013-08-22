@@ -4,15 +4,15 @@
  */
 package com.efsf.sf.bean.consultant;
 
-import com.efsf.sf.bean.client.ClientCaseMB;
+import com.efsf.sf.bean.client.CaseViewMB;
 import com.efsf.sf.sql.dao.CaseRatingDAO;
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.ProductType;
 import java.util.ArrayList;
 import java.util.Set;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -25,8 +25,12 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ConsultantProfileMB {
 
-    @ManagedProperty(value="#{clientCaseMB}")
-    private ClientCaseMB clientCaseMB;
+    @ManagedProperty(value="#{caseViewMB}")
+    private CaseViewMB caseViewMB;
+    
+    private Integer idConsultant;
+    
+    private Consultant selectedConsultant;
     
     private ArrayList<ClientCase> casesRated = new ArrayList();
        
@@ -34,10 +38,11 @@ public class ConsultantProfileMB {
         
     }
     
-    @PostConstruct
+ 
     public void loadData()
     {
-        casesRated = (ArrayList<ClientCase>) new CaseRatingDAO().getConsultantRatings(clientCaseMB.getSelectedConsultant().getIdConsultant());
+        casesRated = (ArrayList<ClientCase>) new CaseRatingDAO().getConsultantRatings(idConsultant);
+        selectedConsultant = new ConsultantDAO().readConsultantForSettings(idConsultant);
     }
 
     
@@ -55,29 +60,40 @@ public class ConsultantProfileMB {
     public ArrayList<Institution> selectBanksFromConsultant(Consultant cons)
     {
        ArrayList<Institution> banks = new ArrayList();
-       for (Institution i : cons.getInstitutions())
+       if (cons.getInstitutions() != null)
        {
-           if (i.getType().equals(0))
-           {
-               banks.add(i);
-           }
+            for (Institution i : cons.getInstitutions())
+            {
+                if (i.getType().equals(0))
+                {
+                    banks.add(i);
+                }
+            }
+            return banks;
        }
+       else
+           return new ArrayList<Institution>();
+           
        
-       return banks;
+       
     }
     
     public ArrayList<Institution> selectOtherInsFromConsultant(Consultant cons)
     {
        ArrayList<Institution> other = new ArrayList();
-       for (Institution i : cons.getInstitutions())
+       if (cons.getInstitutions() != null)
        {
-           if (i.getType().equals(1))
-           {
-               other.add(i);
-           }
+        for (Institution i : cons.getInstitutions())
+        {
+            if (i.getType().equals(1))
+            {
+                other.add(i);
+            }
+        }
+        return other;
        }
-       
-       return other;
+       else
+           return new ArrayList<Institution>();
     }
 
     public ArrayList<ClientCase> getCasesRated() {
@@ -88,13 +104,30 @@ public class ConsultantProfileMB {
         this.casesRated = casesRated;
     }
 
-    public ClientCaseMB getClientCaseMB() {
-        return clientCaseMB;
+    public CaseViewMB getCaseViewMB() {
+        return caseViewMB;
     }
 
-    public void setClientCaseMB(ClientCaseMB clientCaseMB) {
-        this.clientCaseMB = clientCaseMB;
+    public void setCaseViewMB(CaseViewMB caseViewMB) {
+        this.caseViewMB = caseViewMB;
     }
+
+    public Consultant getSelectedConsultant() {
+        return selectedConsultant;
+    }
+
+    public void setSelectedConsultant(Consultant selectedConsultant) {
+        this.selectedConsultant = selectedConsultant;
+    }
+
+    public Integer getIdConsultant() {
+        return idConsultant;
+    }
+
+    public void setIdConsultant(Integer idConsultant) {
+        this.idConsultant = idConsultant;
+    }
+
       
     
 }

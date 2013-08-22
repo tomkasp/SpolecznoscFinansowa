@@ -84,7 +84,7 @@
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
                                       <h:outputText class="fontBlue floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />         
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.toConversation(o.userByFkFromUser.idUser)}" />         
 
                                    </div>
                                 </h:panelGroup>
@@ -104,9 +104,12 @@
                                <h:outputText rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkFromUser.clients.toArray()[0].name} #{o.userByFkFromUser.clients.toArray()[0].lastName}" />
                                <h:outputText rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="fontGrey floatL marginLRT30" value="Rozmowa z #{o.userByFkToUser.clients.toArray()[0].name} #{o.userByFkToUser.clients.toArray()[0].lastName}" />
         
-                               <h:commandButton rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkFromUser.idUser)}" />   
-                               <h:commandButton rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.showMessagesPage(o.userByFkToUser.idUser)}" />  
-                             </div>   
+                               <h:commandButton  rendered="#{o.userByFkFromUser.idUser != loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.toConversation(o.userByFkFromUser.idUser)}" />       
+                              
+                               <h:commandButton rendered="#{o.userByFkFromUser.idUser == loginMB.idUser }" class="floatR greyButton wideButton" style="margin-top: 63px;" value="Czytaj" action="#{messagesMB.toConversation(o.userByFkToUser.idUser)}" />  
+
+                               
+                            </div>   
                         </ui:repeat> 
                     </h:form>
                 </h:panelGroup>

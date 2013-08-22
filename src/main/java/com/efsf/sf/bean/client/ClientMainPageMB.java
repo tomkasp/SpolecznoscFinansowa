@@ -70,7 +70,7 @@ public class ClientMainPageMB implements Serializable {
     private Integer newPoints;
     
     private boolean requirementsFulfilled = false;
-  
+    
     @PostConstruct
     public void makeModels()
     {
@@ -207,9 +207,8 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void rowDoubleClick(ClientCase cs) throws IOException
-    {   
-        clientCaseMB.setSelectedClientCase(cs);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
+    {         
+        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
     }
      
      public String backOffAwaiting(){
@@ -451,6 +450,7 @@ public class ClientMainPageMB implements Serializable {
     public void setPremiumSelectedCase(ClientCase premiumSelectedCase) {
         this.premiumSelectedCase = premiumSelectedCase;
     }
+
     
     
      
