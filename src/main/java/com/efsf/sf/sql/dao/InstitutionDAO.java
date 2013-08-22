@@ -2,15 +2,11 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Institution;
-import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
-/**
- *
- * @author WR1EI1
- */
+
 public class InstitutionDAO {
 
     public List bankList() {

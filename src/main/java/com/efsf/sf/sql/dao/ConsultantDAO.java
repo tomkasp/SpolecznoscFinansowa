@@ -1,20 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
-import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- *
- * @author WR1EI1
- */
+
 public class ConsultantDAO {
 
     public Consultant read(int id) {
@@ -25,16 +16,13 @@ public class ConsultantDAO {
         try
         {
         session.beginTransaction().begin();
-        Query q = null;
+        Query q;
         q = session.createQuery("FROM Consultant c LEFT JOIN FETCH c.user as u WHERE id_consultant = :id");
         q.setParameter("id", id);
         consultant=(Consultant) q.list().get(0);
         session.getTransaction().commit();
         
-        }
-        catch(HibernateException exp)
-        {}
-        finally{   
+        }finally{  
         session.close();
         }
 
@@ -48,10 +36,7 @@ public class ConsultantDAO {
         session.beginTransaction();
         session.save(consultant);
         session.getTransaction().commit();
-        }
-        catch(HibernateException e)
-        {}
-        finally{
+        }finally{
         session.close();
         }
     }
@@ -63,11 +48,7 @@ public class ConsultantDAO {
         session.beginTransaction();
         session.update(consultant);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {
-            e.printStackTrace();
-        }
-        finally{
+        }finally{
         session.close();
         }
     }
@@ -168,10 +149,7 @@ public class ConsultantDAO {
         consultant=(Consultant) q.list().get(0);
         session.getTransaction().commit();
         
-        }
-        catch(HibernateException exp)
-        {}
-        finally{   
+        }finally{  
         session.close();
         }
 

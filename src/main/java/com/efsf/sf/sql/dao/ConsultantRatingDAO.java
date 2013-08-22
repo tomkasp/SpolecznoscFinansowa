@@ -1,22 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.ConsultantRating;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- *
- * @author XaI
- */
+
 public class ConsultantRatingDAO {
 
     public ConsultantRating getConsultantRatings(Integer consultantId) {
@@ -34,8 +24,7 @@ public class ConsultantRatingDAO {
                 cr = (ConsultantRating) q.list().get(0);
             }
 
-        } catch (HibernateException exp) {
-        } finally {
+        }finally{
             session.close();
         }
 
