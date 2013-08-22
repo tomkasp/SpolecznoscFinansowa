@@ -161,6 +161,7 @@ public class ConsultantDAO {
                 + " LEFT JOIN FETCH c.productTypes as p "
                 + " LEFT JOIN FETCH c.institutions as i "
                 + " LEFT JOIN FETCH c.addresses as a "
+                + " LEFT JOIN FETCH c.consultantRatings as crs "
                 + " WHERE id_consultant = :id ");
         
         q.setParameter("id", id);
