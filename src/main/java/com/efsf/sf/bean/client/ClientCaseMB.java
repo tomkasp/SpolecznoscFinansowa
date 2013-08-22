@@ -75,7 +75,7 @@ public class ClientCaseMB implements Serializable {
     }
 
     public void delObligation() {
-        //System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
+
         obdao.deleteObligation(selectedObligation);
         //obligation = new Obligation();
 
@@ -88,9 +88,7 @@ public class ClientCaseMB implements Serializable {
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
         obdao.save(obligation);
-        System.out.println("wykonano save....");
         obligation = new Obligation();
-        System.out.println("data:" + obligation.getBeginDate());
     }
 
     public void addMessage() {

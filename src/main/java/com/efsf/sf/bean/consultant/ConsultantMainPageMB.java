@@ -145,7 +145,6 @@ public class ConsultantMainPageMB {
             ownedModelsBranch.add(showAllClientsBranches(ownedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
     public void reloadFinishedTable()
@@ -159,7 +158,6 @@ public class ConsultantMainPageMB {
             finishedModelsBranch.add(showAllClientsBranches(finishedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
         

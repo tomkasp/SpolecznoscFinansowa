@@ -27,7 +27,6 @@ public class SamePasswordValidator implements Validator {
     public void validate(FacesContext context, UIComponent toValidate, Object value) 
     {
         
-        System.out.println("DAWAJ!!!");
         
         String password = value.toString();
  
@@ -35,11 +34,7 @@ public class SamePasswordValidator implements Validator {
 		getExternalContext().getSessionMap().get("consultantCreateMB");
         
         String confirmPassword =ccmb.getConfirmPassword();
-        
-        
-        System.out.println("VALUE: "+confirmPassword );
-         
-        
+                 
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
         throw new ValidatorException(message);
