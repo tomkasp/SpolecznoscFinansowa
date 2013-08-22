@@ -4,19 +4,18 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/test?characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">SFuser</property>
         <property name="hibernate.connection.password">SFuser123</property>
         <property name="hibernate.show_sql">true</property>
     
-        <property name="c3p0.acquire_increment">10</property>
-        <property name="c3p0.idle_test_periods">10</property>
-        <property name="c3p0.min_size">10</property>
-        <property name="c3p0.max_size">25</property>
-        <property name="c3p0.max_statements">0</property>
-        <property name="c3p0.timeout">20</property>
-        <property name="c3p0.unreturnedConnectionTimeout">3</property>
-
+    
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">100</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+    
     
         <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
         <mapping class="com.efsf.sf.sql.entity.Address"/>
