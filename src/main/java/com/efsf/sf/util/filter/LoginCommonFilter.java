@@ -14,18 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author WR1EI1
  */
-public class LoginAdminFilter implements Filter {
+public class LoginCommonFilter implements Filter {
 
     @Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
 		
-		if ( loginBean == null || !loginBean.isIsLogged() || loginBean.getType()!=1 )//IF NO ADMIN
+		if ( loginBean == null || !loginBean.isIsLogged() )//IF NO ADMIN
                 {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
-                        System.out.println("NO LOGGED AS ADMIN!");
+                        System.out.println("NO LOGGED!");
 		}
                 
 		chain.doFilter(request, response);

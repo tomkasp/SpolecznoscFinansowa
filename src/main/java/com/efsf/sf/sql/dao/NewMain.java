@@ -4,14 +4,7 @@
  */
 package com.efsf.sf.sql.dao;
 
-import com.efsf.sf.sql.entity.CaseStatus;
-import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.Income;
-import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -22,8 +15,7 @@ public class NewMain {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        
+    public static void main(String[] args) throws NoSuchAlgorithmException {     
 //        ConsultantDAO cdao=new ConsultantDAO(); 
 //        Consultant c=cdao.readConsultantForSettings(18);     
 //          
@@ -43,9 +35,7 @@ public class NewMain {
 //        AddressDAO adao=new AddressDAO();
 //        Address a=adao.loadMainAddressFromFkConsultant(21);
 //        System.out.println(a.getIdAddress());
-//           
-//         
-//          
+//   
 //        ClientCaseDAO ccdao=new ClientCaseDAO();
 //        @SuppressWarnings("unchecked")
 //        List<ClientCase> list=ccdao.finishedCasesSelectedClient(38); //ccdao.awaitingCasesSelectedClient(38); //ccdao.last5CasesSelectedClient(38);
@@ -54,11 +44,11 @@ public class NewMain {
 //        System.out.println(list.size());
 //        
 //        System.out.println(list.size());    
-        
-        ClientDAO cdao=new ClientDAO();
-        Client client=cdao.readClientForSettings(50);
-        Iterator<Income> i=client.getIncomes().iterator();
-        System.out.println( "PRINTLN: "+i.next().getBranch().getName() );
+//        
+//        ClientDAO cdao=new ClientDAO();
+//        Client client=cdao.readClientForSettings(50);
+//        Iterator<Income> i=client.getIncomes().iterator();
+//        System.out.println( "PRINTLN: "+i.next().getBranch().getName() );       
         
     }
 }

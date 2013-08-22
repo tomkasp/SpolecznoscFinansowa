@@ -37,7 +37,7 @@ public class ConsultantRatesMB implements Serializable{
    
     
     public String showConsulantRatesPage(){
-        return "/consultant/consultantReceivedComments";
+        return "/consultant/consultantReceivedComments?faces-redirect=true";
     }    
     
      public List<ClientCase> getConsulantRates(){

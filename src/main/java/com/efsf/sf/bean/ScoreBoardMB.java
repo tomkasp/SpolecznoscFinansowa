@@ -18,7 +18,7 @@ public class ScoreBoardMB implements Serializable{
     
 
     public String showScoreBoard(){
-        return "/common/scoreBoard";
+        return "/common/scoreBoard?faces-redirect=true";
     }
     
     public List<ConsultantRating> getBoard() {
