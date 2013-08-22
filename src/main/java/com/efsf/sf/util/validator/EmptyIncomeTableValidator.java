@@ -23,8 +23,7 @@ public class EmptyIncomeTableValidator implements Validator {
    @Override
    public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
       
-       System.out.println("");
-       
+
         if (value.toString().equals("true"))
         {
             FacesContext context = FacesContext.getCurrentInstance();

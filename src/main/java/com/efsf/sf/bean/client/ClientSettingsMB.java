@@ -33,7 +33,6 @@ import org.joda.time.DateTime;
 /**
  * @author WR1EI1
  */
-
 @ManagedBean
 @ViewScoped
 public class ClientSettingsMB implements Serializable {
@@ -63,13 +62,10 @@ public class ClientSettingsMB implements Serializable {
     private Set<Income> incomeSet = new HashSet<>();
     private Set<IncomeBusinessActivity> businessSet = new HashSet<>();
     private boolean tableEmpty = true;
-    
     private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
-    
-    private int idCounter=0;
-    
+    private int idCounter = 0;
     private String email;
 
     public ClientSettingsMB() {
@@ -121,7 +117,7 @@ public class ClientSettingsMB implements Serializable {
         }
         //businessSet= client.getIncomeBusinessActivities();
         email = client.getUser().getEmail();
-        
+
     }
 
     public String updateSettings() {
@@ -134,103 +130,100 @@ public class ClientSettingsMB implements Serializable {
 
         client.setMaritalStatus(newMaritalStatus);
         client.setEducation(newEducation);
-        
+
         //INCOME
         IncomeDAO idao = new IncomeDAO();
         Iterator<Income> IncomeIT = client.getIncomes().iterator();
         while (IncomeIT.hasNext()) {
             Iterator<Income> incomeSetIT = incomeSet.iterator();
-            boolean isExist=false;
-            
+            boolean isExist = false;
+
             Income i = IncomeIT.next();
-            
-            while(incomeSetIT.hasNext())
-            {
-                
-                Income i2=incomeSetIT.next();
-                System.out.println("ID1 "+i.getIdIncome());
-                System.out.println("ID2 "+i2.getIdIncome());
-                if(i.getIdIncome() == i2.getIdIncome()){
-                isExist=true;
+
+            while (incomeSetIT.hasNext()) {
+
+                Income i2 = incomeSetIT.next();
+                System.out.println("ID1 " + i.getIdIncome());
+                System.out.println("ID2 " + i2.getIdIncome());
+                if (i.getIdIncome() == i2.getIdIncome()) {
+                    isExist = true;
                 }
-                
+
             }
-            
-            if(!isExist){
+
+            if (!isExist) {
                 idao.delete(i);
                 System.out.println("USUNIETO!!!! ");
-              }
-             
-        }
-        
-        Iterator<Income> incomeSetIT = incomeSet.iterator();
-        while(incomeSetIT.hasNext())
-            {  
-                Income i2=incomeSetIT.next();
-                if(i2.getIdIncome()<0){
-                i2.setIdIncome(null);
-              }
-                
             }
+
+        }
+
+        Iterator<Income> incomeSetIT = incomeSet.iterator();
+        while (incomeSetIT.hasNext()) {
+            Income i2 = incomeSetIT.next();
+            if (i2.getIdIncome() < 0) {
+                i2.setIdIncome(null);
+            }
+
+        }
         client.setIncomes(incomeSet);
 
         //INCOME BUSINESS ACTIVITY:
         IncomeBusinessActivityDAO ibadao = new IncomeBusinessActivityDAO();
         Iterator<IncomeBusinessActivity> it2 = client.getIncomeBusinessActivities().iterator();
         while (it2.hasNext()) {
-             
+
             IncomeBusinessActivity iba = it2.next();
             ibadao.delete(iba);
-            
+
         }
-        
+
         Iterator<IncomeBusinessActivity> incomeBASetIT = businessSet.iterator();
-        while(incomeBASetIT.hasNext())
-            {  
-                IncomeBusinessActivity i2=incomeBASetIT.next();
-                if(i2.getIdIncomeBusinessActivity()<0){
+        while (incomeBASetIT.hasNext()) {
+            IncomeBusinessActivity i2 = incomeBASetIT.next();
+            if (i2.getIdIncomeBusinessActivity() < 0) {
                 i2.setIdIncomeBusinessActivity(null);
-              }
-                
             }
+
+        }
 
         client.setIncomeBusinessActivities(businessSet);
 
         clientDAO.update(client);
-        
-        UserDAO udao=new UserDAO();
+
+        UserDAO udao = new UserDAO();
         udao.update(client.getUser());
-        
+
         RegionDAO rdao = new RegionDAO();
         Region mainRegion = rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mainRegion);
         AddressDAO adao = new AddressDAO();
         adao.update(mainAddress);
-        
+
         loginMB.setClient(client);
 
         return "/client/clientSettings?faces-redirect=true";
     }
-    
-     public String updatePassword() {
-         
-         UserDAO udao=new UserDAO();
-         User user=client.getUser();
-         user.setPassword(Security.sha1(newPassword));
-         udao.update(user);
-         
-         return "/client/clientMainPage?faces-redirect=true";
-     }
+
+    public String updatePassword() {
+
+        UserDAO udao = new UserDAO();
+        User user = client.getUser();
+        user.setPassword(Security.sha1(newPassword));
+        udao.update(user);
+
+        return "/client/clientMainPage?faces-redirect=true";
+    }
 
     public void validateCurrentPassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
-        password=Security.sha1(password);
-        if ( !password.equals( client.getUser().getPassword() ) ) {
+        password = Security.sha1(password);
+        if (!password.equals(client.getUser().getPassword())) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Obecne hasło jest niewłaściwe!", "Obecne hasło jest niewłaściwe!");
             throw new ValidatorException(message);
         }
     }
-     
+
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
         if (!password.equals(newPassword)) {
@@ -238,37 +231,32 @@ public class ClientSettingsMB implements Serializable {
             throw new ValidatorException(message);
         }
     }
-    
-   public void validateEmail(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
 
-      UserDAO udao=new UserDAO();
-      Boolean ifEmailExist=udao.ifEmailExist(value.toString());
-      
-      System.out.println("111 "+value.toString() );
-      System.out.println("222 "+email ); 
-      
-      if( value.toString().equals( email ) )
-      {
-      ifEmailExist=false;
-      }
-      
-      if(ifEmailExist){
-         FacesContext context = FacesContext.getCurrentInstance();
-         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-         FacesMessage msg =  new FacesMessage(bundle.getString("duplicateEmails"),bundle.getString("duplicateEmails"));
-         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-         throw new ValidatorException(msg);
-      }
-      
+    public void validateEmail(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
 
-   }
-    
-    
+        UserDAO udao = new UserDAO();
+        Boolean ifEmailExist = udao.ifEmailExist(value.toString());
+
+        System.out.println("111 " + value.toString());
+        System.out.println("222 " + email);
+
+        if (value.toString().equals(email)) {
+            ifEmailExist = false;
+        }
+
+        if (ifEmailExist) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+            FacesMessage msg = new FacesMessage(bundle.getString("duplicateEmails"), bundle.getString("duplicateEmails"));
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
+
+
+    }
+
     public void deleteIncome(int idIncome, boolean isIncome) {
 
-        System.out.println("SIE ROBI" + incomeTable.size());
-        System.out.println("IS INCOME: " + isIncome);
-        System.out.println("ID: " + idIncome);
 
         Iterator<IncomeData> it = incomeTable.iterator();
         while (it.hasNext()) {
@@ -277,8 +265,6 @@ public class ClientSettingsMB implements Serializable {
 
                 if (incomeData.getIdIncome() == idIncome) {
                     it.remove();
-                    System.out.println("USUNIETO 1 !");
-
                 }
 
                 if (isIncome == true) {
@@ -289,7 +275,6 @@ public class ClientSettingsMB implements Serializable {
                         Income i = incomeIterator.next();
                         if (i.getIdIncome() == idIncome) {
                             incomeIterator.remove();
-                            System.out.println("USUNIETO 2 !");
                         }
 
                     }
@@ -307,30 +292,18 @@ public class ClientSettingsMB implements Serializable {
 
                 }
 
-            }else{
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
             }
-            
-            
+
+            System.out.println(incomeTable.size());
 
         }
 
-        System.out.println(incomeTable.size());
-
     }
 
-    //DIALOG 1:
     public void toIncome() {
         setIsIncome(true);
 
@@ -349,8 +322,8 @@ public class ClientSettingsMB implements Serializable {
     }
 
     public void addIncome() {
-        idCounter=idCounter-1;
-        System.out.println("COUNTER: "+idCounter);
+        idCounter = idCounter - 1;
+        System.out.println("COUNTER: " + idCounter);
         EmploymentType et = null;
         for (EmploymentType i : dictionaryMB.getIncome()) {
             if (i.getIdEmploymentType() == incomeId) {
@@ -369,12 +342,12 @@ public class ClientSettingsMB implements Serializable {
         }
         if (isIncome) {
             income.setIdIncome(idCounter);
-            
+
             income.setBranch(b);
             income.setEmploymentType(et);
             income.setClient(loginMB.getClient());
             tableEmpty = false;
-            IncomeData incomeData=new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue());
+            IncomeData incomeData = new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue());
             incomeData.setIdIncome(income.getIdIncome());
             incomeData.setIsIncome(true);
             incomeTable.add(incomeData);
@@ -390,13 +363,13 @@ public class ClientSettingsMB implements Serializable {
                 }
             }
             business.setIdIncomeBusinessActivity(idCounter);
-            
+
             business.setBranch(b);
             business.setEmploymentType(et);
             business.setClient(loginMB.getClient());
             tableEmpty = false;
-            
-            IncomeData incomeData=new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue());
+
+            IncomeData incomeData = new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue());
             incomeData.setIdIncome(business.getIdIncomeBusinessActivity());
             incomeData.setIsIncome(false);
             incomeTable.add(incomeData);
@@ -421,7 +394,7 @@ public class ClientSettingsMB implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
-    
+
     public Integer getIdMainRegion() {
         return idMainRegion;
     }
@@ -573,7 +546,4 @@ public class ClientSettingsMB implements Serializable {
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
     }
-    
-    
-    
 }

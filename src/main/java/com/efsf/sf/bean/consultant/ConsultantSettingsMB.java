@@ -60,9 +60,7 @@ public class ConsultantSettingsMB implements Serializable {
     private void loadConsultant() {
         ConsultantDAO cdao=new ConsultantDAO();
         consultant=cdao.readConsultantForSettings( idConsultant );
-        //System.out.println("IDEK: "+consultant.getWorkingPlace().getIdWorkingPlace());
         idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
-        //idSelectedBankList = consultant.getRegion().
                
         Iterator<Institution> it=consultant.getInstitutions().iterator();
         while(it.hasNext())
