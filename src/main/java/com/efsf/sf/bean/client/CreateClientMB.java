@@ -23,6 +23,7 @@ import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
 import com.efsf.sf.util.SendMail;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -159,7 +160,7 @@ public class CreateClientMB implements Serializable
         user = new User();
         user.setPassword(Security.sha1(password));
         user.setEmail(email);
-        user.setType(33);
+        user.setType(Settings.CLIENT_UNVERIFIED);
         user.setLogin(email); 
         
         Client client = new Client();

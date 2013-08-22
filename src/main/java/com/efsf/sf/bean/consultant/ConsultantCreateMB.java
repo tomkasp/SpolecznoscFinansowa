@@ -6,6 +6,7 @@ import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
 import com.efsf.sf.util.SendMail;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class ConsultantCreateMB implements Serializable {
         UserDAO udao = new UserDAO();
         
         //SET USER TYPE:
-        user.setType(22);
+        user.setType(Settings.CONSULTANT_UNVERIFIED);
         user.setLogin(String.valueOf(new Date().getTime()));
         user.setPassword( Security.sha1(confirmPassword) );
         udao.save(user);
