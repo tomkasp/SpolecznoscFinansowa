@@ -86,7 +86,7 @@ public class CreateClientMB implements Serializable
     
     //Income
     
-    private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
+    private ArrayList<IncomeData> incomeTable = new ArrayList();
     private boolean tableEmpty = true;
            
     private Income income = new Income();
