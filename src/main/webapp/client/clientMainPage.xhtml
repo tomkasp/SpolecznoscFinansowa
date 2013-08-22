@@ -129,11 +129,12 @@
                                     <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                                 </p:column> 
 
-
+                               
                             </p:dataTable>
                             <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
-                            <p:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
-                   
+                            <p:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton"  value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" >
+                                <f:param name="clientCase" value="#{clientMainPageMB.lastSelectedCase}" />
+                            </p:commandButton>
                         </h:form>
                     </div>
 

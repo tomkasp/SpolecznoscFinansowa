@@ -82,7 +82,7 @@
                                <h:outputText class="floatL fontGrey marginLR30" value="Branża" /> 
                                <p:selectOneMenu styleClass="floatL" value="#{marketMB.branchId}">
                                      <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
-                                     <f:selectItems value="#{dictionaryItemsMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                     <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
                                </p:selectOneMenu> 
                            </h:panelGroup>  
                            <h:panelGroup style="margin-right: 10px">

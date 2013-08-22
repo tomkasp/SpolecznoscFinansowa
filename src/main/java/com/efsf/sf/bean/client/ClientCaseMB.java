@@ -7,17 +7,14 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
-import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
-import java.io.IOException;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -57,23 +54,12 @@ public class ClientCaseMB implements Serializable {
     
     private int premium = 6;
     
-    // VIEW CASE DETAILS FIELDS 
-    private ClientCase selectedClientCase;
-    
-    private Consultant selectedConsultant;
-    
-    private Consultant selectedPremiumConsultant;
-    
+    // VIEW CASE DETAILS FIELDS     
     private Obligation selectedObligation;
     
     private ArrayList<CaseStatus> statusModel = new ArrayList();
-    
-    private int caseStatusID;
-    
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<IncomeData>();
-    
-    private ArrayList<Consultant> premiumConsultants = new ArrayList<Consultant>();
-    
+      
+    private ClientCase currentlyRatedCase;
     
     /**
      * Creates a new instance of ClientCaseMB
@@ -102,7 +88,7 @@ public class ClientCaseMB implements Serializable {
         return obligationList;
     }
    
-  public void delObligation(){
+    public void delObligation(){
         //System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
         obdao.deleteObligation(selectedObligation);
         //obligation = new Obligation();
@@ -182,76 +168,10 @@ public class ClientCaseMB implements Serializable {
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
     
-    public void changeCaseStatus()
-    {
-        CaseStatus cs = new CaseStatusDAO().read(caseStatusID);
-        String before = selectedClientCase.getCaseStatus().getName();
-        
-        selectedClientCase.setCaseStatus(cs);
-        new ClientCaseDAO().updateClientCase(selectedClientCase);
-        String after = selectedClientCase.getCaseStatus().getName();
-        
-        messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {before, after});
-    }
+
     
     // VIEW CASE METHODS 
-    public void loadCaseConsultantsDetails()
-    {   FacesContext facesContext = FacesContext.getCurrentInstance();
-         if (!facesContext.isPostback() && !facesContext.isValidationFailed())
-         {
-            selectedConsultant = null;
-            selectedClientCase = new ClientCaseDAO().getClientCaseWithConsultantDetails(selectedClientCase.getIdClientCase());
-         }
-    }
-    
-    public void loadCaseClientsDetails()
-    {   FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (!facesContext.isValidationFailed())
-        {
-             ClientCaseDAO cdao = new ClientCaseDAO();
-             selectedClientCase = cdao.getClientCaseWithClientDetails(selectedClientCase.getIdClientCase());
-             caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
-             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
-             cdao.updateClientCase(selectedClientCase);
-             fillSelectedCaseIncomeTable();
-        }
-    }
-    
-    public void fillSelectedCaseIncomeTable() {
-       
-        selectedCaseIncomeTable = new ArrayList();
-        
-        Client client = new ClientDAO().getClientWithIncomes(getSelectedClientCase().getClient().getIdClient());
-        
-        for (Income i : client.getIncomes())
-        {
-            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().doubleValue()));
-        }
-        
-        for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
-        {
-            selectedCaseIncomeTable.add(new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getIncomeLastYearNetto().doubleValue()));
-        }
-    }
-    
-    
-    
-    
-    public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
-    {
-        return new ArrayList<Consultant>(cSet);
-    }
-    
-    public boolean checkLoggedConsultantAccessToCase()
-    {
-        ClientCaseDAO caseDao = new ClientCaseDAO();
-        List list = caseDao.getSelectedCaseWithConsultant(selectedClientCase.getIdClientCase(), login.getConsultant().getIdConsultant());
-        if (list != null && list.size() > 0)
-            return true;
-        else
-            return false;                   
-    }
-    
+
     public void consultantAcceptPremium(ClientCase cc)
     {
         cc.setConsultants(null);
@@ -294,28 +214,6 @@ public class ClientCaseMB implements Serializable {
         new ClientCaseDAO().updateClientCase(cc);
     }
     
-    
-    public void assignPremiumConsultant()
-    {
-        ClientCaseDAO caseDao = new ClientCaseDAO();
-        CaseStatusDAO statusDao = new CaseStatusDAO();
-        selectedClientCase.setConsultant(selectedPremiumConsultant);
-        caseDao.updateClientCase(selectedClientCase);  
-    }
-    
-    public void assignConsultant()
-    {
-        ClientCaseDAO caseDao = new ClientCaseDAO();
-        CaseStatusDAO statusDao = new CaseStatusDAO();
-        selectedClientCase.setConsultant(selectedConsultant);
-        selectedClientCase.setCaseStatus(statusDao.read(2));
-        selectedClientCase.setConsultants(null);
-        selectedClientCase.setConsultants_1(null);
-        caseDao.updateClientCase(selectedClientCase);  
-        
-        messagesMB.generateSystemMessage(bundle.getString("CLIENT_SELECTED_CONSULTANT"), selectedConsultant.getUser().getIdUser(), new Object[] {login.getClient().getIdClient(), selectedClientCase.getIdClientCase()}); 
-    }
-    
     public boolean doesConsultantObserveCase(Consultant consultant, ClientCase clientCase)
     {
         return new ClientCaseDAO().doesConsultantObserveCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
@@ -352,12 +250,6 @@ public class ClientCaseMB implements Serializable {
                 break;
             }
         }
-    }
-    
-    public void rowDoubleClick(Consultant cos) throws IOException
-    {   
-        setSelectedConsultant(cos);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("clientConsultantProfileView.xhtml"); 
     }
     
     public void traceCase(ClientCase cs)
@@ -452,22 +344,6 @@ public class ClientCaseMB implements Serializable {
         this.obligationList = obligationList;
     }
 
-    public ClientCase getSelectedClientCase() {
-        return selectedClientCase;
-    }
-
-    public void setSelectedClientCase(ClientCase selectedClientCase) {
-        this.selectedClientCase = selectedClientCase;
-    }
-
-    public Consultant getSelectedConsultant() {
-        return selectedConsultant;
-    }
-
-    public void setSelectedConsultant(Consultant selectedConsultant) {
-        this.selectedConsultant = selectedConsultant;
-    }
-
     public Obligation getSelectedObligation() {
         return selectedObligation;
     }
@@ -490,22 +366,6 @@ public class ClientCaseMB implements Serializable {
 
     public void setDictionaryMB(DictionaryMB dictionaryMB) {
         this.dictionaryMB = dictionaryMB;
-    }
-
-    public int getCaseStatusID() {
-        return caseStatusID;
-    }
-
-    public void setCaseStatusID(int caseStatusID) {
-        this.caseStatusID = caseStatusID;
-    }
-
-    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
-        return selectedCaseIncomeTable;
-    }
-
-    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
-        this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
     public MessagesMB getMessagesMB() {
@@ -540,21 +400,11 @@ public class ClientCaseMB implements Serializable {
         this.alreadyObserved = alreadyObserved;
     }
 
-    public ArrayList<Consultant> getPremiumConsultants() {
-        return premiumConsultants;
+    public ClientCase getCurrentlyRatedCase() {
+        return currentlyRatedCase;
     }
 
-    public void setPremiumConsultants(ArrayList<Consultant> premiumConsultants) {
-        this.premiumConsultants = premiumConsultants;
+    public void setCurrentlyRatedCase(ClientCase currentlyRatedCase) {
+        this.currentlyRatedCase = currentlyRatedCase;
     }
-
-    public Consultant getSelectedPremiumConsultant() {
-        return selectedPremiumConsultant;
-    }
-
-    public void setSelectedPremiumConsultant(Consultant selectedPremiumConsultant) {
-        this.selectedPremiumConsultant = selectedPremiumConsultant;
-    }
-
-   
 }
