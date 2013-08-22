@@ -2,7 +2,6 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.bean.client.CaseViewMB;
 import com.efsf.sf.bean.client.ClientCaseMB;
-import com.efsf.sf.bean.client.ClientMainPageMB;
 import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.entity.CaseRating;
 import com.efsf.sf.sql.entity.ClientCase;
