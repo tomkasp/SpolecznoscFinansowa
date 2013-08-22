@@ -11,9 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-/**
- * @author WR1EI1
- */
 
 @ManagedBean
 @ViewScoped

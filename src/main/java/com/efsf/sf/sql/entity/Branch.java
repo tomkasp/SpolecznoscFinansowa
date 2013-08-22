@@ -20,7 +20,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="branch"
-    ,catalog="SpolecznoscFinansowa"
     , uniqueConstraints = @UniqueConstraint(columnNames="name") 
 )
 public class Branch  implements java.io.Serializable {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 
@@ -10,10 +6,7 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
-/**
- *
- * @author XaI
- */
+
 public class BranchDAO
 {
         public List branchList(){
