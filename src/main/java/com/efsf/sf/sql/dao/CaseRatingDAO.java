@@ -8,9 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- * @author WR1EI1
- */
+
 public class CaseRatingDAO {
 
     public void save(CaseRating rating) {

@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-/**
- * @author WR1EI1
- */
+
 public class IncomeBusinessActivityDAO {
 
     
@@ -23,10 +16,8 @@ public class IncomeBusinessActivityDAO {
         session.beginTransaction().begin();
         session.update(income);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
-        session.close();
+        } finally {
+            session.close();
         }
     }
     
