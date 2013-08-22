@@ -5,7 +5,6 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.GenericDao;
-import com.efsf.sf.sql.entity.CaseRating;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.ConsultantRating;
 import java.io.IOException;
