@@ -185,7 +185,7 @@ public class ConsultantMainPageMB {
           
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList<ClientCase>(csSet);
+        return new ArrayList(csSet);
     }
     
     public void reloadCases()
