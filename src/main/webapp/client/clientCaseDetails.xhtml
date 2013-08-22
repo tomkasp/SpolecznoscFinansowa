@@ -152,7 +152,7 @@
                                     <div class="marginT50">
                                         <h4> WIADOMOŚCI </h4>
                                     </div>
-                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.showMessagesPage(caseViewMB.selectedClientCase.consultant.user.idUser)}"/>
+                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.toConversation(caseViewMB.selectedClientCase.consultant.user.idUser)}"/>
                         </h:panelGroup>            
                                     
                         <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">

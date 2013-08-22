@@ -7,6 +7,7 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,9 +30,7 @@ public class LoginMB implements Serializable {
     private Consultant consultant;
     
     private Boolean activeAddingApp;
-    
-
-   
+     
     public String login() {
         
         System.out.println(isLogged);
@@ -40,22 +39,27 @@ public class LoginMB implements Serializable {
         ConsultantDAO consultantDao = new ConsultantDAO();
         user=null;
         user=userDao.login(this.email, this.password);
+        type = user.getType();
         if ( user!=null ) {
-            isLogged = true;
-            System.out.println("LOGGED?: "+isLogged);
-            type = user.getType();
-            idUser = user.getIdUser();
-            System.out.println("login");
-            if(type==1)
+            
+            if(type.equals(Settings.ADMIN_ACTIVE)||type.equals(Settings.CLIENT_ACTIVE)||type.equals(Settings.CONSULTANT_ACTIVE))
+            {
+                isLogged = true;
+                System.out.println("LOGGED?: "+isLogged);
+                
+                idUser = user.getIdUser();
+                System.out.println("login");
+            }
+            if(type.equals(Settings.ADMIN_ACTIVE))
             {
                 return "/admin/adminMainPage?faces-redirect=true"; 
             }
-            if(type==2)
+            if(type.equals(Settings.CONSULTANT_ACTIVE))
             { 
                 consultant = consultantDao.getCounsultantConnectedToUser(idUser);
                 return "/consultant/consultantMainPage?faces-redirect=true"; 
             }
-            if(type==3)
+            if(type.equals(Settings.CLIENT_ACTIVE))
             {
                 client = userDao.getClientConnectedToUser(idUser);
                 points = client.getPoints();
@@ -65,7 +69,7 @@ public class LoginMB implements Serializable {
                 return "/client/clientMainPage?faces-redirect=true";  
             } 
             
-            if(type==11||type==12||type==13)
+            if(type.equals(Settings.ADMIN_INACTIVE)||type.equals(Settings.CLIENT_INACTIVE)||type.equals(Settings.CONSULTANT_INACTIVE))
             {
                 return "/common/activateAccount?faces-redirect=true";  
             } 
@@ -85,7 +89,7 @@ public class LoginMB implements Serializable {
     }
     public String logout() {
         isLogged = false;
-        type=-1;
+        type = Settings.LOGGED_OUT;
         client=null;
         consultant=null;
         user=null;
@@ -95,12 +99,12 @@ public class LoginMB implements Serializable {
     }
     
     public String deactivateUser(){
-        if(user.getType()==1)
-        {user.setType(11);}
-        if(user.getType()==2)
-        {user.setType(12);}
-        if(user.getType()==3)
-        {user.setType(13);}
+        if(user.getType() == Settings.ADMIN_ACTIVE)
+        {user.setType(Settings.ADMIN_INACTIVE);}
+        if(user.getType()== Settings.CONSULTANT_ACTIVE)
+        {user.setType(Settings.CONSULTANT_INACTIVE);}
+        if(user.getType()== Settings.CLIENT_ACTIVE)
+        {user.setType(Settings.CLIENT_INACTIVE);}
         
         GenericDao<User> udao=new GenericDao(User.class);
         udao.update(user);
@@ -109,12 +113,12 @@ public class LoginMB implements Serializable {
     }
     
     public String activateUser(){
-        if(user.getType()==11)
-        {user.setType(11);}
-        if(user.getType()==12)
-        {user.setType(2);}
-        if(user.getType()==13)
-        {user.setType(3);}
+        if(user.getType()==Settings.ADMIN_INACTIVE)
+        {user.setType(Settings.ADMIN_ACTIVE);}
+        if(user.getType()==Settings.CONSULTANT_INACTIVE)
+        {user.setType(Settings.CONSULTANT_ACTIVE);}
+        if(user.getType()==Settings.CLIENT_INACTIVE)
+        {user.setType(Settings.CLIENT_ACTIVE);}
         
         GenericDao<User> udao=new GenericDao(User.class);
         udao.update(user);
