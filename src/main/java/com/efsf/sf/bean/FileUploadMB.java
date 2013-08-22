@@ -51,7 +51,6 @@ public class FileUploadMB implements Serializable {
              RequiredDocuments rd=null;
              //load from database
              rd=rddao.readForFkClient(loginMB.getClient().getIdClient());
-             System.out.println("ID CLIENT: "+loginMB.getClient().getIdClient());
              //create new if not exist
              if(rd==null)
              {
