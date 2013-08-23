@@ -85,6 +85,11 @@ public class ClientMainPageMB implements Serializable {
     
     public void fillTables()
     {    
+        
+        finishedSelectedCase = null;
+        awaitingSelectedCase = null;
+        lastSelectedCase = null;
+        premiumSelectedCase = null;
         reloadCases();
         reloadCases2();
         reloadCases3();
@@ -220,6 +225,7 @@ public class ClientMainPageMB implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed() && !facesContext.isPostback())
         {
+
             fillTables();
         }
     }

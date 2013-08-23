@@ -2,10 +2,10 @@ package com.efsf.sf.util.analyser;
 
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,6 +25,8 @@ import java.util.List;
  */
 public class AnalyserAlgorithm {
 
+    private List<Consultant> wynik2 = null;
+    
     public AnalyserAlgorithm() {
     }
 
@@ -39,23 +41,23 @@ public class AnalyserAlgorithm {
         Client jedenKlient = kdao.getClientForCase(idSprawaKlienta);
         ClientCase sprKli = ccdao.read(idSprawaKlienta);
         
-        getKlienci()[0] = jedenKlient.getName();
-        getKlienci()[1] = jedenKlient.getLastName();
         HashSet <Integer> et1 = new HashSet();   
         
         for(Income incomes: jedenKlient.getIncomes()){
             et1.add(incomes.getEmploymentType().getIdEmploymentType());
         }
-        
         for(IncomeBusinessActivity iba: jedenKlient.getIncomeBusinessActivities()){
             et1.add(iba.getEmploymentType().getIdEmploymentType());
         }
-        getKlienci()[2] = et1;
-        //kwota konsolidacji + wolne srodki
-        getKlienci()[3] = sprKli.getConsolidationValue().doubleValue();
-        getKlienci()[4] = sprKli.getExpectedInstalment().doubleValue();
-        getKlienci()[5] = new Converters().ageFromBirthDate(jedenKlient.getBirthDate());
         
+        //kwota konsolidacji + wolne srodki
+        
+        this.klienci[0] = jedenKlient.getName();
+        this.klienci[1] = jedenKlient.getLastName();
+        this.klienci[2] = et1;
+        this.klienci[3] = sprKli.getConsolidationValue().doubleValue();
+        this.klienci[4] = sprKli.getExpectedInstalment().doubleValue();
+        this.klienci[5] = new Converters().ageFromBirthDate(jedenKlient.getBirthDate());
         
         //klienci = kdao.getKlienci();
         //Produkty = kdao.getProduktyBankow();
@@ -76,8 +78,7 @@ public class AnalyserAlgorithm {
         while(i.hasNext()){
             ProductDetails ite = (ProductDetails)i.next();
             System.out.println(" cosik:" + ite.getAmountBruttoMax());
-        
-        
+            
             produkty[prod][0] = ite.getIdProductDetail();
             produkty[prod][1] = ite.getEmploymentType().getIdEmploymentType();
             produkty[prod][2] = ite.getAmountBruttoMin().doubleValue();
@@ -86,55 +87,20 @@ public class AnalyserAlgorithm {
             produkty[prod][5] = ite.getLoanTimeMax();
             produkty[prod][6] = ite.getClientAgeMin().intValue();
             produkty[prod][7] = ite.getClientAgeMax().intValue();
-            
-            
-            System.out.println("typ dochodu:"+ produkty[prod][0]);
-            System.out.print("typ dochodu:"+ produkty[prod][1]);
-            System.out.print("typ dochodu:"+ produkty[prod][2]);
-            System.out.print("typ dochodu:"+ produkty[prod][3]);
-            System.out.print("typ dochodu:"+ produkty[prod][4]);
-            System.out.print("typ dochodu:"+ produkty[prod][5]);
-            System.out.print("typ dochodu:"+ produkty[prod][6]);
-            System.out.print("typ dochodu:"+ produkty[prod][7]);
+                      
+//            System.out.println("typ dochodu:"+ produkty[prod][0]);
+//            System.out.print("typ dochodu:"+ produkty[prod][1]);
+//            System.out.print("typ dochodu:"+ produkty[prod][2]);
+//            System.out.print("typ dochodu:"+ produkty[prod][3]);
+//            System.out.print("typ dochodu:"+ produkty[prod][4]);
+//            System.out.print("typ dochodu:"+ produkty[prod][5]);
+//            System.out.print("typ dochodu:"+ produkty[prod][6]);
+//            System.out.print("typ dochodu:"+ produkty[prod][7]);
             
             prod++;
         }
+    }
 
-//        BigDecimal d1 = sprod.getAmountBruttoMin();
-//        BigDecimal d2 = sprod.getAmountBruttoMax();
-//
-//        this.getProduktyBankow()[i][0] = String.valueOf(sprod.getIdProductDetail());
-//        this.getProduktyBankow()[i][1] = String.valueOf(sprod.getProductType().getName());
-//        this.getProduktyBankow()[i][2] = d1.toString();
-//        this.getProduktyBankow()[i][3] = d2.toString();
-//        this.getProduktyBankow()[i][4] = String.valueOf(sprod.getLoanTimeMin());
-//        this.getProduktyBankow()[i][5] = String.valueOf(sprod.getLoanTimeMax());
-//        this.getProduktyBankow()[i][6] = String.valueOf(sprod.getClientAgeMin());
-//        this.getProduktyBankow()[i][7] = String.valueOf(sprod.getClientAgeMax());
-//
-//        System.out.println(i + 1 + " Typ Dochodu:" + this.getProduktyBankow()[i][1]);
-//        
-//        
-//        System.out.println(Arrays.deepToString(getProduktyBankow()));
-        
-    }
-    
-    
-    
-    public static void main(String args[]){
-        AnalyserAlgorithm aa = new AnalyserAlgorithm(100);
-        //aa.setClient(100);
-        //aa.analizuj(100);
-        for(Integer i:(HashSet<Integer>)aa.getKlienci()[2]){
-            System.out.println("wartosc:"+ i);
-        }
-        
-        //aa.setProducts();
-               
-        
-        System.out.println("data:"+ aa.getKlienci()[5]);
-        
-    }
 
     public String analizuj(Integer IdSprawaKlienta) {
         setClient(IdSprawaKlienta);
@@ -152,8 +118,7 @@ public class AnalyserAlgorithm {
             
             // przeglada wszystkie dostepne typy dochodu klienta i zwieksza licznik.
             
-            
-            if( ((HashSet<Integer>)this.getKlienci()[2]).contains((Integer)produkty[z][1]) ){
+           if( ((HashSet<Integer>)this.getKlienci()[2]).contains((Integer)produkty[z][1]) ){
                 off[(Integer)produkty[z][0]]++;
                 //System.out.println("ooooooooooooooooooooooooooooooooooooooooooooL :");
             }
@@ -168,7 +133,6 @@ public class AnalyserAlgorithm {
 //                    break;
 //                }
 //            }
-            
 //            if (produkty[z][2] == (klienci[2])) {
 //                off[Integer.valueOf(produkty[z][0].toString())]++;
 //                System.out.println("tablica off w tym miejscu to : "+ off[Integer.valueOf(produkty[z][0].toString())] + " a index : " + Integer.valueOf(produkty[z][0].toString()) );
@@ -195,7 +159,7 @@ public class AnalyserAlgorithm {
 
         }
 
-        zwyciezaj(off);
+        best5products(off);
         //Arrays.fill(oferta, "");
 
         for (int i = 0; i < off.length; i++) {
@@ -206,8 +170,15 @@ public class AnalyserAlgorithm {
         return "szczegolySprawy";
     }
 
-    public void zwyciezaj(Integer[] oferta) {
-
+    
+    
+    
+    
+    //metoda generuje 5 najlepszych produktow dla danej sprawy posortowanych malejaco.
+    public void best5products(Integer[] oferta) {
+        ConsultantDAO cdao = new ConsultantDAO();
+        
+        
         int tmp = 0;
         int max = 0;
 
@@ -219,7 +190,6 @@ public class AnalyserAlgorithm {
         }
         
         System.out.println("Wygenerowany maksik to: " + max);
-        
         //petla wpisujaca do tablicy tab[] indeksy najlepszych ofert.
         for (int z = 0; z <= 5; z++) {
             for (int i = 0; i < oferta.length; i++) {
@@ -227,6 +197,17 @@ public class AnalyserAlgorithm {
                     //System.out.println("wykonala sie funkcja dla danych: oferta[i]:" + oferta[i] + ", max=" + max + ", tmp: " + tmp);
                     tab[tmp][0] = i;
                     tab[tmp][1] = oferta[i];
+                    System.out.println("WYKONUJE zapytanie dla sprawy o id= " + tab[tmp][0]);
+                    setWynik2(cdao.getConsultantsForProductDetail(tab[tmp][0]));
+//                    System.out.println("dlugosc: " + wynik2.size());
+//                    
+//                    Iterator ia = wynik2.iterator();
+//                   
+//                    while(ia.hasNext()){
+//                         Consultant co = (Consultant)ia.next();
+//                        System.out.println("cos" + co.getName() + " " + co.getLastName());
+//                        
+//                    }
                     tmp++;
                 }
             }
@@ -239,14 +220,14 @@ public class AnalyserAlgorithm {
         //tablica[x][2]:ocena (sila)
         //
         System.out.println("tablica produktow to: " + oferta.length);
-        
         System.out.println("wygenerowana tablica wynikow najnowsza to: " + Arrays.deepToString(tab));
-        
-        
-        ClientDAO kdaoa = new ClientDAO();
+         
+        //ClientDAO kdaoa = new ClientDAO();
         //this.setWynik(kdaoa.ofertyWynikowe(tab));
 
-        System.out.println("po:"+Arrays.deepToString(this.wynik));
+        //System.out.println("po:"+Arrays.deepToString(this.wynik));
+        
+        System.out.println("po:"+Arrays.toString(getWynik2().toArray()));
         
         //System.out.println("Nazwa naj Banku:" + this.getNazwaBanku());
         //System.out.println("Nazwa naj Produ:" + this.getNazwaProduktu());
@@ -259,9 +240,7 @@ public class AnalyserAlgorithm {
     //TODO: tablica jest przypisana na stale -> 1000 wpisow, blad!
     //      ustawic rozmiar tablicy, w ogole przeanalizowac czy tablica off musi isc od 0 do 1000 czy po prostu numer ID wpisac... 
     // chyba jest ok co do OFF ale trzeba przeanalizowac!
-    
-    
-    
+     
     private Integer[] off = new Integer[1000];
     private Integer[][] tab = new Integer[5][2];
     
@@ -313,5 +292,13 @@ public class AnalyserAlgorithm {
 
     public void setKlienci(Object[] klienci) {
         this.klienci = klienci;
+    }
+
+    public List<Consultant> getWynik2() {
+        return wynik2;
+    }
+
+    public void setWynik2(List<Consultant> wynik2) {
+        this.wynik2 = wynik2;
     }
 }

@@ -35,7 +35,7 @@ public class SendMail{
    public static void sendRegisterMail(String email, String name, Integer id) throws Exception{    
        SendMail sm=new SendMail();
        
-       Map<String, Object> input = new HashMap<String, Object>();
+       Map<String, Object> input = new HashMap<>();
        input.put("name", name);
        input.put("token", Security.sha1(email));
        input.put("id", id);
@@ -98,6 +98,7 @@ public class SendMail{
 
     private class SMTPAuthenticator extends javax.mail.Authenticator {
 
+        @Override
         public PasswordAuthentication getPasswordAuthentication() {
             String username = SMTP_AUTH_USER;
             String password = SMTP_AUTH_PWD;
