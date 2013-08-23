@@ -1,4 +1,4 @@
-package com.efsf.sf.bean;
+package com.efsf.sf.bean.admin;
 
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.EmploymentType;
