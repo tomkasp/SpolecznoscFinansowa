@@ -12,7 +12,11 @@
             <ui:define name="title"> Klient - zakończona sprawa </ui:define> 
             <ui:define name="top"> 
                 <h:outputStylesheet library="css" name="green.css" />
-
+                 <f:metadata>         
+                     <f:viewParam name="idConsultant" value="#{consultantProfileMB.idConsultant}" />
+                 </f:metadata>
+                 <f:event type="preRenderView" listener="#{consultantProfileMB.loadData()}" />
+                        
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
@@ -34,7 +38,7 @@
 
             <ui:define name="content">
 
-                <h3> Profil konsultanta:  #{clientCaseMB.selectedConsultant.lastName}  #{clientCaseMB.selectedConsultant.name}</h3>
+                <h3> Profil konsultanta:  #{consultantProfileMB.selectedConsultant.lastName}  #{consultantProfileMB.selectedConsultant.name}</h3>
 
                 <div>
                     <div class="leftInlineBox">
@@ -42,24 +46,24 @@
                             <div class="marginLRT30">        
                                 <div class="field"> 
                                     <h:outputText class="label" value="Doświadczenie"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.expirience}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.expirience}" /> 
                                 </div>
                                 
                                 <div class="field marginB30"> 
                                     <h:outputText class="label" value="Zatrudnienie"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.workingPlace.name}" /> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.workingPlace.name}" /> 
                                 </div>
                                 <h4> OBSŁUGIWANE BANKI</h4>
-                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectBanksFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
+                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectBanksFromConsultant(consultantProfileMB.selectedConsultant)}" var="inst" >  
                                     #{inst.name} 
                                 </p:dataList> 
                                 <h4> INNE OBSŁUGIWANE INSTUTYCJE</h4>
-                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectOtherInsFromConsultant(clientCaseMB.selectedConsultant)}" var="inst" >  
+                                <p:dataList styleClass="fontGrey listOverflow marginB30" value="#{consultantProfileMB.selectOtherInsFromConsultant(consultantProfileMB.selectedConsultant)}" var="inst" >  
                                     #{inst.name} 
                                 </p:dataList> 
                                 
                                 <h4> OBSŁUGIWANE TYPY KREDYTÓW </h4>
-                                <p:dataList styleClass="fontGrey listOverflow" value="#{consultantProfileMB.castProductTypeSetToArray(clientCaseMB.selectedConsultant.productTypes)}" var="inst" >  
+                                <p:dataList styleClass="fontGrey listOverflow" value="#{consultantProfileMB.castProductTypeSetToArray(consultantProfileMB.selectedConsultant.productTypes)}" var="inst" >  
                                     #{inst.name} 
                                 </p:dataList> 
                             </div>
@@ -70,63 +74,63 @@
                     <div class="rightInlineBox">
                         <h:form>
                             
-                            <h:panelGroup rendered="#{! empty clientCaseMB.selectedConsultant.consultantRatings}" >
+                            <h:panelGroup rendered="#{! empty consultantProfileMB.selectedConsultant.consultantRatings}" >
                              <h4> ŚREDNIA OCENA </h4>
                              <div style="min-height: 58px;">
-                                 <h:outputText class="boldItem" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].average}" > 
+                                 <h:outputText class="boldItem" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].average}" > 
                                               <f:convertNumber maxFractionDigits="2"/>
                                  </h:outputText>
                              </div>
                              <h4> ILOŚĆ UKOŃCZONYCH SPRAW </h4>
-                             <div style="min-height: 58px;"><h:outputText class="boldItem" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].rateCount}" /> </div>
+                             <div style="min-height: 58px;"><h:outputText class="boldItem" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].rateCount}" /> </div>
                            
                              <h4> OCENA OGÓLNA </h4>         
                            
                                  <div class="field"> 
                                     <h:outputText class="label" value="Kontakt"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].contact}" >
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].contact}" >
                                         <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kultura"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].culture}" >
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].culture}" >
                                         <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Kompetencje"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].competence}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].competence}" > 
                                         <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Punktualność"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].punctuality}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].punctuality}" > 
                                         <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Rzetelność"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].reliability}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].reliability}" > 
                                          <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Szacunek"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].respect}"> 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].respect}"> 
                                            <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>
                                 <div class="field"> 
                                     <h:outputText class="label" value="Trud"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].difficulty}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].difficulty}" > 
                                            <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>                                
                                 <div class="field"> 
                                     <h:outputText class="label" value="Zaufanie"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{clientCaseMB.selectedConsultant.consultantRatings.toArray()[0].trust}" > 
+                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{consultantProfileMB.selectedConsultant.consultantRatings.toArray()[0].trust}" > 
                                            <f:convertNumber maxFractionDigits="2"/>
                                     </h:inputText>
                                 </div>

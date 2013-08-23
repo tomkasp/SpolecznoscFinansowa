@@ -25,7 +25,6 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="client"
-    ,catalog="SpolecznoscFinansowa"
     , uniqueConstraints = @UniqueConstraint(columnNames="fk_user") 
 )
 public class Client  implements java.io.Serializable {
