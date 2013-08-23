@@ -4,10 +4,7 @@ import java.util.List;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageNode;
-import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -31,8 +28,12 @@ public class NewMain {
         PDDocument doc = null;
 
         try {
+//            FtpDownloader ftpd=new FtpDownloader();
+            
+//            InputStream is=ftpd.giveInputStream("rice/SF/USERS/"+38+"/", "idCard.pdf" );
+//            doc = PDDocument.load(is);
 
-            doc = PDDocument.load("C:\\u3.pdf");
+            doc = PDDocument.load("u3.pdf");
             List pages = doc.getDocumentCatalog().getAllPages();
             PDPage page = (PDPage) pages.get(0);
 

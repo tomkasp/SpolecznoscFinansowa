@@ -6,12 +6,21 @@ package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.ftp.FtpDownloader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
+import org.apache.pdfbox.exceptions.COSVisitorException;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  * @author admin
@@ -77,6 +86,52 @@ public class DictionaryMB implements Serializable{
         subscriptionType=stdao.subscriptionTypeList();
     }
 
+    public void wykonaj() throws IOException, COSVisitorException {
+
+        System.out.println("START");
+
+        PDDocument doc = null;
+
+        try {
+            
+            FtpDownloader ftpd=new FtpDownloader();
+            InputStream is=ftpd.giveInputStream("rice/SF/USERS/"+123+"/", "idCard.pdf" );
+            System.out.println("TO STRING: "+ is.toString() );
+            doc = PDDocument.load(is);
+
+            //doc = PDDocument.load("C:\\u3.pdf");
+            List pages = doc.getDocumentCatalog().getAllPages();
+            PDPage page = (PDPage) pages.get(0);
+
+            System.out.println(doc.getNumberOfPages());
+
+            //PDFont font = PDType1Font.TIMES_ROMAN;
+
+            PDSimpleFont font = PDType1Font.HELVETICA_BOLD;
+            
+            PDPageContentStream contentStream = new PDPageContentStream(doc, page, true, false);
+            contentStream.beginText();
+
+            contentStream.setFont(font, 12);
+            contentStream.moveTextPositionByAmount( 100, 100 );
+            contentStream.drawString( "WITAJ SWIECIE" );
+
+            contentStream.endText();
+            contentStream.close();
+
+            doc.save("dokumentTest.pdf");
+
+        } finally {
+            if (doc != null) {
+                doc.close();
+            }
+        }
+
+        System.out.println("STOP");
+
+    }
+    
+    
     public List<Region> getRegion() {
         return region;
     }
