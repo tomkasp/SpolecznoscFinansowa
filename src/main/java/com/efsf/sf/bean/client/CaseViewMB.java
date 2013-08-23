@@ -37,6 +37,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class CaseViewMB implements Serializable{
+    
+    
 
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
