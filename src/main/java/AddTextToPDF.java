@@ -66,7 +66,6 @@ public class AddTextToPDF {
 				// close the stream for that page
 				contentStream.close();
 			}
-
 			// save the updated document to the new file
 			doc.save(outfile);
 		} finally {
@@ -80,7 +79,7 @@ public class AddTextToPDF {
 	 * This will create a hello world PDF document. see usage() for command line
 	 * 
 	 * @param args
-	 *            Command line arguments.
+	 * 
 	 */
 	public static void main(String[] args) {
 		AddTextToPDF app = new AddTextToPDF();
