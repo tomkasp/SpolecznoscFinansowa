@@ -145,7 +145,6 @@ public class ConsultantMainPageMB {
             ownedModelsBranch.add(showAllClientsBranches(ownedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
     public void reloadFinishedTable()
@@ -159,7 +158,6 @@ public class ConsultantMainPageMB {
             finishedModelsBranch.add(showAllClientsBranches(finishedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
         
@@ -185,7 +183,7 @@ public class ConsultantMainPageMB {
           
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList<ClientCase>(csSet);
+        return new ArrayList(csSet);
     }
     
     public void reloadCases()

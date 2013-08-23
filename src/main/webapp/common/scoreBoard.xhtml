@@ -21,7 +21,10 @@
 
                     <h3>Ranking najlepszych doradców</h3>
                     <h:form> 
-                        <p:dataTable style="width: auto;" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak doradców" selectionMode="single">
+                        <p:dataTable style="width: auto;" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" selection="#{scoreBoardMB.consultantRating}" emptyMessage="Brak doradców" selectionMode="single">
+
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax rendered="#{settings.clientActive}" event="rowDblselect" listener="#{scoreBoardMB.rowDoubleClick(scoreBoardMB.consultantRating.consultant)}" />
 
                             <p:column headerText="Pozycja">  
                                 <h:outputText  value="#{rowNumber+1}"/>

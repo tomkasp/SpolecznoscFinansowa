@@ -7,13 +7,11 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
-import com.efsf.sf.collection.ScheduleItem;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -77,7 +75,7 @@ public class ClientCaseMB implements Serializable {
     }
 
     public void delObligation() {
-        //System.out.println("zaznaczone zobowiazanie: "+selectedObligation.getName());
+
         obdao.deleteObligation(selectedObligation);
         //obligation = new Obligation();
 
@@ -90,9 +88,7 @@ public class ClientCaseMB implements Serializable {
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
         obdao.save(obligation);
-        System.out.println("wykonano save....");
         obligation = new Obligation();
-        System.out.println("data:" + obligation.getBeginDate());
     }
 
     public void addMessage() {

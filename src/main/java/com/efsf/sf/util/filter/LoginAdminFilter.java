@@ -1,6 +1,7 @@
 package com.efsf.sf.util.filter;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,7 +22,7 @@ public class LoginAdminFilter implements Filter {
 		
 		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
 		
-		if ( loginBean == null || !loginBean.isIsLogged() || loginBean.getType()!=1 )//IF NO ADMIN
+		if ( loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.ADMIN_ACTIVE) )//IF NO ADMIN
                 {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");

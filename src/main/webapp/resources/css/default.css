@@ -424,6 +424,12 @@ background:#F0F5F5;
     margin-bottom: 30px;
 }
 
+.marginLT30
+{
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
 .marginLRT30
 {
     margin-top: 30px;

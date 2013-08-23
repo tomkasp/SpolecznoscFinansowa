@@ -4,6 +4,7 @@ import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.MessageDAO;
 import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -139,7 +140,7 @@ public class MessagesMB implements Serializable {
 
     public String toViewMessages()
     { 
-        if (loginMB.getType().equals(2))
+        if (loginMB.getType().equals(Settings.CONSULTANT_ACTIVE))
             return "/consultant/consultantViewMessages?faces-redirect=true";
         else
             return "/client/clientViewMessages?faces-redirect=true";
