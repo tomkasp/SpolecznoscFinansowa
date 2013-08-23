@@ -137,10 +137,10 @@ public class ClientCaseMB implements Serializable {
             clientCase.setExpectedInstalment(clientCase.getExpectedInstalment().setScale(2, RoundingMode.DOWN));
 
             clientCase.setProductType(ptd.getProductType(idTypProduktu));
-            clientCase.setClient(login.getClient());
-            clientCase.setPhase(1);
+            clientCase.setClient(login.getClient());        
             clientCase.setViewCounter(0);
             clientCase.setDifficulty(calculateCaseDifficulty());
+            clientCase.setPhase(calculateProgress());
             ccd.saveClientCase(clientCase);
 
             if (login.getClient().getPoints() == 0) {
@@ -160,7 +160,7 @@ public class ClientCaseMB implements Serializable {
         int difficulty = 1;
         
         // BIK is really usful in getting credits 
-        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().iterator().next().getBik() == null  )
+        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().isEmpty() || client.getRequiredDocumentses().iterator().next().getBik() == null  )
         {
             difficulty++;
         }
@@ -227,6 +227,77 @@ public class ClientCaseMB implements Serializable {
        
        return income; 
     }
+    
+    
+    //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 
+    public int calculateProgress()
+    {
+         Client client = new ClientDAO().readClientForSettings(login.getClient().getIdClient());
+         int progress = 20; 
+         
+         if(client.getMaritalStatus().getIdMaritalStatus() != 0)
+         {
+             progress+=5;
+         }
+         if(client.getEducation().getIdEducation() != 0)
+         {
+             progress+=5;
+         }
+         if(client.getSex() != null)
+         {
+             progress+=5;
+         }
+         if(client.getPesel() != null)
+         {
+             progress+=5;
+         }
+         
+         Address address = client.getAddresses().iterator().next();
+         
+         if(address.getCity() != null && !"".equals(address.getCity()))
+         {
+             progress+=5;
+         }
+         if(address.getHouseNumber() != null && !"".equals(address.getHouseNumber()))
+         {
+             progress+=5;
+         }
+         if(address.getPhone() != null && !"".equals(address.getPhone()))
+         {
+             progress+=5;
+         }
+         if(address.getCity() != null && !"".equals(address.getPhone()))
+         {
+             progress+=5;
+         }
+         
+         RequiredDocuments requiredDocuments = new RequiredDocumentsDAO().readForFkClient( login.getClient().getIdClient() );
+
+         if (requiredDocuments != null)
+         {
+             if(requiredDocuments.getIdCard() != null)
+             {
+                 progress+=10;
+             }
+             if(requiredDocuments.getBik() != null)
+             {
+                 progress+=10;
+             }
+             if(requiredDocuments.getIncomeStatement() != null)
+             {
+                 progress+=10;
+             }
+             if(requiredDocuments.getTitleDeed() != null)
+             {
+                 progress+=10;
+             }      
+         }
+     
+         return progress;
+         
+         
+    }
+    
     
     // VIEW CASE METHODS 
     public void consultantAcceptPremium(ClientCase cc)
