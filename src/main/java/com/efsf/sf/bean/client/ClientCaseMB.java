@@ -9,6 +9,8 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.Converters;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.BusyConversationException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -137,7 +140,7 @@ public class ClientCaseMB implements Serializable {
             clientCase.setClient(login.getClient());
             clientCase.setPhase(1);
             clientCase.setViewCounter(0);
-            clientCase.setDifficulty(0);
+            clientCase.setDifficulty(calculateCaseDifficulty());
             ccd.saveClientCase(clientCase);
 
             if (login.getClient().getPoints() == 0) {
@@ -149,10 +152,83 @@ public class ClientCaseMB implements Serializable {
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
     
-
+    //Some kind of prototype algorithm to calculate difficulty of the case 
+    public int calculateCaseDifficulty()
+    {
+        Client client = login.getClient();
+        
+        int difficulty = 1;
+        
+        // BIK is really usful in getting credits 
+        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().iterator().next().getBik() == null  )
+        {
+            difficulty++;
+        }
+        
+        // If client have some obligations the loan is harder to get
+        if (obligationList != null)
+        {
+            if (obligationList.size() == 1)
+                difficulty++;
+            else if (obligationList.size() > 1)
+                difficulty += 2;
+        }
+        
+        // Chwilówka should be here || We assume that 'chwilówka' is easier to get then other loans
+        if (clientCase.getProductType().getIdProductType() != Settings.CHWILOWKA )
+        {
+            difficulty+=2;
+        }
+        
+        // The lower income is the harder is to get credit
+        if(calculateClientIncome() < 2000.0 )
+        {
+            difficulty++;
+        }
+        
+        //The age have some infuence on income too. 
+        Converters c = new Converters();
+        
+        if(c.ageFromBirthDate(client.getBirthDate()) <  22 )
+        {
+            difficulty++;
+        }   
+        else if(c.ageFromBirthDate(client.getBirthDate()) > 65)
+        {
+            difficulty++;
+        }
+        
+        //If client have not used our system yet and have no case succesfully finished
+        if (!new ClientCaseDAO().checkClientFinishedCases(client.getIdClient()))
+        {
+            difficulty++;
+        }    
+        else if (!new ClientCaseDAO().checkClientCases(client.getIdClient()))
+        {
+            difficulty++;
+        }
+      
+        return difficulty;
+    }
+    
+    public double calculateClientIncome()
+    {
+       double income = 0;
+       
+       for (Income i : login.getClient().getIncomes())
+       {
+           income += i.getMonthlyNetto().doubleValue();
+       }
+       
+       for (IncomeBusinessActivity iba : login.getClient().getIncomeBusinessActivities())
+       {
+           income += iba.getIncomeLastYearNetto().doubleValue();
+       }
+       
+       return income; 
+    }
     
     // VIEW CASE METHODS 
-
     public void consultantAcceptPremium(ClientCase cc)
     {
         cc.setConsultants(null);

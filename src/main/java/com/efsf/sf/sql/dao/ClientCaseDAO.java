@@ -346,6 +346,8 @@ public class ClientCaseDAO implements Serializable {
          
          return list;
     }
+     
+
     
     public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient)
     {
@@ -777,6 +779,54 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          return list;
+    }
+    
+    public boolean checkClientFinishedCases(Integer idClient)
+    {
+         List<ClientCase> list;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+        
+         Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.caseStatus as cstat "
+                 + "where clt.idClient = :idClient and cstat.idCaseStatus = 9 " );
+         
+         q.setParameter("idClient", idClient);
+         
+         list = q.list();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         if (list != null || !list.isEmpty())
+             return true;
+         else
+             return false;
+    }
+    
+    public boolean checkClientCases(Integer idClient)
+    {
+         List<ClientCase> list;
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+        
+         Query q = session.createQuery("FROM ClientCase as cs "
+                 + "left join fetch cs.client as clt "
+                 + "left join fetch cs.caseStatus as cstat "
+                 + "where clt.idClient = :idClient " );
+         
+         q.setParameter("idClient", idClient);
+         
+         list = q.list();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         if (list != null || !list.isEmpty())
+             return true;
+         else
+             return false;
     }
 }
     
