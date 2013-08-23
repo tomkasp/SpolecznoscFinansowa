@@ -337,7 +337,7 @@
                         </p:dataTable>
                     </div>
                     
-                    <p:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
+                    <h:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
                     <div class="marginT50">
