@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.fontbox.encoding.Encoding;
+import org.apache.fontbox.ttf.TTFSubFont;
 import org.apache.pdfbox.cos.COSArray;
 import org.apache.pdfbox.cos.COSBase;
 import org.apache.pdfbox.encoding.AFMEncoding;
@@ -58,7 +59,8 @@ public class AgreementPDF {
             //PDSimpleFont font = PDType1Font.HELVETICA_BOLD;
 
             PDFont font = PDTrueTypeFont.loadTTF(doc, new File("arial.ttf"));
-
+           
+           
             //font.setFontEncoding(new WinAnsiEncoding() );
 
             //PdfDocEncoding e=new PdfDocEncoding();
@@ -79,7 +81,7 @@ public class AgreementPDF {
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 550);
             //contentStream.drawString(consultant.getName()+" "+consultant.getLastName());
-            contentStream.drawString("\u0105");
+            contentStream.drawString("ł");
 
             contentStream.endText();
 
@@ -87,7 +89,7 @@ public class AgreementPDF {
 
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 510);
-            contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry() + "отделом компьютерной");
+           // contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry() + "отделом компьютерной");
 
 
             contentStream.endText();
