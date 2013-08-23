@@ -6,10 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 
-/**
- *
- * @author admin
- */
+
 public class ProductDAO {
     
     
@@ -20,8 +17,6 @@ public class ProductDAO {
         
         Query q = session.createQuery("from ProductDetails as pd left join fetch pd.employmentType et join fetch pd.product pr join fetch pr.institution");
         
-//        List l2 = q.list();
-
         List<ProductDetails> products =  q.list();
         
         session.getTransaction().commit();

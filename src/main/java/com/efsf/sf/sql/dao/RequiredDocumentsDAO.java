@@ -1,19 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.RequiredDocuments;
-import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- * @author WR1EI1
- */
 
 public class RequiredDocumentsDAO {
 

@@ -13,17 +13,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author admin
- */
 public class ClientCaseDAO implements Serializable {
 
     public void saveClientCase(ClientCase clientCase) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-            //pierwsza faza CaseStatus.
+        //pierwsza faza CaseStatus
         clientCase.setCaseStatus( (CaseStatus)session.load(CaseStatus.class, 1) );
         session.save(clientCase);
 
@@ -51,7 +47,6 @@ public class ClientCaseDAO implements Serializable {
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
          
-    //   Query q = session.createQuery("from ClientCase c left outer join fetch c.productType as p left outer join fetch c.client as cil left outer join cil.addresses as add");
          Query q = session.createQuery("FROM ClientCase as cs "
                  + "join fetch cs.client as clt "
                  + "join fetch cs.productType as pt "      
@@ -127,7 +122,7 @@ public class ClientCaseDAO implements Serializable {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
-         Query q = null; 
+         Query q; 
          //CASE: SELECTED BRANCH AND CASE
          if (region > 0 && branch > 0)
          {

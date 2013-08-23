@@ -1,30 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Client;
-import com.efsf.sf.sql.entity.ClientCase;
-import com.efsf.sf.sql.entity.Income;
-import com.efsf.sf.sql.entity.IncomeBusinessActivity;
-import com.efsf.sf.sql.entity.Product;
-import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- *
- * @author WR1EI1
- */
+
 public class ClientDAO {
 
     private int points;
@@ -167,7 +150,7 @@ public class ClientDAO {
 
         try {
             session.beginTransaction().begin();
-            Query q = null;
+            Query q;
             q = session.createQuery("FROM Client c "
                     + " LEFT JOIN FETCH c.user as u "
                     + " LEFT JOIN FETCH c.maritalStatus as m "
@@ -208,7 +191,7 @@ public class ClientDAO {
         List l = q.list();
         setKlienci(new String[10]);
 
-        System.out.println("dlugosc tab l.size(): " + l.size());
+
 //        while (it.hasNext()) {
         //Object rows[] = (Object[]) it.next();
 
