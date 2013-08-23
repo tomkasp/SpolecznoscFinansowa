@@ -92,7 +92,7 @@ public class CaseViewMB implements Serializable{
             caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
             cdao.updateClientCase(selectedClientCase);
-  //           fillSelectedCaseIncomeTable();
+            fillSelectedCaseIncomeTable();
         }
     }
     
