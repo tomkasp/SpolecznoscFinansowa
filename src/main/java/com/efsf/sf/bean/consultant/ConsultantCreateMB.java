@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,9 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-/**
- * @author WR1EI1
- */
+
 @ManagedBean
 @SessionScoped
 public class ConsultantCreateMB implements Serializable {
@@ -32,6 +31,9 @@ public class ConsultantCreateMB implements Serializable {
 
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
+    
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
     
     //ConsultantCreateAccount
     private User user = new User();
@@ -87,8 +89,11 @@ public class ConsultantCreateMB implements Serializable {
         }
         
         SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser());
-                
-        return "/consultant/consultantFillAccountData?faces-redirect=true";
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), 
+                    getBundle().getString("confirmRegistrationMsg"))); 
+        
+        return "/login";
         
     }
     
@@ -363,8 +368,12 @@ public class ConsultantCreateMB implements Serializable {
         this.loginMB = loginMB;
     }
 
-    
-    
-    
-    
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
 }

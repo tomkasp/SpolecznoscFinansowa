@@ -241,8 +241,6 @@ public class ClientSettingsMB implements Serializable {
         UserDAO udao = new UserDAO();
         Boolean ifEmailExist = udao.ifEmailExist(value.toString());
 
-        System.out.println("111 " + value.toString());
-        System.out.println("222 " + email);
 
         if (value.toString().equals(email)) {
             ifEmailExist = false;
