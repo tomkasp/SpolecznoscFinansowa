@@ -19,6 +19,7 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -35,7 +36,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @ViewScoped
-public class CaseViewMB {
+public class CaseViewMB implements Serializable{
 
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;

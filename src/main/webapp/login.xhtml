@@ -44,7 +44,7 @@
                 </div>
             </p:dialog>  
             
-            <h:form>   
+            <h:form  id="logowanie">   
              <div class="contentBox">
                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
@@ -67,7 +67,7 @@
                     
                     <div class="field"> 
                         <h:outputText class="label" value="Hasło:"/> 
-                        <h:inputSecret id="password" value="#{loginMB.password}" required="true"  
+                        <h:inputSecret id="password" onkeypress="if (event.keyCode == 13) { document.getElementById('logowanie:subbmit').click(); return false; }" value="#{loginMB.password}" required="true"  
                          binding="#{password}">
                         </h:inputSecret>
                         
@@ -81,7 +81,9 @@
                     
                     <h:link class="greyButton buttonMargin" value="Nie pamiętam hasła" />
                     <h:link class="greyButton buttonMargin" value="Anuluj" outcome="/index"/>
-                    <p:commandLink styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();"> 
+                    <p:commandLink id="subbmit" styleClass="blueButton buttonMargin" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();"> 
+                        
+
                     </p:commandLink>
    
                 </div>

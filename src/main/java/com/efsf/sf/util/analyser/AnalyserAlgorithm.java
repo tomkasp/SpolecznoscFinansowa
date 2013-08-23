@@ -84,8 +84,8 @@ public class AnalyserAlgorithm {
             produkty[prod][3] = ite.getAmountBruttoMax().doubleValue();
             produkty[prod][4] = ite.getLoanTimeMin();
             produkty[prod][5] = ite.getLoanTimeMax();
-            produkty[prod][6] = ite.getClientAgeMin();
-            produkty[prod][7] = ite.getClientAgeMax();
+            produkty[prod][6] = ite.getClientAgeMin().intValue();
+            produkty[prod][7] = ite.getClientAgeMax().intValue();
             
             
             System.out.println("typ dochodu:"+ produkty[prod][0]);
@@ -189,9 +189,9 @@ public class AnalyserAlgorithm {
             }
 //
 //            //etap 4= porownanie wiekow 
-//            if ((Integer.valueOf(Produkty[z][6]) <= Integer.valueOf(klienci[5])) && (Integer.valueOf(Produkty[z][7]) > Integer.valueOf(klienci[5]))) {
-//                off[Integer.valueOf(Produkty[z][0])]++;
-//            }
+            if (  (int)produkty[z][6] <= (int)klienci[5]  && (int)produkty[z][7] > (int)klienci[5] ) {
+                off[(Integer)produkty[z][0]]++;
+            }
 
         }
 
