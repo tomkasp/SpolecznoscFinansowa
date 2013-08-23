@@ -5,6 +5,7 @@ import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ public class AnalyserAlgorithm {
     }
 
     public AnalyserAlgorithm(Integer IdSprawy) {
-        setClient(IdSprawy);
+        analizuj(IdSprawy);
     }
 
     private void setClient(Integer idSprawaKlienta) {
@@ -51,8 +52,8 @@ public class AnalyserAlgorithm {
         }
         getKlienci()[2] = et1;
         //kwota konsolidacji + wolne srodki
-        getKlienci()[3] = sprKli.getConsolidationValue();
-        getKlienci()[4] = sprKli.getExpectedInstalment();
+        getKlienci()[3] = sprKli.getConsolidationValue().doubleValue();
+        getKlienci()[4] = sprKli.getExpectedInstalment().doubleValue();
         getKlienci()[5] = new Converters().ageFromBirthDate(jedenKlient.getBirthDate());
         
         
@@ -79,8 +80,8 @@ public class AnalyserAlgorithm {
         
             produkty[prod][0] = ite.getIdProductDetail();
             produkty[prod][1] = ite.getEmploymentType().getIdEmploymentType();
-            produkty[prod][2] = ite.getAmountBruttoMin();
-            produkty[prod][3] = ite.getAmountBruttoMax();
+            produkty[prod][2] = ite.getAmountBruttoMin().doubleValue();
+            produkty[prod][3] = ite.getAmountBruttoMax().doubleValue();
             produkty[prod][4] = ite.getLoanTimeMin();
             produkty[prod][5] = ite.getLoanTimeMax();
             produkty[prod][6] = ite.getClientAgeMin();
@@ -121,67 +122,89 @@ public class AnalyserAlgorithm {
     
     
     public static void main(String args[]){
-        AnalyserAlgorithm aa = new AnalyserAlgorithm();
-        aa.setClient(100);
-        
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(100);
+        //aa.setClient(100);
+        //aa.analizuj(100);
         for(Integer i:(HashSet<Integer>)aa.getKlienci()[2]){
             System.out.println("wartosc:"+ i);
         }
         
-        aa.setProducts();
+        //aa.setProducts();
                
         
         System.out.println("data:"+ aa.getKlienci()[5]);
         
     }
 
-//    public String analizuj(Integer IdSprawaKlienta) {
-//        pobierzDane(IdSprawaKlienta);
-//        Arrays.fill(off, 0);
-//
-//        //etap 1
-//        //dla pierwszego kryterium, znajdz wszystkie idProduktu ktory spelnia kryterium dochodow 
-//        
-//        System.out.println("produkty lenght:" + Produkty[0].length);
-//        for (int z = 0; z < Produkty.length; z++) {
-//
-//            //1.    jesli rodzaj dochodow klienta zgadza sie z dochodami akceptowalnymi zawartymi w szczegolach:
-//            System.out.println("testuje produkty z 1 :" + Integer.valueOf(Produkty[z][1]));
-//            
-//            
-//            if (Integer.valueOf(Produkty[z][1]) == Integer.valueOf(klienci[2])) {
-//                off[Integer.valueOf(Produkty[z][0])]++;
+    public String analizuj(Integer IdSprawaKlienta) {
+        setClient(IdSprawaKlienta);
+        setProducts();
+        Arrays.fill(off, 0);
+
+        //etap 1
+        //dla pierwszego kryterium, znajdz wszystkie idProduktu ktory spelnia kryterium dochodow 
+        
+        System.out.println("produkty lenght:" + produkty[0].length);
+        for (int z = 0; z < produkty.length; z++) {
+
+            //1.    jesli rodzaj dochodow klienta zgadza sie z dochodami akceptowalnymi zawartymi w szczegolach:
+            System.out.println("testuje produkty z 1 :" + (produkty[z][1]));
+            
+            // przeglada wszystkie dostepne typy dochodu klienta i zwieksza licznik.
+            
+            
+            if( ((HashSet<Integer>)this.getKlienci()[2]).contains((Integer)produkty[z][1]) ){
+                off[(Integer)produkty[z][0]]++;
+                //System.out.println("ooooooooooooooooooooooooooooooooooooooooooooL :");
+            }
+//            for(Integer kl :(HashSet<Integer>) this.getKlienci()[2]){
+//                System.out.println("ooooooooooooooooooooooooooooooooooooooooooooL :" + kl);
+//                System.out.println("ooooooooooooooooooooooooooooooooooooooooooooasd :" + produkty[z][1]);
+//                
+//                if(produkty[z][1].equals(kl)){
+//                    off[(Integer)produkty[z][0]]++;
+//                    
+//                    
+//                    break;
+//                }
 //            }
-//
-//            //2.    jesli kwota potrzebna klientowi jest w zasiegu danej oferty
-//            if ((Double.valueOf(Produkty[z][2]) < Double.valueOf(klienci[3])) && (Double.valueOf(Produkty[z][3]) >= Double.valueOf(klienci[3]))) {
-//                off[Integer.valueOf(Produkty[z][0])]++;
+            
+//            if (produkty[z][2] == (klienci[2])) {
+//                off[Integer.valueOf(produkty[z][0].toString())]++;
+//                System.out.println("tablica off w tym miejscu to : "+ off[Integer.valueOf(produkty[z][0].toString())] + " a index : " + Integer.valueOf(produkty[z][0].toString()) );
 //            }
+
+            //2.    jesli kwota potrzebna klientowi jest w zasiegu danej oferty
+            if (((double)produkty[z][2] < (double)klienci[3]) && ((double)produkty[z][3] >= (double)klienci[3])) {
+               
+                off[(Integer)produkty[z][0]]++;
+            }
 //
 //            //3...  sprawdz okres kredytowania porzadana rata
 //            // kwota konsolidacji/maxCzasKredytowania = oplata za miesiac
 //            //jesli jest mniejsza lub rowna porzadanej racie klienta to ok! 
-//            if ((Double.valueOf(klienci[3])) / (Double.valueOf(Produkty[z][5])) <= (Double.valueOf(klienci[4]))) {
-//                off[Integer.valueOf(Produkty[z][0])]++;
-//            }
+            if (( (double)klienci[3] / (int)produkty[z][5]) <= ((double)klienci[4])) {
+                 System.out.println("DUPAAAAAAAAAAAAAAAAAAAAAA ==================================");
+                off[(Integer)produkty[z][0]]++;
+            }
 //
 //            //etap 4= porownanie wiekow 
 //            if ((Integer.valueOf(Produkty[z][6]) <= Integer.valueOf(klienci[5])) && (Integer.valueOf(Produkty[z][7]) > Integer.valueOf(klienci[5]))) {
 //                off[Integer.valueOf(Produkty[z][0])]++;
 //            }
-//
-//        }
-//
-//        zwyciezaj(off);
-//        //Arrays.fill(oferta, "");
-//
-//        for (int i = 0; i < off.length; i++) {
-//            off[i] = null;
-//        }
-//
-//        //metoda analizujaca, jako argument dostaje id klienta
-//        return "szczegolySprawy";
-//    }
+
+        }
+
+        zwyciezaj(off);
+        //Arrays.fill(oferta, "");
+
+        for (int i = 0; i < off.length; i++) {
+            off[i] = null;
+        }
+
+        //metoda analizujaca, jako argument dostaje id klienta
+        return "szczegolySprawy";
+    }
 
     public void zwyciezaj(Integer[] oferta) {
 
@@ -231,7 +254,7 @@ public class AnalyserAlgorithm {
     }
     //================================== pola ==================================
     private Object[] klienci = new Object[6];
-    private Object[][] produkty = new Object[20][20];
+    private Object[][] produkty = new Object[15][8];
 
     //TODO: tablica jest przypisana na stale -> 1000 wpisow, blad!
     //      ustawic rozmiar tablicy, w ogole przeanalizowac czy tablica off musi isc od 0 do 1000 czy po prostu numer ID wpisac... 
