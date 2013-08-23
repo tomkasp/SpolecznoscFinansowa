@@ -11,14 +11,7 @@
 
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Admin - ekran główny </ui:define> 
-            <ui:define name="top"> 
-                <h:outputStylesheet library="css" name="green.css" />
 
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                </div>
-
-            </ui:define>
 
             <ui:define name="content">
                 
@@ -32,7 +25,7 @@
                     <p:commandLink action="#{dictionaryItemsMB.showDictionary(1)}"><h:graphicImage value="/resources/admin/dzialalnosci.png" width="128px" height="128px"/></p:commandLink> 
                     <p:commandLink action="#{dictionaryItemsMB.showDictionary(2)}"><h:graphicImage value="/resources/admin/status.png" width="128px" height="128px"/></p:commandLink> 
                     
-                    <p:commandLink value="Produkty i insytucje"/>
+                    <p:commandLink value="Produkty i insytucje" action="#{productsMB.showProductPage()}"/>
                     <p:commandLink value="Typy produktów" action="#{dictionaryItemsMB.showDictionary(0)}"/>
                     <p:commandLink value="Branże działalności" action="#{dictionaryItemsMB.showDictionary(1)}"/>
                     <p:commandLink value="Statusy spraw" action="#{dictionaryItemsMB.showDictionary(2)}"/>

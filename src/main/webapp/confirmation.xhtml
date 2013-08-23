@@ -15,7 +15,7 @@
              <f:metadata>
                  <f:viewParam name="token" value="#{registrationMB.token}" />
                  <f:viewParam name="id" value="#{registrationMB.id}" />
-                 <f:event type="preRenderView" listener="#{registrationMB.confirmRegistration()}" />
+                 <f:event type="postAddToView" listener="#{registrationMB.confirmRegistration()}" />                         
              </f:metadata>   
                  
             </ui:define>
