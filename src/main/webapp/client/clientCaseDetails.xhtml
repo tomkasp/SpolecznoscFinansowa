@@ -82,7 +82,7 @@
                         <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
                             <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
                                 <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
-                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
+                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.bestConsultantsForPremiumCase()}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
                                 
                                     <p:ajax event="rowSelect" update="@form" />
                                     <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
