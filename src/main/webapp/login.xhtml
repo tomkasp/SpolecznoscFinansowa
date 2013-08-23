@@ -9,6 +9,9 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
+            <f:metadata>   
+                <f:event listener="#{loginMB.addMessageToContext()}" type="preRenderView" />   
+            </f:metadata>   
             
             <ui:define name="title"> SF - Logowanie </ui:define> 
             

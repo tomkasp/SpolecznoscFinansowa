@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.DictionaryMB;
@@ -30,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -41,10 +38,6 @@ import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
 
 
-/**
- *
- * @author XaI
- */
 @ManagedBean
 @SessionScoped
 public class CreateClientMB implements Serializable
@@ -56,6 +49,9 @@ public class CreateClientMB implements Serializable
     
     @ManagedProperty(value="#{dictionaryMB}")
     private DictionaryMB dictionaryMB;
+    
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
     
     User user; 
     
@@ -131,25 +127,9 @@ public class CreateClientMB implements Serializable
     
     public CreateClientMB()
     {
-//        UserDAO userDao = new UserDAO();
-//        
-//        user = new User("", "", "", 3);        
-//        userDao.save(user);
-//        loginNumber = user.getIdUser();
-//        login = Integer.toString(loginNumber);
-//        login = ("000000" + login).substring(login.length());
+
     }
-//    
-//    @PreDestroy
-//    public void deleteUser()
-//    {
-////        UserDAO userDao = new UserDAO();
-////        
-////        userDao.delete(user);
-////        
-////        System.out.println("Usunieto");
-//        
-//    }
+
     public String createClientAccount() throws NoSuchAlgorithmException, Exception
     {
         UserDAO userDao = new UserDAO();
@@ -183,12 +163,14 @@ public class CreateClientMB implements Serializable
         clientDao.save(client);
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
-        
         userDao.update(user);
         
         SendMail.sendRegisterMail(email, name, user.getIdUser());
+ 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), 
+                    bundle.getString("confirmRegistrationMsg"))); 
         
-        return "/client/clientFillAccountData?faces-redirect=true";
+        return "/login";
     }
     
     
@@ -623,7 +605,12 @@ public class CreateClientMB implements Serializable
         this.maxBirthDate = maxBirthDate;
     }
 
-    
-           
-    
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+  
 }

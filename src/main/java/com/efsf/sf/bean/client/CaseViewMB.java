@@ -38,6 +38,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class CaseViewMB implements Serializable{
+    
+    
 
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
@@ -93,7 +95,7 @@ public class CaseViewMB implements Serializable{
             caseStatusID = selectedClientCase.getCaseStatus().getIdCaseStatus();
             selectedClientCase.setViewCounter(selectedClientCase.getViewCounter()+ 1);      
             cdao.updateClientCase(selectedClientCase);
-  //           fillSelectedCaseIncomeTable();
+            fillSelectedCaseIncomeTable();
         }
     }
     

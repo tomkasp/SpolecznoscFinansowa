@@ -8,123 +8,146 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
+import java.util.ResourceBundle;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
 public class LoginMB implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
     
+    private static final long serialVersionUID = 1L;
     private String email;
     private String password;
     private boolean isLogged = false;
     private Integer type;
     private int idUser;
     private int points;
-    
-    private User user; 
+    private User user;
     private Client client;
     private Consultant consultant;
-    
     private Boolean activeAddingApp;
-     
+    
+    
+    private String actualMessage;
+
     public String login() {
-        
+
         System.out.println(isLogged);
-        
-        UserDAO userDao=new UserDAO();
+
+        UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
-        user=null;
-        user=userDao.login(this.email, this.password);
+        user = null;
+        user = userDao.login(this.email, this.password);
         type = user.getType();
-        if ( user!=null ) {
-            
-            if(type.equals(Settings.ADMIN_ACTIVE)||type.equals(Settings.CLIENT_ACTIVE)||type.equals(Settings.CONSULTANT_ACTIVE))
-            {
+        if (user != null) {
+
+            if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
                 isLogged = true;
-                System.out.println("LOGGED?: "+isLogged);
-                
+                System.out.println("LOGGED?: " + isLogged);
+
                 idUser = user.getIdUser();
                 System.out.println("login");
             }
-            if(type.equals(Settings.ADMIN_ACTIVE))
-            {
-                return "/admin/adminMainPage?faces-redirect=true"; 
+
+            if (type.equals(Settings.ADMIN_ACTIVE)) {
+                return "/admin/adminMainPage?faces-redirect=true";
             }
-            if(type.equals(Settings.CONSULTANT_ACTIVE))
-            { 
+            if (type.equals(Settings.CONSULTANT_ACTIVE)) {
                 consultant = consultantDao.getCounsultantConnectedToUser(idUser);
-                return "/consultant/consultantMainPage?faces-redirect=true"; 
+                return "/consultant/consultantMainPage?faces-redirect=true";
             }
-            if(type.equals(Settings.CLIENT_ACTIVE))
-            {
+            if (type.equals(Settings.CLIENT_ACTIVE)) {
                 client = userDao.getClientConnectedToUser(idUser);
                 points = client.getPoints();
-                
-                this.activeAddingApp=this.checkNewAppActivity();
-                
-                return "/client/clientMainPage?faces-redirect=true";  
-            } 
-            
-            if(type.equals(Settings.ADMIN_INACTIVE)||type.equals(Settings.CLIENT_INACTIVE)||type.equals(Settings.CONSULTANT_INACTIVE))
-            {
-                return "/common/activateAccount?faces-redirect=true";  
-            } 
-            
+
+                this.activeAddingApp = this.checkNewAppActivity();
+
+                return "/client/clientMainPage?faces-redirect=true";
+            }
+
+            if (type.equals(Settings.ADMIN_INACTIVE) || type.equals(Settings.CLIENT_INACTIVE) || type.equals(Settings.CONSULTANT_INACTIVE)) {
+                return "/common/activateAccount?faces-redirect=true";
+            } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
+
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"),
+                        getBundle().getString("activateAccountMsg")));
+
+                return "/login";
+            }
+
         }
-        return "/login?faces-redirect=true"; 
+        
+        return "/login?faces-redirect=true";
     }
 
-    
-    private Boolean checkNewAppActivity(){
-        if(this.points>0) {
+    private Boolean checkNewAppActivity() {
+        if (this.points > 0) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
+    
+    public void addMessageToContext(){
+       FacesContext facesContext = FacesContext.getCurrentInstance();
+       if(getActualMessage()!=null){
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", getActualMessage()));
+       }
+       setActualMessage(null);
+    }
+
     public String logout() {
         isLogged = false;
         type = Settings.LOGGED_OUT;
-        client=null;
-        consultant=null;
-        user=null;
+        client = null;
+        consultant = null;
+        user = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/login?faces-redirect=true";
     }
-    
-    public String deactivateUser(){
-        if(user.getType() == Settings.ADMIN_ACTIVE)
-        {user.setType(Settings.ADMIN_INACTIVE);}
-        if(user.getType()== Settings.CONSULTANT_ACTIVE)
-        {user.setType(Settings.CONSULTANT_INACTIVE);}
-        if(user.getType()== Settings.CLIENT_ACTIVE)
-        {user.setType(Settings.CLIENT_INACTIVE);}
-        
-        GenericDao<User> udao=new GenericDao(User.class);
+
+    public String deactivateUser() {
+        if (user.getType() == Settings.ADMIN_ACTIVE) {
+            user.setType(Settings.ADMIN_INACTIVE);
+        }
+        if (user.getType() == Settings.CONSULTANT_ACTIVE) {
+            user.setType(Settings.CONSULTANT_INACTIVE);
+        }
+        if (user.getType() == Settings.CLIENT_ACTIVE) {
+            user.setType(Settings.CLIENT_INACTIVE);
+        }
+
+        GenericDao<User> udao = new GenericDao(User.class);
         udao.update(user);
-        
+
         return logout();
     }
-    
-    public String activateUser(){
-        if(user.getType()==Settings.ADMIN_INACTIVE)
-        {user.setType(Settings.ADMIN_ACTIVE);}
-        if(user.getType()==Settings.CONSULTANT_INACTIVE)
-        {user.setType(Settings.CONSULTANT_ACTIVE);}
-        if(user.getType()==Settings.CLIENT_INACTIVE)
-        {user.setType(Settings.CLIENT_ACTIVE);}
-        
-        GenericDao<User> udao=new GenericDao(User.class);
+
+    public String activateUser() {
+        if (user.getType() == Settings.ADMIN_INACTIVE) {
+            user.setType(Settings.ADMIN_ACTIVE);
+        }
+        if (user.getType() == Settings.CONSULTANT_INACTIVE) {
+            user.setType(Settings.CONSULTANT_ACTIVE);
+        }
+        if (user.getType() == Settings.CLIENT_INACTIVE) {
+            user.setType(Settings.CLIENT_ACTIVE);
+        }
+
+        GenericDao<User> udao = new GenericDao(User.class);
         udao.update(user);
-        
+
         return login();
     }
-  
+
     public String getEmail() {
         return email;
     }
@@ -201,6 +224,21 @@ public class LoginMB implements Serializable {
         this.activeAddingApp = activeAddingApp;
     }
 
-   
-    
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
+    public String getActualMessage() {
+        return actualMessage;
+    }
+
+
+    public void setActualMessage(String actualMessage) {
+        this.actualMessage = actualMessage;
+    }
+
 }
