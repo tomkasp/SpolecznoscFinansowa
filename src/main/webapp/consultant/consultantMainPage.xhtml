@@ -117,7 +117,7 @@
 
                     <h4>ZGŁOSZENIA</h4>
 
-                    <p:dataTable id="applied" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases)}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
+                    <p:dataTable id="applied" value="#{consultantMainPageMB.appliedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
 
                         <p:ajax event="rowSelect" update="@form" />
                         <p:ajax event="rowUnselect" update="@form" /> 
@@ -344,7 +344,7 @@
 
                         <h4>OBSERWOWANE</h4>
 
-                        <p:dataTable id="traced" value="#{consultantMainPageMB.castClientCaseSetToArray(loginMB.consultant.clientCases_2)}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
+                        <p:dataTable id="traced" value="#{consultantMainPageMB.observedList}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
 
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowUnselect" update="@form" /> 

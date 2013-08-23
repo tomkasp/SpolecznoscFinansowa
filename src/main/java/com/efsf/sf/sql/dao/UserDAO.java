@@ -149,6 +149,7 @@ public class UserDAO {
                 + "left join fetch inc.employmentType as empltype "
                 + "left join fetch ba.branch as br2 "
                 + "left join fetch ba.employmentType as empltype2 "
+                + "left join fetch c.requiredDocumentses as docs "
                 + "where u.idUser = :userId");
         q.setParameter("userId", userId);
 
