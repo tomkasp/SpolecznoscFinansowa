@@ -11,19 +11,18 @@ import org.hibernate.Session;
 public class ClientDAO {
 
     private int points;
-    private String[] klienci;
-    private String[][] ProduktyBankow;
-    private String[][] wynik = new String[5][4];
-    private String NazwaBanku;
-    private String NazwaProduktu;
+ //   private String[] klienci;
+ //   private String[][] ProduktyBankow;
+//    private String[][] wynik = new String[5][4];
+//    private String NazwaBanku;
+//    private String NazwaProduktu;
 
     public Client read(int id) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction().begin();
 
-        Query q = null;
-        q = session.createQuery("FROM Client c left outer join fetch c.user as u WHERE id_client = :id");
+        Query q = session.createQuery("FROM Client c left outer join fetch c.user as u WHERE id_client = :id");
         q.setParameter("id", id);
 
         Client client = (Client) q.list().get(0);
@@ -105,15 +104,9 @@ public class ClientDAO {
                 + "where clt.idClient = :id");
 
         q.setParameter("id", idClient);
-
         Client client = (Client) q.list().get(0);
-
-
-
         session.getTransaction().commit();
-
         session.close();
-
         return client;
     }
 
@@ -189,7 +182,7 @@ public class ClientDAO {
         q.setParameter("sprawaKlienta", idSprawaKlienta);
 
         List l = q.list();
-        setKlienci(new String[10]);
+//      setKlienci(new String[10]);
 
         Client klient = (Client) q.list().get(0);
 
@@ -200,43 +193,43 @@ public class ClientDAO {
         return klient;
     }
 
-    public String[] getKlienci() {
-        return klienci;
-    }
+//    public String[] getKlienci() {
+//        return klienci;
+//    }
+//
+//    public String[][] getProduktyBankow() {
+//        return ProduktyBankow;
+//    }
 
-    public String[][] getProduktyBankow() {
-        return ProduktyBankow;
-    }
+//    public String[][] getWynik() {
+//        return wynik;
+//    }
 
-    public String[][] getWynik() {
-        return wynik;
-    }
+//    public String getNazwaBanku() {
+//        return NazwaBanku;
+//    }
+//
+//    public String getNazwaProduktu() {
+//        return NazwaProduktu;
+//    }
 
-    public String getNazwaBanku() {
-        return NazwaBanku;
-    }
+//    public void setKlienci(String[] klienci) {
+//        this.klienci = klienci;
+//    }
+//
+//    public void setProduktyBankow(String[][] ProduktyBankow) {
+//        this.ProduktyBankow = ProduktyBankow;
+//    }
 
-    public String getNazwaProduktu() {
-        return NazwaProduktu;
-    }
+//    public void setWynik(String[][] wynik) {
+//        this.wynik = wynik;
+//    }
 
-    public void setKlienci(String[] klienci) {
-        this.klienci = klienci;
-    }
-
-    public void setProduktyBankow(String[][] ProduktyBankow) {
-        this.ProduktyBankow = ProduktyBankow;
-    }
-
-    public void setWynik(String[][] wynik) {
-        this.wynik = wynik;
-    }
-
-    public void setNazwaBanku(String NazwaBanku) {
-        this.NazwaBanku = NazwaBanku;
-    }
-
-    public void setNazwaProduktu(String NazwaProduktu) {
-        this.NazwaProduktu = NazwaProduktu;
-    }
+//    public void setNazwaBanku(String NazwaBanku) {
+//        this.NazwaBanku = NazwaBanku;
+//    }
+//
+//    public void setNazwaProduktu(String NazwaProduktu) {
+//        this.NazwaProduktu = NazwaProduktu;
+//    }
 }

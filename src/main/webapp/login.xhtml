@@ -9,6 +9,9 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
+            <f:metadata>   
+                <f:event listener="#{loginMB.addMessageToContext()}" type="preRenderView" />   
+            </f:metadata>   
             
             <ui:define name="title"> SF - Logowanie </ui:define> 
             
@@ -44,7 +47,7 @@
                 </div>
             </p:dialog>  
             
-            <h:form>   
+            <h:form>  
              <div class="contentBox">
                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 

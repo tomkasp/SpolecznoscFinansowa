@@ -6,22 +6,29 @@ import com.efsf.sf.util.Security;
 import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
+import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-
 @ManagedBean
-@SessionScoped
-public class RegistrationMB implements Serializable{
+@RequestScoped
+public class RegistrationMB implements Serializable {
 
+    @ManagedProperty(value = "#{loginMB}")
+    private LoginMB loginMB;
     private String token;
-    private Integer id;    
+    private Integer id;
     
-     public void confirmRegistration() throws IOException {
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
+
+    public void confirmRegistration() throws IOException {
         GenericDao<User> dao = new GenericDao(User.class);
         User u = dao.getById(getId());
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
 
         if (u != null && Security.sha1(u.getEmail()).equals(getToken())) {
             if (u.getType() == Settings.CONSULTANT_UNVERIFIED) {
@@ -32,13 +39,12 @@ public class RegistrationMB implements Serializable{
 
             dao.update(u);
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Twoje konto jest aktywne", 
-                    "Zaloguj się przy użyciu maila i hasła podanego przy rejestracji!")); 
+            loginMB.setActualMessage(getBundle().getString("correctLink"));
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Błąd", "Podany link jest błędny, zarejestruj się jeszcze raz"));  
+            loginMB.setActualMessage(getBundle().getString("wrongLink"));
         }
-        
-        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+
+        facesContext.getExternalContext().redirect("login.xhtml");
     }
 
     public String getToken() {
@@ -56,5 +62,22 @@ public class RegistrationMB implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
+    }
+
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
 }
