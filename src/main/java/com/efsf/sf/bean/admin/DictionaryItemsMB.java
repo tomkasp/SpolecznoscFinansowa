@@ -58,7 +58,7 @@ public class DictionaryItemsMB implements Serializable{
        item=new DictionaryItem(-1, "", 1);
     } 
 
-    public List<DictionaryItem> getItems() throws ClassNotFoundException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public List<DictionaryItem> getItems() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         String name = null;
         Integer id = null; 
         Integer isActive=1;
