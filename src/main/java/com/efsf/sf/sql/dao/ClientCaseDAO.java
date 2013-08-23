@@ -799,7 +799,7 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null || !list.isEmpty())
+         if (list != null && !list.isEmpty())
              return true;
          else
              return false;
@@ -823,7 +823,7 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null || !list.isEmpty())
+         if (list != null && !list.isEmpty())
              return true;
          else
              return false;

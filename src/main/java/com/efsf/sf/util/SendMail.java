@@ -16,9 +16,9 @@ import javax.servlet.ServletContext;
 
 public class SendMail{
 
-    private static final String SMTP_HOST_NAME = "spolecznoscfinansowa.pl";//"poczta.o2.pl";
-    private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";//"fake_account2@o2.pl"; 
-    private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";//"123456";
+    private static final String SMTP_HOST_NAME = "spolecznoscfinansowa.pl";
+    private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";
+    private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";
     
    
     public String emailMsgTxt = "";
