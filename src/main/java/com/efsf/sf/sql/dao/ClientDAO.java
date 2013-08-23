@@ -191,34 +191,8 @@ public class ClientDAO {
         List l = q.list();
         setKlienci(new String[10]);
 
-
-//        while (it.hasNext()) {
-        //Object rows[] = (Object[]) it.next();
-
         Client klient = (Client) q.list().get(0);
 
-//            this.getKlienci()[0] = String.valueOf(klient.getName());
-//                [0] = imie
-//            [1] = nazwisko
-//                [2]id typu zatrudnienia
-//            [3] = kwota konsolidacji
-//            [4] = wymagana rata
-//            [5] = wiek klienta
-
-//            this.getKlienci()[1] = klient.getLastName();
-//            this.getKlienci()[2] = String.valueOf(de.getEmploymentType().getIdEmploymentType());
-//            this.getKlienci()[3] = String.valueOf(sp.getConsolidationValue());
-//            this.getKlienci()[4] = String.valueOf(sp.getExpectedInstalment());
-//
-//            int obecnyRok = Calendar.getInstance().get(Calendar.YEAR);
-//
-//            Calendar dataUrKl = Calendar.getInstance();
-//            dataUrKl.setTime(klient.getBirthDate());
-//
-//            this.getKlienci()[5] = (String.valueOf(obecnyRok - dataUrKl.get(Calendar.YEAR)));
-//        }
-
-        //wypelnienie tablica wielowymiarowa danych o produktach...     
 
         session.getTransaction().commit();
         session.close();
