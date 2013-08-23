@@ -56,7 +56,7 @@ public class CaseRatingMB implements Serializable {
         caseRating.setAverage(average);
         caseRating.setCommentDate(new Date());
         dao.save(caseRating);
-        
+
         messagesMB.generateSystemMessage(bundle.getString("CASE_RATED"), clientCase.getConsultant().getUser().getIdUser(), new Object[] {clientCase.getIdClientCase()} );
         
         return "/client/clientCaseDetails?faces-redirect=true&clientCaseId= " + clientCase.getIdClientCase();

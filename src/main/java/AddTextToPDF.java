@@ -102,4 +102,3 @@ public class AddTextToPDF {
 				+ " <input-file> <Message> <output-file>");
 	}
 }
-
