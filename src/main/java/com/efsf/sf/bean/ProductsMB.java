@@ -1,4 +1,4 @@
-package com.efsf.sf.bean.admin;
+package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.EmploymentType;
@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class productsMB implements Serializable {
+public class ProductsMB implements Serializable {
     
     private List<Product> products;
     private Institution newInstitution=new Institution();
