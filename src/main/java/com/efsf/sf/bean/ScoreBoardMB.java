@@ -22,7 +22,7 @@ public class ScoreBoardMB implements Serializable{
     private ConsultantRating consultantRating;
     
     public String showScoreBoard(){
-        return "/common/scoreBoard";
+        return "/common/scoreBoard?faces-redirect=true";
     }
     
     

@@ -18,11 +18,11 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ClientMainPageMB implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -64,6 +64,8 @@ public class ClientMainPageMB implements Serializable {
     private ClientCase finishedSelectedCase;
     
     private ClientCase premiumSelectedCase;
+    
+    private ClientCase awaitingForMarketSelectedCase;
     
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList<>();
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
@@ -477,9 +479,14 @@ public class ClientMainPageMB implements Serializable {
     public void setAwaitingForMarketClientCaseList(List<ClientCase> awaitingForMarketClientCaseList) {
         this.awaitingForMarketClientCaseList = awaitingForMarketClientCaseList;
     }
-    
-    
-     
+
+    public ClientCase getAwaitingForMarketSelectedCase() {
+        return awaitingForMarketSelectedCase;
+    }
+
+    public void setAwaitingForMarketSelectedCase(ClientCase awaitingForMarketSelectedCase) {
+        this.awaitingForMarketSelectedCase = awaitingForMarketSelectedCase;
+    }
     
     
     
