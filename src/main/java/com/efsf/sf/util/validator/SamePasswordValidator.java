@@ -5,12 +5,8 @@
 package com.efsf.sf.util.validator;
 
 import com.efsf.sf.bean.consultant.ConsultantCreateMB;
-import com.efsf.sf.sql.dao.UserDAO;
-import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
@@ -26,7 +22,6 @@ public class SamePasswordValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent toValidate, Object value) 
     {
-        
         
         String password = value.toString();
  

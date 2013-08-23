@@ -21,6 +21,8 @@ import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -58,6 +60,10 @@ public class ConsultantMainPageMB {
     private transient ResourceBundle bundle;
     
     private List<ClientCase> clientCaseList = new ArrayList();
+    
+    private List<ClientCase> appliedList = new ArrayList();
+    private List<ClientCase> observedList = new ArrayList();
+    
     private List<ClientCase> ownedList = new ArrayList();
     private List<ClientCase> finishedList = new ArrayList();
     private List<ClientCase> premiumList = new ArrayList();
@@ -119,21 +125,7 @@ public class ConsultantMainPageMB {
     {
         premiumList = caseDao.premiumCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
     }
-    
-    public void makeObservedModels()
-    {
-        Set<ClientCase> cs = loginMB.getConsultant().getClientCases_2();
-        
-        Iterator<ClientCase> i = cs.iterator();
-        
-        while (i.hasNext())
-        {
-            Client client = i.next().getClient();
-            observedModelsEmploymentType.add(showAllClientsEmploymentTypes(client));
-            observedModelsBranch.add(showAllClientsBranches(client));  
-        }
-    }
-    
+
     public void reloadOwnedTable()
     {
         ownedList = caseDao.ownedCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
@@ -160,18 +152,30 @@ public class ConsultantMainPageMB {
         
     }
     
-        
-    public void makeAppliedModels()
+    public void reloadAppliedTable()
     {
-        Set<ClientCase> cs = loginMB.getConsultant().getClientCases();
+        appliedList = castClientCaseSetToArray(loginMB.getConsultant().getClientCases());
+          
+        appliedModelsEmploymentType = new ArrayList();
+        appliedModelsBranch = new ArrayList();
         
-        Iterator<ClientCase> i = cs.iterator();
-        
-        while (i.hasNext())
+        for (int i = 0; i<appliedList.size(); i++)
         {
-            Client client = i.next().getClient();
-            appliedModelsEmploymentType.add(showAllClientsEmploymentTypes(client));
-            appliedModelsBranch.add(showAllClientsBranches(client));  
+            appliedModelsEmploymentType.add(showAllClientsEmploymentTypes(appliedList.get(i).getClient()));
+            appliedModelsBranch.add(showAllClientsBranches(appliedList.get(i).getClient()));
+        }
+    }
+    
+    public void reloadObservedTable()
+    {
+        observedList = castClientCaseSetToArray(loginMB.getConsultant().getClientCases_2());   
+        observedModelsEmploymentType = new ArrayList();
+        observedModelsBranch = new ArrayList();
+        
+        for (int i = 0; i<observedList.size(); i++)
+        {
+            observedModelsEmploymentType.add(showAllClientsEmploymentTypes(observedList.get(i).getClient()));
+            observedModelsBranch.add(showAllClientsBranches(observedList.get(i).getClient()));
         }
     }
     
@@ -183,7 +187,18 @@ public class ConsultantMainPageMB {
           
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList(csSet);
+        ArrayList<ClientCase> ccArray = new ArrayList(csSet);
+        
+        Collections.sort(ccArray, new Comparator<ClientCase>() {
+        
+            public int compare(ClientCase a, ClientCase b) {
+                return Integer.signum(a.getIdClientCase()-b.getIdClientCase());
+            }
+        
+        
+        });
+        
+        return ccArray;
     }
     
     public void reloadCases()
@@ -196,8 +211,6 @@ public class ConsultantMainPageMB {
             modelsEmploymentType.add(showAllClientsEmploymentTypes(clientCaseList.get(i).getClient()));
             modelsBranch.add(showAllClientsBranches(clientCaseList.get(i).getClient()));
         }
-        
-        System.out.println("Pobrano"); 
     }
     
     public String toClientCaseDetails(ClientCase cc)
@@ -225,19 +238,19 @@ public class ConsultantMainPageMB {
         selectedLastCase = null;
         selectedObservedCase = null;
         selectedAppliedCase = null;
-        
-        observedModelsEmploymentType = new ArrayList();
-        observedModelsBranch = new ArrayList();
+        selectedFinishedCase = null;
+        selectedOwnedCase = null;
         
          // IT COULD BE BETTER TO JUST UPDATE CASES CONNECTED TO THE CONSULTANT NOT THE WHOLE CONSULTANT //TODO
             loginMB.setConsultant(new ConsultantDAO().getCounsultantConnectedToUser(loginMB.getIdUser()));
             loadPremiumAppliences();
             messagesMB.loadUnreadMessages();
             reloadCases(); 
+            reloadAppliedTable();
             reloadOwnedTable();
             reloadFinishedTable();
-            makeObservedModels();
-            makeAppliedModels();
+            reloadObservedTable();
+
     }
     
     public void observeCase(ClientCase cs)
@@ -245,10 +258,8 @@ public class ConsultantMainPageMB {
         clientCaseMB.traceCase(cs);
         if (!clientCaseMB.isAlreadyObserved())
         {
-             observedModelsEmploymentType = new ArrayList();
-             observedModelsBranch = new ArrayList();
-             makeObservedModels();
              selectedObservedCase = null;
+             reloadObservedTable();
         }
     }
     
@@ -257,29 +268,23 @@ public class ConsultantMainPageMB {
         clientCaseMB.applyToCase(cs);
         if (!clientCaseMB.isAlreadyApplied())
         {
-             appliedModelsBranch = new ArrayList();
-             appliedModelsEmploymentType = new ArrayList();
-             makeAppliedModels();
              selectedAppliedCase = null;
+             reloadAppliedTable();
         }
     }
     
     public void stopObserveCase(ClientCase cc)
     {
         clientCaseMB.stopObserve(cc);
-        observedModelsEmploymentType = new ArrayList();
-        observedModelsBranch = new ArrayList();
-        makeObservedModels();
         selectedObservedCase = null;
+        reloadObservedTable();
     }
     
     public void revokeAppliedCase(ClientCase cc)
     {
         clientCaseMB.revokeApplication(cc);
-        appliedModelsEmploymentType = new ArrayList();
-        appliedModelsBranch = new ArrayList();
-        makeAppliedModels();
         selectedAppliedCase = null;
+        reloadAppliedTable();
     
     }
     
@@ -583,6 +588,22 @@ public class ConsultantMainPageMB {
 
     public void setSelectedPremiumCase(ClientCase selectedPremiumCase) {
         this.selectedPremiumCase = selectedPremiumCase;
+    }
+
+    public List<ClientCase> getAppliedList() {
+        return appliedList;
+    }
+
+    public void setAppliedList(List<ClientCase> appliedList) {
+        this.appliedList = appliedList;
+    }
+
+    public List<ClientCase> getObservedList() {
+        return observedList;
+    }
+
+    public void setObservedList(List<ClientCase> observedList) {
+        this.observedList = observedList;
     }
     
    
