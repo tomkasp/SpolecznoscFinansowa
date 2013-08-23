@@ -21,17 +21,17 @@
         <div id="top">
             <ui:insert name="top">
 
-                <h:panelGroup rendered="#{loginMB.type==1}">
+                <h:panelGroup rendered="#{loginMB.type == settings.adminActive}">
                     <ui:include src="adminTop.xhtml"/> 
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{loginMB.type==2}">
+                <h:panelGroup rendered="#{loginMB.type == settings.consultantActive}">
                     <ui:include src="consultantTop.xhtml"/> 
                 </h:panelGroup>
 
-                <h:outputStylesheet rendered="#{loginMB.type==3}" library="css" name="green.css" />  
+                <h:outputStylesheet rendered="#{loginMB.type == settings.clientActive}" library="css" name="green.css" />  
 
-                <h:panelGroup rendered="#{loginMB.type==3}">
+                <h:panelGroup rendered="#{loginMB.type==settings.clientActive}">
                     <ui:include src="clientTop.xhtml"/> 
                 </h:panelGroup>
 

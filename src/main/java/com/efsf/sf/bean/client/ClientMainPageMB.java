@@ -18,11 +18,11 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ClientMainPageMB implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -65,6 +65,8 @@ public class ClientMainPageMB implements Serializable {
     
     private ClientCase premiumSelectedCase;
     
+    private ClientCase awaitingForMarketSelectedCase;
+    
     private ArrayList<Set<String>> modelsEmploymentType = new ArrayList<>();
     private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
     
@@ -73,7 +75,7 @@ public class ClientMainPageMB implements Serializable {
     private Integer newPoints;
     
     private boolean requirementsFulfilled = false;
-  
+    
     @PostConstruct
     public void makeModels()
     {
@@ -97,43 +99,36 @@ public class ClientMainPageMB implements Serializable {
     public void reloadCases()
     {
         clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano"); 
     }
         
     public void reloadCases2()
     {
         awaitingClientCaseList = caseDao.awaitingCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano2"); 
     }
     
      public void reloadCases3()
     {     
         currentClientCaseList = caseDao.currentCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano3"); 
     }
     
      public void reloadCases4()
     {
         finishedClientCaseList = caseDao.finishedCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano4"); 
     }
      
      public void reloadCases5()
     {
         premiumClientCaseList = caseDao.premiumCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano5"); 
     }
      
     public void reloadCases6()
     {
         allClientCaseList = caseDao.allActiveCasesSelectedClient( loginMB.getClient().getIdClient() );
-        System.out.println("Pobrano6"); 
     }
     
     public void reloadCases7()
     {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
-        System.out.println("Pobrano7"); 
     }
     
     public double giveMeConsultantAverage(int consultantId)
@@ -230,9 +225,8 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public void rowDoubleClick(ClientCase cs) throws IOException
-    {   
-        clientCaseMB.setSelectedClientCase(cs);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml"); 
+    {         
+        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
     }
      
      public String backOffAwaiting(){
@@ -291,7 +285,6 @@ public class ClientMainPageMB implements Serializable {
         ClientDAO cdao=new ClientDAO();
         cdao.update(currentClient);   
         newPoints=null;
-        System.out.println("UDAO SIE!");
     }
     
     public LoginMB getLoginMB() {
@@ -486,9 +479,14 @@ public class ClientMainPageMB implements Serializable {
     public void setAwaitingForMarketClientCaseList(List<ClientCase> awaitingForMarketClientCaseList) {
         this.awaitingForMarketClientCaseList = awaitingForMarketClientCaseList;
     }
-    
-    
-     
+
+    public ClientCase getAwaitingForMarketSelectedCase() {
+        return awaitingForMarketSelectedCase;
+    }
+
+    public void setAwaitingForMarketSelectedCase(ClientCase awaitingForMarketSelectedCase) {
+        this.awaitingForMarketSelectedCase = awaitingForMarketSelectedCase;
+    }
     
     
     

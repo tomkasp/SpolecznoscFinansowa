@@ -13,19 +13,15 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author admin
- */
 public class ClientCaseDAO implements Serializable {
 
     public void saveClientCase(ClientCase clientCase) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-            //pierwsza faza CaseStatus.
-            clientCase.setCaseStatus( (CaseStatus)session.load(CaseStatus.class, 1) );
-            session.save(clientCase);
+        //pierwsza faza CaseStatus
+        clientCase.setCaseStatus( (CaseStatus)session.load(CaseStatus.class, 1) );
+        session.save(clientCase);
 
         session.getTransaction().commit();
         session.close();
@@ -51,7 +47,6 @@ public class ClientCaseDAO implements Serializable {
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
          
-    //   Query q = session.createQuery("from ClientCase c left outer join fetch c.productType as p left outer join fetch c.client as cil left outer join cil.addresses as add");
          Query q = session.createQuery("FROM ClientCase as cs "
                  + "join fetch cs.client as clt "
                  + "join fetch cs.productType as pt "      
@@ -127,7 +122,7 @@ public class ClientCaseDAO implements Serializable {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
          session.beginTransaction();
-         Query q = null; 
+         Query q; 
          //CASE: SELECTED BRANCH AND CASE
          if (region > 0 && branch > 0)
          {
@@ -286,6 +281,33 @@ public class ClientCaseDAO implements Serializable {
          return list;
     }
     
+     public boolean checkClientAccess(Integer idClient, Integer idCase)
+     {
+         Session session = HibernateUtil.getSessionFactory().openSession();
+         session.beginTransaction();
+          
+         Query q = session.createQuery("FROM ClientCase as cs "
+                 + " left join fetch cs.client as cl "
+                 + " where cl.idClient = :idClient and cs.idClientCase = :idCase ");
+         
+         q.setParameter("idCase", idCase );
+         q.setParameter("idClient", idClient );
+         
+         List l = q.list();
+         
+         session.getTransaction().commit();
+         session.close();
+         
+         if (l == null || l.isEmpty())
+         {
+             return false;
+         }
+         else
+         {
+             return true;
+         }
+     }
+     
     
      public List<ClientCase> last5CasesSelectedClient(Integer fkClient)
      {
@@ -325,7 +347,7 @@ public class ClientCaseDAO implements Serializable {
          return list;
     }
     
-         public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient)
+    public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
@@ -690,15 +712,17 @@ public class ClientCaseDAO implements Serializable {
         session.close();
     }
     
-    public List<ClientCase> getSelectedCaseWithConsultant(int idClientCase, int idConsultant)
+    public boolean checkConsultantAccess(int idClientCase, int idConsultant)
     {
-        
         List<ClientCase>  list;
     
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Query q = session.createQuery("From ClientCase as cc join fetch cc.consultant as cons where cc.idClientCase = :idClientCase and  cons.idConsultant = :idConsultant");
+        Query q = session.createQuery("From ClientCase as cc "
+                + " left join fetch cc.consultant as cons "
+                + " left join fetch cc.caseStatus as cstat "
+                + " where (cstat.idCaseStatus = 1 or  cons.idConsultant = :idConsultant) and cc.idClientCase = :idClientCase");
         
         q.setParameter("idConsultant", idConsultant);
         q.setParameter("idClientCase", idClientCase);
@@ -707,7 +731,14 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
      
-        return list;
+        if (list == null || list.isEmpty())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     
     public List<ClientCase> premiumCasesSelectedConsultant(int idConsultant)

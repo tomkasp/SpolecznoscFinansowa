@@ -2,13 +2,8 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-/**
- * @author WR1EI1
- */
 
 public class SubscriptionDAO {
 
@@ -19,10 +14,8 @@ public class SubscriptionDAO {
         session.beginTransaction().begin();
         session.save(subscription);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
-        session.close();
+        } finally {
+            session.close();
         }
         
     }
@@ -34,10 +27,8 @@ public class SubscriptionDAO {
         session.beginTransaction().begin();
         session.update(subscription);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
-        session.close();
+        } finally {
+            session.close();
         }
         
     }
@@ -55,11 +46,8 @@ public class SubscriptionDAO {
         subscription=(Subscription) q.list().get(0);
                 
         session.getTransaction().commit();
-        }
-        catch(HibernateException e)
-        {}
-        finally{
-        session.close();
+        } finally {
+            session.close();
         }
         return subscription;
     }

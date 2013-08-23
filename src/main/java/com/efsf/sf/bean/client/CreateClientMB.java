@@ -22,6 +22,8 @@ import com.efsf.sf.sql.entity.MaritalStatus;
 import com.efsf.sf.sql.entity.Region;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.SendMail;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -84,7 +86,7 @@ public class CreateClientMB implements Serializable
     
     //Income
     
-    private ArrayList<IncomeData> incomeTable = new ArrayList<IncomeData>();
+    private ArrayList<IncomeData> incomeTable = new ArrayList();
     private boolean tableEmpty = true;
            
     private Income income = new Income();
@@ -148,7 +150,7 @@ public class CreateClientMB implements Serializable
 ////        System.out.println("Usunieto");
 //        
 //    }
-    public String createClientAccount() throws NoSuchAlgorithmException
+    public String createClientAccount() throws NoSuchAlgorithmException, Exception
     {
         UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
@@ -158,7 +160,7 @@ public class CreateClientMB implements Serializable
         user = new User();
         user.setPassword(Security.sha1(password));
         user.setEmail(email);
-        user.setType(3);
+        user.setType(Settings.CLIENT_UNVERIFIED);
         user.setLogin(email); 
         
         Client client = new Client();
@@ -184,14 +186,12 @@ public class CreateClientMB implements Serializable
         
         userDao.update(user);
         
-        loginMB.setUser(user);
-        loginMB.setClient(client);
-        loginMB.setIsLogged(true);
-        loginMB.setType(3);
-        loginMB.setActiveAddingApp(true);
+        SendMail.sendRegisterMail(email, name, user.getIdUser());
+        
         return "/client/clientFillAccountData?faces-redirect=true";
     }
-        
+    
+    
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
         String confirmPassword = (String)value;

@@ -2,7 +2,6 @@ package com.efsf.sf.util.ftp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -16,53 +15,37 @@ public class FtpDownloader {
 
     public void downLoad(String filePath,String fileName) throws IOException {
 
+       
+        
         FTPClient client = new FTPClient();
         String remoteFile = null;
         try {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
-          
-            //remoteFile = "rice/" + 100 + " Klient/" + 172 + " Kredyt/WszystkieDokumentyKredytu_nr" + 172 + ".pdf";
+            
+             Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP succes logged");
+            
             remoteFile = filePath+fileName;
             
-            //outStream = new FileOutputStream("WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf");
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);        
-            //remoteFile = "rice/tee.txt";
-            //outStream = new FileOutputStream("tee.txt");
-            //fileName = "WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf";
-            //System.out.println("test:" + client.retrieveFileStream("tee.txt").available());
             InputStream is = client.retrieveFileStream(remoteFile);
                       
-            //client.retrieveFile(remoteFile, outStream);
-            //System.out.println("test pliku:" + is.available());
-            //client.retrieveFile("u.pdf");
-            //output.close();
-            //String filePath = "WszystkieDokumentyKredytu_nr" + nrkredytu + ".pdf";
-
+            
             final int DEFAULT_BUFFER_SIZE = 10240;
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-//            File file = new File(filePath);
-//            if (!file.exists()) {
-//                response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//                return;
-//            }
-//            System.out.println("nazwa pliku: " + file.getName());
-
+//          
             response.reset();
             
             response.setBufferSize(DEFAULT_BUFFER_SIZE);
             response.setContentType("application/octet-stream");
-            //response.setHeader("Content-Length", String.valueOf(is.available()));
-            //response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
             response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
 
             BufferedInputStream input = null;
             BufferedOutputStream output = null;
             try {
                 input = new BufferedInputStream(is, DEFAULT_BUFFER_SIZE);
-                
                 output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
                 byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
                 int length;
@@ -74,17 +57,41 @@ public class FtpDownloader {
                 output.close();
             }
             context.responseComplete();
-            //file.delete();
-
+            
         } catch (IOException e) {
         } finally {
             try {
                 client.disconnect();
             } catch (IOException ex) {
-               // Logger.getLogger(FileDownloaderFTP.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP exception", ex);
             }
 
         }
+    }
+    
+    
+    public InputStream giveInputStream(String filePath,String fileName) throws IOException {
+
+        FTPClient client = new FTPClient();
+        String remoteFile = null;
+        InputStream is = null;
+        
+        try {
+            client.connect("192.168.0.5", 89);
+            client.login("rice", "rice123");
+          
+            remoteFile = filePath+fileName;
+            
+            client.setFileType(FTP.BINARY_FILE_TYPE);
+            client.setBufferSize(0);        
+            
+            is = client.retrieveFileStream(remoteFile);
+            
+        } catch (IOException ex) {
+            Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP exception", ex);
+        } finally {
+        }
+        return is;
     }
     
 }

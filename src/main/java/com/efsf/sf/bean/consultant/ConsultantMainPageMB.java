@@ -87,6 +87,7 @@ public class ConsultantMainPageMB {
     
     private ClientCase selectedPremiumCase;
     
+    
     /**
      * Creates a new instance of ConsultantMainPageMB
      */
@@ -144,7 +145,6 @@ public class ConsultantMainPageMB {
             ownedModelsBranch.add(showAllClientsBranches(ownedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
     public void reloadFinishedTable()
@@ -158,7 +158,6 @@ public class ConsultantMainPageMB {
             finishedModelsBranch.add(showAllClientsBranches(finishedList.get(i).getClient()));
         }
         
-        System.out.println("");
     }
     
         
@@ -178,13 +177,13 @@ public class ConsultantMainPageMB {
     
     public void rowDoubleClick(ClientCase cs) throws IOException
     { 
-        clientCaseMB.setSelectedClientCase(cs);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml"); 
+    //    clientCaseMB.setSelectedClientCase(cs);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()); 
     }
           
     public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList<ClientCase>(csSet);
+        return new ArrayList(csSet);
     }
     
     public void reloadCases()
@@ -203,8 +202,8 @@ public class ConsultantMainPageMB {
     
     public String toClientCaseDetails(ClientCase cc)
     {
-        clientCaseMB.setSelectedClientCase(cc);
-        return "/consultant/consultantCaseDetails?faces-redirect=true";
+   //     clientCaseMB.setSelectedClientCase(cc);
+        return "/consultant/consultantCaseDetails?faces-redirect=true&clientCaseId=" + cc.getIdClientCase();
     }
     
     // This method may be moved to ClientCaseMB
