@@ -52,81 +52,52 @@ public class Settings
         return adminUnverified;
     }
 
-    public void setAdminUnverified(Integer adminUnverified) {
-        this.adminUnverified = adminUnverified;
-    }
+
 
     public Integer getAdminActive() {
         return adminActive;
     }
 
-    public void setAdminActive(Integer adminActive) {
-        this.adminActive = adminActive;
-    }
 
     public Integer getAdminInactive() {
         return adminInactive;
     }
 
-    public void setAdminInactive(Integer adminInactive) {
-        this.adminInactive = adminInactive;
-    }
 
     public Integer getConsultantUnverified() {
         return consultantUnverified;
     }
 
-    public void setConsultantUnverified(Integer consultantUnverified) {
-        this.consultantUnverified = consultantUnverified;
-    }
 
     public Integer getConsultantActive() {
         return consultantActive;
     }
 
-    public void setConsultantActive(Integer consultantActive) {
-        this.consultantActive = consultantActive;
-    }
 
     public Integer getConsultantInactive() {
         return consultantInactive;
     }
 
-    public void setConsultantInactive(Integer consultantInactive) {
-        this.consultantInactive = consultantInactive;
-    }
 
     public Integer getClientUnverified() {
         return clientUnverified;
     }
 
-    public void setClientUnverified(Integer clientUnverified) {
-        this.clientUnverified = clientUnverified;
-    }
 
     public Integer getClientActive() {
         return clientActive;
     }
 
-    public void setClientActive(Integer clientActive) {
-        this.clientActive = clientActive;
-    }
 
     public Integer getClientInactive() {
         return clientInactive;
     }
 
-    public void setClientInactive(Integer clientInactive) {
-        this.clientInactive = clientInactive;
-    }
 
     public Integer getLoggedOut() {
         return loggedOut;
     }
 
-    public void setLoggedOut(Integer loggedOut) {
-        this.loggedOut = loggedOut;
-    }
             
     
 }
