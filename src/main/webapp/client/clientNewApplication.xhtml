@@ -19,7 +19,7 @@
                 
                 <div>
 
-                    <div class="contentBox" style="margin-bottom: 30px;">
+                    <div class="contentBox" style="margin-bottom: 30px; margin-top: 30px;">
 
                         <div class="leftBox">
 
@@ -101,10 +101,6 @@
                                     </div>
 
                                 </h:panelGroup>
-
-
-                                <h:commandButton  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
-
 
                                 <p:dialog id="basicDialog" header="Doładuj konto." widgetVar="dlg1" rendered="true">  
                                     <h:panelGrid columns="1">
@@ -267,67 +263,16 @@
 
                             </div>
                             <div id="buttonsBox3">
-
-                                <h:link class="greenButton wideButton" value="Dalej" style="float: right;" outcome="/client/clientMainPage"/>
-
+                                <h:form>
+                                <h:commandButton class="greenButton wideButton" rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                                </h:form>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div class="greenLine" ></div>  
 
-
-                    <h4 class="greenLeftBorder"> PODGLĄD GIEŁDY</h4>
-
-                    <p:dataTable > 
-
-                        <p:column headerText="Lp" >  
-
-                        </p:column> 
-
-                        <p:column headerText="Numer klienta">  
-                        </p:column>  
-
-                        <p:column headerText="Data dodania">    
-                        </p:column>  
-
-                        <p:column headerText="Numer sprawy">  
-                        </p:column>  
-
-                        <p:column headerText="Postęp">  
-                        </p:column> 
-
-                        <p:column headerText="Rodzaj kredytu"  >  
-                        </p:column> 
-
-                        <p:column headerText="BIK">  
-                        </p:column> 
-
-                        <p:column headerText="Kod pocztowy">  
-                        </p:column>
-
-                        <p:column headerText="Wiek">  
-                        </p:column>
-
-                        <p:column headerText="Typ zatrudnienia">  
-                        </p:column>
-
-                        <p:column headerText="Branża">  
-                        </p:column>
-
-                        <p:column headerText="Trudności kredytu">  
-                        </p:column>
-
-                        <p:column headerText="Ilość doradców">  
-                        </p:column>                  
-
-                        <p:column headerText="Koniec aukcji">  
-                        </p:column>      
-
-
-                    </p:dataTable>
                 </div>
 
                 <div style="min-height: 30px;">
