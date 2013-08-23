@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class productsMB implements Serializable {
+public class ProductsMB implements Serializable {
     
     private List<Product> products;
     private Institution newInstitution=new Institution();

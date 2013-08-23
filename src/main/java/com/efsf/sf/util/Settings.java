@@ -26,6 +26,10 @@ public class Settings
     public static final Integer CLIENT_ACTIVE = 31;
     public static final Integer CLIENT_INACTIVE = 32;  
     public static final Integer LOGGED_OUT = -1;
+    
+    
+    // PRODUCT TYPES 
+    public static final Integer CHWILOWKA = 2;
 
     
     
