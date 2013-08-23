@@ -8,25 +8,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.fontbox.encoding.Encoding;
-import org.apache.pdfbox.cos.COSArray;
-import org.apache.pdfbox.cos.COSBase;
-import org.apache.pdfbox.encoding.AFMEncoding;
+import org.apache.fontbox.ttf.TrueTypeFont;
 import org.apache.pdfbox.encoding.DictionaryEncoding;
-import org.apache.pdfbox.encoding.MacRomanEncoding;
-import org.apache.pdfbox.encoding.PdfDocEncoding;
 import org.apache.pdfbox.encoding.StandardEncoding;
+import org.apache.pdfbox.encoding.Type1Encoding;
 import org.apache.pdfbox.encoding.WinAnsiEncoding;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
 import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.util.PDFTextStripper;
+import sun.security.krb5.internal.EncAPRepPart;
 
 /**
  * @author WR1EI1
@@ -55,10 +50,16 @@ public class AgreementPDF {
 
             List pages = doc.getDocumentCatalog().getAllPages();
 
-            //PDSimpleFont font = PDType1Font.HELVETICA_BOLD;
+            PDSimpleFont font = PDType1Font.TIMES_ROMAN;
 
-            PDFont font = PDTrueTypeFont.loadTTF(doc, new File("arial.ttf"));
+            //PDFont font = PDTrueTypeFont.loadTTF( doc , new File("ariali.ttf") );
 
+            PDDocument doc2 = PDDocument.load("java.pdf");
+            
+            font.setToUnicode(doc2.getDocumentInformation().getCOSObject());
+            
+            //font.setFontEncoding(  );
+            
             //font.setFontEncoding(new WinAnsiEncoding() );
 
             //PdfDocEncoding e=new PdfDocEncoding();
@@ -78,8 +79,8 @@ public class AgreementPDF {
 
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 550);
-            //contentStream.drawString(consultant.getName()+" "+consultant.getLastName());
-            contentStream.drawString("\u0105");
+            contentStream.drawString(consultant.getName()+" "+consultant.getLastName());
+            //contentStream.drawString("\u00F3"+"\u00F1");
 
             contentStream.endText();
 
@@ -87,7 +88,7 @@ public class AgreementPDF {
 
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 510);
-            contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry() + "отделом компьютерной");
+            contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry());
 
 
             contentStream.endText();

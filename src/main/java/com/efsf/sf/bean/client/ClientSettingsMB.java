@@ -75,6 +75,10 @@ public class ClientSettingsMB implements Serializable {
     @PostConstruct
     private void loadClient() {
 
+        
+        
+        
+        
         client = clientDAO.readClientForSettings(idClient);
 
         idMartialStatus = client.getMaritalStatus().getIdMaritalStatus();

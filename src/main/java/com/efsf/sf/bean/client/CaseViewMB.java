@@ -18,6 +18,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.util.analyser.AnalyserAlgorithm;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class CaseViewMB implements Serializable{
+    
+    
 
     @ManagedProperty(value="#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
@@ -95,6 +98,17 @@ public class CaseViewMB implements Serializable{
             fillSelectedCaseIncomeTable();
         }
     }
+    
+    
+    public List<Consultant> bestConsultantsForPremiumCase(){
+        List<Consultant> cons;
+        
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
+        cons = aa.getWynik2();
+        
+        return cons;
+    }
+    
     
     public void changeCaseStatus()
     {

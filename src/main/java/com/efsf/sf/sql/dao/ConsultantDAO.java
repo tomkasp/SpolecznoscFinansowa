@@ -2,6 +2,8 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -156,7 +158,27 @@ public class ConsultantDAO {
         return consultant;
     }
     
-    
+    public List<Consultant> getConsultantsForProductDetail(int productDetail){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        List<Consultant> cons;
+        
+        Query q = session.createQuery("FROM Consultant con "
+                + "LEFT JOIN FETCH con.institutions ins "
+                + "LEFT JOIN FETCH ins.products prod "
+                + "LEFT JOIN FETCH prod.productDetailses pd "
+                + "LEFT JOIN FETCH con.consultantRatings cr "
+                + "WHERE pd.idProductDetail= :idProductDetail ");
+        q.setParameter("idProductDetail", productDetail);
+
+        cons = q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        return cons;
+    }
     
     
     
