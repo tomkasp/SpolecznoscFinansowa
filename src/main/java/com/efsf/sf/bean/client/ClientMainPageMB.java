@@ -211,12 +211,7 @@ public class ClientMainPageMB implements Serializable {
         else
         {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            if (rds.getBik() == null) {
-                return false;
-            }
-            else {
-                return true;
-            }   
+            return rds.getBik() == null;  
         }   
     }
     
