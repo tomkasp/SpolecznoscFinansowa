@@ -56,35 +56,35 @@ public class FileDownloadMB implements Serializable {
     }
     
     public void load1() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getIdCard() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getIdCard() ); 
     }
     
     public void load2() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getIncomeStatement() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getIncomeStatement() ); 
     }
    
     public void load3() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getDeathCertificate() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getDeathCertificate() ); 
     }
     
     public void load4() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getMariageSettlement() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getMariageSettlement() ); 
     }
     
     public void load5() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getDivorceAct() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getDivorceAct() ); 
     }
     
     public void load6() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getSeparationAct() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getSeparationAct() ); 
     }
     
     public void load7() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getTitleDeed() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getTitleDeed() ); 
     }
     
     public void load8() throws IOException{
-        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getBik() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getBik() ); 
     }
      
     public LoginMB getLoginMB() {

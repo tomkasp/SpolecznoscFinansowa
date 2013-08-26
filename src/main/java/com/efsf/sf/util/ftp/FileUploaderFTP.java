@@ -1,5 +1,7 @@
 package com.efsf.sf.util.ftp;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -76,6 +78,51 @@ public class FileUploaderFTP {
         }
 
     }
+    
+    
+    public String copyFileOnFTP(String localPath,String ftpPath) {
+ 
+        FTPClient ftpClient = new FTPClient();
+        
+        try {
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+          
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            
+            File firstLocalFile = new File(localPath);
+            String firstRemoteFile =ftpPath;
+            
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+            ftpClient.setBufferSize(0);
+            
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            
+            inputStream.close();
+            if (done) {
+                System.out.println("Success!");
+            }
+ 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return "";
+        
+        
+        
+        
+    }
+    
 
     public boolean makeDirectory(String pathname) {
 
