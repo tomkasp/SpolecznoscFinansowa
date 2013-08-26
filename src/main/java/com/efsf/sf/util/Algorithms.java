@@ -35,10 +35,12 @@ public class Algorithms
         // If client have some obligations the loan is harder to get
         if (client.getObligations() != null)
         {
-            if (client.getObligations().size() == 1)
+            if (client.getObligations().size() == 1) {
                 difficulty++;
-            else if (client.getObligations().size() > 1)
+            }
+            else if (client.getObligations().size() > 1) {
                 difficulty += 2;
+            }
         }
         
         // Chwilówka should be here || We assume that 'chwilówka' is easier to get then other loans
