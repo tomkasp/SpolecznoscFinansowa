@@ -4,6 +4,11 @@ import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.ftp.FileUploaderFTP;
+import com.efsf.sf.util.ftp.FtpDownloader;
+import com.efsf.sf.util.pdf.AgreementPDFItext;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,6 +36,9 @@ public class ConsultantSettingsMB implements Serializable {
     
     @ManagedProperty(value="#{loginMB.consultant.idConsultant}")
     private Integer idConsultant;
+    
+    @ManagedProperty(value="#{loginMB.user.idUser}")
+    private Integer idUser;
    
     private Consultant consultant; 
     
@@ -95,13 +103,13 @@ public class ConsultantSettingsMB implements Serializable {
             {   
                 mainAddress=a;
                 idMainRegion=mainAddress.getRegion().getIdRegion();
-                //idMainRegion=1;
+
             }
             if(a.getType()==2)
             {      
                 invoiceAddress=a;
                 idInvoiceRegion=invoiceAddress.getRegion().getIdRegion();
-                //idInvoiceRegion=1;
+
                 //I PRZY OKAZJI:
                 invoiceData=iddao.loadFromFkAddress(a.getIdAddress());
             } 
@@ -113,7 +121,8 @@ public class ConsultantSettingsMB implements Serializable {
         while(it4.hasNext())
         {
             Subscription s=it4.next();
-            if(!it4.hasNext())//ZAWSZE ZWRACA OSTATNI ABONAMENT
+            //ZAWSZE ZWRACA OSTATNI ABONAMENT
+            if(!it4.hasNext())
             {
                 idSubscriptionType=s.getIdSubscription();
                 subscription=s;
@@ -228,6 +237,34 @@ public class ConsultantSettingsMB implements Serializable {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
             throw new ValidatorException(message);
         }
+    }
+    
+    public void showAgreementPDF() throws IOException{
+        
+        String sourceLocalPath = "\\u.pdf";
+        String destinationLocalPath = "\\";
+        String ftpPath = "rice/SF/USERS/" + idUser + "/";
+        String fileName = "agreement_consultant_"+idConsultant+".pdf";
+        //CREATE NEW AGREEMENT:
+        AgreementPDFItext itext = new AgreementPDFItext();
+        
+        itext.fillPDF( idConsultant,sourceLocalPath , destinationLocalPath + fileName );
+        
+        //UPLOAD ON FTP:
+       
+        FileUploaderFTP fuftp=new FileUploaderFTP();
+        fuftp.makeDirectory(ftpPath);
+        fuftp.copyFileOnFTP( destinationLocalPath+fileName , ftpPath + fileName );
+        
+        
+        //DOWNLOAD FROM FTP:
+        FtpDownloader ftpd=new FtpDownloader();
+        ftpd.download(ftpPath, fileName ); 
+        
+        //DELETE LOCAL FILE
+        File f = new File(destinationLocalPath+fileName);
+        f.delete();
+        
     }
     
     public Integer getIdConsultant() {
@@ -365,7 +402,13 @@ public class ConsultantSettingsMB implements Serializable {
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
     }
-    
-    
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
     
 }

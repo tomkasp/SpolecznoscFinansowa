@@ -2,7 +2,6 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,7 +11,7 @@ public class ConsultantDAO {
 
     public Consultant read(int id) {
        
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Consultant consultant=null;
         
         try
@@ -33,7 +32,7 @@ public class ConsultantDAO {
 
     public void save(Consultant consultant) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         session.save(consultant);
@@ -45,7 +44,7 @@ public class ConsultantDAO {
 
     public void update(Consultant consultant) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         session.update(consultant);
@@ -56,7 +55,7 @@ public class ConsultantDAO {
     }
     
     public void merge(Consultant consultant) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         
         session.merge(consultant);
@@ -68,7 +67,7 @@ public class ConsultantDAO {
 
     public void delete(Consultant consultant) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         session.delete(consultant);
@@ -81,7 +80,7 @@ public class ConsultantDAO {
     
     public Consultant getCounsultantConnectedToUser(int userId)
     {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         
         
@@ -129,7 +128,7 @@ public class ConsultantDAO {
     
     public Consultant readConsultantForSettings(int id) {
        
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Consultant consultant=null;
         
         try
@@ -159,7 +158,7 @@ public class ConsultantDAO {
     }
     
     public List<Consultant> getConsultantsForProductDetail(int productDetail){
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         List<Consultant> cons;

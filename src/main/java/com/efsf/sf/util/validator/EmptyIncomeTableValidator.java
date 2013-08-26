@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.util.validator;
 
-import com.efsf.sf.sql.dao.UserDAO;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -13,10 +8,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-/**
- *
- * @author XaI
- */
+
 @FacesValidator("com.efsf.sf.util.EmptyIncomeTableValidator")
 public class EmptyIncomeTableValidator implements Validator {
     

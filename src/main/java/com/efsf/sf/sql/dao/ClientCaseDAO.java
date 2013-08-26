@@ -4,7 +4,6 @@ import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -16,7 +15,7 @@ import org.joda.time.DateTime;
 public class ClientCaseDAO implements Serializable {
 
     public void saveClientCase(ClientCase clientCase) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         //pierwsza faza CaseStatus
@@ -30,7 +29,7 @@ public class ClientCaseDAO implements Serializable {
     public ClientCase read(int idClientCase)
     {
         ClientCase cs;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         cs = (ClientCase) session.get(ClientCase.class, idClientCase);
@@ -44,7 +43,7 @@ public class ClientCaseDAO implements Serializable {
     public List last5Cases()
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -80,7 +79,7 @@ public class ClientCaseDAO implements Serializable {
     public boolean doesConsultantObserveCase(int consultantID, int caseID)
     {
          boolean flag;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("from Consultant as c "
@@ -100,7 +99,7 @@ public class ClientCaseDAO implements Serializable {
     public boolean doesConsultantAppliedToCase(int consultantID, int caseID)
     {
          boolean flag;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("from Consultant as c "
@@ -117,10 +116,10 @@ public class ClientCaseDAO implements Serializable {
          return !flag;
     }
     
-    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, ArrayList<String> incomes, ArrayList<String> business)
+    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          Query q; 
          //CASE: SELECTED BRANCH AND CASE
@@ -283,7 +282,7 @@ public class ClientCaseDAO implements Serializable {
     
      public boolean checkClientAccess(Integer idClient, Integer idCase)
      {
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
           
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -298,21 +297,15 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (l == null || l.isEmpty())
-         {
-             return false;
-         }
-         else
-         {
-             return true;
-         }
+         return !(l == null || l.isEmpty());
+
      }
      
     
      public List<ClientCase> last5CasesSelectedClient(Integer fkClient)
      {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
         
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -352,7 +345,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
         
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -390,7 +383,7 @@ public class ClientCaseDAO implements Serializable {
          public List<ClientCase> awaitingForMarketClientCaseList(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
         
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -428,7 +421,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> awaitingCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -464,7 +457,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> currentCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -501,7 +494,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> finishedCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -534,7 +527,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> premiumCasesSelectedClient(Integer fkClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -571,7 +564,7 @@ public class ClientCaseDAO implements Serializable {
     public ClientCase getClientCaseWithConsultantDetails(int idClientCase)
     {
                  ClientCase cs;    
-                 Session session = HibernateUtil.getSessionFactory().openSession();
+                 Session session = HibernateUtil.SESSION_FACTORY.openSession();
                  session.beginTransaction();
         
                  Query q = session.createQuery("FROM ClientCase as cs "
@@ -601,7 +594,7 @@ public class ClientCaseDAO implements Serializable {
     public ClientCase getClientCaseWithClientDetails(int idClientCase)
     {
                  ClientCase cs;    
-                 Session session = HibernateUtil.getSessionFactory().openSession();
+                 Session session = HibernateUtil.SESSION_FACTORY.openSession();
                  session.beginTransaction();
         
                  Query q = session.createQuery("FROM ClientCase as cs "
@@ -631,7 +624,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> ownedCasesSelectedConsultant(Integer fkConsultant)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -669,7 +662,7 @@ public class ClientCaseDAO implements Serializable {
     public List<ClientCase> finishedCasesSelectedConsultant(int idConsultant)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -705,7 +698,7 @@ public class ClientCaseDAO implements Serializable {
     }
             
     public void updateClientCase(ClientCase clientCase) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         session.update(clientCase);
@@ -718,7 +711,7 @@ public class ClientCaseDAO implements Serializable {
     {
         List<ClientCase>  list;
     
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Query q = session.createQuery("From ClientCase as cc "
@@ -733,20 +726,13 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
      
-        if (list == null || list.isEmpty())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return !(list == null || list.isEmpty());
     }
     
     public List<ClientCase> premiumCasesSelectedConsultant(int idConsultant)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -784,7 +770,7 @@ public class ClientCaseDAO implements Serializable {
     public boolean checkClientFinishedCases(Integer idClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
         
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -799,16 +785,13 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null && !list.isEmpty())
-             return true;
-         else
-             return false;
+         return list != null && !list.isEmpty();
     }
     
     public boolean checkClientCases(Integer idClient)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
         
          Query q = session.createQuery("FROM ClientCase as cs "
@@ -823,10 +806,7 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null && !list.isEmpty())
-             return true;
-         else
-             return false;
+         return list != null && !list.isEmpty();
     }
 }
     

@@ -3,23 +3,17 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 
 public class ClientDAO {
 
-    private int points;
- //   private String[] klienci;
- //   private String[][] ProduktyBankow;
-//    private String[][] wynik = new String[5][4];
-//    private String NazwaBanku;
-//    private String NazwaProduktu;
+    
 
     public Client read(int id) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client c left outer join fetch c.user as u WHERE id_client = :id");
@@ -36,7 +30,7 @@ public class ClientDAO {
 
     public void save(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         session.save(client);
@@ -49,7 +43,9 @@ public class ClientDAO {
     public void decrementPoints(Client client, Integer p) {
         //odejmowanie punktow po dodaniu wniosku
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        int points;
+        
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         Client cli = (Client) session.load(Client.class, client.getIdClient());
@@ -66,7 +62,7 @@ public class ClientDAO {
 
     public void update(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         session.update(client);
@@ -78,7 +74,7 @@ public class ClientDAO {
 
     public void delete(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         session.delete(client);
@@ -91,7 +87,7 @@ public class ClientDAO {
 
     public Client getClientWithIncomes(int idClient) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client as clt "
@@ -112,7 +108,7 @@ public class ClientDAO {
 
      public Client checkClientForNewApplication(int idClient)
      {
-                Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.SESSION_FACTORY.openSession();
                 session.beginTransaction().begin();
                 
                 Query q = session.createQuery("FROM Client as clt "
@@ -138,7 +134,7 @@ public class ClientDAO {
 
     public Client readClientForSettings(int id) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Client client = null;
 
         try {
@@ -161,7 +157,6 @@ public class ClientDAO {
             client = (Client) q.list().get(0);
             session.getTransaction().commit();
 
-        } catch (HibernateException exp) {
         } finally {
             session.close();
         }
@@ -170,7 +165,7 @@ public class ClientDAO {
     }
 
     public Client getClientForCase(Integer idSprawaKlienta) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         Query q = session.createQuery("from Client cl "
                 + "left join fetch cl.clientCases cc "
@@ -181,9 +176,6 @@ public class ClientDAO {
                 + "where cc.idClientCase= :sprawaKlienta ");
         q.setParameter("sprawaKlienta", idSprawaKlienta);
 
-        List l = q.list();
-//      setKlienci(new String[10]);
-
         Client klient = (Client) q.list().get(0);
 
 
@@ -193,43 +185,4 @@ public class ClientDAO {
         return klient;
     }
 
-//    public String[] getKlienci() {
-//        return klienci;
-//    }
-//
-//    public String[][] getProduktyBankow() {
-//        return ProduktyBankow;
-//    }
-
-//    public String[][] getWynik() {
-//        return wynik;
-//    }
-
-//    public String getNazwaBanku() {
-//        return NazwaBanku;
-//    }
-//
-//    public String getNazwaProduktu() {
-//        return NazwaProduktu;
-//    }
-
-//    public void setKlienci(String[] klienci) {
-//        this.klienci = klienci;
-//    }
-//
-//    public void setProduktyBankow(String[][] ProduktyBankow) {
-//        this.ProduktyBankow = ProduktyBankow;
-//    }
-
-//    public void setWynik(String[][] wynik) {
-//        this.wynik = wynik;
-//    }
-
-//    public void setNazwaBanku(String NazwaBanku) {
-//        this.NazwaBanku = NazwaBanku;
-//    }
-//
-//    public void setNazwaProduktu(String NazwaProduktu) {
-//        this.NazwaProduktu = NazwaProduktu;
-//    }
 }

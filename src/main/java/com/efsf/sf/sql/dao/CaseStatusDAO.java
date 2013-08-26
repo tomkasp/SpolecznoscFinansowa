@@ -11,7 +11,7 @@ public class CaseStatusDAO {
     
     public List caseStatusList(){
         List<CaseStatus> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         lista = session.createQuery("from CaseStatus").list();
         session.getTransaction().commit();
@@ -21,7 +21,7 @@ public class CaseStatusDAO {
     
      public CaseStatus read(int id) {
        
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         CaseStatus caseStatus=null;
         try
         {

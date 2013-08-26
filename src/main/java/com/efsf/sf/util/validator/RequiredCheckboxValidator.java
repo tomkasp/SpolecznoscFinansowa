@@ -25,8 +25,8 @@ public class RequiredCheckboxValidator implements Validator
         throws ValidatorException
     {
         if (value == null || value.equals(Boolean.FALSE)) {
-            context = FacesContext.getCurrentInstance();
-            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            ResourceBundle bundle = facesContext.getApplication().getResourceBundle(facesContext, "msg");
             FacesMessage msg =  new FacesMessage(bundle.getString("requiredCheckbox"),bundle.getString("requiredCheckbox"));
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);

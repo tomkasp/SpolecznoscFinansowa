@@ -11,7 +11,7 @@ public class BranchDAO
 {
         public List branchList(){
         List<Branch> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         list = session.createQuery("from Branch").list();
         session.getTransaction().commit();

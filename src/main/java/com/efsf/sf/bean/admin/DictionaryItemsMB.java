@@ -45,14 +45,15 @@ public class DictionaryItemsMB implements Serializable{
        active.setAccessible(true);
        active.set(o, item.getIsActive());
        
-       if(item.getId()!=-1){
-            Field[] fields = cls.getDeclaredFields(); 
-            for (Field field : fields)
-               if (field.getName().startsWith("id")) {
-                  field.setAccessible(true);
-                  field.set(o, item.getId());
-               }         
-       }
+        if (item.getId() != -1) {
+            Field[] fields = cls.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.getName().startsWith("id")) {
+                    field.setAccessible(true);
+                    field.set(o, item.getId());
+                }
+            }
+        }
        
        dao.saveOrUpdateObject(o);
        item=new DictionaryItem(-1, "", 1);

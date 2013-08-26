@@ -1,4 +1,9 @@
 body {
+    background: url("../resources/images/bg-page.png") repeat scroll 0% 0% transparent;
+
+}
+
+.page {
     background-color: #ffffff;
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
@@ -9,11 +14,8 @@ body {
     padding: 30px;
     box-shadow: 2px 2px 12px rgb(221, 221, 221);
     border: 1px solid #dddddd;
-    
-}
-
- html {
-    background: url("http://www.zorba.io/img/bg-page.png") repeat scroll 0% 0% transparent;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .effect7
@@ -22,8 +24,6 @@ body {
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 .effect7:before, .effect7:after
 {

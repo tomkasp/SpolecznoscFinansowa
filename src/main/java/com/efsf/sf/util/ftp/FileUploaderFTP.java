@@ -1,5 +1,7 @@
 package com.efsf.sf.util.ftp;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -19,20 +21,21 @@ public class FileUploaderFTP {
     private String pass = "rice123";
 
     public String upload(UploadedFile file, Integer folderId, String fileName) {
-
+        String finalFileName;
         String ftpPath = "rice/SF/USERS/" + folderId + "/";
         makeDirectory(ftpPath);
 
         if (file != null) {
-            String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5)); //wyłuskanie rozszerzenia pliku
-            fileName = fileName + fileFormat;
+            String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5)); 
+            finalFileName = fileName + fileFormat;
             try {
 
-                uploadFTP(file.getInputstream(), ftpPath + fileName);
+                uploadFTP(file.getInputstream(), ftpPath + finalFileName);
 
             } catch (IOException e) {
+                Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload exception", e);
             }
-            return fileName;
+            return finalFileName;
         } else {
             return null;
         }
@@ -57,7 +60,6 @@ public class FileUploaderFTP {
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
 
             inputStream.close();
-            System.out.println(9);
             if (done) {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload success");
             }
@@ -76,6 +78,51 @@ public class FileUploaderFTP {
         }
 
     }
+    
+    
+    public String copyFileOnFTP(String localPath,String ftpPath) {
+ 
+        FTPClient ftpClient = new FTPClient();
+        
+        try {
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+          
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            
+            File firstLocalFile = new File(localPath);
+            String firstRemoteFile =ftpPath;
+            
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+            ftpClient.setBufferSize(0);
+            
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            
+            inputStream.close();
+            if (done) {
+                System.out.println("Success!");
+            }
+ 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return "";
+        
+        
+        
+        
+    }
+    
 
     public boolean makeDirectory(String pathname) {
 
@@ -94,8 +141,8 @@ public class FileUploaderFTP {
             if (done) {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory success");
             } else {
-                     Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory failed");
-            };
+                Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory failed");
+            }
 
 
         } catch (IOException ex) {

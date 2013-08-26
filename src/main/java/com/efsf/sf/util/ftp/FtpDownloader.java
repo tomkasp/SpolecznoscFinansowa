@@ -13,10 +13,10 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FtpDownloader {
 
-    public void downLoad(String filePath,String fileName) throws IOException {
+    public static final int DEFAULT_BUFFER_SIZE = 10240;
+    
+    public void download(String filePath,String fileName) throws IOException {
 
-       
-        
         FTPClient client = new FTPClient();
         String remoteFile = null;
         try {
@@ -30,12 +30,10 @@ public class FtpDownloader {
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);        
             InputStream is = client.retrieveFileStream(remoteFile);
-                      
-            
-            final int DEFAULT_BUFFER_SIZE = 10240;
+
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
-//          
+     
             response.reset();
             
             response.setBufferSize(DEFAULT_BUFFER_SIZE);
@@ -59,6 +57,7 @@ public class FtpDownloader {
             context.responseComplete();
             
         } catch (IOException e) {
+                Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP exception", e);
         } finally {
             try {
                 client.disconnect();
@@ -69,29 +68,5 @@ public class FtpDownloader {
         }
     }
     
-    
-    public InputStream giveInputStream(String filePath,String fileName) throws IOException {
-
-        FTPClient client = new FTPClient();
-        String remoteFile = null;
-        InputStream is = null;
-        
-        try {
-            client.connect("192.168.0.5", 89);
-            client.login("rice", "rice123");
-          
-            remoteFile = filePath+fileName;
-            
-            client.setFileType(FTP.BINARY_FILE_TYPE);
-            client.setBufferSize(0);        
-            
-            is = client.retrieveFileStream(remoteFile);
-            
-        } catch (IOException ex) {
-            Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP exception", ex);
-        } finally {
-        }
-        return is;
-    }
     
 }
