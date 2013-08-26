@@ -11,6 +11,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.ProductType;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ConsultantProfileMB {
+public class ConsultantProfileMB implements Serializable{
 
     @ManagedProperty(value="#{caseViewMB}")
     private CaseViewMB caseViewMB;
