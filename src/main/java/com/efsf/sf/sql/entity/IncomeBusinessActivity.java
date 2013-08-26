@@ -55,32 +55,6 @@ public class IncomeBusinessActivity implements java.io.Serializable {
         this.branch = branch;
     }
 
-    public IncomeBusinessActivity(Client client, EmploymentType employmentType, Branch branch, Date beginDate, String revenueExpenceLedger, BigDecimal incomeCurrentYearBrutto, BigDecimal incomeLastYearBrutto, BigDecimal incomeCurrentYearNetto, BigDecimal incomeLastYearNetto, BigDecimal incomeTax6mthAdv, BigDecimal valueZus, BigDecimal valueUs, BigDecimal valueKrd, String titleKrd, BigDecimal depreciationCurrentYear, BigDecimal depreciationLastYear, BigDecimal rateRe, BigDecimal incomeLastYearRe, BigDecimal incomeCurrentYearRe, BigDecimal taxValue1mth, BigDecimal taxValue2mth, BigDecimal taxValue3mth, BigDecimal constantAmountCard) {
-        this.client = client;
-        this.employmentType = employmentType;
-        this.branch = branch;
-        this.beginDate = beginDate;
-        this.revenueExpenceLedger = revenueExpenceLedger;
-        this.incomeCurrentYearBrutto = incomeCurrentYearBrutto;
-        this.incomeLastYearBrutto = incomeLastYearBrutto;
-        this.incomeCurrentYearNetto = incomeCurrentYearNetto;
-        this.incomeLastYearNetto = incomeLastYearNetto;
-        this.incomeTax6mthAdv = incomeTax6mthAdv;
-        this.valueZus = valueZus;
-        this.valueUs = valueUs;
-        this.valueKrd = valueKrd;
-        this.titleKrd = titleKrd;
-        this.depreciationCurrentYear = depreciationCurrentYear;
-        this.depreciationLastYear = depreciationLastYear;
-        this.rateRe = rateRe;
-        this.incomeLastYearRe = incomeLastYearRe;
-        this.incomeCurrentYearRe = incomeCurrentYearRe;
-        this.taxValue1mth = taxValue1mth;
-        this.taxValue2mth = taxValue2mth;
-        this.taxValue3mth = taxValue3mth;
-        this.constantAmountCard = constantAmountCard;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_incomeBusinessActivity", unique = true, nullable = false)

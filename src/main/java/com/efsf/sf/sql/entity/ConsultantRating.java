@@ -44,10 +44,6 @@ public class ConsultantRating implements java.io.Serializable {
         rateCount = 0;
     }
 
-    public ConsultantRating(Consultant consultant) {
-        this.consultant = consultant;
-    }
-
     public ConsultantRating(Consultant consultant, Double contact, Double culture, Double competence, Double punctuality, Double reliability, Double respect, Double difficulty, Double trust, Double average, Integer rateCount) {
         this.consultant = consultant;
         this.contact = contact;
@@ -60,6 +56,10 @@ public class ConsultantRating implements java.io.Serializable {
         this.trust = trust;
         this.average = average;
         this.rateCount = rateCount;
+    }
+
+    public ConsultantRating(Consultant consultant) {
+        this.consultant = consultant;
     }
 
     @Id

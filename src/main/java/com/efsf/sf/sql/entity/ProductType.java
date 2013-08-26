@@ -34,14 +34,6 @@ public class ProductType implements java.io.Serializable {
     public ProductType() {
     }
 
-    public ProductType(String name, Set<Consultant> consultants, Set<Obligation> obligations, Set<ProductDetails> productDetailses, Set<ClientCase> clientCases) {
-        this.name = name;
-        this.consultants = consultants;
-        this.obligations = obligations;
-        this.productDetailses = productDetailses;
-        this.clientCases = clientCases;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_productType", unique = true, nullable = false)

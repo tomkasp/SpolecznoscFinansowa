@@ -41,18 +41,6 @@ public class Obligation implements java.io.Serializable {
         this.productType = productType;
     }
 
-    public Obligation(Client client, ProductType productType, String name, Date beginDate, BigDecimal beginPrice, BigDecimal actualPrice, BigDecimal repayment, String obligationKind, Boolean active) {
-        this.client = client;
-        this.productType = productType;
-        this.name = name;
-        this.beginDate = beginDate;
-        this.beginPrice = beginPrice;
-        this.actualPrice = actualPrice;
-        this.repayment = repayment;
-        this.obligationKind = obligationKind;
-        this.active = active;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_obligation", unique = true, nullable = false)

@@ -33,12 +33,6 @@ public class Institution implements java.io.Serializable {
     public Institution() {
     }
 
-    public Institution(String name, Integer type, Set<Product> products, Set<Consultant> consultants) {
-        this.name = name;
-        this.type = type;
-        this.products = products;
-        this.consultants = consultants;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

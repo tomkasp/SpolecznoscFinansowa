@@ -32,17 +32,6 @@ public class RequiredDocuments implements java.io.Serializable {
     public RequiredDocuments() {
     }
 
-    public RequiredDocuments(Client client, String idCard, String incomeStatement, String deathCertificate, String mariageSettlement, String divorceAct, String separationAct, String titleDeed, String bik) {
-        this.client = client;
-        this.idCard = idCard;
-        this.incomeStatement = incomeStatement;
-        this.deathCertificate = deathCertificate;
-        this.mariageSettlement = mariageSettlement;
-        this.divorceAct = divorceAct;
-        this.separationAct = separationAct;
-        this.titleDeed = titleDeed;
-        this.bik = bik;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
