@@ -4,7 +4,6 @@ import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
