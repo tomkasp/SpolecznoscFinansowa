@@ -18,28 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginConsultantFilter implements Filter {
 
     @Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		LoginMB loginBean = (LoginMB)((HttpServletRequest)request).getSession().getAttribute("loginMB");
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		if ( loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE)  )//IF NO CONSULTANT
-                {
-			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(contextPath + "/faces/login.xhtml");
-                        System.out.println("NO LOGGED AS CONSULTANT");
-		}
-                
-		chain.doFilter(request, response);
-                
-	}
+        LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
-    @Override
-	public void init(FilterConfig config) throws ServletException {
-	}
+        if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))//IF NO CONSULTANT
+        {
+            String contextPath = ((HttpServletRequest) request).getContextPath();
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
+            System.out.println("NO LOGGED AS CONSULTANT");
+        }
+
+        chain.doFilter(request, response);
+
+    }
 
     @Override
-	public void destroy() {
-	}	
-	
+    public void init(FilterConfig config) throws ServletException {
+    }
+
+    @Override
+    public void destroy() {
+    }
 }
-

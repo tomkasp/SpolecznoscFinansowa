@@ -95,7 +95,7 @@ public class FileUploaderFTP {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory success");
             } else {
                      Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory failed");
-            };
+            }
 
 
         } catch (IOException ex) {
