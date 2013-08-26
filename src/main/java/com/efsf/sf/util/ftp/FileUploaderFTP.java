@@ -31,6 +31,7 @@ public class FileUploaderFTP {
                 uploadFTP(file.getInputstream(), ftpPath + fileName);
 
             } catch (IOException e) {
+                Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload exception", e);
             }
             return fileName;
         } else {
@@ -57,7 +58,6 @@ public class FileUploaderFTP {
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
 
             inputStream.close();
-            System.out.println(9);
             if (done) {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload success");
             }
@@ -94,7 +94,7 @@ public class FileUploaderFTP {
             if (done) {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory success");
             } else {
-                     Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory failed");
+                Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP make directory failed");
             }
 
 

@@ -104,11 +104,12 @@ public class CreateClientMB implements Serializable
     
     
     //Address Data
+    private Address address = new Address();
+    private Set<Address> addressSet = new HashSet();
     
     private int regionId;
     
-    // flag to set required elements if we want to make new application
-    
+    // flag to set required elements if we want to make new application 
     private boolean areRequired = false;
 
     public boolean isAreRequired() {
@@ -126,8 +127,6 @@ public class CreateClientMB implements Serializable
     public void setRegionId(int regionId) {
         this.regionId = regionId;
     }
-    private Address address = new Address();
-    private Set<Address> addressSet = new HashSet();
     
     public CreateClientMB()
     {
@@ -356,7 +355,7 @@ public class CreateClientMB implements Serializable
                 if (incomeData.getIdIncome() == idIncome) {
                     it.remove();
                 }
-                if (isIncome == true) {
+                if (isIncome) {
                     Iterator<Income> incomeIterator = incomeSet.iterator();
                     while (incomeIterator.hasNext()) {
 

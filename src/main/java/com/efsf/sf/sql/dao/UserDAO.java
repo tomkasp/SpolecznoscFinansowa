@@ -5,11 +5,8 @@ import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Security;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.exception.JDBCConnectionException;
 
 public class UserDAO {
 
@@ -32,14 +29,13 @@ public class UserDAO {
 
     public User login(String email, String password) {
 
-        Session session = null;
+        Session session;
         User user = null;
 
 
         session = HibernateUtil.getSessionFactory().openSession();
         try {
-            Query q = null;
-            q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
+            Query q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
             q.setParameter("email", email);
             q.setParameter("password", Security.sha1(password));
             ArrayList<User> resultList = (ArrayList<User>) q.list();
@@ -47,11 +43,7 @@ public class UserDAO {
                 user = resultList.get(0);
             }
 
-        } catch (JDBCConnectionException e) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-           
-        } finally {
+        }finally{
             session.close();
         }
 
