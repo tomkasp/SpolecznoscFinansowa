@@ -21,7 +21,6 @@ import com.efsf.sf.util.Security;
 import com.efsf.sf.util.SendMail;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;

@@ -440,17 +440,17 @@
                                                 </p:column>  
 
                                                 <p:column headerText="Średnia wszystkich doradców">  
-                                                    <h:outputText  value="#{row.average_score}">
+                                                    <h:outputText  value="#{row.averageScore}">
                                                     <f:convertNumber locale="en" pattern="#0.00" />
                                                     </h:outputText>
                                                 </p:column>  
 
                                                 <p:column headerText="Najlepszy wynik">  
-                                                    <h:outputText  value="#{row.max_score}"/>
+                                                    <h:outputText  value="#{row.maxScore}"/>
                                                 </p:column>  
 
                                                 <p:column headerText="Najgorszy wynik">  
-                                                    <h:outputText  value="#{row.min_score}"/>
+                                                    <h:outputText  value="#{row.minScore}"/>
                                                 </p:column> 
 
                                             </p:dataTable>

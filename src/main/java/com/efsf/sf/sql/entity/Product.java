@@ -36,13 +36,6 @@ public class Product implements java.io.Serializable {
         this.productName = productName;
     }
 
-    public Product(Institution institution, String productName, Integer parentProduct, Set<ProductDetails> productDetailses) {
-        this.institution = institution;
-        this.productName = productName;
-        this.parentProduct = parentProduct;
-        this.productDetailses = productDetailses;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_product", unique = true, nullable = false)

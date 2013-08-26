@@ -43,16 +43,6 @@ public class User implements java.io.Serializable {
         this.type = type;
     }
 
-    public User(String login, String password, String email, int type, Set<Client> clients, Set<Message> messagesForFkFromUser, Set<Message> messagesForFkToUser, Set<Consultant> consultants) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-        this.type = type;
-        this.clients = clients;
-        this.messagesForFkFromUser = messagesForFkFromUser;
-        this.messagesForFkToUser = messagesForFkToUser;
-        this.consultants = consultants;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

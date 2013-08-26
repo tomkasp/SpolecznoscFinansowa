@@ -28,11 +28,6 @@ public class Education implements java.io.Serializable {
     public Education() {
     }
 
-    public Education(String name, Set<Client> clients) {
-        this.name = name;
-        this.clients = clients;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_education", unique = true, nullable = false)
