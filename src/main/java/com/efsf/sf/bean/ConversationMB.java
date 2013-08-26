@@ -58,7 +58,7 @@ public class ConversationMB {
     @PostConstruct
     public void load()
     {
-        userToId = messagesMB.getId_ToUser();
+        userToId = messagesMB.getIdToUser();
         MessageDAO dao = new MessageDAO();
         setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userToId));
         messagesMB.markListAsRead(messages);

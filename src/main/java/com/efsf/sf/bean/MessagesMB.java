@@ -23,10 +23,10 @@ public class MessagesMB implements Serializable {
     
     private HashSet<Integer> unreadUsers;
     
-    private Integer id_ToUser;
+    private Integer idToUser;
     
-    private ArrayList<Message> unreadMessagesList = new ArrayList();
-    private ArrayList<Message> readConversations = new ArrayList();
+    private List<Message> unreadMessagesList = new ArrayList();
+    private List<Message> readConversations = new ArrayList();
     
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
@@ -46,7 +46,7 @@ public class MessagesMB implements Serializable {
     
     public String toConversation(Integer id)
     {
-        id_ToUser = id;
+        idToUser = id;
         return "/common/messages.xhtml?faces-redirect=true";
     }
 
@@ -74,7 +74,7 @@ public class MessagesMB implements Serializable {
         dao.update(m);
     }
     
-    public ArrayList<Message> chooseUnreadConversationsAndSystemMessages(ArrayList<Message> messagesList)
+    public ArrayList<Message> chooseUnreadConversationsAndSystemMessages(List<Message> messagesList)
     {
         unreadUsers = new HashSet();
         ArrayList<Message> unreadConversations = new ArrayList();
@@ -94,7 +94,7 @@ public class MessagesMB implements Serializable {
         return unreadConversations;
     }
     
-    public ArrayList<Message> chooseReadConversations(ArrayList<Message> messagesList)
+    public ArrayList<Message> chooseReadConversations(List<Message> messagesList)
     {
         HashSet<User> fromUsers = new HashSet();
         ArrayList<Message> readConversationsList = new ArrayList();
@@ -150,7 +150,7 @@ public class MessagesMB implements Serializable {
         this.loginMB = loginMB;
     }
    
-    public ArrayList<Message> getUnreadMessagesList() {
+    public List<Message> getUnreadMessagesList() {
         return unreadMessagesList;
     }
 
@@ -158,7 +158,7 @@ public class MessagesMB implements Serializable {
         this.unreadMessagesList = unreadMessagesList;
     }
 
-    public ArrayList<Message> getReadConversations() {
+    public List<Message> getReadConversations() {
         return readConversations;
     }
 
@@ -174,12 +174,12 @@ public class MessagesMB implements Serializable {
         this.dictionaryMB = dictionaryMB;
     }
 
-    public Integer getId_ToUser() {
-        return id_ToUser;
+    public Integer getIdToUser() {
+        return idToUser;
     }
 
-    public void setId_ToUser(Integer id_ToUser) {
-        this.id_ToUser = id_ToUser;
+    public void setIdToUser(Integer idToUser) {
+        this.idToUser = idToUser;
     }
 
 }
