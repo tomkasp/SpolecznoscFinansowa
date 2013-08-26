@@ -243,7 +243,6 @@ public class ClientSettingsMB implements Serializable {
             throw new ValidatorException(msg);
         }
 
-
     }
 
     public void deleteIncome(int idIncome, boolean isIncome) {

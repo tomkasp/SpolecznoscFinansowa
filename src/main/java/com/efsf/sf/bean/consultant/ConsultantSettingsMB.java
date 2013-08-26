@@ -4,6 +4,10 @@ import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.ftp.FileUploaderFTP;
+import com.efsf.sf.util.ftp.FtpDownloader;
+import com.efsf.sf.util.pdf.AgreementPDFItext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,6 +35,9 @@ public class ConsultantSettingsMB implements Serializable {
     
     @ManagedProperty(value="#{loginMB.consultant.idConsultant}")
     private Integer idConsultant;
+    
+    @ManagedProperty(value="#{loginMB.user.idUser}")
+    private Integer idUser;
    
     private Consultant consultant; 
     
@@ -231,6 +238,27 @@ public class ConsultantSettingsMB implements Serializable {
         }
     }
     
+    public void showAgreementPDF() throws IOException{
+        //CREATE NEW AGREEMENT:
+        AgreementPDFItext itext = new AgreementPDFItext();
+        String localPath = itext.fillPDF(idConsultant);
+        
+        //UPLOAD ON FTP:
+        String ftpPath = "rice/SF/USERS/" + idUser + "/";
+        String fileName = "agreement_consultant_"+idConsultant+".pdf";
+        FileUploaderFTP fuftp=new FileUploaderFTP();
+        fuftp.makeDirectory(ftpPath);
+        fuftp.copyFileOnFTP( localPath , ftpPath + fileName );
+        
+        
+        
+        //DOWNLOAD FROM FTP:
+        FtpDownloader ftpd=new FtpDownloader();
+        ftpd.download(ftpPath, fileName ); 
+        
+        
+    }
+    
     public Integer getIdConsultant() {
         return idConsultant;
     }
@@ -366,7 +394,13 @@ public class ConsultantSettingsMB implements Serializable {
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
     }
-    
-    
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
+    }
     
 }
