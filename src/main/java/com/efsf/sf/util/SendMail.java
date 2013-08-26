@@ -21,10 +21,10 @@ public class SendMail{
     private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";
     
    
-    public String emailMsgTxt = "";
-    public String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
-    public String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
-    public String[] emailList = {"michal.oles@gmail.com"}; 
+    private String emailMsgTxt = "";
+    private String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
+    private String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
+    private String[] emailList = {"michal.oles@gmail.com"}; 
 
     public void send() throws Exception {
          
@@ -46,7 +46,7 @@ public class SendMail{
        sm.send();
     }
     
-    public void setTemplate(String file_name, Object params) throws IOException, TemplateException{
+    public void setTemplate(String fileName, Object params) throws IOException, TemplateException{
         String relativePath = "/resources/mails/";
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String absolutePath = servletContext.getRealPath(relativePath);
@@ -54,7 +54,7 @@ public class SendMail{
         cfg.setDirectoryForTemplateLoading(new File(absolutePath));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setOutputEncoding("UTF-8");
-        Template template = cfg.getTemplate(file_name);
+        Template template = cfg.getTemplate(fileName);
         
         
         ByteArrayOutputStream result=new ByteArrayOutputStream();

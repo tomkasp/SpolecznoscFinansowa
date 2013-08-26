@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Security {
-
+    
     public static String sha1(String plaintext)  {
         String salt = "984se%^#$$4[]2@#.;'9fSD9_+=#@#$hjft4763{}][3";
         String text = salt + plaintext;

@@ -9,7 +9,7 @@ public class WorkingPlaceDAO {
     
     public List workingPlaceList(){
         List<WorkingPlace> lista=null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         lista = session.createQuery("from WorkingPlace").list();
         }finally{

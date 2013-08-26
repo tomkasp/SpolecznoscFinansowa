@@ -13,7 +13,7 @@ import org.hibernate.classic.Session;
 public class ProductTypeDAO implements Serializable {
 
     public ProductType getProductType(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         ProductType ms = (ProductType) session.get(ProductType.class, id);
@@ -27,7 +27,7 @@ public class ProductTypeDAO implements Serializable {
 
     public List productTypeList() {
         List<ProductType> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         lista = session.createQuery("from ProductType").list();

@@ -21,7 +21,7 @@ public class GenericDao<T> {
     }
 
     public T getById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         T obj = (T) session.get(getMyType(), id);
 
@@ -33,7 +33,7 @@ public class GenericDao<T> {
 
     public List getAll() {
         List<T> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
 
@@ -46,14 +46,14 @@ public class GenericDao<T> {
         return lista;
     }
 
-    public List getAllInOrder(String field, String order_type) {
+    public List getAllInOrder(String field, String orderType) {
         List<T> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
 
             lista = session.createQuery("from " + getMyTypeAsString()
-                    + " order by " + field + " " + order_type).list();
+                    + " order by " + field + " " + orderType).list();
 
             session.getTransaction().commit();
         } finally {
@@ -64,7 +64,7 @@ public class GenericDao<T> {
 
     public List getWhere(String field, String value) {
         List<T> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
             lista = session.createQuery("from " + getMyTypeAsString() + " where " + field + "=" + value).list();
@@ -77,7 +77,7 @@ public class GenericDao<T> {
 
     public void save(T obj) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.save(obj);
@@ -90,7 +90,7 @@ public class GenericDao<T> {
 
     public void saveOrUpdate(T obj) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.saveOrUpdate(obj);
@@ -103,7 +103,7 @@ public class GenericDao<T> {
 
     public void saveOrUpdateObject(Object obj) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.saveOrUpdate(obj);
@@ -116,7 +116,7 @@ public class GenericDao<T> {
 
     public void update(T obj) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.update(obj);

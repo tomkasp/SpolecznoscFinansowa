@@ -118,13 +118,13 @@ public class MessagesMB implements Serializable {
     public void generateSystemMessage(String text, int toUserId, Object[] params)
     {   
         GenericDao<Message> dao = new GenericDao(Message.class);
-        GenericDao<User> user_dao = new GenericDao(User.class);
+        GenericDao<User> userRao = new GenericDao(User.class);
         Message msg = new Message();
         
         msg.setMessage(String.format(text, params));
         msg.setSentDate(new Date());
         msg.setUserByFkFromUser(loginMB.getUser());
-        msg.setUserByFkToUser(user_dao.getById(toUserId));
+        msg.setUserByFkToUser(userRao.getById(toUserId));
         msg.setIsViewed(0);
         msg.setIsSystem(1);
         
@@ -140,10 +140,12 @@ public class MessagesMB implements Serializable {
 
     public String toViewMessages()
     { 
-        if (loginMB.getType().equals(Settings.CONSULTANT_ACTIVE))
+        if (loginMB.getType().equals(Settings.CONSULTANT_ACTIVE)) {
             return "/consultant/consultantViewMessages?faces-redirect=true";
-        else
+        }
+        else {
             return "/client/clientViewMessages?faces-redirect=true";
+        }
     }
     
     public void setLoginMB(LoginMB loginMB) {
