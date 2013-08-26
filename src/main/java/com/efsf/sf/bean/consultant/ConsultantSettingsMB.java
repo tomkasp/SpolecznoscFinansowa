@@ -7,6 +7,7 @@ import com.efsf.sf.util.Security;
 import com.efsf.sf.util.ftp.FileUploaderFTP;
 import com.efsf.sf.util.ftp.FtpDownloader;
 import com.efsf.sf.util.pdf.AgreementPDFItext;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -239,23 +240,30 @@ public class ConsultantSettingsMB implements Serializable {
     }
     
     public void showAgreementPDF() throws IOException{
-        //CREATE NEW AGREEMENT:
-        AgreementPDFItext itext = new AgreementPDFItext();
-        String localPath = itext.fillPDF(idConsultant);
         
-        //UPLOAD ON FTP:
+        String sourceLocalPath = "\\u.pdf";
+        String destinationLocalPath = "\\";
         String ftpPath = "rice/SF/USERS/" + idUser + "/";
         String fileName = "agreement_consultant_"+idConsultant+".pdf";
+        //CREATE NEW AGREEMENT:
+        AgreementPDFItext itext = new AgreementPDFItext();
+        
+        itext.fillPDF( idConsultant,sourceLocalPath , destinationLocalPath + fileName );
+        
+        //UPLOAD ON FTP:
+       
         FileUploaderFTP fuftp=new FileUploaderFTP();
         fuftp.makeDirectory(ftpPath);
-        fuftp.copyFileOnFTP( localPath , ftpPath + fileName );
-        
+        fuftp.copyFileOnFTP( destinationLocalPath+fileName , ftpPath + fileName );
         
         
         //DOWNLOAD FROM FTP:
         FtpDownloader ftpd=new FtpDownloader();
         ftpd.download(ftpPath, fileName ); 
         
+        //DELETE LOCAL FILE
+        File f = new File(destinationLocalPath+fileName);
+        f.delete();
         
     }
     
