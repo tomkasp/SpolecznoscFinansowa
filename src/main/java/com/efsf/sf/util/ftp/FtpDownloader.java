@@ -13,10 +13,8 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FtpDownloader {
 
-    public void downLoad(String filePath,String fileName) throws IOException {
+    public void download(String filePath,String fileName) throws IOException {
 
-       
-        
         FTPClient client = new FTPClient();
         String remoteFile = null;
         try {

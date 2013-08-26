@@ -20,11 +20,7 @@ import java.util.logging.Logger;
  */
 public class AgreementPDFItext {
 
-    public static void main(String[] args) throws IOException {
-           // fillPDF(40);
-    }
-    
-    public void fillPDF(int idConsultant) {
+    public String fillPDF(int idConsultant) {
 
         ConsultantDAO cdao = new ConsultantDAO();
         Consultant consultant = cdao.read(idConsultant);
@@ -32,7 +28,7 @@ public class AgreementPDFItext {
         AddressDAO adao = new AddressDAO();
         Address address = adao.loadMainAddressFromFkConsultant(idConsultant);
         
-        String source = "C:\\u.pdf";
+        String source = "\\u.pdf";
         PdfReader pdfReader = null;
         try {
             pdfReader = new PdfReader(source);
@@ -40,7 +36,7 @@ public class AgreementPDFItext {
             Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String path = "C:\\out.pdf";
+        String path = "\\agreement_consultant_"+idConsultant+".pdf";
         PdfStamper pdfStamper = null;
         
         try {  
@@ -53,7 +49,6 @@ public class AgreementPDFItext {
         catch (DocumentException ex) {
             Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         BaseFont bf = null;
         try {
             try {
@@ -85,6 +80,7 @@ public class AgreementPDFItext {
             Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return path;
     }
   
 }
