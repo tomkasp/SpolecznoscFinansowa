@@ -25,7 +25,6 @@ public class LoginCommonFilter implements Filter {
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
             ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
-            System.out.println("NO LOGGED!");
         }
 
         chain.doFilter(request, response);

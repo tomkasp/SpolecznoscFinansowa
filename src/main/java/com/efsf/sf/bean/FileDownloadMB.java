@@ -51,7 +51,6 @@ public class FileDownloadMB implements Serializable {
             requiredDocuments=new RequiredDocuments();
         }    
         
-        System.out.println("ID USER: "+idUser);
     }
     
     public void load1() throws IOException{
