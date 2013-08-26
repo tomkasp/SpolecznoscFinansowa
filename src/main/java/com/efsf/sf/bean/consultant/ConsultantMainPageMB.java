@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
@@ -25,7 +21,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -36,10 +31,7 @@ import javax.faces.context.FacesContext;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-/**
- *
- * @author XaI
- */
+
 @ManagedBean
 @SessionScoped
 public class ConsultantMainPageMB {
@@ -76,27 +68,25 @@ public class ConsultantMainPageMB {
     private ClientCase selectedOwnedCase;
     private ClientCase selectedFinishedCase;
       
-    private ArrayList<Set<String>> modelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> modelsBranch = new ArrayList();
+    private List<Set<String>> modelsEmploymentType = new ArrayList();
+    private List<Set<String>> modelsBranch = new ArrayList();
     
-    private ArrayList<Set<String>> observedModelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> observedModelsBranch = new ArrayList();
+    private List<Set<String>> observedModelsEmploymentType = new ArrayList();
+    private List<Set<String>> observedModelsBranch = new ArrayList();
     
-    private ArrayList<Set<String>> appliedModelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> appliedModelsBranch = new ArrayList();
+    private List<Set<String>> appliedModelsEmploymentType = new ArrayList();
+    private List<Set<String>> appliedModelsBranch = new ArrayList();
     
-    private ArrayList<Set<String>> ownedModelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> ownedModelsBranch = new ArrayList();
+    private List<Set<String>> ownedModelsEmploymentType = new ArrayList();
+    private List<Set<String>> ownedModelsBranch = new ArrayList();
     
-    private ArrayList<Set<String>> finishedModelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> finishedModelsBranch = new ArrayList();
+    private List<Set<String>> finishedModelsEmploymentType = new ArrayList();
+    private List<Set<String>> finishedModelsBranch = new ArrayList();
     
     private ClientCase selectedPremiumCase;
     
     
-    /**
-     * Creates a new instance of ConsultantMainPageMB
-     */
+
     public ConsultantMainPageMB() {
     }
     
@@ -181,11 +171,10 @@ public class ConsultantMainPageMB {
     
     public void rowDoubleClick(ClientCase cs) throws IOException
     { 
-    //    clientCaseMB.setSelectedClientCase(cs);
         FacesContext.getCurrentInstance().getExternalContext().redirect("consultantCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()); 
     }
           
-    public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
+    public List<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
         ArrayList<ClientCase> ccArray = new ArrayList(csSet);
         
@@ -215,7 +204,6 @@ public class ConsultantMainPageMB {
     
     public String toClientCaseDetails(ClientCase cc)
     {
-   //     clientCaseMB.setSelectedClientCase(cc);
         return "/consultant/consultantCaseDetails?faces-redirect=true&clientCaseId=" + cc.getIdClientCase();
     }
     
@@ -349,10 +337,7 @@ public class ConsultantMainPageMB {
         else
         {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            if (rds.getBik() == null)
-                return false;
-            else
-                return true;   
+            return rds.getBik() == null;
         }   
     }
     
@@ -382,11 +367,11 @@ public class ConsultantMainPageMB {
         this.caseDao = caseDao;
     }
 
-    public ArrayList<Set<String>> getModelsEmploymentType() {
+    public List<Set<String>> getModelsEmploymentType() {
         return modelsEmploymentType;
     }
 
-    public void setModelsEmploymentType(ArrayList<Set<String>> modelsEmploymentType) {
+    public void setModelsEmploymentType(List<Set<String>> modelsEmploymentType) {
         this.modelsEmploymentType = modelsEmploymentType;
     }
 
@@ -510,75 +495,75 @@ public class ConsultantMainPageMB {
         this.selectedFinishedCase = selectedFinishedCase;
     }
 
-    public ArrayList<Set<String>> getModelsBranch() {
+    public List<Set<String>> getModelsBranch() {
         return modelsBranch;
     }
 
-    public void setModelsBranch(ArrayList<Set<String>> modelsBranch) {
+    public void setModelsBranch(List<Set<String>> modelsBranch) {
         this.modelsBranch = modelsBranch;
     }
 
-    public ArrayList<Set<String>> getObservedModelsEmploymentType() {
+    public List<Set<String>> getObservedModelsEmploymentType() {
         return observedModelsEmploymentType;
     }
 
-    public void setObservedModelsEmploymentType(ArrayList<Set<String>> observedModelsEmploymentType) {
+    public void setObservedModelsEmploymentType(List<Set<String>> observedModelsEmploymentType) {
         this.observedModelsEmploymentType = observedModelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getObservedModelsBranch() {
+    public List<Set<String>> getObservedModelsBranch() {
         return observedModelsBranch;
     }
 
-    public void setObservedModelsBranch(ArrayList<Set<String>> observedModelsBranch) {
+    public void setObservedModelsBranch(List<Set<String>> observedModelsBranch) {
         this.observedModelsBranch = observedModelsBranch;
     }
 
-    public ArrayList<Set<String>> getAppliedModelsEmploymentType() {
+    public List<Set<String>> getAppliedModelsEmploymentType() {
         return appliedModelsEmploymentType;
     }
 
-    public void setAppliedModelsEmploymentType(ArrayList<Set<String>> appliedModelsEmploymentType) {
+    public void setAppliedModelsEmploymentType(List<Set<String>> appliedModelsEmploymentType) {
         this.appliedModelsEmploymentType = appliedModelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getAppliedModelsBranch() {
+    public List<Set<String>> getAppliedModelsBranch() {
         return appliedModelsBranch;
     }
 
-    public void setAppliedModelsBranch(ArrayList<Set<String>> appliedModelsBranch) {
+    public void setAppliedModelsBranch(List<Set<String>> appliedModelsBranch) {
         this.appliedModelsBranch = appliedModelsBranch;
     }
 
-    public ArrayList<Set<String>> getOwnedModelsEmploymentType() {
+    public List<Set<String>> getOwnedModelsEmploymentType() {
         return ownedModelsEmploymentType;
     }
 
-    public void setOwnedModelsEmploymentType(ArrayList<Set<String>> ownedModelsEmploymentType) {
+    public void setOwnedModelsEmploymentType(List<Set<String>> ownedModelsEmploymentType) {
         this.ownedModelsEmploymentType = ownedModelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getOwnedModelsBranch() {
+    public List<Set<String>> getOwnedModelsBranch() {
         return ownedModelsBranch;
     }
 
-    public void setOwnedModelsBranch(ArrayList<Set<String>> ownedModelsBranch) {
+    public void setOwnedModelsBranch(List<Set<String>> ownedModelsBranch) {
         this.ownedModelsBranch = ownedModelsBranch;
     }
 
-    public ArrayList<Set<String>> getFinishedModelsEmploymentType() {
+    public List<Set<String>> getFinishedModelsEmploymentType() {
         return finishedModelsEmploymentType;
     }
 
-    public void setFinishedModelsEmploymentType(ArrayList<Set<String>> finishedModelsEmploymentType) {
+    public void setFinishedModelsEmploymentType(List<Set<String>> finishedModelsEmploymentType) {
         this.finishedModelsEmploymentType = finishedModelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getFinishedModelsBranch() {
+    public List<Set<String>> getFinishedModelsBranch() {
         return finishedModelsBranch;
     }
 
-    public void setFinishedModelsBranch(ArrayList<Set<String>> finishedModelsBranch) {
+    public void setFinishedModelsBranch(List<Set<String>> finishedModelsBranch) {
         this.finishedModelsBranch = finishedModelsBranch;
     }
 

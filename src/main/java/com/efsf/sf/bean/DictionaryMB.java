@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.*;
@@ -38,7 +34,7 @@ public class DictionaryMB implements Serializable{
     private List<Education> education;
     private List<MaritalStatus> maritalStatus;
     private List<WorkingPlace> workingPlace;
-    private ArrayList<SelectItem> workingPlaceMap;
+    private List<SelectItem> workingPlaceMap;
     private List<CaseStatus> caseStatus;
     private List<EmploymentType> businessActivity;
     private List<EmploymentType> income;
@@ -148,7 +144,7 @@ public class DictionaryMB implements Serializable{
         return workingPlace;
     }
 
-    public ArrayList<SelectItem> getWorkingPlaceMap() {
+    public List<SelectItem> getWorkingPlaceMap() {
         return workingPlaceMap;
     }
 

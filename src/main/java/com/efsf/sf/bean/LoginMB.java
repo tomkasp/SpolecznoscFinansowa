@@ -76,8 +76,7 @@ public class LoginMB implements Serializable {
                 return "/common/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"),
-                        getBundle().getString("activateAccountMsg")));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
 
                 return "/login";
             }
@@ -88,17 +87,13 @@ public class LoginMB implements Serializable {
     }
 
     private Boolean checkNewAppActivity() {
-        if (this.points > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.points > 0;
     }
     
     public void addMessageToContext(){
        FacesContext facesContext = FacesContext.getCurrentInstance();
        if(getActualMessage()!=null){
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", getActualMessage()));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getActualMessage(), ""));
        }
        setActualMessage(null);
     }

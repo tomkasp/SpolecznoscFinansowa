@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -82,14 +84,14 @@ public class CreateClientMB implements Serializable
     
     //Income
     
-    private ArrayList<IncomeData> incomeTable = new ArrayList();
+    private List<IncomeData> incomeTable = new ArrayList();
     private boolean tableEmpty = true;
            
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
     
-    private HashSet<Income> incomeSet = new HashSet();
-    private HashSet<IncomeBusinessActivity> businessSet = new HashSet();
+    private Set<Income> incomeSet = new HashSet();
+    private Set<IncomeBusinessActivity> businessSet = new HashSet();
     
     //Fields used to make select menus working
     
@@ -167,8 +169,7 @@ public class CreateClientMB implements Serializable
         
         SendMail.sendRegisterMail(email, name, user.getIdUser());
  
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), 
-                    bundle.getString("confirmRegistrationMsg"))); 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
         return "/login";
     }
@@ -292,15 +293,13 @@ public class CreateClientMB implements Serializable
             }
         }
         
-  //      if(!(regionId == 0 && address.getCity().equals("") && address.getHouseNumber().equals("")  && address.getPhone().equals("") 
-  //               && address.getStreet().equals("")  && address.getZipCode().equals("") ))
-  //      {
+
         addressSet.clear();
         address.setClient(client);
         address.setCountry("Polska");
         addressSet.add(address);
         client.setAddresses(addressSet);
-//
+
         
         if(sexString != null && sexString.equals("true") && !sexString.equals(""))
         {
@@ -517,11 +516,11 @@ public class CreateClientMB implements Serializable
         this.birthPlace = birthPlace;
     }
 
-    public ArrayList<IncomeData> getIncomeTable() {
+    public List<IncomeData> getIncomeTable() {
         return incomeTable;
     }
 
-    public void setIncomeTable(ArrayList<IncomeData> incomeTable) {
+    public void setIncomeTable(List<IncomeData> incomeTable) {
         this.incomeTable = incomeTable;
     }
 

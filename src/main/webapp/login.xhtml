@@ -21,12 +21,7 @@
                         <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     </div>
 
-            </ui:define>
-            <ui:define name="content">
-             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />      
-           
-
-             <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px" height="145px" draggable="false" closable="false">  
+                <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px" height="145px" draggable="false" closable="false">  
                 <div id="circular3dG">
                    <div id="circular3d_1G" class="circular3dG">
                    </div>
@@ -45,11 +40,17 @@
                    <div id="circular3d_8G" class="circular3dG">
                    </div>
                 </div>
-            </p:dialog>  
+            </p:dialog>
+                
+            </ui:define>
+            <ui:define name="content">
+             <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />      
+   
             
             <h:form  id="logowanie">   
-             <div class="contentBox">
-                <div class="newsletter"> 
+                
+             <div class="contentBox"  style="display: none;">
+                 <div class="newsletter"> 
                     <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
                 </div>
              </div>           
@@ -92,12 +93,12 @@
                 </div>
                 
                 
-                <div class="rightBox" style="padding-top: 125px;">   
+                <div class="rightBox" style="padding-top: 50px;">   
                     
                     <h2>Nie masz jeszcze konta?</h2>
                     
-                    <h:link class="blueButton wideButton buttonMargin" style="width: 350px;" value="Zarejestruj się za darmo" outcome="/index"/>
-                    <h:link class="greyButton wideButton buttonMargin" style="width: 350px;" value="Dowiedz się więcej"/>
+                    <h:link class="blueButton wideButton buttonMargin" style="width: 300px;" value="Zarejestruj się za darmo" outcome="/index"/>
+                    <h:link class="greyButton wideButton buttonMargin" style="width: 300px;" value="Dowiedz się więcej"/>
                     
                 </div>
                     
