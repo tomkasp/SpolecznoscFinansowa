@@ -39,8 +39,6 @@ public class LoginMB implements Serializable {
 
     public String login() {
 
-        System.out.println(isLogged);
-
         UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
@@ -50,10 +48,8 @@ public class LoginMB implements Serializable {
 
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
                 isLogged = true;
-                System.out.println("LOGGED?: " + isLogged);
 
                 idUser = user.getIdUser();
-                System.out.println("login");
             }
 
             if (type.equals(Settings.ADMIN_ACTIVE)) {
@@ -76,8 +72,7 @@ public class LoginMB implements Serializable {
                 return "/common/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"),
-                        getBundle().getString("activateAccountMsg")));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
 
                 return "/login";
             }
@@ -88,17 +83,13 @@ public class LoginMB implements Serializable {
     }
 
     private Boolean checkNewAppActivity() {
-        if (this.points > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.points > 0;
     }
     
     public void addMessageToContext(){
        FacesContext facesContext = FacesContext.getCurrentInstance();
        if(getActualMessage()!=null){
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", getActualMessage()));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getActualMessage(), ""));
        }
        setActualMessage(null);
     }
@@ -110,7 +101,6 @@ public class LoginMB implements Serializable {
         consultant = null;
         user = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        System.out.println("logout");
         return "/login?faces-redirect=true";
     }
 

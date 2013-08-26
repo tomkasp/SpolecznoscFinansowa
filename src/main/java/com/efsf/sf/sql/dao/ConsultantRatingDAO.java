@@ -11,7 +11,7 @@ public class ConsultantRatingDAO {
 
     public ConsultantRating getConsultantRatings(Integer consultantId) {
         ConsultantRating cr = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
         try {
             Query q = session.createQuery("FROM ConsultantRating as cr left join fetch cr.consultant as cons "

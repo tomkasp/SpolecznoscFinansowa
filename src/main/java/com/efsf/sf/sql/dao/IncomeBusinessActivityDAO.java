@@ -11,7 +11,7 @@ public class IncomeBusinessActivityDAO {
     
     public void update(IncomeBusinessActivity income)
     {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.update(income);
@@ -23,7 +23,7 @@ public class IncomeBusinessActivityDAO {
     
     public void delete(IncomeBusinessActivity income)
     {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         session.delete(income);
         session.getTransaction().commit();

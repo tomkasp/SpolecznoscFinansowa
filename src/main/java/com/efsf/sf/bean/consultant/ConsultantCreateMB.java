@@ -90,8 +90,7 @@ public class ConsultantCreateMB implements Serializable {
         
         SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser());
         
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), 
-                    getBundle().getString("confirmRegistrationMsg"))); 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), "")); 
         
         return "/login";
         
@@ -203,9 +202,6 @@ public class ConsultantCreateMB implements Serializable {
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
         String password = (String) value;
-
-      //  UIInput otherInput = (UIInput) context.getViewRoot().findComponent("password");
-      //  confirmPassword = (String) otherInput.getSubmittedValue();
       
         if (!password.equals(confirmPassword)) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
@@ -218,7 +214,7 @@ public class ConsultantCreateMB implements Serializable {
     {
         Boolean policyValue=(Boolean)value;
         
-        if (policyValue==false ) {
+        if (!policyValue) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Musisz akceptować warunki umowy", "Musisz akceptować warunki umowy");
         throw new ValidatorException(message);
         }

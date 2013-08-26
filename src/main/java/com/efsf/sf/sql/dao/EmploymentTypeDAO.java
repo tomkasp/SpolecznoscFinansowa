@@ -11,7 +11,7 @@ public class EmploymentTypeDAO
     public List incomeList()
     {
         List<EmploymentType> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         list= session.createQuery("from EmploymentType where companyFlag = 0").list();
@@ -24,7 +24,7 @@ public class EmploymentTypeDAO
     public List businessActivityList()
     {
         List<EmploymentType> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         list= session.createQuery("from EmploymentType where companyFlag = 1").list();

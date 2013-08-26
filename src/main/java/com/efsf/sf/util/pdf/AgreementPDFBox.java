@@ -1,3 +1,5 @@
+package com.efsf.sf.util.pdf;
+
 
 import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
@@ -17,11 +19,11 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 /**
  * @author WR1EI1
  */
-public class AgreementPDF {
+public class AgreementPDFBox {
     
     public static void main(String[] args) throws IOException, COSVisitorException {
       
-        AgreementPDF apdf=new AgreementPDF();
+        AgreementPDFBox apdf=new AgreementPDFBox();
         apdf.fillConsultantAgreement(40);
         
     }
@@ -45,9 +47,9 @@ public class AgreementPDF {
 
             //PDFont font = PDTrueTypeFont.loadTTF( doc , new File("ariali.ttf") );
 
-            PDDocument doc2 = PDDocument.load("u.pdf");
+            //PDDocument doc2 = PDDocument.load("java.pdf");
             
-            font.setToUnicode(doc2.getDocumentInformation().getCOSObject());
+            //font.setToUnicode(doc2.getDocumentInformation().getCOSObject());
             
             //font.setFontEncoding(  );
             
@@ -70,11 +72,8 @@ public class AgreementPDF {
 
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 550);
-//            contentStream.drawString(consultant.getName()+" "+consultant.getLastName());
-            
-            
-//            contentStream.drawString("\u01E1"+"\u01E2"+"\u01E3"+"\u01E4"+"\u01E5"+"\u01E6"+"\u01E7"+"\u01E8"+"\u01E9"+"\u01EA"+"\u01EB"+"\u01EC"+"\u01ED"+"\u01EE"+"\u00EF" );
-            contentStream.drawString("\u0000"+"\u0001"+"\u0002"+"\u0003"+"\u0004"+"\u0005"+"\u0006"+"\u0007"+"\u0008"+"\u0009");
+            contentStream.drawString(consultant.getName()+" "+consultant.getLastName());
+            //contentStream.drawString("\u00F3"+"\u00F1");
 
             contentStream.endText();
 
@@ -82,7 +81,7 @@ public class AgreementPDF {
 
             contentStream.setFont(font, 12);
             contentStream.moveTextPositionByAmount(120, 510);
-//            contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry());
+            contentStream.drawString(address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode() + " " + address.getCountry());
 
 
             contentStream.endText();
@@ -91,13 +90,13 @@ public class AgreementPDF {
             doc.save("dokumentTest.pdf");
 
         } catch (COSVisitorException | IOException ex) {
-            Logger.getLogger(AgreementPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgreementPDFBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (doc != null) {
                 try {
                     doc.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(AgreementPDF.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AgreementPDFBox.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

@@ -26,6 +26,18 @@
                             <h:outputText class="redMessage marginL20" value="Twoje dane osobowe są w stu procentach bezpieczne." /> 
 
                           <div class="marginLRT30">
+                              
+                              
+                              <div class="field">
+                                <h:outputText class="label" value="Pobierz umowe"/> 
+                                <h:commandLink target="_blank" action="#{ consultantSettingsMB.showAgreementPDF() }">
+                                  <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                </h:commandLink>
+                            </div>
+                              
+                              
+                              
+                                        
 
                             <div class="field">
                                 <h:outputText class="label" value="Imię"/> 

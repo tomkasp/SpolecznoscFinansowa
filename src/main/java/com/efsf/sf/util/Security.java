@@ -7,13 +7,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Security {
-
+    
     public static String sha1(String plaintext)  {
         String salt = "984se%^#$$4[]2@#.;'9fSD9_+=#@#$hjft4763{}][3";
         String text = salt + plaintext;
         MessageDigest m = null;
         try {
-            m = MessageDigest.getInstance("SHA-1"); // Or: SHA,SHA-1,SHA-256,SHA-384,SHA-512,MD2,MD5
+            // Or: SHA,SHA-1,SHA-256,SHA-384,SHA-512,MD2,MD5
+            m = MessageDigest.getInstance("SHA-1"); 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
         }

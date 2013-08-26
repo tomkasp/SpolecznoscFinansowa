@@ -21,12 +21,15 @@ import com.efsf.sf.util.Security;
 import com.efsf.sf.util.SendMail;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -53,7 +56,7 @@ public class CreateClientMB implements Serializable
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
-    User user; 
+ 
     
     private int counter = 0;
     
@@ -82,14 +85,14 @@ public class CreateClientMB implements Serializable
     
     //Income
     
-    private ArrayList<IncomeData> incomeTable = new ArrayList();
+    private List<IncomeData> incomeTable = new ArrayList();
     private boolean tableEmpty = true;
            
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
     
-    private HashSet<Income> incomeSet = new HashSet();
-    private HashSet<IncomeBusinessActivity> businessSet = new HashSet();
+    private Set<Income> incomeSet = new HashSet();
+    private Set<IncomeBusinessActivity> businessSet = new HashSet();
     
     //Fields used to make select menus working
     
@@ -100,11 +103,12 @@ public class CreateClientMB implements Serializable
     
     
     //Address Data
+    private Address address = new Address();
+    private Set<Address> addressSet = new HashSet();
     
     private int regionId;
     
-    // flag to set required elements if we want to make new application
-    
+    // flag to set required elements if we want to make new application 
     private boolean areRequired = false;
 
     public boolean isAreRequired() {
@@ -122,16 +126,16 @@ public class CreateClientMB implements Serializable
     public void setRegionId(int regionId) {
         this.regionId = regionId;
     }
-    private Address address = new Address();
-    private HashSet<Address> addressSet = new HashSet();
     
     public CreateClientMB()
     {
 
     }
 
-    public String createClientAccount() throws NoSuchAlgorithmException, Exception
+    public String createClientAccount() 
     {
+        User user;
+        
         UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
         EducationDAO eduDao = new EducationDAO();
@@ -164,11 +168,13 @@ public class CreateClientMB implements Serializable
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
-        
-        SendMail.sendRegisterMail(email, name, user.getIdUser());
+        try {
+            SendMail.sendRegisterMail(email, name, user.getIdUser());
+        } catch (Exception ex) {
+            Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
  
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), 
-                    bundle.getString("confirmRegistrationMsg"))); 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
         return "/login";
     }
@@ -292,15 +298,13 @@ public class CreateClientMB implements Serializable
             }
         }
         
-  //      if(!(regionId == 0 && address.getCity().equals("") && address.getHouseNumber().equals("")  && address.getPhone().equals("") 
-  //               && address.getStreet().equals("")  && address.getZipCode().equals("") ))
-  //      {
+
         addressSet.clear();
         address.setClient(client);
         address.setCountry("Polska");
         addressSet.add(address);
         client.setAddresses(addressSet);
-//
+
         
         if(sexString != null && sexString.equals("true") && !sexString.equals(""))
         {
@@ -333,10 +337,12 @@ public class CreateClientMB implements Serializable
         
         clientDao.update(client);
         
-        if (areRequired)
+        if (areRequired) {
                 return "/client/clientNewApplication?faces-redirect=true";
-        else
+        }
+        else {
                 return "/client/clientMainPage?faces-redirect=true";
+        }
     }
 
     //NOT MINE METHOD
@@ -350,7 +356,7 @@ public class CreateClientMB implements Serializable
                 if (incomeData.getIdIncome() == idIncome) {
                     it.remove();
                 }
-                if (isIncome == true) {
+                if (isIncome) {
                     Iterator<Income> incomeIterator = incomeSet.iterator();
                     while (incomeIterator.hasNext()) {
 
@@ -517,11 +523,11 @@ public class CreateClientMB implements Serializable
         this.birthPlace = birthPlace;
     }
 
-    public ArrayList<IncomeData> getIncomeTable() {
+    public List<IncomeData> getIncomeTable() {
         return incomeTable;
     }
 
-    public void setIncomeTable(ArrayList<IncomeData> incomeTable) {
+    public void setIncomeTable(List<IncomeData> incomeTable) {
         this.incomeTable = incomeTable;
     }
 

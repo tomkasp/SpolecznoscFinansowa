@@ -5,18 +5,15 @@ import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Security;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.exception.JDBCConnectionException;
 
 public class UserDAO {
 
     public User read(int id) {
 
         User client = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
         try {
             session.beginTransaction().begin();
@@ -32,14 +29,13 @@ public class UserDAO {
 
     public User login(String email, String password) {
 
-        Session session = null;
+        Session session;
         User user = null;
 
 
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            Query q = null;
-            q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
+            Query q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
             q.setParameter("email", email);
             q.setParameter("password", Security.sha1(password));
             ArrayList<User> resultList = (ArrayList<User>) q.list();
@@ -47,11 +43,7 @@ public class UserDAO {
                 user = resultList.get(0);
             }
 
-        } catch (JDBCConnectionException e) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-           
-        } finally {
+        }finally{
             session.close();
         }
 
@@ -60,7 +52,7 @@ public class UserDAO {
 
     public void save(User user) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.save(user);
@@ -74,7 +66,7 @@ public class UserDAO {
 
     public void update(User user) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.update(user);
@@ -86,7 +78,7 @@ public class UserDAO {
     }
 
     public void delete(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         session.delete(user);
         session.getTransaction().commit();
@@ -95,7 +87,7 @@ public class UserDAO {
 
     public Boolean ifEmailExist(String email) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             Query q;
             q = session.createQuery("FROM User WHERE email = :email ");
@@ -112,7 +104,7 @@ public class UserDAO {
 
     public int checkLogin(String email, String password) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
 
             Query q;
@@ -126,7 +118,8 @@ public class UserDAO {
                 if (user.getPassword().equals(password)) {
                     return 1;
                 } else {
-                    return 0;//wrong password
+                    //wrong password
+                    return 0;
                 }
             }
 
@@ -134,11 +127,12 @@ public class UserDAO {
         } finally {
             session.close();
         }
-        return -1;//wrong email
+        //wrong email
+        return -1;
     }
 
     public Client getClientConnectedToUser(int userId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client c "

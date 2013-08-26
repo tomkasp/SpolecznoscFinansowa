@@ -18,6 +18,8 @@ public class FileDownloadMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    private static final String PATH =  "rice/SF/USERS/";
+    
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
@@ -51,39 +53,38 @@ public class FileDownloadMB implements Serializable {
             requiredDocuments=new RequiredDocuments();
         }    
         
-        System.out.println("ID USER: "+idUser);
     }
     
     public void load1() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getIdCard() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getIdCard() ); 
     }
     
     public void load2() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getIncomeStatement() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getIncomeStatement() ); 
     }
    
     public void load3() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getDeathCertificate() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getDeathCertificate() ); 
     }
     
     public void load4() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getMariageSettlement() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getMariageSettlement() ); 
     }
     
     public void load5() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getDivorceAct() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getDivorceAct() ); 
     }
     
     public void load6() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getSeparationAct() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getSeparationAct() ); 
     }
     
     public void load7() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getTitleDeed() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getTitleDeed() ); 
     }
     
     public void load8() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getBik() ); 
+        ftpd.download(PATH+idUser+"/", requiredDocuments.getBik() ); 
     }
      
     public LoginMB getLoginMB() {

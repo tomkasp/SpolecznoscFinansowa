@@ -11,7 +11,9 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Institution;
 import com.efsf.sf.sql.entity.ProductType;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -23,7 +25,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ConsultantProfileMB {
+public class ConsultantProfileMB implements Serializable{
 
     @ManagedProperty(value="#{caseViewMB}")
     private CaseViewMB caseViewMB;
@@ -32,7 +34,7 @@ public class ConsultantProfileMB {
     
     private Consultant selectedConsultant;
     
-    private ArrayList<ClientCase> casesRated = new ArrayList();
+    private List<ClientCase> casesRated = new ArrayList();
        
     public ConsultantProfileMB() {
         
@@ -47,17 +49,17 @@ public class ConsultantProfileMB {
 
     
     
-    public ArrayList<Institution> castInstitutionSetToArray(Set<Institution> csSet)
+    public List<Institution> castInstitutionSetToArray(Set<Institution> csSet)
     {
-        return new ArrayList<Institution>(csSet);
+        return new ArrayList(csSet);
     }
     
-    public ArrayList<ProductType> castProductTypeSetToArray(Set<ProductType> csSet)
+    public List<ProductType> castProductTypeSetToArray(Set<ProductType> csSet)
     {
-        return new ArrayList<ProductType>(csSet);
+        return new ArrayList(csSet);
     }
     
-    public ArrayList<Institution> selectBanksFromConsultant(Consultant cons)
+    public List<Institution> selectBanksFromConsultant(Consultant cons)
     {
        ArrayList<Institution> banks = new ArrayList();
        if (cons.getInstitutions() != null)
@@ -71,14 +73,14 @@ public class ConsultantProfileMB {
             }
             return banks;
        }
-       else
-           return new ArrayList<Institution>();
-           
+       else {
+           return new ArrayList();
+       }
        
        
     }
     
-    public ArrayList<Institution> selectOtherInsFromConsultant(Consultant cons)
+    public List<Institution> selectOtherInsFromConsultant(Consultant cons)
     {
        ArrayList<Institution> other = new ArrayList();
        if (cons.getInstitutions() != null)
@@ -92,15 +94,16 @@ public class ConsultantProfileMB {
         }
         return other;
        }
-       else
-           return new ArrayList<Institution>();
+       else {
+           return new ArrayList();
+       }
     }
 
-    public ArrayList<ClientCase> getCasesRated() {
+    public List<ClientCase> getCasesRated() {
         return casesRated;
     }
 
-    public void setCasesRated(ArrayList<ClientCase> casesRated) {
+    public void setCasesRated(List<ClientCase> casesRated) {
         this.casesRated = casesRated;
     }
 

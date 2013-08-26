@@ -1,129 +1,86 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/mainTemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title"> Klient - zakończona sprawa </ui:define> 
+    <ui:define name="content">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+        <f:metadata>         
+            <f:viewParam name="clientCaseId" value="#{caseViewMB.clientCaseId}" />
+        </f:metadata>
+        <f:event type="preRenderView" listener="#{caseViewMB.loadCaseConsultantsDetails()}" />
 
-    
+        <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} </h3>
 
-    <body>
-        <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Klient - zakończona sprawa </ui:define> 
-            <ui:define name="content">
-                
-                 <f:metadata>         
-                    <f:viewParam name="clientCaseId" value="#{caseViewMB.clientCaseId}" />
-                 </f:metadata>
-                 <f:event type="preRenderView" listener="#{caseViewMB.loadCaseConsultantsDetails()}" />
+        <div>
+            <div class="leftInlineBox">
+                <h:form id="leftForm">
+                    <h4> DANE SPRAWY </h4>
+                    <div class="marginLRT30">        
 
-                 <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} </h3>
+                        <div class="field"> 
+                            <h:outputText class="label" value="Kwota zobowiązania"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
+                        </div>
 
-                <div>
-                    <div class="leftInlineBox">
-                        <h:form id="leftForm">
-                            <h4> DANE SPRAWY </h4>
-                            <div class="marginLRT30">        
-                               
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Kwota zobowiązania"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
-                                </div>
-                                
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Cel"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> 
-                                </div>
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Rodzaj kredytu"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> 
-                                </div>
-                                
-                                <div class="field">
-                                    <h:outputText class="label" value="Wielkość raty"/>
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" />
-                                </div>
-                                
-                                <div class="field">
-                                    <h:outputText class="label" value="Data wystawienia na giełdę"/> 
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.beginDate}" > 
-                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
-                                    </h:inputText>
-                                </div>
-                                
-                                <div class="field">
-                                    <h:outputText class="label" value="Koniec aukcji"/>  
-                                    <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.endDate}" >
-                                        <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
-                                    </h:inputText>
-                                </div>
-                                
-                                <div class="field">
-                                    <h:outputText class="label" value="Notatka"/>  
-                                    <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;"  disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
-                                </div>
-                            </div>
-                            
-                            <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null)}" >
-                            <h4>DANE DORADCY</h4>
-                            <div class="marginLRT30">   
-                                <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
-                                <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].phone : caseViewMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
-                            </div>    
-                            </h:panelGroup>
-                        </h:form>
+                        <div class="field"> 
+                            <h:outputText class="label" value="Cel"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> 
+                        </div>
+                        <div class="field"> 
+                            <h:outputText class="label" value="Rodzaj kredytu"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> 
+                        </div>
+
+                        <div class="field">
+                            <h:outputText class="label" value="Wielkość raty"/>
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" />
+                        </div>
+
+                        <div class="field">
+                            <h:outputText class="label" value="Data wystawienia na giełdę"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.beginDate}" > 
+                                <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
+                            </h:inputText>
+                        </div>
+
+                        <div class="field">
+                            <h:outputText class="label" value="Koniec aukcji"/>  
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.endDate}" >
+                                <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
+                            </h:inputText>
+                        </div>
+
+                        <div class="field">
+                            <h:outputText class="label" value="Notatka"/>  
+                            <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;" rows="3" cols="30" disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
+                        </div>
                     </div>
 
-                    <div class="rightInlineBox">
-                        <h:form>
-                        <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
-                            <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
-                                <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
-                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.bestConsultantsForPremiumCase()}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
-                                
-                                    <p:ajax event="rowSelect" update="@form" />
-                                    <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
-                                    
-                                    <p:column headerText="Nazwisko">  
-                                        <h:outputText value="#{row.lastName}" /> 
-                                    </p:column>  
-                                    
-                                    <p:column headerText="Imie">  
-                                        <h:outputText value="#{row.name}" /> 
-                                    </p:column>  
-                                    
-                                    <p:column headerText="Doświadczenie">    
-                                        <h:outputText value="#{row.expirience}" /> 
-                                    </p:column>  
-                                    
-                                    <p:column headerText="Średnia Ocena">    
-                                        <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" > 
-                                            <f:convertNumber maxFractionDigits="2"/>
-                                        </h:outputText>
-                                    </p:column>  
-                                    
-                                </p:dataTable>
-                                <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{caseViewMB.assignPremiumConsultant()}"/>
-                                <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}"/>     
-                                <div style="min-height: 20px"> </div> 
-                            
-                            </h:panelGroup>
-                            
-                            <h:panelGroup rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant != null }" >
-                                <h4> PREMIUM: </h4>
-                                <div class="solidText">
-                                   Wysłałeś zapytanie prowadzenia sprawy do <b> doradcy nr #{caseViewMB.selectedClientCase.consultant.idConsultant}.  </b> 
-                                </div>
-                            </h:panelGroup>    
-                            <h4> DOSTĘPNI DORADCY </h4>
-                            <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single" >
-     
+                    <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null) and caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
+                        <h4>DANE DORADCY</h4>
+                        <div class="marginLRT30">   
+                            <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
+                            <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
+                            <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].phone : caseViewMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
+                        </div>    
+                    </h:panelGroup>
+                </h:form>
+            </div>
+
+            <div class="rightInlineBox">
+                <h:form>
+                    <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
+                        <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
+                            <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
+                            <h:panelGroup rendered="#{caseViewMB.selectedClientCase.consultant eq null}" />
+                            <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
+
                                 <p:ajax event="rowSelect" update="@form" />
-                                <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}" />     
-                                
+                                <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
+
                                 <p:column headerText="Nazwisko">  
                                     <h:outputText value="#{row.lastName}" /> 
                                 </p:column>  
@@ -135,73 +92,110 @@
                                 <p:column headerText="Doświadczenie">    
                                     <h:outputText value="#{row.expirience}" /> 
                                 </p:column>  
-                                
+
                                 <p:column headerText="Średnia Ocena">    
                                     <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" > 
                                         <f:convertNumber maxFractionDigits="2"/>
                                     </h:outputText>
                                 </p:column>  
 
-                             </p:dataTable>
-                             <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Przydziel" action="#{caseViewMB.assignConsultant()}"/>
-                             <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}"/>
-
-                        </h:panelGroup>
-                        
-                            <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; caseViewMB.selectedClientCase.consultant!=null}" >    
-                                    <div class="marginT50">
-                                        <h4> WIADOMOŚCI </h4>
-                                    </div>
-                                    <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.toConversation(caseViewMB.selectedClientCase.consultant.user.idUser)}"/>
-                        </h:panelGroup>            
-                                    
-                        <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
-                            <h4> NASTĘPNA RATA </h4>
-
-                            <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
-
-                            <h4> PROGNOZOWANY CZAS ZAKOŃCZENIA</h4>    
-
-                            <div style="min-height: 58px;"><h:outputText class="boldItem" value="30-10-2018" /> </div>
-
-                            <h4> HARMONOGRAM SPŁAT </h4>
-
-                            <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak klientów!" 
-                                         rowKey="#{row.toPay}" paginator="true" rows="15">
-                                <p:column headerText="Termin spłaty">  
-                                    <h:outputText value="#{row.paymentDate}">
-                                       <f:convertDateTime pattern="dd.MM.yyyy" />
-                                    </h:outputText>
-                                </p:column>  
-
-                                <p:column headerText="Kwota">  
-                                    <h:outputText value="#{row.amount}" /> 
-                                </p:column>  
-
-                                <p:column headerText="Pozostało">    
-                                    <h:outputText value="#{row.toPay}" /> 
-                                </p:column>  
-
-                                <p:column headerText="Spłacono">  
-                                    <h:outputText value="#{row.alreadyPayed}" /> 
-                                </p:column>    
                             </p:dataTable>
 
-                             <h:outputLabel rendered="#{caseViewMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
+                            <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{caseViewMB.assignPremiumConsultant()}"/>
+                            <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}"/>     
+                            <div style="min-height: 20px"> </div> 
+                        </h:panelGroup>   
 
-                            <h4 style="margin-top: 80px;"> Ocena doradcy </h4>
-                            
-                            <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseViewMB.isNotRated()}" action="#{caseViewMB.toRateCase()}"> 
-                                
-                            </p:commandLink> 
-                            
-                        </h:panelGroup>
-                       </h:form>
-                    </div>
-                </div>
-                <div style="width: 100%; height: 2px;" ></div>
-            </ui:define>
+                        <h:panelGroup rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant != null }" >
+                            <h4> PREMIUM: </h4>
+                            <div class="solidText">
+                                Wysłałeś zapytanie prowadzenia sprawy do <b> doradcy nr #{caseViewMB.selectedClientCase.consultant.idConsultant}.  </b> 
+                            </div>
+                        </h:panelGroup>    
+                        <h4> DOSTĘPNI DORADCY </h4>
+                        <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single" >
 
-        </ui:composition>
-    </body>
-</html>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}" />     
+
+                            <p:column headerText="Nazwisko">  
+                                <h:outputText value="#{row.lastName}" /> 
+                            </p:column>  
+
+                            <p:column headerText="Imie">  
+                                <h:outputText value="#{row.name}" /> 
+                            </p:column>  
+
+                            <p:column headerText="Doświadczenie">    
+                                <h:outputText value="#{row.expirience}" /> 
+                            </p:column>  
+
+                            <p:column headerText="Średnia Ocena">    
+                                <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" > 
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                </h:outputText>
+                            </p:column>  
+
+                        </p:dataTable>
+                        <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Przydziel" action="#{caseViewMB.assignConsultant()}"/>
+                        <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}"/>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; caseViewMB.selectedClientCase.consultant!=null}" >    
+                        <div style="min-height: 58px;">
+                            <h4> WIADOMOŚCI </h4>
+                        </div>
+                        <p:commandLink styleClass="wideButton greyButton floatR" value="Moje wiadomości" action="#{messagesMB.toConversation(caseViewMB.selectedClientCase.consultant.user.idUser)}"/>
+
+                    </h:panelGroup>            
+
+                    <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
+                        <div class="marginT50" >
+                            <h4> NASTĘPNA RATA </h4>
+                        </div>
+                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="11-08-2013" /> </div>
+
+                        <h4> PROGNOZOWANY CZAS ZAKOŃCZENIA</h4>    
+
+                        <div style="min-height: 58px;"><h:outputText class="boldItem" value="30-10-2018" /> </div>
+
+                        <h4> HARMONOGRAM SPŁAT </h4>
+
+                        <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak klientów!" 
+                                     rowKey="#{row.toPay}" paginator="true" rows="15">
+                            <p:column headerText="Termin spłaty">  
+                                <h:outputText value="#{row.paymentDate}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                                </h:outputText>
+                            </p:column>  
+
+                            <p:column headerText="Kwota">  
+                                <h:outputText value="#{row.amount}" /> 
+                            </p:column>  
+
+                            <p:column headerText="Pozostało">    
+                                <h:outputText value="#{row.toPay}" /> 
+                            </p:column>  
+
+                            <p:column headerText="Spłacono">  
+                                <h:outputText value="#{row.alreadyPayed}" /> 
+                            </p:column>    
+                        </p:dataTable>
+
+                        <h:outputLabel rendered="#{caseViewMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
+
+
+
+                        <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseViewMB.isNotRated()}" action="#{caseViewMB.toRateCase()}"> 
+
+                        </p:commandLink> 
+
+                    </h:panelGroup>
+                </h:form>
+            </div>
+        </div>
+        <div style="width: 100%; height: 2px;" ></div>
+    </ui:define>
+
+</ui:composition>

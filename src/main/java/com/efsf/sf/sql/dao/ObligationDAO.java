@@ -16,7 +16,7 @@ public class ObligationDAO implements Serializable{
     }
     
     public void deleteObligation(Obligation ob){
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         session.delete(ob);
@@ -27,7 +27,7 @@ public class ObligationDAO implements Serializable{
     
     
     public Obligation getObligation(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         Obligation ob = (Obligation) session.get(Obligation.class, id);
@@ -41,7 +41,7 @@ public class ObligationDAO implements Serializable{
 
     public List obligationListForClient(Integer idUser) {
         List<Obligation> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         lista = session.createQuery("from Obligation ob join fetch ob.client cl where cl.idClient= :user ").setParameter("user",idUser).list();
@@ -52,7 +52,7 @@ public class ObligationDAO implements Serializable{
     }
 
     public void save(Obligation ob) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         session.save(ob);

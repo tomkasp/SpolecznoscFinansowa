@@ -10,7 +10,7 @@ public class NewsletterDAO
     public void saveNewsletter(String email)
     {
         Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         
         Newsletter news = new Newsletter(email);

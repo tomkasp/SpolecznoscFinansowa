@@ -10,8 +10,6 @@ import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Algorithms;
-import com.efsf.sf.util.Converters;
-import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -19,9 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.BusyConversationException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -40,14 +36,14 @@ public class ClientCaseMB implements Serializable {
     private MessagesMB messagesMB;
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
-    private int idTypProduktu;
-    private int idTypProduktuObligation;
+    private int idTypProduktu = 1;
+    private int idTypProduktuObligation = 1;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
-    ObligationDAO obdao = new ObligationDAO();
+    private ObligationDAO obdao = new ObligationDAO();
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
     private int premium = 6;
@@ -83,13 +79,11 @@ public class ClientCaseMB implements Serializable {
     public void delObligation() {
 
         obdao.deleteObligation(selectedObligation);
-        //obligation = new Obligation();
 
     }
 
     //zwraca liste zobowiazan dla danego klienta w sesji
     public void addObligation() {
-        //RequestContext.getCurrentInstance().execute("zobDial.show()");
 
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
@@ -106,12 +100,7 @@ public class ClientCaseMB implements Serializable {
     }
 
     public Boolean premiumPointsChecking() {
-
-        if (login.getClient().getPoints() < premium) {
-            return true;
-        } else {
-            return false;
-        }
+        return login.getClient().getPoints() < premium;
     }
 
     public String addCase() {

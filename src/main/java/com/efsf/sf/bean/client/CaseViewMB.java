@@ -59,19 +59,22 @@ public class CaseViewMB implements Serializable{
     private Consultant selectedPremiumConsultant;
     private int caseStatusID;
     
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList();
+    private List<IncomeData> selectedCaseIncomeTable = new ArrayList();
     
-    private ArrayList<Consultant> premiumConsultants = new ArrayList();
+    private List<Consultant> premiumConsultants = new ArrayList();
     
     private List<ScheduleItem> schedule = new ArrayList();
     
     public CaseViewMB() {
     }
     
+    
+    
     public void loadCaseConsultantsDetails() throws IOException
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
+            premiumConsultants = (ArrayList<Consultant>) bestConsultantsForPremiumCase();
             ClientCaseDAO cdao = new ClientCaseDAO();
             if (!cdao.checkClientAccess(loginMB.getClient().getIdClient(), clientCaseId)) 
             {
@@ -86,6 +89,7 @@ public class CaseViewMB implements Serializable{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed())
         {
+
             ClientCaseDAO cdao = new ClientCaseDAO();
             if (!cdao.checkConsultantAccess(clientCaseId, loginMB.getConsultant().getIdConsultant()))
             {
@@ -147,8 +151,7 @@ public class CaseViewMB implements Serializable{
     }
     
     
-    
-    public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
+    public List<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
     {
         return new ArrayList(cSet);
     }
@@ -156,7 +159,6 @@ public class CaseViewMB implements Serializable{
     public void assignPremiumConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
-        CaseStatusDAO statusDao = new CaseStatusDAO();
         selectedClientCase.setConsultant(selectedPremiumConsultant);
         caseDao.updateClientCase(selectedClientCase);  
     }
@@ -254,19 +256,19 @@ public class CaseViewMB implements Serializable{
         this.caseStatusID = caseStatusID;
     }
 
-    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
+    public List<IncomeData> getSelectedCaseIncomeTable() {
         return selectedCaseIncomeTable;
     }
 
-    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
+    public void setSelectedCaseIncomeTable(List<IncomeData> selectedCaseIncomeTable) {
         this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
-    public ArrayList<Consultant> getPremiumConsultants() {
+    public List<Consultant> getPremiumConsultants() {
         return premiumConsultants;
     }
 
-    public void setPremiumConsultants(ArrayList<Consultant> premiumConsultants) {
+    public void setPremiumConsultants(List<Consultant> premiumConsultants) {
         this.premiumConsultants = premiumConsultants;
     }
 

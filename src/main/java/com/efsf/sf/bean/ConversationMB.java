@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.MessageDAO;
 import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.entity.User;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ConversationMB {
+public class ConversationMB implements Serializable{
     
     @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB; 
@@ -31,7 +32,7 @@ public class ConversationMB {
     
     private List<Message> messages;
     private String message;
-    private int userTo_id;
+    private int userToId;
     
     public ConversationMB() 
     {
@@ -41,34 +42,34 @@ public class ConversationMB {
     public void sendAnswer(){
         
         GenericDao<Message> dao = new GenericDao(Message.class);
-        GenericDao<User> user_dao = new GenericDao(User.class);
+        GenericDao<User> userDao = new GenericDao(User.class);
         Message msg=new Message();
         msg.setMessage(message);
         msg.setSentDate(new Date());
         msg.setUserByFkFromUser(loginMB.getUser());
-        msg.setUserByFkToUser(user_dao.getById(userTo_id));
+        msg.setUserByFkToUser(userDao.getById(userToId));
         msg.setIsViewed(0);
         msg.setIsSystem(0);
         dao.save(msg);
         message="";
        
-        showMessagesPage(userTo_id); 
+        showMessagesPage(userToId); 
     }
     
     @PostConstruct
     public void load()
     {
-        userTo_id = messagesMB.getId_ToUser();
+        userToId = messagesMB.getIdToUser();
         MessageDAO dao = new MessageDAO();
-        setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userTo_id));
+        setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userToId));
         messagesMB.markListAsRead(messages);
     }
     
-    public String showMessagesPage(int userTo_id)
+    public String showMessagesPage(int userTo)
     {  
-        this.userTo_id=userTo_id;
+        this.userToId=userTo;
         MessageDAO dao = new MessageDAO();
-        setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userTo_id));
+        setMessages((List<Message>) dao.getMessages(loginMB.getUser().getIdUser(), userTo));
         messagesMB.markListAsRead(messages);
         return "/common/messages";
     }
@@ -107,11 +108,11 @@ public class ConversationMB {
         this.message = message;
     }
 
-    public int getUserTo_id() {
-        return userTo_id;
+    public int getUserToId() {
+        return userToId;
     }
 
-    public void setUserTo_id(int userTo_id) {
-        this.userTo_id = userTo_id;
+    public void setUserToId(int userToId) {
+        this.userToId = userToId;
     }
 }
