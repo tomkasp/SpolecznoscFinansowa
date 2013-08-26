@@ -57,6 +57,7 @@ public class FtpDownloader {
             context.responseComplete();
             
         } catch (IOException e) {
+                Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP exception", e);
         } finally {
             try {
                 client.disconnect();

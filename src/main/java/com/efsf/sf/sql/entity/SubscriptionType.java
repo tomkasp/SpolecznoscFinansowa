@@ -30,12 +30,6 @@ public class SubscriptionType implements java.io.Serializable {
     public SubscriptionType() {
     }
 
-    public SubscriptionType(String name, BigDecimal price, Integer length, Set<Subscription> subscriptions) {
-        this.name = name;
-        this.price = price;
-        this.length = length;
-        this.subscriptions = subscriptions;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

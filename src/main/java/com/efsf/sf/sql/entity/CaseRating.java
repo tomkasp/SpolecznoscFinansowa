@@ -43,20 +43,6 @@ public class CaseRating implements java.io.Serializable {
         this.clientCase = clientCase;
     }
 
-    public CaseRating(ClientCase clientCase, Integer contact, Integer culture, Integer competence, Integer punctuality, Integer reliability, Integer respect, Integer difficulty, Integer trust, Double average, String comment, Date commentDate) {
-        this.clientCase = clientCase;
-        this.contact = contact;
-        this.culture = culture;
-        this.competence = competence;
-        this.punctuality = punctuality;
-        this.reliability = reliability;
-        this.respect = respect;
-        this.difficulty = difficulty;
-        this.trust = trust;
-        this.average = average;
-        this.comment = comment;
-        this.commentDate = commentDate;
-    }
 
     @Id
     @Column(name = "id_rating", unique = true, nullable = false)

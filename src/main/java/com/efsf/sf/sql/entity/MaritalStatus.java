@@ -28,10 +28,6 @@ public class MaritalStatus implements java.io.Serializable {
     public MaritalStatus() {
     }
 
-    public MaritalStatus(String name, Set<Client> clients) {
-        this.name = name;
-        this.clients = clients;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

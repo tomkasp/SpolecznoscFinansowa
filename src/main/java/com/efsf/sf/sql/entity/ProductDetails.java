@@ -52,25 +52,6 @@ public class ProductDetails implements java.io.Serializable {
         this.productType = productType;
     }
 
-    public ProductDetails(EmploymentType employmentType, Product product, ProductType productType, BigDecimal amountBruttoMin, BigDecimal amountBruttoMax, Integer loanTimeMin, Integer loanTimeMax, Integer clientAgeMin, Integer clientAgeMax, Integer partnersNumberMin, Integer partnersNumberMax, Integer oodwmMin, Integer oodwmMax, Boolean recomendation, String recomendationDetails, String requiredDocuments, Set<ClientCase> clientCases) {
-        this.employmentType = employmentType;
-        this.product = product;
-        this.productType = productType;
-        this.amountBruttoMin = amountBruttoMin;
-        this.amountBruttoMax = amountBruttoMax;
-        this.loanTimeMin = loanTimeMin;
-        this.loanTimeMax = loanTimeMax;
-        this.clientAgeMin = clientAgeMin;
-        this.clientAgeMax = clientAgeMax;
-        this.partnersNumberMin = partnersNumberMin;
-        this.partnersNumberMax = partnersNumberMax;
-        this.oodwmMin = oodwmMin;
-        this.oodwmMax = oodwmMax;
-        this.recomendation = recomendation;
-        this.recomendationDetails = recomendationDetails;
-        this.requiredDocuments = requiredDocuments;
-        this.clientCases = clientCases;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

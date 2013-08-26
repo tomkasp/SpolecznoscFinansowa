@@ -43,19 +43,6 @@ public class Address implements java.io.Serializable {
         this.houseNumber = houseNumber;
     }
 
-    public Address(Region region, Consultant consultant, Client client, String street, String houseNumber, String zipCode, String city, String country, String phone, Integer type, Set<InvoiceData> invoiceDatas) {
-        this.region = region;
-        this.consultant = consultant;
-        this.client = client;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.country = country;
-        this.phone = phone;
-        this.type = type;
-        this.invoiceDatas = invoiceDatas;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

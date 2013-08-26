@@ -48,30 +48,6 @@ public class Consultant implements java.io.Serializable {
     public Consultant() {
     }
 
-    public Consultant(WorkingPlace workingPlace, User user) {
-        this.workingPlace = workingPlace;
-        this.user = user;
-    }
-
-    public Consultant(Region region, WorkingPlace workingPlace, User user, String name, String lastName, String pesel, String nip, String regon, String expirience, Set<ConsultantRating> consultantRatings, Set<Institution> institutions, Set<ClientCase> clientCases, Set<ProductType> productTypes, Set<ClientCase> clientCases_1, Set<Address> addresses, Set<Subscription> subscriptions, Set<ClientCase> clientCases_2) {
-        this.region = region;
-        this.workingPlace = workingPlace;
-        this.user = user;
-        this.name = name;
-        this.lastName = lastName;
-        this.pesel = pesel;
-        this.nip = nip;
-        this.regon = regon;
-        this.expirience = expirience;
-        this.consultantRatings = consultantRatings;
-        this.institutions = institutions;
-        this.clientCases = clientCases;
-        this.productTypes = productTypes;
-        this.clientCases_1 = clientCases_1;
-        this.addresses = addresses;
-        this.subscriptions = subscriptions;
-        this.clientCases_2 = clientCases_2;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

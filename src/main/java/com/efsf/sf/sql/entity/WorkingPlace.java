@@ -25,11 +25,6 @@ public class WorkingPlace implements java.io.Serializable {
     public WorkingPlace() {
     }
 
-    public WorkingPlace(String name, Set<Consultant> consultants) {
-        this.name = name;
-        this.consultants = consultants;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_workingPlace", unique = true, nullable = false)
