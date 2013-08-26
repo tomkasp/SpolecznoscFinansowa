@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             
-                            <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null)}" >
+                            <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null) and caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
                             <h4>DANE DORADCY</h4>
                             <div class="marginLRT30">   
                                 <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
@@ -83,7 +83,7 @@
                             <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
                                 <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
                                 <h:panelGroup rendered="#{caseViewMB.selectedClientCase.consultant eq null}" />
-                                  <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
+                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
 
                                     <p:ajax event="rowSelect" update="@form" />
                                     <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
@@ -110,8 +110,9 @@
                             
                                 <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{caseViewMB.assignPremiumConsultant()}"/>
                                 <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}"/>     
+                                <div style="min-height: 20px"> </div> 
                             </h:panelGroup>   
-                            <div style="min-height: 20px"> </div> 
+                            
                             <h:panelGroup rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant != null }" >
                                 <h4> PREMIUM: </h4>
                                 <div class="solidText">

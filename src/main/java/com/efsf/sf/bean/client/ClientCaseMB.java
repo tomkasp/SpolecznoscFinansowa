@@ -40,8 +40,8 @@ public class ClientCaseMB implements Serializable {
     private MessagesMB messagesMB;
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
-    private int idTypProduktu;
-    private int idTypProduktuObligation;
+    private int idTypProduktu = 1;
+    private int idTypProduktuObligation = 1;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
