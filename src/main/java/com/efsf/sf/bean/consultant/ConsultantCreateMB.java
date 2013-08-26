@@ -214,7 +214,7 @@ public class ConsultantCreateMB implements Serializable {
     {
         Boolean policyValue=(Boolean)value;
         
-        if (policyValue==false ) {
+        if (!policyValue) {
              FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Musisz akceptować warunki umowy", "Musisz akceptować warunki umowy");
         throw new ValidatorException(message);
         }

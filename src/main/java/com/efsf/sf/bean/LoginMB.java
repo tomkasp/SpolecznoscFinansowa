@@ -39,8 +39,6 @@ public class LoginMB implements Serializable {
 
     public String login() {
 
-        System.out.println(isLogged);
-
         UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
@@ -50,10 +48,8 @@ public class LoginMB implements Serializable {
 
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
                 isLogged = true;
-                System.out.println("LOGGED?: " + isLogged);
 
                 idUser = user.getIdUser();
-                System.out.println("login");
             }
 
             if (type.equals(Settings.ADMIN_ACTIVE)) {
@@ -105,7 +101,6 @@ public class LoginMB implements Serializable {
         consultant = null;
         user = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        System.out.println("logout");
         return "/login?faces-redirect=true";
     }
 
