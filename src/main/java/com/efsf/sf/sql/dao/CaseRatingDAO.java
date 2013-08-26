@@ -4,7 +4,6 @@ import com.efsf.sf.sql.entity.CaseRating;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,7 +17,6 @@ public class CaseRatingDAO {
             session.beginTransaction();
             session.save(rating);
             session.getTransaction().commit();
-        } catch (HibernateException e) {
         } finally {
             session.close();
         }
@@ -29,7 +27,6 @@ public class CaseRatingDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             rating = (CaseRating) session.get(CaseRating.class, idClientCase);
-        } catch (HibernateException e) {
         } finally {
             session.close();
         }

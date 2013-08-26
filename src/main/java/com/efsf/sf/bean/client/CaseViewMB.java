@@ -18,6 +18,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.util.analyser.AnalyserAlgorithm;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,10 +68,13 @@ public class CaseViewMB implements Serializable{
     public CaseViewMB() {
     }
     
+    
+    
     public void loadCaseConsultantsDetails() throws IOException
     {   FacesContext facesContext = FacesContext.getCurrentInstance();
          if (!facesContext.isPostback() && !facesContext.isValidationFailed())
          {
+            premiumConsultants = (ArrayList<Consultant>) bestConsultantsForPremiumCase();
             ClientCaseDAO cdao = new ClientCaseDAO();
             if (!cdao.checkClientAccess(loginMB.getClient().getIdClient(), clientCaseId)) 
             {
@@ -85,6 +89,7 @@ public class CaseViewMB implements Serializable{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed())
         {
+
             ClientCaseDAO cdao = new ClientCaseDAO();
             if (!cdao.checkConsultantAccess(clientCaseId, loginMB.getConsultant().getIdConsultant()))
             {
@@ -97,6 +102,17 @@ public class CaseViewMB implements Serializable{
             fillSelectedCaseIncomeTable();
         }
     }
+    
+    
+    public List<Consultant> bestConsultantsForPremiumCase(){
+        List<Consultant> cons;
+        
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
+        cons = aa.getWynik2();
+        
+        return cons;
+    }
+    
     
     public void changeCaseStatus()
     {

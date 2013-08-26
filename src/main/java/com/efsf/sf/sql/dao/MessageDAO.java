@@ -18,8 +18,9 @@ public class MessageDAO extends GenericDao<Message>{
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        lista = session.createQuery("from Message where (fk_toUser="+user_id+" AND fk_fromUser="
-                +user_id2+") OR (fk_toUser="+user_id2+" AND fk_fromUser="+user_id+")").list();
+        lista = session.createQuery("from Message where ((fk_toUser="+user_id+" AND fk_fromUser="
+                +user_id2+") OR (fk_toUser="+user_id2+" AND fk_fromUser="+user_id+"))"
+                + " AND isSystem=0").list();
 
         session.getTransaction().commit();
         session.close();

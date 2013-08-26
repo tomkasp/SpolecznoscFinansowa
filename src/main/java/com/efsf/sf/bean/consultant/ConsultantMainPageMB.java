@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
@@ -36,10 +32,7 @@ import javax.faces.context.FacesContext;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-/**
- *
- * @author XaI
- */
+
 @ManagedBean
 @SessionScoped
 public class ConsultantMainPageMB {
@@ -94,9 +87,7 @@ public class ConsultantMainPageMB {
     private ClientCase selectedPremiumCase;
     
     
-    /**
-     * Creates a new instance of ConsultantMainPageMB
-     */
+
     public ConsultantMainPageMB() {
     }
     
@@ -349,10 +340,7 @@ public class ConsultantMainPageMB {
         else
         {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            if (rds.getBik() == null)
-                return false;
-            else
-                return true;   
+            return rds.getBik() == null;
         }   
     }
     
