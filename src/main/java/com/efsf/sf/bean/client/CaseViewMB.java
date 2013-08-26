@@ -159,7 +159,6 @@ public class CaseViewMB implements Serializable{
     public void assignPremiumConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
-        CaseStatusDAO statusDao = new CaseStatusDAO();
         selectedClientCase.setConsultant(selectedPremiumConsultant);
         caseDao.updateClientCase(selectedClientCase);  
     }

@@ -29,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -55,7 +57,7 @@ public class CreateClientMB implements Serializable
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
-    User user; 
+    private User user; 
     
     private int counter = 0;
     
@@ -131,7 +133,7 @@ public class CreateClientMB implements Serializable
 
     }
 
-    public String createClientAccount() throws NoSuchAlgorithmException, Exception
+    public String createClientAccount() 
     {
         UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
@@ -165,8 +167,11 @@ public class CreateClientMB implements Serializable
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
-        
-        SendMail.sendRegisterMail(email, name, user.getIdUser());
+        try {
+            SendMail.sendRegisterMail(email, name, user.getIdUser());
+        } catch (Exception ex) {
+            Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
  
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
@@ -331,10 +336,12 @@ public class CreateClientMB implements Serializable
         
         clientDao.update(client);
         
-        if (areRequired)
+        if (areRequired) {
                 return "/client/clientNewApplication?faces-redirect=true";
-        else
+        }
+        else {
                 return "/client/clientMainPage?faces-redirect=true";
+        }
     }
 
     //NOT MINE METHOD

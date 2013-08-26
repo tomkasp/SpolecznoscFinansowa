@@ -43,7 +43,7 @@ public class ClientCaseMB implements Serializable {
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
-    ObligationDAO obdao = new ObligationDAO();
+    private ObligationDAO obdao = new ObligationDAO();
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
     private int premium = 6;

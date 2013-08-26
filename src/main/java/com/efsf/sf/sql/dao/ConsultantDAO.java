@@ -2,7 +2,6 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;

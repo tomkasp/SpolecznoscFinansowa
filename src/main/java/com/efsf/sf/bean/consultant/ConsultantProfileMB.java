@@ -50,12 +50,12 @@ public class ConsultantProfileMB {
     
     public List<Institution> castInstitutionSetToArray(Set<Institution> csSet)
     {
-        return new ArrayList<Institution>(csSet);
+        return new ArrayList(csSet);
     }
     
     public List<ProductType> castProductTypeSetToArray(Set<ProductType> csSet)
     {
-        return new ArrayList<ProductType>(csSet);
+        return new ArrayList(csSet);
     }
     
     public List<Institution> selectBanksFromConsultant(Consultant cons)
@@ -72,9 +72,9 @@ public class ConsultantProfileMB {
             }
             return banks;
        }
-       else
-           return new ArrayList<Institution>();
-           
+       else {
+           return new ArrayList();
+       }
        
        
     }
@@ -93,8 +93,9 @@ public class ConsultantProfileMB {
         }
         return other;
        }
-       else
-           return new ArrayList<Institution>();
+       else {
+           return new ArrayList();
+       }
     }
 
     public List<ClientCase> getCasesRated() {
