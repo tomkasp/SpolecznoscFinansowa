@@ -33,7 +33,6 @@ public class ConsultantRatesMB implements Serializable{
     private ConsultantMainPageMB consultantMainPageMB;
     
     private ClientCase clientCase;
-    private List<ScoreBoardRow> scoreBoard;
    
     
     public String showConsulantRatesPage(){
@@ -101,9 +100,6 @@ public class ConsultantRatesMB implements Serializable{
         this.clientCaseMB = clientCaseMB;
     }
 
-    public void setScoreBoard(List<ScoreBoardRow> scoreBoard) {
-        this.scoreBoard = scoreBoard;
-    }
 
     private double[] calculateAverageConsultantScore(List<ConsultantRating> ratingAll) {
         double[] average=new double[8];

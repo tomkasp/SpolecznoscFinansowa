@@ -46,7 +46,7 @@ public class CaseRatingMB implements Serializable {
         CaseRatingDAO dao = new CaseRatingDAO();
         
         caseRating.setClientCase(clientCase);
-        //caseRating.setIdRating(caseViewMB.getSelectedClientCase().getIdClientCase());
+
         average += caseRating.getCompetence() + caseRating.getContact()
                 + caseRating.getCulture() + caseRating.getDifficulty()
                 + caseRating.getPunctuality() + caseRating.getReliability()

@@ -21,12 +21,7 @@
                         <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     </div>
 
-            </ui:define>
-            <ui:define name="content">
-             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />      
-           
-
-             <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px" height="145px" draggable="false" closable="false">  
+                <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px" height="145px" draggable="false" closable="false">  
                 <div id="circular3dG">
                    <div id="circular3d_1G" class="circular3dG">
                    </div>
@@ -45,7 +40,12 @@
                    <div id="circular3d_8G" class="circular3dG">
                    </div>
                 </div>
-            </p:dialog>  
+            </p:dialog>
+                
+            </ui:define>
+            <ui:define name="content">
+             <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />      
+   
             
             <h:form  id="logowanie">   
              <div class="contentBox">

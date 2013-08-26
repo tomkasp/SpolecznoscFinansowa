@@ -79,13 +79,11 @@ public class ClientCaseMB implements Serializable {
     public void delObligation() {
 
         obdao.deleteObligation(selectedObligation);
-        //obligation = new Obligation();
 
     }
 
     //zwraca liste zobowiazan dla danego klienta w sesji
     public void addObligation() {
-        //RequestContext.getCurrentInstance().execute("zobDial.show()");
 
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));
