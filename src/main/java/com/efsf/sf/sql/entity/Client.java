@@ -58,26 +58,6 @@ public class Client implements java.io.Serializable {
         this.lastName = lastName;
     }
 
-    public Client(User user, Education education, MaritalStatus maritalStatus, String name, String lastName, Boolean sex, String pesel, Date birthDate, String familyName, String birthPlace, Integer points, Set<Income> incomes, Set<RequiredDocuments> requiredDocumentses, Set<Obligation> obligations, Set<ClientCase> clientCases, Set<IncomeBusinessActivity> incomeBusinessActivities, Set<IdentyficationDocument> identyficationDocuments, Set<Address> addresses) {
-        this.user = user;
-        this.education = education;
-        this.maritalStatus = maritalStatus;
-        this.name = name;
-        this.lastName = lastName;
-        this.sex = sex;
-        this.pesel = pesel;
-        this.birthDate = birthDate;
-        this.familyName = familyName;
-        this.birthPlace = birthPlace;
-        this.points = points;
-        this.incomes = incomes;
-        this.requiredDocumentses = requiredDocumentses;
-        this.obligations = obligations;
-        this.clientCases = clientCases;
-        this.incomeBusinessActivities = incomeBusinessActivities;
-        this.identyficationDocuments = identyficationDocuments;
-        this.addresses = addresses;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

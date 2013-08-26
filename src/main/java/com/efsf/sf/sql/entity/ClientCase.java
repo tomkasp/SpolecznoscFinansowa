@@ -52,33 +52,6 @@ public class ClientCase implements java.io.Serializable {
     public ClientCase() {
     }
 
-    public ClientCase(Client client, CaseStatus caseStatus, ProductType productType) {
-        this.client = client;
-        this.caseStatus = caseStatus;
-        this.productType = productType;
-    }
-
-    public ClientCase(Consultant consultant, Client client, CaseStatus caseStatus, ProductType productType, ProductDetails productDetails, Date beginDate, Date endDate, Integer phase, BigDecimal consolidationValue, BigDecimal freeResourcesValue, String goal, BigDecimal expectedInstalment, String note, Integer viewCounter, Integer difficulty, Boolean premium, CaseRating caseRating, Set<Consultant> consultants, Set<Consultant> consultants_1) {
-        this.consultant = consultant;
-        this.client = client;
-        this.caseStatus = caseStatus;
-        this.productType = productType;
-        this.productDetails = productDetails;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-        this.phase = phase;
-        this.consolidationValue = consolidationValue;
-        this.freeResourcesValue = freeResourcesValue;
-        this.goal = goal;
-        this.expectedInstalment = expectedInstalment;
-        this.note = note;
-        this.viewCounter = viewCounter;
-        this.difficulty = difficulty;
-        this.premium = premium;
-        this.caseRating = caseRating;
-        this.consultants = consultants;
-        this.consultants_1 = consultants_1;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

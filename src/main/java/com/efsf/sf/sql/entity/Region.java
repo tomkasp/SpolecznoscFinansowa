@@ -29,12 +29,6 @@ public class Region implements java.io.Serializable {
     public Region() {
     }
 
-    public Region(String region, Set<Address> addresses, Set<Consultant> consultants) {
-        this.region = region;
-        this.addresses = addresses;
-        this.consultants = consultants;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_region", unique = true, nullable = false)

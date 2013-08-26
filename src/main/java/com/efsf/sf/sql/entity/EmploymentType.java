@@ -36,14 +36,6 @@ public class EmploymentType implements java.io.Serializable {
         this.companyFlag = companyFlag;
     }
 
-    public EmploymentType(String name, boolean companyFlag, String shortcut, Set<IncomeBusinessActivity> incomeBusinessActivities, Set<Income> incomes, Set<ProductDetails> productDetailses) {
-        this.name = name;
-        this.companyFlag = companyFlag;
-        this.shortcut = shortcut;
-        this.incomeBusinessActivities = incomeBusinessActivities;
-        this.incomes = incomes;
-        this.productDetailses = productDetailses;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

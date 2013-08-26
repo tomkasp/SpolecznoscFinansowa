@@ -39,14 +39,6 @@ public class Income implements java.io.Serializable {
         this.branch = branch;
     }
 
-    public Income(Client client, EmploymentType employmentType, Branch branch, String employer, BigDecimal monthlyNetto, Date beginDate) {
-        this.client = client;
-        this.employmentType = employmentType;
-        this.branch = branch;
-        this.employer = employer;
-        this.monthlyNetto = monthlyNetto;
-        this.beginDate = beginDate;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

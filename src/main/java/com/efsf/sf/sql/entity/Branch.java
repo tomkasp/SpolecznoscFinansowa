@@ -35,11 +35,6 @@ public class Branch implements java.io.Serializable {
         this.name = name;
     }
 
-    public Branch(String name, Set<Income> incomes, Set<IncomeBusinessActivity> incomeBusinessActivities) {
-        this.name = name;
-        this.incomes = incomes;
-        this.incomeBusinessActivities = incomeBusinessActivities;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

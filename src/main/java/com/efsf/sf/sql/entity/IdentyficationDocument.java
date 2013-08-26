@@ -38,15 +38,6 @@ public class IdentyficationDocument implements java.io.Serializable {
         this.client = client;
     }
 
-    public IdentyficationDocument(Client client, String kind, String serial, String number, String deliveredBy, Date expireDate) {
-        this.client = client;
-        this.kind = kind;
-        this.serial = serial;
-        this.number = number;
-        this.deliveredBy = deliveredBy;
-        this.expireDate = expireDate;
-    }
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_identyficationDocument", unique = true, nullable = false)
