@@ -3,7 +3,6 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -161,7 +160,6 @@ public class ClientDAO {
             client = (Client) q.list().get(0);
             session.getTransaction().commit();
 
-        } catch (HibernateException exp) {
         } finally {
             session.close();
         }
