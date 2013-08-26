@@ -4,7 +4,6 @@ import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -117,7 +116,7 @@ public class ClientCaseDAO implements Serializable {
          return !flag;
     }
     
-    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, ArrayList<String> incomes, ArrayList<String> business)
+    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();

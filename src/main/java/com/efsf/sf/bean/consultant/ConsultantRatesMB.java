@@ -33,7 +33,6 @@ public class ConsultantRatesMB implements Serializable{
     private ConsultantMainPageMB consultantMainPageMB;
     
     private ClientCase clientCase;
-    private List<ScoreBoardRow> scoreBoard;
    
     
     public String showConsulantRatesPage(){
@@ -53,7 +52,9 @@ public class ConsultantRatesMB implements Serializable{
     public List<ScoreBoardRow> getScoreBoard() {
        GenericDao<ConsultantRating> dao = new GenericDao(ConsultantRating.class); 
        ConsultantRating rating=dao.getById(idConsultant);
-       if(rating==null) rating=new ConsultantRating();
+       if(rating==null) {
+           rating=new ConsultantRating();
+       }
        
        List<ConsultantRating> ratingAll=dao.getAll();
        
@@ -63,7 +64,7 @@ public class ConsultantRatesMB implements Serializable{
        int[][] minAndMax=calculateConsultantMinAndMaxScore(cases);
        double[] average = calculateAverageConsultantScore(ratingAll);
     
-       List<ScoreBoardRow> sb=new ArrayList<ScoreBoardRow>();
+       List<ScoreBoardRow> sb=new ArrayList();
        sb.add(new ScoreBoardRow("Kontakt", rating.getContact(), average[0], minAndMax[1][0], minAndMax[0][0]));
        sb.add(new ScoreBoardRow("Kultura", rating.getCulture(), average[1], minAndMax[1][1], minAndMax[0][1]));
        sb.add(new ScoreBoardRow("Kompetencje", rating.getCompetence(), average[2], minAndMax[1][2], minAndMax[0][02]));
@@ -101,9 +102,6 @@ public class ConsultantRatesMB implements Serializable{
         this.clientCaseMB = clientCaseMB;
     }
 
-    public void setScoreBoard(List<ScoreBoardRow> scoreBoard) {
-        this.scoreBoard = scoreBoard;
-    }
 
     private double[] calculateAverageConsultantScore(List<ConsultantRating> ratingAll) {
         double[] average=new double[8];
@@ -118,7 +116,9 @@ public class ConsultantRatesMB implements Serializable{
            average[7]+=rat.getTrust();
         }
         for(int i=0; i<average.length && !ratingAll.isEmpty(); i++)
+        {
             average[i]/=ratingAll.size();
+        }
         return average;
     }
 
@@ -135,23 +135,55 @@ public class ConsultantRatesMB implements Serializable{
         
         for(ClientCase cs: cases){
            CaseRating caseRat=cs.getCaseRating();
-           if(caseRat.getContact()>max[0]) max[0]=caseRat.getContact();
-           if(caseRat.getCulture()>max[1]) max[1]=caseRat.getCulture();
-           if(caseRat.getCompetence()>max[2]) max[2]=caseRat.getCompetence();
-           if(caseRat.getPunctuality()>max[3]) max[3]=caseRat.getPunctuality();
-           if(caseRat.getReliability()>max[4]) max[4]=caseRat.getReliability();
-           if(caseRat.getRespect()>max[5]) max[5]=caseRat.getRespect();
-           if(caseRat.getDifficulty()>max[6]) max[6]=caseRat.getDifficulty();
-           if(caseRat.getTrust()>max[7]) max[7]=caseRat.getTrust();
+           if(caseRat.getContact()>max[0]) {
+               max[0]=caseRat.getContact();
+           }
+           if(caseRat.getCulture()>max[1]) {
+               max[1]=caseRat.getCulture();
+           }
+           if(caseRat.getCompetence()>max[2]) {
+               max[2]=caseRat.getCompetence();
+           }
+           if(caseRat.getPunctuality()>max[3]){
+               max[3]=caseRat.getPunctuality();
+           }
+           if(caseRat.getReliability()>max[4]) {
+               max[4]=caseRat.getReliability();
+           }
+           if(caseRat.getRespect()>max[5]) {
+               max[5]=caseRat.getRespect();
+           }
+           if(caseRat.getDifficulty()>max[6]) {
+               max[6]=caseRat.getDifficulty();
+           }
+           if(caseRat.getTrust()>max[7]) { 
+               max[7]=caseRat.getTrust();
+           }
            
-           if(caseRat.getContact()<min[0]) min[0]=caseRat.getContact();
-           if(caseRat.getCulture()<min[1]) min[1]=caseRat.getCulture();
-           if(caseRat.getCompetence()<min[2]) min[2]=caseRat.getCompetence();
-           if(caseRat.getPunctuality()<min[3]) min[3]=caseRat.getPunctuality();
-           if(caseRat.getReliability()<min[4]) min[4]=caseRat.getReliability();
-           if(caseRat.getRespect()<min[5]) min[5]=caseRat.getRespect();
-           if(caseRat.getDifficulty()<min[6]) min[6]=caseRat.getDifficulty();
-           if(caseRat.getTrust()<min[7]) min[7]=caseRat.getTrust();
+           if(caseRat.getContact()<min[0]) {
+               min[0]=caseRat.getContact();
+           }
+           if(caseRat.getCulture()<min[1]) {
+               min[1]=caseRat.getCulture();
+           }
+           if(caseRat.getCompetence()<min[2]) {
+               min[2]=caseRat.getCompetence();
+           }
+           if(caseRat.getPunctuality()<min[3]) {
+               min[3]=caseRat.getPunctuality();
+           }
+           if(caseRat.getReliability()<min[4]) {
+               min[4]=caseRat.getReliability();
+           }
+           if(caseRat.getRespect()<min[5]) {
+               min[5]=caseRat.getRespect();
+           }
+           if(caseRat.getDifficulty()<min[6]) {
+               min[6]=caseRat.getDifficulty();
+           }
+           if(caseRat.getTrust()<min[7]) {
+               min[7]=caseRat.getTrust();
+           }
         }
         
         int[][] result=new int[2][8];

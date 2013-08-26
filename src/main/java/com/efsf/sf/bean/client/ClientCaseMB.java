@@ -43,7 +43,7 @@ public class ClientCaseMB implements Serializable {
     private Obligation obligation = new Obligation();
     private ProductTypeDAO ptd = new ProductTypeDAO();
     private List<Obligation> obligationList = new ArrayList<>();
-    ObligationDAO obdao = new ObligationDAO();
+    private ObligationDAO obdao = new ObligationDAO();
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
     private int premium = 6;
@@ -79,13 +79,11 @@ public class ClientCaseMB implements Serializable {
     public void delObligation() {
 
         obdao.deleteObligation(selectedObligation);
-        //obligation = new Obligation();
 
     }
 
     //zwraca liste zobowiazan dla danego klienta w sesji
     public void addObligation() {
-        //RequestContext.getCurrentInstance().execute("zobDial.show()");
 
         obligation.setClient(login.getClient());
         obligation.setProductType(ptd.getProductType(idTypProduktuObligation));

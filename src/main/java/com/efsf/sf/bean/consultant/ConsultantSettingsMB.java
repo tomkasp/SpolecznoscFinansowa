@@ -98,13 +98,13 @@ public class ConsultantSettingsMB implements Serializable {
             {   
                 mainAddress=a;
                 idMainRegion=mainAddress.getRegion().getIdRegion();
-                //idMainRegion=1;
+
             }
             if(a.getType()==2)
             {      
                 invoiceAddress=a;
                 idInvoiceRegion=invoiceAddress.getRegion().getIdRegion();
-                //idInvoiceRegion=1;
+
                 //I PRZY OKAZJI:
                 invoiceData=iddao.loadFromFkAddress(a.getIdAddress());
             } 
@@ -116,7 +116,8 @@ public class ConsultantSettingsMB implements Serializable {
         while(it4.hasNext())
         {
             Subscription s=it4.next();
-            if(!it4.hasNext())//ZAWSZE ZWRACA OSTATNI ABONAMENT
+            //ZAWSZE ZWRACA OSTATNI ABONAMENT
+            if(!it4.hasNext())
             {
                 idSubscriptionType=s.getIdSubscription();
                 subscription=s;
