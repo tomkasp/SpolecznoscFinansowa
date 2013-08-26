@@ -139,7 +139,8 @@ public class ClientSettingsMB implements Serializable {
             while (incomeSetIT.hasNext()) {
 
                 Income i2 = incomeSetIT.next();
-                if (i.getIdIncome() == i2.getIdIncome()) {
+                if (i.getIdIncome().equals(i2.getIdIncome()))
+                {
                     isExist = true;
                 }
 

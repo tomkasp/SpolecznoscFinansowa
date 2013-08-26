@@ -43,9 +43,9 @@ public class LoginMB implements Serializable {
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
         user = userDao.login(this.email, this.password);
-        type = user.getType();
+        
         if (user != null) {
-
+            type = user.getType();
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
                 isLogged = true;
 
