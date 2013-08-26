@@ -27,9 +27,15 @@
 
                           <div class="marginLRT30">
                               
-                              <h:commandLink target="_blank" value="Pokaż umowe" action="#{ consultantSettingsMB.showAgreementPDF() }">
+                              
+                              <div class="field">
+                                <h:outputText class="label" value="Pobierz umowe"/> 
+                                <h:commandLink target="_blank" action="#{ consultantSettingsMB.showAgreementPDF() }">
                                   <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" />
-                              </h:commandLink>
+                                </h:commandLink>
+                            </div>
+                              
+                              
                               
                                         
 
