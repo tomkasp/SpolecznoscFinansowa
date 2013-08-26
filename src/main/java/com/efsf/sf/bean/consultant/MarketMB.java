@@ -40,7 +40,7 @@ public class MarketMB implements Serializable
     @ManagedProperty(value="#{consultantMainPageMB}")
     private ConsultantMainPageMB consultantMainPageMB;
        
-    ClientCaseDAO caseDao = new ClientCaseDAO(); 
+    private ClientCaseDAO caseDao = new ClientCaseDAO(); 
    
     //MARKET VIEW FIELDS!
     
@@ -104,11 +104,12 @@ public class MarketMB implements Serializable
          incomeIds = new ArrayList();
          businessIds = new ArrayList();   
          
-         for (EmploymentType et : dictionaryMB.getIncome())
+         for (EmploymentType et : dictionaryMB.getIncome()) {
             incomeIds.add(et.getShortcut());
-         for (EmploymentType ba : dictionaryMB.getBusinessActivity())
+         }
+         for (EmploymentType ba : dictionaryMB.getBusinessActivity()) {
             businessIds.add(ba.getShortcut());  
-         
+         }
          loadMarket();
          
     }
