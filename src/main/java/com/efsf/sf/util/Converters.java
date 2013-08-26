@@ -5,11 +5,11 @@
 package com.efsf.sf.util;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 /**
  *
@@ -19,26 +19,7 @@ public class Converters implements Serializable
 {
     public int ageFromBirthDate(Date birthDate)
     {
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        
-        int age;
-        int factor = 0;
-        
-        Calendar calBirth = new GregorianCalendar();
-        if (birthDate != null)
-        {
-            calBirth.setTime(birthDate);
-            if(cal.get(Calendar.DAY_OF_YEAR) < calBirth.get(Calendar.DAY_OF_YEAR)) {
-              factor = -1; 
-            
-            }
-            age = cal.get(Calendar.YEAR) - calBirth.get(Calendar.YEAR) + factor;
-
-            return age;
-        }
-        else
-            return 0;
+        return Years.yearsBetween(new LocalDate(birthDate), new LocalDate()).getYears();
     }
     
     public String hoursLeft(Date end)

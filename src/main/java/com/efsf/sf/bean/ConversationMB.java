@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.MessageDAO;
 import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.entity.User;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class ConversationMB {
+public class ConversationMB implements Serializable{
     
     @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB; 
