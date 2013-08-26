@@ -4,6 +4,8 @@
  */
 package com.efsf.sf.util.analyser;
 
+import java.util.HashSet;
+
 /**
  *
  * @author admin
@@ -11,7 +13,18 @@ package com.efsf.sf.util.analyser;
 public class analyserTest {
     public static void main(String args[]){
         
-        AnalyserAlgorithm algorytm = new AnalyserAlgorithm(20);
-
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(100);
+        //aa.setClient(100);
+        //aa.analizuj(100);
+        for(Integer i:(HashSet<Integer>)aa.getKlienci()[2]){
+            System.out.println("wartosc:"+ i);
+        }
+        
+        //aa.setProducts();
+               
+        
+        System.out.println("data:"+ aa.getKlienci()[5]);
+ 
     }
 }
+    

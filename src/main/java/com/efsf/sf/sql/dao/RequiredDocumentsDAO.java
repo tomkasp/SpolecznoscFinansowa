@@ -2,7 +2,6 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.sql.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,11 +17,8 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         requiredDocuments = (RequiredDocuments) session.get(RequiredDocuments.class, id);
         session.getTransaction().commit();
-        }
-        catch(HibernateException exp)
-        {
-        }
-        finally{   
+
+        }finally{   
         session.close();
         }
         return requiredDocuments;
@@ -43,11 +39,7 @@ public class RequiredDocumentsDAO {
         requiredDocuments = (RequiredDocuments) q.list().get(0);
         }
         session.getTransaction().commit();
-        }
-        catch(HibernateException exp)
-        {
-        }
-        finally{   
+        }finally{   
         session.close();
         }
         return requiredDocuments;
@@ -63,9 +55,7 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         session.save(requiredDocuments);          
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
+        }finally{   
         session.close();
         }
         
@@ -79,9 +69,7 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         session.saveOrUpdate(requiredDocuments);            
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
+        }finally{   
         session.close();
         }
         
@@ -95,9 +83,7 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         session.update(requiredDocuments);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
+        }finally{   
         session.close();
         }
         
@@ -111,9 +97,7 @@ public class RequiredDocumentsDAO {
         session.beginTransaction().begin();
         session.delete(requiredDocuments);
         session.getTransaction().commit();
-        }catch(HibernateException e)
-        {}
-        finally{
+        }finally{   
         session.close();
         }
         

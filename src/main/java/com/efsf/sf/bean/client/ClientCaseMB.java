@@ -9,16 +9,15 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
-import com.efsf.sf.util.Converters;
-import com.efsf.sf.util.Settings;
+import com.efsf.sf.util.Algorithms;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.BusyConversationException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -37,8 +36,8 @@ public class ClientCaseMB implements Serializable {
     private MessagesMB messagesMB;
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
-    private int idTypProduktu;
-    private int idTypProduktuObligation;
+    private int idTypProduktu = 1;
+    private int idTypProduktuObligation = 1;
     private ClientCase clientCase = new ClientCase();
     private Date currentDate = new Date();
     private Obligation obligation = new Obligation();
@@ -103,12 +102,7 @@ public class ClientCaseMB implements Serializable {
     }
 
     public Boolean premiumPointsChecking() {
-
-        if (login.getClient().getPoints() < premium) {
-            return true;
-        } else {
-            return false;
-        }
+        return login.getClient().getPoints() < premium;
     }
 
     public String addCase() {
@@ -139,8 +133,11 @@ public class ClientCaseMB implements Serializable {
             clientCase.setProductType(ptd.getProductType(idTypProduktu));
             clientCase.setClient(login.getClient());        
             clientCase.setViewCounter(0);
-            clientCase.setDifficulty(calculateCaseDifficulty());
-            clientCase.setPhase(calculateProgress());
+            
+            login.getClient().setObligations(new HashSet(obligationList));
+            
+            clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(),clientCase));
+            clientCase.setPhase(Algorithms.calculateProgress(login.getClient()));
             ccd.saveClientCase(clientCase);
 
             if (login.getClient().getPoints() == 0) {
@@ -152,151 +149,6 @@ public class ClientCaseMB implements Serializable {
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
     
-    //Some kind of prototype algorithm to calculate difficulty of the case 
-    public int calculateCaseDifficulty()
-    {
-        Client client = login.getClient();
-        
-        int difficulty = 1;
-        
-        // BIK is really usful in getting credits 
-        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().isEmpty() || client.getRequiredDocumentses().iterator().next().getBik() == null  )
-        {
-            difficulty++;
-        }
-        
-        // If client have some obligations the loan is harder to get
-        if (obligationList != null)
-        {
-            if (obligationList.size() == 1)
-                difficulty++;
-            else if (obligationList.size() > 1)
-                difficulty += 2;
-        }
-        
-        // Chwilówka should be here || We assume that 'chwilówka' is easier to get then other loans
-        if (clientCase.getProductType().getIdProductType() != Settings.CHWILOWKA )
-        {
-            difficulty+=2;
-        }
-        
-        // The lower income is the harder is to get credit
-        if(calculateClientIncome() < 2000.0 )
-        {
-            difficulty++;
-        }
-        
-        //The age have some infuence on income too. 
-        Converters c = new Converters();
-        
-        if(c.ageFromBirthDate(client.getBirthDate()) <  22 )
-        {
-            difficulty++;
-        }   
-        else if(c.ageFromBirthDate(client.getBirthDate()) > 65)
-        {
-            difficulty++;
-        }
-        
-        //If client have not used our system yet and have no case succesfully finished
-        if (!new ClientCaseDAO().checkClientFinishedCases(client.getIdClient()))
-        {
-            difficulty++;
-        }    
-        else if (!new ClientCaseDAO().checkClientCases(client.getIdClient()))
-        {
-            difficulty++;
-        }
-      
-        return difficulty;
-    }
-    
-    public double calculateClientIncome()
-    {
-       double income = 0;
-       
-       for (Income i : login.getClient().getIncomes())
-       {
-           income += i.getMonthlyNetto().doubleValue();
-       }
-       
-       for (IncomeBusinessActivity iba : login.getClient().getIncomeBusinessActivities())
-       {
-           income += iba.getIncomeLastYearNetto().doubleValue();
-       }
-       
-       return income; 
-    }
-    
-    
-    //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 
-    public int calculateProgress()
-    {
-         Client client = new ClientDAO().readClientForSettings(login.getClient().getIdClient());
-         int progress = 20; 
-         
-         if(client.getMaritalStatus().getIdMaritalStatus() != 0)
-         {
-             progress+=5;
-         }
-         if(client.getEducation().getIdEducation() != 0)
-         {
-             progress+=5;
-         }
-         if(client.getSex() != null)
-         {
-             progress+=5;
-         }
-         if(client.getPesel() != null)
-         {
-             progress+=5;
-         }
-         
-         Address address = client.getAddresses().iterator().next();
-         
-         if(address.getCity() != null && !"".equals(address.getCity()))
-         {
-             progress+=5;
-         }
-         if(address.getHouseNumber() != null && !"".equals(address.getHouseNumber()))
-         {
-             progress+=5;
-         }
-         if(address.getPhone() != null && !"".equals(address.getPhone()))
-         {
-             progress+=5;
-         }
-         if(address.getCity() != null && !"".equals(address.getPhone()))
-         {
-             progress+=5;
-         }
-         
-         RequiredDocuments requiredDocuments = new RequiredDocumentsDAO().readForFkClient( login.getClient().getIdClient() );
-
-         if (requiredDocuments != null)
-         {
-             if(requiredDocuments.getIdCard() != null)
-             {
-                 progress+=10;
-             }
-             if(requiredDocuments.getBik() != null)
-             {
-                 progress+=10;
-             }
-             if(requiredDocuments.getIncomeStatement() != null)
-             {
-                 progress+=10;
-             }
-             if(requiredDocuments.getTitleDeed() != null)
-             {
-                 progress+=10;
-             }      
-         }
-     
-         return progress;
-         
-         
-    }
     
     
     // VIEW CASE METHODS 

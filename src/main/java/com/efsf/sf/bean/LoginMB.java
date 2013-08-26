@@ -88,11 +88,7 @@ public class LoginMB implements Serializable {
     }
 
     private Boolean checkNewAppActivity() {
-        if (this.points > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.points > 0;
     }
     
     public void addMessageToContext(){

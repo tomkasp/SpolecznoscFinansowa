@@ -85,6 +85,11 @@ public class ClientMainPageMB implements Serializable {
     
     public void fillTables()
     {    
+        
+        finishedSelectedCase = null;
+        awaitingSelectedCase = null;
+        lastSelectedCase = null;
+        premiumSelectedCase = null;
         reloadCases();
         reloadCases2();
         reloadCases3();
@@ -206,12 +211,7 @@ public class ClientMainPageMB implements Serializable {
         else
         {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            if (rds.getBik() == null) {
-                return false;
-            }
-            else {
-                return true;
-            }   
+            return rds.getBik() == null;  
         }   
     }
     
@@ -220,6 +220,7 @@ public class ClientMainPageMB implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed() && !facesContext.isPostback())
         {
+
             fillTables();
         }
     }
