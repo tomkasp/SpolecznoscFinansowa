@@ -1,35 +1,29 @@
+package com.efsf.sf.util.pdf;
+
 
 import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Consultant;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.fontbox.ttf.TrueTypeFont;
-import org.apache.pdfbox.encoding.DictionaryEncoding;
-import org.apache.pdfbox.encoding.StandardEncoding;
-import org.apache.pdfbox.encoding.Type1Encoding;
-import org.apache.pdfbox.encoding.WinAnsiEncoding;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDSimpleFont;
-import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  * @author WR1EI1
  */
-public class AgreementPDF {
+public class AgreementPDFBox {
     
     public static void main(String[] args) throws IOException, COSVisitorException {
       
-        AgreementPDF apdf=new AgreementPDF();
+        AgreementPDFBox apdf=new AgreementPDFBox();
         apdf.fillConsultantAgreement(40);
         
     }
@@ -53,9 +47,9 @@ public class AgreementPDF {
 
             //PDFont font = PDTrueTypeFont.loadTTF( doc , new File("ariali.ttf") );
 
-            PDDocument doc2 = PDDocument.load("java.pdf");
+            //PDDocument doc2 = PDDocument.load("java.pdf");
             
-            font.setToUnicode(doc2.getDocumentInformation().getCOSObject());
+            //font.setToUnicode(doc2.getDocumentInformation().getCOSObject());
             
             //font.setFontEncoding(  );
             
@@ -96,13 +90,13 @@ public class AgreementPDF {
             doc.save("dokumentTest.pdf");
 
         } catch (COSVisitorException | IOException ex) {
-            Logger.getLogger(AgreementPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgreementPDFBox.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (doc != null) {
                 try {
                     doc.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(AgreementPDF.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AgreementPDFBox.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

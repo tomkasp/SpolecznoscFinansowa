@@ -4,6 +4,9 @@ import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.ftp.FtpDownloader;
+import com.efsf.sf.util.pdf.AgreementPDFItext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -229,6 +232,17 @@ public class ConsultantSettingsMB implements Serializable {
             throw new ValidatorException(message);
         }
     }
+    
+    public void showAgreementPDF() throws IOException{
+        
+        AgreementPDFItext itext=new AgreementPDFItext();
+        itext.fillPDF(idConsultant);    
+        
+        FtpDownloader ftpd=new FtpDownloader();
+        ftpd.downLoad("rice/SF/USERS/"+9+"/", "" ); 
+        
+    }
+    
     
     public Integer getIdConsultant() {
         return idConsultant;
