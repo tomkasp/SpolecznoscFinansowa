@@ -117,7 +117,7 @@ public class ClientCaseDAO implements Serializable {
          return !flag;
     }
     
-    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, ArrayList<String> incomes, ArrayList<String> business)
+    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();

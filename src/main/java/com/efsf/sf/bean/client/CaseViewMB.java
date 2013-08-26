@@ -59,9 +59,9 @@ public class CaseViewMB implements Serializable{
     private Consultant selectedPremiumConsultant;
     private int caseStatusID;
     
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList();
+    private List<IncomeData> selectedCaseIncomeTable = new ArrayList();
     
-    private ArrayList<Consultant> premiumConsultants = new ArrayList();
+    private List<Consultant> premiumConsultants = new ArrayList();
     
     private List<ScheduleItem> schedule = new ArrayList();
     
@@ -151,8 +151,7 @@ public class CaseViewMB implements Serializable{
     }
     
     
-    
-    public ArrayList<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
+    public List<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
     {
         return new ArrayList(cSet);
     }
@@ -258,19 +257,19 @@ public class CaseViewMB implements Serializable{
         this.caseStatusID = caseStatusID;
     }
 
-    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
+    public List<IncomeData> getSelectedCaseIncomeTable() {
         return selectedCaseIncomeTable;
     }
 
-    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
+    public void setSelectedCaseIncomeTable(List<IncomeData> selectedCaseIncomeTable) {
         this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
-    public ArrayList<Consultant> getPremiumConsultants() {
+    public List<Consultant> getPremiumConsultants() {
         return premiumConsultants;
     }
 
-    public void setPremiumConsultants(ArrayList<Consultant> premiumConsultants) {
+    public void setPremiumConsultants(List<Consultant> premiumConsultants) {
         this.premiumConsultants = premiumConsultants;
     }
 
