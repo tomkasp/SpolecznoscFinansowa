@@ -40,7 +40,7 @@ public class MarketMB implements Serializable
     @ManagedProperty(value="#{consultantMainPageMB}")
     private ConsultantMainPageMB consultantMainPageMB;
        
-    ClientCaseDAO caseDao = new ClientCaseDAO(); 
+    private ClientCaseDAO caseDao = new ClientCaseDAO(); 
    
     //MARKET VIEW FIELDS!
     
@@ -56,11 +56,11 @@ public class MarketMB implements Serializable
     private int branchId = 0;
     private int regionId = 0;
     
-    private ArrayList<String> incomeIds = new ArrayList();
-    private ArrayList<String> businessIds = new ArrayList();
+    private List<String> incomeIds = new ArrayList();
+    private List<String> businessIds = new ArrayList();
 
-    private ArrayList<Set<String>> marketModelsEmploymentType = new ArrayList();
-    private ArrayList<Set<String>> marketModelsBranch = new ArrayList();
+    private List<Set<String>> marketModelsEmploymentType = new ArrayList();
+    private List<Set<String>> marketModelsBranch = new ArrayList();
     
     private List<ClientCase> allMarket = new ArrayList();
     
@@ -104,11 +104,12 @@ public class MarketMB implements Serializable
          incomeIds = new ArrayList();
          businessIds = new ArrayList();   
          
-         for (EmploymentType et : dictionaryMB.getIncome())
+         for (EmploymentType et : dictionaryMB.getIncome()) {
             incomeIds.add(et.getShortcut());
-         for (EmploymentType ba : dictionaryMB.getBusinessActivity())
+         }
+         for (EmploymentType ba : dictionaryMB.getBusinessActivity()) {
             businessIds.add(ba.getShortcut());  
-         
+         }
          loadMarket();
          
     }
@@ -179,11 +180,11 @@ public class MarketMB implements Serializable
         this.difficultyMax = difficultyMax;
     }
 
-    public ArrayList<String> getIncomeIds() {
+    public List<String> getIncomeIds() {
         return incomeIds;
     }
 
-    public void setIncomeIds(ArrayList<String> incomeIds) {
+    public void setIncomeIds(List<String> incomeIds) {
         this.incomeIds = incomeIds;
     }
 
@@ -203,11 +204,11 @@ public class MarketMB implements Serializable
         this.regionId = regionId;
     }
 
-    public ArrayList<String> getBusinessIds() {
+    public List<String> getBusinessIds() {
         return businessIds;
     }
 
-    public void setBusinessIds(ArrayList<String> businessIds) {
+    public void setBusinessIds(List<String> businessIds) {
         this.businessIds = businessIds;
     }
 
@@ -219,19 +220,19 @@ public class MarketMB implements Serializable
         this.allMarket = allMarket;
     }
 
-    public ArrayList<Set<String>> getMarketModelsEmploymentType() {
+    public List<Set<String>> getMarketModelsEmploymentType() {
         return marketModelsEmploymentType;
     }
 
-    public void setMarketModelsEmploymentType(ArrayList<Set<String>> marketModelsEmploymentType) {
+    public void setMarketModelsEmploymentType(List<Set<String>> marketModelsEmploymentType) {
         this.marketModelsEmploymentType = marketModelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getMarketModelsBranch() {
+    public List<Set<String>> getMarketModelsBranch() {
         return marketModelsBranch;
     }
 
-    public void setMarketModelsBranch(ArrayList<Set<String>> marketModelsBranch) {
+    public void setMarketModelsBranch(List<Set<String>> marketModelsBranch) {
         this.marketModelsBranch = marketModelsBranch;
     }
 

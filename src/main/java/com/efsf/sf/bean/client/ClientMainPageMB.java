@@ -67,10 +67,10 @@ public class ClientMainPageMB implements Serializable {
     
     private ClientCase awaitingForMarketSelectedCase;
     
-    private ArrayList<Set<String>> modelsEmploymentType = new ArrayList<>();
-    private ArrayList<Set<String>> modelsBranch = new ArrayList<>();
+    private List<Set<String>> modelsEmploymentType = new ArrayList<>();
+    private List<Set<String>> modelsBranch = new ArrayList<>();
     
-    private ArrayList<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
+    private List<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
    
     private Integer newPoints;
     
@@ -255,8 +255,9 @@ public class ClientMainPageMB implements Serializable {
      public void redirectNewApplication() throws IOException
      {
          if (requirementsFulfilled)
+         {
               FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
-         
+         }
      }
      
      public void checkRequirementsForNewApplication()
@@ -274,9 +275,9 @@ public class ClientMainPageMB implements Serializable {
          }
      }
     //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
-    public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
+    public List<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList<ClientCase>(csSet);
+        return new ArrayList(csSet);
     }
     
     public void addPoints(){
@@ -297,7 +298,6 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getClientCaseList() {
-//        reloadCases();
         return clientCaseList;
     }
 
@@ -315,19 +315,19 @@ public class ClientMainPageMB implements Serializable {
     }
 
 
-    public ArrayList<Set<String>> getModelsEmploymentType() {
+    public List<Set<String>> getModelsEmploymentType() {
         return modelsEmploymentType;
     }
 
-    public void setModelsEmploymentType(ArrayList<Set<String>> modelsEmploymentType) {
+    public void setModelsEmploymentType(List<Set<String>> modelsEmploymentType) {
         this.modelsEmploymentType = modelsEmploymentType;
     }
 
-    public ArrayList<Set<String>> getModelsBranch() {
+    public List<Set<String>> getModelsBranch() {
         return modelsBranch;
     }
 
-    public void setModelsBranch(ArrayList<Set<String>> modelsBranch) {
+    public void setModelsBranch(List<Set<String>> modelsBranch) {
         this.modelsBranch = modelsBranch;
     }
 
@@ -339,16 +339,15 @@ public class ClientMainPageMB implements Serializable {
         this.converters = converters;
     }
 
-    public ArrayList<IncomeData> getSelectedCaseIncomeTable() {
+    public List<IncomeData> getSelectedCaseIncomeTable() {
         return selectedCaseIncomeTable;
     }
 
-    public void setSelectedCaseIncomeTable(ArrayList<IncomeData> selectedCaseIncomeTable) {
+    public void setSelectedCaseIncomeTable(List<IncomeData> selectedCaseIncomeTable) {
         this.selectedCaseIncomeTable = selectedCaseIncomeTable;
     }
 
     public List<ClientCase> getAwaitingClientCaseList() {
-//        reloadCases2();
         return awaitingClientCaseList;
     }
 
@@ -357,7 +356,6 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getCurrentClientCaseList() {
-//        reloadCases3();
         return currentClientCaseList;
     }
 
@@ -366,7 +364,6 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getFinishedClientCaseList() {
-//        reloadCases4();
         return finishedClientCaseList;
     }
 
@@ -375,7 +372,6 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getPremiumClientCaseList() {
-//        reloadCases5();
         return premiumClientCaseList;
     }
 
@@ -384,7 +380,6 @@ public class ClientMainPageMB implements Serializable {
     }
 
     public List<ClientCase> getAllClientCaseList() {
-//        reloadCases6();
         return allClientCaseList;
     }
 

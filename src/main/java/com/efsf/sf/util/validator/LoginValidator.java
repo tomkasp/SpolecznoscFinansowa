@@ -18,41 +18,39 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author WR1EI1
  */
-
 @FacesValidator("LoginValidator")
 public class LoginValidator implements Validator {
-    
-   @Override
-   public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
-      
-       String email = value.toString();
- 
-	  UIInput uiInputConfirmPassword = (UIInput) component.getAttributes()
-		.get("password");
-	  String password = uiInputConfirmPassword.getSubmittedValue()
-		.toString();
-       
-      password=Security.sha1(password);
-       
-      UserDAO udao=new UserDAO();
-      int loginStatus=udao.checkLogin(email, password);
-      
-      if(loginStatus==-1){
-         FacesContext context = FacesContext.getCurrentInstance();
-         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-         FacesMessage msg =  new FacesMessage(bundle.getString("failed1"),bundle.getString("failed1"));
-         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-         throw new ValidatorException(msg);
-      }
-      
-      if(loginStatus==0){
-         FacesContext context = FacesContext.getCurrentInstance();
-         ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
-         FacesMessage msg =  new FacesMessage(bundle.getString("failed2"),bundle.getString("failed2"));
-         msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-         throw new ValidatorException(msg);
-      }
 
-   }
- 
+    @Override
+    public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+
+        String email = value.toString();
+
+        UIInput uiInputConfirmPassword = (UIInput) component.getAttributes()
+                .get("password");
+        String password = uiInputConfirmPassword.getSubmittedValue()
+                .toString();
+
+        password = Security.sha1(password);
+
+        UserDAO udao = new UserDAO();
+        int loginStatus = udao.checkLogin(email, password);
+
+        if (loginStatus == -1) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+            FacesMessage msg = new FacesMessage(bundle.getString("failed1"), bundle.getString("failed1"));
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
+
+        if (loginStatus == 0) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+            FacesMessage msg = new FacesMessage(bundle.getString("failed2"), bundle.getString("failed2"));
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ValidatorException(msg);
+        }
+
+    }
 }

@@ -13,7 +13,8 @@ public class Security {
         String text = salt + plaintext;
         MessageDigest m = null;
         try {
-            m = MessageDigest.getInstance("SHA-1"); // Or: SHA,SHA-1,SHA-256,SHA-384,SHA-512,MD2,MD5
+            // Or: SHA,SHA-1,SHA-256,SHA-384,SHA-512,MD2,MD5
+            m = MessageDigest.getInstance("SHA-1"); 
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
         }

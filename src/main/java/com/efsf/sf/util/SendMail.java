@@ -69,7 +69,7 @@ public class SendMail{
         emailList[0]=email;
     }
 
-    private void postMail(String recipients[], String subject, String message, String from) throws MessagingException, AuthenticationFailedException {
+    private void postMail(String recipients[], String subject, String message, String from) throws MessagingException {
         boolean debug = false;
 
         Properties props = new Properties();

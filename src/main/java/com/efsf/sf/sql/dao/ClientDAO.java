@@ -10,11 +10,6 @@ import org.hibernate.Session;
 public class ClientDAO {
 
     private int points;
- //   private String[] klienci;
- //   private String[][] ProduktyBankow;
-//    private String[][] wynik = new String[5][4];
-//    private String NazwaBanku;
-//    private String NazwaProduktu;
 
     public Client read(int id) {
 
@@ -179,9 +174,6 @@ public class ClientDAO {
                 + "where cc.idClientCase= :sprawaKlienta ");
         q.setParameter("sprawaKlienta", idSprawaKlienta);
 
-        List l = q.list();
-//      setKlienci(new String[10]);
-
         Client klient = (Client) q.list().get(0);
 
 
@@ -191,43 +183,4 @@ public class ClientDAO {
         return klient;
     }
 
-//    public String[] getKlienci() {
-//        return klienci;
-//    }
-//
-//    public String[][] getProduktyBankow() {
-//        return ProduktyBankow;
-//    }
-
-//    public String[][] getWynik() {
-//        return wynik;
-//    }
-
-//    public String getNazwaBanku() {
-//        return NazwaBanku;
-//    }
-//
-//    public String getNazwaProduktu() {
-//        return NazwaProduktu;
-//    }
-
-//    public void setKlienci(String[] klienci) {
-//        this.klienci = klienci;
-//    }
-//
-//    public void setProduktyBankow(String[][] ProduktyBankow) {
-//        this.ProduktyBankow = ProduktyBankow;
-//    }
-
-//    public void setWynik(String[][] wynik) {
-//        this.wynik = wynik;
-//    }
-
-//    public void setNazwaBanku(String NazwaBanku) {
-//        this.NazwaBanku = NazwaBanku;
-//    }
-//
-//    public void setNazwaProduktu(String NazwaProduktu) {
-//        this.NazwaProduktu = NazwaProduktu;
-//    }
 }
