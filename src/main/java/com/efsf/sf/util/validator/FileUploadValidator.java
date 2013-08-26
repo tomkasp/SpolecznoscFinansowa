@@ -28,8 +28,8 @@ public class FileUploadValidator implements Validator {
                 accept=true; 
             }         
         }
-        //false = nieprawidlowy format
-        if (accept==false) 
+
+        if (!accept) //false = nieprawidlowy format
         {
              FacesMessage msg =
                         new FacesMessage("Nieprawidlowy format",

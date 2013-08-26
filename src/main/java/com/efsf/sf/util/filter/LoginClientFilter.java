@@ -26,7 +26,6 @@ public class LoginClientFilter implements Filter {
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
             ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
-            System.out.println("NO LOGGED AS CLIENT!");
         }
 
         chain.doFilter(request, response);
