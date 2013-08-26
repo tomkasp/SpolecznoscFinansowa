@@ -82,36 +82,36 @@
                         <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
                             <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
                                 <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
-                                <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
-                                
+                                <h:panelGroup rendered="#{caseViewMB.selectedClientCase.consultant eq null}" />
+                                  <p:dataTable id="premiumConsultantsTable" value="#{caseViewMB.premiumConsultants}" rowKey="#{row}" var="row" emptyMessage="Nie znaleziono odpowiednich konsultantów!" selection="#{caseViewMB.selectedPremiumConsultant}" selectionMode="single" >
+
                                     <p:ajax event="rowSelect" update="@form" />
                                     <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}" />     
-                                    
+
                                     <p:column headerText="Nazwisko">  
                                         <h:outputText value="#{row.lastName}" /> 
                                     </p:column>  
-                                    
+
                                     <p:column headerText="Imie">  
                                         <h:outputText value="#{row.name}" /> 
                                     </p:column>  
-                                    
+
                                     <p:column headerText="Doświadczenie">    
                                         <h:outputText value="#{row.expirience}" /> 
                                     </p:column>  
-                                    
+
                                     <p:column headerText="Średnia Ocena">    
                                         <h:outputText value="#{empty row.consultantRatings ? 'brak' : row.consultantRatings.toArray()[0].average}" > 
                                             <f:convertNumber maxFractionDigits="2"/>
                                         </h:outputText>
                                     </p:column>  
-                                    
+
                                 </p:dataTable>
+                            
                                 <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Zaproś" action="#{caseViewMB.assignPremiumConsultant()}"/>
                                 <p:commandButton disabled="#{empty caseViewMB.selectedPremiumConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedPremiumConsultant)}"/>     
-                                <div style="min-height: 20px"> </div> 
-                            
-                            </h:panelGroup>
-                            
+                            </h:panelGroup>   
+                            <div style="min-height: 20px"> </div> 
                             <h:panelGroup rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant != null }" >
                                 <h4> PREMIUM: </h4>
                                 <div class="solidText">
