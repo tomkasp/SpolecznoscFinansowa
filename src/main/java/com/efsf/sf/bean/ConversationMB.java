@@ -42,12 +42,12 @@ public class ConversationMB implements Serializable{
     public void sendAnswer(){
         
         GenericDao<Message> dao = new GenericDao(Message.class);
-        GenericDao<User> user_dao = new GenericDao(User.class);
+        GenericDao<User> userDao = new GenericDao(User.class);
         Message msg=new Message();
         msg.setMessage(message);
         msg.setSentDate(new Date());
         msg.setUserByFkFromUser(loginMB.getUser());
-        msg.setUserByFkToUser(user_dao.getById(userToId));
+        msg.setUserByFkToUser(userDao.getById(userToId));
         msg.setIsViewed(0);
         msg.setIsSystem(0);
         dao.save(msg);

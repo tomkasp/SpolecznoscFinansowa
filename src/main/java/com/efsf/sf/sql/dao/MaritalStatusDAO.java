@@ -13,7 +13,7 @@ public class MaritalStatusDAO {
    
     public MaritalStatus getMaritalStatus(int id)
     {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         MaritalStatus ms = (MaritalStatus) session.get(MaritalStatus.class, id);
@@ -27,7 +27,7 @@ public class MaritalStatusDAO {
     
     public List maritalStatusList(){
         List<MaritalStatus> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         lista = session.createQuery("from MaritalStatus").list();

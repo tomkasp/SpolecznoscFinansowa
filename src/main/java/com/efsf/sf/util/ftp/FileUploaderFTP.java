@@ -21,21 +21,21 @@ public class FileUploaderFTP {
     private String pass = "rice123";
 
     public String upload(UploadedFile file, Integer folderId, String fileName) {
-
+        String finalFileName;
         String ftpPath = "rice/SF/USERS/" + folderId + "/";
         makeDirectory(ftpPath);
 
         if (file != null) {
-            String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5)); //wyłuskanie rozszerzenia pliku
-            fileName = fileName + fileFormat;
+            String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5)); 
+            finalFileName = fileName + fileFormat;
             try {
 
-                uploadFTP(file.getInputstream(), ftpPath + fileName);
+                uploadFTP(file.getInputstream(), ftpPath + finalFileName);
 
             } catch (IOException e) {
                 Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload exception", e);
             }
-            return fileName;
+            return finalFileName;
         } else {
             return null;
         }

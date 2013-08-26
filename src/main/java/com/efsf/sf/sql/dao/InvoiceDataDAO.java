@@ -9,7 +9,7 @@ public class InvoiceDataDAO {
 
     public void save(InvoiceData invoiceData) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
             session.save(invoiceData);
@@ -22,7 +22,7 @@ public class InvoiceDataDAO {
 
     public void update(InvoiceData invoiceData) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
             session.update(invoiceData);
@@ -36,7 +36,7 @@ public class InvoiceDataDAO {
     public InvoiceData loadFromFkAddress(Integer fkAddress) {
 
         InvoiceData invoiceData = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
 

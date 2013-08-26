@@ -12,7 +12,7 @@ public class CaseRatingDAO {
 
     public void save(CaseRating rating) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
             session.save(rating);
@@ -24,7 +24,7 @@ public class CaseRatingDAO {
 
     public boolean isNotRated(Integer idClientCase) {
         CaseRating rating = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             rating = (CaseRating) session.get(CaseRating.class, idClientCase);
         } finally {
@@ -37,7 +37,7 @@ public class CaseRatingDAO {
     public List<ClientCase> getConsultantRatings(Integer consultantId)
     {
          List<ClientCase> list;
-         Session session = HibernateUtil.getSessionFactory().openSession();
+         Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
          Query q = session.createQuery("FROM ClientCase as cs "
          + "join fetch cs.client as clt "    

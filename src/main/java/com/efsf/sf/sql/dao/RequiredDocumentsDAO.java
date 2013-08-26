@@ -11,7 +11,7 @@ public class RequiredDocumentsDAO {
     public RequiredDocuments read(int id) {
 
         RequiredDocuments requiredDocuments=null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try
         {
         session.beginTransaction().begin();
@@ -25,15 +25,15 @@ public class RequiredDocumentsDAO {
 
     }
     
-    public RequiredDocuments readForFkClient(int fk_client) {
+    public RequiredDocuments readForFkClient(int fkClient) {
 
         RequiredDocuments requiredDocuments=null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try
         {
         session.beginTransaction().begin();
         Query q=session.createQuery("FROM RequiredDocuments WHERE fk_client = :id");
-        q.setParameter("id", fk_client);
+        q.setParameter("id", fkClient);
         if(!q.list().isEmpty())
         {
         requiredDocuments = (RequiredDocuments) q.list().get(0);
@@ -50,7 +50,7 @@ public class RequiredDocumentsDAO {
     public void save(RequiredDocuments requiredDocuments)
     {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.save(requiredDocuments);          
@@ -64,7 +64,7 @@ public class RequiredDocumentsDAO {
     public void saveOrUpdate(RequiredDocuments requiredDocuments)
     {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.saveOrUpdate(requiredDocuments);            
@@ -78,7 +78,7 @@ public class RequiredDocumentsDAO {
     public void update(RequiredDocuments requiredDocuments)
     {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.update(requiredDocuments);
@@ -92,7 +92,7 @@ public class RequiredDocumentsDAO {
     public void delete(RequiredDocuments requiredDocuments)
     {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.delete(requiredDocuments);

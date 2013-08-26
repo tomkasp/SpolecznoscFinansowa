@@ -56,7 +56,7 @@ public class CreateClientMB implements Serializable
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
-    private User user; 
+ 
     
     private int counter = 0;
     
@@ -134,6 +134,8 @@ public class CreateClientMB implements Serializable
 
     public String createClientAccount() 
     {
+        User user;
+        
         UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
         EducationDAO eduDao = new EducationDAO();

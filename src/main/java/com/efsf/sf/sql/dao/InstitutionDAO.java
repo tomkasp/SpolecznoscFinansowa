@@ -11,7 +11,7 @@ public class InstitutionDAO {
 
     public List bankList() {
         List<EmploymentType> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         list = session.createQuery("from Institution where type = 0").list();
@@ -23,7 +23,7 @@ public class InstitutionDAO {
 
     public List institutionList() {
         List<EmploymentType> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         list = session.createQuery("from Institution where type = 1").list();
@@ -35,7 +35,7 @@ public class InstitutionDAO {
     
     public Institution getInstitution(int id)
     {
-        org.hibernate.classic.Session session = HibernateUtil.getSessionFactory().openSession();
+        org.hibernate.classic.Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Institution ms = (Institution) session.get(Institution.class, id);
