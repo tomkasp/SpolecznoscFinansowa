@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class AgreementPDFItext {
 
-    public String fillPDF(int idConsultant) {
+    public void fillPDF(int idConsultant,String sourcePath,String destinationPath) {
 
         ConsultantDAO cdao = new ConsultantDAO();
         Consultant consultant = cdao.read(idConsultant);
@@ -28,20 +28,18 @@ public class AgreementPDFItext {
         AddressDAO adao = new AddressDAO();
         Address address = adao.loadMainAddressFromFkConsultant(idConsultant);
         
-        String source = "\\u.pdf";
         PdfReader pdfReader = null;
         try {
-            pdfReader = new PdfReader(source);
+            pdfReader = new PdfReader(sourcePath);
         } catch (IOException ex) {
             Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String path = "\\agreement_consultant_"+idConsultant+".pdf";
         PdfStamper pdfStamper = null;
         
         try {  
             try { 
-                pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(path));
+                pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(destinationPath) );
             } catch (IOException ex) {
                 Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -80,7 +78,6 @@ public class AgreementPDFItext {
             Logger.getLogger(AgreementPDFItext.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return path;
     }
   
 }
