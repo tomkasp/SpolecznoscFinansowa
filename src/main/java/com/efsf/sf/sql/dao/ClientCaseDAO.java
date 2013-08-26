@@ -117,7 +117,7 @@ public class ClientCaseDAO implements Serializable {
          return !flag;
     }
     
-    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, ArrayList<String> incomes, ArrayList<String> business)
+    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.getSessionFactory().openSession();
@@ -298,14 +298,8 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (l == null || l.isEmpty())
-         {
-             return false;
-         }
-         else
-         {
-             return true;
-         }
+         return !(l == null || l.isEmpty());
+
      }
      
     
@@ -733,14 +727,7 @@ public class ClientCaseDAO implements Serializable {
         session.getTransaction().commit();
         session.close();
      
-        if (list == null || list.isEmpty())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return !(list == null || list.isEmpty());
     }
     
     public List<ClientCase> premiumCasesSelectedConsultant(int idConsultant)
@@ -799,10 +786,7 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null && !list.isEmpty())
-             return true;
-         else
-             return false;
+         return list != null && !list.isEmpty();
     }
     
     public boolean checkClientCases(Integer idClient)
@@ -823,10 +807,7 @@ public class ClientCaseDAO implements Serializable {
          session.getTransaction().commit();
          session.close();
          
-         if (list != null && !list.isEmpty())
-             return true;
-         else
-             return false;
+         return list != null && !list.isEmpty();
     }
 }
     
