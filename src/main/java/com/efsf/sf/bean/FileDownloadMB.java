@@ -18,6 +18,8 @@ public class FileDownloadMB implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    private static final String PATH =  "rice/SF/USERS/";
+    
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
@@ -55,35 +57,35 @@ public class FileDownloadMB implements Serializable {
     }
     
     public void load1() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getIdCard() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getIdCard() ); 
     }
     
     public void load2() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getIncomeStatement() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getIncomeStatement() ); 
     }
    
     public void load3() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getDeathCertificate() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getDeathCertificate() ); 
     }
     
     public void load4() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getMariageSettlement() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getMariageSettlement() ); 
     }
     
     public void load5() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getDivorceAct() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getDivorceAct() ); 
     }
     
     public void load6() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getSeparationAct() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getSeparationAct() ); 
     }
     
     public void load7() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getTitleDeed() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getTitleDeed() ); 
     }
     
     public void load8() throws IOException{
-        ftpd.downLoad("rice/SF/USERS/"+idUser+"/", requiredDocuments.getBik() ); 
+        ftpd.downLoad(PATH+idUser+"/", requiredDocuments.getBik() ); 
     }
      
     public LoginMB getLoginMB() {

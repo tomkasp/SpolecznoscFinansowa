@@ -255,8 +255,9 @@ public class ClientMainPageMB implements Serializable {
      public void redirectNewApplication() throws IOException
      {
          if (requirementsFulfilled)
+         {
               FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
-         
+         }
      }
      
      public void checkRequirementsForNewApplication()
@@ -274,9 +275,9 @@ public class ClientMainPageMB implements Serializable {
          }
      }
     //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
-    public ArrayList<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
+    public List<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
     {
-        return new ArrayList<ClientCase>(csSet);
+        return new ArrayList(csSet);
     }
     
     public void addPoints(){

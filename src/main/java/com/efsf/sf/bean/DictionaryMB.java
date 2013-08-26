@@ -34,7 +34,6 @@ public class DictionaryMB implements Serializable{
     private List<Education> education;
     private List<MaritalStatus> maritalStatus;
     private List<WorkingPlace> workingPlace;
-    private List<SelectItem> workingPlaceMap;
     private List<CaseStatus> caseStatus;
     private List<EmploymentType> businessActivity;
     private List<EmploymentType> income;
@@ -59,7 +58,6 @@ public class DictionaryMB implements Serializable{
         
         WorkingPlaceDAO wp = new WorkingPlaceDAO();
         workingPlace = wp.workingPlaceList();
-        //workingPlaceMap = wp.workingPlaceMap();
         
         CaseStatusDAO cs = new CaseStatusDAO();
         caseStatus = cs.caseStatusList();  
@@ -142,14 +140,6 @@ public class DictionaryMB implements Serializable{
 
     public List<WorkingPlace> getWorkingPlace() {
         return workingPlace;
-    }
-
-    public List<SelectItem> getWorkingPlaceMap() {
-        return workingPlaceMap;
-    }
-
-    public void setWorkingPlaceMap(ArrayList<SelectItem> workingPlaceMap) {
-        this.workingPlaceMap = workingPlaceMap;
     }
     
     public List<CaseStatus> getCaseStatus() {

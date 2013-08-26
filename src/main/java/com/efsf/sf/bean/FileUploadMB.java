@@ -35,16 +35,16 @@ public class FileUploadMB implements Serializable {
     public String save() {
             String[] filename = new String[8];
             
-            FileUploaderFTP FUFTP=new FileUploaderFTP();
+            FileUploaderFTP fileUploadFTP=new FileUploaderFTP();
             
-            filename[0] = FUFTP.upload(uploadedFiles[0] , loginMB.getIdUser() , "idCard");    
-            filename[1] = FUFTP.upload(uploadedFiles[1] , loginMB.getIdUser() , "incomeStatement");    
-            filename[2] = FUFTP.upload(uploadedFiles[2] , loginMB.getIdUser() , "deathCertificate");    
-            filename[3] = FUFTP.upload(uploadedFiles[3] , loginMB.getIdUser() , "mariageSettlement");    
-            filename[4] = FUFTP.upload(uploadedFiles[4] , loginMB.getIdUser() , "divorceAct");    
-            filename[5] = FUFTP.upload(uploadedFiles[5] , loginMB.getIdUser() , "separationAct");    
-            filename[6] = FUFTP.upload(uploadedFiles[6] , loginMB.getIdUser() , "titleDeed");    
-            filename[7] = FUFTP.upload(uploadedFiles[7] , loginMB.getIdUser() , "bik");    
+            filename[0] = fileUploadFTP.upload(uploadedFiles[0] , loginMB.getIdUser() , "idCard");    
+            filename[1] = fileUploadFTP.upload(uploadedFiles[1] , loginMB.getIdUser() , "incomeStatement");    
+            filename[2] = fileUploadFTP.upload(uploadedFiles[2] , loginMB.getIdUser() , "deathCertificate");    
+            filename[3] = fileUploadFTP.upload(uploadedFiles[3] , loginMB.getIdUser() , "mariageSettlement");    
+            filename[4] = fileUploadFTP.upload(uploadedFiles[4] , loginMB.getIdUser() , "divorceAct");    
+            filename[5] = fileUploadFTP.upload(uploadedFiles[5] , loginMB.getIdUser() , "separationAct");    
+            filename[6] = fileUploadFTP.upload(uploadedFiles[6] , loginMB.getIdUser() , "titleDeed");    
+            filename[7] = fileUploadFTP.upload(uploadedFiles[7] , loginMB.getIdUser() , "bik");    
              
              RequiredDocumentsDAO rddao=new RequiredDocumentsDAO(); 
              
