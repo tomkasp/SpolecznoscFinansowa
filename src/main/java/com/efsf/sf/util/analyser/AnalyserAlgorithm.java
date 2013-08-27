@@ -7,8 +7,6 @@ import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -30,11 +28,11 @@ import java.util.Map;
  */
 public class AnalyserAlgorithm {
 
-    private List<Consultant> wynik2 = null;
+    private List<Consultant> bestConsultants = null;
     private ClientData clidata = new ClientData();
     private ArrayList<ProductsData> prodata = new ArrayList<>();
     private HashMap<Integer, Integer> testtab = new HashMap<>();
-    private HashMap<Integer, Integer> wynik = new HashMap<>();
+    private HashMap<Integer, Integer> bestOfferts = new HashMap<>();
     
     
     public AnalyserAlgorithm() {
@@ -283,10 +281,10 @@ public class AnalyserAlgorithm {
 //                    tab[tmp][0] = (Integer)entry.getKey();
 //                    tab[tmp][1] = (Integer)entry.getValue();
                     
-                    wynik.put((int)entry.getKey(), (int)entry.getValue());
+                    bestOfferts.put((int)entry.getKey(), (int)entry.getValue());
                     
                     System.out.println("WYKONUJE zapytanie dla sprawy o id= " + entry.getKey());
-                    setWynik2(cdao.getConsultantsForProductDetail( (int)entry.getKey() ) );
+                    setBestConsultants(cdao.getConsultantsForProductDetail( (int)entry.getKey() ) );
                     tmp++;
                 }
             }
@@ -327,7 +325,7 @@ public class AnalyserAlgorithm {
         //System.out.println("tablica produktow to: " + oferta.length);
 //        System.out.println("wygenerowana tablica wynikow : " + Arrays.deepToString(tab));
 
-        for(Map.Entry ent : wynik.entrySet()){
+        for(Map.Entry ent : bestOfferts.entrySet()){
             System.out.println("oto co mam: "+ ent.getKey() + " " + ent.getValue());
         }
         
@@ -393,11 +391,11 @@ public class AnalyserAlgorithm {
 //    public void setKlienci(Object[] klienci) {
 //        this.klienci = klienci;
 //    }
-    public List<Consultant> getWynik2() {
-        return wynik2;
+    public List<Consultant> getBestConsultants() {
+        return bestConsultants;
     }
 
-    public void setWynik2(List<Consultant> wynik2) {
-        this.wynik2 = wynik2;
+    public void setBestConsultants(List<Consultant> bestConsultants) {
+        this.bestConsultants = bestConsultants;
     }
 }

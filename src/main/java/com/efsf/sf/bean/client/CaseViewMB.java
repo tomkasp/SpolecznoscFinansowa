@@ -108,7 +108,7 @@ public class CaseViewMB implements Serializable{
         List<Consultant> cons;
         
         AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
-        cons = aa.getWynik2();
+        cons = aa.getBestConsultants();
         
         return cons;
     }
