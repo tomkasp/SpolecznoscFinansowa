@@ -18,26 +18,7 @@
             <div class="leftInlineBox">
                 <h:form id="leftForm">
                     <h4> DANE SPRAWY </h4>
-                    <div class="marginLRT30">        
-
-                        <div class="field"> 
-                            <h:outputText class="label" value="Kwota zobowiązania"/> 
-                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
-                        </div>
-
-                        <div class="field"> 
-                            <h:outputText class="label" value="Cel"/> 
-                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> 
-                        </div>
-                        <div class="field"> 
-                            <h:outputText class="label" value="Rodzaj kredytu"/> 
-                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> 
-                        </div>
-
-                        <div class="field">
-                            <h:outputText class="label" value="Wielkość raty"/>
-                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" />
-                        </div>
+                    <div class="marginLRT30">     
 
                         <div class="field">
                             <h:outputText class="label" value="Data wystawienia na giełdę"/> 
@@ -47,16 +28,47 @@
                         </div>
 
                         <div class="field">
-                            <h:outputText class="label" value="Koniec aukcji"/>  
+                            <h:outputText class="label" value="Data zakończenia"/>  
                             <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.endDate}" >
                                 <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+2"/>
                             </h:inputText>
+                        </div>
+
+                        <div class="field"> 
+                            <h:outputText class="label" value="Kwota całkowita zobowiązania"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
+                        </div>
+
+                        <div class="field">
+                            <h:outputText class="label" value="Wysokość raty"/>
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" />
+                        </div>
+
+                        <div class="field"> 
+                            <h:outputText class="label" value="Cel"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> 
                         </div>
 
                         <div class="field">
                             <h:outputText class="label" value="Notatka"/>  
                             <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;" rows="3" cols="30" disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
                         </div>
+
+                        <div class="field"> 
+                            <h:outputText class="label" value="Rodzaj kredytu"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> 
+                        </div>
+
+                        <div class="field"> 
+                            <h:outputText class="label" value="Premium"/> 
+                            <p:selectBooleanCheckbox disabled="true" value="#{caseViewMB.selectedClientCase.premium}" />
+                        </div>
+
+
+
+
+
+
                     </div>
 
                     <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null) and caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >

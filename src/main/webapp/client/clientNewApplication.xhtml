@@ -26,8 +26,8 @@
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
                             <h:form>  
                                 <h:panelGroup>
-                                    <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
-                                        <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
+                                    <div class="field"> <h:outputText class="label" value="Data wystawienia na giełdę"/>  
+                                        <p:calendar mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
                                             <p:ajax  event="dateSelect" update="end-date"  />
                                         </p:calendar>
                                         <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
@@ -40,7 +40,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                        <h:outputText class="label" value="Kwota konsolidacji"/>  
                                         <h:inputText maxlength="13"  required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"  > 
                                             <f:converter converterId="javax.faces.BigDecimal"   />
                                             <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
@@ -50,7 +50,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Kwota wolne środki:"/>  
+                                        <h:outputText class="label" value="Kwota wolne środki"/>  
                                         <h:inputText maxlength="13" required="true" id="freeResourcesValue" value="#{clientCaseMB.clientCase.freeResourcesValue}" > 
                                             <f:converter converterId="javax.faces.BigDecimal"   />
                                             <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Oczekiwana rata:"/>
+                                        <h:outputText class="label" value="Oczekiwana rata"/>
                                         <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
                                             <f:converter converterId="javax.faces.BigDecimal"    />
                                             <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Cel:"/>
+                                        <h:outputText class="label" value="Cel"/>
                                         <h:inputText id="goal" maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}">
                                             <f:validateLength maximum="255"/>
                                             <p:ajax event="keyup" update="goalMessage" />
@@ -79,7 +79,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="notatka"/>
+                                        <h:outputText class="label" value="Notatka"/>
                                         <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
                                             <f:validateLength maximum="100"/>
                                         </h:inputTextarea>    
