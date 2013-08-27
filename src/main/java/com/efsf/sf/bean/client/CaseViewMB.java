@@ -18,12 +18,17 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.util.analyser.AnalyserAlgorithm;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
@@ -62,6 +67,8 @@ public class CaseViewMB implements Serializable{
     private List<IncomeData> selectedCaseIncomeTable = new ArrayList();
     
     private List<Consultant> premiumConsultants = new ArrayList();
+    
+    private List<Product> products = new ArrayList(); 
     
     private List<ScheduleItem> schedule = new ArrayList();
     
@@ -111,6 +118,27 @@ public class CaseViewMB implements Serializable{
         cons = aa.getBestConsultants();
         
         return cons;
+    }
+    
+    public List<Product> bestProductForCase() {
+        
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
+        Map<Integer, Integer> productIds = aa.getBestOfferts();
+        
+        List<Product> products = new ArrayList();
+        while (!productIds.isEmpty())
+        {
+             int currentMax = Collections.max(productIds.values());
+             for (Entry <Integer, Integer> entry : productIds.entrySet())
+             {
+                 if (entry.getValue().equals(currentMax))
+                 {
+//                     products.add()
+                 }
+             }
+        }
+        
+        return null;
     }
     
     
