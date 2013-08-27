@@ -24,10 +24,12 @@ public class Algorithms
     public static int calculateCaseDifficulty(Client client, ClientCase clientCase)
     {
          
+        RequiredDocuments requiredDocuments = new RequiredDocumentsDAO().readForFkClient(client.getIdClient());
+        
         int difficulty = 1;
         
         // BIK is really usful in getting credits 
-        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().isEmpty() || client.getRequiredDocumentses().iterator().next().getBik() == null  )
+        if (requiredDocuments == null ||  requiredDocuments.getBik() == null  )
         {
             difficulty++;
         }
