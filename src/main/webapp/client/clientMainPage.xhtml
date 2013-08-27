@@ -45,7 +45,15 @@
                         </div>
                     </h:form>
                 </h:panelGroup>
-
+                
+                <h:panelGroup rendered="#{!clientMainPageMB.profilFilled}">
+                    <h:form>
+                        <div style="min-height: 80px; border-bottom: green 4px solid">
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
+                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Uzupełnij profil"/>  
+                        </div>
+                    </h:form>
+                </h:panelGroup>    
 
                 <div class="marginT50"> 
                     <h:form>
