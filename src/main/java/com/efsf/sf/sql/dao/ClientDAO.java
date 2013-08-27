@@ -9,11 +9,11 @@ import org.hibernate.Session;
 
 public class ClientDAO {
 
-    private int points;
+    
 
     public Client read(int id) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client c left outer join fetch c.user as u WHERE id_client = :id");
@@ -30,7 +30,7 @@ public class ClientDAO {
 
     public void save(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         session.save(client);
@@ -43,7 +43,9 @@ public class ClientDAO {
     public void decrementPoints(Client client, Integer p) {
         //odejmowanie punktow po dodaniu wniosku
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        int points;
+        
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         Client cli = (Client) session.load(Client.class, client.getIdClient());
@@ -60,7 +62,7 @@ public class ClientDAO {
 
     public void update(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
         session.update(client);
@@ -72,7 +74,7 @@ public class ClientDAO {
 
     public void delete(Client client) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         session.delete(client);
@@ -85,7 +87,7 @@ public class ClientDAO {
 
     public Client getClientWithIncomes(int idClient) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client as clt "
@@ -106,7 +108,7 @@ public class ClientDAO {
 
      public Client checkClientForNewApplication(int idClient)
      {
-                Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.SESSION_FACTORY.openSession();
                 session.beginTransaction().begin();
                 
                 Query q = session.createQuery("FROM Client as clt "
@@ -132,7 +134,7 @@ public class ClientDAO {
 
     public Client readClientForSettings(int id) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Client client = null;
 
         try {
@@ -163,7 +165,7 @@ public class ClientDAO {
     }
 
     public Client getClientForCase(Integer idSprawaKlienta) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         Query q = session.createQuery("from Client cl "
                 + "left join fetch cl.clientCases cc "

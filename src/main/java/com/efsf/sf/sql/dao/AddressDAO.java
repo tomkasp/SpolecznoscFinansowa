@@ -9,7 +9,7 @@ public class AddressDAO {
 
     public void save(Address address) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         session.save(address);
@@ -22,7 +22,7 @@ public class AddressDAO {
     
     public void update(Address address) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         session.update(address);
@@ -36,7 +36,7 @@ public class AddressDAO {
      public Address loadMainAddressFromFkConsultant(Integer fkConsuntant) {
          
         Address address = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         
@@ -56,7 +56,7 @@ public class AddressDAO {
      public Address loadInvoiceAddressFromFkConsultant(Integer fkConsuntant) {
          
         Address address = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         

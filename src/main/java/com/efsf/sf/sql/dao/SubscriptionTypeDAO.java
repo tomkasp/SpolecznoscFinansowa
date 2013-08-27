@@ -11,7 +11,7 @@ public class SubscriptionTypeDAO {
     public SubscriptionType getSubscriptionType(int id)
     {
         SubscriptionType st=null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         st = (SubscriptionType) session.get(SubscriptionType.class, id);
         }finally {
@@ -23,7 +23,7 @@ public class SubscriptionTypeDAO {
     
     public List subscriptionTypeList(){
         List<SubscriptionType> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         
         lista = session.createQuery("from SubscriptionType").list();
         

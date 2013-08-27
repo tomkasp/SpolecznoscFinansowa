@@ -13,7 +13,7 @@ public class UserDAO {
     public User read(int id) {
 
         User client = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
         try {
             session.beginTransaction().begin();
@@ -33,7 +33,7 @@ public class UserDAO {
         User user = null;
 
 
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             Query q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
             q.setParameter("email", email);
@@ -52,7 +52,7 @@ public class UserDAO {
 
     public void save(User user) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.save(user);
@@ -66,7 +66,7 @@ public class UserDAO {
 
     public void update(User user) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.update(user);
@@ -78,7 +78,7 @@ public class UserDAO {
     }
 
     public void delete(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
         session.delete(user);
         session.getTransaction().commit();
@@ -87,7 +87,7 @@ public class UserDAO {
 
     public Boolean ifEmailExist(String email) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             Query q;
             q = session.createQuery("FROM User WHERE email = :email ");
@@ -104,7 +104,7 @@ public class UserDAO {
 
     public int checkLogin(String email, String password) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
 
             Query q;
@@ -118,7 +118,8 @@ public class UserDAO {
                 if (user.getPassword().equals(password)) {
                     return 1;
                 } else {
-                    return 0;//wrong password
+                    //wrong password
+                    return 0;
                 }
             }
 
@@ -126,11 +127,12 @@ public class UserDAO {
         } finally {
             session.close();
         }
-        return -1;//wrong email
+        //wrong email
+        return -1;
     }
 
     public Client getClientConnectedToUser(int userId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction().begin();
 
         Query q = session.createQuery("FROM Client c "

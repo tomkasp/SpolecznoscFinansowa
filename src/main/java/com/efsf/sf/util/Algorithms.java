@@ -99,9 +99,10 @@ public class Algorithms
     
     
     //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 
-    public static int calculateProgress(Client client)
+    public static int calculateProgress(Client cl)
     {
-         client = new ClientDAO().readClientForSettings(client.getIdClient());
+         Client client;
+         client = new ClientDAO().readClientForSettings(cl.getIdClient());
          int progress = 20; 
          
          if(client.getMaritalStatus().getIdMaritalStatus() != 0)

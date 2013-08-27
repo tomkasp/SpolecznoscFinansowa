@@ -13,13 +13,13 @@ public class MessageDAO extends GenericDao<Message>{
         super(Message.class);
     }
     
-    public List getMessages(int user_id, int user_id2) {
+    public List getMessages(int userId, int userId2) {
         List<Message> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        lista = session.createQuery("from Message where ((fk_toUser="+user_id+" AND fk_fromUser="
-                +user_id2+") OR (fk_toUser="+user_id2+" AND fk_fromUser="+user_id+"))"
+        lista = session.createQuery("from Message where ((fk_toUser="+userId+" AND fk_fromUser="
+                +userId2+") OR (fk_toUser="+userId2+" AND fk_fromUser="+userId+"))"
                 + " AND isSystem=0").list();
 
         session.getTransaction().commit();
@@ -30,7 +30,7 @@ public class MessageDAO extends GenericDao<Message>{
     public List<Message> getUnreadMessages(int userId) 
     {
         List<Message> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Query q =  session.createQuery("from Message as m "
@@ -48,7 +48,7 @@ public class MessageDAO extends GenericDao<Message>{
     public List<Message> getReadMessages(int userId) 
     {
         List<Message> list;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Query q =  session.createQuery("FROM Message as m "
