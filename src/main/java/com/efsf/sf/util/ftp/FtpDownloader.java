@@ -13,6 +13,8 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FtpDownloader {
 
+    public static final int DEFAULT_BUFFER_SIZE = 10240;
+    
     public void download(String filePath,String fileName) throws IOException {
 
         FTPClient client = new FTPClient();
@@ -28,9 +30,7 @@ public class FtpDownloader {
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);        
             InputStream is = client.retrieveFileStream(remoteFile);
-                      
-            
-            final int DEFAULT_BUFFER_SIZE = 10240;
+
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
      

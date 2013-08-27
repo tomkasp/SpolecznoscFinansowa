@@ -56,7 +56,7 @@ public class CreateClientMB implements Serializable
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
-    private User user; 
+ 
     
     private int counter = 0;
     
@@ -134,6 +134,8 @@ public class CreateClientMB implements Serializable
 
     public String createClientAccount() 
     {
+        User user;
+        
         UserDAO userDao = new UserDAO();
         ClientDAO clientDao = new ClientDAO();
         EducationDAO eduDao = new EducationDAO();
@@ -201,7 +203,7 @@ public class CreateClientMB implements Serializable
     }
     
     public void addIncome() {
-        EmploymentType et = null;
+        EmploymentType et = new EmploymentType();
         for (EmploymentType i : dictionaryMB.getIncome()) {
             if (i.getIdEmploymentType() == incomeId) {
                 et = i;
@@ -209,7 +211,7 @@ public class CreateClientMB implements Serializable
             }
         }
 
-        Branch b = null;
+        Branch b = new Branch();
 
         for (Branch i : dictionaryMB.getBranch()) {
             if (i.getIdBranch() == branchId) {

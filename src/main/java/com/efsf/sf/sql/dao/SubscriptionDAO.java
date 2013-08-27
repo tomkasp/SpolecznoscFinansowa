@@ -9,7 +9,7 @@ public class SubscriptionDAO {
 
     public void save(Subscription subscription) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.save(subscription);
@@ -22,7 +22,7 @@ public class SubscriptionDAO {
     
     public void update(Subscription subscription) {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction().begin();
         session.update(subscription);
@@ -36,7 +36,7 @@ public class SubscriptionDAO {
      public Subscription loadFkConsultant(Integer fkConsuntant) {
          
         Subscription subscription = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
         session.beginTransaction();
         

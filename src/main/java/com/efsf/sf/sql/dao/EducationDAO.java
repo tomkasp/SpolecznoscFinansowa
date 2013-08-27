@@ -10,7 +10,7 @@ public class EducationDAO {
     
     public Education getEducation(int id)
     {
-                Session session = HibernateUtil.getSessionFactory().openSession();
+                Session session = HibernateUtil.SESSION_FACTORY.openSession();
                 session.beginTransaction();
                 Education edu = (Education) session.get(Education.class, id);
                 
@@ -23,7 +23,7 @@ public class EducationDAO {
     
     public List educationList(){
         List<Education> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         lista = session.createQuery("from Education").list();

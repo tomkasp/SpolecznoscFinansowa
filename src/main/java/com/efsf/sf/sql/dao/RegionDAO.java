@@ -11,7 +11,7 @@ public class RegionDAO {
     
     public List regionList(){
         List<Region> lista;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         lista = session.createQuery("from Region").list();
@@ -24,7 +24,7 @@ public class RegionDAO {
     
     public Region getRegion(int id)
     {
-        org.hibernate.classic.Session session = HibernateUtil.getSessionFactory().openSession();
+        org.hibernate.classic.Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Region ms = (Region) session.get(Region.class, id);

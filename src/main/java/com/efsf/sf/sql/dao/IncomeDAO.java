@@ -7,7 +7,7 @@ import org.hibernate.Session;
 public class IncomeDAO {
 
     public void update(Income income) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.update(income);
@@ -18,7 +18,7 @@ public class IncomeDAO {
     }
 
     public void delete(Income income) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction().begin();
             session.delete(income);

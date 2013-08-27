@@ -139,7 +139,8 @@ public class ClientSettingsMB implements Serializable {
             while (incomeSetIT.hasNext()) {
 
                 Income i2 = incomeSetIT.next();
-                if (i.getIdIncome() == i2.getIdIncome()) {
+                if (i.getIdIncome().equals(i2.getIdIncome()))
+                {
                     isExist = true;
                 }
 
@@ -304,7 +305,7 @@ public class ClientSettingsMB implements Serializable {
 
     public void addIncome() {
         idCounter = idCounter - 1;
-        EmploymentType et = null;
+        EmploymentType et = dictionaryMB.getIncome().get(0);
         for (EmploymentType i : dictionaryMB.getIncome()) {
             if (i.getIdEmploymentType() == incomeId) {
                 et = i;
@@ -312,7 +313,7 @@ public class ClientSettingsMB implements Serializable {
             }
         }
 
-        Branch b = null;
+        Branch b = dictionaryMB.getBranch().get(0);
 
         for (Branch i : dictionaryMB.getBranch()) {
             if (i.getIdBranch() == branchId) {

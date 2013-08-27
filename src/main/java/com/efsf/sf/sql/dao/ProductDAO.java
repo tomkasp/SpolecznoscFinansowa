@@ -12,7 +12,7 @@ public class ProductDAO {
     
     public List<ProductDetails> getAllProducts(){
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         
         Query q = session.createQuery("from ProductDetails as pd left join fetch pd.employmentType et join fetch pd.product pr join fetch pr.institution");
