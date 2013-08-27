@@ -281,7 +281,7 @@ public class AnalyserAlgorithm {
 //                    tab[tmp][0] = (Integer)entry.getKey();
 //                    tab[tmp][1] = (Integer)entry.getValue();
                     
-                    bestOfferts.put((int)entry.getKey(), (int)entry.getValue());
+                    getBestOfferts().put((int)entry.getKey(), (int)entry.getValue());
                     
                     System.out.println("WYKONUJE zapytanie dla sprawy o id= " + entry.getKey());
                     setBestConsultants(cdao.getConsultantsForProductDetail( (int)entry.getKey() ) );
@@ -325,7 +325,7 @@ public class AnalyserAlgorithm {
         //System.out.println("tablica produktow to: " + oferta.length);
 //        System.out.println("wygenerowana tablica wynikow : " + Arrays.deepToString(tab));
 
-        for(Map.Entry ent : bestOfferts.entrySet()){
+        for(Map.Entry ent : getBestOfferts().entrySet()){
             System.out.println("oto co mam: "+ ent.getKey() + " " + ent.getValue());
         }
         
@@ -397,5 +397,13 @@ public class AnalyserAlgorithm {
 
     public void setBestConsultants(List<Consultant> bestConsultants) {
         this.bestConsultants = bestConsultants;
+    }
+
+    public HashMap<Integer, Integer> getBestOfferts() {
+        return bestOfferts;
+    }
+
+    public void setBestOfferts(HashMap<Integer, Integer> bestOfferts) {
+        this.bestOfferts = bestOfferts;
     }
 }
