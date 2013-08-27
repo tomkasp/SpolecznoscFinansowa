@@ -137,8 +137,8 @@ public class ClientMainPageMB implements Serializable {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
     }
     
-    public boolean isProfilFilled(){
-        return Algorithms.calculateProgress(loginMB.getClient())>50;
+    public boolean isProfilNotFilled(){
+        return Algorithms.calculateProgress(loginMB.getClient())<50;
     }
     
     public double giveMeConsultantAverage(int consultantId)

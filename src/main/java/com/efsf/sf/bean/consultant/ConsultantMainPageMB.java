@@ -85,8 +85,8 @@ public class ConsultantMainPageMB {
         return "/consultant/consultantMarket?faces-redirect=true";
     }
 
-    public boolean isProfilFilled(){
-        return Algorithms.calculateProgress(loginMB.getConsultant())>50;
+    public boolean isProfilNotFilled(){
+        return Algorithms.calculateProgress(loginMB.getConsultant())<30;
     }
     
     // May be moved to ClientCaseMB
