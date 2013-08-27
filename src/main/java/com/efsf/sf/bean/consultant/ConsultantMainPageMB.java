@@ -14,6 +14,7 @@ import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.sql.entity.Subscription;
+import com.efsf.sf.util.Algorithms;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,6 +85,10 @@ public class ConsultantMainPageMB {
         return "/consultant/consultantMarket?faces-redirect=true";
     }
 
+    public boolean isProfilFilled(){
+        return Algorithms.calculateProgress(loginMB.getConsultant())>50;
+    }
+    
     // May be moved to ClientCaseMB
     public void selectPremiumCase(ClientCase cc) {
         selectedPremiumCase = cc;

@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantRatingDAO;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.Algorithms;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
@@ -134,6 +135,10 @@ public class ClientMainPageMB implements Serializable {
     public void reloadCases7()
     {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
+    }
+    
+    public boolean isProfilFilled(){
+        return Algorithms.calculateProgress(loginMB.getClient())>50;
     }
     
     public double giveMeConsultantAverage(int consultantId)
