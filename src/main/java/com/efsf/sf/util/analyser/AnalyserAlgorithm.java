@@ -73,7 +73,7 @@ public class AnalyserAlgorithm {
         //Produkty = kdao.getProduktyBankow();
     }
 
-    public void setProducts() {
+    private void setProducts() {
         //setProduktyBankow(new String[l2.size()][10]);
         //System.out.println("Produkty bankowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww:" + getProduktyBankow().length);
         //Iterator it2 = l2.iterator();
@@ -110,7 +110,7 @@ public class AnalyserAlgorithm {
         }
     }
 
-    public final String analizuj(Integer IdSprawaKlienta) {
+    private final String analizuj(Integer IdSprawaKlienta) {
         setClient(IdSprawaKlienta);
         setProducts();
 //        Arrays.fill(off, 0);
