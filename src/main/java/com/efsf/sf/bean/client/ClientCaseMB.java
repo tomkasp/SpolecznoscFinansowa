@@ -94,7 +94,7 @@ public class ClientCaseMB implements Serializable {
     public void addMessage() {
 
         if (clientCase.getPremium()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zabiore Ci " + premium + " punktów!"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Koszt to " + premium + " punktów!"));
         }
 
     }

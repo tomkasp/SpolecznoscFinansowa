@@ -8,6 +8,8 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -38,7 +40,8 @@ public class LoginMB implements Serializable {
     private String actualMessage;
 
     public String login() {
-
+        
+       
         UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
@@ -69,7 +72,7 @@ public class LoginMB implements Serializable {
             }
 
             if (type.equals(Settings.ADMIN_INACTIVE) || type.equals(Settings.CLIENT_INACTIVE) || type.equals(Settings.CONSULTANT_INACTIVE)) {
-                return "/common/activateAccount?faces-redirect=true";
+                return "/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
