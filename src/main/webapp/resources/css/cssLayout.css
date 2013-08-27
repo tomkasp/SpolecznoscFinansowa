@@ -163,79 +163,44 @@ img{border:0px;}
     text-align:center;
     border:0px;
 }
-.klientLogin{
-    margin:100px 0 0 22px;
-    float:left;
-    width:310px;
-    padding:0;
-    background-image: url("../resources/images/button_green_1.png");
-    background-repeat:no-repeat;
-    background-position: 180px 60px;
-    height:290px;
-}
 
-.klientLogin p a{
-    width:172px;
+.loginLink{
+    margin-top: 35px;
     display: block;
-    margin:92px 200px 0 0;
-    text-align:right;
     font-size:20px;
     font-weight: normal;
     color:#545454;
     text-decoration:none;
 }
 
-.zalogujLogin{
-    margin:60px 0 40px 0;
-    float:left;
-    width:320px;
-    background-image: url("../resources/images/zaloguj_1.png");
-    background-repeat:no-repeat;
-    background-position: 0px 0px;
-    
-    height:320px;
+.loginContent{
+     width: 990px;
+     height: 320px;
+}
+.loginLeft{
+    width: 330px;
+    height: 123px;
+    float: left; 
+    margin-top: 100px;
 }
 
-.doradcaLogin{
-    margin:100px 0 0 0;
-    float:left;
-    width:310px;
-    background-image: url("../resources/images/button_blue_1.png");
-    background-repeat:no-repeat;
-    background-position: 2px 60px;
-    height:290px;
+.loginRight{
+    width: 330px;
+    height: 123px;
+    float: left;
+    margin-top: 100px;
 }
 
-.doradcaLogin p a{
-    width:190px;
-    display:block;
-    margin:92px 0px 0 125px;
-    text-align:left;
-    font-size:20px;
-    color:#545454;
-    text-decoration:none;
+.loginBottom{
+    margin-left: 330px;
+    width: 200px;
+    float: left;
+    margin-top: 30px;
 }
 
-.checkItLogin{
-    background-image: url("../resources/images/kropka_1.png");
-    background-repeat:no-repeat;
-    background-position: 0px 0px;
-    clear:both;
-    margin:0 0 0 450px;
-    width:220px;
-
-    height:70px;
-}
-
-.checkItLogin p a{
-    width:140px;
-    display:block;
-    text-decoration:none;
-    padding: 8px 0;
-    margin:0px 80px;
-    text-align:left;
-    font-size:20px;
-    color:#545454;   
+.loginCenter{
+    width: 330px;
+    float: left; 
 }
 
 .linkWidth 
