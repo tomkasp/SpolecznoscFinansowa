@@ -33,8 +33,7 @@ public class AnalyserAlgorithm {
     private ArrayList<ProductsData> prodata = new ArrayList<>();
     private HashMap<Integer, Integer> testtab = new HashMap<>();
     private HashMap<Integer, Integer> bestOfferts = new HashMap<>();
-    
-    
+
     public AnalyserAlgorithm() {
     }
 
@@ -74,10 +73,6 @@ public class AnalyserAlgorithm {
     }
 
     private void setProducts() {
-        //setProduktyBankow(new String[l2.size()][10]);
-        //System.out.println("Produkty bankowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww:" + getProduktyBankow().length);
-        //Iterator it2 = l2.iterator();
-
         ProductDAO pDao = new ProductDAO();
         List<ProductDetails> pd = pDao.getAllProducts();
 
@@ -97,36 +92,16 @@ public class AnalyserAlgorithm {
 //            produkty[prod][7] = ite.getClientAgeMax().intValue();
 
             prodata.add(new ProductsData(ite.getIdProductDetail(), ite.getEmploymentType().getIdEmploymentType(), ite.getAmountBruttoMin().doubleValue(), ite.getAmountBruttoMax().doubleValue(), ite.getLoanTimeMin(), ite.getLoanTimeMax(), ite.getClientAgeMin().intValue(), ite.getClientAgeMax().intValue()));
-
-//            System.out.println("typ dochodu:"+ produkty[prod][0]);
-//            System.out.print("typ dochodu:"+ produkty[prod][1]);
-//            System.out.print("typ dochodu:"+ produkty[prod][2]);
-//            System.out.print("typ dochodu:"+ produkty[prod][3]);
-//            System.out.print("typ dochodu:"+ produkty[prod][4]);
-//            System.out.print("typ dochodu:"+ produkty[prod][5]);
-//            System.out.print("typ dochodu:"+ produkty[prod][6]);
-//            System.out.print("typ dochodu:"+ produkty[prod][7]);
-
         }
     }
 
-    private final String analizuj(Integer IdSprawaKlienta) {
+    private String analizuj(Integer IdSprawaKlienta) {
         setClient(IdSprawaKlienta);
         setProducts();
 //        Arrays.fill(off, 0);
 
         //etap 1
         //dla pierwszego kryterium, znajdz wszystkie idProduktu ktory spelnia kryterium dochodow 
-
-
-        //System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC: " + clidata.getClientAge());
-
-//        Iterator idd = clidata.getEmploymentType().iterator();
-//        while(idd.hasNext()){
-//            Integer cd = (Integer)idd.next();
-//            System.out.println(" ccccccccccccccccccccccccc: "+ cd);
-//        }
-//        
 
         Iterator iii = prodata.iterator();
         while (iii.hasNext()) {
@@ -135,20 +110,12 @@ public class AnalyserAlgorithm {
             // przeglada wszystkie dostepne typy dochodu klienta i zwieksza licznik.
             if (clidata.getEmploymentType().contains(pd.getEmploymentType())) {
                 //off[pd.getProductId()]++;
-
-                //testtab.add((int)pd.getProductId(), (int)testtab.get(pd.getProductId())+1); 
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
-
-
-                // testtab.add(new TestTab(pd.getProductId()));
             }
 
             //2.    jesli kwota potrzebna klientowi jest w zasiegu danej oferty
             if ((pd.getAmountBruttoMin() < clidata.getConsolidationValue()) && (pd.getAmountBruttoMax() >= clidata.getConsolidationValue())) {
                 //off[pd.getProductId()]++;
-                //testtab.add(new TestTab(pd.getProductId(),2));
-                // testtab.set(pd.getProductId(), testtab.get(pd.getProductId())+1);
-                //testtab.add(new TestTab(pd.getProductId()));
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
             }
 
@@ -158,30 +125,20 @@ public class AnalyserAlgorithm {
             if ((clidata.getConsolidationValue() / pd.getLoanTimeMax()) <= clidata.getExpectedInstallment()) {
                 // off[pd.getProductId()]++;
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
-                // testtab.add(new TestTab(pd.getProductId()));
-                // testtab.set(pd.getProductId(), testtab.get(pd.getProductId())+1);
-                //testtab.add(new TestTab(pd.getProductId(),2));
             }
 
             //etap 4= porownanie wiekow 
             if (pd.getClientAgeMin() <= clidata.getClientAge() && pd.getClientAgeMax() > clidata.getClientAge()) {
                 // off[pd.getProductId()]++;
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
-                //testtab.add(new TestTab(pd.getProductId()));
-                // testtab.set(pd.getProductId(), testtab.get(pd.getProductId())+1);
-                //testtab.add(new TestTab(pd.getProductId(),2));
             }
 
         }
 
 
-        for (Map.Entry entry : testtab.entrySet()) {
-            System.out.println("wartosc tablicy nowej " + entry.getKey() + ", " + entry.getValue());
-        }
-
-
-        System.out.println("ttttttttttttttt: " + testtab.size());
-
+//        for (Map.Entry entry : testtab.entrySet()) {
+//            System.out.println("wartosc tablicy nowej " + entry.getKey() + ", " + entry.getValue());
+//        }
 
 //        System.out.println("produkty lenght:" + produkty[0].length);
 //        for (int z = 0; z < produkty.length; z++) {
@@ -233,13 +190,6 @@ public class AnalyserAlgorithm {
 //        }
 
         best5products(testtab);
-        //Arrays.fill(oferta, "");
-
-//        for (int i = 0; i < off.length; i++) {
-//            off[i] = null;
-//        }
-
-        //metoda analizujaca, jako argument dostaje id klienta
         return "szczegolySprawy";
     }
 
@@ -250,49 +200,27 @@ public class AnalyserAlgorithm {
         int tmp = 0;
         int max = 0;
 
-//        for (int i = 0; i < oferta.length; i++) {
-//            System.out.println("tablica Off[" + i + "]->" + oferta[i]);
-//            if (max < oferta[i]) {
-//                max = oferta[i];
-//            }
-//        }
-
         //sprwadzam max ocene do porownania (normalnie 4)
         for (Map.Entry entry : oferta.entrySet()) {
             if (max < (int) entry.getValue()) {
                 max = (int) entry.getValue();
             }
         }
-        
-        System.out.println("Wygenerowany maksik to22222: " + max);
 
-        
-//        for(Map.Entry entry : oferta.entrySet()){
-//            if((int)entry.getValue() == max){
-//                tab[tmp][0]=(int)entry.getKey();
-//                tab[tmp][1]=(int)entry.getValue();
-//            }
-//        }
-        
-        
         for (int z = 0; z <= 5; z++) {
             for (Map.Entry entry : oferta.entrySet()) {
-                if(entry.getValue() == max && tmp<5){
-//                    tab[tmp][0] = (Integer)entry.getKey();
-//                    tab[tmp][1] = (Integer)entry.getValue();
-                    
-                    getBestOfferts().put((int)entry.getKey(), (int)entry.getValue());
-                    
+                if (entry.getValue() == max && tmp < 5) {
+
+                    getBestOfferts().put((int) entry.getKey(), (int) entry.getValue());
+
                     System.out.println("WYKONUJE zapytanie dla sprawy o id= " + entry.getKey());
-                    setBestConsultants(cdao.getConsultantsForProductDetail( (int)entry.getKey() ) );
+                    setBestConsultants(cdao.getConsultantsForProductDetail((int) entry.getKey()));
                     tmp++;
                 }
             }
             max--;
         }
 
-
-        System.out.println("Wygenerowany maksik to: " + max);
         //petla wpisujaca do tablicy tab[] indeksy najlepszych ofert.
 //        //for (int z = 0; z <= 5; z++) {
 ////            for (int i = 0; i < oferta.length; i++) {
@@ -325,11 +253,11 @@ public class AnalyserAlgorithm {
         //System.out.println("tablica produktow to: " + oferta.length);
 //        System.out.println("wygenerowana tablica wynikow : " + Arrays.deepToString(tab));
 
-        for(Map.Entry ent : getBestOfferts().entrySet()){
-            System.out.println("oto co mam: "+ ent.getKey() + " " + ent.getValue());
+        for (Map.Entry ent : getBestOfferts().entrySet()) {
+            System.out.println("oto co mam: " + ent.getKey() + " " + ent.getValue());
         }
-        
-        
+
+
         //ClientDAO kdaoa = new ClientDAO();
         //this.setWynik(kdaoa.ofertyWynikowe(tab));
 
@@ -355,42 +283,7 @@ public class AnalyserAlgorithm {
 
     //================================== /pola =================================
     //========================== gettery i settery =============================
-//    public String getNazwaBanku() {
-//        return nazwaBanku;
-//    }
-//
-//    public void setNazwaBanku(String nazwaBanku) {
-//        this.nazwaBanku = nazwaBanku;
-//    }
-//
-//    public String getNazwaProduktu() {
-//        return nazwaProduktu;
-//    }
-//
-//    public void setNazwaProduktu(String nazwaProduktu) {
-//        this.nazwaProduktu = nazwaProduktu;
-//    }
-//    public Integer[][] getTab() {
-//        return tab;
-//    }
-//
-//    public void setTab(Integer[][] tab) {
-//        this.tab = tab;
-//    }
-//    public String[][] getWynik() {
-//        return wynik;
-//    }
-//
-//    public void setWynik(String[][] wynik) {
-//        this.wynik = wynik;
-//    }
-//    public Object[] getKlienci() {
-//        return klienci;
-//    }
-//
-//    public void setKlienci(Object[] klienci) {
-//        this.klienci = klienci;
-//    }
+
     public List<Consultant> getBestConsultants() {
         return bestConsultants;
     }
