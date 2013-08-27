@@ -74,6 +74,13 @@ public class ConsultantCreateMB implements Serializable {
         if (wp != null) {
             consultant.setWorkingPlace(wp);
         }
+        
+        RegionDAO regDao = new RegionDAO();
+        
+        Region r = (Region) regDao.getRegion(0);
+        
+        consultant.setRegion(r);
+        
         ConsultantDAO cdao = new ConsultantDAO();
         consultant.setUser(user);
         cdao.save(consultant);
