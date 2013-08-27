@@ -43,7 +43,7 @@
             <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
                 <div id="profileBar" class="profilBar">
 
-                    <div> 
+                    <div style="margin-bottom: 5px;"> 
                         <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za #{consultantMainPageMB.subscriptionDeadline()} dni" /> 
                     </div>
 
@@ -51,10 +51,10 @@
                         <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
 
                         <div class="right">
-                      <h:outputText class="profileText" value="nr. użytkownika:" />
-                        <h5> #{loginMB.consultant.user.login} </h5>
-                        <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
-                        <h5> #{scoreBoardMB.rankingPlace(loginMB.consultant)} </h5>
+                            <h:outputText class="profileText" value="nr. użytkownika:" />
+                            <h5> #{loginMB.consultant.user.login} </h5>
+                            <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
+                            <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
                         </div>
 
                     </div>
