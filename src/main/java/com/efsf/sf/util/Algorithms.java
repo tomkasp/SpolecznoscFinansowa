@@ -24,10 +24,12 @@ public class Algorithms
     public static int calculateCaseDifficulty(Client client, ClientCase clientCase)
     {
          
+        RequiredDocuments requiredDocuments = new RequiredDocumentsDAO().readForFkClient(client.getIdClient());
+        
         int difficulty = 1;
         
         // BIK is really usful in getting credits 
-        if (client.getRequiredDocumentses() == null || client.getRequiredDocumentses().isEmpty() || client.getRequiredDocumentses().iterator().next().getBik() == null  )
+        if (requiredDocuments == null ||  requiredDocuments.getBik() == null  )
         {
             difficulty++;
         }
@@ -103,7 +105,7 @@ public class Algorithms
     {
          Client client;
          client = new ClientDAO().readClientForSettings(cl.getIdClient());
-         int progress = 20; 
+         int progress = 0;
          
          if(client.getMaritalStatus().getIdMaritalStatus() != 0)
          {
@@ -121,9 +123,24 @@ public class Algorithms
          {
              progress+=5;
          }
+         if(client.getBirthDate() != null)
+         {
+             progress+=5;
+         }
+         if(client.getLastName() != null && !client.getLastName().equals(""))
+         {
+             progress+=5;
+         }
          
          Address address = client.getAddresses().iterator().next();
-         
+         if (address.getZipCode() != null && !"".equals(address.getZipCode()))
+         {
+             progress+=5;
+         }
+         if (address.getRegion().getIdRegion() != 0)
+         {
+             progress+=5;
+         }     
          if(address.getCity() != null && !"".equals(address.getCity()))
          {
              progress+=5;
@@ -164,8 +181,6 @@ public class Algorithms
          }
      
          return progress;
-         
-         
     }
     
 }
