@@ -52,7 +52,7 @@ public class ConsultantSettingsMB implements Serializable {
     private Integer idInvoiceRegion;
     private Address mainAddress = new Address();
     private Address invoiceAddress = new Address();
-    private InvoiceData invoiceData;
+    private InvoiceData invoiceData = new InvoiceData();
     
     private Integer idSubscriptionType;
     private Subscription subscription;
@@ -103,6 +103,7 @@ public class ConsultantSettingsMB implements Serializable {
             {   
                 mainAddress=a;
                 idMainRegion=mainAddress.getRegion().getIdRegion();
+                
 
             }
             if(a.getType()==2)
@@ -194,13 +195,35 @@ public class ConsultantSettingsMB implements Serializable {
         consultant.setAddresses(addressSet);
         
         AddressDAO adao=new AddressDAO();
-        adao.update(mainAddress);
-        adao.update(invoiceAddress);
+        if (mainAddress.getIdAddress() == null) { 
+            mainAddress.setConsultant(consultant);
+            mainAddress.setType(1);
+            adao.save(mainAddress);           
+        }
+        else {
+            adao.update(mainAddress);
+        }
         
-       
+        
+        if (invoiceAddress.getIdAddress() == null) { 
+            invoiceAddress.setConsultant(consultant);
+            invoiceAddress.setType(2);
+            adao.save(invoiceAddress);           
+        }
+        else {
+            adao.update(invoiceAddress);
+        }
+        
+
         invoiceData.setAddress(invoiceAddress);
         InvoiceDataDAO iddao=new InvoiceDataDAO();
-        iddao.update(invoiceData);
+        if (invoiceData.getIdInvoieData() == null) { 
+            iddao.save(invoiceData);           
+        }
+        else {
+            iddao.update(invoiceData);
+        }
+        
         
         
         //UPDATE CONSULTANT

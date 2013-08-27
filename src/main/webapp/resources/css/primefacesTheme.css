@@ -4,6 +4,11 @@ font-weight: bold;
 text-align: center;
 }
 
+.ui-selectonemenu-panel .ui-selectonemenu-list-item
+{
+    font-size: 13px;
+}
+
 
 .ui-widget-content.ui-datatable-even{
     background: none repeat scroll 0 0 #E7E3E3;

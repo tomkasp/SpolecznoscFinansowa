@@ -31,6 +31,24 @@ public class ScoreBoardMB implements Serializable{
         return dao.getAllInOrder("average", "desc");
     }
     
+    public int fetchRankingPlace(Consultant cos)
+    {
+        GenericDao<ConsultantRating> dao = new GenericDao(ConsultantRating.class);
+        List<ConsultantRating> ranking =  dao.getAllInOrder("average", "desc");
+        boolean found = false;
+        int  i;
+        for(i = 0; i < ranking.size(); i++)
+        {
+            if (ranking.get(i).getConsultant().getIdConsultant().equals(cos.getIdConsultant()))
+            {
+                found = true;
+                break;   
+            }
+        }
+        
+        return found ? i : -1;
+    }
+    
     public void rowDoubleClick(Consultant cos) throws IOException
     {   
         FacesContext.getCurrentInstance().getExternalContext().redirect("./../client/clientConsultantProfileView.xhtml?idConsultant=" + cos.getIdConsultant()); 
