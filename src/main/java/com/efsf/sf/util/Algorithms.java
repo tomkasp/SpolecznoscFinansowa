@@ -110,7 +110,19 @@ public class Algorithms
         Address address = consultant.getAddresses().iterator().next();
         progress+= getProgressForAddress(address);
         
-        return 0;
+        if(consultant.getInstitutions()!=null && consultant.getInstitutions().size()>0){
+            progress+=10;
+        }
+
+        if(consultant.getExpirience()!=null && !consultant.getExpirience().equals("")){
+            progress+=10;
+        }
+        
+        if(consultant.getProductTypes()!=null && consultant.getProductTypes().size()>0){
+            progress+=10;
+        }              
+        
+        return progress;
     }
     
     //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 

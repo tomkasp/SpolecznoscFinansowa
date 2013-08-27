@@ -1,6 +1,7 @@
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
+import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
@@ -36,6 +37,9 @@ public class ConsultantSettingsMB implements Serializable {
     
     @ManagedProperty(value="#{loginMB.consultant.idConsultant}")
     private Integer idConsultant;
+    
+    @ManagedProperty(value = "#{loginMB}")
+    private LoginMB loginMB;
     
     @ManagedProperty(value="#{loginMB.user.idUser}")
     private Integer idUser;
@@ -230,7 +234,9 @@ public class ConsultantSettingsMB implements Serializable {
         ConsultantDAO cdao = new ConsultantDAO();
         cdao.update(consultant);
         //UPDATE USER
+        loginMB.setConsultant(consultant);
 
+        
         return "/consultant/consultantMainPage?faces-redirect=true";
     }
     
@@ -432,6 +438,14 @@ public class ConsultantSettingsMB implements Serializable {
 
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
     }
     
 }
