@@ -67,7 +67,7 @@
 
                                 <div class="field" style="margin-bottom: 60px;">
                                     <h:outputText class="label" value="Adres email"/> 
-                                    <h:inputText id="email" class="inputWidth" value="#{clientSettingsMB.client.user.email}" validator="#{clientSettingsMB.validateEmail}">
+                                    <h:inputText disabled ="true" id="email" class="inputWidth" value="#{clientSettingsMB.client.user.email}" validator="#{clientSettingsMB.validateEmail}">
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /> 
                                         <p:ajax event="keyup" update="emailMessage"/>
                                     </h:inputText>

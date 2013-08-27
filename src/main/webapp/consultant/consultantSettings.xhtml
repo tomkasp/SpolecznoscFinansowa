@@ -14,72 +14,61 @@
             <ui:define name="content">
 
                 <h:form>
-                   
-                    
-                       
-                 
 
                     <div style="min-height: 420px">
 
-                         <h3> Ustawienie konta </h3>
-                        
+                        <h3> Ustawienie konta </h3>
+
                         <div class="leftThinerBox">
 
-                          <div class="marginLRT30">
-                              
-                              <div class="field">
-                                <h:outputText class="label" value="Pobierz umowe"/> 
-                                <h:commandLink target="_blank" action="#{ consultantSettingsMB.showAgreementPDF() }">
-                                  <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" />
-                                </h:commandLink>
-                               </div>
-                              
-                              
-                              
-                                        
+                            <div class="marginLRT30">
 
-                            <div class="field">
-                                <h:outputText class="label" value="Imię"/> 
-                                <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
-                                <h:message styleClass="invalid" for="name"/>
-                            </div>
+                                <div class="field">
+                                    <h:outputText class="label" value="Pobierz umowe"/> 
+                                    <h:commandLink target="_blank" action="#{ consultantSettingsMB.showAgreementPDF() }">
+                                        <h:graphicImage alt="could not be found."  value="/resources/icons/Document-icon.png" />
+                                    </h:commandLink>
+                                </div>           
 
-                            <div class="field">
-                                <h:outputText class="label" value="Nazwisko"/>
-                                <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
-                                <h:message styleClass="invalid" for="lastName"/>
-                            </div>
-                                 
-                               
-                               
+                                <div class="field">
+                                    <h:outputText class="label" value="Imię"/> 
+                                    <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
+                                    <h:message styleClass="invalid" for="name"/>
+                                </div>
+
+                                <div class="field">
+                                    <h:outputText class="label" value="Nazwisko"/>
+                                    <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
+                                    <h:message styleClass="invalid" for="lastName"/>
+                                </div>
 
                                 <div class="field"> 
                                     <p class="label3"> Na ten email będzie wysyłana wszelka korespondencja dotycząca twojego konta</p>                                    
                                     <h:outputText class="label" value="Adres email"/> 
-                                    <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantSettingsMB.consultant.user.email}" >
+                                    <h:inputText disabled="true" id ="email" class="inputWidth" required="true" value="#{consultantSettingsMB.consultant.user.email}" >
                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" /> 
                                         <p:ajax event="keyup" update="emailMessage"/>
                                     </h:inputText>
                                     <h:message for="email" errorClass="invalid" id="emailMessage" />
                                 </div>
-                              
-                               <div class="field">
-                                <h:outputText class="label" value="Staż w branży"/> 
-                                <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}"/>
-                                <h:message styleClass="invalid" for="expirience"/>
-                               </div>
 
-                               <div class="field"> 
-                                <h:outputText class="label" value="Miejsce zatrudnienia"/>
-                                <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantSettingsMB.idWorkingPlace}">
-                                    <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
-                                </p:selectOneMenu> 
-                                <h:message styleClass="invalid" for="workingPlace"/>
-                              </div>
+                                <div class="field">
+                                    <h:outputText class="label" value="Staż w branży"/> 
+                                    <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}"/>
+                                    <h:message styleClass="invalid" for="expirience"/>
+                                </div>
 
-                          </div>
-                            
-                            
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Miejsce zatrudnienia"/>
+                                    <p:selectOneMenu id="workingPlace" style="width: 35%;" styleClass="inputWidth" value="#{consultantSettingsMB.idWorkingPlace}">
+                                        <f:selectItems value="#{dictionaryMB.workingPlace}" var="w" itemLabel="#{w.name}" itemValue="#{w.idWorkingPlace}" />
+                                    </p:selectOneMenu> 
+                                    <h:message styleClass="invalid" for="workingPlace"/>
+                                </div>
+
+                            </div>
+
+
                         </div>
 
                         <div style="display: none;" class="rightWiderBox">
