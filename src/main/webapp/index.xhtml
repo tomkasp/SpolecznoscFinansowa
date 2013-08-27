@@ -4,7 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
 
-     
+
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
@@ -14,27 +14,37 @@
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                 </div>
                 <div class="naglowekLogin">
-                    
+
                     <h1>Dołącz do <br/>społeczności finansowej</h1>
                 </div>
-                
+
             </ui:define>
-            
+
             <ui:define name="content">
-                
-                <div class="klientLogin">
-                    <p><h:link outcome="/clientCreateAccount.xhtml" >Zostań<br/> naszym klientem</h:link></p>
-                </div>
-                <div class="zalogujLogin">
-                    <h:link outcome="/login.xhtml"><h:graphicImage id="sf_logo2" alt="could not be found."  value="/resources/images/zaloguj_1.png" title="SF Logo" ></h:graphicImage></h:link>
-                </div>
-                <div class="doradcaLogin">
-                    <p><h:link outcome="/consultantCreateAccount.xhtml" >Dołącz do <br/> naszych doradców</h:link></p>
-                </div>
-                <div class="checkItLogin">
-                    <p><h:link outcome="/login.xhtml">Sprawdź jak <br/>to działa</h:link></p>
-                </div>
-               
+
+                <div class="loginContent">                    
+
+                    <div class="loginLeft">
+                        <p style="text-align: right;"><h:link class="loginLink" outcome="/clientCreateAccount.xhtml" ><h:graphicImage style="float: right;  margin-top: -35px;" id="sf_logo2" alt="could not be found."  value="/resources/images/button_green_1.png" title="SF Logo" ></h:graphicImage>Zostań<br/> naszym klientem</h:link></p>
+                    </div>
+
+                    <div align="center" class="loginCenter">
+                        <h:link outcome="/login.xhtml"><h:graphicImage id="sf_logo2" alt="could not be found."  value="/resources/images/zaloguj_1.png" title="SF Logo" ></h:graphicImage></h:link>
+                    </div>
+
+                    <div class="loginRight">
+                        <p><h:link class="loginLink" outcome="/consultantCreateAccount.xhtml" ><h:graphicImage style="float: left; margin-top: -35px;" id="sf_logo2" alt="could not be found."  value="/resources/images/button_blue_1.png" title="SF Logo" ></h:graphicImage>Dołącz do <br/> naszych doradców</h:link></p>
+                    </div>
+
+                    <div id="checkIt" class="loginBottom">
+                        <p style="text-align: right; "><h:link  class="loginLink" outcome="/login.xhtml"><h:graphicImage style="float: right;  margin-top: -8px;" id="sf_logo2" alt="could not be found."  value="/resources/images/kropka_1.png" title="SF Logo" ></h:graphicImage>Sprawdź jak <br/>to działa  </h:link></p>
+                    </div>
+
+                </div>    
+
+
+
+
             </ui:define>
 
         </ui:composition>
