@@ -8,8 +8,6 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -56,10 +54,15 @@ public class LoginMB implements Serializable {
             }
 
             if (type.equals(Settings.ADMIN_ACTIVE)) {
+                client=null;
+                consultant=null;
+                
                 return "/admin/adminMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CONSULTANT_ACTIVE)) {
                 consultant = consultantDao.getCounsultantConnectedToUser(idUser);
+                client=null;
+                
                 return "/consultant/consultantMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CLIENT_ACTIVE)) {
@@ -67,7 +70,8 @@ public class LoginMB implements Serializable {
                 points = client.getPoints();
 
                 this.activeAddingApp = this.checkNewAppActivity();
-
+                consultant=null;      
+                
                 return "/client/clientMainPage?faces-redirect=true";
             }
 
