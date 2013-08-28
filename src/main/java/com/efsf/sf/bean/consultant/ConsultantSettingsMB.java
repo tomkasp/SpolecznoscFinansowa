@@ -283,7 +283,7 @@ public class ConsultantSettingsMB implements Serializable {
        
         FileUploaderFTP fuftp=new FileUploaderFTP();
         fuftp.makeDirectory(ftpPath);
-        fuftp.copyFileOnFTP( destinationLocalPath+fileName , ftpPath + fileName );
+        fuftp.copyFileOnFTP( destinationLocalPath + fileName , ftpPath + fileName );
         
         
         //DOWNLOAD FROM FTP:
