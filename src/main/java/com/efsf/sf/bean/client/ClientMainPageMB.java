@@ -235,16 +235,17 @@ public class ClientMainPageMB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
     }
      
-     public String backOffAwaiting(){
+     public void backOffAwaiting(){
          CaseStatusDAO csdao = new CaseStatusDAO();
          CaseStatus cs = csdao.read(8);
          awaitingSelectedCase.setCaseStatus(cs);
          caseDao.updateClientCase(awaitingSelectedCase);
          awaitingSelectedCase=null;
-     return "/client/clientMainPage.xhtml";
+         
+         fillTables();
      }
      
-     public String backOffCurrent(){
+     public void backOffCurrent(){
          CaseStatusDAO csdao = new CaseStatusDAO();
          CaseStatus cs = csdao.read(8);
          currentSelectedCase.setCaseStatus(cs);
@@ -253,8 +254,7 @@ public class ClientMainPageMB implements Serializable {
          
          reloadCases3();
          reloadCases4();
-         
-     return "/client/clientMainPage.xhtml";
+
      }
      
      public void redirectNewApplication() throws IOException
