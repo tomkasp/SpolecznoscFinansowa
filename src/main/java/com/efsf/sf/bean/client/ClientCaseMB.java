@@ -109,11 +109,10 @@ public class ClientCaseMB implements Serializable {
 
             ClientDAO cd = new ClientDAO();
 
-
             if (clientCase.getPremium() == null) {
                 clientCase.setPremium(false);
             }
-
+            
             //pamietac o zabraniu punktow z klienta!
             if (clientCase.getPremium()) {
                 cd.decrementPoints(login.getClient(), premium);
@@ -133,11 +132,9 @@ public class ClientCaseMB implements Serializable {
             clientCase.setViewCounter(0);
             
             login.getClient().setObligations(new HashSet(obligationList));
-            
             clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(),clientCase));
             clientCase.setPhase(Algorithms.calculateProgress(login.getClient()));
             ccd.saveClientCase(clientCase);
-
             if (login.getClient().getPoints() == 0) {
                 login.setActiveAddingApp(false);
             }
