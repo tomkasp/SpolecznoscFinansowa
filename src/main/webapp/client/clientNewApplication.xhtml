@@ -110,9 +110,10 @@
 
                                 <h:commandButton action="false"  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
 
-
-
-
+                     
+                                
+                                <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                            
                             </h:form>        
 
                         </div>   
@@ -180,8 +181,8 @@
 
                                 </p:dataTable>
                                 <h:panelGrid columns="2" >
-                                    <p:commandButton style="margin:0 30px;" value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
-                                    <p:commandButton id="deleteBtn" style="margin:0 30px;" disabled="#{clientCaseMB.selectedObligation==null}" value="Usuń" onclick="confirmation.show();" type="button" />
+                                    <p:commandButton styleClass="wideButton greyButton floatR" value="Dodaj zobowiązanie" onclick="zobDial2.show();"  /> 
+                                    <p:commandButton id="deleteBtn" styleClass="wideButton greyButton floatR" disabled="#{clientCaseMB.selectedObligation==null}" value="Usuń" onclick="confirmation.show();" type="button" />
                                 </h:panelGrid>
 
                                 <p:confirmDialog message="Czy na pewno chcesz usunąć zaznaczone zobowiązanie?"  
@@ -203,11 +204,7 @@
 
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;"></div>
 
-                            <div id="buttonsBox3">
-                                <h:form>
-                                    <h:commandButton class="greenButton wideButton" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
-                                </h:form>
-                            </div>
+
 
                         </div>
 
