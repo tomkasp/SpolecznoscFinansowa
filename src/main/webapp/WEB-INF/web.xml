@@ -83,6 +83,19 @@
         <filter-name>LoginCommonFilter</filter-name>
         <url-pattern>/faces/common/*</url-pattern>
     </filter-mapping>
+    
+    <filter>
+        <filter-name>NoLoginFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.NoLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NoLoginFilter</filter-name>
+        <url-pattern>/faces/login.xhtml</url-pattern>
+    </filter-mapping>
+     <filter-mapping>
+        <filter-name>NoLoginFilter</filter-name>
+        <url-pattern>/faces/index.xhtml</url-pattern>
+    </filter-mapping>
  
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>

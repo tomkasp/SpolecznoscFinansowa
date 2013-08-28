@@ -37,8 +37,13 @@
                         </div>
 
                         <div class="field"> 
-                            <h:outputText class="label" value="Kwota całkowita zobowiązania"/> 
-                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue + caseViewMB.selectedClientCase.consolidationValue}" /> 
+                            <h:outputText class="label" value="Kwota konsolidacji"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> 
+                        </div>
+                        
+                        <div class="field"> 
+                            <h:outputText class="label" value="Kwota wolne środki"/> 
+                            <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> 
                         </div>
 
                         <div class="field">
