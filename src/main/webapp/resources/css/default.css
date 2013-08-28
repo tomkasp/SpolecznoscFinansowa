@@ -361,7 +361,7 @@ p:column {
 .bigMenuButton
 {
     float: right;
-    margin-right: 50px;
+    margin-left: 50px;
 }
 
 .messagesBox{
