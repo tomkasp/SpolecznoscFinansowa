@@ -45,7 +45,7 @@ img{border:0px;}
     padding: 0px 5px;
     min-height: 480px;
     border-bottom: 4px solid #5297cb;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
 }
 
 .left_content {
@@ -231,7 +231,6 @@ ul{
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
-    min-height:150px
 }
 
 li{
