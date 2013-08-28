@@ -134,6 +134,12 @@ public class CaseViewMB implements Serializable{
         return cons;
     }
     
+    public void showActualAssignedProductConsultantView()
+    {
+        selectedProduct=selectedClientCase.getProductDetails();
+        fetchProductTreeForSelectedProduct(selectedProduct);
+    }
+    
     public void findBestProduct()
     {
         AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
