@@ -61,7 +61,7 @@ img{border:0px;}
 }
 
 #top a:link, #top a:visited {
-  /* color: white; */
+   color: white; 
   font-weight : bold;
   text-decoration: none;
 }
@@ -208,20 +208,20 @@ img{border:0px;}
     min-width: 90px !important;
 }
 
-/** WATERMARK CSS!!! **/
-/** chorme and safari **/
+* WATERMARK CSS!!! *
+* chorme and safari *
 ::-webkit-input-placeholder {
 	font-weight: normal !important;
         padding-left: 20px;
 }
  
-/** firefox **/
+* firefox *
 :-moz-placeholder {
 	font-weight: normal !important;
         padding-left: 20px;
 }
  
-/** IE **/
+* IE *
 .ui-watermark {
 	font-weight: normal !important;
         padding-left: 20px;
@@ -231,7 +231,7 @@ ul{
     margin:20px 0;
     padding:0 22px;
     color:#5297cb;
-    /*min-height:150px*/
+    min-height:150px
 }
 
 li{
@@ -308,4 +308,8 @@ input
     background: #0793F0;
 }
 
-
+#zobDial{
+    position:absolute;
+    top:200px;
+    
+}

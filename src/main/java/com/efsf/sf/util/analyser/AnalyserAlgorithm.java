@@ -128,7 +128,7 @@ public class AnalyserAlgorithm {
             }
 
             //etap 4= porownanie wiekow 
-            if (pd.getClientAgeMin() <= clidata.getClientAge() && pd.getClientAgeMax() > clidata.getClientAge()) {
+            if (pd.getClientAgeMin() <= clidata.getClientAge() && pd.getClientAgeMax() >= clidata.getClientAge()) {
                 // off[pd.getProductId()]++;
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
             }

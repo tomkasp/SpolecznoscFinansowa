@@ -11,13 +11,18 @@
         <param-value>cruze</param-value>
     </context-param>
     <context-param>
-          <param-name> com.sun.faces.enableViewStateIdRendering </param-name>
-          <param-value>false</param-value>
-     </context-param>
+        <param-name> com.sun.faces.enableViewStateIdRendering </param-name>
+        <param-value>false</param-value>
+    </context-param>
      
-     <context-param>
+    <context-param>
         <param-name>com.sun.faces.autoCompleteOffOnViewState</param-name>
         <param-value>false</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+        <param-value>true</param-value>
     </context-param>
     
     <servlet>
@@ -38,10 +43,6 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     
-    <filter>
-        <filter-name>Character Encoding Filter</filter-name>
-        <filter-class> com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
-    </filter>
     
     <filter>
         <filter-name>LoginClientFilter</filter-name>
@@ -92,4 +93,6 @@
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
     
+    
+
 </web-app>
