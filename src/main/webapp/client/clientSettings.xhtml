@@ -342,7 +342,7 @@
                                         <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.idCard!=null}" alt="could not be found."  value="/resources/icons/File-Reload-icon.png" />                                                                 
                                     </span>
 
-                                    <span id="upload1" style="display:none; float: right;">
+                                    <span id="upload1" style="display:none; float:right;">
                                         <p:fileUpload  styleClass="greyButton" id="idCardUpload" value="#{ fileUploadMB.uploadedFiles[0] }" mode="simple" > 
                                             <f:validator validatorId="fileUploadValidator" />
                                         </p:fileUpload>
@@ -520,7 +520,7 @@
 
 
 
-                <p:dialog id="addBusiness"  style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="business" resizable="false" height="550" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                    <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
                     <h:form>  
                         <p:commandButton  styleClass="floatL  wideButton marginTB20"  action="#{clientSettingsMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
 
@@ -672,17 +672,11 @@
 
                 </p:dialog>
 
-
-
-
-
-
-
-                <p:dialog id="addIncome" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="false" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
-
                     <h:form> 
+                    
+                    <p:dialog id="addIncome"  style="position: absolute;" header="Dodaj informację o dochodach"  widgetVar="income" resizable="false" height="340" width="550" showEffect="clip" hideEffect="explode" modal="true" >  
 
-                        <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientSettingsMB.toIncome()}" value="Umowa"  >
+                      <p:commandButton  styleClass="floatL  wideButton marginTB20" action="#{clientSettingsMB.toIncome()}" value="Umowa"  >
 
                         </p:commandButton>
 
@@ -737,10 +731,12 @@
                             <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientSettingsMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
                         </div>
 
-                    </h:form>
+                    
 
                 </p:dialog> 
 
+              </h:form>          
+                        
             </ui:define>
         </ui:composition>
     </body>
