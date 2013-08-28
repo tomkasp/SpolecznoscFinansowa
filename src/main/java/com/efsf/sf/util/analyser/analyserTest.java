@@ -11,7 +11,7 @@ package com.efsf.sf.util.analyser;
 public class analyserTest {
     public static void main(String args[]){
         
-        AnalyserAlgorithm aa = new AnalyserAlgorithm(100);
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(103);
         //aa.setClient(100);
         //aa.analizuj(100);
 //        for(Integer i:(HashSet<Integer>)aa.getKlienci()[2]){

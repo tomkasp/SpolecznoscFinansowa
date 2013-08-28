@@ -16,7 +16,7 @@
 
 
             <ui:define name="content">
-                
+
                 <div>
 
                     <div class="contentBox" style="margin-bottom: 30px; margin-top: 30px;">
@@ -148,10 +148,10 @@
                             <h:form id="obligationForm">
                                 <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="row" rowKey="#{row.idObligation}"
                                              selection="#{clientCaseMB.selectedObligation}"  selectionMode="single" >
-                                    
+
                                     <p:ajax event="rowSelect" update=":obligationForm:deleteBtn" />
                                     <p:ajax event="rowUnselect" update=":obligationForm:deleteBtn" />
-                                    
+
                                     <p:column headerText="Lp">  
                                         #{wiersz+1}
                                     </p:column>  
@@ -185,78 +185,24 @@
                                 </h:panelGrid>
 
                                 <p:confirmDialog message="Czy na pewno chcesz usunąć zaznaczone zobowiązanie?"  
-                                                  hideEffect="explode"  
+                                                 hideEffect="explode"  
                                                  header="Usuwanie zobowiązania." severity="alert" widgetVar="confirmation">  
-                                    
+
                                     <p:commandButton value="TAK" style="width:100px;margin:0 100px 0 0;" oncomplete="confirmation.hide()"  
                                                      update="@form" action="#{clientCaseMB.delObligation}" />  
-                                        <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
-                                        
-                                   
-                                    
+                                    <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
+
+
+
 
                                 </p:confirmDialog>  
 
 
                             </h:form>
-                            <div id="buttonsBox2" style="margin-top: 30px; height: 50px;">
 
 
+                            <div id="buttonsBox2" style="margin-top: 30px; height: 50px;"></div>
 
-                                <p:dialog width="350" hideEffect="explode"  draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial2" rendered="true">  
-                                    <h:form id="costam23">
-                                        <h:panelGrid  class="obligationDialogBox" columns="2" cellspacing="5" >
-
-                                            <h:outputText value="Rodzaj zobowiązania"/>
-                                            <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
-                                                <f:selectItem itemLabel="Bankowe" itemValue="b"/>
-                                                <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
-                                            </h:selectOneMenu>
-
-                                            <h:outputText value="Wygasa:"/>
-                                            <p:calendar effect="slide" value="#{clientCaseMB.obligation.beginDate}"/>
-
-                                            <h:outputText value="Rata:"/>
-                                            <h:inputText required="true" id="actualPrice" value="#{clientCaseMB.obligation.actualPrice}">
-                                                <f:converter converterId="javax.faces.BigDecimal"    />
-                                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
-                                                <p:ajax event="keyup" update="actualPriceMessage" />
-                                            </h:inputText>    
-
-                                            <h:outputText />
-                                            <h:message errorClass="invalid"  for="actualPrice" id="actualPriceMessage" />
-
-                                            <h:outputText value="Kwota:"/>
-                                            <h:inputText required="true" id="repayment" value="#{clientCaseMB.obligation.repayment}">
-                                                <f:converter converterId="javax.faces.BigDecimal"    />
-                                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
-                                                <p:ajax event="keyup" update="repaymentMessage" />
-                                            </h:inputText>
-                                            <h:outputText />
-                                            <h:message errorClass="invalid"  for="repayment" id="repaymentMessage" />
-
-
-                                            <h:outputText value="Tytulem"/>
-                                            <h:inputText value="#{clientCaseMB.obligation.name}"/>
-
-                                            <h:outputText value="Aktualne"/>
-                                            <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
-
-                                            <h:outputText value="Rodzaj produktu"/> 
-                                            <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
-                                                <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
-                                            </h:selectOneMenu>
-                                            <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
-                                            <p:commandButton update=":obligationForm:obligationTable costam23 " oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
-
-
-                                        </h:panelGrid>
-
-
-                                    </h:form>  
-                                </p:dialog>
-
-                            </div>
                             <div id="buttonsBox3">
                                 <h:form>
                                     <h:commandButton class="greenButton wideButton" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
@@ -273,8 +219,64 @@
 
                 </div>
 
+                <p:dialog  height="300" width="350" onShow="zobDial2.initPosition();" hideEffect="explode"  position="center" draggable="false" showEffect="clip" id="zobDial" header="Dodaj zobowiązanie" widgetVar="zobDial2" rendered="true">  
+                    <h:form id="costam23">
+                        <h:panelGrid  class="obligationDialogBox" columns="2" cellspacing="5" >
 
+                            <h:outputText value="Rodzaj zobowiązania"/>
+                            <h:selectOneMenu value="#{clientCaseMB.obligation.obligationKind}">
+                                <f:selectItem itemLabel="Bankowe" itemValue="b"/>
+                                <f:selectItem itemLabel="Pozabakowe" itemValue="p"/>
+                            </h:selectOneMenu>
+
+                            <h:outputText value="Wygasa:"/>
+                            <p:calendar effect="slide" value="#{clientCaseMB.obligation.beginDate}"/>
+
+                            <h:outputText value="Rata:"/>
+                            <h:inputText required="true" id="actualPrice" value="#{clientCaseMB.obligation.actualPrice}">
+                                <f:converter converterId="javax.faces.BigDecimal"    />
+                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
+                                <p:ajax event="keyup" update="actualPriceMessage" />
+                            </h:inputText>    
+
+                            <h:outputText />
+                            <h:message errorClass="invalid"  for="actualPrice" id="actualPriceMessage" />
+
+                            <h:outputText value="Kwota:"/>
+                            <h:inputText required="true" id="repayment" value="#{clientCaseMB.obligation.repayment}">
+                                <f:converter converterId="javax.faces.BigDecimal"    />
+                                <f:validateDoubleRange minimum="0.00" maximum="999999.99"  />
+                                <p:ajax event="keyup" update="repaymentMessage" />
+                            </h:inputText>
+                            <h:outputText />
+                            <h:message errorClass="invalid"  for="repayment" id="repaymentMessage" />
+
+
+                            <h:outputText value="Tytulem"/>
+                            <h:inputText value="#{clientCaseMB.obligation.name}"/>
+
+                            <h:outputText value="Aktualne"/>
+                            <h:selectBooleanCheckbox value="#{clientCaseMB.obligation.active}"/>
+
+                            <h:outputText value="Rodzaj produktu"/> 
+                            <h:selectOneMenu value="#{clientCaseMB.idTypProduktuObligation}">
+                                <f:selectItems value="#{dictionaryMB.productType}" var="w" itemLabel="#{w.name}" itemValue="#{w.idProductType}"/>
+                            </h:selectOneMenu>
+                            <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
+                            <p:commandButton update=":obligationForm:obligationTable costam23 " oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
+
+
+                        </h:panelGrid>
+
+
+                    </h:form>  
+                </p:dialog>
             </ui:define>           
+
+
+
+
+
         </ui:composition>
     </body>
 </html>
