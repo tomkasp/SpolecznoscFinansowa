@@ -40,7 +40,7 @@
     
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
-        <filter-class> com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
+        <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
     </filter>
     
     <filter>
