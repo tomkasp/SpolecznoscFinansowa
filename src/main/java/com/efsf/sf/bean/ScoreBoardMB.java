@@ -46,7 +46,7 @@ public class ScoreBoardMB implements Serializable{
             }
         }
         
-        return found ? i : -1;
+        return found ? (i+1) : -1;
     }
     
     public void rowDoubleClick(Consultant cos) throws IOException
