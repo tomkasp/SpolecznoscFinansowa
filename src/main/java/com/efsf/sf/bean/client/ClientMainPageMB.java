@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantRatingDAO;
 import com.efsf.sf.sql.entity.*;
+import com.efsf.sf.util.Algorithms;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
 import java.io.Serializable;
@@ -136,6 +137,10 @@ public class ClientMainPageMB implements Serializable {
         awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
     }
     
+    public boolean isProfilNotFilled(){
+        return Algorithms.calculateProgress(loginMB.getClient())<50;
+    }
+    
     public double giveMeConsultantAverage(int consultantId)
     {
         ConsultantRatingDAO crdao = new ConsultantRatingDAO();
@@ -230,16 +235,17 @@ public class ClientMainPageMB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
     }
      
-     public String backOffAwaiting(){
+     public void backOffAwaiting(){
          CaseStatusDAO csdao = new CaseStatusDAO();
          CaseStatus cs = csdao.read(8);
          awaitingSelectedCase.setCaseStatus(cs);
          caseDao.updateClientCase(awaitingSelectedCase);
          awaitingSelectedCase=null;
-     return "/client/clientMainPage.xhtml";
+         
+         fillTables();
      }
      
-     public String backOffCurrent(){
+     public void backOffCurrent(){
          CaseStatusDAO csdao = new CaseStatusDAO();
          CaseStatus cs = csdao.read(8);
          currentSelectedCase.setCaseStatus(cs);
@@ -248,8 +254,7 @@ public class ClientMainPageMB implements Serializable {
          
          reloadCases3();
          reloadCases4();
-         
-     return "/client/clientMainPage.xhtml";
+
      }
      
      public void redirectNewApplication() throws IOException

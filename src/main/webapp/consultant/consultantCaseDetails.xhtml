@@ -154,7 +154,7 @@
                                            </h:commandLink>
                                            <h:outputText value="Intercyza"/>
                                            
-                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.mariageSettlement==null}" target="_blank" action="#{ fileDownloadMB.load5() }"> 
+                                           <h:commandLink disabled="#{fileDownloadMB.requiredDocuments.divorceAct==null}" target="_blank" action="#{ fileDownloadMB.load5() }"> 
                                                <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct!=null}" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                                <h:graphicImage rendered="#{fileDownloadMB.requiredDocuments.divorceAct==null}" style="opacity: 0.2;" alt="could not be found."  value="/resources/icons/Document-icon.png" />
                                            </h:commandLink>

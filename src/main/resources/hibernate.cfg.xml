@@ -7,7 +7,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">SFuser</property>
         <property name="hibernate.connection.password">SFuser123</property>
-        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.show_sql">false</property>
     
     
         <property name="hibernate.c3p0.min_size">5</property>

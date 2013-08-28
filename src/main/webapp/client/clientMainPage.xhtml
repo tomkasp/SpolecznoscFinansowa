@@ -29,6 +29,8 @@
                             $("#last").toggle();    
                         });
                     });
+                    
+                   
                 </script>
 
                 <h:form>
@@ -45,7 +47,15 @@
                         </div>
                     </h:form>
                 </h:panelGroup>
-
+                
+                <h:panelGroup rendered="#{clientMainPageMB.profilNotFilled}">
+                    <h:form>
+                        <div style="min-height: 80px; border-bottom: green 4px solid">
+                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
+                            <h:link  class="floatR greyButton wideButton marginT50" value="Uzupełnij profil" outcome="/client/clientSettings"/>  
+                        </div>
+                    </h:form>
+                </h:panelGroup>    
 
                 <div class="marginT50"> 
                     <h:form>
@@ -64,6 +74,7 @@
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
+                        
                         <h:form id="lastForm">
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
@@ -295,7 +306,7 @@
                         </p:dataTable>
 
                         <h:panelGroup id="awaitingCasesButtonBar">
-                            <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
+                            <p:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  styleClass="topMenuButton  redX wideButton"  update=":awaitingForm :finishedForm" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
                             <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}" />
                         </h:panelGroup>
 
@@ -371,7 +382,7 @@
 
                         <h:panelGroup id="currentCasesButtonBar">
                             <h:button disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
-                            <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton  redX wideButton" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }" />
+                            <p:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" styleClass="topMenuButton  redX wideButton" update="currentForm :finishedForm" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }" />
                             <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
                         </h:panelGroup>
                     </h:form>
@@ -546,7 +557,7 @@
                                 <h:outputText value="#{row.viewCounter}" />
                             </p:column>      
 
-                            <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
+                            <p:column style="background:  #55b867;" headerText="Wybierz/zmień doradcę">  
 
                                 <h:outputText value=" " />
 
@@ -563,7 +574,7 @@
 
                 </div>
 
-                <div id="awaitingMarket">
+                <div id="awaitingMarket" >
 
                     <h:form id="awaitingMarketForm">
 
