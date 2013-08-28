@@ -15,21 +15,41 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author WR1EI1
  */
-public class LoginClientFilter implements Filter {
+public class NoLoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
-        if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CLIENT_ACTIVE))
+        if( loginBean != null)
+        {    
+            
+        if(  loginBean.isIsLogged() & loginBean.getType()!=null )
+        {
+        
+        if ( loginBean.getType().equals(Settings.CLIENT_ACTIVE) )
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/client/clientMainPage.xhtml");
         }
         
+        if ( loginBean.getType().equals(Settings.CONSULTANT_ACTIVE) )
+        {
+            String contextPath = ((HttpServletRequest) request).getContextPath();
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/consultant/consultantMainPage.xhtml");
+        }
         
-
+        if ( loginBean.getType().equals(Settings.ADMIN_ACTIVE) )
+        {
+            String contextPath = ((HttpServletRequest) request).getContextPath();
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/admin/adminMainPage.xhtml");
+        }
+        
+        }
+        
+        }
+        
         chain.doFilter(request, response);
 
     }
