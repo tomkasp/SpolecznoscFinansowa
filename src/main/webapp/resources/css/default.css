@@ -445,6 +445,11 @@ p:column {
     margin-right: 30px;
 }
 
+.marginLR20
+{
+    margin: 0 20px;
+}
+
 
 .marginT10
 {
@@ -932,6 +937,34 @@ p:column {
 
 .area{
     width: 300px;
+}
+
+.pdetailsItem {
+    margin: 0 30px 5px 30px; 
+}
+
+.pdetailsLabel {
+    float: left;
+    width: 36%;
+    min-height: 15px;
+    clear: both;
+    letter-spacing: 1pt;
+    color: #000000;
+    font-family: Arial;
+    font-weight:bold;
+    text-align: right;
+    margin: 3px;
+    margin-right: 20px;
+}
+
+.pdetailsArea {
+    margin-right: 20px; 
+    width: 95%;
+    float: right;
+    letter-spacing: 1pt;
+    color: #868686;
+    font-family: Arial;
+    font-weight:bold;
 }
 
 

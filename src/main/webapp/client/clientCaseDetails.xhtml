@@ -12,7 +12,9 @@
         </f:metadata>
         <f:event type="preRenderView" listener="#{caseViewMB.loadCaseConsultantsDetails()}" />
 
-        <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} </h3>
+        <h:form id="titleForm">
+           <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} (#{caseViewMB.selectedClientCase.caseStatus.name}) </h3>
+        </h:form>   
 
         <div>
             <div class="leftInlineBox">
@@ -141,7 +143,86 @@
                         <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}"/>
 
                     </h:panelGroup>
+                    <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
+                        <h4> AKTUALNIE PRZYPISANA OFERTA </h4>
+                        <div class="solidText">
+                            Tutaj znajduje się aktualnie przypisana przed doradcę oferta. 
+                        </div>
+                        <div style="min-height: 30px;"></div>
+              
+                        
+                        <p:commandButton id="detailsButton" disabled="#{empty caseViewMB.selectedProduct}" update="detailsDialog"  styleClass="marginTB20 floatR greyButton wideButton" value="Szczegóły" action="#{caseViewMB.fetchProductTreeForSelectedProduct(caseViewMB.selectedProduct)}" oncomplete="productDetails.show()" />
+                                  
+                        
+                        
+                         <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="750" height="500" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
+                                       <h4>#{caseViewMB.fetchTopProductForProductDetails(caseViewMB.selectedProduct).institution.name} </h4>
+                                       
+                                       <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
+                                           <h:panelGroup rendered="#{current.index == 0}" > <h3>#{node.productName}</h3> </h:panelGroup>
+                                           <h:panelGroup rendered="#{current.index > 1}" > <h4>#{node.productName}</h4> </h:panelGroup>
+                                       </ui:repeat>
+                                       
+                                       
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel" value="Typ kredytu:  " />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.productType.name}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Kredyt dla: " />
+                                            <h:inputText  style="width: 55.9%" disabled="true" value="#{caseViewMB.selectedProduct.employmentType.name}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Kwota: " />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.amountBruttoMin}" />
+                                            <h:outputText class="marginLR20" value="---" />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.amountBruttoMax}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Okres kredytowania: " />
 
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.loanTimeMin}" />
+                                            <h:outputText class="marginLR20" value="---" />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.loanTimeMax}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Wiek kredytobiorcy: " />
+                                            
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.clientAgeMin}" />
+                                            <h:outputText class="marginLR20" value="---" />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.clientAgeMax}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Ilość współkredytobiorców: " />
+                                          
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.partnersNumberMin}" />
+                                            <h:outputText class="marginLR20" value="---" />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.partnersNumberMax}" />                                                                
+                                       </div>
+                                       <div class="pdetailsItem">
+                                            <h:outputText class="pdetailsLabel"  value="Okres otrzymywania dochodu: " />
+                                            
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.oodwmMin}" />
+                                            <h:outputText class="marginLR20" value="---" />
+                                            <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.oodwmMax}" />                                                                
+                                       </div>
+                                       <h:panelGroup rendered="#{caseViewMB.selectedProduct.recomendation}" >
+                                            <div class="pdetailsItem">
+                                                <h:outputText class="pdetailsLabel"  value="Rekomendacja: " /> <br />
+                                                <h:inputTextarea class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.recomendationDetails}" />
+                                            </div>
+                                       </h:panelGroup>
+                                       <div class="pdetailsItem">
+                                               <h:outputText class="pdetailsLabel"  value="Wymagane dokumenty: " />
+                                               <h:inputTextarea class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.requiredDocuments}" />
+                                       </div>
+
+                                       <h:commandButton  styleClass="floatR wideButton marginTB20" style="clear:both;" type="button" value="Kontynuuj" onclick="productDetails.hide()"  >
+                                           <f:ajax  execute="@this" render="@this" /> 
+                                       </h:commandButton>
+                                       
+                                   </p:dialog>
+                    </h:panelGroup>
                     <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus>=2 &amp;&amp; caseViewMB.selectedClientCase.consultant!=null}" >    
                         <div style="min-height: 58px;">
                             <h4> WIADOMOŚCI </h4>

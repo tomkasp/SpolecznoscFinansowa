@@ -3,10 +3,12 @@ package com.efsf.sf.util.analyser;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Converters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,6 +41,27 @@ public class AnalyserAlgorithm {
 
     public AnalyserAlgorithm(Integer IdSprawy) {
         analizuj(IdSprawy);
+    }
+    
+    public List<ProductDetails> bestProductForCase(Map<Integer, Integer> productIds) 
+    {
+        
+        GenericDao<ProductDetails> dao = new GenericDao(ProductDetails.class);
+        List<ProductDetails> productDetailsList = new ArrayList();
+        Integer currentMax = Collections.max(productIds.values());
+        while (currentMax > 0)
+        {  
+             for (Map.Entry <Integer, Integer> entry : productIds.entrySet())
+             {
+                 if (entry.getValue().equals(currentMax))
+                 {
+                     productDetailsList.add(dao.getById(entry.getKey()));
+                 }
+             }
+             currentMax--;   
+        }
+        
+        return productDetailsList;
     }
 
     private void setClient(Integer idSprawaKlienta) {
