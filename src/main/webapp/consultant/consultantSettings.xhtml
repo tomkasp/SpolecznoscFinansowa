@@ -32,14 +32,20 @@
 
                                 <div class="field">
                                     <h:outputText class="label" value="Imię"/> 
-                                    <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}"  />
-                                    <h:message styleClass="invalid" for="name"/>
+                                    <h:inputText id="name" class="inputWidth" value="#{consultantSettingsMB.consultant.name}">
+                                        <f:validateRegex pattern="([A-Za-za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]|\s){2,}"/>
+                                        <p:ajax event="keyup" update="nameMessage" />
+                                    </h:inputText>
+                                    <h:message styleClass="invalid" for="name" id="nameMessage"/>
                                 </div>
 
                                 <div class="field">
                                     <h:outputText class="label" value="Nazwisko"/>
-                                    <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"/> 
-                                    <h:message styleClass="invalid" for="lastName"/>
+                                    <h:inputText id="lastName" class="inputWidth" value="#{consultantSettingsMB.consultant.lastName}"> 
+                                        <f:validateRegex pattern="([A-Za-za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]|\s){2,}"/>
+                                        <p:ajax event="keyup" update="lastNameMessage" />
+                                    </h:inputText>
+                                    <h:message styleClass="invalid" for="lastName" id="lastNameMessage"/>
                                 </div>
 
                                 <div class="field"> 
@@ -149,17 +155,25 @@
 
                         <div class="field">
                             <h:outputText class="label" value="Miasto"/>
-                            <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.city}"/> 
+                            <h:inputText id="city" class="inputWidth3" value="#{consultantSettingsMB.mainAddress.city}">
+                                <f:validateRegex pattern="([A-Za-za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]|\s){2,}"/>
+                                <p:ajax event="keyup" update="cityMessage" />
+                            </h:inputText>
+                            <h:message for="city" errorClass="invalid" id="cityMessage" />
                         </div>
 
                         <div class="field">
                             <h:outputText class="label" value="Kod pocztowy"/>
-                            <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.zipCode}"/> 
+                            <h:inputText id="postCode" class="inputWidth3" value="#{consultantSettingsMB.mainAddress.zipCode}">
+                                <f:validateRegex pattern="([0-9]){2}-([0-9]){3}"/>
+                                <p:ajax event="keyup" update="postCodeMessage" />
+                            </h:inputText>
+                            <h:message for="postCode" errorClass="invalid" id="postCodeMessage" />
                         </div>
 
                         <div class="field"> 
                             <h:outputText class="label" value="Telefon"/> 
-                            <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.phone}" />
+                            <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.phone}"/>  
                         </div>
 
                         <div class="field"> 

@@ -1,5 +1,6 @@
 package com.efsf.sf.sql.dao;
 
+import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
@@ -25,5 +26,37 @@ public class ProductDAO {
         return products;
     }
     
+    public Product getProductForDetails(Integer idDetails)
+    {
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("from Product as p left join fetch p.productDetailses as pd left join fetch p.institution as ins where pd.idProductDetail = :idDetails");
+      
+        q.setParameter("idDetails", idDetails);
+        
+        List l = q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        return l != null ? (Product) l.get(0) : null;
+    }
     
+    public Product getProductWithInstitution(Integer idProduct)
+    {
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("from Product as p left join fetch p.institution as ins where p.idProduct = :idProduct");
+      
+        q.setParameter("idProduct", idProduct);
+        
+        List l = q.list();
+        
+        session.getTransaction().commit();
+        session.close();
+        
+        return l != null ? (Product) l.get(0) : null;
+    }
 }

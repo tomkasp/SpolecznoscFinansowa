@@ -27,16 +27,15 @@ public class Settings
     public static final Integer CLIENT_INACTIVE = 32;  
     public static final Integer LOGGED_OUT = -1;
     
-    
     // PRODUCT TYPES 
     public static final Integer CHWILOWKA = 2;
-
+       
+        
+    // CASE STATUSES 
     
+    public static final Integer PRODUCT_ASSIGNED = 3; 
     
-    
-    
-    //EL FIELDS
-    
+    //EL FIELDS 
     private Integer adminUnverified = ADMIN_UNVERIFIED;
     private Integer adminActive = ADMIN_ACTIVE;
     private Integer adminInactive = ADMIN_INACTIVE;
@@ -47,6 +46,7 @@ public class Settings
     private Integer clientActive = CLIENT_ACTIVE;
     private Integer clientInactive = CLIENT_INACTIVE;
     private Integer loggedOut = LOGGED_OUT;
+
 
     public Integer getAdminUnverified() {
         return adminUnverified;

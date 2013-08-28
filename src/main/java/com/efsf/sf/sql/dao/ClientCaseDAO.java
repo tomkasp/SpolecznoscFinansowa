@@ -579,6 +579,7 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch consul.institutions as inst "
                  + "left join fetch consul.workingPlace as work "
                  + "left join fetch consul.productTypes as ptypes "
+                 + "left join fetch cs.productDetails as pd "
                  + "where cs.idClientCase = :id" );
                  
                  q.setParameter("id", idClientCase);
@@ -608,7 +609,8 @@ public class ClientCaseDAO implements Serializable {
                  + "left join fetch inc.employmentType as empltype "
                  + "left join fetch ba.branch as br2 "
                  + "left join fetch ba.employmentType as empltype2 "
-                 + "left join fetch clt.requiredDocumentses as rd "        
+                 + "left join fetch clt.requiredDocumentses as rd "      
+                 + "left join fetch cs.productDetails as pd "
                  + "where cs.idClientCase = :id" );
                  
                  q.setParameter("id", idClientCase);
