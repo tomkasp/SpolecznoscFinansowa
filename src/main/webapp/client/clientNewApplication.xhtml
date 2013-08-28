@@ -26,8 +26,8 @@
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
                             <h:form>  
                                 <h:panelGroup>
-                                    <div class="field"> <h:outputText class="label" value="Data Rozpoczęcia:"/>  
-                                        <p:calendar   mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
+                                    <div class="field"> <h:outputText class="label" value="Data wystawienia na giełdę"/>  
+                                        <p:calendar mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
                                             <p:ajax  event="dateSelect" update="end-date"  />
                                         </p:calendar>
                                         <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
@@ -40,7 +40,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Kwota konsolidacji:"/>  
+                                        <h:outputText class="label" value="Kwota konsolidacji"/>  
                                         <h:inputText maxlength="13"  required="true" id="consolidationValue" value="#{clientCaseMB.clientCase.consolidationValue}"  > 
                                             <f:converter converterId="javax.faces.BigDecimal"   />
                                             <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
@@ -50,8 +50,8 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Kwota wolne środki:"/>  
-                                        <h:inputText maxlength="13" id="freeResourcesValue" value="#{clientCaseMB.clientCase.freeResourcesValue}" > 
+                                        <h:outputText class="label" value="Kwota wolne środki"/>  
+                                        <h:inputText maxlength="13" required="true" id="freeResourcesValue" value="#{clientCaseMB.clientCase.freeResourcesValue}" > 
                                             <f:converter converterId="javax.faces.BigDecimal"   />
                                             <f:validateDoubleRange minimum="0.00" maximum="9999999999.99"  />
                                             <p:ajax  event="keyup" update="freeResourcesValueMessage" />
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Oczekiwana rata:"/>
+                                        <h:outputText class="label" value="Oczekiwana rata"/>
                                         <h:inputText maxlength="9" id="expectedInstalment" required="true" value="#{clientCaseMB.clientCase.expectedInstalment}"> 
                                             <f:converter converterId="javax.faces.BigDecimal"    />
                                             <f:validateDoubleRange minimum="0.01" maximum="999999.99"  />
@@ -69,9 +69,8 @@
                                         <h:message for="expectedInstalment" errorClass="invalid" id="expectedInstalmentMessage" />
                                     </div>
 
-
                                     <div class="field"> 
-                                        <h:outputText class="label" value="Cel:"/>
+                                        <h:outputText class="label" value="Cel"/>
                                         <h:inputText id="goal" maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}">
                                             <f:validateLength maximum="255"/>
                                             <p:ajax event="keyup" update="goalMessage" />
@@ -80,7 +79,7 @@
                                     </div>
 
                                     <div class="field"> 
-                                        <h:outputText class="label" value="notatka"/>
+                                        <h:outputText class="label" value="Notatka"/>
                                         <h:inputTextarea cols="29" rows="10" value="#{clientCaseMB.clientCase.note}" >
                                             <f:validateLength maximum="100"/>
                                         </h:inputTextarea>    
@@ -95,9 +94,9 @@
                                     <div class="field"> 
                                         <h:outputText class="label" value="Premium"/> 
                                         <p:selectBooleanCheckbox disabled="#{clientCaseMB.premiumPointsChecking()}" value="#{clientCaseMB.clientCase.premium}" >
-                                            <p:ajax update="msg"  listener="#{clientCaseMB.addMessage()}" /> 
+                                            <p:ajax update="msg" listener="#{clientCaseMB.addMessage()}" /> 
                                         </p:selectBooleanCheckbox>
-                                        <p:growl id="msg" severity="info, warn"  />
+                                        <p:growl id="msg" severity="info, warn" />
                                     </div>
 
                                 </h:panelGroup>
@@ -109,7 +108,7 @@
                                     </h:panelGrid>
                                 </p:dialog>  
 
-                                <h:commandButton action="false" rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
+                                <h:commandButton action="false"  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
 
 
 
@@ -121,26 +120,22 @@
 
                         <div class="rightBox" style="width: 50%;">
 
-                            <h4 class="greenLeftBorder"> Koszt punktów: </h4>
+                            <h3 class="greenLeftBorder"> Koszt punktów: </h3>
 
                             <h4 class="greenLeftBorder"> PUNKTY - Jak działa i co za ile </h4>
                             <div>
-
-                                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
-
+                                Aby umiescic swoją potrzebę na giełdzie ogłoszeń musisz posiadać wystarczającą ilość punktów.
+                                Zwykły wniosek to koszt jednego punktu. Wniosek premium natomiast to koszt sześciu punktów.
                             </div>
 
-                            <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIKu </h4>
-                            <div style="margin-bottom: 30px;">
-
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-
+                            <h4 class="greenLeftBorder"> DODAWANIE RAPORTU BIK-u </h4>
+                            <div>
+                                Dodaj raport BIK do profilu. Dzięki temu zwiększysz swoje szanse na otrzymanie kredytu.
                             </div>
                             <h:form>
                                 <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Posiadam raport BIK"/> </div>
-                                <div class="field">  <h:selectBooleanCheckbox/>  <h:outputText value="Nie posiadam raportu BIK"/> </div>
                             </h:form>
-                            <div id="buttonsBox1" style="margin-top: 30px;">
+                            <div id="buttonsBox1" style="margin-top: 10px;">
 
                                 <h:link class="greyButton wideButton" value="Więcej o usłudze" style="margin-right: 20px; width: 190px;"/>
 
@@ -264,14 +259,13 @@
                             </div>
                             <div id="buttonsBox3">
                                 <h:form>
-                                <h:commandButton class="greenButton wideButton" rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                                    <h:commandButton class="greenButton wideButton" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
                                 </h:form>
                             </div>
 
                         </div>
 
                     </div>
-
 
                 </div>
 
