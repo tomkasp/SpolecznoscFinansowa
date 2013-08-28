@@ -14,14 +14,17 @@ public class FileUploadValidator implements Validator {
 
     private String[] formaty = new String[]{"pdf","jpg","gif","png","jpeg"};
 
-    public FileUploadValidator() {
-    }
+    public FileUploadValidator() {}
     
     @Override
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {
+        
+        if(value!=null)
+        {
 
         UploadedFile file1 = (UploadedFile) value;
+        
         boolean accept=false;
         for (int i = 0; i < formaty.length; i++) {
             if ( file1.getFileName().toLowerCase().endsWith( formaty[i] ) ) {
@@ -50,4 +53,6 @@ public class FileUploadValidator implements Validator {
 
     }
     
+    }    
+        
 }

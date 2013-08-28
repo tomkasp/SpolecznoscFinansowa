@@ -29,6 +29,8 @@
                             $("#last").toggle();    
                         });
                     });
+                    
+                   
                 </script>
 
                 <h:form>
@@ -64,6 +66,7 @@
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
+                        
                         <h:form id="lastForm">
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
@@ -546,7 +549,7 @@
                                 <h:outputText value="#{row.viewCounter}" />
                             </p:column>      
 
-                            <p:column style="background:  #5297cb" headerText="Wybierz/zmień doradcę">  
+                            <p:column style="background:  #55b867;" headerText="Wybierz/zmień doradcę">  
 
                                 <h:outputText value=" " />
 
@@ -563,7 +566,7 @@
 
                 </div>
 
-                <div id="awaitingMarket">
+                <div id="awaitingMarket" >
 
                     <h:form id="awaitingMarketForm">
 
