@@ -29,6 +29,7 @@ public class ConsultantDAO {
 
         return consultant;
     }
+    
 
     public void save(Consultant consultant) {
 

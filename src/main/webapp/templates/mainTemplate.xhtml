@@ -18,78 +18,80 @@
 
     <h:body>
         <div class="page effect7">
-            
-        <div id="top">
-            <ui:insert name="top">
 
-                <h:panelGroup rendered="#{loginMB.type == settings.adminActive}">
-                    <ui:include src="adminTop.xhtml"/> 
-                </h:panelGroup>
-                
-                <h:panelGroup rendered="#{loginMB.type == settings.consultantActive}">
-                    <ui:include src="consultantTop.xhtml"/> 
-                </h:panelGroup>
+            <div id="top">
+                <ui:insert name="top">
 
-                <h:outputStylesheet rendered="#{loginMB.type == settings.clientActive}" library="css" name="green.css" />  
+                    <h:panelGroup rendered="#{loginMB.type == settings.adminActive}">
+                        <ui:include src="adminTop.xhtml"/> 
+                    </h:panelGroup>
 
-                <h:panelGroup rendered="#{loginMB.type==settings.clientActive}">
-                    <ui:include src="clientTop.xhtml"/> 
-                </h:panelGroup>
+                    <h:panelGroup rendered="#{loginMB.type == settings.consultantActive}">
+                        <ui:include src="consultantTop.xhtml"/> 
+                    </h:panelGroup>
 
-            </ui:insert>
-        </div>
+                    <h:outputStylesheet rendered="#{loginMB.type == settings.clientActive}" library="css" name="green.css" />  
 
-        <div id="content" class="center_content">
-            <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
-                <div id="profileBar" class="profilBar">
+                    <h:panelGroup rendered="#{loginMB.type==settings.clientActive}">
+                        <ui:include src="clientTop.xhtml"/> 
+                    </h:panelGroup>
 
-                    <div style="margin-bottom: 5px;"> 
-                        <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za #{consultantMainPageMB.subscriptionDeadline()} dni" /> 
-                    </div>
+                </ui:insert>
+            </div>
 
-                    <div>     
-                        <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
-
-                        <div class="right">
-                            <h:outputText class="profileText" value="nr. użytkownika:" />
-                            <h5> #{loginMB.consultant.user.login} </h5>
-                            <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
-                            <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
-                        </div>
-
-                    </div>
-                </div>
-            </h:panelGroup>    
-            <h:panelGroup rendered="#{loginMB.client!=null}"> 
-                <h:form id="test">
+            <div id="content" class="center_content">
+                <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
                     <div id="profileBar" class="profilBar">
 
+                        <div> 
+                            <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za #{consultantMainPageMB.subscriptionDeadline()} dni" /> 
+                        </div>
+
                         <div>     
-                            <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5>
+                            <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
+
                             <div class="right">
+
                                 <h:outputText class="profileText" value="nr. użytkownika:" />
-                                <h5> #{loginMB.client.user.login} </h5>
-                                <h:outputText class="profileText" value="Stan konta:" />
-                                <h5 > #{loginMB.client.points}</h5>
+                                <h5> #{loginMB.consultant.user.login} </h5>
+                                <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
+                                <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
                             </div>
+
                         </div>
                     </div>
-                </h:form>   
-            </h:panelGroup>    
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+                </h:panelGroup>    
+                <h:panelGroup rendered="#{loginMB.client!=null}"> 
+                    <h:form id="test">
+                        <div id="profileBar" class="profilBar">
+
+                            <div>     
+
+                                <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5>
+                                <div class="right">
+                                    <h:outputText class="profileText" value="nr. użytkownika:" />
+                                    <h5> #{loginMB.client.user.login} </h5>
+                                    <h:outputText class="profileText" value="Stan konta:" />
+                                    <h5 > #{loginMB.client.points}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>   
+                </h:panelGroup>    
+                <ui:insert name="content">Content</ui:insert>
+            </div>
 
 
             <div id="bottom">
-            <ui:insert name="bottom">    
-                <div>
-                    <h:graphicImage id="ue_logo" style="top: 0px; left: 0px;  position: absolute;" alt="could not be found" value="/resources/images/innowacyjna_gospodarka.png"  ></h:graphicImage>
-                </div>
-                <div>
-                    <h:graphicImage id="ig_logo" style="top: 0px; right: 0px; position: absolute;" alt="could not be found" value="/resources/images/ue_logo.png"  ></h:graphicImage>
-                </div>         
-            </ui:insert>
-        </div>
+                <ui:insert name="bottom">    
+                    <div>
+                        <h:graphicImage id="ue_logo" style="top: 0px; left: 0px; position: absolute;" alt="could not be found" value="/resources/images/innowacyjna_gospodarka.png"  ></h:graphicImage>
+                    </div>
+                    <div>
+                        <h:graphicImage id="ig_logo" style="top: 0px; right: 0px; position: absolute;" alt="could not be found" value="/resources/images/ue_logo.png"  ></h:graphicImage>
+                    </div>         
+                </ui:insert>
+            </div>
 
         </div>
     </h:body>

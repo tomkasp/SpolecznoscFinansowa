@@ -6,10 +6,12 @@ package com.efsf.sf.util;
 
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
@@ -100,6 +102,29 @@ public class Algorithms
     }
     
     
+    public static int calculateProgress(Consultant cs){
+        int progress=0;
+        
+        Consultant consultant = new ConsultantDAO().readConsultantForSettings(cs.getIdConsultant());
+        
+        Address address = consultant.getAddresses().iterator().next();
+        progress+= getProgressForAddress(address);
+        
+        if(consultant.getInstitutions()!=null && consultant.getInstitutions().size()>0){
+            progress+=10;
+        }
+
+        if(consultant.getExpirience()!=null && !consultant.getExpirience().equals("")){
+            progress+=10;
+        }
+        
+        if(consultant.getProductTypes()!=null && consultant.getProductTypes().size()>0){
+            progress+=10;
+        }              
+        
+        return progress;
+    }
+    
     //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 
     public static int calculateProgress(Client cl)
     {
@@ -133,30 +158,7 @@ public class Algorithms
          }
          
          Address address = client.getAddresses().iterator().next();
-         if (address.getZipCode() != null && !"".equals(address.getZipCode()))
-         {
-             progress+=5;
-         }
-         if (address.getRegion().getIdRegion() != 0)
-         {
-             progress+=5;
-         }     
-         if(address.getCity() != null && !"".equals(address.getCity()))
-         {
-             progress+=5;
-         }
-         if(address.getHouseNumber() != null && !"".equals(address.getHouseNumber()))
-         {
-             progress+=5;
-         }
-         if(address.getPhone() != null && !"".equals(address.getPhone()))
-         {
-             progress+=5;
-         }
-         if(address.getCity() != null && !"".equals(address.getPhone()))
-         {
-             progress+=5;
-         }
+         progress+= getProgressForAddress(address);
          
          RequiredDocuments requiredDocuments = new RequiredDocumentsDAO().readForFkClient(client.getIdClient());
 
@@ -181,6 +183,36 @@ public class Algorithms
          }
      
          return progress;
+    }
+
+    private static int getProgressForAddress(Address address) {
+        int progress=0;
+        
+        if (address.getZipCode() != null && !"".equals(address.getZipCode()))
+        {
+            progress+=5;
+        }
+        if (address.getRegion().getIdRegion() != 0)
+        {
+            progress+=5;
+        }
+        if(address.getCity() != null && !"".equals(address.getCity()))
+        {
+            progress+=5;
+        }
+        if(address.getHouseNumber() != null && !"".equals(address.getHouseNumber()))
+        {
+            progress+=5;
+        }
+        if(address.getPhone() != null && !"".equals(address.getPhone()))
+        {
+            progress+=5;
+        }
+        if(address.getCity() != null && !"".equals(address.getPhone()))
+        {
+            progress+=5;
+        }
+        return progress;
     }
     
 }
