@@ -118,7 +118,6 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 .ui-datatable table
 {
     border-collapse:collapse;
-    width:100%;
 }
 
 .ui-datatable .ui-datatable-header,.ui-datatable .ui-datatable-footer
@@ -129,7 +128,7 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 
 .ui-datatable .ui-datatable-header
 {
-    order-bottom:0px none;
+    border-bottom:0px none;
 }
 
 .ui-datatable .ui-datatable-footer
@@ -158,6 +157,7 @@ TR.ui-widget-content.ui-datatable-odd.ui-state-hover{
 
 .obligationDialogBox .hasDatepicker{
     width:162px;
+    top:30% !important;
 }
 
 .ui-state-disabled{

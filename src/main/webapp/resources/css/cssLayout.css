@@ -11,7 +11,6 @@ img{border:0px;}
 #top {
     position: relative;
     background-color: #ffffff;
-    color: white;
     padding: 5px;
     margin: 0px 0px 0px 0px;
     min-height: 124px;
@@ -61,7 +60,7 @@ img{border:0px;}
 }
 
 #top a:link, #top a:visited {
-  /* color: white; */
+/*   color: white; */
   font-weight : bold;
   text-decoration: none;
 }
@@ -306,5 +305,4 @@ input
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active .ui-state-focus {
     background: #0793F0;
 }
-
 
