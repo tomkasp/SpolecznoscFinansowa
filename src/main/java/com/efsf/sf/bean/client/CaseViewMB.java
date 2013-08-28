@@ -12,6 +12,7 @@ import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
@@ -19,22 +20,23 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.Product;
+import com.efsf.sf.sql.entity.ProductDetails;
+import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.analyser.AnalyserAlgorithm;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -55,21 +57,31 @@ public class CaseViewMB implements Serializable{
     @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB;
     
+    
+    
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
+    
+    
      
     private ClientCase selectedClientCase;
     private Integer clientCaseId;
     private Consultant selectedConsultant;
     private Consultant selectedPremiumConsultant;
+    private ProductDetails selectedProduct;
+    
+    private List<Product> productTree;
+    
     private int caseStatusID;
     
     private List<IncomeData> selectedCaseIncomeTable = new ArrayList();
     
     private List<Consultant> premiumConsultants = new ArrayList();
     
-    private List<Product> products = new ArrayList(); 
+    private List<ProductDetails> products = new ArrayList(); 
     
+    private List<Integer> sortedProductValues;
+   
     private List<ScheduleItem> schedule = new ArrayList();
     
     public CaseViewMB() {
@@ -88,6 +100,8 @@ public class CaseViewMB implements Serializable{
                 facesContext.getExternalContext().redirect("./../error.xhtml");
             }
             selectedClientCase = cdao.getClientCaseWithConsultantDetails(clientCaseId);
+            selectedProduct = selectedClientCase.getProductDetails();
+                    
          }
     }
     
@@ -120,28 +134,66 @@ public class CaseViewMB implements Serializable{
         return cons;
     }
     
-    public List<Product> bestProductForCase() {
-        
+    public void findBestProduct()
+    {
         AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
-        Map<Integer, Integer> productIds = aa.getBestOfferts();
-        
-        List<Product> products = new ArrayList();
-        while (!productIds.isEmpty())
+        Map<Integer, Integer> productsIdsWithValue = aa.getBestOfferts();
+        if (productsIdsWithValue != null && !productsIdsWithValue.isEmpty() )
         {
-             int currentMax = Collections.max(productIds.values());
-             for (Entry <Integer, Integer> entry : productIds.entrySet())
-             {
-                 if (entry.getValue().equals(currentMax))
-                 {
-//                     products.add()
-                 }
-             }
+           sortedProductValues = new ArrayList(productsIdsWithValue.values());
+           Collections.sort(sortedProductValues);
+            products = aa.bestProductForCase(productsIdsWithValue);
         }
-        
-        return null;
+        else
+        {
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("emptyProducts.show()");
+        }
     }
     
+    public Product fetchTopProductForProductDetails(ProductDetails pd)
+    {
+        ProductDAO pdao = new ProductDAO();
+        
+        Product p = pdao.getProductForDetails(pd.getIdProductDetail());
+        
+        while (p.getParentProduct() != 0)
+        {
+            p = pdao.getProductWithInstitution(p.getParentProduct());
+        }
+        return p;
+    }
     
+    public void fetchProductTreeForSelectedProduct(ProductDetails pd)
+    {
+        ProductDAO pdao = new ProductDAO();
+        
+        Product p = pdao.getProductForDetails(pd.getIdProductDetail());
+        
+        productTree = new ArrayList();
+        
+        productTree.add(p);
+        
+        while (p.getParentProduct() != 0)
+        {
+            p = pdao.getProductWithInstitution(p.getParentProduct());
+            productTree.add(p);
+        }        
+        
+        Collections.reverse(productTree);
+    }
+    
+    public void assignProduct(ProductDetails pd)
+    {
+        
+        ClientCaseDAO cdao = new ClientCaseDAO();
+        CaseStatus cs = new CaseStatusDAO().read(Settings.PRODUCT_ASSIGNED);
+        selectedClientCase.setCaseStatus(cs);
+        selectedClientCase.setProductDetails(pd);
+        
+        cdao.updateClientCase(selectedClientCase);
+    }
+
     public void changeCaseStatus()
     {
         CaseStatus cs = new CaseStatusDAO().read(caseStatusID);
@@ -347,5 +399,37 @@ public class CaseViewMB implements Serializable{
 
     public void setSchedule(List<ScheduleItem> schedule) {
         this.schedule = schedule;
+    }
+
+    public List<ProductDetails> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductDetails> products) {
+        this.products = products;
+    }
+
+    public List<Integer> getSortedProductValues() {
+        return sortedProductValues;
+    }
+
+    public void setSortedProductValues(List<Integer> sortedProductValues) {
+        this.sortedProductValues = sortedProductValues;
+    }
+
+    public ProductDetails getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(ProductDetails selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public List<Product> getProductTree() {
+        return productTree;
+    }
+
+    public void setProductTree(List<Product> productTree) {
+        this.productTree = productTree;
     }
 }
