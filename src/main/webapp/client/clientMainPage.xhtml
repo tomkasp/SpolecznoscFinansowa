@@ -38,28 +38,11 @@
                     <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
                 </h:form>
 
-                <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList) }" >
-                    <h:form> 
-                        <div style="min-height: 80px; border-bottom: green 4px solid">
-                            <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość:  #{messagesMB.unreadMessagesList.size()}" /> 
-                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
-                        </div>
-                    </h:form>
-                </h:panelGroup>
+                 
 
-                <h:panelGroup rendered="#{clientMainPageMB.profilNotFilled}">
+                <div> 
                     <h:form>
-                        <div style="min-height: 80px; border-bottom: green 4px solid">
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
-                            <h:link  class="floatR greyButton wideButton marginT50" value="Uzupełnij profil" outcome="/client/clientSettings"/>  
-                        </div>
-                    </h:form>
-                </h:panelGroup>    
-
-                <div class="marginT50"> 
-                    <h:form>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
+                        <h:commandButton class="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
 
                         <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
 
@@ -237,7 +220,7 @@
 
                 <div  class="marginT50">
 
-                    <h4>Oczekujące na decyzję.</h4>
+                    <h4>OCZEKUJĄCE NA DECYZJE</h4>
 
                     <h:form id="awaitingForm">
 
@@ -318,7 +301,7 @@
 
                     <h:form id="currentForm">
 
-                        <h4> TRWAJĄCE </h4>               
+                        <h4>TRWAJĄCE</h4>               
 
                         <p:dataTable id="currentCases" value="#{clientMainPageMB.currentClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.currentSelectedCase}" selectionMode="single" >
 
@@ -489,7 +472,7 @@
 
                     <h:form id="premiumForm">
 
-                        <h4> PREMIUM </h4>
+                        <h4>PREMIUM</h4>
 
                         <p:dataTable id="premiumCases" value="#{clientMainPageMB.premiumClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.premiumSelectedCase}" selectionMode="single" >
 
@@ -578,7 +561,7 @@
 
                     <h:form id="awaitingMarketForm">
 
-                        <h4> SPRAWY OCZEKUJĄCE NA ROZPOCZĘCIE </h4>
+                        <h4>SPRAWY OCZEKUJĄCE NA ROZPOCZĘCIE</h4>
 
                         <p:dataTable id="awaitingMarketTable" value="#{clientMainPageMB.awaitingForMarketClientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.awaitingForMarketSelectedCase}" selectionMode="single" >
 
