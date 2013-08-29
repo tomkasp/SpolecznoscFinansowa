@@ -21,26 +21,7 @@
                         <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
                     </div>
 
-                <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px; background: none; box-shadow: none;" height="145px" draggable="false" closable="false">  
-                <div id="circular3dG">
-                   <div id="circular3d_1G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_2G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_3G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_4G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_5G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_6G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_7G" class="circular3dG">
-                   </div>
-                   <div id="circular3d_8G" class="circular3dG">
-                   </div>
-                </div>
-            </p:dialog>
+
                 
             </ui:define>
             
@@ -86,7 +67,7 @@
                     </div>
                     
                     <h:link class="greyButton" style="margin-right: 5px" value="Nie pamiętam hasła" />
-                    <p:commandLink  style="width: 175px; text-align: center" id="subbmit" styleClass="blueButton" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();"></p:commandLink>
+                    <p:commandLink  style="width: 175px; text-align: center" id="subbmit" styleClass="blueButton" value="Zaloguj" ajax="false" action="#{loginMB.login()}"></p:commandLink>
    
                 </div>
                 
