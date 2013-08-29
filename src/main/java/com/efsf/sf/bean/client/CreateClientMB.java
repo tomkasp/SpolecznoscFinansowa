@@ -38,6 +38,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpServletRequest;
 import org.joda.time.DateTime;
 
 
@@ -169,7 +170,9 @@ public class CreateClientMB implements Serializable
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
         try {
-            SendMail.sendRegisterMail(email, name, user.getIdUser());
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String host=request.getRemoteHost();
+            SendMail.sendRegisterMail(email, name, user.getIdUser(), host);
         } catch (Exception ex) {
             Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
         }

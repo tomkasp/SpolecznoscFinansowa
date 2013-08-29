@@ -24,7 +24,7 @@ public class SendMail{
     private String emailMsgTxt = "";
     private String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
     private String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
-    private String[] emailList = {"michal.oles@gmail.com"}; 
+    private String[] emailList; 
 
     public void send() throws Exception {
          
@@ -32,13 +32,14 @@ public class SendMail{
   
     }
     
-   public static void sendRegisterMail(String email, String name, Integer id) throws Exception{    
+   public static void sendRegisterMail(String email, String name, Integer id, String host) throws Exception{    
        SendMail sm=new SendMail();
        
        Map<String, Object> input = new HashMap<>();
        input.put("name", name);
        input.put("token", Security.sha1(email));
        input.put("id", id);
+       input.put("host", host);
        
        sm.setTemplate("registration.html", input);
        sm.emailSubjectTxt="Potwierdzenie rejestracji w portalu społeczność finansowa";
