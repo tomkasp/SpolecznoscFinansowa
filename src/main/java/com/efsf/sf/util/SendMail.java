@@ -38,7 +38,7 @@ public class SendMail{
        Map<String, Object> input = new HashMap<>();
        input.put("name", name);
        input.put("token", Security.sha1(email));
-       input.put("id", id);
+       input.put("id", String.valueOf(id));
        input.put("host", host);
        
        sm.setTemplate("registration.html", input);
@@ -77,7 +77,7 @@ public class SendMail{
         props.put("mail.smtp.host", SMTP_HOST_NAME);
         props.put("mail.smtp.auth", "true");
         Authenticator auth = new SMTPAuthenticator();
-        Session session = Session.getDefaultInstance(props, auth);
+        Session session = Session.getInstance(props, auth);
         session.setDebug(debug); 
         Message msg = new MimeMessage(session); 
         InternetAddress addressFrom = new InternetAddress(from);
