@@ -38,7 +38,7 @@ public class SendMail{
        Map<String, Object> input = new HashMap<>();
        input.put("name", name);
        input.put("token", Security.sha1(email));
-       input.put("id", id);
+       input.put("id", String.valueOf(id));
        input.put("host", host);
        
        sm.setTemplate("registration.html", input);
