@@ -8,6 +8,7 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -99,6 +100,12 @@ public class LoginMB implements Serializable {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getActualMessage(), ""));
        }
        setActualMessage(null);
+    }
+    
+    public boolean areCookiesAccepted()
+    {
+        Map<String, Object> requestCookieMap = FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap();
+        return (requestCookieMap.containsKey("cookiesAccepted")); 
     }
 
     public String logout() {
