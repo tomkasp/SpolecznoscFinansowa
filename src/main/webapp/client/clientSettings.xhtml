@@ -111,7 +111,7 @@
                                 <div class="field"> 
                                     <h:outputText  class="label" value="Data urodzenia"/> 
                                     <p:calendar  pattern="dd-MM-yyyy" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{clientSettingsMB.client.birthDate}" >
-                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+2" />
                                         <p:ajax  event="keyup" update="birthDateMessage" />
                                     </p:calendar>
                                     <h:message for="birthDate" errorClass="invalid" id="birthDateMessage" />
@@ -227,11 +227,11 @@
                                     <h:message for="phone" errorClass="invalid" id="phoneMessage" /> 
                                 </div>
 
-                                 
+                                <h:commandLink style="margin-top: 38px;" class ="greenButton wideButton floatR marginTB20"  value="Zapisz ustawienia" action="#{clientSettingsMB.updateSettings()}" />
+       
                             </div>
 
-                            <h:commandLink style="margin-top: 60px;" class ="greenButton wideButton floatR marginTB20"  value="Zapisz ustawienia" action="#{clientSettingsMB.updateSettings()}" />
-  
+                            
                         </h:form>
                         
                     </div>
@@ -292,8 +292,6 @@
 
                         </h:form>
 
-
-                        
                         <h:form id="uploadForm" enctype="multipart/form-data" >
 
                             <div class="marginLRT30">  
@@ -476,11 +474,11 @@
 
                                 </div>
                                 
+                                <div style="min-height: 40px"> 
+                             <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
+                            </div>
                                
                             </div>
-
-                             <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
-
                             
                         </h:form>
 

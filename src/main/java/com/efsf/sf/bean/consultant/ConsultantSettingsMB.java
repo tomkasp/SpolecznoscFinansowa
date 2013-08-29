@@ -237,7 +237,7 @@ public class ConsultantSettingsMB implements Serializable {
         loginMB.setConsultant(consultant);
 
         
-        return "/consultant/consultantMainPage?faces-redirect=true";
+        return "/consultant/consultantSettings?faces-redirect=true";
     }
     
     
@@ -268,9 +268,10 @@ public class ConsultantSettingsMB implements Serializable {
         }
     }
     
+
     public void showAgreementPDF() throws IOException{
         
-        String sourceLocalPath = "\\u.pdf";
+        String sourceLocalPath = "/home/sf/agreement.pdf";
         String destinationLocalPath = "\\";
         String ftpPath = "rice/SF/USERS/" + idUser + "/";
         String fileName = "agreement_consultant_"+idConsultant+".pdf";
@@ -283,7 +284,7 @@ public class ConsultantSettingsMB implements Serializable {
        
         FileUploaderFTP fuftp=new FileUploaderFTP();
         fuftp.makeDirectory(ftpPath);
-        fuftp.copyFileOnFTP( destinationLocalPath+fileName , ftpPath + fileName );
+        fuftp.copyFileOnFTP( destinationLocalPath + fileName , ftpPath + fileName );
         
         
         //DOWNLOAD FROM FTP:

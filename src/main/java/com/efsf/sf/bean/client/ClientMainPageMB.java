@@ -91,6 +91,10 @@ public class ClientMainPageMB implements Serializable {
         awaitingSelectedCase = null;
         lastSelectedCase = null;
         premiumSelectedCase = null;
+        awaitingForMarketSelectedCase = null;
+        currentSelectedCase = null;
+        selectedCase = null;
+        
         reloadCases();
         reloadCases2();
         reloadCases3();

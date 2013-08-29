@@ -19,7 +19,6 @@ h4{
 }
 
 h5{
-    border-right:3px solid green;
 }
 
 h6{
@@ -54,7 +53,8 @@ h6{
 
 .profilBar
 {
-    border-bottom: green 4px solid;
+    border: green 4px solid;
+    padding: 3px;
 }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight 

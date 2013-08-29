@@ -193,7 +193,7 @@
                                        </h:commandButton>
                                    
                                    </p:dialog>
-                                   <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
+                                   <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus >= 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
                                        <h4> AKTUALNIE PRZYPISANA OFERTA </h4>
                                        <div class="solidText">
                                            Tutaj znajduje się aktualnie przypisana przed doradcę oferta. 
