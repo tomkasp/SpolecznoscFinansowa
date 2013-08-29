@@ -237,7 +237,7 @@ public class ConsultantSettingsMB implements Serializable {
         loginMB.setConsultant(consultant);
 
         
-        return "/consultant/consultantMainPage?faces-redirect=true";
+        return "/consultant/consultantSettings?faces-redirect=true";
     }
     
     
@@ -268,6 +268,7 @@ public class ConsultantSettingsMB implements Serializable {
         }
     }
     
+
     public void showAgreementPDF() throws IOException{
         
         String sourceLocalPath = "/home/sf/agreement.pdf";
