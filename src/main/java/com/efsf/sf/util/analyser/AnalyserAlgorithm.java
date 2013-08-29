@@ -137,7 +137,7 @@ public class AnalyserAlgorithm {
             }
 
             //2.    jesli kwota potrzebna klientowi jest w zasiegu danej oferty
-            if ((pd.getAmountBruttoMin() < clidata.getConsolidationValue()) && (pd.getAmountBruttoMax() >= clidata.getConsolidationValue())) {
+            if ((pd.getAmountBruttoMin() < clidata.getTotalValue()) && (pd.getAmountBruttoMax() >= clidata.getTotalValue())) {
                 //off[pd.getProductId()]++;
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
             }

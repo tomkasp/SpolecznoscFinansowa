@@ -7,17 +7,25 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="normalize.css" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css" />
         <h:outputStylesheet library="css" name="primefacesTheme.css" />
+        <h:outputScript     library="js"   name="cookies.js" />
         <title><ui:insert name="title">Facelets Template</ui:insert></title>
     </h:head>
 
     <h:body>
+
         <div class="page effect7">
+            
+            <p:notificationBar autoDisplay="#{!loginMB.areCookiesAccepted()}" position="bottom" effect="slide" id="cookiesBar" widgetVar="cookieBar" styleClass="cookieBar">  
+                <h:form>
+                    <p:commandLink onclick="cookieBar.hide(); createCookie('cookiesAccepted','true',20);" style="color: #545454" styleClass="greyButton wideButton cookiesButton" value="Akceptuję"/>  
+                    <h:outputText class="cookieBarText" value="Tutaj powinna być informacja o ciasteczka." />  
+                </h:form>
+            </p:notificationBar>
 
             <div id="top">
                 <ui:insert name="top">
@@ -37,7 +45,7 @@
                     </h:panelGroup>
                     
                     <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
-                    <div id="profileBar" class="profilBar">
+                        <div id="profileBar" class="profilBar">
 
                         <div> 
                             <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za #{consultantMainPageMB.subscriptionDeadline()} dni" /> 
