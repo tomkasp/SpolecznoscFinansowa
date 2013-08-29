@@ -31,12 +31,12 @@ public class CaseRatingMB implements Serializable {
     
     private ClientCase clientCase;
     
-    private CaseRating caseRating = new CaseRating();
+    private CaseRating caseRating;
 
     @PostConstruct
     public void load()
     {
-        
+        caseRating = new CaseRating();
         clientCase = clientCaseMB.getCurrentlyRatedCase();
     }
     

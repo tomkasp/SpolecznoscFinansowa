@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <f:metadata>   
+                <f:event listener="#{loginMB.addMessageToContext()}" type="preRenderView" />   
+            </f:metadata>   
+            
+            <ui:define name="title"> SF - Logowanie </ui:define> 
+            
+            <ui:define name="top">
+
+                    <div class="topbarLogo">
+                        <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                    </div>
+
+                <p:dialog modal="true" widgetVar="statusDialog" resizable="false" showHeader="false" header="Logowanie..." style="padding-bottom: 0px; max-height: 145px; background: none; box-shadow: none;" height="145px" draggable="false" closable="false">  
+                <div id="circular3dG">
+                   <div id="circular3d_1G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_2G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_3G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_4G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_5G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_6G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_7G" class="circular3dG">
+                   </div>
+                   <div id="circular3d_8G" class="circular3dG">
+                   </div>
+                </div>
+            </p:dialog>
+                
+            </ui:define>
+            
+            <ui:define name="content">
+                
+   
+            
+            <h:form  id="logowanie">   
+                
+            <div class="contentBox"  style="display: none;">
+                 <div class="newsletter"> 
+                    <h:inputText class="label2" value="wpisz email aby dostać Newsletter"/>   <h:link class="blueButton"  value="Akceptuj"/> 
+                </div>
+            </div>           
+                    
+            <div class="contentBox" style="min-height: 50px;">
+                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />  
+                
+                <div class="shadow" style="width: 38%; margin: auto; margin-top: 65px; padding: 20px; border-radius: 5px "> 
+                     
+                    <h2 style="margin: 0;">Zaloguj się</h2>
+                    
+                    <div class="field"> 
+                        <h:outputText class="label" value="E-mail:"/> 
+                        <h:inputText id="email" style="width: 207px;" value="#{loginMB.email}" required="true">  
+			<f:validator validatorId="LoginValidator" />
+                        <f:attribute name="password" value="#{password}" />
+                        </h:inputText>
+                    </div>
+                    
+                    <div class="field"> 
+                        <h:outputText class="label" value="Hasło:"/> 
+                        <h:inputSecret id="password" style="width: 207px;" onkeypress="if (event.keyCode == 13) { document.getElementById('logowanie:subbmit').click(); return false; }" value="#{loginMB.password}" required="true"  
+                         binding="#{password}">
+                        </h:inputSecret>
+                        
+                        <h:message style=" float: left; margin-left: 160px;" class="label" for="email" errorClass="invalid" id="emailMessage" />
+                    </div>
+                    
+                    <div class="field"> 
+                        <h:selectBooleanCheckbox/> 
+                        <h:outputText class="label" value="Zapamiętaj mnie"/> 
+                    </div>
+                    
+                    <h:link class="greyButton" style="margin-right: 5px" value="Nie pamiętam hasła" />
+                    <p:commandLink  style="width: 175px; text-align: center" id="subbmit" styleClass="blueButton" value="Zaloguj" ajax="false" action="#{loginMB.login()}" onclick="statusDialog.show();"></p:commandLink>
+   
+                </div>
+                
+                
+                <div style="padding-top: 70px;">   
+                    
+                    <div style="width: 38%; margin: auto;"><h2>Nie masz jeszcze konta?</h2> </div>
+                    <div style="width: 72%; margin: auto; margin-top: 25px">
+                          <h:link class="blueButton wideButton buttonMargin" style="width: 300px;" value="Zarejestruj się za darmo" outcome="/index"/>
+                          <h:link class="greyButton wideButton buttonMargin" style="width: 300px;" value="Dowiedz się więcej"/>
+                    </div>
+                    </div>
+
+                    </div>
+                    
+                 </h:form>
+                   
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
