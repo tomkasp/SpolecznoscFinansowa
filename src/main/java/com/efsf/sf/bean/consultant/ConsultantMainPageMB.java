@@ -86,7 +86,7 @@ public class ConsultantMainPageMB {
     }
 
     public boolean isProfilNotFilled(){
-        return Algorithms.calculateProgress(loginMB.getConsultant())<30;
+        return Algorithms.calculateProgress(loginMB.getConsultant())<40;
     }
     
     // May be moved to ClientCaseMB
