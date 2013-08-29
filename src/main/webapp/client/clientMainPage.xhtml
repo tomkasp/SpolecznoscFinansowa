@@ -43,11 +43,11 @@
                         <div style="min-height: 80px; border-bottom: green 4px solid">
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
                             <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość:  #{messagesMB.unreadMessagesList.size()}" /> 
-                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
+                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
                         </div>
                     </h:form>
                 </h:panelGroup>
-                
+
                 <h:panelGroup rendered="#{clientMainPageMB.profilNotFilled}">
                     <h:form>
                         <div style="min-height: 80px; border-bottom: green 4px solid">
@@ -74,7 +74,7 @@
                     <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
                     <div id="last">
-                        
+
                         <h:form id="lastForm">
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
@@ -138,7 +138,7 @@
                                     <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                                 </p:column> 
 
-                               
+
                             </p:dataTable>
 
                             <h:panelGroup id="lastFormButtonBar">
@@ -237,7 +237,7 @@
 
                 <div  class="marginT50">
 
-                    <h4>OCZEKUJĄCE</h4>
+                    <h4>Oczekujące na decyzję.</h4>
 
                     <h:form id="awaitingForm">
 
@@ -652,9 +652,9 @@
                     </h:form>
 
                 </div>
-                
-                
-               
+
+
+
 
             </ui:define>           
         </ui:composition>

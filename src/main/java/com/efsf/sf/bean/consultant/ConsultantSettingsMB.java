@@ -271,7 +271,7 @@ public class ConsultantSettingsMB implements Serializable {
 
     public void showAgreementPDF() throws IOException{
         
-        String sourceLocalPath = "\\u.pdf";
+        String sourceLocalPath = "/home/sf/agreement.pdf";
         String destinationLocalPath = "\\";
         String ftpPath = "rice/SF/USERS/" + idUser + "/";
         String fileName = "agreement_consultant_"+idConsultant+".pdf";

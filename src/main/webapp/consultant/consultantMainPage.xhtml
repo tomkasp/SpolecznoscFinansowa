@@ -20,7 +20,7 @@
                             <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
                             <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{consultantMainPageMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
                                 
-                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Obczaj" action="#{messagesMB.toViewMessages()}" />  
+                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
                         </div>
                     </h:form>
                 </h:panelGroup>
@@ -423,7 +423,7 @@
 
                     
                     
-                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Akceptuj" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                           <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     

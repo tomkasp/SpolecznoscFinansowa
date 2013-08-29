@@ -30,7 +30,7 @@
                                           <f:convertDateTime pattern="yyyy-MM-dd hh:mm:ss" timeZone="GMT+2" />
                                       </h:outputText>
                                       <h:outputText class="fontBlack floatL marginLT30" style="width: 50%" value="#{o.message}" />
-                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="OK" action="#{messagesMB.acceptSystemMessage(o)}" >     
+                                      <h:commandButton  class="floatR greyButton wideButton" style="margin-top: 63px;" value="Przeczytałem" action="#{messagesMB.acceptSystemMessage(o)}" >     
                                         <f:ajax execute="@all" render="@all" />
                                       </h:commandButton>
                                     </div>
