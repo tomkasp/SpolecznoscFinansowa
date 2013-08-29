@@ -101,7 +101,7 @@
 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Nazwisko rodowe"/>  
-                                    <h:inputText id="family" class="inputWidth" value="#{clientSettingsMB.client.familyName}" > 
+                                    <h:inputText  id="family" class="inputWidth" value="#{clientSettingsMB.client.familyName}" > 
                                         <f:validateLength minimum="3" maximum="20" />
                                         <p:ajax event="keyup" update="familyMessage" />
                                     </h:inputText>
