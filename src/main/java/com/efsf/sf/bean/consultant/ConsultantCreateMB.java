@@ -97,7 +97,7 @@ public class ConsultantCreateMB implements Serializable {
         }
         
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String host=request.getRemoteHost();
+        String host=request.getServerName();
         SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser(), host);
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), "")); 

@@ -171,7 +171,7 @@ public class CreateClientMB implements Serializable
         userDao.update(user);
         try {
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            String host=request.getRemoteHost();
+            String host=request.getServerName();
             SendMail.sendRegisterMail(email, name, user.getIdUser(), host);
         } catch (Exception ex) {
             Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
