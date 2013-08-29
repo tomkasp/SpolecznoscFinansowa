@@ -108,10 +108,7 @@
                                     </h:panelGrid>
                                 </p:dialog>  
 
-                                <h:commandButton action="false"  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
-
-                     
-                                
+                                <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  action="false"  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
                                 <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
                             
                             </h:form>        

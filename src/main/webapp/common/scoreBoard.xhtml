@@ -23,8 +23,7 @@
                     <h:form> 
                         <p:dataTable style="width: auto;" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" selection="#{scoreBoardMB.consultantRating}" emptyMessage="Brak doradców" selectionMode="single">
 
-                            <p:ajax event="rowSelect" update="@form" />
-                            <p:ajax rendered="#{settings.clientActive}" event="rowSelect" listener="#{scoreBoardMB.rowDoubleClick(scoreBoardMB.consultantRating.consultant)}" />
+                            <p:ajax update="@form" event="rowSelect" />
 
                             <p:column headerText="Pozycja">  
                                 <h:outputText  value="#{rowNumber+1}"/>
@@ -94,6 +93,7 @@
                             </p:column> 
 
                         </p:dataTable>
+                        <p:commandButton rendered="#{loginMB.type == settings.clientActive}" styleClass="greyButton wideButton floatR" disabled="#{(scoreBoardMB.consultantRating.consultant == null)}" update="@form" action="#{scoreBoardMB.rowDoubleClick(scoreBoardMB.consultantRating.consultant)}" value="Profil doradcy" />
                     </h:form> 
                 </div>
 
