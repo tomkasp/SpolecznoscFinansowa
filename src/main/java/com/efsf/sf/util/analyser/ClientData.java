@@ -12,6 +12,7 @@ public class ClientData {
     private HashSet<Integer> employmentType;
     private Double consolidationValue;
     private Double expectedInstallment;
+    private Double totalValue;
     private int clientAge;
 
     
@@ -23,6 +24,7 @@ public class ClientData {
         this.employmentType = employmentType;
         this.consolidationValue = consolidationValue;
         this.expectedInstallment = expectedInstallment;
+        this.totalValue = consolidationValue + expectedInstallment;
         this.clientAge = clientAge;
         
     }
@@ -76,6 +78,14 @@ public class ClientData {
 
     public void setClientAge(int clientAge) {
         this.clientAge = clientAge;
+    }
+
+    public Double getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(Double totalValue) {
+        this.totalValue = totalValue;
     }
     
     
