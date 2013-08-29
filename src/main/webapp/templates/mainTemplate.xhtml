@@ -17,8 +17,16 @@
     </h:head>
 
     <h:body>
-        <div class="page effect7">
 
+        <div class="page effect7">
+ 
+            <p:notificationBar autoDisplay="true" position="bottom" effect="slide" id="cookiesBar" widgetVar="cookieBar" styleClass="cookieBar">  
+                <h:form>
+                    <p:commandLink onclick="cookieBar.hide()" style="color: #545454" styleClass="greyButton wideButton cookiesButton" value="Akceptuję"/>  
+                    <h:outputText class="cookieBarText" value="Tutaj powinna być informacja o ciasteczka." />  
+                </h:form>
+            </p:notificationBar>
+        
             <div id="top">
                 <ui:insert name="top">
 

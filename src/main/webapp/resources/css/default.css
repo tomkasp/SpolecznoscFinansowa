@@ -967,6 +967,22 @@ p:column {
     font-weight:bold;
 }
 
+.cookieBar {
+    opacity: 0.7;
+    text-align: center;
+}
+
+.cookieBarText {
+     color: #868686;
+     font-size:36px;    
+}
+
+.cookiesButton {
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+}
+
 
 
 @-moz-keyframes bounce_circular3dG{
