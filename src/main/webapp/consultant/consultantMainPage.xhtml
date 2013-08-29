@@ -14,25 +14,6 @@
 
             <ui:define name="content">
                <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
-                <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
-                    <h:form> 
-                        <div style="min-height: 80px; border-bottom: #0793F0 4px solid">
-                            <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{consultantMainPageMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
-                                
-                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
-                        </div>
-                    </h:form>
-                </h:panelGroup>
-               
-               <h:panelGroup rendered="#{consultantMainPageMB.profilNotFilled}">
-                    <h:form>
-                        <div style="min-height: 80px; border-bottom: #0793F0 4px solid">
-                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
-                            <h:link  class="floatR greyButton wideButton marginT50" value="Uzupełnij profil" outcome="/consultant/consultantSettings"/>  
-                        </div>
-                    </h:form>
-                </h:panelGroup> 
                
                 <h:form>
                    
