@@ -101,8 +101,8 @@
 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Nazwisko rodowe"/>  
-                                    <h:inputText  id="family" class="inputWidth" value="#{clientSettingsMB.client.familyName}" > 
-                                        <f:validateLength minimum="3" maximum="20" />
+                                    <h:inputText id="family" class="inputWidth" value="#{clientSettingsMB.client.familyName}" > 
+                                        <f:validateRegex pattern="([A-Za-za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]|\s)*"/>
                                         <p:ajax event="keyup" update="familyMessage" />
                                     </h:inputText>
                                     <h:message for="family" errorClass="invalid" id="familyMessage" />
