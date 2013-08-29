@@ -32,7 +32,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -40,8 +40,18 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.xhtml</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.xhtml</location>
+    </error-page>
     
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
@@ -54,7 +64,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginClientFilter</filter-name>
-        <url-pattern>/faces/client/*</url-pattern>
+        <url-pattern>/client/*</url-pattern>
     </filter-mapping>
     
     <filter>
@@ -63,7 +73,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginConsultantFilter</filter-name>
-        <url-pattern>/faces/consultant/*</url-pattern>
+        <url-pattern>/consultant/*</url-pattern>
     </filter-mapping>
     
     <filter>
@@ -72,7 +82,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginAdminFilter</filter-name>
-        <url-pattern>/faces/admin/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
  
     <filter>
@@ -81,7 +91,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginCommonFilter</filter-name>
-        <url-pattern>/faces/common/*</url-pattern>
+        <url-pattern>/common/*</url-pattern>
     </filter-mapping>
     
     <filter>
@@ -90,11 +100,11 @@
     </filter>
     <filter-mapping>
         <filter-name>NoLoginFilter</filter-name>
-        <url-pattern>/faces/login.xhtml</url-pattern>
+        <url-pattern>/login.xhtml</url-pattern>
     </filter-mapping>
      <filter-mapping>
         <filter-name>NoLoginFilter</filter-name>
-        <url-pattern>/faces/index.xhtml</url-pattern>
+        <url-pattern>/index.xhtml</url-pattern>
     </filter-mapping>
  
     <filter>
