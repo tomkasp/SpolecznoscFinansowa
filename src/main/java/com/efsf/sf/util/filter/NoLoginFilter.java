@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author WR1EI1
  */
+
 public class NoLoginFilter implements Filter {
 
     @Override
@@ -25,7 +26,7 @@ public class NoLoginFilter implements Filter {
         if( loginBean != null)
         {    
             
-        if(  loginBean.isIsLogged() & loginBean.getType()!=null )
+        if(  loginBean.isIsLogged() && loginBean.getType()!=null )
         {
         
         if ( loginBean.getType().equals(Settings.CLIENT_ACTIVE) )
