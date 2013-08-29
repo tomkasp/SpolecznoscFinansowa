@@ -10,6 +10,7 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
+            
             <ui:define name="title"> Admin - ekran główny </ui:define> 
 
             <ui:define name="content">
@@ -126,8 +127,10 @@
                         <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Dodaj produkt" update=":prodDial" ajax="true" immediate="true" onclick="prodcutDlg.show();" action="#{productsMB.addProduct()}"/>
                         <p:commandLink styleClass="topMenuButton greyButton wideButton" value="Szczegóły produktu" action="#{productsMB.showDetails}"/>
                     </h:form> 
-                </div>               
-            </ui:define>           
+                </div>   
+                
+            </ui:define> 
+            
         </ui:composition>
 
 
