@@ -25,7 +25,7 @@ public class LoginConsultantFilter implements Filter {
         if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
         }
 
         chain.doFilter(request, response);

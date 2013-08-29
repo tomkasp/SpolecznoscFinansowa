@@ -32,19 +32,19 @@ public class NoLoginFilter implements Filter {
         if ( loginBean.getType().equals(Settings.CLIENT_ACTIVE) )
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/client/clientMainPage.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/client/clientMainPage.xhtml");
         }
         
         if ( loginBean.getType().equals(Settings.CONSULTANT_ACTIVE) )
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/consultant/consultantMainPage.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
         }
         
         if ( loginBean.getType().equals(Settings.ADMIN_ACTIVE) )
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/admin/adminMainPage.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/admin/adminMainPage.xhtml");
         }
         
         }

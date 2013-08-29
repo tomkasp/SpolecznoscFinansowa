@@ -24,7 +24,7 @@ public class LoginCommonFilter implements Filter {
         if ( loginBean == null || !loginBean.isIsLogged() )
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/faces/login.xhtml");
+            ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
         }
 
         chain.doFilter(request, response);
