@@ -22,6 +22,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpServletRequest;
 
 
 @ManagedBean
@@ -95,7 +96,9 @@ public class ConsultantCreateMB implements Serializable {
             sdao.save(subscription);
         }
         
-        SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser());
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String host=request.getRemoteHost();
+        SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser(), host);
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), "")); 
         
