@@ -17,7 +17,7 @@ public class WorkingPlaceDAO {
         } finally {
             session.close();
         }
-
+        
         return lista;
     }
 }
