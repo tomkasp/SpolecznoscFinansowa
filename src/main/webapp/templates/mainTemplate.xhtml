@@ -14,6 +14,7 @@
         <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <h:outputScript     library="js"   name="cookies.js" />
         <title><ui:insert name="title">Facelets Template</ui:insert></title>
+        <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/icons/favicon.png" />
     </h:head>
 
     <h:body>
@@ -43,45 +44,96 @@
                     <h:panelGroup rendered="#{loginMB.type==settings.clientActive}">
                         <ui:include src="clientTop.xhtml"/> 
                     </h:panelGroup>
-                    
+
                     <h:panelGroup rendered="#{loginMB.consultant!=null}"> 
+                       
                         <div id="profileBar" class="profilBar">
 
-                        <div> 
-                            <h:outputText class="paymentExpire" value="Uwaga! Twój abonament wygasa za #{consultantMainPageMB.subscriptionDeadline()} dni" /> 
-                        </div>
-
-                        <div>     
-                            <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
-
-                            <div class="right">
-
-                                <h:outputText class="profileText" value="nr. użytkownika:" />
-                                <h5> #{loginMB.consultant.user.login} </h5>
-                                <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
-                                <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
-                            </div>
-
-                        </div>
-                    </div>
-                </h:panelGroup>    
-                <h:panelGroup rendered="#{loginMB.client!=null}"> 
-                    <h:form id="test">
-                        <div id="profileBar" class="profilBar">
 
                             <div>     
+                                <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
 
-                                <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5>
                                 <div class="right">
+
                                     <h:outputText class="profileText" value="nr. użytkownika:" />
-                                    <h5> #{loginMB.client.user.login} </h5>
-                                    <h:outputText class="profileText" value="Stan konta:" />
-                                    <h5 > #{loginMB.client.points}</h5>
+                                    <h5> #{loginMB.consultant.user.login} </h5>
+                                    <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
+                                    <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
                                 </div>
+
                             </div>
+
+                            
+                            <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
+                                <h:form> 
+                                    <div style="min-height: 80px;">
+                                        <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                                        <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{consultantMainPageMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
+
+                                        <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
+                                    </div>
+                                </h:form>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{consultantMainPageMB.profilNotFilled}">
+                                <h:form>
+                                    <div style="min-height: 40px;">
+                                        <h:outputText class="redMessage floatL marginT10" style="margin-left: 116px;" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
+                                        <h:button  class="floatR greyButton wideButton marginT10" value="Uzupełnij profil" outcome="/consultant/consultantSettings"/>  
+                                    </div>
+                                </h:form>
+                            </h:panelGroup> 
+
+
+
                         </div>
-                    </h:form>   
-                </h:panelGroup>
+                    </h:panelGroup>  
+                    
+                    <h:panelGroup rendered="#{loginMB.client!=null}"> 
+                        
+                        <h:form id="test">
+                            
+                            <div id="profileBar" class="profilBar">
+
+                                <div>     
+
+                                    <h5> #{loginMB.client.name} #{loginMB.client.lastName} </h5>
+                                    <div class="right">
+                                        <h:outputText class="profileText" value="nr. użytkownika:" />
+                                        <h5> #{loginMB.client.user.login} </h5>
+                                        <h:outputText class="profileText" value="Stan konta:" />
+                                        <h5 > #{loginMB.client.points}</h5>
+                                    </div>
+                                </div>
+
+                                <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList) }" >
+
+                                    <h:form> 
+                                        <div style="min-height: 80px;">
+                                            <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
+                                            <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość:  #{messagesMB.unreadMessagesList.size()}" /> 
+                                            <h:commandButton  class="floatR greyButton wideButton marginT50" value="Zobacz" action="#{messagesMB.toViewMessages()}" />  
+                                        </div>
+                                    </h:form>
+
+                                </h:panelGroup>
+
+
+                                <h:panelGroup rendered="#{clientMainPageMB.profilNotFilled}">
+                                    <h:form>
+                                        <div style="min-height: 40px;">
+                                            <h:outputText class="redMessage  floatL marginT10" style="margin-left: 114px;" value="Uwaga! Twój profil jest niepełny. Uzupełnij go."/>
+                                            <h:button  class="floatR greyButton wideButton marginT10" value="Uzupełnij profil" outcome="/client/clientSettings"/>  
+                                        </div>
+                                    </h:form>
+                                </h:panelGroup>        
+
+                            </div>
+                            
+                        </h:form>
+                        
+                    </h:panelGroup>
+                    
                 </ui:insert>
             </div>
 

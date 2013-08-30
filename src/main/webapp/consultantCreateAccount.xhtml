@@ -17,34 +17,18 @@
             <ui:define name="top"> 
                 <div class="topbarLogo">
                     <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                    <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
                 </div>
 
-                <div class="topbarMenuBlue">
-                    <h:panelGroup>
-                        <h:link class="topMenuButton greyButton wideButton" value="Logowanie" outcome="/login"/>
-                    </h:panelGroup>
-                </div>
             </ui:define>
             <ui:define name="content">
-                <div id="profileBar" class="profilBar" style="min-height: 149px">
-                    <h:graphicImage  class="profilLogo" id="profil_logo_blue" alt="could not be found."  value="/resources/images/profile_blue.png" title="Profil Blue" ></h:graphicImage>
-                    <p:outputLabel styleClass="blackTitle height120"> Zarejestruj się jako doradca </p:outputLabel>
-                    <div class="floatR" style="display: none;">
-                        <h:form>
-                            <h:panelGroup>
-                                <h:inputText id="keyword" required="true" label="Keyword" class="newsletterInput" />     
-                                <p:watermark for="keyword" value="wpisz email aby dostać newsletter"  />  
-                                <h:link class ="blueButton wideButton" style="padding-bottom: 8px;" value="Akceptuj"/>
-                            </h:panelGroup> 
-                        </h:form>
-                    </div>
+                <div id="profileBar" style="min-height: 50px">
+                    <h3> Zarejestruj się jako doradca </h3>
                 </div>
-                <div class="redMessage marginLRT30"  >
-                    <p:outputLabel value="Rejestracja jest DARMOWA."/> <br />
-                    <p:outputLabel value="Możesz wykupić wersję PRO w dowolnej chwilii. "/>        
+                <div class="redMessage">
+                    <h5> Rejestracja jest DARMOWA. Możesz wykupić wersję PRO w dowolnej chwilii.</h5>    
                 </div>
-                <div style="min-height: 470px; margin-bottom: 60px;" >
+                <div style="min-height: 400px;">
+                    
                     <div class="leftThinerBox">
 
                         <h:form>
@@ -111,21 +95,22 @@
                                     <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
                                 </div>
 
+                             <div style="float: right;">
+                                <h:button class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
+                            
+                                <h:commandButton class ="blueButton wideButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
+                             </div>    
+                                
                             </div>
+                           
 
-                            <div>
-                                <h:commandLink class ="blueButton wideButton floatR marginLR30 marginTB20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
-                            </div>
-
-                            <div>
-                                <h:link class="greenButton oneColumnLengthButton" value="Chcę zarejestrować się jako klient" outcome="/clientCreateAccount"/>
-                            </div>
 
                         </h:form>
 
                     </div>
 
                     <div class="rightWiderBox">
+                        
                         <h4> Co zyskujesz jako doradca </h4>
 
                         <div class="solidText"> 
@@ -150,7 +135,8 @@
                                 Teraz możesz wymieniać opinie i informacje dzięki stałemu kontaktowi z innym doradcami.                            
                             </p>  
 
-                        </div>       
+                        </div>   
+                        
                     </div>
                 </div>
                 
