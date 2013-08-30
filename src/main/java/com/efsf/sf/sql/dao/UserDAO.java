@@ -31,7 +31,7 @@ public class UserDAO {
 
         User user = null;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        
+
         try {
             Query q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
             q.setParameter("email", email);
@@ -50,6 +50,7 @@ public class UserDAO {
     public void save(User user) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        
         try {
             session.beginTransaction().begin();
             session.save(user);
@@ -64,6 +65,7 @@ public class UserDAO {
     public void update(User user) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        
         try {
             session.beginTransaction().begin();
             session.update(user);
@@ -76,17 +78,20 @@ public class UserDAO {
 
     public void delete(User user) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+
         try {
-        session.beginTransaction().begin();
-        session.delete(user);
-        session.getTransaction().commit();
-        }finally{
-        session.close();
+            session.beginTransaction().begin();
+            session.delete(user);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
         }
+        
     }
 
     public Boolean ifEmailExist(String email) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+
         try {
             Query q;
             q = session.createQuery("FROM User WHERE email = :email ");
@@ -95,22 +100,22 @@ public class UserDAO {
             if (!resultList.isEmpty()) {
                 return true;
             }
-        } 
-        finally {
+        } finally {
             session.close();
         }
-        
+
         return false;
     }
 
     public int checkLogin(String email, String password) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+
         try {
             Query q;
             q = session.createQuery("FROM User WHERE email = :email ");
             q.setParameter("email", email);
-            
+
             @SuppressWarnings("unchecked")
             ArrayList<User> resultList = (ArrayList<User>) q.list();
             if (!resultList.isEmpty()) {
@@ -125,32 +130,35 @@ public class UserDAO {
         } finally {
             session.close();
         }
+
         return -1;
     }
 
     public Client getClientConnectedToUser(int userId) {
-        
+
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Client result;
-        try{
-        session.beginTransaction().begin();
-        Query q = session.createQuery("FROM Client c "
-                + "JOIN Fetch c.user as u "
-                + "LEFT JOIN fetch c.incomes as inc "
-                + "LEFT JOIN fetch c.incomeBusinessActivities as ba "
-                + "left join fetch inc.branch as br "
-                + "left join fetch inc.employmentType as empltype "
-                + "left join fetch ba.branch as br2 "
-                + "left join fetch ba.employmentType as empltype2 "
-                + "left join fetch c.requiredDocumentses as docs "
-                + "where u.idUser = :userId");
-        q.setParameter("userId", userId);
-        result = (Client) q.list().get(0);
 
-        session.getTransaction().commit();
-        }finally{
-        session.close();
+        try {
+            session.beginTransaction().begin();
+            Query q = session.createQuery("FROM Client c "
+                    + "JOIN Fetch c.user as u "
+                    + "LEFT JOIN fetch c.incomes as inc "
+                    + "LEFT JOIN fetch c.incomeBusinessActivities as ba "
+                    + "left join fetch inc.branch as br "
+                    + "left join fetch inc.employmentType as empltype "
+                    + "left join fetch ba.branch as br2 "
+                    + "left join fetch ba.employmentType as empltype2 "
+                    + "left join fetch c.requiredDocumentses as docs "
+                    + "where u.idUser = :userId");
+            q.setParameter("userId", userId);
+            result = (Client) q.list().get(0);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
         }
+
         return result;
     }
 }
