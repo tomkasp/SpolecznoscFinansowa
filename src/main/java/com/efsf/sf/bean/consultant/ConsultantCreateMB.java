@@ -2,6 +2,7 @@ package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MailerMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
@@ -33,6 +34,9 @@ public class ConsultantCreateMB implements Serializable {
     @ManagedProperty(value="#{loginMB}")
     private LoginMB loginMB;
     
+    @ManagedProperty(value="#{mailerMB}")
+    private MailerMB mailerMB;
+    
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
@@ -56,8 +60,6 @@ public class ConsultantCreateMB implements Serializable {
     private Boolean policy = false;
     private Boolean policy2 = false;
     
-    public ConsultantCreateMB() {
-    }
 
     public String savePart1() throws Exception {
         UserDAO udao = new UserDAO();
@@ -96,9 +98,7 @@ public class ConsultantCreateMB implements Serializable {
             sdao.save(subscription);
         }
         
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String host=request.getServerName();
-    //    SendMail.sendRegisterMail(user.getEmail(), consultant.getName(), user.getIdUser(), host);
+        getMailerMB().sendMail(user.getEmail(), consultant.getName(), user.getIdUser());
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), "")); 
         
@@ -391,6 +391,16 @@ public class ConsultantCreateMB implements Serializable {
 
     public void setBundle(ResourceBundle bundle) {
         this.bundle = bundle;
+    }
+
+
+    public MailerMB getMailerMB() {
+        return mailerMB;
+    }
+
+
+    public void setMailerMB(MailerMB mailerMB) {
+        this.mailerMB = mailerMB;
     }
 
 }
