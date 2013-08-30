@@ -118,11 +118,11 @@ img{border:0px;}
  font-weight:bold; 
  color: #030202;
  background-color: #ADA6A5;
- background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#FFFFFF));
- background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
- background-image: -moz-linear-gradient(top, #FFFFFF, #FFFFFF);
- background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
- background-image: -o-linear-gradient(top, #FFFFFF, #707070);
+ background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#ADA6A5));
+ background-image: -webkit-linear-gradient(top, #FFFFFF, #ADA6A5);
+ background-image: -moz-linear-gradient(top, #FFFFFF, #ADA6A5);
+ background-image: -ms-linear-gradient(top, #FFFFFF, #ADA6A5);
+ background-image: -o-linear-gradient(top, #FFFFFF, #ADA6A5);
  background-image: linear-gradient(to bottom, #FFFFFF, #ADA6A5);
  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
  border-radius: 2px;
