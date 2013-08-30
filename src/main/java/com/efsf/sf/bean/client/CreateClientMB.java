@@ -125,10 +125,6 @@ public class CreateClientMB implements Serializable
         this.regionId = regionId;
     }
     
-    public CreateClientMB()
-    {
-
-    }
 
     public String createClientAccount() 
     {
