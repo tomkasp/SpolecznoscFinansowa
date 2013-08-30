@@ -38,7 +38,7 @@
                     <p:poll interval="40" listener="#{clientMainPageMB.fillTables()}" update=":lastForm :awaitingForm :currentForm :premiumForm :finishedForm" /> 
                 </h:form>
 
-                 
+
 
                 <div> 
                     <h:form>
@@ -289,11 +289,24 @@
                         </p:dataTable>
 
                         <h:panelGroup id="awaitingCasesButtonBar">
-                            <p:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  styleClass="topMenuButton  redX wideButton"  update=":awaitingForm :finishedForm" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
+                            <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffAwaiting.show()" />
+                            </h:commandButton>
+
                             <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}" />
                         </h:panelGroup>
 
-                    </h:form>   
+                    </h:form> 
+
+                    <p:dialog id="dialog2" widgetVar="backOffAwaiting" header="Dodaj punkty" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <h:form>
+                            <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
+                            <div>
+                            <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
+                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaiting.hide()"></h:button> 
+                            </div>
+                        </h:form>
+                    </p:dialog>
 
                 </div>
 
@@ -364,11 +377,23 @@
                         </p:dataTable>
 
                         <h:panelGroup id="currentCasesButtonBar">
+                            <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffCurrent.show()" />
+                            </h:commandButton>
                             <h:button disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
-                            <p:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" styleClass="topMenuButton  redX wideButton" update="currentForm :finishedForm" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }" />
                             <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
                         </h:panelGroup>
                     </h:form>
+                    
+                    <p:dialog id="dialog3" widgetVar="backOffCurrent" header="Dodaj punkty" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <h:form>
+                            <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
+                            <div>
+                            <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
+                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffCurrent.hide()"></h:button> 
+                            </div>
+                        </h:form>
+                    </p:dialog>
 
                 </div>
 

@@ -14,6 +14,7 @@
         <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <h:outputScript     library="js"   name="cookies.js" />
         <title><ui:insert name="title">Facelets Template</ui:insert></title>
+        
     </h:head>
 
     <h:body>
@@ -23,7 +24,7 @@
             <p:notificationBar autoDisplay="#{!loginMB.areCookiesAccepted()}" position="bottom" effect="slide" id="cookiesBar" widgetVar="cookieBar" styleClass="cookieBar">  
                 <h:form>
                     <p:commandLink onclick="cookieBar.hide(); createCookie('cookiesAccepted','true',20);" style="color: #545454" styleClass="greyButton wideButton cookiesButton" value="Akceptuję"/>  
-                    <h:outputText class="cookieBarText" value="Tutaj powinna być informacja o ciasteczka." />  
+                    <h:outputText class="cookieBarText" value="Ta strona używa cookie. Dowiedz się więcej o celu ich używania i zmianie ustawień cookie w przeglądarce. Korzystając ze strony wyrażasz zgodę na używanie cookie, zgodnie z aktualnymi ustawieniami przeglądarki." />  
                 </h:form>
             </p:notificationBar>
 
