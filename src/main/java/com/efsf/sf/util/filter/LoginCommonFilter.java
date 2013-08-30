@@ -27,8 +27,10 @@ public class LoginCommonFilter implements Filter {
             ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
         }
 
-        chain.doFilter(request, response);
-
+        else
+        {
+             chain.doFilter(request, response);
+        }
     }
 
     @Override
