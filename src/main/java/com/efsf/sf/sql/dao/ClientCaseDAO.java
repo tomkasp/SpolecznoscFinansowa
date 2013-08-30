@@ -75,38 +75,30 @@ public class ClientCaseDAO implements Serializable {
 
          return list;
     }
-   
+    
+    
     public boolean doesConsultantObserveCase(int consultantID, int caseID)
     {
-         boolean flag;
-         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-         session.beginTransaction();
-         
-         Query q = session.createQuery("from Consultant as c "
-                 + "join fetch c.clientCases_2 as cc2 "
-                 + "where c.idConsultant = :consultantID and cc2.idClientCase = :caseID");
-         q.setParameter("caseID", caseID);
-         q.setParameter("consultantID", consultantID);
-         
-         flag =  q.list().isEmpty();
-         
-         session.getTransaction().commit();
-         session.close();
-         
-         return !flag;
+        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases_2");
     }
-    
+     
     public boolean doesConsultantAppliedToCase(int consultantID, int caseID)
+    {
+        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases");
+    } 
+   
+    public boolean doesConsultantConnectedToCase(int consultantID, int caseID, String relationPrefix)
     {
          boolean flag;
          Session session = HibernateUtil.SESSION_FACTORY.openSession();
          session.beginTransaction();
          
          Query q = session.createQuery("from Consultant as c "
-                 + "join fetch c.clientCases as cc "
+                 + "join fetch c.:relation as cc "
                  + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
          q.setParameter("caseID", caseID);
          q.setParameter("consultantID", consultantID);
+         q.setParameter("relation", relationPrefix);         
          
          flag =  q.list().isEmpty();
          
@@ -354,7 +346,7 @@ public class ClientCaseDAO implements Serializable {
     } 
      
          
-         public List<ClientCase> awaitingForMarketClientCaseList(Integer fkClient)
+    public List<ClientCase> awaitingForMarketClientCaseList(Integer fkClient)
     {
          List<ClientCase> list;
          Session session = HibernateUtil.SESSION_FACTORY.openSession();
