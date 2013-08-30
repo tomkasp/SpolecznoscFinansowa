@@ -142,7 +142,7 @@ public class ClientMainPageMB implements Serializable {
     }
     
     public boolean isProfilNotFilled(){
-        return Algorithms.calculateProgress(loginMB.getClient())<50;
+        return Algorithms.calculateProgress(loginMB.getClient())<60;
     }
     
     public double giveMeConsultantAverage(int consultantId)
