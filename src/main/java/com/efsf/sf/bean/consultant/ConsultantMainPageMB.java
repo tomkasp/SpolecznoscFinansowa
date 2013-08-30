@@ -17,6 +17,7 @@ import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.util.Algorithms;
 import com.efsf.sf.util.Converters;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,7 +35,7 @@ import org.joda.time.Days;
 
 @ManagedBean
 @SessionScoped
-public class ConsultantMainPageMB {
+public class ConsultantMainPageMB implements Serializable {
 
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
