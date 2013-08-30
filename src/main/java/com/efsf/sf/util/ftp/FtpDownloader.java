@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-public class FtpDownloader {
+public class FtpDownloader implements Serializable {
 
     public static final int DEFAULT_BUFFER_SIZE = 10240;
     
