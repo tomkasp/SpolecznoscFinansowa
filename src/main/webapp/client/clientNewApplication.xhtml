@@ -28,15 +28,19 @@
                                 <h:panelGroup>
                                     <div class="field"> <h:outputText class="label" value="Data wystawienia na giełdę"/>  
                                         <p:calendar mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
-                                            <p:ajax  event="dateSelect" update="end-date"  />
                                         </p:calendar>
                                         <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
-                                        <p:calendar mindate="#{clientCaseMB.clientCase.beginDate}" required="true" id="end-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}">
-                                            <p:ajax  event="dateSelect" update="begin-date"  />
-                                        </p:calendar>
+                                    <div class="field"> <h:outputText class="label" value="Czas trwania"/>  
+                                        <p:selectOneMenu style="width:214px" required="true" value="#{clientCaseMB.caseDuration}">
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItem itemLabel="1 dzień" itemValue="1"/>
+                                            <f:selectItem itemLabel="3 dni" itemValue="3"/>
+                                            <f:selectItem itemLabel="5 dni" itemValue="5"/>
+                                            <f:selectItem itemLabel="7 dni" itemValue="7"/>
+                                            <f:selectItem itemLabel="14 dni" itemValue="14"/>
+                                        </p:selectOneMenu> 
                                     </div>
 
                                     <div class="field"> 
