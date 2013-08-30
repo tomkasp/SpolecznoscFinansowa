@@ -811,7 +811,6 @@ p:column {
     overflow-x: auto;
 }
 
-
 /*WAITING INDICATOR*/
 #circular3dG{
     position:relative;
@@ -821,7 +820,7 @@ p:column {
 
 .circular3dG{
     position:absolute;
-    background-color:#3974DB;
+    background-color: #55b867;
     width:36px;
     height:36px;
     -moz-border-radius:38px;

@@ -7,7 +7,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-
 public class CaseRatingDAO {
 
     public void save(CaseRating rating) {
@@ -23,6 +22,7 @@ public class CaseRatingDAO {
     }
 
     public boolean isNotRated(Integer idClientCase) {
+        
         CaseRating rating = null;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
@@ -33,23 +33,22 @@ public class CaseRatingDAO {
 
         return rating == null ? true : false;
     }
-    
-    public List<ClientCase> getConsultantRatings(Integer consultantId)
-    {
-         List<ClientCase> list;
-         Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
-         Query q = session.createQuery("FROM ClientCase as cs "
-         + "join fetch cs.client as clt "    
-         + "join fetch cs.caseRating as rat "
-         + "join fetch cs.consultant as con "        
-         + "where con.idConsultant = :consultantId ");
-         
-         q.setParameter("consultantId", consultantId);
+    public List<ClientCase> getConsultantRatings(Integer consultantId) {
+        List<ClientCase> list;
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
 
-         list = q.list();
-         session.close();
+        Query q = session.createQuery("FROM ClientCase as cs "
+                + "join fetch cs.client as clt "
+                + "join fetch cs.caseRating as rat "
+                + "join fetch cs.consultant as con "
+                + "where con.idConsultant = :consultantId ");
 
-         return list;
+        q.setParameter("consultantId", consultantId);
+
+        list = q.list();
+        session.close();
+
+        return list;
     }
 }

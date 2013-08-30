@@ -59,6 +59,7 @@
                     <div id="last">
 
                         <h:form id="lastForm">
+                            
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
                                 <p:ajax event="rowSelect" update=":lastForm:lastFormButtonBar"/> 
