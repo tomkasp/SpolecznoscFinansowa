@@ -8,8 +8,19 @@
 
         <div class="topbarLogo">
             <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-            <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="green_home_icon" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
-            <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+            <h:panelGroup rendered="#{view.viewId != '/client/clientMainPage.xhtml' and  view.viewId != '/client/clientSettings.xhtml'}" >
+                <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
+                <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{view.viewId == '/client/clientMainPage.xhtml'}" >
+                <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_home_clicked" alt="could not be found."  value="/resources/images/home_green.png" title="Home" ></h:graphicImage> </h:link>
+                <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_home_clicked" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{view.viewId == '/client/clientSettings.xhtml'}" >
+                <h:link outcome="/client/clientMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_profile_clicked" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
+                <h:link outcome="/client/clientSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_profile_clicked" alt="could not be found."  value="/resources/images/profile_logo_green.png" title="Profile" ></h:graphicImage> </h:link>
+            </h:panelGroup>
+            
         </div>
     </h:form>
 
