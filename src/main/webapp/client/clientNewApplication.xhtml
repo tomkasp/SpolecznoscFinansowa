@@ -21,22 +21,27 @@
 
                     <div class="contentBox" style="margin-bottom: 30px; margin-top: 30px;">
 
-                        <div class="leftBox">
+                        <div class="leftBox" style="width: 400px; padding-right: 70px;">
 
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
                             <h:form>  
                                 <h:panelGroup>
                                     <div class="field"> <h:outputText class="label" value="Data wystawienia na giełdę"/>  
                                         <p:calendar mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
-                                            <p:ajax  event="dateSelect" update="end-date"  />
                                         </p:calendar>
                                         <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Data zakończenia"/>  
-                                        <p:calendar mindate="#{clientCaseMB.clientCase.beginDate}" required="true" id="end-date" yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.endDate}">
-                                            <p:ajax  event="dateSelect" update="begin-date"  />
-                                        </p:calendar>
+                                    <div class="field" > <h:outputText class="label" value="Czas trwania"/>  
+                                        <p:selectOneMenu id="caseDuration" style="width:214px" required="true" value="#{clientCaseMB.caseDuration}">
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItem itemLabel="1 dzień" itemValue="1"/>
+                                            <f:selectItem itemLabel="3 dni" itemValue="3"/>
+                                            <f:selectItem itemLabel="5 dni" itemValue="5"/>
+                                            <f:selectItem itemLabel="7 dni" itemValue="7"/>
+                                            <f:selectItem itemLabel="14 dni" itemValue="14"/>
+                                        </p:selectOneMenu> 
+                                        <h:message for="caseDuration" errorClass="invalid"/>
                                     </div>
 
                                     <div class="field"> 

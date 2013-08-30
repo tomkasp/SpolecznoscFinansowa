@@ -571,88 +571,153 @@
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Przychód w roku obecnym (netto)"/>
-                                    <h:inputText id="currentIncomeNetto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearNetto}" style="width: 20%" /> 
+                                    <h:inputText id="currentIncomeNetto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearNetto}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="currentIncomeNettoMessage" />
+                                    </h:inputText>
+                                    <h:message for="currentIncomeNetto" errorClass="invalid" id="currentIncomeNettoMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (brutto)"/>
-                                    <h:inputText id="lastIncomeBrutto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearBrutto}" style="width: 20%" /> 
+                                    <h:inputText id="lastIncomeBrutto" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearBrutto}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="lastIncomeBruttoMessage" />
+                                    </h:inputText>
+                                    <h:message for="lastIncomeBrutto" errorClass="invalid" id="lastIncomeBruttoMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Przychód w roku poprzednim (netto)"/>
-                                    <h:inputText id="lastIncomeNetto" class="floatR marginT10 marginR5 " value="#{clientSettingsMB.business.incomeLastYearNetto}" style="width: 20%" /> 
+                                    <h:inputText id="lastIncomeNetto" class="floatR marginT10 marginR5 " value="#{clientSettingsMB.business.incomeLastYearNetto}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="lastIncomeNettoMessage" />
+                                    </h:inputText>
+                                    <h:message for="lastIncomeNetto" errorClass="invalid" id="lastIncomeNettoMessage" />
                                 </div>
 
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Zaliczka na podatek dochodowy (6 miesięcy w przód)"/>
-                                    <h:inputText id="advance" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeTax6mthAdv}" style="width: 20%" /> 
+                                    <h:inputText id="advance" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeTax6mthAdv}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="advanceMessage" />
+                                    </h:inputText>
+                                    <h:message for="advance" errorClass="invalid" id="advanceMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Kwota zaległości ZUS"/>
-                                    <h:inputText id="ZUS" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueZus}" style="width: 20%" /> 
+                                    <h:inputText id="ZUS" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueZus}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="ZUSMessage" />
+                                    </h:inputText>
+                                    <h:message for="ZUS" errorClass="invalid" id="ZUSMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Kwota zaległości US"/>
-                                    <h:inputText id="US" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueUs}" style="width: 20%" /> 
+                                    <h:inputText id="US" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueUs}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="USMessage" />
+                                    </h:inputText>
+                                    <h:message for="US" errorClass="invalid" id="USMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Kwota zaległości KRD"/>
-                                    <h:inputText id="KRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueKrd}" style="width: 20%" /> 
+                                    <h:inputText id="KRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.valueKrd}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="KRDMessage" />
+                                    </h:inputText>
+                                    <h:message for="KRD" errorClass="invalid" id="KRDMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Tytuł zaległości w KRD"/>
-                                    <h:inputText id="titleKRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.titleKrd}" style="width: 20%" /> 
+                                    <h:inputText id="titleKRD" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.titleKrd}" style="width: 20%" >
+                                    </h:inputText>
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Amortyzacja w roku bieżącym"/>
-                                    <h:inputText id="currentAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationCurrentYear}" style="width: 20%" /> 
+                                    <h:inputText id="currentAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationCurrentYear}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="currentAmortizationMessage" />
+                                    </h:inputText>
+                                    <h:message for="currentAmortization" errorClass="invalid" id="currentAmortizationMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Amortyzacja w roku ubiegłym"/>
-                                    <h:inputText id="lastAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationLastYear}" style="width: 20%" /> 
+                                    <h:inputText id="lastAmortization" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.depreciationLastYear}" style="width: 20%" >
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="lastAmortizationMessage" />
+                                    </h:inputText>
+                                    <h:message for="lastAmortization" errorClass="invalid" id="lastAmortizationMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość stawki"/>
-                                    <h:inputText id="REvalue" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.rateRe}" style="width: 20%" /> 
+                                    <h:inputText id="REvalue" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.rateRe}" style="width: 20%" > 
+                                       <f:convertNumber maxFractionDigits="2" />
+                                       <p:ajax  event="keyup" update="REvalueMessage" />
+                                    </h:inputText>
+                                    <h:message for="REvalue" errorClass="invalid" id="REvalueMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku ubiegłym"/>
-                                    <h:inputText id="REincomeLast" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearRe}" style="width: 20%" /> 
+                                    <h:inputText id="REincomeLast" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeLastYearRe}" style="width: 20%" > 
+                                           <f:convertNumber maxFractionDigits="2" />
+                                           <p:ajax  event="keyup" update="REincomeLastMessage" />
+                                    </h:inputText>
+                                    <h:message for="REincomeLast" errorClass="invalid" id="REincomeLastMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - przychód w roku bieżącym"/>
-                                    <h:inputText id="REincomeCurrent" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearRe}" style="width: 20%" /> 
+                                    <h:inputText id="REincomeCurrent" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.incomeCurrentYearRe}" style="width: 20%" > 
+                                         <f:convertNumber maxFractionDigits="2" />
+                                         <p:ajax  event="keyup" update="REincomeCurrentMessage" />
+                                    </h:inputText>
+                                    <h:message for="REincomeCurrent" errorClass="invalid" id="REincomeCurrentMessage" />
                                 </div> 
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (ostatni miesiąc)"/>
-                                    <h:inputText id="month1st" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue1mth}" style="width: 20%" /> 
+                                    <h:inputText id="month1st" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue1mth}" style="width: 20%" > 
+                                          <f:convertNumber maxFractionDigits="2" />
+                                          <p:ajax  event="keyup" update="month1stMessage" />
+                                    </h:inputText>
+                                    <h:message for="month1st" errorClass="invalid" id="month1stMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (2 mies. wstecz)"/>
-                                    <h:inputText id="month2nd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue2mth}" style="width: 20%" /> 
+                                    <h:inputText id="month2nd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue2mth}" style="width: 20%" > 
+                                          <f:convertNumber maxFractionDigits="2" />
+                                          <p:ajax  event="keyup" update="month2ndMessage" />
+                                    </h:inputText>
+                                    <h:message for="month2nd" errorClass="invalid" id="month2ndMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - kwota podatku (3 mies. wstecz)"/>
-                                    <h:inputText id="month3rd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue3mth}" style="width: 20%" /> 
+                                    <h:inputText id="month3rd" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.taxValue3mth}" style="width: 20%" > 
+                                         <f:convertNumber maxFractionDigits="2" />
+                                         <p:ajax  event="keyup" update="month3rdMessage" />
+                                    </h:inputText>
+                                    <h:message for="month3rd" errorClass="invalid" id="month3rdMessage" />
                                 </div>
 
                                 <div class="marginT10"> 
                                     <h:outputText class="dialogLabel" value="Ryczałt ewidencjonowany - wysokość karty podatkowej"/>
-                                    <h:inputText id="card" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.constantAmountCard}" style="width: 20%" /> 
+                                    <h:inputText id="card" class="floatR marginT10 marginR5" value="#{clientSettingsMB.business.constantAmountCard}" style="width: 20%" > 
+                                        <f:convertNumber maxFractionDigits="2" />
+                                        <p:ajax  event="keyup" update="cardMessage" />
+                                    </h:inputText>
+                                    <h:message for="card" errorClass="invalid" id="cardMessage" />
                                 </div>
 
 
@@ -660,8 +725,8 @@
 
                         </h:panelGroup>
 
-                        <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
-                        <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientSettingsMB.addIncome()}" value="Dodaj" ajax="false" oncomplete="business.hide()"  />
+                        <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px"  action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
+                        <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" value="Dodaj" ajax="false" oncomplete=" if (!args.validationFailed){ business.hide() } "   />
 
                     </h:form>
 
@@ -722,8 +787,8 @@
 
                         </h:panelGroup>
                         <div>
-                            <p:commandButton styleClass="floatL wideButton" style="clear:both; margin-top: 40px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
-                            <p:commandButton styleClass="floatR wideButton" style="margin-top:40px;" action="#{clientSettingsMB.addIncome()}" ajax="false" value="Dodaj" oncomplete="income.hide()"  />
+                            <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
+                            <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" update=":form1:table" value="Dodaj" oncomplete="if (!args.validationFailed){ income.hide() }"   />
                         </div>
 
                     
