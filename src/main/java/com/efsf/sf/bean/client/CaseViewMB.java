@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.LoginMB;
@@ -38,10 +34,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
-/**
- *
- * @author XaI
- */
+
 @ManagedBean
 @ViewScoped
 public class CaseViewMB implements Serializable{

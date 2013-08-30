@@ -30,9 +30,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
 
-/**
- * @author WR1EI1
- */
 @ManagedBean
 @ViewScoped
 public class ClientSettingsMB implements Serializable {
@@ -52,6 +49,7 @@ public class ClientSettingsMB implements Serializable {
     private Integer idEducation;
     private ClientDAO clientDAO;
     private ArrayList<IncomeData> incomeTable = new ArrayList<>();
+    
     //DIALOG 1
     private int incomeId;
     private int branchId;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.GenericDao;
@@ -16,10 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-/**
- *
- * @author XaI
- */
 @ManagedBean
 @ViewScoped
 public class ConversationMB implements Serializable{
@@ -34,10 +26,6 @@ public class ConversationMB implements Serializable{
     private String message;
     private int userToId;
     
-    public ConversationMB() 
-    {
-
-    }
     
     public void sendAnswer(){
         

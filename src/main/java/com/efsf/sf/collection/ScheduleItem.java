@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.collection;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author EI GLOBAL
- */
 public class ScheduleItem implements Serializable{
  
     private Date paymentDate;
