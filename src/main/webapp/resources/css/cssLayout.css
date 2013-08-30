@@ -27,6 +27,7 @@ img{border:0px;}
 .shadow {
         -webkit-box-shadow:  0px 0px 40px 40px #305d7b;
         box-shadow:  0px 0px 46px 16px rgba(89, 145, 184, 0.90);
+        border: 1px solid #5297cb;
 }
 
 #left {
@@ -102,7 +103,7 @@ img{border:0px;}
 }
 
 .greyButton {
- border-color: #ADA6A5 !important;
+ border-color: #CCCCCC !important;
  border-width: 1px 1px 1px 1px !important;
  border-style: solid !important; 
  -webkit-border-radius: 0px; 
@@ -116,14 +117,16 @@ img{border:0px;}
  text-shadow: 0px 0px 0 rgba(0,0,0,0.3);
  font-weight:bold; 
  color: #030202;
- background-color: #FFFFFF;
- background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#707070));
- background-image: -webkit-linear-gradient(top, #FFFFFF, #707070);
- background-image: -moz-linear-gradient(top, #FFFFFF, #707070);
+ background-color: #CCCCCC;
+ background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#FFFFFF));
+ background-image: -webkit-linear-gradient(top, #FFFFFF, #FFFFFF);
+ background-image: -moz-linear-gradient(top, #FFFFFF, #FFFFFF);
  background-image: -ms-linear-gradient(top, #FFFFFF, #707070);
  background-image: -o-linear-gradient(top, #FFFFFF, #707070);
- background-image: linear-gradient(to bottom, #FFFFFF, #707070);
+ background-image: linear-gradient(to bottom, #FFFFFF, #CCCCCC);
  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFFFFF, endColorstr=#707070);
+ border-radius: 3px;
+ margin-left: 3px;
 }
 
 .blueButton {
