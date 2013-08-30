@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Asynchronous;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -162,19 +163,23 @@ public class CreateClientMB implements Serializable
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
-        try {
-            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            String host=request.getServerName();
-            SendMail.sendRegisterMail(email, name, user.getIdUser(), host);
-        } catch (Exception ex) {
-            Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sendMail(email, name, user.getIdUser());
  
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
         return "/login";
     }
     
+    @Asynchronous
+    public void sendMail(String email, String name, Integer id){
+        try {
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String host=request.getServerName();
+            SendMail.sendRegisterMail(email, name, id, host);
+        } catch (Exception ex) {
+            Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
