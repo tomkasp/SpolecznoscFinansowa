@@ -53,8 +53,7 @@
                             <div>     
                                 <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
 
-                                <div class="right">
-
+                                <div class="right">                                  
                                     <h:outputText class="profileText" value="nr. użytkownika:" />
                                     <h5> #{loginMB.consultant.user.login} </h5>
                                     <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
@@ -66,6 +65,7 @@
                             
                             <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList) }" >
                                 <h:form> 
+                                    
                                     <div style="min-height: 80px;">
                                         <h:graphicImage id="red_envelope" class="floatL" style="margin-left: 10px; margin-top:10px" alt="could not be found."  value="/resources/images/mail_red.png" title="RedEnvelope" ></h:graphicImage>
                                         <h:outputText class="redMessage floatL marginLRT30" value="Uwaga! Masz nieprzeczytane wiadomości. Ilość: #{consultantMainPageMB.premiumList.size() + messagesMB.unreadMessagesList.size()}" /> 
