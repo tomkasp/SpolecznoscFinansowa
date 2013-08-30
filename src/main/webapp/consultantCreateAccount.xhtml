@@ -95,15 +95,14 @@
                                     <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
                                 </div>
 
-                            </div>
-
-                            <div>
-                           
-                                <h:link class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
+                             <div style="float: right;">
+                                <h:button class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
                             
-                                <h:commandButton class ="blueButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
+                                <h:commandButton class ="blueButton wideButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
+                             </div>    
+                                
+                            </div>
                            
-                            </div>     
 
 
                         </h:form>
