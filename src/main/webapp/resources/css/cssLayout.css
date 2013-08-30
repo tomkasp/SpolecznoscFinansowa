@@ -137,7 +137,8 @@ img{border:0px;}
     background-image: -moz-linear-gradient(top, #0793F0, #0E427D);
     background-image: -ms-linear-gradient(top, #0793F0, #0E427D);
     background-image: -o-linear-gradient(top, #0793F0, #0E427D);
-    background-image: linear-gradient(to bottom, #0793F0, #0E427D);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#0793F0, endColorstr=#0E427D);
+    background-image: linear-gradient(to bottom, #0793F0, #0E427D);
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#0793F0, endColorstr=#0E427D);
 }
 
 .greenButton {

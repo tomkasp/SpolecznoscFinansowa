@@ -501,6 +501,8 @@
                             <p:ajax event="rowUnselect"  update=":premiumForm:premiumCasesButtonBar"/> 
                             <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}"/>
 
+                            
+                            
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
