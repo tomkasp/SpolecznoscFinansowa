@@ -29,11 +29,9 @@ public class UserDAO {
 
     public User login(String email, String password) {
 
-        Session session;
         User user = null;
-
-
-        session = HibernateUtil.SESSION_FACTORY.openSession();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        
         try {
             Query q = session.createQuery("FROM User WHERE email = :email AND password = :password ");
             q.setParameter("email", email);
@@ -42,8 +40,7 @@ public class UserDAO {
             if (!resultList.isEmpty()) {
                 user = resultList.get(0);
             }
-
-        }finally{
+        } finally {
             session.close();
         }
 
@@ -79,14 +76,16 @@ public class UserDAO {
 
     public void delete(User user) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
         session.beginTransaction().begin();
         session.delete(user);
         session.getTransaction().commit();
+        }finally{
         session.close();
+        }
     }
 
     public Boolean ifEmailExist(String email) {
-
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             Query q;
@@ -96,9 +95,11 @@ public class UserDAO {
             if (!resultList.isEmpty()) {
                 return true;
             }
-        } finally {
+        } 
+        finally {
             session.close();
         }
+        
         return false;
     }
 
@@ -106,11 +107,10 @@ public class UserDAO {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-
             Query q;
             q = session.createQuery("FROM User WHERE email = :email ");
             q.setParameter("email", email);
-
+            
             @SuppressWarnings("unchecked")
             ArrayList<User> resultList = (ArrayList<User>) q.list();
             if (!resultList.isEmpty()) {
@@ -118,23 +118,22 @@ public class UserDAO {
                 if (user.getPassword().equals(password)) {
                     return 1;
                 } else {
-                    //wrong password
                     return 0;
                 }
             }
 
-
         } finally {
             session.close();
         }
-        //wrong email
         return -1;
     }
 
     public Client getClientConnectedToUser(int userId) {
+        
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        Client result;
+        try{
         session.beginTransaction().begin();
-
         Query q = session.createQuery("FROM Client c "
                 + "JOIN Fetch c.user as u "
                 + "LEFT JOIN fetch c.incomes as inc "
@@ -146,12 +145,12 @@ public class UserDAO {
                 + "left join fetch c.requiredDocumentses as docs "
                 + "where u.idUser = :userId");
         q.setParameter("userId", userId);
-
-        Client result = (Client) q.list().get(0);
+        result = (Client) q.list().get(0);
 
         session.getTransaction().commit();
+        }finally{
         session.close();
-
+        }
         return result;
     }
 }
