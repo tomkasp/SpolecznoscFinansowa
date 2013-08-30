@@ -28,14 +28,7 @@
                    <li><h:outputText value = "Wystąpił błąd w funkcjonowaniu aplikacji." /></li>
                 </ul>
                 <div style="font-size: 17px;font-weight: bold;margin-top: 60px;"> Aby zapobiec podobnym zdarzeniom w przyszłości prosimy o zgłoszenie błędu wraz z krótkim opisem jak doszło do jego wystąpienia. </div>
-                
-                <h:panelGroup rendered="#{loginMB.idUser != null and loginMB.idUser > 0 }" >
-                    <div> Zgłoś błąd <h:link value="tutaj" outcome="index.xhtml" /> </div>  
-                </h:panelGroup>
-                
-                <h:panelGroup rendered="#{loginMB.idUser == null or loginMB.idUser == 0}" >
-                    <div> Zgłoś błąd wysyłając mail na (admin@spolecznosc.pl) </div>  
-                </h:panelGroup>
+
                 
                 
                 
