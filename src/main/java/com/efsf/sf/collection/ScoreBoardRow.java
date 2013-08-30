@@ -2,7 +2,6 @@ package com.efsf.sf.collection;
 
 import java.io.Serializable;
 
-
 public class ScoreBoardRow implements Serializable{
     
     private String title;

@@ -11,9 +11,6 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.UploadedFile;
 
-/**
- * @author WR1EI1
- */
 @ManagedBean
 @ViewScoped
 public class FileUploadMB implements Serializable {
@@ -49,8 +46,10 @@ public class FileUploadMB implements Serializable {
              RequiredDocumentsDAO rddao=new RequiredDocumentsDAO(); 
              
              RequiredDocuments rd=null;
+             
              //load from database
              rd=rddao.readForFkClient(loginMB.getClient().getIdClient());
+             
              //create new if not exist
              if(rd==null)
              {

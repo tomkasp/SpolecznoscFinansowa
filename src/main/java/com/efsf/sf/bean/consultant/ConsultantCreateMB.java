@@ -115,6 +115,7 @@ public class ConsultantCreateMB implements Serializable {
         
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
+        
         //HERE:
         //ADD BANKS
         Set<Institution> institutionSet = new HashSet<Institution>();
@@ -124,6 +125,7 @@ public class ConsultantCreateMB implements Serializable {
             Institution inst = idao.getInstitution( id );
             institutionSet.add( inst );
         } 
+        
         //ADD INSTITUTIONS
         it=idSelectedInstitutionList.iterator();
         while ( it.hasNext() ) {  
@@ -131,8 +133,10 @@ public class ConsultantCreateMB implements Serializable {
             Institution inst = idao.getInstitution( id );
             institutionSet.add( inst );
         }
+        
         //ADD ALL INSTITUTIONS IN CONSULTANT
         consultant.setInstitutions(institutionSet);
+        
         //ADD PRODUCT TYPES
         Set<ProductType> productTypeSet = new HashSet<>();
         it=idProductTypes.iterator();
@@ -142,9 +146,11 @@ public class ConsultantCreateMB implements Serializable {
             productTypeSet.add(pt);
         }
         consultant.setProductTypes(productTypeSet);
+        
         //ADD CONSULTANT REGION
         Region r=rdao.getRegion(idRegion);
         consultant.setRegion(r);
+        
         //ADD MAIN REGION
         r=rdao.getRegion(idMainRegion);
         mainAddress.setType(1);
@@ -152,16 +158,19 @@ public class ConsultantCreateMB implements Serializable {
         mainAddress.setConsultant(consultant);
         AddressDAO adao=new AddressDAO();
         adao.save(mainAddress);
+        
         //ADD INVOICE REGION
         r=rdao.getRegion(idInvoiceRegion);
         invoiceAddress.setType(2);
         invoiceAddress.setRegion(r);
         invoiceAddress.setConsultant(consultant);
         adao.save(invoiceAddress);
+        
         //ADD INVOICEDATA
         invoiceData.setAddress(invoiceAddress);
         InvoiceDataDAO iddao=new InvoiceDataDAO();
         iddao.save(invoiceData);
+        
         //ADD SUBSCRIPTION TYPE
         if(idSubscriptionType!=null)
         {
@@ -172,9 +181,11 @@ public class ConsultantCreateMB implements Serializable {
         SubscriptionDAO sdao=new SubscriptionDAO();
         sdao.update(subscription);
         }
+        
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
         cdao.update(consultant);
+        
         //UPDATE USER
         UserDAO udao = new UserDAO();
         udao.update(user);
@@ -189,24 +200,24 @@ public class ConsultantCreateMB implements Serializable {
     }
     
     private void clearFields(){
-    user = new User();
-    consultant = new Consultant();
-    confirmPassword = new String();
-    subscription = new Subscription();
-    //ConsultantFillAccountData
-    mainAddress = new Address();
-    invoiceAddress = new Address();
-    idWorkingPlace=null;
-    idSelectedBankList = new ArrayList<>();
-    idSelectedInstitutionList = new ArrayList<>();
-    idProductTypes = new ArrayList<>();
-    idRegion=null;
-    idMainRegion=null;
-    idInvoiceRegion=null;
-    invoiceData=new InvoiceData();
-    idSubscriptionType=null;
-    policy = false;
-    policy2 = false;
+        user = new User();
+        consultant = new Consultant();
+        confirmPassword = new String();
+        subscription = new Subscription();
+        //ConsultantFillAccountData
+        mainAddress = new Address();
+        invoiceAddress = new Address();
+        idWorkingPlace=null;
+        idSelectedBankList = new ArrayList<>();
+        idSelectedInstitutionList = new ArrayList<>();
+        idProductTypes = new ArrayList<>();
+        idRegion=null;
+        idMainRegion=null;
+        idInvoiceRegion=null;
+        invoiceData=new InvoiceData();
+        idSubscriptionType=null;
+        policy = false;
+        policy2 = false;
     }
     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 

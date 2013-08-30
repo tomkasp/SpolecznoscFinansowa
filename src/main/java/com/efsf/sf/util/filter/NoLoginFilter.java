@@ -23,35 +23,25 @@ public class NoLoginFilter implements Filter {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
-        if( loginBean != null)
-        {    
-            
-        if(  loginBean.isIsLogged() && loginBean.getType()!=null )
+        if (loginBean != null && loginBean.isIsLogged() && loginBean.getType() != null)
         {
-        
-        if ( loginBean.getType().equals(Settings.CLIENT_ACTIVE) )
-        {
-            String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/client/clientMainPage.xhtml");
+                if (loginBean.getType().equals(Settings.CLIENT_ACTIVE)) {
+                    String contextPath = ((HttpServletRequest) request).getContextPath();
+                    ((HttpServletResponse) response).sendRedirect(contextPath + "/client/clientMainPage.xhtml");
+                }
+
+                if (loginBean.getType().equals(Settings.CONSULTANT_ACTIVE)) {
+                    String contextPath = ((HttpServletRequest) request).getContextPath();
+                    ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
+                }
+
+                if (loginBean.getType().equals(Settings.ADMIN_ACTIVE)) {
+                    String contextPath = ((HttpServletRequest) request).getContextPath();
+                    ((HttpServletResponse) response).sendRedirect(contextPath + "/admin/adminMainPage.xhtml");
+                }
+        } else {
+            chain.doFilter(request, response);
         }
-        
-        if ( loginBean.getType().equals(Settings.CONSULTANT_ACTIVE) )
-        {
-            String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
-        }
-        
-        if ( loginBean.getType().equals(Settings.ADMIN_ACTIVE) )
-        {
-            String contextPath = ((HttpServletRequest) request).getContextPath();
-            ((HttpServletResponse) response).sendRedirect(contextPath + "/admin/adminMainPage.xhtml");
-        }
-        
-        }
-        
-        }
-        
-        chain.doFilter(request, response);
 
     }
 
