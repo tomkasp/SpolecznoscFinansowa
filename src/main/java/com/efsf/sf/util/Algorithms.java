@@ -107,7 +107,7 @@ public class Algorithms
         
         Consultant consultant = new ConsultantDAO().readConsultantForSettings(cs.getIdConsultant());
         
-        if(consultant.getAddresses()!=null){
+        if( consultant.getAddresses().iterator().hasNext() ){
         Address address = consultant.getAddresses().iterator().next();
         progress+= getProgressForAddress(address);
         }
