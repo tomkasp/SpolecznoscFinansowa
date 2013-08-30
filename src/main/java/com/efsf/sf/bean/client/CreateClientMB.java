@@ -2,6 +2,7 @@ package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.bean.MailerMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.EducationDAO;
@@ -58,7 +59,8 @@ public class CreateClientMB implements Serializable
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
     
- 
+    @ManagedProperty(value="#{mailerMB}")
+    private MailerMB mailerMB;
     
     private int counter = 0;
     
@@ -163,23 +165,13 @@ public class CreateClientMB implements Serializable
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
-        sendMail(email, name, user.getIdUser());
+        getMailerMB().sendMail(email, name, user.getIdUser());
  
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
         return "/login";
     }
     
-    @Asynchronous
-    public void sendMail(String email, String name, Integer id){
-        try {
-            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            String host=request.getServerName();
-            SendMail.sendRegisterMail(email, name, id, host);
-        } catch (Exception ex) {
-            Logger.getLogger(CreateClientMB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) 
     {
@@ -618,6 +610,20 @@ public class CreateClientMB implements Serializable
 
     public void setBundle(ResourceBundle bundle) {
         this.bundle = bundle;
+    }
+
+    /**
+     * @return the mailerMB
+     */
+    public MailerMB getMailerMB() {
+        return mailerMB;
+    }
+
+    /**
+     * @param mailerMB the mailerMB to set
+     */
+    public void setMailerMB(MailerMB mailerMB) {
+        this.mailerMB = mailerMB;
     }
   
 }
