@@ -10,66 +10,53 @@ public class AddressDAO {
     public void save(Address address) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try{
-        session.beginTransaction();
-        session.save(address);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(address);
+            session.getTransaction().commit();
 
-        }finally{
-        session.close();
+        } finally {
+            session.close();
         }
     }
-    
+
     public void update(Address address) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try{
-        session.beginTransaction();
-        session.update(address);
-        session.getTransaction().commit();
-        }finally{
-        session.close();
+        try {
+            session.beginTransaction();
+            session.update(address);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
         }
     }
-    
-    
-     public Address loadMainAddressFromFkConsultant(Integer fkConsuntant) {
-         
+
+    public Address loadMainAddressFromFkConsultant(Integer fkConsuntant) {
+        return loadAddressFromFkConsultant(fkConsuntant, 1);
+    }
+
+    public Address loadInvoiceAddressFromFkConsultant(Integer fkConsuntant) {
+        return loadAddressFromFkConsultant(fkConsuntant, 2);
+    }
+
+    private Address loadAddressFromFkConsultant(Integer fkConsuntant, Integer type) {
+
         Address address = null;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try{
-        session.beginTransaction();
-        
-        Query q;
-        q = session.createQuery("FROM Address WHERE fk_consultant = :id AND type = 1");
-        q.setParameter("id", fkConsuntant);
-        address=(Address) q.list().get(0);
-                
-        session.getTransaction().commit();
-        }finally{
-        session.close();
+        try {
+            session.beginTransaction();
+
+            Query q;
+            q = session.createQuery("FROM Address WHERE fk_consultant = :id AND type = :type");
+            q.setParameter("id", fkConsuntant);
+            q.setParameter("type", type);
+            address = (Address) q.list().get(0);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
         }
         return address;
     }
-     
-     
-     public Address loadInvoiceAddressFromFkConsultant(Integer fkConsuntant) {
-         
-        Address address = null;
-        Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try{
-        session.beginTransaction();
-        
-        Query q;
-        q = session.createQuery("FROM Address WHERE fk_consultant = :id AND type = 2");
-        q.setParameter("id", fkConsuntant);
-        address=(Address) q.list().get(0);
-                
-        session.getTransaction().commit();
-        }finally{
-        session.close();
-        }
-        return address;
-    }
-    
 }
