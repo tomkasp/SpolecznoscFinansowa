@@ -9,6 +9,7 @@ import com.efsf.sf.util.Algorithms;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -43,12 +44,11 @@ public class ClientCaseMB implements Serializable {
     private boolean alreadyApplied = false;
     private boolean alreadyObserved = false;
     private int premium = 6;
-    
     // VIEW CASE DETAILS FIELDS     
     private Obligation selectedObligation;
     private ArrayList<CaseStatus> statusModel = new ArrayList();
-      
     private ClientCase currentlyRatedCase;
+    private int caseDuration;
 
     /**
      * Creates a new instance of ClientCaseMB
@@ -105,10 +105,18 @@ public class ClientCaseMB implements Serializable {
 
             ClientDAO cd = new ClientDAO();
 
+           
+            Calendar c = Calendar.getInstance();
+            c.setTime(clientCase.getBeginDate());
+            c.add(Calendar.DATE, caseDuration);
+            Date endDate = c.getTime();
+            clientCase.setEndDate(endDate);
+
+
             if (clientCase.getPremium() == null) {
                 clientCase.setPremium(false);
             }
-            
+
             //pamietac o zabraniu punktow z klienta!
             if (clientCase.getPremium()) {
                 cd.decrementPoints(login.getClient(), premium);
@@ -124,11 +132,11 @@ public class ClientCaseMB implements Serializable {
             clientCase.setExpectedInstalment(clientCase.getExpectedInstalment().setScale(2, RoundingMode.DOWN));
 
             clientCase.setProductType(ptd.getProductType(idTypProduktu));
-            clientCase.setClient(login.getClient());        
+            clientCase.setClient(login.getClient());
             clientCase.setViewCounter(0);
-            
+
             login.getClient().setObligations(new HashSet(obligationList));
-            clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(),clientCase));
+            clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(), clientCase));
             clientCase.setPhase(Algorithms.calculateProgress(login.getClient().getIdClient()));
             ccd.saveClientCase(clientCase);
             if (login.getClient().getPoints() == 0) {
@@ -139,12 +147,9 @@ public class ClientCaseMB implements Serializable {
         }
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
-    
-    
-    
+
     // VIEW CASE METHODS 
-    public void consultantAcceptPremium(ClientCase cc)
-    {
+    public void consultantAcceptPremium(ClientCase cc) {
         cc.setConsultants(null);
         cc.setConsultants_1(null);
         cc.setCaseStatus(new CaseStatusDAO().read(2));
@@ -182,9 +187,8 @@ public class ClientCaseMB implements Serializable {
 
         new ClientCaseDAO().updateClientCase(cc);
     }
-    
-    public boolean doesConsultantObserveCase(Consultant consultant, ClientCase clientCase)
-    {
+
+    public boolean doesConsultantObserveCase(Consultant consultant, ClientCase clientCase) {
         return new ClientCaseDAO().doesConsultantObserveCase(consultant.getIdConsultant(), clientCase.getIdClientCase());
     }
 
@@ -359,5 +363,13 @@ public class ClientCaseMB implements Serializable {
 
     public void setCurrentlyRatedCase(ClientCase currentlyRatedCase) {
         this.currentlyRatedCase = currentlyRatedCase;
+    }
+
+    public int getCaseDuration() {
+        return caseDuration;
+    }
+
+    public void setCaseDuration(int caseDuration) {
+        this.caseDuration = caseDuration;
     }
 }
