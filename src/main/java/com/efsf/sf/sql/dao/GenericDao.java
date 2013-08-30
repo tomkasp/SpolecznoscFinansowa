@@ -22,12 +22,14 @@ public class GenericDao<T> {
 
     public T getById(int id) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        T obj = (T) session.get(getMyType(), id);
-
-        session.getTransaction().commit();
-        session.close();
-
+        T obj;
+        try {
+            session.beginTransaction();
+            obj = (T) session.get(getMyType(), id);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
         return obj;
     }
 
