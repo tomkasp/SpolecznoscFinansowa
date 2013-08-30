@@ -72,7 +72,7 @@
                                 <div class="field"> 
                                     <h:outputText class="label" value="Pesel"/> 
                                     <h:inputText required="#{createClientMB.areRequired}" id="pesel" class="inputWidth" value="#{createClientMB.pesel}" >
-                                            <f:validateLength minimum="11" maximum="11" />
+                                            <f:validateLength  minimum="11" maximum="11" />
                                             <f:convertNumber integerOnly="" />
                                             <p:ajax event="keyup" update="peselMessage" />
                                     </h:inputText>
