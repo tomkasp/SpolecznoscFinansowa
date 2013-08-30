@@ -15,6 +15,7 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
+import java.util.Iterator;
 
 /**
  *
@@ -107,9 +108,17 @@ public class Algorithms
         
         Consultant consultant = new ConsultantDAO().readConsultantForSettings(cs.getIdConsultant());
         
-        if( consultant.getAddresses().iterator().hasNext() ){
-        Address address = consultant.getAddresses().iterator().next();
-        progress+= getProgressForAddress(address);
+        Iterator<Address> it = consultant.getAddresses().iterator();
+        if( it.hasNext() ){
+            Address address = it.next();
+            if (address.getType() == 2 && it.hasNext())
+            {
+                address = it.next();
+            }
+            if (address.getType() == 1)
+            {
+                progress+= getProgressForAddress(address);
+            }
         }
         
         if(consultant.getInstitutions()!=null && consultant.getInstitutions().size()>0){
@@ -123,15 +132,15 @@ public class Algorithms
         if(consultant.getProductTypes()!=null && consultant.getProductTypes().size()>0){
             progress+=10;
         }              
-        
+
         return progress;
     }
     
     //Prototype of algorithm to calculate progress ('postęp') -> I was told it was connected to amount of data filled 
-    public static int calculateProgress(Client cl)
+    public static int calculateProgress(Integer clId)
     {
          Client client;
-         client = new ClientDAO().readClientForSettings(cl.getIdClient());
+         client = new ClientDAO().readClientForSettings(clId);
          int progress = 0;
          
          if(client.getMaritalStatus().getIdMaritalStatus() != 0)

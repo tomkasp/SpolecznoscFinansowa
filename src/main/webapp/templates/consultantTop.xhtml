@@ -6,9 +6,28 @@
 
     <div class="topbarLogo">
         <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-        <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
-        <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="blue_home_icon" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
-        <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+        <h:panelGroup rendered="#{view.viewId != '/consultant/consultantMainPage.xhtml' and  view.viewId != '/consultant/consultantSettings.xhtml' and  view.viewId != '/consultant/consultantMarket.xhtml'}" >
+            <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{view.viewId == '/consultant/consultantMainPage.xhtml'}" >
+            <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon_home_clicked" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_home_clicked" alt="could not be found."  value="/resources/images/home_blue.png" title="Home" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_home_clicked" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{view.viewId == '/consultant/consultantSettings.xhtml'}" >
+            <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon_profile_clicked" alt="could not be found."  value="/resources/images/gielda.png" title="Gielda" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_profile_clicked" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_profile_clicked" alt="could not be found."  value="/resources/images/profile_logo_blue.png" title="Profile" ></h:graphicImage> </h:link>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{view.viewId == '/consultant/consultantMarket.xhtml'}" >
+            <h:link outcome="/consultant/consultantMarket"> <h:graphicImage class="bigMenuButton" id="gielda_icon_market_clicked" alt="could not be found."  value="/resources/images/gielda_blue.png" title="Gielda" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_market_clicked" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
+            <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_market_clicked" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
+        </h:panelGroup>
+    
+    
     </div>
 
     <h:form>
