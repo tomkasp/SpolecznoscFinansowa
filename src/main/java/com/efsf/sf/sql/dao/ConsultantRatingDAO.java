@@ -27,9 +27,6 @@ public class ConsultantRatingDAO {
         }finally{
             session.close();
         }
-
-
-
         return cr;
     }
 }
