@@ -289,10 +289,10 @@ public class ClientCaseDAO implements Serializable {
     }
 
     public List<ClientCase> last5CasesSelectedClient(Integer fkClient) {
-        return casesSelectedClient(fkClient, 5, 0);
+        return casesSelectedClient(fkClient, 5, false);
     }
 
-    public List<ClientCase> casesSelectedClient(Integer fkClient, Integer limit, Integer premium) {
+    public List<ClientCase> casesSelectedClient(Integer fkClient, Integer limit, Boolean premium) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
@@ -331,7 +331,7 @@ public class ClientCaseDAO implements Serializable {
     }
 
     public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient) {
-        return casesSelectedClient(fkClient, 100, 0);
+        return casesSelectedClient(fkClient, 100, false);
     }
 
     public List<ClientCase> awaitingForMarketClientCaseList(Integer fkClient) {
@@ -405,7 +405,7 @@ public class ClientCaseDAO implements Serializable {
     }
 
     public List<ClientCase> premiumCasesSelectedClient(Integer fkClient) {
-        return casesSelectedClient(fkClient, 100, 1);
+        return casesSelectedClient(fkClient, 100, true);
     }
 
     public List<ClientCase> currentCasesSelectedClient(Integer fkClient) {
