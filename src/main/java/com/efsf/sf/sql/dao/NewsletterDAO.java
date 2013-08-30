@@ -11,13 +11,16 @@ public class NewsletterDAO
     {
         Session session;
         session = HibernateUtil.SESSION_FACTORY.openSession();
+        try{
         session.beginTransaction().begin();
         
         Newsletter news = new Newsletter(email);
 
         session.saveOrUpdate(news);
         session.getTransaction().commit();
-        session.close();
+        }finally{
+            session.close();
+        }
     }
             
 }
