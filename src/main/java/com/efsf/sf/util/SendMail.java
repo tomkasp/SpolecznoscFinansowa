@@ -19,7 +19,7 @@ public class SendMail{
     private static final String SMTP_HOST_NAME = "spolecznoscfinansowa.pl";
     private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";
     private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";
-    
+    private static final String ENCODING="UTF-8";
    
     private String emailMsgTxt = "";
     private String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
@@ -53,16 +53,16 @@ public class SendMail{
         String absolutePath = servletContext.getRealPath(relativePath);
         Configuration cfg = new Configuration();
         cfg.setDirectoryForTemplateLoading(new File(absolutePath));
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setOutputEncoding("UTF-8");
+        cfg.setDefaultEncoding(ENCODING);
+        cfg.setOutputEncoding(ENCODING);
         Template template = cfg.getTemplate(fileName);
         
         
         ByteArrayOutputStream result=new ByteArrayOutputStream();
-        Writer out = new OutputStreamWriter(result, "UTF-8");
+        Writer out = new OutputStreamWriter(result, ENCODING);
         template.process(params, out);
         out.flush();
-        emailMsgTxt=result.toString("UTF-8");
+        emailMsgTxt=result.toString(ENCODING);
     }
     
     public void setReceiver(String email){

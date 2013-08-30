@@ -16,6 +16,7 @@ public class MessageDAO extends GenericDao<Message>{
     public List getMessages(int userId, int userId2) {
         List<Message> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try{
         session.beginTransaction();
 
         lista = session.createQuery("from Message where ((fk_toUser="+userId+" AND fk_fromUser="
@@ -23,7 +24,9 @@ public class MessageDAO extends GenericDao<Message>{
                 + " AND isSystem=0").list();
 
         session.getTransaction().commit();
-        session.close();
+        }finally{
+            session.close();
+        }
         return lista;
     } 
     
@@ -31,6 +34,7 @@ public class MessageDAO extends GenericDao<Message>{
     {
         List<Message> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try{
         session.beginTransaction();
         
         Query q =  session.createQuery("from Message as m "
@@ -41,7 +45,9 @@ public class MessageDAO extends GenericDao<Message>{
         q.setParameter("userId", userId);
         list = q.list();
         session.getTransaction().commit();
-        session.close();
+        }finally{
+            session.close();
+        }
         return list;
     }
     
@@ -49,6 +55,7 @@ public class MessageDAO extends GenericDao<Message>{
     {
         List<Message> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try{
         session.beginTransaction();
         
         Query q =  session.createQuery("FROM Message as m "
@@ -62,7 +69,9 @@ public class MessageDAO extends GenericDao<Message>{
         q.setParameter("userId", userId);
         list = q.list();
         session.getTransaction().commit();
-        session.close();
+        }finally{
+            session.close();
+        }
         return list;
     }
     

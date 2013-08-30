@@ -5,34 +5,35 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 
+public class EmploymentTypeDAO {
 
-public class EmploymentTypeDAO 
-{
-    public List incomeList()
-    {
+    public List incomeList() {
         List<EmploymentType> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        
-        list= session.createQuery("from EmploymentType where companyFlag = 0").list();
-        
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.beginTransaction();
+
+            list = session.createQuery("from EmploymentType where companyFlag = 0").list();
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
         return list;
     }
-    
-    public List businessActivityList()
-    {
+
+    public List businessActivityList() {
         List<EmploymentType> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        
-        list= session.createQuery("from EmploymentType where companyFlag = 1").list();
-        
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.beginTransaction();
+
+            list = session.createQuery("from EmploymentType where companyFlag = 1").list();
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
         return list;
     }
-    
-        
 }

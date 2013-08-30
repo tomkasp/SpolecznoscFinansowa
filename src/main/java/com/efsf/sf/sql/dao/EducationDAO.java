@@ -6,32 +6,33 @@ import java.util.List;
 import org.hibernate.classic.Session;
 
 public class EducationDAO {
-    
-    
-    public Education getEducation(int id)
-    {
-                Session session = HibernateUtil.SESSION_FACTORY.openSession();
-                session.beginTransaction();
-                Education edu = (Education) session.get(Education.class, id);
-                
-                session.getTransaction().commit();
-                session.close();
-                
-                return edu;
-        
+
+    public Education getEducation(int id) {
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        Education edu;
+        try {
+            session.beginTransaction();
+            edu = (Education) session.get(Education.class, id);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        return edu;
     }
-    
-    public List educationList(){
+
+    public List educationList() {
         List<Education> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        
-        lista = session.createQuery("from Education").list();
-        
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.beginTransaction();
+
+            lista = session.createQuery("from Education").list();
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
         return lista;
     }
-    
-    
 }

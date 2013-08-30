@@ -5,35 +5,36 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.classic.Session;
 
-/**
- *
- * @author admin
- */
 public class MaritalStatusDAO {
-   
-    public MaritalStatus getMaritalStatus(int id)
-    {
+
+    public MaritalStatus getMaritalStatus(int id) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        
-        MaritalStatus ms = (MaritalStatus) session.get(MaritalStatus.class, id);
-                
-        session.getTransaction().commit();
-        session.close();
-        
+        MaritalStatus ms;
+
+        try {
+            session.beginTransaction();
+            ms = (MaritalStatus) session.get(MaritalStatus.class, id);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
         return ms;
-        
     }
-    
-    public List maritalStatusList(){
+
+    public List maritalStatusList() {
         List<MaritalStatus> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        session.beginTransaction();
-        
-        lista = session.createQuery("from MaritalStatus").list();
-        
-        session.getTransaction().commit();
-        session.close();
+
+        try {
+            session.beginTransaction();
+            lista = session.createQuery("from MaritalStatus").list();
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
         return lista;
     }
 }
