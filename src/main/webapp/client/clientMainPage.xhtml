@@ -42,7 +42,7 @@
 
                 <div> 
                     <h:form>
-                        <h:commandButton class="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
 
                         <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
 
