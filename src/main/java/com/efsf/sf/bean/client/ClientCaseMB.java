@@ -129,7 +129,7 @@ public class ClientCaseMB implements Serializable {
             
             login.getClient().setObligations(new HashSet(obligationList));
             clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(),clientCase));
-            clientCase.setPhase(Algorithms.calculateProgress(login.getClient()));
+            clientCase.setPhase(Algorithms.calculateProgress(login.getClient().getIdClient()));
             ccd.saveClientCase(clientCase);
             if (login.getClient().getPoints() == 0) {
                 login.setActiveAddingApp(false);
