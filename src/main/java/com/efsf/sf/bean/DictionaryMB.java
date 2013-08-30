@@ -12,7 +12,6 @@ import javax.faces.model.SelectItem;
 @ApplicationScoped
 public class DictionaryMB implements Serializable{
 
-    
     private List<Region> region;
     private List<Education> education;
     private List<MaritalStatus> maritalStatus;
@@ -26,7 +25,6 @@ public class DictionaryMB implements Serializable{
     private List<Branch> branch;
     private List<ProductType> productType;
     private List<SubscriptionType> subscriptionType;
-    
     
     public DictionaryMB() {
         
