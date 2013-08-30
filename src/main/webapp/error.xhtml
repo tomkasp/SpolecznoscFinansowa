@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
      
     <body>
@@ -29,7 +30,21 @@
                 </ul>
                 <div style="font-size: 17px;font-weight: bold;margin-top: 60px;"> Aby zapobiec podobnym zdarzeniom w przyszłości prosimy o zgłoszenie błędu wraz z krótkim opisem jak doszło do jego wystąpienia. </div>
 
+                <div style="font-size: 17px;font-weight: bold;margin-top: 20px;"> Błąd możesz zgłosić wysyłając wiadomość na adres <h:outputText style="color:red" value="error@spolecznoscfinansowa.pl"/> </div>
                 
+                <h:panelGroup rendered="#{loginMB.idUser != null and loginMB.idUser >= 0}" >
+                    <h:form>
+                        <div style="font-size: 17px;font-weight: bold;margin-top: 20px; margin-bottom: 20px"> lub za pomocą formularza: </div>
+                        <p:commandButton styleClass="greyButton" value="Formularz" onclick="formVar.show();" />
+                    </h:form>
+                </h:panelGroup>
+                
+                <p:dialog id="formDialog" widgetVar="formVar" header="Formularz zgłoszenia błędu" showEffect="clip" hideEffect="explode" modal="true">
+                    <h:form>
+                        <h:inputTextarea cols="100" rows="10" />
+                        <div><h:commandButton styleClass="greyButton wideButton floatR" value="Zgłoś"/> </div>
+                    </h:form>
+                </p:dialog>
                 
                 
                 
