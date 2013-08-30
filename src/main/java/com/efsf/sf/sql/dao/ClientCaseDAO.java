@@ -82,48 +82,34 @@ public class ClientCaseDAO implements Serializable {
     }
 
     public boolean doesConsultantObserveCase(int consultantID, int caseID) {
-        boolean flag;
-        Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
-
-            Query q = session.createQuery("from Consultant as c "
-                    + "join fetch c.clientCases_2 as cc2 "
-                    + "where c.idConsultant = :consultantID and cc2.idClientCase = :caseID");
-            q.setParameter("caseID", caseID);
-            q.setParameter("consultantID", consultantID);
-
-            flag = q.list().isEmpty();
-            session.getTransaction().commit();
-        } finally {
-
-            session.close();
-        }
-        return !flag;
+        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases_2");
     }
 
     public boolean doesConsultantAppliedToCase(int consultantID, int caseID) {
+        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases");
+    }
+
+    public boolean doesConsultantConnectedToCase(int consultantID, int caseID, String relationPrefix) {
         boolean flag;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
+        session.beginTransaction();
 
-            Query q = session.createQuery("from Consultant as c "
-                    + "join fetch c.clientCases as cc "
-                    + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
-            q.setParameter("caseID", caseID);
-            q.setParameter("consultantID", consultantID);
+        Query q = session.createQuery("from Consultant as c "
+                + "join fetch c.:relation as cc "
+                + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
+        q.setParameter("caseID", caseID);
+        q.setParameter("consultantID", consultantID);
+        q.setParameter("relation", relationPrefix);
 
-            flag = q.list().isEmpty();
-            session.getTransaction().commit();
-        } finally {
+        flag = q.list().isEmpty();
 
-            session.close();
-        }
+        session.getTransaction().commit();
+        session.close();
+
         return !flag;
     }
 
-    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business) {
+   public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
@@ -279,180 +265,124 @@ public class ClientCaseDAO implements Serializable {
         return list;
     }
 
-    public boolean checkClientAccess(Integer idClient, Integer idCase) {
-        Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        List l;
-        try {
-            session.beginTransaction();
-
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + " left join fetch cs.client as cl "
-                    + " where cl.idClient = :idClient and cs.idClientCase = :idCase ");
-
-            q.setParameter("idCase", idCase);
-            q.setParameter("idClient", idClient);
-
-            l = q.list();
-            session.getTransaction().commit();
-        } finally {
-
-            session.close();
-        }
-        return !(l == null || l.isEmpty());
-
+    public List<ClientCase> last5CasesSelectedClient(Integer fkClient) {
+        return casesSelectedClient(fkClient, 5, 0);
     }
 
-    public List<ClientCase> last5CasesSelectedClient(Integer fkClient) {
+    public List<ClientCase> casesSelectedClient(Integer fkClient, Integer limit, Integer premium) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
+        session.beginTransaction();
 
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + "left join fetch cs.client as clt "
-                    + "left join fetch cs.productType as pt "
-                    + "left join fetch cs.consultants as consul "
-                    + "left join fetch cs.caseStatus as cstatus "
-                    + "left join fetch clt.addresses as addr "
-                    + "left join fetch clt.incomes as inc "
-                    + "left join fetch clt.incomeBusinessActivities as ba "
-                    + "left join fetch inc.branch as br "
-                    + "left join fetch inc.employmentType as empltype "
-                    + "left join fetch ba.branch as br2 "
-                    + "left join fetch ba.employmentType as empltype2 "
-                    + "left join fetch clt.requiredDocumentses as rd "
-                    + "where cs.beginDate <= :dateNow "
-                    + "and cs.endDate >= :dateNow "
-                    + "and clt.idClient = :fk "
-                    + "and cs.caseStatus = 1 "
-                    + "and cs.premium = 0 "
-                    + "order by cs.beginDate desc, cs.idClientCase desc ");
+        Query q = session.createQuery("FROM ClientCase as cs "
+                + "left join fetch cs.client as clt "
+                + "left join fetch cs.productType as pt "
+                + "left join fetch cs.consultants as consul "
+                + "left join fetch cs.caseStatus as cstatus "
+                + "left join fetch clt.addresses as addr "
+                + "left join fetch clt.incomes as inc "
+                + "left join fetch clt.incomeBusinessActivities as ba "
+                + "left join fetch inc.branch as br "
+                + "left join fetch inc.employmentType as empltype "
+                + "left join fetch ba.branch as br2 "
+                + "left join fetch ba.employmentType as empltype2 "
+                + "left join fetch clt.requiredDocumentses as rd "
+                + "where cs.beginDate <= :dateNow "
+                + "and cs.endDate >= :dateNow "
+                + "and clt.idClient = :fk "
+                + "and cs.caseStatus = 1 "
+                + "and cs.premium = :premium "
+                + "order by cs.beginDate desc, cs.idClientCase desc ");
 
-            q.setParameter("dateNow", new DateTime().toDate());
-            q.setParameter("fk", fkClient);
-            q.setMaxResults(5);
+        q.setParameter("dateNow", new DateTime().toDate());
+        q.setParameter("fk", fkClient);
+        q.setParameter("premium", premium);
+        q.setMaxResults(limit);
 
-            list = q.list();
-            session.getTransaction().commit();
-        } finally {
+        list = q.list();
 
-            session.close();
-        }
+        session.getTransaction().commit();
+        session.close();
+
         return list;
     }
 
     public List<ClientCase> allActiveCasesSelectedClient(Integer fkClient) {
-        List<ClientCase> list;
-        Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
-
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + "left join fetch cs.client as clt "
-                    + "left join fetch cs.productType as pt "
-                    + "left join fetch cs.consultants as consul "
-                    + "left join fetch cs.caseStatus as cstatus "
-                    + "left join fetch clt.addresses as addr "
-                    + "left join fetch clt.incomes as inc "
-                    + "left join fetch clt.incomeBusinessActivities as ba "
-                    + "left join fetch inc.branch as br "
-                    + "left join fetch inc.employmentType as empltype "
-                    + "left join fetch ba.branch as br2 "
-                    + "left join fetch ba.employmentType as empltype2 "
-                    + "left join fetch clt.requiredDocumentses as rd "
-                    + "where cs.beginDate <= :dateNow "
-                    + "and cs.endDate >= :dateNow "
-                    + "and clt.idClient = :fk "
-                    + "and cs.caseStatus = 1 "
-                    + "and cs.premium = 0 "
-                    + "order by cs.beginDate desc, cs.idClientCase desc ");
-
-            q.setParameter("dateNow", new DateTime().toDate());
-            q.setParameter("fk", fkClient);
-            q.setMaxResults(100);
-
-            list = q.list();
-            session.getTransaction().commit();
-        } finally {
-
-            session.close();
-        }
-        return list;
+        return casesSelectedClient(fkClient, 100, 0);
     }
 
     public List<ClientCase> awaitingForMarketClientCaseList(Integer fkClient) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
+        session.beginTransaction();
 
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + "left join fetch cs.client as clt "
-                    + "left join fetch cs.productType as pt "
-                    + "left join fetch cs.consultants as consul "
-                    + "left join fetch cs.caseStatus as cstatus "
-                    + "left join fetch clt.addresses as addr "
-                    + "left join fetch clt.incomes as inc "
-                    + "left join fetch clt.incomeBusinessActivities as ba "
-                    + "left join fetch inc.branch as br "
-                    + "left join fetch inc.employmentType as empltype "
-                    + "left join fetch ba.branch as br2 "
-                    + "left join fetch ba.employmentType as empltype2 "
-                    + "left join fetch clt.requiredDocumentses as rd "
-                    + "where cs.beginDate >= :dateNow "
-                    + "and clt.idClient = :fk "
-                    + "and cs.caseStatus = 1 "
-                    + "order by cs.beginDate desc, cs.idClientCase desc ");
+        Query q = session.createQuery("FROM ClientCase as cs "
+                + "left join fetch cs.client as clt "
+                + "left join fetch cs.productType as pt "
+                + "left join fetch cs.consultants as consul "
+                + "left join fetch cs.caseStatus as cstatus "
+                + "left join fetch clt.addresses as addr "
+                + "left join fetch clt.incomes as inc "
+                + "left join fetch clt.incomeBusinessActivities as ba "
+                + "left join fetch inc.branch as br "
+                + "left join fetch inc.employmentType as empltype "
+                + "left join fetch ba.branch as br2 "
+                + "left join fetch ba.employmentType as empltype2 "
+                + "left join fetch clt.requiredDocumentses as rd "
+                + "where cs.beginDate >= :dateNow "
+                + "and clt.idClient = :fk "
+                + "and cs.caseStatus = 1 "
+                + "order by cs.beginDate desc, cs.idClientCase desc ");
 
-            q.setParameter("dateNow", new DateTime().toDate());
-            q.setParameter("fk", fkClient);
-            q.setMaxResults(100);
+        q.setParameter("dateNow", new DateTime().toDate());
+        q.setParameter("fk", fkClient);
+        q.setMaxResults(100);
 
-            list = q.list();
-            session.getTransaction().commit();
-        } finally {
+        list = q.list();
 
-            session.close();
-        }
+        session.getTransaction().commit();
+        session.close();
+
         return list;
     }
 
     public List<ClientCase> awaitingCasesSelectedClient(Integer fkClient) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
+        session.beginTransaction();
 
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + "left join fetch cs.client as clt "
-                    + "left join fetch cs.productType as pt "
-                    + "left join fetch cs.consultants as consul "
-                    + "left join fetch cs.caseStatus as cstatus "
-                    + "left join fetch clt.addresses as addr "
-                    + "left join fetch clt.incomes as inc "
-                    + "left join fetch clt.incomeBusinessActivities as ba "
-                    + "left join fetch inc.branch as br "
-                    + "left join fetch inc.employmentType as empltype "
-                    + "left join fetch ba.branch as br2 "
-                    + "left join fetch ba.employmentType as empltype2 "
-                    + "left join fetch clt.requiredDocumentses as rd "
-                    + "where cs.beginDate <= :dateNow "
-                    + "and cs.endDate < :dateNow "
-                    + "and clt.idClient = :fk "
-                    + "and cs.caseStatus = 1 "
-                    + "order by cs.beginDate desc, cs.idClientCase desc ");
+        Query q = session.createQuery("FROM ClientCase as cs "
+                + "left join fetch cs.client as clt "
+                + "left join fetch cs.productType as pt "
+                + "left join fetch cs.consultants as consul "
+                + "left join fetch cs.caseStatus as cstatus "
+                + "left join fetch clt.addresses as addr "
+                + "left join fetch clt.incomes as inc "
+                + "left join fetch clt.incomeBusinessActivities as ba "
+                + "left join fetch inc.branch as br "
+                + "left join fetch inc.employmentType as empltype "
+                + "left join fetch ba.branch as br2 "
+                + "left join fetch ba.employmentType as empltype2 "
+                + "left join fetch clt.requiredDocumentses as rd "
+                + "where cs.beginDate <= :dateNow "
+                + "and cs.endDate < :dateNow "
+                + "and clt.idClient = :fk "
+                + "and cs.caseStatus = 1 "
+                + "order by cs.beginDate desc, cs.idClientCase desc ");
 
-            q.setParameter("dateNow", new DateTime().toDate());
-            q.setParameter("fk", fkClient);
-            q.setMaxResults(100);
+        q.setParameter("dateNow", new DateTime().toDate());
+        q.setParameter("fk", fkClient);
+        q.setMaxResults(100);
 
-            list = q.list();
-            session.getTransaction().commit();
-        } finally {
+        list = q.list();
 
-            session.close();
-        }
+        session.getTransaction().commit();
+        session.close();
         return list;
+    }
+
+    public List<ClientCase> premiumCasesSelectedClient(Integer fkClient) {
+        return casesSelectedClient(fkClient, 100, 1);
     }
 
     public List<ClientCase> currentCasesSelectedClient(Integer fkClient) {
@@ -526,45 +456,6 @@ public class ClientCaseDAO implements Serializable {
             session.close();
         }
 
-        return list;
-    }
-
-    public List<ClientCase> premiumCasesSelectedClient(Integer fkClient) {
-        List<ClientCase> list;
-        Session session = HibernateUtil.SESSION_FACTORY.openSession();
-        try {
-            session.beginTransaction();
-
-            Query q = session.createQuery("FROM ClientCase as cs "
-                    + "left join fetch cs.client as clt "
-                    + "left join fetch cs.productType as pt "
-                    + "left join fetch cs.consultants as consul "
-                    + "left join fetch cs.caseStatus as cstatus "
-                    + "left join fetch clt.addresses as addr "
-                    + "left join fetch clt.incomes as inc "
-                    + "left join fetch clt.incomeBusinessActivities as ba "
-                    + "left join fetch inc.branch as br "
-                    + "left join fetch inc.employmentType as empltype "
-                    + "left join fetch ba.branch as br2 "
-                    + "left join fetch ba.employmentType as empltype2 "
-                    + "left join fetch clt.requiredDocumentses as rd "
-                    + "where cs.beginDate <= :dateNow "
-                    + "and cs.endDate >= :dateNow "
-                    + "and clt.idClient = :fk "
-                    + "and cs.caseStatus = 1 "
-                    + "and cs.premium = 1 "
-                    + "order by cs.beginDate desc, cs.idClientCase desc ");
-
-            q.setParameter("dateNow", new DateTime().toDate());
-            q.setParameter("fk", fkClient);
-            q.setMaxResults(100);
-
-            list = q.list();
-            session.getTransaction().commit();
-        } finally {
-
-            session.close();
-        }
         return list;
     }
 
