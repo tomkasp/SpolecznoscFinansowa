@@ -19,13 +19,14 @@
 
             <h:panelGroup>
 
-
-                <h:commandLink class="topMenuButton greyButton " value="Wyloguj" action="#{loginMB.logout()}"/>
-                <h:link class="topMenuButton greyButton" value="Najlepsi doradcy" outcome="/common/scoreBoard"/>
-                <h:link class="topMenuButton greyButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
-                <h:link class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
-                <p:commandLink styleClass="topMenuButton greyButton" value="Doładuj konto" update=":dialog1" oncomplete="dodaj.show()" />
-                <h:link class="topMenuButton greyButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
+                <h:commandButton class="topMenuButton greyButton " value="Wyloguj"  action="#{loginMB.logout()}"/>
+                <h:button class="topMenuButton greyButton" value="Najlepsi doradcy" outcome="/common/scoreBoard"/>
+                <h:button class="topMenuButton greyButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
+                <h:button class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
+                <h:commandButton class="topMenuButton greyButton" value="Doładuj konto" >
+                    <f:ajax event="click" onevent="dodaj.show()" />
+                </h:commandButton>
+                <h:button class="topMenuButton greyButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
 
             </h:panelGroup>
 
