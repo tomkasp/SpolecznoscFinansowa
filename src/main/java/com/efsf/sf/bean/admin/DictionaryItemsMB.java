@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.admin;
 
 import com.efsf.sf.collection.DictionaryItem;
@@ -23,7 +19,7 @@ public class DictionaryItemsMB implements Serializable{
     private DictionaryItem item=new DictionaryItem(1, "test", 1);
     
      public String showDictionary(int type){
-         this.type=type;
+        this.type=type;
         return "/admin/dictionary?faces-redirect=true";
     }   
 

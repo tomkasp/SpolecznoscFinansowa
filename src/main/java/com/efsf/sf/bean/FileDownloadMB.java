@@ -32,9 +32,6 @@ public class FileDownloadMB implements Serializable {
     
     private Integer idUser;
     
-    public FileDownloadMB() {    
-    }
-    
     @PostConstruct
     private void loadRequiredDocuments() {
         

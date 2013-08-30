@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.DictionaryMB;
@@ -19,10 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author XaI
- */
+
 @ManagedBean
 @SessionScoped
 public class MarketMB implements Serializable
@@ -65,14 +58,7 @@ public class MarketMB implements Serializable
     private List<ClientCase> allMarket = new ArrayList();
     
     private ClientCase selectedMarketCase;
-    
-    
-    public MarketMB()
-    {
-        
-    }
-         
-    
+
     
     public void loadMarket()
     {

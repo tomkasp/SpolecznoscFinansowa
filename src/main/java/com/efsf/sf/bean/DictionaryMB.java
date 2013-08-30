@@ -30,7 +30,6 @@ public class DictionaryMB implements Serializable{
     
     public DictionaryMB() {
         
-        
         RegionDAO reg = new RegionDAO();
         region = reg.regionList();
         
@@ -129,8 +128,5 @@ public class DictionaryMB implements Serializable{
         this.subscriptionType = subscriptionType;
     }
 
-    
-
-    
     
 }
