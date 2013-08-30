@@ -109,7 +109,7 @@ public class ClientCaseDAO implements Serializable {
         return !flag;
     }
 
-   public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business) {
+    public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business) {
         List<ClientCase> list;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
@@ -263,6 +263,29 @@ public class ClientCaseDAO implements Serializable {
         list.addAll(setItems);
 
         return list;
+    }
+
+    public boolean checkClientAccess(Integer idClient, Integer idCase) {
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        List l;
+        try {
+            session.beginTransaction();
+
+            Query q = session.createQuery("FROM ClientCase as cs "
+                    + " left join fetch cs.client as cl "
+                    + " where cl.idClient = :idClient and cs.idClientCase = :idCase ");
+
+            q.setParameter("idCase", idCase);
+            q.setParameter("idClient", idClient);
+
+            l = q.list();
+            session.getTransaction().commit();
+        } finally {
+
+            session.close();
+        }
+        return !(l == null || l.isEmpty());
+
     }
 
     public List<ClientCase> last5CasesSelectedClient(Integer fkClient) {
