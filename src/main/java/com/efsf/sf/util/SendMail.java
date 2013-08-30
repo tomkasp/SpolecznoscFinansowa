@@ -11,10 +11,10 @@ import java.io.Writer;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class SendMail{
+public class SendMail extends Thread{
 
     private static final String SMTP_HOST_NAME = "spolecznoscfinansowa.pl";
     private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";
@@ -25,32 +25,39 @@ public class SendMail{
     private String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
     private String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
     private String[] emailList; 
-
-    public void send() throws Exception {
-         
-        this.postMail(emailList, emailSubjectTxt, emailMsgTxt, emailFromAddress);
-  
-    }
     
-   public static void sendRegisterMail(String email, String name, Integer id, String host) throws Exception{    
-       SendMail sm=new SendMail();
-       
-       Map<String, Object> input = new HashMap<>();
+    private String email;
+    private String absolutePath;
+    Map<String, Object> input = new HashMap<>();
+
+    public SendMail(String email, String name, Integer id, String host, String absolutePath) throws IOException, TemplateException{
+           
        input.put("name", name);
        input.put("token", Security.sha1(email));
        input.put("id", String.valueOf(id));
        input.put("host", host);
-       
-       sm.setTemplate("registration.html", input);
-       sm.emailSubjectTxt="Potwierdzenie rejestracji w portalu społeczność finansowa";
-       sm.setReceiver(email);
-       sm.send();
+            
+       this.email=email;
+       this.absolutePath=absolutePath;
     }
     
+    @Override
+    public void run(){
+        try {
+            emailSubjectTxt="Potwierdzenie rejestracji w portalu społeczność finansowa";
+            
+            setReceiver(email);
+            setTemplate("registration.html", input);
+            postMail(emailList, emailSubjectTxt, emailMsgTxt, emailFromAddress);
+            
+        } catch (MessagingException | IOException | TemplateException ex) {
+            Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     public void setTemplate(String fileName, Object params) throws IOException, TemplateException{
-        String relativePath = "/resources/mails/";
-        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String absolutePath = servletContext.getRealPath(relativePath);
+
         Configuration cfg = new Configuration();
         cfg.setDirectoryForTemplateLoading(new File(absolutePath));
         cfg.setDefaultEncoding(ENCODING);
