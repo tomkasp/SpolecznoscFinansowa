@@ -71,8 +71,6 @@ public class ConsultantMainPageMB {
     private List<Set<String>> finishedModelsBranch = new ArrayList();
     private ClientCase selectedPremiumCase;
 
-    public ConsultantMainPageMB() {
-    }
 
     public void reload() {
         FacesContext facesContext = FacesContext.getCurrentInstance();

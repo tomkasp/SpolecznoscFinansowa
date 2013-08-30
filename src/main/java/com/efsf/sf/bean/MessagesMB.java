@@ -19,8 +19,6 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class MessagesMB implements Serializable {
     
-
-    
     private HashSet<Integer> unreadUsers;
     
     private Integer idToUser;

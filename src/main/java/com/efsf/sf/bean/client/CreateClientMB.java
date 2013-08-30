@@ -82,8 +82,6 @@ public class CreateClientMB implements Serializable
     private Date currentDate = new DateTime().toDate();
     private Date maxBirthDate = new DateTime().minusYears(18).toDate();
     
-    
-    
     //Income
     
     private List<IncomeData> incomeTable = new ArrayList();
@@ -100,7 +98,6 @@ public class CreateClientMB implements Serializable
     private int incomeId;
     private int branchId;
     private boolean isIncome = true;
-    
     
     
     //Address Data

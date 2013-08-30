@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean;
 
 import com.efsf.sf.sql.dao.GenericDao;
@@ -61,8 +57,5 @@ public class ScoreBoardMB implements Serializable{
     public void setConsultantRating(ConsultantRating consultantRating) {
         this.consultantRating = consultantRating;
     }
-
-    
-    
     
 }

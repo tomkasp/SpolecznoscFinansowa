@@ -25,9 +25,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-/**
- * @author WR1EI1
- */
 
 @ManagedBean
 @ViewScoped
@@ -65,9 +62,7 @@ public class ConsultantSettingsMB implements Serializable {
     private String newPassword;
     private String confirmNewPassword;
     
-    public ConsultantSettingsMB() { 
-    }
- 
+
     @PostConstruct
     private void loadConsultant() {
         ConsultantDAO cdao=new ConsultantDAO();

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.client.CaseViewMB;
@@ -19,10 +15,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-/**
- *
- * @author XaI
- */
 @ManagedBean
 @ViewScoped
 public class ConsultantProfileMB implements Serializable{
@@ -36,11 +28,7 @@ public class ConsultantProfileMB implements Serializable{
     
     private List<ClientCase> casesRated = new ArrayList();
        
-    public ConsultantProfileMB() {
-        
-    }
-    
- 
+
     public void loadData()
     {
         casesRated = (ArrayList<ClientCase>) new CaseRatingDAO().getConsultantRatings(idConsultant);
