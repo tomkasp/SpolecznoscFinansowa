@@ -1,14 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.efsf.sf.collection;
 
 import java.io.Serializable;
-
-/**
- * @author XaI
- */
 
 public class IncomeData implements Serializable
 {
@@ -74,8 +66,5 @@ public class IncomeData implements Serializable
         this.isIncome = isIncome;
     }
 
-   
-
-    
     
 }
