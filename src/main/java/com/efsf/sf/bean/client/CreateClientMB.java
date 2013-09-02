@@ -146,7 +146,7 @@ public class CreateClientMB implements Serializable
         
         user.setLogin(("000000" + Integer.toString(user.getIdUser())).substring(Integer.toString(user.getIdUser()).length()));
         userDao.update(user);
-        getMailerMB().sendMail(email, name, user.getIdUser());
+        getMailerMB().sendMail(email, name, user.getIdUser() );
  
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
