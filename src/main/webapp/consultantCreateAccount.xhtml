@@ -27,7 +27,7 @@
                 <div class="redMessage">
                     <h5> Rejestracja jest DARMOWA. Możesz wykupić wersję PRO w dowolnej chwilii.</h5>    
                 </div>
-                <div style="min-height: 400px;">
+                <div style="min-height: 400px;" class="marginB30">
                     
                     <div class="leftThinerBox">
 
@@ -84,18 +84,22 @@
                                 </div>
 
                                 <div class="field" > 
-                                    <p:selectBooleanCheckbox id="policy1" value="#{consultantCreateMB.policy}" validator="#{consultantCreateMB.validatePolicy}" />  
+                                    <p:selectBooleanCheckbox id="policy1" value="#{consultantCreateMB.policy}" > 
+                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                    </p:selectBooleanCheckbox>
                                     <h:outputText class="label"  value="akceptuje"/><h:link class="label" value="regulamin"/>
                                     <h:message for="policy1" errorClass="invalid" id="policy1CheckMessage" />
                                 </div>
 
                                 <div class="field" style="margin-top: 50px;"> 
-                                    <p:selectBooleanCheckbox id="policy2" value="#{consultantCreateMB.policy2}" validator="#{consultantCreateMB.validatePolicy}" /> 
+                                    <p:selectBooleanCheckbox id="policy2" value="#{consultantCreateMB.policy2}"  >
+                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                    </p:selectBooleanCheckbox>
                                     <h:outputText class="label" value="wyrażam zgodę na przetwarzanie danych" />
                                     <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
                                 </div>
 
-                             <div style="float: right;">
+                             <div style="float: right; margin: 20px 0; ">
                                 <h:button class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
                             
                                 <h:commandButton class ="blueButton wideButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
