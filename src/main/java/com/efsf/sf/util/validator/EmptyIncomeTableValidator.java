@@ -9,7 +9,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 
-@FacesValidator("com.efsf.sf.util.EmptyIncomeTableValidator")
+@FacesValidator("com.efsf.sf.util.validator.EmptyIncomeTableValidator")
 public class EmptyIncomeTableValidator implements Validator {
     
    @Override
