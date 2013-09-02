@@ -95,14 +95,14 @@
                             
                             <h:outputText class="label" value="E-mail:"/> 
                             <h:inputText id="remindEmail" style="width: 207px;" value="#{loginMB.email}" required="true">
-                                 <f:validator validatorId="LoginValidator" />
+                                 
                             </h:inputText>
                             <h:message style=" float: left; margin-left: 160px;" class="label" for="remindEmail" errorClass="invalid" id="passwordMessage" />
                   
                             </div>
                             <div class="field" style="margin-top: 70px;"> 
                             <a id="remindButton" href="javascript:void(0);" class="greyButton" style=" margin-right: 5px; width: 110px; text-align: center; " >Wstecz</a>
-                            <h:commandLink style="width: 175px; text-align: center;" class="blueButton floatR" value="Wyślij" action="#{loginMB.login()}" />
+                            <h:commandLink style="width: 175px; text-align: center;" class="blueButton floatR" value="Wyślij" action="#{loginMB.sendNewPasswordMail()}" />
                             </div>
                             
                             </h:form>

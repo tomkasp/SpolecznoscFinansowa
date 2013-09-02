@@ -1,2 +1,3 @@
 /target/
 /src\main\webapp\resources\images/Thumbs.db
+/src\main\webapp\WEB-INF/web.xml
