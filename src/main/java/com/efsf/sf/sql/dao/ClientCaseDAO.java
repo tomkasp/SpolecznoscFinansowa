@@ -2,6 +2,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -749,6 +750,29 @@ public class ClientCaseDAO implements Serializable {
             session.close();
         }
         return list != null && !list.isEmpty();
+    }
+    
+    public ClientCase getCaseWithAllAppliedConsultants(Integer idCase)
+    {
+        ClientCase cs;
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
+            session.beginTransaction();
+
+            Query q = session.createQuery("FROM ClientCase as cs "
+                    + "left join fetch cs.consultants as cons "
+                    + "left join fetch cons.user as u "
+                    + "where cs.idClientCase = :idCase");
+
+            q.setParameter("idCase", idCase);
+
+            cs = (ClientCase) q.list().get(0);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        
+        return cs;
     }
 
     public boolean checkClientCases(Integer idClient) {
