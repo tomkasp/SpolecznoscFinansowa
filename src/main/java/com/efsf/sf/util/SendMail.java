@@ -20,64 +20,50 @@ public class SendMail extends Thread{
     private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";
     private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";
     private static final String ENCODING="UTF-8";
-   
-    private String emailMsgTxt = "";
-    private String emailSubjectTxt = "Wiadomość z poratalu Społeczność finansowa";
     private String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
-    private String[] emailList; 
     
     private String email;
-    private String absolutePath;
-    Map<String, Object> input = new HashMap<>();
+    private String subject;    
+    private String templatePath;
+    private String templateName;
+    private Map<String, Object> params = new HashMap<>();
 
-    public SendMail(String email, String name, Integer id, String host, String absolutePath) throws IOException, TemplateException{
-           
-       input.put("name", name);
-       input.put("token", Security.sha1(email));
-       input.put("id", String.valueOf(id));
-       input.put("host", host);
-            
+    public SendMail(String email, String subject, String templatePath, String templateName, Map<String, Object> params) throws IOException, TemplateException{
        this.email=email;
-       this.absolutePath=absolutePath;
+       this.subject=subject;
+       this.templatePath=templatePath;
+       this.templateName=templateName;
+       this.params=params;
     }
     
     @Override
     public void run(){
-        try {
-            emailSubjectTxt="Potwierdzenie rejestracji w portalu społeczność finansowa";
-            
-            setReceiver(email);
-            setTemplate("registration.html", input);
-            postMail(emailList, emailSubjectTxt, emailMsgTxt, emailFromAddress);
+        try {            
+            postMail();
             
         } catch (MessagingException | IOException | TemplateException ex) {
             Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    
-    public void setTemplate(String fileName, Object params) throws IOException, TemplateException{
+    public String getMessageFromTemplate() throws IOException, TemplateException{
 
         Configuration cfg = new Configuration();
-        cfg.setDirectoryForTemplateLoading(new File(absolutePath));
+        cfg.setDirectoryForTemplateLoading(new File(templatePath));
         cfg.setDefaultEncoding(ENCODING);
         cfg.setOutputEncoding(ENCODING);
-        Template template = cfg.getTemplate(fileName);
+        Template template = cfg.getTemplate(templateName);
         
         
         ByteArrayOutputStream result=new ByteArrayOutputStream();
         Writer out = new OutputStreamWriter(result, ENCODING);
         template.process(params, out);
         out.flush();
-        emailMsgTxt=result.toString(ENCODING);
+        return result.toString(ENCODING);
     }
     
-    public void setReceiver(String email){
-        emailList=new String[1];
-        emailList[0]=email;
-    }
 
-    private void postMail(String recipients[], String subject, String message, String from) throws MessagingException {
+    private void postMail() throws MessagingException, IOException, TemplateException {
         boolean debug = false;
 
         Properties props = new Properties();
@@ -87,21 +73,18 @@ public class SendMail extends Thread{
         Session session = Session.getInstance(props, auth);
         session.setDebug(debug); 
         Message msg = new MimeMessage(session); 
-        InternetAddress addressFrom = new InternetAddress(from);
+        InternetAddress addressFrom = new InternetAddress(emailFromAddress);
         msg.setFrom(addressFrom);
-        InternetAddress[] addressTo = new InternetAddress[recipients.length];
-        for (int i = 0; i < recipients.length; i++) {
-            addressTo[i] = new InternetAddress(recipients[i]);
-        }
-
+        
+        InternetAddress[] addressTo = new InternetAddress[1];
+        addressTo[0] = new InternetAddress(email);
+        
         msg.setRecipients(Message.RecipientType.TO, addressTo);
         
         msg.setSubject(subject);
-        msg.setContent(message, "text/html; charset=utf-8");
+        msg.setContent(getMessageFromTemplate(), "text/html; charset=utf-8");
         
         Transport.send(msg);
-
-
     }
 
     private class SMTPAuthenticator extends javax.mail.Authenticator {
