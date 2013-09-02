@@ -6,38 +6,38 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core" >
-    
+
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Doradca - ekran główny </ui:define> 
 
 
             <ui:define name="content">
-               <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
-               
+                <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
+
                 <h:form>
-                   
+
                     <div>
 
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
                         <p:dataTable id="lastCases" value="#{consultantMainPageMB.clientCaseList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedLastCase}" selectionMode="single" >
-          
+
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}"/>
-                            
+
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
-                            
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
                                 </h:outputText>  
                             </p:column>  
-                            
+
                             <p:column headerText="Numer klienta"> 
                                 <h:outputText  value="#{row.client.idClient}"/>
                             </p:column>
@@ -57,9 +57,9 @@
                             <p:column headerText="Kod pocztowy">  
                                 <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
                             </p:column>
-                           
+
                             <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
@@ -89,98 +89,180 @@
                             </p:column> 
 
                         </p:dataTable>
-                   
+
                         <p:poll interval="120" listener="#{consultantMainPageMB.pollData()}" update="@form" /> 
-                    
+
                     </div>
 
+                    <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
                     <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
-                         <p:ajax update="applied lastCases traced" />
+                        <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
-                    <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
 
                     <div class="marginT50">
 
-                    <h4>ZGŁOSZENIA</h4>
+                        <h4>ZGŁOSZENIA</h4>
 
-                    <p:dataTable id="applied" value="#{consultantMainPageMB.appliedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
+                        <p:dataTable id="applied" value="#{consultantMainPageMB.appliedList}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedAppliedCase}" selectionMode="single" >
 
-                        <p:ajax event="rowSelect" update="@form" />
-                        <p:ajax event="rowUnselect" update="@form" /> 
-                        <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}"/>
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}"/>
 
-                        <p:column headerText="Numer sprawy">  
-                            <h:outputText  value="#{row.idClientCase}"/>
-                        </p:column>  
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
 
-                        <p:column headerText="Data dodania">    
-                            <h:outputText  value="#{row.beginDate}">
-                                <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                            </h:outputText>  
-                        </p:column>  
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
 
-                        <p:column headerText="Numer klienta"> 
-                            <h:outputText  value="#{row.client.idClient}"/>
-                        </p:column>
+                            <p:column headerText="Numer klienta"> 
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column>
 
-                        <p:column headerText="Postęp">  
-                            <h:outputText  value="#{row.phase}"/>
-                        </p:column> 
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
 
-                        <p:column headerText="Rodzaj kredytu"  >
-                            <h:outputText  value="#{row.productType.name}"/>
-                        </p:column> 
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
 
-                        <p:column headerText="BIK">  
-                            <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                        </p:column> 
+                            <p:column headerText="BIK">  
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
 
-                        <p:column headerText="Kod pocztowy">  
-                            <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                        </p:column>
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
 
-                        <p:column headerText="Wiek">  
-                                 <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                        </p:column>
+                            <p:column headerText="Wiek">  
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
 
-                        <p:column headerText="Typ zatrudnienia">
-                            <h:outputText rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                            <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                <f:selectItems value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber)}" />
-                            </h:selectOneMenu>
-                        </p:column>
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.appliedModelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                        <p:column headerText="Branża">  
-                            <h:outputText rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                            <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                <f:selectItems value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber)}" />
-                            </h:selectOneMenu>
-                        </p:column>
+                            <p:column headerText="Branża">  
+                                <h:outputText rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.appliedModelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
 
-                        <p:column headerText="Trudność kredytu"> 
-                            <h:outputText  value="#{row.difficulty}"/>
-                        </p:column>
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
 
-                        <p:column headerText="Ilość doradców"> 
-                            <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
-                        </p:column>
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
+                            </p:column>
 
-                        <p:column headerText="Koniec aukcji"> 
-                            <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
-                        </p:column> 
-                    </p:dataTable>
-                </div>
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
+                        </p:dataTable>
+                    </div>
 
-                <p:commandButton id="deleteApplied" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
-                     <f:ajax execute="applied" render="applied" />
-                </p:commandButton>
+                    <p:commandButton id="detailsAppliedButton" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}" />
+                    <p:commandButton id="deleteApplied" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" onclick="revokeApp.show();" >
+                        <f:ajax execute="applied" render="applied" />
+                    </p:commandButton>
+
+
+                    <div class="marginT50">
+
+                        <h4>OBSERWOWANE</h4>
+
+                        <p:dataTable id="traced" value="#{consultantMainPageMB.observedList}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
+
+                            <p:ajax event="rowSelect" update="@form" />
+                            <p:ajax event="rowUnselect" update="@form" /> 
+                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}"/>
+
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
+
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
+
+                            <p:column headerText="Numer klienta"> 
+                                <h:outputText  value="#{row.client.idClient}"/>
+                            </p:column>
+
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
+
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
+
+                            <p:column headerText="BIK">  
+                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
+
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
+
+                            <p:column headerText="Wiek">  
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
+
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Branża">  
+                                <h:outputText rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
+                                    <f:selectItems value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
+
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
+                            </p:column>
+
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
+                        </p:dataTable>
+                    </div>
+
+
+                    <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
+                    <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
+
+                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                        <p:ajax update="applied lastCases traced" />
+                    </p:commandButton>
+
+
                     
-                <p:commandButton id="detailsAppliedButton" disabled="#{empty consultantMainPageMB.selectedAppliedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedAppliedCase)}" />
-
 
                     <div class="marginT50">
 
@@ -191,12 +273,12 @@
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}"/>
-                     
-                            
+
+
                             <p:column headerText="Numer sprawy">
                                 <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
- 
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -242,17 +324,17 @@
                             </p:column>
 
                             <p:column headerText="Trudność kredytu"> 
-                                  <h:outputText  value="#{row.difficulty}"/>
+                                <h:outputText  value="#{row.difficulty}"/>
                             </p:column>
 
-                   
+
                             <p:column headerText="Status">  
                                 <h:outputText value="#{row.caseStatus.name}" />
                             </p:column>  
-                            
+
                         </p:dataTable>
                     </div>
-                    
+
                     <p:commandButton id="detailsOwnedButton" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
 
 
@@ -265,12 +347,12 @@
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowUnselect" update="@form" /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}"/>
-                     
-                            
+
+
                             <p:column headerText="Numer sprawy">
                                 <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
- 
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
@@ -316,9 +398,9 @@
                             </p:column>
 
                             <p:column headerText="Trudność kredytu"> 
-                                  <h:outputText  value="#{row.difficulty}"/>
+                                <h:outputText  value="#{row.difficulty}"/>
                             </p:column>
-                            
+
                             <p:column headerText="Ocena"> 
                                 <h:outputText rendered="#{row.caseRating eq null}" value="Poproś o ocenę"/>
                                 <h:outputText rendered="#{!(row.caseRating eq null)}" value="#{row.caseRating.average}" />
@@ -326,200 +408,119 @@
 
                         </p:dataTable>
                     </div>
-                    
+
                     <h:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
-                    <div class="marginT50">
+                    
 
-                        <h4>OBSERWOWANE</h4>
 
-                        <p:dataTable id="traced" value="#{consultantMainPageMB.observedList}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{consultantMainPageMB.selectedObservedCase}" selectionMode="single" >
+                    <div class="marginT50 marginB30">
+                        <h4> PODSUMOWANIE RANKINGU </h4>
 
-                            <p:ajax event="rowSelect" update="@form" />
-                            <p:ajax event="rowUnselect" update="@form" /> 
-                            <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}"/>
+                        <p:dataTable var="row" value="#{consultantRatesMB.scoreBoard}">
 
-                            <p:column headerText="Numer sprawy">  
-                                <h:outputText  value="#{row.idClientCase}"/>
+                            <p:column headerText="">  
+                                <h:outputText  value="#{row.title}"/>
                             </p:column>  
 
-                            <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}">
-                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                                </h:outputText>  
+                            <p:column headerText="Twój wynik"> 
+                                <h:outputText  value="#{row.score}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
                             </p:column>  
 
-                            <p:column headerText="Numer klienta"> 
-                                <h:outputText  value="#{row.client.idClient}"/>
-                            </p:column>
+                            <p:column headerText="Średnia wszystkich doradców">  
+                                <h:outputText  value="#{row.averageScore}">
+                                    <f:convertNumber locale="en" pattern="#0.00" />
+                                </h:outputText>
+                            </p:column>  
 
-                            <p:column headerText="Postęp">  
-                                <h:outputText  value="#{row.phase}"/>
+                            <p:column headerText="Najlepszy wynik">  
+                                <h:outputText  value="#{row.maxScore}"/>
+                            </p:column>  
+
+                            <p:column headerText="Najgorszy wynik">  
+                                <h:outputText  value="#{row.minScore}"/>
                             </p:column> 
 
-                            <p:column headerText="Rodzaj kredytu"  >
-                                <h:outputText  value="#{row.productType.name}"/>
-                            </p:column> 
-
-                            <p:column headerText="BIK">  
-                                <h:outputText  value="#{consultantMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                            </p:column> 
-
-                            <p:column headerText="Kod pocztowy">  
-                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                            </p:column>
-
-                            <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                            </p:column>
-
-                            <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{consultantMainPageMB.observedModelsEmploymentType.get(rowNumber)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Branża">  
-                                <h:outputText rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() == 1}" value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{consultantMainPageMB.observedModelsBranch.get(rowNumber).size() > 1}" value=" ">
-                                    <f:selectItems value="#{consultantMainPageMB.observedModelsBranch.get(rowNumber)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Trudność kredytu"> 
-                                <h:outputText  value="#{row.difficulty}"/>
-                            </p:column>
-
-                            <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{consultantMainPageMB.countConsultantApplications(row)}" />
-                            </p:column>
-
-                            <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{consultantMainPageMB.converters.hoursLeft(row.endDate)}"/>        
-                            </p:column> 
                         </p:dataTable>
+                        <p:commandLink styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
+                        <p:commandLink styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
                     </div>
 
-                    
-                    
-                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
-                          <p:ajax update="applied lastCases traced" />
-                    </p:commandButton>
-                    
-                    <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" > 
-                    </p:commandButton>
-                    
-                    <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
+                    <!-- DIALOGS -->
+
+                    <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                        <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
+                            Twoje zgłoszenie do sprawy zostało zatwierdzone.
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
+                            Do tego zlecenia zgłosiłeś się już wcześniej. 
+                        </h:panelGroup>
+
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
+                                <p:ajax update="applied"/>
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
+
+                    <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                        <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
+                            Od teraz śledzisz sprawę numer:  #{consultantMainPageMB.selectedLastCase.idClientCase}.
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
+                            Już obserwujesz tą sprawę! 
+                        </h:panelGroup>
+
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
+                                <p:ajax update="traced"/>
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
+
+                    <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                        <h:panelGroup class="fontGrey">
+                            Czy napewno chcesz usunąć element z listy?
+                        </h:panelGroup>
+
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.revokeAppliedCase(consultantMainPageMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
+                                <p:ajax update="applied deleteApplied"/>
+                            </h:commandButton>
+
+                            <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
+                                <p:ajax update="applied"/>
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
+
+                    <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
+                        <h:panelGroup class="fontGrey">
+                            Czy napewno chcesz usunąć element z listy?
+                        </h:panelGroup>
+
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.stopObserveCase(consultantMainPageMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
+                                <p:ajax update="traced deleteObservedButton"/>
+                            </h:commandButton>
+
+                            <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
+                                <p:ajax update="traced"/>
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
 
 
-                                        <div class="marginT50 marginB30">
-                                            <h4> PODSUMOWANIE RANKINGU </h4>
-                                            
-                                            <p:dataTable var="row" value="#{consultantRatesMB.scoreBoard}">
 
-                                                <p:column headerText="">  
-                                                    <h:outputText  value="#{row.title}"/>
-                                                </p:column>  
 
-                                                <p:column headerText="Twój wynik"> 
-                                                    <h:outputText  value="#{row.score}">
-                                                    <f:convertNumber locale="en" pattern="#0.00" />
-                                                    </h:outputText>
-                                                </p:column>  
+                </h:form>
 
-                                                <p:column headerText="Średnia wszystkich doradców">  
-                                                    <h:outputText  value="#{row.averageScore}">
-                                                    <f:convertNumber locale="en" pattern="#0.00" />
-                                                    </h:outputText>
-                                                </p:column>  
-
-                                                <p:column headerText="Najlepszy wynik">  
-                                                    <h:outputText  value="#{row.maxScore}"/>
-                                                </p:column>  
-
-                                                <p:column headerText="Najgorszy wynik">  
-                                                    <h:outputText  value="#{row.minScore}"/>
-                                                </p:column> 
-
-                                            </p:dataTable>
-                                            <p:commandLink styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
-                                            <p:commandLink styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
-                                        </div>
-                                        
-                                        <!-- DIALOGS -->
-                                        
-                                            <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                                                <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
-                                                    Twoje zgłoszenie do sprawy zostało zatwierdzone.
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
-                                                    Do tego zlecenia zgłosiłeś się już wcześniej. 
-                                                </h:panelGroup>
-
-                                                <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
-                                                        <p:ajax update="applied"/>
-                                                    </h:commandButton>
-                                                </div>
-                                             </p:dialog>
-
-                                             <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                                                <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
-                                                    Od teraz śledzisz sprawę numer:  #{consultantMainPageMB.selectedLastCase.idClientCase}.
-                                                </h:panelGroup>
-
-                                                <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
-                                                    Już obserwujesz tą sprawę! 
-                                                </h:panelGroup>
-
-                                                <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
-                                                        <p:ajax update="traced"/>
-                                                    </h:commandButton>
-                                                </div>
-                                             </p:dialog>
-
-                                             <p:dialog id="revokeApplication" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeApp" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                                                <h:panelGroup class="fontGrey">
-                                                    Czy napewno chcesz usunąć element z listy?
-                                                </h:panelGroup>
-
-                                                <div> 
-                                                    <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.revokeAppliedCase(consultantMainPageMB.selectedAppliedCase)}" onclick="revokeApp.hide()" >
-                                                        <p:ajax update="applied deleteApplied"/>
-                                                    </h:commandButton>
-
-                                                    <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeApp.hide()"  >
-                                                        <p:ajax update="applied"/>
-                                                    </h:commandButton>
-                                                </div>
-                                             </p:dialog>
-                                        
-                                        <p:dialog id="revokeObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Czy napewno?"  widgetVar="revokeObs" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >   
-                                            <h:panelGroup class="fontGrey">
-                                                Czy napewno chcesz usunąć element z listy?
-                                            </h:panelGroup>
-
-                                            <div> 
-                                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{consultantMainPageMB.stopObserveCase(consultantMainPageMB.selectedObservedCase)}" onclick="revokeObs.hide()" >
-                                                    <p:ajax update="traced deleteObservedButton"/>
-                                                </h:commandButton>
-
-                                                <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="revokeObs.hide()"  >
-                                                    <p:ajax update="traced"/>
-                                                </h:commandButton>
-                                            </div>
-                                       </p:dialog>
-
-                                        
-
-                                        
-                                        </h:form>
-
-                            </ui:define>           
-                  </ui:composition>
-        </body>
- </html>
+            </ui:define>           
+        </ui:composition>
+    </body>
+</html>
