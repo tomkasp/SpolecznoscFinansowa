@@ -91,15 +91,15 @@ public class CreateClientMB implements Serializable
 //    private int regionId;
     
     // flag to set required elements if we want to make new application 
-//    private boolean areRequired = false;
+    private boolean areRequired = false;
 
-//    public boolean isAreRequired() {
-//        return areRequired;
-//    }
-//
-//    public void setAreRequired(boolean areRequired) {
-//        this.areRequired = areRequired;
-//    }
+    public boolean isAreRequired() {
+        return areRequired;
+    }
+
+    public void setAreRequired(boolean areRequired) {
+        this.areRequired = areRequired;
+    }
     
 //    public int getRegionId() {
 //        return regionId;

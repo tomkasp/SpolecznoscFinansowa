@@ -82,11 +82,11 @@ public class ClientCaseDAO implements Serializable {
     }
 
     public boolean doesConsultantObserveCase(int consultantID, int caseID) {
-        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases_2");
+        return doesConsultantConnectedToCase(consultantID, caseID, "c.clientCases_2");
     }
 
     public boolean doesConsultantAppliedToCase(int consultantID, int caseID) {
-        return doesConsultantConnectedToCase(consultantID, caseID, "clientCases");
+        return doesConsultantConnectedToCase(consultantID, caseID, "c.clientCases");
     }
 
     public boolean doesConsultantConnectedToCase(int consultantID, int caseID, String relationPrefix) {
@@ -95,11 +95,10 @@ public class ClientCaseDAO implements Serializable {
         session.beginTransaction();
 
         Query q = session.createQuery("from Consultant as c "
-                + "join fetch c.:relation as cc "
+                + "join fetch "+relationPrefix+" as cc "
                 + "where c.idConsultant = :consultantID and cc.idClientCase = :caseID");
         q.setParameter("caseID", caseID);
         q.setParameter("consultantID", consultantID);
-        q.setParameter("relation", relationPrefix);
 
         flag = q.list().isEmpty();
 
