@@ -107,6 +107,8 @@ public class ClientCaseDAO implements Serializable {
 
         return !flag;
     }
+    
+    
 
     public List getCasesWithMarketFilter(int phaseMin, int phaseMax, int ageMin, int ageMax, int diffMin, int diffMax, int branch, int region, List<String> incomes, List<String> business) {
         List<ClientCase> list;
@@ -262,6 +264,29 @@ public class ClientCaseDAO implements Serializable {
         list.addAll(setItems);
 
         return list;
+    }
+    
+    public boolean doesClientHaveActiveCases(Integer idClient)
+    {
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        List l;
+        try {
+            session.beginTransaction();
+
+            Query q = session.createQuery("FROM ClientCase as cs "
+                    + " left join fetch cs.client as cl "
+                    + " left join fetch cs.caseStatus as cstat" 
+                    + " where cl.idClient = :idClient and cstat.idCaseStatus != 8");
+
+            q.setParameter("idClient", idClient);
+
+            l = q.list();
+            session.getTransaction().commit();
+        } finally {
+
+            session.close();
+        }
+        return (l != null && !l.isEmpty());
     }
 
     public boolean checkClientAccess(Integer idClient, Integer idCase) {
