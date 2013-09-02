@@ -491,7 +491,7 @@
                         </p:dataTable>
 
                         <h:panelGroup id="currentCasesButtonBar">
-                            <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                            <h:commandButton rendered="false" disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
                                 <f:ajax event="click" onevent="backOffCurrent.show()" />
                             </h:commandButton>
                             <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
@@ -503,7 +503,7 @@
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
-                                <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
+                                <h:commandButton  class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
                                 <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffCurrent.hide()" type="button"/>
                             </div>
                         </h:form>
