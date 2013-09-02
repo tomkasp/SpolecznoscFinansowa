@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -29,10 +30,17 @@ public class ClientMainPageMB implements Serializable {
     private static final long serialVersionUID = 1L;
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
+    
     @ManagedProperty(value = "#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
+    
     @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB;
+    
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
+    
+    
     private List<ClientCase> clientCaseList = new ArrayList<>();
     private List<ClientCase> awaitingClientCaseList = new ArrayList<>();
     private List<ClientCase> currentClientCaseList = new ArrayList<>();
@@ -191,6 +199,17 @@ public class ClientMainPageMB implements Serializable {
         CaseStatusDAO csdao = new CaseStatusDAO();
         CaseStatus cs = csdao.read(8);
         awaitingForMarketSelectedCase.setCaseStatus(cs);
+        
+        ClientCase ccase = caseDao.getCaseWithAllAppliedConsultants(awaitingForMarketSelectedCase.getIdClientCase());
+        
+        for (Consultant c : ccase.getConsultants())
+        {
+            messagesMB.generateSystemMessage(bundle.getString("CASE_REVOKED"), c.getUser().getIdUser(), new Object[]{awaitingForMarketSelectedCase.getIdClientCase()});
+        }
+        
+        awaitingForMarketSelectedCase.setConsultants(null);
+        awaitingForMarketSelectedCase.setConsultants_1(null);
+        
         caseDao.updateClientCase(awaitingForMarketSelectedCase);
         awaitingForMarketSelectedCase = null;
 
@@ -201,6 +220,17 @@ public class ClientMainPageMB implements Serializable {
         CaseStatusDAO csdao = new CaseStatusDAO();
         CaseStatus cs = csdao.read(8);
         premiumSelectedCase.setCaseStatus(cs);
+        
+        ClientCase ccase = caseDao.getCaseWithAllAppliedConsultants(premiumSelectedCase.getIdClientCase());
+        
+        for (Consultant c : ccase.getConsultants())
+        {
+            messagesMB.generateSystemMessage(bundle.getString("CASE_REVOKED"), c.getUser().getIdUser(), new Object[]{premiumSelectedCase.getIdClientCase()});
+        }
+        
+        premiumSelectedCase.setConsultants(null);
+        premiumSelectedCase.setConsultants_1(null);
+        
         caseDao.updateClientCase(premiumSelectedCase);
         premiumSelectedCase = null;
 
@@ -211,6 +241,18 @@ public class ClientMainPageMB implements Serializable {
         CaseStatusDAO csdao = new CaseStatusDAO();
         CaseStatus cs = csdao.read(8);
         lastSelectedCase.setCaseStatus(cs);
+        
+        ClientCase ccase = caseDao.getCaseWithAllAppliedConsultants(lastSelectedCase.getIdClientCase());
+        
+        for (Consultant c : ccase.getConsultants())
+        {
+            messagesMB.generateSystemMessage(bundle.getString("CASE_REVOKED"), c.getUser().getIdUser(), new Object[]{lastSelectedCase.getIdClientCase()});
+        }
+        
+        lastSelectedCase.setConsultants(null);
+        lastSelectedCase.setConsultants_1(null);
+            
+        
         caseDao.updateClientCase(lastSelectedCase);
         lastSelectedCase = null;
 
@@ -221,6 +263,17 @@ public class ClientMainPageMB implements Serializable {
         CaseStatusDAO csdao = new CaseStatusDAO();
         CaseStatus cs = csdao.read(8);
         awaitingSelectedCase.setCaseStatus(cs);
+        
+        ClientCase ccase = caseDao.getCaseWithAllAppliedConsultants(awaitingSelectedCase.getIdClientCase());
+        
+        for (Consultant c : ccase.getConsultants())
+        {
+            messagesMB.generateSystemMessage(bundle.getString("CASE_REVOKED"), c.getUser().getIdUser(), new Object[]{awaitingSelectedCase.getIdClientCase()});
+        }
+        
+        awaitingSelectedCase.setConsultants(null);
+        awaitingSelectedCase.setConsultants_1(null);
+            
         caseDao.updateClientCase(awaitingSelectedCase);
         awaitingSelectedCase = null;
 
@@ -462,5 +515,13 @@ public class ClientMainPageMB implements Serializable {
 
     public void setAwaitingForMarketSelectedCase(ClientCase awaitingForMarketSelectedCase) {
         this.awaitingForMarketSelectedCase = awaitingForMarketSelectedCase;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 }
