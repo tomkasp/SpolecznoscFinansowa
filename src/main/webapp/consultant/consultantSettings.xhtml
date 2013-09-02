@@ -26,7 +26,6 @@
                             <h:outputText class="label" value="Obecne hasło"/>  
                             <h:inputSecret required="true" id="cPassword"  value="#{consultantSettingsMB.currentPassword}" validator="#{consultantSettingsMB.validateCurrentPassword}"> 
                                 <f:validateLength minimum="8" maximum="20" />
-                                <p:ajax event="keyup" update="currentPasswordMessage"/>
                             </h:inputSecret>
                             <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
                         </div>

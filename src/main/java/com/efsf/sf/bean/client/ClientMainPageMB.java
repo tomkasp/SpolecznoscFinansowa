@@ -25,68 +25,44 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class ClientMainPageMB implements Serializable {
+
     private static final long serialVersionUID = 1L;
-
-    @ManagedProperty(value="#{loginMB}")
+    @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
-    
-    @ManagedProperty(value="#{clientCaseMB}")
+    @ManagedProperty(value = "#{clientCaseMB}")
     private ClientCaseMB clientCaseMB;
-    
-    @ManagedProperty(value="#{messagesMB}")
+    @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB;
-    
     private List<ClientCase> clientCaseList = new ArrayList<>();
-    
     private List<ClientCase> awaitingClientCaseList = new ArrayList<>();
-    
     private List<ClientCase> currentClientCaseList = new ArrayList<>();
-    
     private List<ClientCase> finishedClientCaseList = new ArrayList<>();
-    
     private List<ClientCase> premiumClientCaseList = new ArrayList<>();
-    
     private List<ClientCase> allClientCaseList = new ArrayList<>();
-    
     private List<ClientCase> awaitingForMarketClientCaseList = new ArrayList<>();
-    
     private ClientCaseDAO caseDao = new ClientCaseDAO();
-
     private Converters converters = new Converters();
-    
     private ClientCase selectedCase;
-    
     private ClientCase lastSelectedCase;
-    
     private ClientCase awaitingSelectedCase;
-    
     private ClientCase currentSelectedCase;
-    
     private ClientCase finishedSelectedCase;
-    
     private ClientCase premiumSelectedCase;
-    
     private ClientCase awaitingForMarketSelectedCase;
-    
     private List<Set<String>> modelsEmploymentType = new ArrayList<>();
     private List<Set<String>> modelsBranch = new ArrayList<>();
-    
     private List<IncomeData> selectedCaseIncomeTable = new ArrayList<>();
-   
     private Integer newPoints;
-    
     private boolean requirementsFulfilled = false;
-    
+
     @PostConstruct
-    public void makeModels()
-    {
-        modelsEmploymentType.add( showAllClientsEmploymentTypes( loginMB.getClient() ) );
-        modelsBranch.add( showAllClientsBranches( loginMB.getClient() ) );
+    public void makeModels() {
+        modelsEmploymentType.add(showAllClientsEmploymentTypes(loginMB.getClient()));
+        modelsBranch.add(showAllClientsBranches(loginMB.getClient()));
     }
-    
-    public void fillTables()
-    {    
-        
+
+    public void fillTables() {
+
         finishedSelectedCase = null;
         awaitingSelectedCase = null;
         lastSelectedCase = null;
@@ -94,7 +70,7 @@ public class ClientMainPageMB implements Serializable {
         awaitingForMarketSelectedCase = null;
         currentSelectedCase = null;
         selectedCase = null;
-        
+
         reloadCases();
         reloadCases2();
         reloadCases3();
@@ -103,213 +79,199 @@ public class ClientMainPageMB implements Serializable {
         reloadCases6();
         reloadCases7();
         messagesMB.loadUnreadMessages();
-        checkRequirementsForNewApplication(); 
+        checkRequirementsForNewApplication();
     }
-   
-    public void reloadCases()
-    {
-        clientCaseList = caseDao.last5CasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases() {
+        clientCaseList = caseDao.last5CasesSelectedClient(loginMB.getClient().getIdClient());
     }
-        
-    public void reloadCases2()
-    {
-        awaitingClientCaseList = caseDao.awaitingCasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases2() {
+        awaitingClientCaseList = caseDao.awaitingCasesSelectedClient(loginMB.getClient().getIdClient());
     }
-    
-     public void reloadCases3()
-    {     
-        currentClientCaseList = caseDao.currentCasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases3() {
+        currentClientCaseList = caseDao.currentCasesSelectedClient(loginMB.getClient().getIdClient());
     }
-    
-     public void reloadCases4()
-    {
-        finishedClientCaseList = caseDao.finishedCasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases4() {
+        finishedClientCaseList = caseDao.finishedCasesSelectedClient(loginMB.getClient().getIdClient());
     }
-     
-     public void reloadCases5()
-    {
-        premiumClientCaseList = caseDao.premiumCasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases5() {
+        premiumClientCaseList = caseDao.premiumCasesSelectedClient(loginMB.getClient().getIdClient());
     }
-     
-    public void reloadCases6()
-    {
-        allClientCaseList = caseDao.allActiveCasesSelectedClient( loginMB.getClient().getIdClient() );
+
+    public void reloadCases6() {
+        allClientCaseList = caseDao.allActiveCasesSelectedClient(loginMB.getClient().getIdClient());
     }
-    
-    public void reloadCases7()
-    {
-        awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList( loginMB.getClient().getIdClient()) ;
+
+    public void reloadCases7() {
+        awaitingForMarketClientCaseList = caseDao.awaitingForMarketClientCaseList(loginMB.getClient().getIdClient());
     }
-    
-    public boolean isProfilNotFilled(){
-        return Algorithms.calculateProgress(loginMB.getClient().getIdClient())<60;
+
+    public boolean isProfilNotFilled() {
+        return Algorithms.calculateProgress(loginMB.getClient().getIdClient()) < 60;
     }
-    
-    public double giveMeConsultantAverage(int consultantId)
-    {
+
+    public double giveMeConsultantAverage(int consultantId) {
         ConsultantRatingDAO crdao = new ConsultantRatingDAO();
         ConsultantRating cr = crdao.getConsultantRatings(consultantId);
-        if(cr!=null){
-        return cr.getAverage();
+        if (cr != null) {
+            return cr.getAverage();
+        } else {
+            return 0;
         }
-        else{
-        return 0;
-        }
-        
+
     }
-     
-     public int countConsultantApplications(ClientCase cs)
-    { 
+
+    public int countConsultantApplications(ClientCase cs) {
         Set<Consultant> cons = cs.getConsultants();
         if (cons == null) {
             return 0;
-        }
-        else {
+        } else {
             return cons.size();
         }
-    }   
-        
-     public Set<String> showAllClientsEmploymentTypes(Client client)
-     {
+    }
+
+    public Set<String> showAllClientsEmploymentTypes(Client client) {
         HashSet<String> types = new HashSet<>();
-        if (client.getIncomes() != null)
-        {
-            for (Income i : client.getIncomes())
-            {
+        if (client.getIncomes() != null) {
+            for (Income i : client.getIncomes()) {
                 types.add(i.getEmploymentType().getShortcut());
             }
         }
-        if( client.getIncomeBusinessActivities() != null)
-        {
-            for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
-            {
+        if (client.getIncomeBusinessActivities() != null) {
+            for (IncomeBusinessActivity i : client.getIncomeBusinessActivities()) {
                 types.add(i.getEmploymentType().getShortcut());
             }
         }
-        
+
         return types;
     }
-     
-    public Set<String> showAllClientsBranches(Client client)
-    {
+
+    public Set<String> showAllClientsBranches(Client client) {
         HashSet<String> types = new HashSet<>();
-        if (client.getIncomes() != null)
-        {
-            for (Income i : client.getIncomes())
-            {
+        if (client.getIncomes() != null) {
+            for (Income i : client.getIncomes()) {
                 types.add(i.getBranch().getName());
             }
         }
-        if( client.getIncomeBusinessActivities() != null)
-        {
-            for (IncomeBusinessActivity i : client.getIncomeBusinessActivities())
-            {
+        if (client.getIncomeBusinessActivities() != null) {
+            for (IncomeBusinessActivity i : client.getIncomeBusinessActivities()) {
                 types.add(i.getBranch().getName());
             }
         }
-        
+
         return types;
-    }    
-    
-    public boolean showBIK(Client client)
-    {
-        if (client.getRequiredDocumentses().isEmpty())
-        {
+    }
+
+    public boolean showBIK(Client client) {
+        if (client.getRequiredDocumentses().isEmpty()) {
             return false;
-        }
-        else
-        {
+        } else {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            return rds.getBik() == null;  
-        }   
+            return rds.getBik() == null;
+        }
     }
-    
-    public void reload()
-    {
+
+    public void reload() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if (!facesContext.isValidationFailed() && !facesContext.isPostback())
-        {
+        if (!facesContext.isValidationFailed() && !facesContext.isPostback()) {
 
             fillTables();
         }
     }
-    
-    public void rowDoubleClick(ClientCase cs) throws IOException
-    {         
-        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
+
+    public void rowDoubleClick(ClientCase cs) throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase());
     }
     
-    
-    
-     public void backOffClientCaseList(){
-         CaseStatusDAO csdao = new CaseStatusDAO();
-         CaseStatus cs = csdao.read(8);
-         lastSelectedCase.setCaseStatus(cs);
-         caseDao.updateClientCase(lastSelectedCase);
-         lastSelectedCase=null;
-         
-         fillTables();
-     }
-    
-     public void backOffAwaiting(){
-         CaseStatusDAO csdao = new CaseStatusDAO();
-         CaseStatus cs = csdao.read(8);
-         awaitingSelectedCase.setCaseStatus(cs);
-         caseDao.updateClientCase(awaitingSelectedCase);
-         awaitingSelectedCase=null;
-         
-         fillTables();
-     }
-     
-     public void backOffCurrent(){
-         CaseStatusDAO csdao = new CaseStatusDAO();
-         CaseStatus cs = csdao.read(8);
-         currentSelectedCase.setCaseStatus(cs);
-         caseDao.updateClientCase(currentSelectedCase);
-         currentSelectedCase=null;
-         
-         reloadCases3();
-         reloadCases4();
+    public void backOffAwaitingMarket() {
+        CaseStatusDAO csdao = new CaseStatusDAO();
+        CaseStatus cs = csdao.read(8);
+        awaitingForMarketSelectedCase.setCaseStatus(cs);
+        caseDao.updateClientCase(awaitingForMarketSelectedCase);
+        awaitingForMarketSelectedCase = null;
 
-     }
+        fillTables();
+    }
+
+    public void backOffPremiumClientCase() {
+        CaseStatusDAO csdao = new CaseStatusDAO();
+        CaseStatus cs = csdao.read(8);
+        premiumSelectedCase.setCaseStatus(cs);
+        caseDao.updateClientCase(premiumSelectedCase);
+        premiumSelectedCase = null;
+
+        fillTables();
+    }
+
+    public void backOffClientCaseList() {
+        CaseStatusDAO csdao = new CaseStatusDAO();
+        CaseStatus cs = csdao.read(8);
+        lastSelectedCase.setCaseStatus(cs);
+        caseDao.updateClientCase(lastSelectedCase);
+        lastSelectedCase = null;
+
+        fillTables();
+    }
+
+    public void backOffAwaiting() {
+        CaseStatusDAO csdao = new CaseStatusDAO();
+        CaseStatus cs = csdao.read(8);
+        awaitingSelectedCase.setCaseStatus(cs);
+        caseDao.updateClientCase(awaitingSelectedCase);
+        awaitingSelectedCase = null;
+
+        fillTables();
+    }
+
+    public void backOffCurrent() {
+        CaseStatusDAO csdao = new CaseStatusDAO();
+        CaseStatus cs = csdao.read(8);
+        currentSelectedCase.setCaseStatus(cs);
+        caseDao.updateClientCase(currentSelectedCase);
+        currentSelectedCase = null;
+
+        reloadCases3();
+        reloadCases4();
+    }
+    
      
-     public void redirectNewApplication() throws IOException
-     {
-         if (requirementsFulfilled)
-         {
-              FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
-         }
-     }
-     
-     public void checkRequirementsForNewApplication()
-     {
-         ClientDAO clientDao = new ClientDAO();
-         Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
-         
-         if (client == null || client.getAddresses() == null || client.getAddresses().isEmpty() || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode().equals("") || ((Address) client.getAddresses().toArray()[0]).getRegion().getIdRegion().equals(0) || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null ))
-         {
-             requirementsFulfilled = false;
-         }
-         else
-         {
-             requirementsFulfilled = true;
-         }
-     }
+    
+
+    public void redirectNewApplication() throws IOException {
+        if (requirementsFulfilled) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("clientNewApplication.xhtml");
+        }
+    }
+
+    public void checkRequirementsForNewApplication() {
+        ClientDAO clientDao = new ClientDAO();
+        Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
+
+        if (client == null || client.getAddresses() == null || client.getAddresses().isEmpty() || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode().equals("") || ((Address) client.getAddresses().toArray()[0]).getRegion().getIdRegion().equals(0) || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null)) {
+            requirementsFulfilled = false;
+        } else {
+            requirementsFulfilled = true;
+        }
+    }
     //IF THERE WILL BE VIEWED CASE BEAN SOMEDAY THIS SHOULD BE COPIED THERE  //TODO
-    public List<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet)
-    {
+
+    public List<ClientCase> castClientCaseSetToArray(Set<ClientCase> csSet) {
         return new ArrayList(csSet);
     }
-    
-    public void addPoints(){
-        Client currentClient=loginMB.getClient();
-        int currentPoints=currentClient.getPoints();
-        currentClient.setPoints(currentPoints+newPoints);
-        ClientDAO cdao=new ClientDAO();
-        cdao.update(currentClient);   
-        newPoints=null;
+
+    public void addPoints() {
+        Client currentClient = loginMB.getClient();
+        int currentPoints = currentClient.getPoints();
+        currentClient.setPoints(currentPoints + newPoints);
+        ClientDAO cdao = new ClientDAO();
+        cdao.update(currentClient);
+        newPoints = null;
     }
-    
+
     public LoginMB getLoginMB() {
         return loginMB;
     }
@@ -326,7 +288,6 @@ public class ClientMainPageMB implements Serializable {
         this.clientCaseList = clientCaseList;
     }
 
-    
     public ClientCaseDAO getCaseDao() {
         return caseDao;
     }
@@ -334,7 +295,6 @@ public class ClientMainPageMB implements Serializable {
     public void setCaseDao(ClientCaseDAO caseDao) {
         this.caseDao = caseDao;
     }
-
 
     public List<Set<String>> getModelsEmploymentType() {
         return modelsEmploymentType;
@@ -456,7 +416,6 @@ public class ClientMainPageMB implements Serializable {
         this.clientCaseMB = clientCaseMB;
     }
 
-
     public void setNewPoints(Integer newPoints) {
         this.newPoints = newPoints;
     }
@@ -504,7 +463,4 @@ public class ClientMainPageMB implements Serializable {
     public void setAwaitingForMarketSelectedCase(ClientCase awaitingForMarketSelectedCase) {
         this.awaitingForMarketSelectedCase = awaitingForMarketSelectedCase;
     }
-    
-    
-    
 }
