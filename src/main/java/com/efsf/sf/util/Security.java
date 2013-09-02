@@ -1,10 +1,12 @@
 package com.efsf.sf.util;
 
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.codec.binary.Hex;
 
 public class Security {
     
@@ -27,6 +29,19 @@ public class Security {
             hashtext = "0" + hashtext;
         }
         return hashtext;
+    }
+    
+    public static String md5(String text){
+        MessageDigest m = null;
+        try {
+            m = MessageDigest.getInstance("MD5"); 
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        m.update(text.getBytes(Charset.forName("UTF8")));
+        byte[] resultByte = m.digest();
+        return new String(Hex.encodeHex(resultByte));
     }
     
     
