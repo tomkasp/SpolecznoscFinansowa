@@ -13,6 +13,16 @@ th.ui-state-default{
      
 }
 
+button.ui-state-hover, button.ui-state-active  {
+     background-color: #ADA6A5;
+     background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#ADA6A5));
+     background-image: -webkit-linear-gradient(top, #FFFFFF, #ADA6A5);
+     background-image: -moz-linear-gradient(top, #FFFFFF, #ADA6A5);
+     background-image: -ms-linear-gradient(top, #FFFFFF, #ADA6A5);
+     background-image: -o-linear-gradient(top, #FFFFFF, #ADA6A5);
+     background-image: linear-gradient(to bottom, #FFFFFF, #ADA6A5);
+}
+
 .ui-widget-content.ui-datatable-even{
     background: none repeat scroll 0 0 #E7E3E3;
     text-align: center;
