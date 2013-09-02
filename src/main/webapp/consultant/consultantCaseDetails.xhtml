@@ -72,7 +72,7 @@
 
                         <div class="rightInlineBox">
                             <h:form id="rightColumn">
-                                <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1 and caseViewMB.selectedClientCase.consultant eq null}" >
+                                <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
                                     <h:panelGroup rendered="#{!clientCaseMB.doesAppliedToCase(loginMB.consultant, caseViewMB.selectedClientCase)}" >
                                         <h4> WYŚLIJ SWOJE ZGŁOSZENIE </h4>
                                         <div class="solidText"> 
@@ -111,7 +111,7 @@
                                         <p:commandButton styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
                                     </h:panelGroup>
                                 </h:panelGroup>
-                                    <h:panelGroup style="color: red" rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(caseViewMB.selectedClientCase.consultant eq null)}" >
+                                    <h:panelGroup style="color: red" rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1 and !(caseViewMB.selectedClientCase.consultant eq null) and (loginMB.consultant.idConsultant == caseViewMB.selectedClientCase.consultant.idConsultant)}" >
                                         <h4> PODEJMIJ DECYZJĘ </h4>
                                         <div class="solidText"> 
                                             Dana sprawa jest sprawą Premium i klient chce właśnie Ciebie do prowadzenia sprawy. <br /><br /> Podejmij decyzję teraz. Pamiętaj odrzucenie sprawy premium skutkuje w utracie rankingu. 
