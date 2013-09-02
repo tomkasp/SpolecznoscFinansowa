@@ -4,6 +4,7 @@ import com.efsf.sf.bean.DictionaryMB;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.collection.IncomeData;
 import com.efsf.sf.sql.dao.AddressDAO;
+import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.EducationDAO;
 import com.efsf.sf.sql.dao.IncomeBusinessActivityDAO;
@@ -58,13 +59,15 @@ public class ClientSettingsMB implements Serializable {
     private Income income = new Income();
     private IncomeBusinessActivity business = new IncomeBusinessActivity();
     private Set<Income> incomeSet = new HashSet<>();
-    private Set<IncomeBusinessActivity> businessSet = new HashSet<>();
-    private boolean tableEmpty = true;
+    private Set<IncomeBusinessActivity> businessSet = new HashSet<>();   
     private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
     private int idCounter = 0;
     private String email;
+    
+    private boolean areRequired = false;
+    private boolean tableEmpty = true;
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
@@ -108,9 +111,15 @@ public class ClientSettingsMB implements Serializable {
 
             incomeTable.add(incomeData);
             businessSet.add(iba);
+            
 
         }
         email = client.getUser().getEmail();
+        
+        ClientCaseDAO cdao = new ClientCaseDAO();
+        areRequired = cdao.doesClientHaveActiveCases(idClient);
+        
+        tableEmpty = (incomeTable.isEmpty()) ? true : false;
 
     }
 
@@ -279,6 +288,7 @@ public class ClientSettingsMB implements Serializable {
                 }
             }
             System.out.println(incomeTable.size());
+            tableEmpty = (incomeTable.isEmpty()) ? true : false;
 
         }
 
@@ -522,5 +532,13 @@ public class ClientSettingsMB implements Serializable {
 
     public void setConfirmNewPassword(String confirmNewPassword) {
         this.confirmNewPassword = confirmNewPassword;
+    }
+
+    public boolean isAreRequired() {
+        return areRequired;
+    }
+
+    public void setAreRequired(boolean areRequired) {
+        this.areRequired = areRequired;
     }
 }
