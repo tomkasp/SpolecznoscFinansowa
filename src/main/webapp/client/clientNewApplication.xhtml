@@ -26,13 +26,15 @@
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
                             <h:form>  
                                 <h:panelGroup>
-                                    <div class="field"> <h:outputText class="label" value="Data wystawienia na giełdę"/>  
+                                    <div class="field"> 
+                                        <h:outputText class="label" value="Data rozpoczęcia"/>  
                                         <p:calendar mindate="#{clientCaseMB.currentDate}" required="true" id="begin-date"  yearRange="2005:2015" navigator="true"   value="#{clientCaseMB.clientCase.beginDate}">
                                         </p:calendar>
-                                        <h:message for="consolidationValue" errorClass="invalid" id="beginDate" />
+                                        <h:message for="begin-date" errorClass="invalid" id="beginDateMessage" />
                                     </div>
 
-                                    <div class="field" > <h:outputText class="label" value="Czas trwania"/>  
+                                    <div class="field"  > 
+                                        <h:outputText class="label" value="Czas trwania"/>  
                                         <p:selectOneMenu id="caseDuration" style="width:214px" required="true" value="#{clientCaseMB.caseDuration}">
                                             <f:selectItem itemLabel="" itemValue=""/>
                                             <f:selectItem itemLabel="1 dzień" itemValue="1"/>
@@ -41,7 +43,7 @@
                                             <f:selectItem itemLabel="7 dni" itemValue="7"/>
                                             <f:selectItem itemLabel="14 dni" itemValue="14"/>
                                         </p:selectOneMenu> 
-                                        <h:message for="caseDuration" errorClass="invalid"/>
+                                        <h:message for="caseDuration" errorClass="invalid" id="caseDurationMessage"/>
                                     </div>
 
                                     <div class="field"> 
@@ -114,9 +116,6 @@
                                 </p:dialog>  
 
                                 <h:commandButton class="greenButton wideButton marginLR30" style="float: right;" action="false"  rendered="#{!loginMB.activeAddingApp}" value="Dodaj do giełdy" onclick="dlg1.show();" />
-
-                     
-                                
                                 <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.activeAddingApp}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
                             
                             </h:form>        

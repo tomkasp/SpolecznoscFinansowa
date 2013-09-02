@@ -170,7 +170,8 @@
                                 <h4>DANE ADRESOWE</h4>
 
 
-                                <div class="field"> <h:outputText class="label" value="Województwo "/> 
+                                <div class="field"> 
+                                    <h:outputText class="label" value="Województwo "/> 
                                     <p:selectOneMenu id="region" style="width:214px"  value="#{clientSettingsMB.idMainRegion}">
                                         <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />
                                         <f:validator disabled="#{!createClientMB.areRequired}" validatorId="com.efsf.sf.util.ComboBoxNoInputValidator" />

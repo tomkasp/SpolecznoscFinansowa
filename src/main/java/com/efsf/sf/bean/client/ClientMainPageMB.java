@@ -238,7 +238,19 @@ public class ClientMainPageMB implements Serializable {
     {         
         FacesContext.getCurrentInstance().getExternalContext().redirect("clientCaseDetails.xhtml?clientCaseId=" + cs.getIdClientCase()  ); 
     }
-     
+    
+    
+    
+     public void backOffClientCaseList(){
+         CaseStatusDAO csdao = new CaseStatusDAO();
+         CaseStatus cs = csdao.read(8);
+         lastSelectedCase.setCaseStatus(cs);
+         caseDao.updateClientCase(lastSelectedCase);
+         lastSelectedCase=null;
+         
+         fillTables();
+     }
+    
      public void backOffAwaiting(){
          CaseStatusDAO csdao = new CaseStatusDAO();
          CaseStatus cs = csdao.read(8);
