@@ -63,10 +63,14 @@ public class AgreementPDFItext {
 
         content.setFontAndSize(bf, 14);
 
+        try{
         content.showTextAligned(PdfContentByte.ALIGN_LEFT, consultant.getName() +" "+ consultant.getLastName() , 120, 550, 0);
+        }catch(NullPointerException ex){}
         
+        try{
         content.showTextAligned(PdfContentByte.ALIGN_LEFT, address.getStreet() + " " + address.getHouseNumber() + " " + address.getCity() + " " + address.getZipCode()  , 120, 510, 0);
-    
+        }catch(NullPointerException ex){}
+        
         content.endText();
         try {
             try {
