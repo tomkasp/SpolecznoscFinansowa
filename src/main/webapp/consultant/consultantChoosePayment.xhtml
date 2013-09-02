@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Wybierz typ abonamentu </ui:define> 
+
+            <ui:define name="content">
+                
+
+                <div class="contentBox">
+
+                    <h4>Wybierz rozdzaj abonamentu</h4>    
+
+                    <form action="https://www.platnosci.pl/paygw/ISO/NewPayment">
+                        <input type="hidden" name="first_name" value="Adam"></input>
+                        <input type="hidden" name="last_name" value="Nowak"></input>
+                        <input type="hidden" name="email" value="adam.nowak7@o2.pl"></input>
+                        <input type="hidden" name="pos_id" value="145366"></input>
+                        <input type="hidden" name="pos_auth_key" value="BKnQU9G"></input>
+                        <input type="hidden" name="session_id" value="453454"></input>
+                        <input type="hidden" name="amount" value="1000"></input>
+                        <input type="hidden" name="desc" value="Opłata za abonament SpolecznoscFinansowa.pl"></input>
+                        <input type="hidden" name="client_ip" value="79.110.203.149"></input>                       
+                        <input type="submit" value="Kup"></input>
+                    </form>
+                </div>
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+    </body>
+</html>
