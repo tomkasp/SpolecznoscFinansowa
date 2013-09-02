@@ -48,7 +48,7 @@ public class ClientCaseMB implements Serializable {
     private Obligation selectedObligation;
     private ArrayList<CaseStatus> statusModel = new ArrayList();
     private ClientCase currentlyRatedCase;
-    private int caseDuration;
+    private Integer caseDuration;
 
     /**
      * Creates a new instance of ClientCaseMB
@@ -143,7 +143,7 @@ public class ClientCaseMB implements Serializable {
                 login.setActiveAddingApp(false);
             }
             clientCase = new ClientCase();
-
+            caseDuration=null;
         }
         return "/client/clientMainPage.xhtml?faces-redirect=true";
     }
@@ -365,11 +365,13 @@ public class ClientCaseMB implements Serializable {
         this.currentlyRatedCase = currentlyRatedCase;
     }
 
-    public int getCaseDuration() {
+    public Integer getCaseDuration() {
         return caseDuration;
     }
 
-    public void setCaseDuration(int caseDuration) {
+    public void setCaseDuration(Integer caseDuration) {
         this.caseDuration = caseDuration;
     }
+
+    
 }
