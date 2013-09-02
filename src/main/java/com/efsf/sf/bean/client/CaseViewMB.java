@@ -239,6 +239,7 @@ public class CaseViewMB implements Serializable{
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
         selectedClientCase.setConsultant(selectedPremiumConsultant);
+        
         caseDao.updateClientCase(selectedClientCase);  
     }
     
@@ -246,6 +247,8 @@ public class CaseViewMB implements Serializable{
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
         CaseStatusDAO statusDao = new CaseStatusDAO();
+        
+        
         selectedClientCase.setConsultant(selectedConsultant);
         selectedClientCase.setCaseStatus(statusDao.read(2));
         selectedClientCase.setConsultants(null);
