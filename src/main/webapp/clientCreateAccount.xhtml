@@ -66,10 +66,7 @@
                                     <h:message for="email" errorClass="invalid" id="emailMessage" />
                                 </div>
 
-
-                            </div>
-
-                            <div class="field">
+                                <div class="field">
                                 <div class="label">
                                     <h:outputText value="Akceptuję"/>
                                     <h:link class="redUnderlineLink" value="Regulamin" />
@@ -77,7 +74,7 @@
                                 <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
                                     <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
                                 </p:selectBooleanCheckbox>
-                                <h:message style="margin-right:30px" for="rules" class="invalid" id="rulesMessage" />
+                                <h:message for="rules" class="invalid" id="rulesMessage" />
                             </div> 
                             <div class="field">
                                 <div class="label">
@@ -87,14 +84,18 @@
                                 <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
                                     <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
                                 </p:selectBooleanCheckbox>
-                                <h:message style="margin-right:30px" for="policy" class="invalid" id="policyMessage" />
+                                <h:message for="policy" class="invalid" id="policyMessage" />
                             </div>
 
-                            <h:link class="blueButton floatL" value="Chcę zarejestrować się jako doradca" outcome="/consultantCreateAccount" />
+                            <div style="float: right; margin: 20px 0;" >
+                                <h:button class="blueButton floatL" value="Zarejestruj się jako doradca" outcome="/consultantCreateAccount" />
                             
                             <h:commandButton class ="greenButton wideButton floatL marginL20" value="Załóż konto" action="#{createClientMB.createClientAccount()}" >
                                 <f:ajax execute="@form" render="@form"/>
                             </h:commandButton>              
+                            </div>
+
+                       </div>
 
                         </h:form>
                         

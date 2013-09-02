@@ -126,6 +126,9 @@
                             </p:dataTable>
 
                             <h:panelGroup id="lastFormButtonBar">
+                                <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffClientCaseList.show()" />
+                                </h:commandButton>
                                 <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
                             </h:panelGroup>
@@ -203,6 +206,9 @@
                             </p:dataTable>
 
                             <h:panelGroup id="allCasesButtonBar">
+                                <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffClientCaseList.show()" />
+                                </h:commandButton>
                                 <button class="topMenuButton greyButton wideButton" type="reset" id="show">Pokaż tylko ostatnie</button>
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
                             </h:panelGroup>
@@ -210,6 +216,16 @@
                         </h:form>
                     </div>    
 
+                    <p:dialog id="dialog4" widgetVar="backOffClientCaseList" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <h:form>
+                            <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
+                            <div>
+                                <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffClientCaseList() }"/>
+                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaiting.hide()"></h:button> 
+                            </div>
+                        </h:form>
+                    </p:dialog>
+                    
                 </div>
 
 
@@ -294,7 +310,7 @@
 
                     </h:form> 
 
-                    <p:dialog id="dialog2" widgetVar="backOffAwaiting" header="Dodaj punkty" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                    <p:dialog id="dialog2" widgetVar="backOffAwaiting" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
@@ -381,7 +397,7 @@
                         </h:panelGroup>
                     </h:form>
                     
-                    <p:dialog id="dialog3" widgetVar="backOffCurrent" header="Dodaj punkty" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                    <p:dialog id="dialog3" widgetVar="backOffCurrent" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
