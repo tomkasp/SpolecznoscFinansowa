@@ -17,7 +17,8 @@
 
                 <script>
                     
-                    $(document).ready(function(){
+                    $(document).ready(
+                    function(){
                         $("#uploadButton1").click(function(){
                             $("#upload1").toggle();
                         });
@@ -165,7 +166,7 @@
                                 </p:dataTable>
 
                                 <p:commandLink styleClass="greyButton floatR" value="Dodaj" oncomplete="income.show()"  /> 
-
+                                
                             </div>
 
                             <div class="marginLR30" >
@@ -264,7 +265,6 @@
                                     <h:outputText class="label" value="Obecne hasło"/>  
                                     <h:inputSecret required="true" id="cPassword"  value="#{clientSettingsMB.currentPassword}" validator="#{clientSettingsMB.validateCurrentPassword}"> 
                                         <f:validateLength minimum="8" maximum="20" />
-                                        <p:ajax event="keyup" update="currentPasswordMessage"/>
                                     </h:inputSecret>
                                     <h:message for="cPassword" errorClass="invalid" id="currentPasswordMessage" />
                                 </div>

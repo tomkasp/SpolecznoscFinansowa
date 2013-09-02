@@ -30,7 +30,6 @@
                         });
                     });
                     
-                   
                 </script>
 
                 <h:form>
@@ -59,7 +58,7 @@
                     <div id="last">
 
                         <h:form id="lastForm">
-                            
+
                             <p:dataTable id="lastCases" value="#{clientMainPageMB.clientCaseList}" var="row" rowKey="#{row}" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.lastSelectedCase}" selectionMode="single" >
 
                                 <p:ajax event="rowSelect" update=":lastForm:lastFormButtonBar"/> 
@@ -122,15 +121,18 @@
                                     <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                                 </p:column> 
 
+                                <p:column headerText="Ilość wyświetleń">  
+                                    <h:outputText value="#{row.viewCounter}" />
+                                </p:column>    
 
                             </p:dataTable>
 
                             <h:panelGroup id="lastFormButtonBar">
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
-                                <f:ajax event="click" onevent="backOffClientCaseList.show()" />
+                                    <f:ajax event="click" onevent="backOffClientCaseList.show()" />
                                 </h:commandButton>
-                                <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
+                                <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>  
                             </h:panelGroup>
 
                         </h:form>
@@ -202,30 +204,131 @@
                                     <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
                                 </p:column> 
 
+                                <p:column headerText="Ilość wyświetleń">  
+                                    <h:outputText value="#{row.viewCounter}" />
+                                </p:column>    
+
 
                             </p:dataTable>
 
                             <h:panelGroup id="allCasesButtonBar">
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
-                                <f:ajax event="click" onevent="backOffClientCaseList.show()" />
+                                    <f:ajax event="click" onevent="backOffClientCaseList.show()" />
                                 </h:commandButton>
-                                <button class="topMenuButton greyButton wideButton" type="reset" id="show">Pokaż tylko ostatnie</button>
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
+                                <button class="topMenuButton greyButton wideButton" type="reset" id="show">Pokaż tylko ostatnie</button>
                             </h:panelGroup>
 
                         </h:form>
                     </div>    
 
-                    <p:dialog id="dialog4" widgetVar="backOffClientCaseList" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                    <p:dialog id="dialog2" widgetVar="backOffClientCaseList" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
                                 <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffClientCaseList() }"/>
-                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaiting.hide()"></h:button> 
+                                <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffClientCaseList.hide()" type="button"/>
                             </div>
                         </h:form>
                     </p:dialog>
-                    
+
+                </div>
+
+                <div>
+
+                    <h:form id="premiumForm">
+
+                        <h4>PREMIUM</h4>
+
+                        <p:dataTable id="premiumCases" value="#{clientMainPageMB.premiumClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.premiumSelectedCase}" selectionMode="single" >
+
+                            <p:ajax event="rowSelect" update=":premiumForm:premiumCasesButtonBar"/> 
+                            <p:ajax event="rowUnselect"  update=":premiumForm:premiumCasesButtonBar"/> 
+                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}"/>
+
+
+
+                            <p:column headerText="Data dodania">    
+                                <h:outputText  value="#{row.beginDate}">
+                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
+                                </h:outputText>  
+                            </p:column>  
+
+                            <p:column headerText="Numer sprawy">  
+                                <h:outputText  value="#{row.idClientCase}"/>
+                            </p:column>  
+
+                            <p:column headerText="Postęp">  
+                                <h:outputText  value="#{row.phase}"/>
+                            </p:column> 
+
+                            <p:column headerText="Rodzaj kredytu"  >
+                                <h:outputText  value="#{row.productType.name}"/>
+                            </p:column> 
+
+                            <p:column headerText="BIK">
+                                <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
+                            </p:column> 
+
+                            <p:column headerText="Kod pocztowy">  
+                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
+                            </p:column>
+
+                            <p:column headerText="Wiek">  
+                                <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                            </p:column>
+
+                            <p:column headerText="Typ zatrudnienia">
+                                <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
+                                    <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Branża"> 
+                                <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
+                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
+                                    <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
+                                </h:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Trudność kredytu"> 
+                                <h:outputText  value="#{row.difficulty}"/>
+                            </p:column>
+
+                            <p:column headerText="Ilość doradców"> 
+                                <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
+                            </p:column>
+
+                            <p:column headerText="Koniec aukcji"> 
+                                <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
+                            </p:column> 
+
+                            <p:column headerText="Ilość wyświetleń">  
+                                <h:outputText value="#{row.viewCounter}" />
+                            </p:column>      
+
+                        </p:dataTable>
+
+                        <h:panelGroup id="premiumCasesButtonBar">
+                            <h:commandButton disabled="#{empty clientMainPageMB.premiumSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffPremiumClientCase.show()" />
+                            </h:commandButton>
+                            <h:commandButton disabled="#{empty clientMainPageMB.premiumSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}" />
+                        </h:panelGroup>
+
+                    </h:form>
+
+                    <p:dialog id="dialog3" widgetVar="backOffPremiumClientCase" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <h:form>
+                            <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
+                            <div>
+                                <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffPremiumClientCase() }"/>
+                                <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffPremiumClientCase.hide()" type="button"/>
+                            </div>
+                        </h:form>
+                    </p:dialog>
+
                 </div>
 
 
@@ -304,18 +407,17 @@
                             <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
                                 <f:ajax event="click" onevent="backOffAwaiting.show()" />
                             </h:commandButton>
-
                             <h:commandButton disabled="#{empty clientMainPageMB.awaitingSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingSelectedCase)}" />
                         </h:panelGroup>
 
                     </h:form> 
 
-                    <p:dialog id="dialog2" widgetVar="backOffAwaiting" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                    <p:dialog id="dialog4" widgetVar="backOffAwaiting" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
-                            <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
-                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaiting.hide()"></h:button> 
+                                <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaiting() }"/>
+                                <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaiting.hide()" type="button"/>
                             </div>
                         </h:form>
                     </p:dialog>
@@ -389,20 +491,20 @@
                         </p:dataTable>
 
                         <h:panelGroup id="currentCasesButtonBar">
-                            <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                            <h:commandButton rendered="false" disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
                                 <f:ajax event="click" onevent="backOffCurrent.show()" />
                             </h:commandButton>
-                            <h:button disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
                             <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
+                            <h:button disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" outcome="/client/clientMainPage"/>
                         </h:panelGroup>
                     </h:form>
-                    
-                    <p:dialog id="dialog3" widgetVar="backOffCurrent" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+
+                    <p:dialog id="dialog5" widgetVar="backOffCurrent" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
                         <h:form>
                             <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
                             <div>
-                            <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
-                            <h:button class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffCurrent.hide()"></h:button> 
+                                <h:commandButton  class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffCurrent() }"/>
+                                <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffCurrent.hide()" type="button"/>
                             </div>
                         </h:form>
                     </p:dialog>
@@ -496,105 +598,15 @@
                         </p:dataTable>
 
                         <h:panelGroup id="finishedCasesButtonBar">
-                            <h:button disabled="#{empty clientMainPageMB.finishedSelectedCase}"  class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                             <h:commandButton  disabled="#{empty clientMainPageMB.finishedSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}" />
+                            <h:button disabled="#{empty clientMainPageMB.finishedSelectedCase}"  class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                         </h:panelGroup>
-
 
                     </h:form>  
 
                 </div>
 
-                <div>
 
-                    <h:form id="premiumForm">
-
-                        <h4>PREMIUM</h4>
-
-                        <p:dataTable id="premiumCases" value="#{clientMainPageMB.premiumClientCaseList}" rowKey="#{row.idClientCase}"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{clientMainPageMB.premiumSelectedCase}" selectionMode="single" >
-
-                            <p:ajax event="rowSelect" update=":premiumForm:premiumCasesButtonBar"/> 
-                            <p:ajax event="rowUnselect"  update=":premiumForm:premiumCasesButtonBar"/> 
-                            <p:ajax event="rowDblselect"  listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}"/>
-
-                            
-                            
-                            <p:column headerText="Data dodania">    
-                                <h:outputText  value="#{row.beginDate}">
-                                    <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
-                                </h:outputText>  
-                            </p:column>  
-
-                            <p:column headerText="Numer sprawy">  
-                                <h:outputText  value="#{row.idClientCase}"/>
-                            </p:column>  
-
-                            <p:column headerText="Postęp">  
-                                <h:outputText  value="#{row.phase}"/>
-                            </p:column> 
-
-                            <p:column headerText="Rodzaj kredytu"  >
-                                <h:outputText  value="#{row.productType.name}"/>
-                            </p:column> 
-
-                            <p:column headerText="BIK">
-                                <h:outputText  value="#{clientMainPageMB.showBIK(row.client) ? 'TAK' : 'NIE' }"/>                         
-                            </p:column> 
-
-                            <p:column headerText="Kod pocztowy">  
-                                <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
-                            </p:column>
-
-                            <p:column headerText="Wiek">  
-                                <h:outputText  value="#{clientMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
-                            </p:column>
-
-                            <p:column headerText="Typ zatrudnienia">
-                                <h:outputText rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() == 1}" value="#{clientMainPageMB.modelsEmploymentType.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsEmploymentType.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsEmploymentType.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Branża"> 
-                                <h:outputText rendered="#{clientMainPageMB.modelsBranch.get(0).size() == 1}" value="#{clientMainPageMB.modelsBranch.get(0).toArray()[0]}"/>
-                                <h:selectOneMenu rendered="#{clientMainPageMB.modelsBranch.get(0).size() > 1}" value=" ">
-                                    <f:selectItems value="#{clientMainPageMB.modelsBranch.get(0)}" />
-                                </h:selectOneMenu>
-                            </p:column>
-
-                            <p:column headerText="Trudność kredytu"> 
-                                <h:outputText  value="#{row.difficulty}"/>
-                            </p:column>
-
-                            <p:column headerText="Ilość doradców"> 
-                                <h:outputText value="#{clientMainPageMB.countConsultantApplications(row)}" />
-                            </p:column>
-
-                            <p:column headerText="Koniec aukcji"> 
-                                <h:outputText  value="#{clientMainPageMB.converters.hoursLeft(row.endDate)}"/>        
-                            </p:column> 
-
-                            <p:column headerText="Ilość wyświetleń">  
-                                <h:outputText value="#{row.viewCounter}" />
-                            </p:column>      
-
-                            <p:column style="background:  #55b867;" headerText="Wybierz/zmień doradcę">  
-
-                                <h:outputText value=" " />
-
-                            </p:column>      
-
-
-                        </p:dataTable>
-
-                        <h:panelGroup id="premiumCasesButtonBar">
-                            <h:commandButton disabled="#{empty clientMainPageMB.premiumSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.premiumSelectedCase)}" />
-                        </h:panelGroup>
-
-                    </h:form>
-
-                </div>
 
                 <div id="awaitingMarket" >
 
@@ -668,10 +680,23 @@
                         </p:dataTable>
 
                         <h:panelGroup id="awaitingMarketTableButtonBar">
+                            <h:commandButton disabled="#{empty clientMainPageMB.awaitingForMarketSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
+                                <f:ajax event="click" onevent="backOffAwaitingMarket.show()" />
+                            </h:commandButton>
                             <h:commandButton disabled="#{empty clientMainPageMB.awaitingForMarketSelectedCase}" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.awaitingForMarketSelectedCase)}" />
                         </h:panelGroup>
 
                     </h:form>
+                    
+                    <p:dialog id="dialog6" widgetVar="backOffAwaitingMarket" header="Wycofaj sprawe" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
+                        <h:form>
+                            <h:outputText value="Czy napewno chcesz wycofać sprawę?"/>
+                            <div>
+                                <h:commandButton class="topMenuButton wideButton greyButton marginL20" value="Wycofaj" action="#{ clientMainPageMB.backOffAwaitingMarket() }"/>
+                                <h:commandButton class="topMenuButton wideButton greyButton" value="Anuluj" onclick="backOffAwaitingMarket.hide()" type="button"/>
+                            </div>
+                        </h:form>
+                    </p:dialog>
 
                 </div>
 
