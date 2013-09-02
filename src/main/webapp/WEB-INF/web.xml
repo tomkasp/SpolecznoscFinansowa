@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
     <context-param>
         <param-name> javax.faces.PROJECT_STAGE </param-name>
         <param-value>Development</param-value>
@@ -13,21 +12,19 @@
         <param-name> com.sun.faces.enableViewStateIdRendering </param-name>
         <param-value>false</param-value>
     </context-param>
-     
     <context-param>
         <param-name>com.sun.faces.autoCompleteOffOnViewState</param-name>
         <param-value>false</param-value>
     </context-param>
-    
     <context-param>
         <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
         <param-value>true</param-value>
     </context-param>
-    
     <context-param>
-         <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
-         <param-value>false</param-value>
+        <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
+        <param-value>false</param-value>
     </context-param>
+    
     
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -46,23 +43,18 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-    
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error.xhtml</location>
     </error-page>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/error.xhtml</location>
     </error-page>
-   
-    
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
     </filter>
-    
     <filter>
         <filter-name>LoginClientFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.LoginClientFilter</filter-class>
@@ -71,7 +63,6 @@
         <filter-name>LoginClientFilter</filter-name>
         <url-pattern>/client/*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>LoginConsultantFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.LoginConsultantFilter</filter-class>
@@ -80,7 +71,6 @@
         <filter-name>LoginConsultantFilter</filter-name>
         <url-pattern>/consultant/*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>LoginAdminFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.LoginAdminFilter</filter-class>
@@ -89,7 +79,6 @@
         <filter-name>LoginAdminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
- 
     <filter>
         <filter-name>LoginCommonFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.LoginCommonFilter</filter-class>
@@ -98,7 +87,6 @@
         <filter-name>LoginCommonFilter</filter-name>
         <url-pattern>/common/*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>NoLoginFilter</filter-name>
         <filter-class>com.efsf.sf.util.filter.NoLoginFilter</filter-class>
@@ -111,7 +99,6 @@
         <filter-name>NoLoginFilter</filter-name>
         <url-pattern>/index.xhtml</url-pattern>
     </filter-mapping>
- 
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
@@ -123,6 +110,8 @@
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping>
-  
+    </filter-mapping> 
+    
+
+    
 </web-app>
