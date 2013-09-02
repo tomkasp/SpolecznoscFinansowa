@@ -318,8 +318,10 @@ public class ClientMainPageMB implements Serializable {
 
     public void addPoints() {
         Client currentClient = loginMB.getClient();
+        
         int currentPoints = currentClient.getPoints();
         currentClient.setPoints(currentPoints + newPoints);
+        
         ClientDAO cdao = new ClientDAO();
         cdao.update(currentClient);
         newPoints = null;
