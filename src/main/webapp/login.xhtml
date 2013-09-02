@@ -41,7 +41,7 @@
                 <div class="contentBox" style="min-height: 50px;">
 
 
-                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />  
+                    <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" globalOnly="true"/>  
 
                     <div  class="shadow" style="width: 38%; margin: auto; margin-top: 65px; padding: 20px; border-radius: 8px; height: 210px;"> 
 
@@ -57,6 +57,8 @@
                                         <f:validator validatorId="LoginValidator" />
                                         <f:attribute name="password" value="#{password}" />
                                     </h:inputText>
+                                    <h:message style=" float: left; margin-left: 160px;" class="label" for="email" errorClass="invalid" id="emailMessage" />
+                  
                                 </div>
 
                                 <div class="field"> 
@@ -64,6 +66,8 @@
                                     <h:inputSecret id="password" style="width: 207px;" onkeypress="if (event.keyCode == 13) { document.getElementById('logowanie:subbmit').click(); return false; }" value="#{loginMB.password}" required="true"  
                                                    binding="#{password}">
                                     </h:inputSecret>
+                                    <h:message style=" float: left; margin-left: 160px;" class="label" for="password" errorClass="invalid" id="passwordMessage" />
+                  
                                 </div>
 
                                 <div class="field"> 
@@ -90,13 +94,15 @@
                             <div class="field"> 
                             
                             <h:outputText class="label" value="E-mail:"/> 
-                            <h:inputText  style="width: 207px;" value="#{loginMB.email}" required="true">
+                            <h:inputText id="remindEmail" style="width: 207px;" value="#{loginMB.email}" required="true">
                                  <f:validator validatorId="LoginValidator" />
                             </h:inputText>
+                            <h:message style=" float: left; margin-left: 160px;" class="label" for="remindEmail" errorClass="invalid" id="passwordMessage" />
+                  
                             </div>
-                                <div class="field" style="margin-top: 70px;"> 
-                            <a id="remindButton" href="javascript:void(0);" class="greyButton" style="margin-right: 5px; width: 110px; text-align: center; " >Wstecz</a>
-                            <h:commandLink  style="width: 175px; text-align: center;" class="blueButton floatR" value="Wyślij" action="#{loginMB.login()}"/>
+                            <div class="field" style="margin-top: 70px;"> 
+                            <a id="remindButton" href="javascript:void(0);" class="greyButton" style=" margin-right: 5px; width: 110px; text-align: center; " >Wstecz</a>
+                            <h:commandLink style="width: 175px; text-align: center;" class="blueButton floatR" value="Wyślij" action="#{loginMB.login()}" />
                             </div>
                             
                             </h:form>
