@@ -21,7 +21,7 @@ public class MessageDAO extends GenericDao<Message>{
 
         lista = session.createQuery("from Message where ((fk_toUser="+userId+" AND fk_fromUser="
                 +userId2+") OR (fk_toUser="+userId2+" AND fk_fromUser="+userId+"))"
-                + " AND isSystem=0").list();
+                + " AND isSystem=0 order by sentDate").list();
 
         session.getTransaction().commit();
         }finally{
