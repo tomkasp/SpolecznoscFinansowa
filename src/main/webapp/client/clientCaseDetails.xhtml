@@ -166,7 +166,7 @@
                                   
                         
                         
-                         <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="760" height="500" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
+                         <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="750" height="520" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
                                        <h4>#{caseViewMB.fetchTopProductForProductDetails(caseViewMB.selectedProduct).institution.name} </h4>
                                        
                                        <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
@@ -181,7 +181,7 @@
                                        </div>
                                        <div class="pdetailsItem">
                                             <h:outputText class="pdetailsLabel"  value="Kredyt dla: " />
-                                            <h:inputText  style="width: 55.9%" disabled="true" value="#{caseViewMB.selectedProduct.employmentType.name}" />                                                                
+                                            <h:inputText  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.employmentType.name}" />                                                                
                                        </div>
                                        <div class="pdetailsItem">
                                             <h:outputText class="pdetailsLabel"  value="Kwota: " />
@@ -220,17 +220,21 @@
                                        <h:panelGroup rendered="#{caseViewMB.selectedProduct.recomendation}" >
                                             <div class="pdetailsItem">
                                                 <h:outputText class="pdetailsLabel"  value="Rekomendacja: " /> <br />
-                                                <h:inputTextarea class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.recomendationDetails}" />
+                                                <h:inputTextarea  class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.recomendationDetails}" />
                                             </div>
                                        </h:panelGroup>
                                        <div class="pdetailsItem">
                                                <h:outputText class="pdetailsLabel"  value="Wymagane dokumenty: " />
-                                               <h:inputTextarea class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.requiredDocuments}" />
+                                               <h:inputTextarea  class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.requiredDocuments}" />
                                        </div>
 
+                                       
+                                       
                                        <h:commandButton  styleClass="floatR wideButton marginTB20" style="clear:both;" type="button" value="Kontynuuj" onclick="productDetails.hide()"  >
                                            <f:ajax  execute="@this" render="@this" /> 
                                        </h:commandButton>
+                                       
+                                       
                                        
                                    </p:dialog>
                     </h:panelGroup>
