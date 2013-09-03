@@ -161,4 +161,28 @@ public class UserDAO {
 
         return result;
     }
+    
+    
+     public User read(String email) {
+
+        User user = null;
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+
+        try {
+            Query q;
+            q = session.createQuery("FROM User WHERE email = :email ");
+            q.setParameter("email", email);
+
+            @SuppressWarnings("unchecked")
+            ArrayList<User> resultList = (ArrayList<User>) q.list();
+            if (!resultList.isEmpty()) {
+                user = resultList.get(0);
+            }
+
+        } finally {
+            session.close();
+        }
+
+        return user;
+    }   
 }
