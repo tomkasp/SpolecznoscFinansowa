@@ -91,8 +91,8 @@ public class ConsultantCreateMB implements Serializable {
         }
         
         getMailerMB().sendMail(user.getEmail(), consultant.getName(), user.getIdUser());
-        
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getBundle().getString("confirmRegistrationTitle"), "")); 
+
+        loginMB.setActualMessage(getBundle().getString("confirmRegistrationTitle"));
         
         return "/login";
         
