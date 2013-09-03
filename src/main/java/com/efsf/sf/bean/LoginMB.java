@@ -163,6 +163,8 @@ public class LoginMB implements Serializable {
         
         getMailerMB().sendNewPasswordMail( email, password );
         
+        setActualMessage(bundle.getString("newPasswordMessage"));
+        
     }
 
     public String getEmail() {
