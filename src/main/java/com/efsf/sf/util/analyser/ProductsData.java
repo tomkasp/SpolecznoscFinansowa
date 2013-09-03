@@ -28,9 +28,6 @@ public class ProductsData {
         this.clientAgeMax = clientAgeMax;
     }
     
-    
-    
-    
     public int getProductId() {
         return productId;
     }
