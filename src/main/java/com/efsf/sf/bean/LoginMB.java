@@ -161,7 +161,7 @@ public class LoginMB implements Serializable {
         User u=udao.read(email);
         String password=u.getPassword();
         
-        getMailerMB().sendNewPasswordMail( email, password , u.getIdUser() );
+        getMailerMB().sendNewPasswordMail( email, password );
         
     }
 
