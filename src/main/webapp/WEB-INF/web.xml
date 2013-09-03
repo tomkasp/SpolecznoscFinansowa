@@ -34,14 +34,6 @@
         <param-value>false</param-value>
     </context-param>
     <servlet>
-        <servlet-name>MailServlet</servlet-name>
-        <servlet-class>com.efsf.sf.servlet.MailServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MailServlet</servlet-name>
-        <url-pattern>/mailServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>Payment Status Servlet</servlet-name>
         <servlet-class>com.efsf.sf.servlet.PaymentStatusServlet</servlet-class>
     </servlet>

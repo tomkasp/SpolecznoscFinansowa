@@ -44,7 +44,7 @@ public class MailerMB implements Serializable {
 
     }
     
-    public void sendNewPasswordMail(String email, String oldPassword,Integer id) {
+    public void sendNewPasswordMail(String email, String oldPassword) {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String host = request.getServerName();
 
@@ -56,7 +56,6 @@ public class MailerMB implements Serializable {
         input.put("email", String.valueOf(email));
         input.put("host", host);
         input.put("token", Security.sha1(email+oldPassword));
-        input.put("id", String.valueOf(id));
         
         SendMail sm;
 
