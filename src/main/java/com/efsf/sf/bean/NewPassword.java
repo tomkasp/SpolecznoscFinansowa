@@ -8,10 +8,12 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -28,56 +30,63 @@ public class NewPassword {
     private String email;
     private String newPassword;
     private String confirmNewPassword;
+    private boolean rendered = false;
     
-    private boolean rendered=false;
-   
-    public NewPassword() { 
-        
-        try{
-        email=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("email");
-        String token=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token");
-        
-        UserDAO udao = new UserDAO();
-        User u = udao.read(email);
-        String salt = Security.sha1(u.getEmail() + u.getPassword());
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
+    
+    @ManagedProperty(value="#{loginMB}")
+    private LoginMB loginMB;
 
-        if(salt.equals(token)){
-        rendered=true;
-        }else{
-        rendered=false;
+    public NewPassword() {
+
+        try {
+            email = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("email");
+            String token = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token");
+
+            UserDAO udao = new UserDAO();
+            User u = udao.read(email);
+            String salt = Security.sha1(u.getEmail() + u.getPassword());
+
+            if (salt.equals(token)) {
+                rendered = true;
+            } else {
+                rendered = false;
+            }
+        } catch (Exception e) {
         }
-        }catch(Exception e){}
-        
-        if(!rendered)
-        {
+
+        if (!rendered) {
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(NewPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-          
+
     }
-    
-    public String saveNewPassword(){
-    
+
+    public String saveNewPassword() {
+
         UserDAO udao = new UserDAO();
         User u = udao.read(email);
-        u.setPassword( Security.sha1(newPassword) );
+        u.setPassword(Security.sha1(newPassword));
         udao.update(u);
         
+        loginMB.setActualMessage(bundle.getString("newPasswordMessageSuccess"));
+
         return "/login.xhtml?faces-redirect=true";
     }
 
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
-        
+
         if (!password.equals(newPassword)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie są identyczne", "Hasła nie są identyczne");
             throw new ValidatorException(message);
         }
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -109,7 +118,22 @@ public class NewPassword {
     public void setRendered(boolean rendered) {
         this.rendered = rendered;
     }
-    
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
+    }
     
     
     

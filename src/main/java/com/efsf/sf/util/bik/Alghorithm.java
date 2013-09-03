@@ -53,7 +53,7 @@ public class Alghorithm extends Thread{
         try {
             PDFWithText pdf = new PDFWithText();
             pdf.reset();
-            String text = pdf.getTextFromPDF("C:\\files\\" + file, password);
+            String text = pdf.getTextFromPDF("/home/sf/bik/" + file, password);
             
             //Poprawny BIK
             if(text.length()>1000 && text.contains(bikSample)){
@@ -77,7 +77,7 @@ public class Alghorithm extends Thread{
         } catch (Exception ex) {
             Logger.getLogger(Alghorithm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            File f=new File("C:\\files\\"+file);
+            File f=new File("/home/sf/bik/"+file);
             f.delete();
         }
     }
