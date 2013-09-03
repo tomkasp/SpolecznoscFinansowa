@@ -211,7 +211,7 @@
                                        </h:commandButton>
                                    
                                    </p:dialog>
-                                   <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus >= 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
+                                   <h:panelGroup id="currentOffer" rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus >= 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
                                        <h4> AKTUALNIE PRZYPISANA OFERTA </h4>
                                        <div class="solidText">
                                            Tutaj znajduje się aktualnie przypisana przed doradcę oferta. 
@@ -255,7 +255,7 @@
                                             <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)/4 * 100} %" />
                                         </p:column>  
                                     </p:dataTable>
-                                   <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
+                                   <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm :rightColumn:currentOffer"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
                                    <p:commandButton id="detailsButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog"  styleClass="marginTB20 floatR greyButton wideButton" value="Szczegóły" action="#{caseViewMB.fetchProductTreeForSelectedProduct(caseViewMB.selectedProduct)}" oncomplete="productDetails.show()" />
                                   
                                    <p:dialog header="Informacja" id="assignedDialog" widgetVar="assignProducts" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
