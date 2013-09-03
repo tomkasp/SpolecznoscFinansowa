@@ -5,6 +5,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -606,7 +607,7 @@ public class ClientCaseDAO implements Serializable {
 
             Set s = new HashSet<ClientCase>(list);
             list.clear();
-            list.addAll(s);
+            list.addAll(s);  
             session.getTransaction().commit();
         } finally {
 

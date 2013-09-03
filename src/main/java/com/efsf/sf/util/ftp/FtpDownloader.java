@@ -2,6 +2,8 @@ package com.efsf.sf.util.ftp;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -67,6 +70,39 @@ public class FtpDownloader implements Serializable {
             }
 
         }
+    }
+    
+    
+        public String downloadBik(Integer userId, String fileName) throws IOException {
+        FTPClient client = new FTPClient();
+        InputStream is;
+        String name = null;
+                
+        try {
+            client.connect("192.168.0.5", 89);
+            client.login("rice", "rice123");
+            client.setFileType(FTP.BINARY_FILE_TYPE);
+            client.setBufferSize(0);
+            is = client.retrieveFileStream("rice/SF/USERS/" + userId + "/" + fileName);
+
+            name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), "pdf");     
+            File file=new File("C:\\files\\", name);
+            file.setWritable(true);
+
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            while ((read = is.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+
+        } finally {
+            client.disconnect();
+        }
+
+        return name;
     }
     
     
