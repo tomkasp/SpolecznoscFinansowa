@@ -8,10 +8,12 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Security;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -29,6 +31,12 @@ public class NewPassword {
     private String newPassword;
     private String confirmNewPassword;
     private boolean rendered = false;
+    
+    @ManagedProperty("#{msg}")
+    private transient ResourceBundle bundle;
+    
+    @ManagedProperty(value="#{loginMB}")
+    private LoginMB loginMB;
 
     public NewPassword() {
 
@@ -64,6 +72,8 @@ public class NewPassword {
         User u = udao.read(email);
         u.setPassword(Security.sha1(newPassword));
         udao.update(u);
+        
+        loginMB.setActualMessage(bundle.getString("newPasswordMessageSuccess"));
 
         return "/login.xhtml?faces-redirect=true";
     }
@@ -108,4 +118,23 @@ public class NewPassword {
     public void setRendered(boolean rendered) {
         this.rendered = rendered;
     }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
+    }
+    
+    
+    
 }
