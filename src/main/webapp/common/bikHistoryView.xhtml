@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title">BIK Raport</ui:define> 
+
+            <ui:define name="content">
+
+                <h3>Historia rachunku</h3>
+
+                <div> 
+                    <h:form id="rachunki"> 
+                        <p:dataTable value="#{bikMB.history}" rowKey="#{row.idWpisu}" var="row" emptyMessage="Brak historii rachunku" selectionMode="single" paginator="true" rows="10">
+
+                            <p:column headerText="Numer"> 
+                                <h:outputText value="#{row.numer}" />  
+                            </p:column>
+
+                            <p:column headerText="Status płatności">
+                                <h:outputText value="#{row.status}" />  
+                            </p:column>
+                               
+                            <p:column headerText="Kwota do spłaty">
+                                <h:outputText value="#{row.kwotaDoSplaty}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Saldo wymagalnych należności">
+                                <h:outputText value="#{row.saldoNaleznosci}" />  
+                            </p:column>
+
+                            <p:column headerText="Liczba dni opóźnienia">
+                                <h:outputText value="#{row.opoznienie}" />  
+                            </p:column>                            
+
+                            <p:column headerText="Liczba zaległych płatności">
+                                <h:outputText value="#{row.zaleglePlatnosci}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Średnie saldo wykorzystania limitu">
+                                <h:outputText value="#{row.saldoLimitu}" />  
+                            </p:column>  
+                            
+                            <p:column headerText="Waluta">
+                                <h:outputText value="#{row.waluta}" />  
+                            </p:column>                              
+                            
+                        </p:dataTable>
+
+                    </h:form>
+                </div>
+
+            </ui:define>           
+        </ui:composition>
+
+
+    </body>
+</html>
