@@ -205,6 +205,8 @@
                                            
                                    </h:panelGroup>
                                    
+                                   <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus >= 3) and (caseViewMB.selectedClientCase.caseStatus.idCaseStatus < 8) }">
+                                   
                                    <div style="clear:both">
                                         <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
                                         <div class="solidText"> 
@@ -221,7 +223,7 @@
                                        </h:commandButton>
                                    </p:dialog>
                                    
-
+                                       
                                    <p:dataTable id="offers" value="#{caseViewMB.products}" var="row" rowKey="#{row}" selection="#{caseViewMB.selectedProduct}" emptyMessage="Nie ma żadnych spraw" selectionMode="single" >
                                        <p:ajax event="rowSelect" update="offers :rightColumn:detailsButton :rightColumn:assignButton" />
                                        
@@ -239,7 +241,7 @@
                                     </p:dataTable>
                                    <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm :rightColumn:currentOffer"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
                                    <p:commandButton id="detailsButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog"  styleClass="marginTB20 floatR greyButton wideButton" value="Szczegóły" action="#{caseViewMB.fetchProductTreeForSelectedProduct(caseViewMB.selectedProduct)}" oncomplete="productDetails.show()" />
-                                  
+                                   </h:panelGroup>
                                    <p:dialog header="Informacja" id="assignedDialog" widgetVar="assignProducts" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
                                        <div class="fontGrey"> Oferta została przypisana do sprawy.</div>
                                    
