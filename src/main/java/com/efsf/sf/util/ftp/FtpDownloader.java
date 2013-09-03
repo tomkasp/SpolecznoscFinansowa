@@ -97,7 +97,6 @@ public class FtpDownloader implements Serializable {
             while ((read = is.read(bytes)) != -1) {
                 outputStream.write(bytes, 0, read);
             }
-
         } finally {
             client.disconnect();
         }

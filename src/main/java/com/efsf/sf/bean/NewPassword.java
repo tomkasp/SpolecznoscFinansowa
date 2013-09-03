@@ -66,17 +66,14 @@ public class NewPassword {
         u.setPassword( Security.sha1(newPassword) );
         udao.update(u);
         
-        return "/login.xhtml";
+        return "/login.xhtml?faces-redirect=true";
     }
 
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
         
-        System.out.println("p"+password);
-        System.out.println("P"+newPassword);
-        
         if (!password.equals(newPassword)) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie są identyczne", "Hasła nie są identyczne");
             throw new ValidatorException(message);
         }
     }
