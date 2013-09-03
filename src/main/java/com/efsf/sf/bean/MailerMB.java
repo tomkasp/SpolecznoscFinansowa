@@ -42,7 +42,6 @@ public class MailerMB implements Serializable {
             Logger.getLogger(MailerMB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
     }
     
     public void sendNewPasswordMail(String email, String oldPassword,Integer id) {
@@ -54,10 +53,11 @@ public class MailerMB implements Serializable {
         String absolutePath = servletContext.getRealPath(relativePath);
 
         Map<String, Object> input = new HashMap<>();
+        input.put("email", String.valueOf(email));
         input.put("host", host);
         input.put("token", Security.sha1(email+oldPassword));
         input.put("id", String.valueOf(id));
-
+        
         SendMail sm;
 
         try {

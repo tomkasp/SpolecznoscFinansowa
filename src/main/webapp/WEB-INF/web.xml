@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SUCTR</web-resource-name>
+            <url-pattern>/*</url-pattern>      
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
     <context-param>
         <param-name> javax.faces.PROJECT_STAGE </param-name>
         <param-value>Development</param-value>
@@ -24,8 +33,22 @@
         <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
         <param-value>false</param-value>
     </context-param>
-    
-    
+    <servlet>
+        <servlet-name>MailServlet</servlet-name>
+        <servlet-class>com.efsf.sf.servlet.MailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MailServlet</servlet-name>
+        <url-pattern>/mailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Payment Status Servlet</servlet-name>
+        <servlet-class>com.efsf.sf.servlet.PaymentStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Payment Status Servlet</servlet-name>
+        <url-pattern>/payment_status</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -36,9 +59,7 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
@@ -110,8 +131,5 @@
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
-    </filter-mapping> 
-    
-
-    
+    </filter-mapping>
 </web-app>
