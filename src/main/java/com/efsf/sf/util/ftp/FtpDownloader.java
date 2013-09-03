@@ -86,7 +86,7 @@ public class FtpDownloader implements Serializable {
             is = client.retrieveFileStream("rice/SF/USERS/" + userId + "/" + fileName);
 
             name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), "pdf");     
-            File file=new File("C:\\files\\", name);
+            File file=new File("/home/sf/bik/", name);
             file.setWritable(true);
 
             FileOutputStream outputStream = new FileOutputStream(file);

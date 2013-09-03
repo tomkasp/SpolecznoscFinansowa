@@ -190,6 +190,8 @@ public class CaseViewMB implements Serializable{
         selectedClientCase.setCaseStatus(cs);
         selectedClientCase.setProductDetails(pd);
         
+        messagesMB.generateSystemMessage(bundle.getString("PRODUCT_ASSIGNED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {selectedClientCase.getIdClientCase() } );
+        
         cdao.updateClientCase(selectedClientCase);
     }
 
