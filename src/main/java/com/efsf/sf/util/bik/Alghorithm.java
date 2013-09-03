@@ -207,7 +207,7 @@ public class Alghorithm extends Thread{
         //Zapytania
         GenericDao<BikZapytanie> dao3 = new GenericDao(BikZapytanie.class);
         ArrayList<String> zapytania = (ArrayList<String>) result.get(RegexBase.Z_KWOTA.getName());
-        if (kwoty != null) {
+        if (zapytania != null) {
 
             for (int i = 0; i < zapytania.size(); i++) {
              BikZapytanie zapytanie=new BikZapytanie();
