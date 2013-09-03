@@ -30,6 +30,8 @@ public class Alghorithm extends Thread{
     private Map<String, Object> result = new HashMap<String, Object>();
     private Integer clientId; 
     
+    private String bikSample="Biuro Informacji Kredytowej S.A.";
+    
     public Alghorithm(String file, String password, Integer clientId) {
         setUpRules();
         this.file=file;
@@ -52,15 +54,23 @@ public class Alghorithm extends Thread{
             PDFWithText pdf = new PDFWithText();
             pdf.reset();
             String text = pdf.getTextFromPDF("C:\\files\\" + file, password);
+            
+            //Poprawny BIK
+            if(text.length()>1000 && text.contains(bikSample)){
+            
+                PrintWriter out = new PrintWriter("C:/bik/texty/" + file + ".txt");
+                out.print(text);
+                out.close();
 
-            PrintWriter out = new PrintWriter("C:/bik/texty/" + file + ".txt");
-            out.print(text);
-            out.close();
-
-            parse(preProcess(text));
-            tables=pdf.getTables(); 
-            saveResult();
-            setStatus(4);
+                parse(preProcess(text));
+                tables=pdf.getTables(); 
+                saveResult();
+                setStatus(4);
+                
+            //Nie poprawny BIK    
+            } else {
+                setStatus(3);
+            }
             
         } catch (IOException ex) {
             Logger.getLogger(Alghorithm.class.getName()).log(Level.SEVERE, null, ex);
