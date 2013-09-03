@@ -150,7 +150,7 @@ public class CreateClientMB implements Serializable
  
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
         
-        return "/login";
+        return "/login?faces-redirect=true";
     }
     
     

@@ -11,6 +11,7 @@ import com.efsf.sf.sql.dao.IncomeBusinessActivityDAO;
 import com.efsf.sf.sql.dao.IncomeDAO;
 import com.efsf.sf.sql.dao.MaritalStatusDAO;
 import com.efsf.sf.sql.dao.RegionDAO;
+import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
@@ -68,6 +69,8 @@ public class ClientSettingsMB implements Serializable {
     
     private boolean areRequired = false;
     private boolean tableEmpty = true;
+    
+    private String bikPassword;
 
     public ClientSettingsMB() {
         clientDAO = new ClientDAO();
@@ -81,6 +84,9 @@ public class ClientSettingsMB implements Serializable {
         idMartialStatus = client.getMaritalStatus().getIdMaritalStatus();
         idEducation = client.getEducation().getIdEducation();
 
+        RequiredDocumentsDAO documentsDao=new RequiredDocumentsDAO();
+        bikPassword=documentsDao.readForFkClient(idClient).getBikPassword();
+        
         Iterator<Address> it = client.getAddresses().iterator();
         while (it.hasNext()) {
             mainAddress = it.next();
@@ -121,6 +127,18 @@ public class ClientSettingsMB implements Serializable {
         
         tableEmpty = (incomeTable.isEmpty()) ? true : false;
 
+    }
+    
+    public void saveBikPassword(){
+        RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
+        RequiredDocuments documents = requiredDocumentsDAO.readForFkClient(loginMB.getClient().getIdClient());
+        
+        if(documents==null){
+            documents=new RequiredDocuments();
+        }
+        
+        documents.setBikPassword(bikPassword);
+        requiredDocumentsDAO.saveOrUpdate(documents);
     }
 
     public String updateSettings() {
@@ -191,7 +209,9 @@ public class ClientSettingsMB implements Serializable {
         client.setIncomeBusinessActivities(businessSet);
 
         clientDAO.update(client);
-
+        
+        saveBikPassword();
+        
         UserDAO udao = new UserDAO();
         udao.update(client.getUser());
 
@@ -540,5 +560,14 @@ public class ClientSettingsMB implements Serializable {
 
     public void setAreRequired(boolean areRequired) {
         this.areRequired = areRequired;
+    }
+
+
+    public String getBikPassword() {
+        return bikPassword;
+    }
+
+    public void setBikPassword(String bikPassword) {
+        this.bikPassword = bikPassword;
     }
 }
