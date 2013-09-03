@@ -1,6 +1,5 @@
 package com.efsf.sf.util.bik;
 
-import org.apache.pdfbox.exceptions.InvalidPasswordException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDStream;
@@ -11,6 +10,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.pdfbox.exceptions.CryptographyException;
 
 
 public class PDFWithText extends PDFTextStripper
@@ -44,7 +44,6 @@ float actual_y, actual_x;
 
     public String getTextFromPDF(String file, String pass) throws Exception
     {
-
             PDDocument document = null;
             try
             {
@@ -52,16 +51,9 @@ float actual_y, actual_x;
                 
                 if( document.isEncrypted() )
                 {
-                    try
-                    {
-                        document.decrypt( pass );
-                    }
-                    catch( InvalidPasswordException e )
-                    {
-                        System.err.println( "Error: Document is encrypted with a password." );
-                        System.exit( 1 );
-                    }
+                   document.decrypt( pass );
                 }
+                
                 PDFWithText printer = new PDFWithText();
                 List allPages = document.getDocumentCatalog().getAllPages();
                 for( int i=0; i<allPages.size(); i++ )
@@ -73,9 +65,11 @@ float actual_y, actual_x;
                         printer.processStream( page, page.findResources(), page.getContents().getStream() );
                     }
                 }
-            }
-            finally
-            {
+            } catch(IOException | CryptographyException e) {
+                
+                return "";
+                
+            } finally {
                 if( document != null )
                 {
                     document.close();

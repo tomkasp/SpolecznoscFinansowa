@@ -186,6 +186,9 @@
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==1}" >
                                            <h:outputText value="Bik w trakcie analizowania"/>
                                        </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==3}" >
+                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne"/>
+                                       </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==4}" >
                                            <h:outputText value="Bik pomyślnie przetworzony"/>
                                            <p:commandLink styleClass="blueButton buttonMargin" value="Zobacz wyniki" ajax="false" action="#{bikMB.showBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandLink>

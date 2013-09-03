@@ -85,7 +85,10 @@ public class ClientSettingsMB implements Serializable {
         idEducation = client.getEducation().getIdEducation();
 
         RequiredDocumentsDAO documentsDao=new RequiredDocumentsDAO();
-        bikPassword = documentsDao.readForFkClient(idClient).getBikPassword();
+        RequiredDocuments doc=documentsDao.readForFkClient(idClient);
+        if(doc!=null){
+            bikPassword=doc.getBikPassword();
+        }
         
         Iterator<Address> it = client.getAddresses().iterator();
         while (it.hasNext()) {
