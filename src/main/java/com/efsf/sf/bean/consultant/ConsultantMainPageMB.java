@@ -100,6 +100,16 @@ public class ConsultantMainPageMB implements Serializable {
 
     public void reloadOwnedTable() {
         ownedList = caseDao.ownedCasesSelectedConsultant(loginMB.getConsultant().getIdConsultant());
+        Collections.sort(ownedList, new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                ClientCase cc1 = (ClientCase) o1;
+                ClientCase cc2 = (ClientCase) o2;
+                
+                return cc1.getIdClientCase() - cc2.getIdClientCase();
+            }
+        });
         ownedModelsEmploymentType = new ArrayList();
         ownedModelsBranch = new ArrayList();
         for (int i = 0; i < ownedList.size(); i++) {
