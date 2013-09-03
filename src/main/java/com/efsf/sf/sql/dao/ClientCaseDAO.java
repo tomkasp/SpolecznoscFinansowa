@@ -447,6 +447,8 @@ public class ClientCaseDAO implements Serializable {
 
             Query q = session.createQuery("FROM ClientCase as cs "
                     + "left join fetch cs.client as clt "
+                    + "left join fetch cs.consultant as cons "
+                    + "left join fetch cons.user as us "
                     + "left join fetch cs.productType as pt "
                     + "left join fetch cs.consultants as consul "
                     + "left join fetch cs.caseStatus as cstatus "
