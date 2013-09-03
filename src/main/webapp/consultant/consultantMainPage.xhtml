@@ -402,7 +402,7 @@
                             </p:column>
 
                             <p:column headerText="Ocena"> 
-                                <h:outputText rendered="#{row.caseRating eq null}" value="Poproś o ocenę"/>
+                                <h:outputText rendered="#{row.caseRating eq null}" value="Brak oceny"/>
                                 <h:outputText rendered="#{!(row.caseRating eq null)}" value="#{row.caseRating.average}" />
                             </p:column>
 
