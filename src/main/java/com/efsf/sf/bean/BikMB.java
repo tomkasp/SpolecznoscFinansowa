@@ -64,7 +64,7 @@ public class BikMB implements Serializable {
 
     public Bik getBik() {
         GenericDao<Bik> dao=new GenericDao(Bik.class);
-        Bik bik=dao.getWhere("clientId", String.valueOf(clientId)).get(0);
+        Bik bik=dao.getWhereInOrder("clientId", String.valueOf(clientId), "idBik", "desc").get(0);
         bikId=bik.getIdBik();
         return bik;
     }
