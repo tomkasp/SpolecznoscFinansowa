@@ -73,7 +73,10 @@ public class FileUploadMB implements Serializable {
             if(filename[6]!=null)
             { rd.setTitleDeed(filename[6]); }
             if(filename[7]!=null)
-            { rd.setBik(filename[7]); }
+            { 
+                rd.setBik(filename[7]); 
+                rd.setBikStatus(null);
+            }
             
             rddao.saveOrUpdate(rd);
             

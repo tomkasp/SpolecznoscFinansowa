@@ -148,7 +148,8 @@ public class CreateClientMB implements Serializable
         userDao.update(user);
         getMailerMB().sendMail(email, name, user.getIdUser() );
  
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, bundle.getString("confirmRegistrationTitle"), "")); 
+        
+        loginMB.setActualMessage(bundle.getString("confirmRegistrationTitle"));
         
         return "/login?faces-redirect=true";
     }

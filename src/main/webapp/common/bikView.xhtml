@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="title">BIK Raport</ui:define> 
+
+            <ui:define name="content">
+
+                <h3>Odczytany BIK</h3>
+                <div style="display: flex;">
+                  <h:form>  
+                    <div class="leftInlineBox">  
+
+                        <h4>Dane podstawowe</h4>
+
+                        <div class="field"> <h:outputText class="label" value="PESEL"/><p:inputText value="#{bikMB.bik.pesel}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Ocena punktowa"/><p:inputText value="#{bikMB.bik.ocenaPunktowa}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Klasa"/><p:inputText value="#{bikMB.bik.klasa}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Rachunki kwestionowane"/><p:inputText value="#{bikMB.bik.rachunkiKwestionowane}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zablokowane rekordy BIORK"/><p:inputText value="#{bikMB.bik.zablokowanerekordyBIORK}"/></div>
+
+                        <h4>Rachunki zamknięte</h4>
+
+                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.rzZaleglosc030dni}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Umorzone"/><p:inputText value="#{bikMB.bik.rzUmorzone}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Odzyskane"/><p:inputText value="#{bikMB.bik.rzOdzyskane}"/></div>
+
+                    </div>
+                    <div class="rightInlineBox">  
+                        <h4>Rachunki otwarte</h4>
+
+                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc030dni}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość 31-90 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc3190dni}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość 91-180 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc91180dni}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość powyżej 180 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc180dni}"/></div>   
+                        <div class="field"> <h:outputText class="label" value="Windykacja"/><p:inputText value="#{bikMB.bik.roWindykacja}"/></div>   
+                        <div class="field"> <h:outputText class="label" value="Egzekucja"/><p:inputText value="#{bikMB.bik.roEgzekucja}"/></div>   
+                    </div>
+                  </h:form>   
+                </div>
+
+                <div>
+                    <h3>Rachunki</h3>    
+                    <h:form id="rachunki"> 
+                        <p:dataTable value="#{bikMB.rachunki}" rowKey="#{row.idRachunek}" var="row" emptyMessage="Brak rachunków" selection="#{bikMB.selectedAccount}" selectionMode="single" paginator="true" rows="10">
+
+                            <p:column headerText="Relacja z klientem"> 
+                                <h:outputText value="#{row.relacjaKlienta}" />  
+                            </p:column>
+
+                            <p:column headerText="Data pows. relacji">
+                                <h:outputText value="#{row.dataPowstaniaRelacji}" />  
+                            </p:column>
+                               
+                            <p:column headerText="Typ Transakcji">
+                                <h:outputText value="#{row.typTransakcji}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Kwota z odsetkami">
+                                <h:outputText value="#{row.kwotaZKosztemOds1}" />  
+                            </p:column>
+
+                            <p:column headerText="Waluta">
+                                <h:outputText value="#{row.waluta}" />  
+                            </p:column>                            
+
+                        </p:dataTable>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zobacz historię" action="#{bikMB.viewAccountHistory()}"/>
+                    </h:form>
+                </div>
+                
+               <div>
+                    <h3>Zapytania</h3>    
+                    <h:form id="zapytania"> 
+                        <p:dataTable value="#{bikMB.zapytania}" rowKey="#{row.idZapytania}" var="row" emptyMessage="Brak zapytań" selectionMode="single" paginator="true" rows="10">
+
+                            <p:column headerText="Powód zapytania"> 
+                                <h:outputText value="#{row.powod}" />  
+                            </p:column>
+
+                            <p:column headerText="Data">
+                                <h:outputText value="#{row.data}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Typ">
+                                <h:outputText value="#{row.typ}" />  
+                            </p:column>
+                            
+                            <p:column headerText="Kwota">
+                                <h:outputText value="#{row.kwota}" />  
+                            </p:column>
+                          
+
+                        </p:dataTable>
+
+                    </h:form>
+                </div> 
+
+            </ui:define>           
+        </ui:composition>
+
+
+    </body>
+</html>

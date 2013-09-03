@@ -136,6 +136,12 @@
                                         <f:selectItems value="#{dictionaryMB.education}" var="edu" itemLabel="#{edu.name}" itemValue="#{edu.idEducation}"   />
                                     </p:selectOneMenu>    
                                 </div>
+                                
+                               <div class="field">
+                                        <h:outputText class="label" value="Hasło do raportu BIK"/>  
+                                        <h:inputText id="bikPass" class="inputWidth" value="#{clientSettingsMB.bikPassword}"> 
+                                        </h:inputText>
+                               </div>
                             </div>
 
                             <div class="marginLR30">
@@ -316,13 +322,8 @@
                                             <f:validator validatorId="fileUploadValidator" />
                                         </p:fileUpload>
                                       </span>
-                                    <h:message for="idBIK"  errorClass="invalid"  /> 
 
                                 </div>
-
-                       
-
-                        
 
                        
                             <div class="marginLRT30">     
@@ -519,8 +520,10 @@
 
 
 
-                    <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                    
                     <h:form>  
+                        
                         <p:commandButton  styleClass="floatL  wideButton marginTB20"  action="#{clientSettingsMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
 
                         </p:commandButton>  
