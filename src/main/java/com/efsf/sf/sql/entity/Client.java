@@ -46,7 +46,8 @@ public class Client implements java.io.Serializable {
     private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
     private Set<IdentyficationDocument> identyficationDocuments = new HashSet<IdentyficationDocument>(0);
     private Set<Address> addresses = new HashSet<Address>(0);
-
+    private Set<Bik> biki;
+    
     public Client() {
     }
 
@@ -234,5 +235,14 @@ public class Client implements java.io.Serializable {
 
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
+   }
+    
+    @OneToMany(mappedBy="client", fetch = FetchType.LAZY)
+    public Set<Bik> getBiki() {
+        return biki;
+    }
+
+    public void setBiki(Set<Bik> biki) {
+        this.biki = biki;
     }
 }

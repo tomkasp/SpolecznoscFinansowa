@@ -33,7 +33,7 @@ public class GenericDao<T> {
         return obj;
     }
 
-    public List getAll() {
+    public List<T> getAll() {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
@@ -48,7 +48,7 @@ public class GenericDao<T> {
         return lista;
     }
 
-    public List getAllInOrder(String field, String orderType) {
+    public List<T> getAllInOrder(String field, String orderType) {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
@@ -64,7 +64,7 @@ public class GenericDao<T> {
         return lista;
     }
 
-    public List getWhere(String field, String value) {
+    public List<T> getWhere(String field, String value) {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
