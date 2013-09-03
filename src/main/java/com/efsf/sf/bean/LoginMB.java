@@ -37,6 +37,9 @@ public class LoginMB implements Serializable {
     
     
     private String actualMessage;
+    
+    @ManagedProperty(value="#{mailerMB}")
+    private MailerMB mailerMB;
 
     public String login() {
         
@@ -151,6 +154,16 @@ public class LoginMB implements Serializable {
 
         return login();
     }
+    
+    public void sendNewPasswordMail(){
+    
+        UserDAO udao=new UserDAO();
+        User u=udao.read(email);
+        String password=u.getPassword();
+        
+        getMailerMB().sendNewPasswordMail( email, password );
+        
+    }
 
     public String getEmail() {
         return email;
@@ -244,5 +257,15 @@ public class LoginMB implements Serializable {
     public void setActualMessage(String actualMessage) {
         this.actualMessage = actualMessage;
     }
+
+    public MailerMB getMailerMB() {
+        return mailerMB;
+    }
+
+    public void setMailerMB(MailerMB mailerMB) {
+        this.mailerMB = mailerMB;
+    }
+    
+    
 
 }

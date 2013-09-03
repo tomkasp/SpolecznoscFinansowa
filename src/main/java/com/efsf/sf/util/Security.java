@@ -31,7 +31,7 @@ public class Security {
         return hashtext;
     }
     
-    public static String md5(String text){
+    public static String md5(String text) {
         MessageDigest m = null;
         try {
             m = MessageDigest.getInstance("MD5"); 
