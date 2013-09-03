@@ -495,7 +495,7 @@
                                 <f:ajax event="click" onevent="backOffCurrent.show()" />
                             </h:commandButton>
                             <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.currentSelectedCase)}" />
-                            <h:button disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" action="#{messagesMB.toConversation(clientMainPageMB.currentSelectedCase.consultant.user.userId)}" outcome="/client/clientMainPage"/>
+                            <h:commandButton disabled="#{empty clientMainPageMB.currentSelectedCase}" class="topMenuButton greyButton wideButton" value="Kontakt z doradcą" action="#{messagesMB.toConversation(clientMainPageMB.currentSelectedCase.consultant.user.userId)}"/>
                             
                         </h:panelGroup>
                     </h:form>
