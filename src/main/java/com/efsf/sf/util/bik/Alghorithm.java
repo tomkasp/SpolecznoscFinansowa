@@ -57,10 +57,6 @@ public class Alghorithm extends Thread{
             
             //Poprawny BIK
             if(text.length()>1000 && text.contains(bikSample)){
-            
-                PrintWriter out = new PrintWriter("C:/bik/texty/" + file + ".txt");
-                out.print(text);
-                out.close();
 
                 parse(preProcess(text));
                 tables=pdf.getTables(); 
@@ -207,7 +203,7 @@ public class Alghorithm extends Thread{
         //Zapytania
         GenericDao<BikZapytanie> dao3 = new GenericDao(BikZapytanie.class);
         ArrayList<String> zapytania = (ArrayList<String>) result.get(RegexBase.Z_KWOTA.getName());
-        if (kwoty != null) {
+        if (zapytania != null) {
 
             for (int i = 0; i < zapytania.size(); i++) {
              BikZapytanie zapytanie=new BikZapytanie();
