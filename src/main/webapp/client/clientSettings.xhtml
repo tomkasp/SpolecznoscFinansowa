@@ -520,8 +520,10 @@
 
 
 
-                    <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                    
                     <h:form>  
+                        
                         <p:commandButton  styleClass="floatL  wideButton marginTB20"  action="#{clientSettingsMB.toIncome()}" value="Umowa" oncomplete="business.hide(); income.show()"  >
 
                         </p:commandButton>  
