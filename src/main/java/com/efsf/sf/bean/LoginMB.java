@@ -37,6 +37,9 @@ public class LoginMB implements Serializable {
     
     
     private String actualMessage;
+    
+    @ManagedProperty(value="#{mailerMB}")
+    private MailerMB mailerMB;
 
     public String login() {
         
@@ -80,7 +83,7 @@ public class LoginMB implements Serializable {
                 return "/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));         
 
                 return "/login";
             }
@@ -150,6 +153,18 @@ public class LoginMB implements Serializable {
         udao.update(user);
 
         return login();
+    }
+    
+    public void sendNewPasswordMail(){
+    
+        UserDAO udao=new UserDAO();
+        User u=udao.read(email);
+        String password=u.getPassword();
+        
+        getMailerMB().sendNewPasswordMail( email, password );
+        
+        setActualMessage(bundle.getString("newPasswordMessage"));
+        
     }
 
     public String getEmail() {
@@ -244,5 +259,15 @@ public class LoginMB implements Serializable {
     public void setActualMessage(String actualMessage) {
         this.actualMessage = actualMessage;
     }
+
+    public MailerMB getMailerMB() {
+        return mailerMB;
+    }
+
+    public void setMailerMB(MailerMB mailerMB) {
+        this.mailerMB = mailerMB;
+    }
+    
+    
 
 }

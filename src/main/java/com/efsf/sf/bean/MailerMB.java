@@ -42,6 +42,30 @@ public class MailerMB implements Serializable {
             Logger.getLogger(MailerMB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public void sendNewPasswordMail(String email, String oldPassword) {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String host = request.getServerName();
+
+        String relativePath = "/resources/mails/";
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String absolutePath = servletContext.getRealPath(relativePath);
+
+        Map<String, Object> input = new HashMap<>();
+        input.put("email", String.valueOf(email));
+        input.put("host", host);
+        input.put("token", Security.sha1(email+oldPassword));
+        
+        SendMail sm;
+
+        try {
+            sm = new SendMail(email, "Nowe hasło użytkownika w portalu Społeczność Finansowa", absolutePath, "newPassword.html", input);
+            sm.start();
+        } catch (IOException | TemplateException ex) {
+            Logger.getLogger(MailerMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
+    
 }

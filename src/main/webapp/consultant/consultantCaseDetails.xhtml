@@ -121,6 +121,10 @@
                                         <p:commandButton  styleClass="floatR greyButton wideButton" update="@this" style="margin-top: 17px !important" value="Akceptuję"  oncomplete="acceptPremiumDialog.show();" />     
                                     </h:panelGroup>
                                 <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
+                                    
+
+                                    
+                                    
                                    <h4> DOKUMENTY KLIENTA </h4>
                                    <div>
                                        <h:panelGrid columns="4">
@@ -173,6 +177,23 @@
                                            <h:outputText  value="Akt własności"/>
                                        </h:panelGrid> 
                                    </div>
+                                   
+                                  <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
+                                       <h4> Analiza raportu BIK </h4>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
+                                           <p:commandLink styleClass="blueButton buttonMargin" value="Analizuj BIK" ajax="false" action="#{bikMB.parseBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandLink>    
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==1}" >
+                                           <h:outputText value="Bik w trakcie analizowania"/>
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==3}" >
+                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne"/>
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==4}" >
+                                           <h:outputText value="Bik pomyślnie przetworzony"/>
+                                           <p:commandLink styleClass="blueButton buttonMargin" value="Zobacz wyniki" ajax="false" action="#{bikMB.showBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandLink>
+                                       </h:panelGroup>                                   
+                                   </h:panelGroup>    
                                    
                                     
                                    <h4> USTAW STATUS SPRAWY </h4>

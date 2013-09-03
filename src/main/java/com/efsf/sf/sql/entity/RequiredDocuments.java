@@ -28,6 +28,8 @@ public class RequiredDocuments implements java.io.Serializable {
     private String separationAct;
     private String titleDeed;
     private String bik;
+    private Integer bikStatus;
+    private String bikPassword;
 
     public RequiredDocuments() {
     }
@@ -124,5 +126,24 @@ public class RequiredDocuments implements java.io.Serializable {
 
     public void setBik(String bik) {
         this.bik = bik;
+    }
+    
+
+    @Column
+    public void setBikStatus(Integer bikStatus) {
+        this.bikStatus = bikStatus;
+    }
+
+    public Integer getBikStatus() {
+        return bikStatus;
+    }
+
+    @Column(name = "bikPassword", length = 55)
+    public String getBikPassword() {
+        return bikPassword;
+    }
+
+    public void setBikPassword(String bikPassword) {
+        this.bikPassword = bikPassword;
     }
 }
