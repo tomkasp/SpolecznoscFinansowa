@@ -26,7 +26,7 @@ public class Alghorithm extends Thread{
     private String password;
     
     
-    private List<Table> tables= new ArrayList<Table>();
+    private ArrayList<Table> tables= new ArrayList<Table>();
     private Map<String, Object> result = new HashMap<String, Object>();
     private Integer clientId; 
     
