@@ -10,7 +10,6 @@ import org.hibernate.classic.Session;
 public class ProductDAO {
 
     public List<ProductDetails> getAllProducts() {
-
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         session.beginTransaction();
         List<ProductDetails> products = null;
@@ -59,4 +58,5 @@ public class ProductDAO {
 
         return l != null ? (Product) l.get(0) : null;
     }
+    
 }
