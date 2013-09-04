@@ -135,7 +135,7 @@ public class CaseViewMB implements Serializable{
     
     public void findBestProduct()
     {
-        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId, loginMB.getConsultant().getIdConsultant());
         Map<Integer, Integer> productsIdsWithValue = aa.getBestOfferts();
         if (productsIdsWithValue != null && !productsIdsWithValue.isEmpty() )
         {

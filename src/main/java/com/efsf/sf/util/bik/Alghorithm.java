@@ -30,8 +30,8 @@ public class Alghorithm extends Thread{
     private Map<String, Object> result = new HashMap<String, Object>();
     private Integer clientId; 
     
-    private static String path="C:\\files\\";
-   // private static String path="/home/sf/bik/";    
+    //private static String path="C:\\files\\";
+    private static String path="/home/sf/bik/";    
     
     private String bikSample="Biuro Informacji Kredytowej S.A.";
     

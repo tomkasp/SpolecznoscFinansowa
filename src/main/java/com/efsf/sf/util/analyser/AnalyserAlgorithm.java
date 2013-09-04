@@ -35,12 +35,18 @@ public class AnalyserAlgorithm {
     private ArrayList<ProductsData> prodata = new ArrayList<>();
     private HashMap<Integer, Integer> testtab = new HashMap<>();
     private HashMap<Integer, Integer> bestOfferts = new HashMap<>();
-
+    private Integer idConsultant;
+    
     public AnalyserAlgorithm() {
     }
 
     public AnalyserAlgorithm(Integer IdSprawy) {
         analizuj(IdSprawy);
+    }
+    
+    public AnalyserAlgorithm(Integer idSprawy,Integer idConsultant) {
+        this.idConsultant = idConsultant;
+        analizuj(idSprawy);
     }
     
     public List<ProductDetails> bestProductForCase(Map<Integer, Integer> productIds) 
@@ -99,8 +105,21 @@ public class AnalyserAlgorithm {
     
     private void setProducts() {
         ProductDAO pDao = new ProductDAO();
-        List<ProductDetails> pd = pDao.getAllProducts();
-
+        List<ProductDetails> pd=null; 
+        
+        //jesli jest nadany idConsultant wygeneruj oferty zgodne z konsultantem
+        //jesli nie, wyswietl dla klienta najlepszych konsultantow
+        if(this.idConsultant==null){
+            pd = pDao.getAllProducts();
+            System.out.println("nie został zapisany idConsultant");
+        }
+        else{
+            pd = pDao.getAllProductsForConsultant(this.idConsultant);
+            System.out.println("został zapisany konsultant");
+        }
+        
+        
+        
         Iterator i = pd.iterator();
 
         while (i.hasNext()) {
@@ -122,8 +141,8 @@ public class AnalyserAlgorithm {
         }
     }
 
-    private String analizuj(Integer IdSprawaKlienta) {
-        setClient(IdSprawaKlienta);
+    private String analizuj(Integer idSprawaKlienta) {
+        setClient(idSprawaKlienta);
         setProducts();
 //        Arrays.fill(off, 0);
 
