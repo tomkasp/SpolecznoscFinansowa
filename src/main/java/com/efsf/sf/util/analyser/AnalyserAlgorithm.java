@@ -96,7 +96,7 @@ public class AnalyserAlgorithm {
         //klienci = kdao.getKlienci();
         //Produkty = kdao.getProduktyBankow();
     }
-
+    
     private void setProducts() {
         ProductDAO pDao = new ProductDAO();
         List<ProductDetails> pd = pDao.getAllProducts();
