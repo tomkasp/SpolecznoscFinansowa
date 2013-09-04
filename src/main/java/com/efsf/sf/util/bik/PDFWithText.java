@@ -18,7 +18,7 @@ public class PDFWithText extends PDFTextStripper
 
 static StringWriter sw = new StringWriter();   
 
-private static List<Table> tables= new ArrayList<Table>();
+private static ArrayList<Table> tables= new ArrayList<Table>();
 static double[] tableMin={0,   51, 102, 210, 262, 335, 380, 423, 486};
 static double[] tableMax={51, 102, 210, 262, 335, 380, 423, 486, 9999};
         
@@ -28,7 +28,7 @@ static boolean isTable;
     /**
      * @return the tables
      */
-    public static List<Table> getTables() {
+    public static ArrayList<Table> getTables() {
         return tables;
     }
 float actual_y, actual_x;    
@@ -40,6 +40,9 @@ float actual_y, actual_x;
     
     public void reset(){
         sw=new StringWriter();
+        tables=new ArrayList<Table>();
+        last="";
+        isTable=false;
     }
 
     public String getTextFromPDF(String file, String pass) throws Exception
