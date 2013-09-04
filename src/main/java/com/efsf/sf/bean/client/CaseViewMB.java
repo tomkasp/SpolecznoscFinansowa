@@ -141,6 +141,7 @@ public class CaseViewMB implements Serializable{
         {
            sortedProductValues = new ArrayList(productsIdsWithValue.values());
            Collections.sort(sortedProductValues);
+           Collections.reverse(sortedProductValues);
             products = aa.bestProductForCase(productsIdsWithValue);
         }
         else
