@@ -27,9 +27,11 @@ import javax.faces.bean.SessionScoped;
 public class BikMB implements Serializable {
 
     private BikRachunek selectedAccount;
-    
-    private Integer clientId;
-    private Integer bikId;
+      
+    private Bik bik;
+    private List<BikRachunek> rachunki;
+    private List<BikZapytanie> zapytania;
+    private List<BikHistoriaRachunku> historia;
     
     public void parseBik(Integer clientId) throws IOException, Exception {
         
@@ -55,33 +57,26 @@ public class BikMB implements Serializable {
     }
     
     public String showBik(Integer clientId){
-        this.clientId=clientId;
-        selectedAccount=null;
+        setSelectedAccount(null);
+        
+        GenericDao<Bik> dao=new GenericDao(Bik.class);
+        setBik(dao.getLastWhere("clientId", String.valueOf(clientId), "idBik", "desc"));
+        Integer bikId=getBik().getIdBik();
+        
+        GenericDao<BikRachunek> daoRachunki=new GenericDao(BikRachunek.class);
+        setRachunki(daoRachunki.getWhere("bik_id", String.valueOf(bikId)));
+        
+        GenericDao<BikZapytanie> daoZapytania=new GenericDao(BikZapytanie.class);
+        setZapytania(daoZapytania.getWhere("bik_id", String.valueOf(bikId)));
+        
         return "/common/bikView?faces-redirect=true";
     }
     
     public String viewAccountHistory(){
+        GenericDao<BikHistoriaRachunku> dao=new GenericDao(BikHistoriaRachunku.class);
+        setHistoria(dao.getWhere("id_rachunek", String.valueOf(getSelectedAccount().getIdRachunek())));
         
         return "/common/bikHistoryView?faces-redirect=true";
-    }
-
-    public Bik getBik() {
-        GenericDao<Bik> dao=new GenericDao(Bik.class);
-        Bik bik=dao.getLastWhere("clientId", String.valueOf(clientId), "idBik", "desc");
-        bikId=bik.getIdBik();
-        return bik;
-    }
-
-
-    public List<BikRachunek> getRachunki() {
-        GenericDao<BikRachunek> dao=new GenericDao(BikRachunek.class);
-        return dao.getWhere("bik_id", String.valueOf(bikId));
-    }
-
-
-    public List<BikZapytanie> getZapytania() {
-        GenericDao<BikZapytanie> dao=new GenericDao(BikZapytanie.class);
-        return dao.getWhere("bik_id", String.valueOf(bikId));
     }
 
     public BikRachunek getSelectedAccount() {
@@ -92,9 +87,36 @@ public class BikMB implements Serializable {
         this.selectedAccount = selectedAccount;
     }
     
-    public List<BikHistoriaRachunku> getHistory(){
-        GenericDao<BikHistoriaRachunku> dao=new GenericDao(BikHistoriaRachunku.class);
-        return dao.getWhere("id_rachunek", String.valueOf(selectedAccount.getIdRachunek()));
+    public Bik getBik() {
+        return bik;
+    }
+
+    public void setBik(Bik bik) {
+        this.bik = bik;
+    }
+
+    public List<BikRachunek> getRachunki() {
+        return rachunki;
+    }
+
+    public void setRachunki(List<BikRachunek> rachunki) {
+        this.rachunki = rachunki;
+    }
+
+    public List<BikZapytanie> getZapytania() {
+        return zapytania;
+    }
+
+    public void setZapytania(List<BikZapytanie> zapytania) {
+        this.zapytania = zapytania;
+    }
+
+    public List<BikHistoriaRachunku> getHistoria() {
+        return historia;
+    }
+
+    public void setHistoria(List<BikHistoriaRachunku> historia) {
+        this.historia = historia;
     }
 
 
