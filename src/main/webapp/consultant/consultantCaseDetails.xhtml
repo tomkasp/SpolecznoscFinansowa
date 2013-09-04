@@ -277,7 +277,7 @@
                                        
                                        <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
                                            <h:panelGroup rendered="#{current.index == 0}" > <h3>#{node.productName}</h3> </h:panelGroup>
-                                           <h:panelGroup rendered="#{current.index > 1}" > <h4>#{node.productName}</h4> </h:panelGroup>
+                                           <h:panelGroup rendered="#{current.index > 0}" > <h4>#{node.productName}</h4> </h:panelGroup>
                                        </ui:repeat>
                                        
                                        
