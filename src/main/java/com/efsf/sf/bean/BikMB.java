@@ -26,7 +26,6 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class BikMB implements Serializable {
 
-    private Bik bik;
     private BikRachunek selectedAccount;
     
     private Integer clientId;
@@ -46,12 +45,13 @@ public class BikMB implements Serializable {
         String file=ftp.downloadBik(userId, doc.getBik());
         
         Alghorithm alg = new Alghorithm(file, password, clientId);
-        
+                
         //UPDATE FLAG TO PROCESSING
         alg.setStatus(1);
         
         //PARSE BIK
         alg.start();
+        
     }
     
     public String showBik(Integer clientId){
@@ -67,14 +67,11 @@ public class BikMB implements Serializable {
 
     public Bik getBik() {
         GenericDao<Bik> dao=new GenericDao(Bik.class);
-        Bik bik=dao.getWhereInOrder("clientId", String.valueOf(clientId), "idBik", "desc").get(0);
+        Bik bik=dao.getLastWhere("clientId", String.valueOf(clientId), "idBik", "desc");
         bikId=bik.getIdBik();
         return bik;
     }
 
-    public void setBik(Bik bik) {
-        this.bik = bik;
-    }
 
     public List<BikRachunek> getRachunki() {
         GenericDao<BikRachunek> dao=new GenericDao(BikRachunek.class);
@@ -100,5 +97,5 @@ public class BikMB implements Serializable {
         return dao.getWhere("id_rachunek", String.valueOf(selectedAccount.getIdRachunek()));
     }
 
-    
+
 }
