@@ -24,9 +24,7 @@ public class GenericDao<T> {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         T obj;
         try {
-            session.beginTransaction();
             obj = (T) session.get(getMyType(), id);
-            session.getTransaction().commit();
         } finally {
             session.close();
         }
@@ -37,11 +35,7 @@ public class GenericDao<T> {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            session.beginTransaction();
-
             lista = session.createQuery("from " + getMyTypeAsString()).list();
-
-            session.getTransaction().commit();
         } finally {
             session.close();
         }
@@ -52,12 +46,8 @@ public class GenericDao<T> {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            session.beginTransaction();
-
             lista = session.createQuery("from " + getMyTypeAsString()
                     + " order by " + field + " " + orderType).list();
-
-            session.getTransaction().commit();
         } finally {
             session.close();
         }
@@ -68,13 +58,9 @@ public class GenericDao<T> {
         T obj;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            session.beginTransaction();
-
             obj = (T) session.createQuery("from " + getMyTypeAsString()
                     + " where " + whereField + "=" + whereValue
                     +" order by " + field + " " + orderType + " LIMIT 1").list().get(0);
-
-            session.getTransaction().commit();
         } finally {
             session.close();
         }
@@ -85,9 +71,7 @@ public class GenericDao<T> {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            session.beginTransaction();
             lista = session.createQuery("from " + getMyTypeAsString() + " where " + field + "=" + value).list();
-            session.getTransaction().commit();
         } finally {
             session.close();
         }
