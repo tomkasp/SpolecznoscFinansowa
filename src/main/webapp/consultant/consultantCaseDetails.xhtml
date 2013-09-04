@@ -246,7 +246,7 @@
                                    </p:dialog>
                                    
                                        
-                                   <p:dataTable id="offers" value="#{caseViewMB.products}" var="row" rowKey="#{row}" selection="#{caseViewMB.selectedProduct}" emptyMessage="Nie ma żadnych spraw" selectionMode="single" >
+                                       <p:dataTable id="offers" value="#{caseViewMB.products}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" selection="#{caseViewMB.selectedProduct}" emptyMessage="Nie ma żadnych spraw" selectionMode="single" >
                                        <p:ajax event="rowSelect" update="offers :rightColumn:detailsButton :rightColumn:assignButton" />
                                        
                                         <p:column headerText="Nazwa instytucji">  
@@ -258,7 +258,7 @@
                                         </p:column>  
 
                                         <p:column headerText="Trafność">    
-                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)} %" />
+                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)*100/4}  %" />
                                         </p:column>  
                                     </p:dataTable>
                                    <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm :rightColumn:currentOffer"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
