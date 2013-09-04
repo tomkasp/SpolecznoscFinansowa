@@ -135,12 +135,13 @@ public class CaseViewMB implements Serializable{
     
     public void findBestProduct()
     {
-        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId);
+        AnalyserAlgorithm aa = new AnalyserAlgorithm(clientCaseId, loginMB.getConsultant().getIdConsultant());
         Map<Integer, Integer> productsIdsWithValue = aa.getBestOfferts();
         if (productsIdsWithValue != null && !productsIdsWithValue.isEmpty() )
         {
            sortedProductValues = new ArrayList(productsIdsWithValue.values());
            Collections.sort(sortedProductValues);
+           Collections.reverse(sortedProductValues);
             products = aa.bestProductForCase(productsIdsWithValue);
         }
         else
@@ -189,6 +190,8 @@ public class CaseViewMB implements Serializable{
         CaseStatus cs = new CaseStatusDAO().read(Settings.PRODUCT_ASSIGNED);
         selectedClientCase.setCaseStatus(cs);
         selectedClientCase.setProductDetails(pd);
+        
+        messagesMB.generateSystemMessage(bundle.getString("PRODUCT_ASSIGNED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {selectedClientCase.getIdClientCase() } );
         
         cdao.updateClientCase(selectedClientCase);
     }

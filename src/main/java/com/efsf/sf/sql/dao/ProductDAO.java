@@ -15,7 +15,8 @@ public class ProductDAO {
         List<ProductDetails> products = null;
         
         try {
-            Query q = session.createQuery("from ProductDetails as pd left join fetch pd.employmentType et join fetch pd.product pr join fetch pr.institution");
+            Query q = session.createQuery("from ProductDetails as pd left join fetch pd.employmentType et "
+                    + " join fetch pd.product pr join fetch pr.institution");
             products = q.list();
             session.getTransaction().commit();
         } finally {
@@ -24,6 +25,29 @@ public class ProductDAO {
 
         return products;
     }
+    
+    public List<ProductDetails> getAllProductsForConsultant(Integer idConsultant) {
+
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        session.beginTransaction();
+        List<ProductDetails> products = null;
+        
+        try {
+            Query q = session.createQuery("from ProductDetails as pd left join fetch pd.employmentType et "
+                    + " left join fetch pd.product pr left join fetch pr.institution ins "
+                    + " left join fetch ins.consultants cons "
+                    + " where cons.idConsultant = :idCons");
+            q.setParameter("idCons", idConsultant);
+            
+            products = q.list();
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        return products;
+    }
+    
 
     public Product getProductForDetails(Integer idDetails) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();

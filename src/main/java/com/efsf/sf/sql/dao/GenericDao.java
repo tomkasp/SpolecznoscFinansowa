@@ -63,6 +63,23 @@ public class GenericDao<T> {
         }
         return lista;
     }
+    
+    public T getLastWhere(String whereField, String whereValue, String field, String orderType) {
+        T obj;
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
+            session.beginTransaction();
+
+            obj = (T) session.createQuery("from " + getMyTypeAsString()
+                    + " where " + whereField + "=" + whereValue
+                    +" order by " + field + " " + orderType + " LIMIT 1").list().get(0);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+        return obj;
+    }
 
     public List<T> getWhere(String field, String value) {
         List<T> lista;

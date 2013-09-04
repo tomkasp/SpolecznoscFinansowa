@@ -14,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -26,12 +29,10 @@ import org.apache.http.message.BasicNameValuePair;
 @ViewScoped
 public class PaymentMB implements Serializable {
 
-    
-    private String pos_id="145366";
-    private String pos_auth_key="BKnQU9G";
-    private String key1="56df4fe519063a46419f38e4de5bd4f6";
-    
-    
+    private String pos_id = "145366";
+    private String pos_auth_key = "BKnQU9G";
+    private String key1 = "56df4fe519063a46419f38e4de5bd4f6";
+
     //Send new Payment
     public void consultantPayment() throws UnsupportedEncodingException, IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
@@ -54,40 +55,56 @@ public class PaymentMB implements Serializable {
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
         HttpResponse response = client.execute(post);
-        printResponse(response.getEntity().getContent());
+        //printResponse(response.getEntity().getContent());
 
         System.out.println("\nSending 'POST' request to URL : " + url);
         System.out.println("Post parameters : " + post.getEntity());
         System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
+
+
+        String content=getContentFromResponse(response.getEntity().getContent());
+
+        HttpServletResponse myResponse =
+                (HttpServletResponse) FacesContext.getCurrentInstance()
+                .getExternalContext().getResponse();
+
+        ExternalContext context=(ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
+        context.setResponseContentType("text/html");
+        context.setRequestCharacterEncoding("UTF-8");
+        context.getResponseOutputWriter().write(content);
+//        myResponse.setContentType("text/html");
+//        myResponse.setCharacterEncoding("UTF-8");
+//        myResponse.write(content);
+//        myResponse.getWriter().flush();
+        FacesContext.getCurrentInstance().responseComplete();
+
     }
-    
-    
+
     //Read Payment status
-    public void readTransactionStatus(Integer session_id) throws UnsupportedEncodingException, IOException{
+    public void readTransactionStatus(Integer session_id) throws UnsupportedEncodingException, IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
-         
+
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
         urlParameters.add(new BasicNameValuePair("session_id", session_id.toString()));
-        
+
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String ts=dateFormat.format(new Date());
-        
+        String ts = dateFormat.format(new Date());
+
         urlParameters.add(new BasicNameValuePair("ts", ts));
 
-        
-        String sig=Security.md5(pos_id + session_id + ts + key1);
+
+        String sig = Security.md5(pos_id + session_id + ts + key1);
         urlParameters.add(new BasicNameValuePair("sig", sig));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
         HttpResponse response = client.execute(post);
-        printResponse(response.getEntity().getContent());
+        //printResponse(response.getEntity().getContent());
     }
-    
 
-    public void printResponse(InputStream is) throws IOException {
+    public String getContentFromResponse(InputStream is) throws IOException {
 
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(is));
@@ -98,6 +115,6 @@ public class PaymentMB implements Serializable {
             result.append(line);
         }
 
-        System.out.println(result.toString());
+        return result.toString();
     }
 }

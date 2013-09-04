@@ -16,6 +16,8 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +33,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 @ManagedBean
 @ViewScoped
@@ -273,7 +276,37 @@ public class ClientSettingsMB implements Serializable {
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
+    }
+    
+    public void validatePesel(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+        String pesel = value.toString();
+        if (pesel.length() > 5 && client.getBirthDate() != null)
+        {
+            LocalDate date = new LocalDate(client.getBirthDate());
+            String year = Integer.toString(date.getYear()).substring(2);
+            
+            FacesContext context = FacesContext.getCurrentInstance();
+            ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
+            FacesMessage msg = new FacesMessage(bundle.getString("peselNotMatch"), bundle.getString("peselNotMatch"));
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            
+            if (date.getYear() < 2000)
+            {
+             
+                if (!pesel.substring(0, 2).equals(year) || Integer.parseInt(pesel.substring(2, 4)) != date.getMonthOfYear() || Integer.parseInt(pesel.substring(4, 6)) != date.getDayOfMonth())
+                {
+                                throw new ValidatorException(msg);
+                }
+            }
+            else     
+            {
+                if (!pesel.substring(0, 2).equals(year) || Integer.parseInt(pesel.substring(2, 4)) != (date.getMonthOfYear()+20) || Integer.parseInt(pesel.substring(4, 6)) != date.getDayOfMonth())
+                {
 
+                                throw new ValidatorException(msg);
+                }
+            }
+        }
     }
 
     public void deleteIncome(int idIncome, boolean isIncome) {

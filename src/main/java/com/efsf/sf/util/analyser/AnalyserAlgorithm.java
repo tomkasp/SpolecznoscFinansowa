@@ -35,7 +35,8 @@ public class AnalyserAlgorithm {
     private ArrayList<ProductsData> prodata = new ArrayList<>();
     private HashMap<Integer, Integer> testtab = new HashMap<>();
     private HashMap<Integer, Integer> bestOfferts = new HashMap<>();
-
+    private Integer idConsultant;
+    
     public AnalyserAlgorithm() {
     }
 
@@ -43,9 +44,13 @@ public class AnalyserAlgorithm {
         analizuj(IdSprawy);
     }
     
+    public AnalyserAlgorithm(Integer idSprawy,Integer idConsultant) {
+        this.idConsultant = idConsultant;
+        analizuj(idSprawy);
+    }
+    
     public List<ProductDetails> bestProductForCase(Map<Integer, Integer> productIds) 
     {
-        
         GenericDao<ProductDetails> dao = new GenericDao(ProductDetails.class);
         List<ProductDetails> productDetailsList = new ArrayList();
         Integer currentMax = Collections.max(productIds.values());
@@ -89,16 +94,32 @@ public class AnalyserAlgorithm {
 //        this.klienci[4] = sprKli.getExpectedInstalment().doubleValue();
 //        this.klienci[5] = new Converters().ageFromBirthDate(jedenKlient.getBirthDate());
 
-        clidata = new ClientData(jedenKlient.getName(), jedenKlient.getLastName(), et1, sprKli.getConsolidationValue().doubleValue(), sprKli.getExpectedInstalment().doubleValue(), new Converters().ageFromBirthDate(jedenKlient.getBirthDate()));
+        clidata = new ClientData(jedenKlient.getName(), jedenKlient.getLastName(), 
+                et1, sprKli.getConsolidationValue().doubleValue(), 
+                sprKli.getExpectedInstalment().doubleValue(), 
+                new Converters().ageFromBirthDate(jedenKlient.getBirthDate()));
 
         //klienci = kdao.getKlienci();
         //Produkty = kdao.getProduktyBankow();
     }
-
+    
     private void setProducts() {
         ProductDAO pDao = new ProductDAO();
-        List<ProductDetails> pd = pDao.getAllProducts();
-
+        List<ProductDetails> pd=null; 
+        
+        //jesli jest nadany idConsultant wygeneruj oferty zgodne z konsultantem
+        //jesli nie, wyswietl dla klienta najlepszych konsultantow
+        if(this.idConsultant==null){
+            pd = pDao.getAllProducts();
+            System.out.println("nie został zapisany idConsultant");
+        }
+        else{
+            pd = pDao.getAllProductsForConsultant(this.idConsultant);
+            System.out.println("został zapisany konsultant");
+        }
+        
+        
+        
         Iterator i = pd.iterator();
 
         while (i.hasNext()) {
@@ -114,12 +135,14 @@ public class AnalyserAlgorithm {
 //            produkty[prod][6] = ite.getClientAgeMin().intValue();
 //            produkty[prod][7] = ite.getClientAgeMax().intValue();
 
-            prodata.add(new ProductsData(ite.getIdProductDetail(), ite.getEmploymentType().getIdEmploymentType(), ite.getAmountBruttoMin().doubleValue(), ite.getAmountBruttoMax().doubleValue(), ite.getLoanTimeMin(), ite.getLoanTimeMax(), ite.getClientAgeMin().intValue(), ite.getClientAgeMax().intValue()));
+            prodata.add(new ProductsData(ite.getIdProductDetail(), ite.getEmploymentType().getIdEmploymentType(), 
+                    ite.getAmountBruttoMin().doubleValue(), ite.getAmountBruttoMax().doubleValue(), 
+                    ite.getLoanTimeMin(), ite.getLoanTimeMax(), ite.getClientAgeMin().intValue(), ite.getClientAgeMax().intValue()));
         }
     }
 
-    private String analizuj(Integer IdSprawaKlienta) {
-        setClient(IdSprawaKlienta);
+    private String analizuj(Integer idSprawaKlienta) {
+        setClient(idSprawaKlienta);
         setProducts();
 //        Arrays.fill(off, 0);
 
@@ -222,7 +245,7 @@ public class AnalyserAlgorithm {
 
         int tmp = 0;
         int max = 0;
-
+        
         //sprwadzam max ocene do porownania (normalnie 4)
         for (Map.Entry entry : oferta.entrySet()) {
             if (max < (int) entry.getValue()) {
@@ -306,7 +329,7 @@ public class AnalyserAlgorithm {
 
     //================================== /pola =================================
     //========================== gettery i settery =============================
-
+    
     public List<Consultant> getBestConsultants() {
         return bestConsultants;
     }

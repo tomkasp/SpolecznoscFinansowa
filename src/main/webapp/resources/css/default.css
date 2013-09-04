@@ -944,7 +944,7 @@ p:column {
 }
 
 .pdetailsItem {
-    margin: 0 30px 5px 30px; 
+    margin: 0 20px 5px 20px; 
 }
 
 .pdetailsLabel {
@@ -969,6 +969,7 @@ p:column {
     color: #868686;
     font-family: Arial;
     font-weight:bold;
+    resize: false;
 }
 
 .cookieBar {
