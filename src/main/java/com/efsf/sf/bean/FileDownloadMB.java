@@ -16,6 +16,10 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class FileDownloadMB implements Serializable {
 
+    
+    @ManagedProperty(value = "#{bikMB}")
+    private BikMB bikMB;
+    
     private static final long serialVersionUID = 1L;
     
     private static final String PATH =  "rice/SF/USERS/";
@@ -50,6 +54,11 @@ public class FileDownloadMB implements Serializable {
             requiredDocuments=new RequiredDocuments();
         }    
         
+    }
+    
+    public void parseBik(Integer clientId) throws IOException, Exception{
+        requiredDocuments.setBikStatus(1);
+        bikMB.parseBik(clientId);
     }
     
     public void load1() throws IOException{
@@ -110,6 +119,20 @@ public class FileDownloadMB implements Serializable {
 
     public void setCaseViewMB(CaseViewMB caseViewMB) {
         this.caseViewMB = caseViewMB;
+    }
+
+    /**
+     * @return the bikMB
+     */
+    public BikMB getBikMB() {
+        return bikMB;
+    }
+
+    /**
+     * @param bikMB the bikMB to set
+     */
+    public void setBikMB(BikMB bikMB) {
+        this.bikMB = bikMB;
     }
 
 }

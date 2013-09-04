@@ -1,5 +1,6 @@
 package com.efsf.sf.util.ftp;
 
+import com.efsf.sf.util.bik.Alghorithm;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -77,7 +78,7 @@ public class FtpDownloader implements Serializable {
         FTPClient client = new FTPClient();
         InputStream is;
         String name = null;
-                
+
         try {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
@@ -86,7 +87,7 @@ public class FtpDownloader implements Serializable {
             is = client.retrieveFileStream("rice/SF/USERS/" + userId + "/" + fileName);
 
             name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), "pdf");     
-            File file=new File("/home/sf/bik/", name);
+            File file=new File(Alghorithm.getPath(), name);
             file.setWritable(true);
 
             FileOutputStream outputStream = new FileOutputStream(file);
