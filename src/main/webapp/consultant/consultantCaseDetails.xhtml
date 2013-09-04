@@ -181,18 +181,19 @@
                                   <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
                                        <h4> Analiza raportu BIK </h4>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
-                                           <p:commandLink styleClass="blueButton buttonMargin" value="Analizuj BIK" ajax="false" action="#{bikMB.parseBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandLink>    
+                                           <h:outputText value="Bik nie był jeszcze analizowany."/>
+                                           <p:commandButton styleClass="floatR greyButton" value="Analizuj BIK" ajax="true" update=":rightColumn" action="#{fileDownloadMB.parseBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandButton>    
                                        </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==1}" >
-                                           <h:outputText value="Bik w trakcie analizowania"/>
+                                           <h:outputText value="Bik w trakcie analizowania. Analiza może trwać do 5 minut."/>
                                        </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==3}" >
-                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne"/>
+                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne! Poproś klienta o wgranie nowego raportu BIK."/>
                                        </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==4}" >
                                            <h:outputText value="Bik pomyślnie przetworzony"/>
-                                           <p:commandLink styleClass="blueButton buttonMargin" value="Zobacz wyniki" ajax="false" action="#{bikMB.showBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandLink>
-                                       </h:panelGroup>                                   
+                                           <p:commandButton styleClass="floatR greyButton" value="Zobacz wyniki" action="#{bikMB.showBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandButton>
+                                       </h:panelGroup>           
                                    </h:panelGroup>    
                                    
                                     
@@ -226,6 +227,8 @@
                                            
                                    </h:panelGroup>
                                    
+                                   <h:panelGroup rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus != 9) }" >
+                                   
                                    <div style="clear:both">
                                         <h4> WYSZUKAJ NAJLEPSZĄ OFERTĘ </h4>
                                         <div class="solidText"> 
@@ -242,8 +245,8 @@
                                        </h:commandButton>
                                    </p:dialog>
                                    
-
-                                   <p:dataTable id="offers" value="#{caseViewMB.products}" var="row" rowKey="#{row}" selection="#{caseViewMB.selectedProduct}" emptyMessage="Nie ma żadnych spraw" selectionMode="single" >
+                                       
+                                       <p:dataTable id="offers" value="#{caseViewMB.products}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" selection="#{caseViewMB.selectedProduct}" emptyMessage="Nie ma żadnych spraw" selectionMode="single" >
                                        <p:ajax event="rowSelect" update="offers :rightColumn:detailsButton :rightColumn:assignButton" />
                                        
                                         <p:column headerText="Nazwa instytucji">  
@@ -255,12 +258,12 @@
                                         </p:column>  
 
                                         <p:column headerText="Trafność">    
-                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)/4 * 100} %" />
+                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)*100/4}  %" />
                                         </p:column>  
                                     </p:dataTable>
                                    <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm :rightColumn:currentOffer"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
                                    <p:commandButton id="detailsButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog"  styleClass="marginTB20 floatR greyButton wideButton" value="Szczegóły" action="#{caseViewMB.fetchProductTreeForSelectedProduct(caseViewMB.selectedProduct)}" oncomplete="productDetails.show()" />
-                                  
+                                   </h:panelGroup>
                                    <p:dialog header="Informacja" id="assignedDialog" widgetVar="assignProducts" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
                                        <div class="fontGrey"> Oferta została przypisana do sprawy.</div>
                                    
@@ -274,7 +277,7 @@
                                        
                                        <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
                                            <h:panelGroup rendered="#{current.index == 0}" > <h3>#{node.productName}</h3> </h:panelGroup>
-                                           <h:panelGroup rendered="#{current.index > 1}" > <h4>#{node.productName}</h4> </h:panelGroup>
+                                           <h:panelGroup rendered="#{current.index > 0}" > <h4>#{node.productName}</h4> </h:panelGroup>
                                        </ui:repeat>
                                        
                                        

@@ -9,7 +9,6 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +20,18 @@ import java.util.regex.Pattern;
 
 public class Alghorithm extends Thread{
 
+
     List<RuleBase> rules = new ArrayList<RuleBase>();
     private String file;
     private String password;
     
     
-    private List<Table> tables= new ArrayList<Table>();
+    private ArrayList<Table> tables= new ArrayList<Table>();
     private Map<String, Object> result = new HashMap<String, Object>();
     private Integer clientId; 
+    
+    //private static String path="C:\\files\\";
+    private static String path="/home/sf/bik/";    
     
     private String bikSample="Biuro Informacji Kredytowej S.A.";
     
@@ -53,14 +56,10 @@ public class Alghorithm extends Thread{
         try {
             PDFWithText pdf = new PDFWithText();
             pdf.reset();
-            String text = pdf.getTextFromPDF("C:\\files\\" + file, password);
+            String text = pdf.getTextFromPDF(getPath() + file, password);
             
             //Poprawny BIK
             if(text.length()>1000 && text.contains(bikSample)){
-            
-                PrintWriter out = new PrintWriter("C:/bik/texty/" + file + ".txt");
-                out.print(text);
-                out.close();
 
                 parse(preProcess(text));
                 tables=pdf.getTables(); 
@@ -77,7 +76,7 @@ public class Alghorithm extends Thread{
         } catch (Exception ex) {
             Logger.getLogger(Alghorithm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            File f=new File("C:\\files\\"+file);
+            File f=new File(getPath()+file);
             f.delete();
         }
     }
@@ -207,7 +206,7 @@ public class Alghorithm extends Thread{
         //Zapytania
         GenericDao<BikZapytanie> dao3 = new GenericDao(BikZapytanie.class);
         ArrayList<String> zapytania = (ArrayList<String>) result.get(RegexBase.Z_KWOTA.getName());
-        if (kwoty != null) {
+        if (zapytania != null) {
 
             for (int i = 0; i < zapytania.size(); i++) {
              BikZapytanie zapytanie=new BikZapytanie();
@@ -264,6 +263,10 @@ public class Alghorithm extends Thread{
         RequiredDocuments doc=(RequiredDocuments) dao.getWhere("fk_client", String.valueOf(clientId)).get(0);
         doc.setBikStatus(status);
         dao.update(doc);
+    }
+    
+    public static String getPath() {
+        return path;
     }
     
 }

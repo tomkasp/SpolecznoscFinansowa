@@ -1,6 +1,8 @@
-// Sprawdzić czy tekst czy PDF z obrrazami
-// Table problem z separatorem strony
-
+// Przycisk zobacz historię ma być nie aktywny
+// Zapis hasła w ustawieniach zaraz po wciśnięciu klawisza
+// Komunikat ma się odświeżać po kliknięciu na analizuj BIK
+// Ma się ładować ostatni BIK a nie pierwszy
+// BIK w wersji z obrazami
 
 package com.efsf.sf.bean;
 
@@ -24,7 +26,6 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class BikMB implements Serializable {
 
-    private Bik bik;
     private BikRachunek selectedAccount;
     
     private Integer clientId;
@@ -44,16 +45,18 @@ public class BikMB implements Serializable {
         String file=ftp.downloadBik(userId, doc.getBik());
         
         Alghorithm alg = new Alghorithm(file, password, clientId);
-        
+                
         //UPDATE FLAG TO PROCESSING
         alg.setStatus(1);
         
         //PARSE BIK
         alg.start();
+        
     }
     
     public String showBik(Integer clientId){
         this.clientId=clientId;
+        selectedAccount=null;
         return "/common/bikView?faces-redirect=true";
     }
     
@@ -64,14 +67,11 @@ public class BikMB implements Serializable {
 
     public Bik getBik() {
         GenericDao<Bik> dao=new GenericDao(Bik.class);
-        Bik bik=dao.getWhere("clientId", String.valueOf(clientId)).get(0);
+        Bik bik=dao.getLastWhere("clientId", String.valueOf(clientId), "idBik", "desc");
         bikId=bik.getIdBik();
         return bik;
     }
 
-    public void setBik(Bik bik) {
-        this.bik = bik;
-    }
 
     public List<BikRachunek> getRachunki() {
         GenericDao<BikRachunek> dao=new GenericDao(BikRachunek.class);
@@ -97,5 +97,5 @@ public class BikMB implements Serializable {
         return dao.getWhere("id_rachunek", String.valueOf(selectedAccount.getIdRachunek()));
     }
 
-    
+
 }
