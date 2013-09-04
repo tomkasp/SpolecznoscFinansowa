@@ -57,10 +57,6 @@ public class Alghorithm extends Thread{
             
             //Poprawny BIK
             if(text.length()>1000 && text.contains(bikSample)){
-            
-                PrintWriter out = new PrintWriter("C:/bik/texty/" + file + ".txt");
-                out.print(text);
-                out.close();
 
                 parse(preProcess(text));
                 tables=pdf.getTables(); 

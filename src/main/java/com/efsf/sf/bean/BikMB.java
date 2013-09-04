@@ -1,6 +1,8 @@
-// Sprawdzić czy tekst czy PDF z obrrazami
-// Table problem z separatorem strony
-
+// Przycisk zobacz historię ma być nie aktywny
+// Zapis hasła w ustawieniach zaraz po wciśnięciu klawisza
+// Komunikat ma się odświeżać po kliknięciu na analizuj BIK
+// Ma się ładować ostatni BIK a nie pierwszy
+// BIK w wersji z obrazami
 
 package com.efsf.sf.bean;
 
@@ -54,6 +56,7 @@ public class BikMB implements Serializable {
     
     public String showBik(Integer clientId){
         this.clientId=clientId;
+        selectedAccount=null;
         return "/common/bikView?faces-redirect=true";
     }
     
