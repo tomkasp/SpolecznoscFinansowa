@@ -15,6 +15,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean
 @SessionScoped
@@ -22,10 +25,10 @@ public class LoginMB implements Serializable {
 
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
-    
     private static final long serialVersionUID = 1L;
     private String email;
     private String password;
+    private boolean rememberMe;
     private boolean isLogged = false;
     private Integer type;
     private int idUser;
@@ -34,21 +37,23 @@ public class LoginMB implements Serializable {
     private Client client;
     private Consultant consultant;
     private Boolean activeAddingApp;
-    
-    
     private String actualMessage;
-    
-    @ManagedProperty(value="#{mailerMB}")
+    @ManagedProperty(value = "#{mailerMB}")
     private MailerMB mailerMB;
 
+    public LoginMB() {
+        checkCookie();
+    }
+
     public String login() {
-        
-       
+
         UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
         user = userDao.login(this.email, this.password);
-        
+
+        setCookie();
+
         if (user != null) {
             type = user.getType();
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
@@ -58,15 +63,15 @@ public class LoginMB implements Serializable {
             }
 
             if (type.equals(Settings.ADMIN_ACTIVE)) {
-                client=null;
-                consultant=null;
-                
+                client = null;
+                consultant = null;
+
                 return "/admin/adminMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CONSULTANT_ACTIVE)) {
                 consultant = consultantDao.getCounsultantConnectedToUser(idUser);
-                client=null;
-                
+                client = null;
+
                 return "/consultant/consultantMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CLIENT_ACTIVE)) {
@@ -74,8 +79,8 @@ public class LoginMB implements Serializable {
                 points = client.getPoints();
 
                 this.activeAddingApp = this.checkNewAppActivity();
-                consultant=null;      
-                
+                consultant = null;
+
                 return "/client/clientMainPage?faces-redirect=true";
             }
 
@@ -83,32 +88,34 @@ public class LoginMB implements Serializable {
                 return "/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
 
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));         
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
 
                 return "/login";
             }
 
         }
-        
+
+
+
+
         return "/login?faces-redirect=true";
     }
 
     private Boolean checkNewAppActivity() {
         return this.points > 0;
     }
-    
-    public void addMessageToContext(){
-       FacesContext facesContext = FacesContext.getCurrentInstance();
-       if(getActualMessage()!=null){
+
+    public void addMessageToContext() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (getActualMessage() != null) {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, getActualMessage(), ""));
-       }
-       setActualMessage(null);
+        }
+        setActualMessage(null);
     }
-    
-    public boolean areCookiesAccepted()
-    {
+
+    public boolean areCookiesAccepted() {
         Map<String, Object> requestCookieMap = FacesContext.getCurrentInstance().getExternalContext().getRequestCookieMap();
-        return (requestCookieMap.containsKey("cookiesAccepted")); 
+        return (requestCookieMap.containsKey("cookiesAccepted"));
     }
 
     public String logout() {
@@ -154,17 +161,72 @@ public class LoginMB implements Serializable {
 
         return login();
     }
-    
-    public void sendNewPasswordMail(){
-    
-        UserDAO udao=new UserDAO();
-        User u=udao.read(email);
-        String password=u.getPassword();
-        
-        getMailerMB().sendNewPasswordMail( email, password );
-        
+
+    public void sendNewPasswordMail() {
+
+        UserDAO udao = new UserDAO();
+        User u = udao.read(email);
+        String password = u.getPassword();
+
+        getMailerMB().sendNewPasswordMail(email, password);
+
         setActualMessage(bundle.getString("newPasswordMessage"));
-        
+
+    }
+
+    public void checkCookie() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        String cookieName = null;
+        Cookie cookie[] = ((HttpServletRequest) facesContext.getExternalContext().
+                getRequest())
+                .getCookies();
+        if (cookie != null && cookie.length > 0) {
+            for (int i = 0; i < cookie.length; i++) {
+                cookieName = cookie[i].getName();
+                if (cookieName.equals("email")) {
+                    email = cookie[i].getValue();
+                } else if (cookieName.equals("password")) {
+                    password = cookie[i].getValue();
+                } else if (cookieName.equals("remember")) {
+                    String remember1 = cookie[i].getValue();
+                    if (remember1.equals("false")) {
+                        rememberMe = false;
+                    } else if (remember1.equals("true")) {
+                        rememberMe = true;
+                    }
+                }
+            }
+        } else {
+            System.out.println("Brak cookie");
+        }
+    }
+
+    public void setCookie() {
+        int COOKIE_TIMEOUT=2678400;
+        Cookie cemail;
+        Cookie cpass;
+        Cookie cremember;
+        String remember;
+
+        if (rememberMe == true) {
+            cemail = new Cookie("email", email);
+            cpass = new Cookie("password", password);
+            remember = "true";
+            cremember = new Cookie("remember", remember);
+        } else {
+            cemail = new Cookie("email", "");
+            cpass = new Cookie("password", "");
+            remember = "false";
+            cremember = new Cookie("remember", remember);
+        }
+
+        cemail.setMaxAge(COOKIE_TIMEOUT);
+        cpass.setMaxAge(COOKIE_TIMEOUT);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cemail);
+        ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cpass);
+        ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cremember);
+
     }
 
     public String getEmail() {
@@ -255,7 +317,6 @@ public class LoginMB implements Serializable {
         return actualMessage;
     }
 
-
     public void setActualMessage(String actualMessage) {
         this.actualMessage = actualMessage;
     }
@@ -267,7 +328,12 @@ public class LoginMB implements Serializable {
     public void setMailerMB(MailerMB mailerMB) {
         this.mailerMB = mailerMB;
     }
-    
-    
 
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
 }

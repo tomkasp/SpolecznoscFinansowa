@@ -94,7 +94,8 @@ public class ConsultantCreateMB implements Serializable {
 
         loginMB.setActualMessage(getBundle().getString("confirmRegistrationTitle"));
         
-        return "/login";
+        
+        return "/login?faces-redirect=true";
         
     }
     
