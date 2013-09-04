@@ -258,7 +258,7 @@
                                         </p:column>  
 
                                         <p:column headerText="Trafność">    
-                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)} %" />
+                                            <h:outputText value="#{caseViewMB.sortedProductValues.get(rowIndex)} #{rowIndex}}" />
                                         </p:column>  
                                     </p:dataTable>
                                    <p:commandButton id="assignButton" disabled="#{empty caseViewMB.selectedProduct}" update="offers detailsDialog :titleForm :rightColumn:currentOffer"  styleClass="marginTB20 floatR greyButton wideButton" value="Przypisz ofertę" action="#{caseViewMB.assignProduct(caseViewMB.selectedProduct)}" oncomplete="assignProducts.show()" />
