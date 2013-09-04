@@ -64,21 +64,21 @@ public class GenericDao<T> {
         return lista;
     }
     
-    public List<T> getWhereInOrder(String whereField, String whereValue, String field, String orderType) {
-        List<T> lista;
+    public T getLastWhere(String whereField, String whereValue, String field, String orderType) {
+        T obj;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
 
-            lista = session.createQuery("from " + getMyTypeAsString()
+            obj = (T) session.createQuery("from " + getMyTypeAsString()
                     + " where " + whereField + "=" + whereValue
-                    +" order by " + field + " " + orderType).list();
+                    +" order by " + field + " " + orderType + " LIMIT 1").list().get(0);
 
             session.getTransaction().commit();
         } finally {
             session.close();
         }
-        return lista;
+        return obj;
     }
 
     public List<T> getWhere(String field, String value) {
