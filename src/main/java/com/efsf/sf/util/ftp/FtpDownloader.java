@@ -28,7 +28,7 @@ public class FtpDownloader implements Serializable {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
             
-             Logger.getLogger( FtpDownloader.class.getName() ).log(Level.SEVERE, "FTP succes logged");
+             Logger.getLogger( FtpDownloader.class.getName() ).log(Level.INFO, "FTP succes logged");
             
             remoteFile = filePath+fileName;
             
