@@ -18,7 +18,7 @@
 
                 <div> 
                     <h:form id="rachunki"> 
-                        <p:dataTable value="#{bikMB.history}" rowKey="#{row.idWpisu}" var="row" emptyMessage="Brak historii rachunku" selectionMode="single" paginator="true" rows="10">
+                        <p:dataTable value="#{bikMB.historia}" rowKey="#{row.idWpisu}" var="row" emptyMessage="Brak historii rachunku" selectionMode="single" paginator="true" rows="10">
 
                             <p:column headerText="Numer"> 
                                 <h:outputText value="#{row.numer}" />  
