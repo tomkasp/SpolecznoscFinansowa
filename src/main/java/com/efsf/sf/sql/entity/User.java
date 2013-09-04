@@ -28,11 +28,11 @@ public class User implements java.io.Serializable {
     private String password;
     private String email;
     private int type;
-    private Set<Client> clients = new HashSet<Client>(0);
-    private Set<Message> messagesForFkFromUser = new HashSet<Message>(0);
-    private Set<Message> messagesForFkToUser = new HashSet<Message>(0);
-    private Set<Consultant> consultants = new HashSet<Consultant>(0);
-    private Set<Payment> payments = new HashSet<Payment>(0);
+    private Set<Client> clients = new HashSet<>(0);
+    private Set<Message> messagesForFkFromUser = new HashSet<>(0);
+    private Set<Message> messagesForFkToUser = new HashSet<>(0);
+    private Set<Consultant> consultants = new HashSet<>(0);
+    private Set<Payment> payments = new HashSet<>(0);
     
     public User() {
     }
