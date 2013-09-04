@@ -183,11 +183,11 @@ public class LoginMB implements Serializable {
         if (cookie != null && cookie.length > 0) {
             for (int i = 0; i < cookie.length; i++) {
                 cookieName = cookie[i].getName();
-                if (cookieName.equals("email")) {
+                if (cookieName.equals("sfemail")) {
                     email = cookie[i].getValue();
-                } else if (cookieName.equals("password")) {
+                } else if (cookieName.equals("sfpassword")) {
                     password = cookie[i].getValue();
-                } else if (cookieName.equals("remember")) {
+                } else if (cookieName.equals("sfremember")) {
                     String remember1 = cookie[i].getValue();
                     if (remember1.equals("false")) {
                         rememberMe = false;
@@ -196,32 +196,29 @@ public class LoginMB implements Serializable {
                     }
                 }
             }
-        } else {
-            System.out.println("Brak cookie");
-        }
+        } else {}
     }
 
     public void setCookie() {
-        int COOKIE_TIMEOUT=2678400;
+        int COOKIE_TIMEOUT=2678400;//31 days
         Cookie cemail;
         Cookie cpass;
         Cookie cremember;
-        String remember;
 
         if (rememberMe == true) {
-            cemail = new Cookie("email", email);
-            cpass = new Cookie("password", password);
-            remember = "true";
-            cremember = new Cookie("remember", remember);
+            cemail = new Cookie("sfemail", email);
+            cpass = new Cookie("sfpassword", password);
+            cremember = new Cookie("sfremember", "true");
         } else {
-            cemail = new Cookie("email", "");
-            cpass = new Cookie("password", "");
-            remember = "false";
-            cremember = new Cookie("remember", remember);
+            cemail = new Cookie("sfemail", "");
+            cpass = new Cookie("sfpassword", "");
+            cremember = new Cookie("sfremember", "false");
         }
 
         cemail.setMaxAge(COOKIE_TIMEOUT);
         cpass.setMaxAge(COOKIE_TIMEOUT);
+        cremember.setMaxAge(COOKIE_TIMEOUT);
+        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cemail);
         ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cpass);
