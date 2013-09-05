@@ -93,26 +93,32 @@ public class Alghorithm extends Thread{
              
             
             if (rules.get(i).getType() == RuleBase.T_MANY) {
-               List<String> ls=new ArrayList<String>(); 
-               while(m.find())
-                   ls.add(trim(m.group("val")));
+               List<String> ls=new ArrayList<>(); 
+               while(m.find()) {
+                    ls.add(trim(m.group("val")));
+                }
                
-               if(!ls.isEmpty()) getResult().put(rules.get(i).getName(), ls);
+               if(!ls.isEmpty()) {
+                    getResult().put(rules.get(i).getName(), ls);
+                }
                
             } else if (rules.get(i).getType() == RuleBase.T_ONE) {
                 
-                if (m.find())
+                if (m.find()) {
                     getResult().put(rules.get(i).getName(), trim(m.group("val")));
+                }
                 
             } else if (rules.get(i).getType() == RuleBase.T_ONE_TABLE) {
                 
-                if (m.find())
+                if (m.find()) {
                     getResult().put(rules.get(i).getName(), TableHelper.getAsTable(m.group("val")));
+                }
                 
             } else if (rules.get(i).getType() == RuleBase.T_MANY_TABLE) {
                  
-                 while(m.find()) 
-                     getResult().put(rules.get(i).getName(), TableHelper.getAsTable(m.group("val"))); 
+                 while(m.find()) {
+                    getResult().put(rules.get(i).getName(), TableHelper.getAsTable(m.group("val")));
+                } 
               
             }    
             m.reset();
