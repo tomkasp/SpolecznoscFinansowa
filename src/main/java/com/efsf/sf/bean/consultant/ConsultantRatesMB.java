@@ -130,7 +130,8 @@ public class ConsultantRatesMB implements Serializable{
         }
         
         for(ClientCase cs: cases){
-           CaseRating caseRat=cs.getCaseRating();
+          
+           CaseRating caseRat=(CaseRating) cs.getCaseRating();
            if(caseRat.getContact()>max[0]) {
                max[0]=caseRat.getContact();
            }
