@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name="bik")
@@ -71,6 +72,7 @@ public class Bik implements java.io.Serializable{
     
     @ManyToOne
     @JoinColumn(name="clientId")
+    @ForeignKey(name="bikToClient")
     private Client client;
     
     public Integer getIdBik() {
