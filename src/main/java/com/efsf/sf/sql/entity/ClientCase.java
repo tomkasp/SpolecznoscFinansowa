@@ -46,8 +46,8 @@ public class ClientCase implements java.io.Serializable {
     private Integer difficulty;
     private Boolean premium;
     private CaseRating caseRating;
-    private Set<Consultant> consultants = new HashSet<Consultant>(0);
-    private Set<Consultant> consultants_1 = new HashSet<Consultant>(0);
+    private Set<Consultant> consultants = new HashSet<>(0);
+    private Set<Consultant> consultants_1 = new HashSet<>(0);
 
     public ClientCase() {
     }
