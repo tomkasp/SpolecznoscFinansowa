@@ -4,6 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
+    <h:form id="navFormConsultant">
     <div class="topbarLogo">
         <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
         <h:panelGroup rendered="#{view.viewId != '/consultant/consultantMainPage.xhtml' and  view.viewId != '/consultant/consultantSettings.xhtml' and  view.viewId != '/consultant/consultantMarket.xhtml'}" >
@@ -26,16 +27,15 @@
             <h:link outcome="/consultant/consultantMainPage"> <h:graphicImage class="bigMenuButton" id="home_icon_market_clicked" alt="could not be found."  value="/resources/images/home_black.png" title="Home" ></h:graphicImage> </h:link>
             <h:link outcome="/consultant/consultantSettings"> <h:graphicImage class="bigMenuButton" id="profile_icon_market_clicked" alt="could not be found."  value="/resources/images/profile_logo_black.png" title="Profile" ></h:graphicImage> </h:link>
         </h:panelGroup>
-    
-    
     </div>
-
-    <h:form>
+    </h:form>
+    
+    <h:form id="menuFormConsultant">
         <div class="topbarMenuBlue">
             <h:panelGroup>
-                <h:commandButton class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                <h:button class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
-                <h:button class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
+                <h:commandButton id="logoutButton" class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
+                <h:button id="messagesButton" class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
+                <h:button id="deactivateAccountButton" class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
                 <h:button class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
                 <h:button class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/consultant/consultantChoosePayment"/>
             </h:panelGroup>

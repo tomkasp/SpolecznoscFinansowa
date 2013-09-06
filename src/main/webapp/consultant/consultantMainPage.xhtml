@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
 
-                <h:form>
+                <h:form id="lastForm">
 
                     <div>
 
@@ -445,8 +445,8 @@
                             </p:column> 
 
                         </p:dataTable>
-                        <p:commandLink styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
-                        <p:commandLink styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
+                        <p:commandLink id="myRates" styleClass="wideButton greyButton floatR" value="Moje oceny" action="#{consultantRatesMB.showConsulantRatesPage()}"/>
+                        <p:commandLink id="bestConsultants" styleClass="wideButton greyButton floatR" value="Najlepsi doradcy" action="#{scoreBoardMB.showScoreBoard()}"/>
                     </div>
 
                     <!-- DIALOGS -->
