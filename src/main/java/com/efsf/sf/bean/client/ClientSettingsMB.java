@@ -422,6 +422,7 @@ public class ClientSettingsMB implements Serializable {
         }
     }
 
+    
     public Integer getIdClient() {
         return idClient;
     }

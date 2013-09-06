@@ -529,23 +529,38 @@ p:column {
 
 .adressSection
 {
-    width:45%; 
+    width:390px; 
     display: inline-block;
+    float:left;
 }
+
+.adressSection h4{
+    margin:22px 0 70px 0;
+}
+
+.copyAddressButton{  
+    float:left;
+    width:100px;
+    height:50px;
+    margin:240px 0 0 0px;
+}
+
+.copyAddressButtonImage{
+    background-image: url("../resources/icons/copyAddress.png") !important;
+}    
+
+
 
 .invoiceSection
 {  
-    width:45%;
-    margin-left: 80px; 
+    width:390px;
+    margin-left: 0px; 
     display: inline-block;
-}
-
-.invoiceSectionContent
-{
-
-    vertical-align: top; 
     border-left: 3px solid #5297cb;
+    padding:0 0 0 30px;
 }
+
+
 
 .floatR
 {
