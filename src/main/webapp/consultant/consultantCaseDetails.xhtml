@@ -61,6 +61,10 @@
                                     </div>
 
                                     <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> </div>
+                                    <div class="field">
+                                         <h:outputText class="label" value="Notatka"/>  
+                                         <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;" rows="3" cols="30" disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
+                                    </div>
                                     <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
                                     <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
                                     <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>

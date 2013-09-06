@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table
@@ -32,6 +33,7 @@ public class Payment implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="userId")
+    @ForeignKey(name = "payementToUser")
     private User user;
 
     public Integer getId() {
