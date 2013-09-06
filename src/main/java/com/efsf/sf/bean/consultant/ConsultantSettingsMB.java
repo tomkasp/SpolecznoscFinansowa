@@ -292,6 +292,16 @@ public class ConsultantSettingsMB implements Serializable {
         
     }
     
+    
+    public void copyAddress(){
+        idInvoiceRegion = idMainRegion;
+        invoiceAddress.setCity(mainAddress.getCity());
+        invoiceAddress.setZipCode(mainAddress.getZipCode());
+        invoiceAddress.setPhone(mainAddress.getPhone());
+        invoiceAddress.setStreet(mainAddress.getStreet());
+        invoiceAddress.setHouseNumber(mainAddress.getHouseNumber()); 
+    }
+    
     public Integer getIdConsultant() {
         return idConsultant;
     }
