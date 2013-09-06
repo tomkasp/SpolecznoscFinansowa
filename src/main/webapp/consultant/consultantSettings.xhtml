@@ -17,9 +17,9 @@
 
 
                 <div style="margin-top: 80px; width: 500px; float: right;">
-                   
+
                     <h:form> 
-                        
+
                         <h4>ZMIANA HASŁA</h4>
 
                         <div class="field">
@@ -50,17 +50,17 @@
                         <div style="margin-right: 120px;"> 
                             <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{consultantSettingsMB.updatePassword()}"/>
                         </div>
-                        
+
                     </h:form>
-                    
+
                 </div>
 
 
 
 
-                <h:form>
+                <h:form id="formularz">
 
-                    <h3> Ustawienie konta </h3>
+                    <h3> Ustawienia konta </h3>
 
                     <div class="leftThinerBox">
 
@@ -106,7 +106,7 @@
                                 <h:inputText id="expirience" class="inputWidth" value="#{consultantSettingsMB.consultant.expirience}">
                                     <f:convertNumber minIntegerDigits="1" maxIntegerDigits="2" maxFractionDigits="1" minFractionDigits="0"/>
                                 </h:inputText>
-                                
+
                                 <h:message styleClass="invalid" for="expirience"/>
                             </div>
 
@@ -127,7 +127,7 @@
 
                         <div style="display: inline-block;">
 
-                            <h4>Z KTÓRYMI BANKAMI WSPÓŁPRACUJESZ?</h4>  
+                            <h4>WSPÓŁPRACA Z BANKAMI</h4>  
 
                             <p:selectManyCheckbox styleClass="fontGrey" style="display:inline;" value="#{consultantSettingsMB.idSelectedBankList}" layout="pageDirection" >  
 
@@ -139,7 +139,7 @@
 
                         <div>
 
-                            <h4>Z KTÓRYMI INSTYTUCJAMI POZABANKOWYMI WSPÓŁPRACUJESZ?</h4> 
+                            <h4>WSPÓŁPRACA Z INSTYTUCJAMI POZABANKOWYMI</h4> 
 
                             <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantSettingsMB.idSelectedInstitutionList}" layout="pageDirection">
                                 <f:selectItems value="#{ dictionaryMB.institution }" var="w" itemLabel="#{w.name}" itemValue="#{w.idInstitution}"/>
@@ -147,7 +147,7 @@
 
                         </div>
                         <div>
-                            <h4>JAKIE KREDYTY PREFERUJESZ?</h4>
+                            <h4>AKCEPTOWANE KREDYTY</h4>
                             <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantSettingsMB.idProductTypes}" layout="pageDirection">
                                 <f:selectItems value="#{ dictionaryMB.productType}" var="p" itemLabel="#{p.name}" itemValue="#{p.idProductType}"/>
                             </p:selectManyCheckbox>
@@ -167,12 +167,12 @@
                             </div>
 
                         </div>  
-                        
+
 
                         <div class="adressSection" align="left">
-                            
-                            <div class="adressSection"> <h4> DANE ADRESOWE </h4> </div>
-                       
+
+                            <h4> DANE ADRESOWE </h4>
+
                             <div class="field"> 
                                 <h:outputText class="label" value="Województwo"/>  
                                 <p:selectOneMenu style="width: 39%;" value="#{consultantSettingsMB.idMainRegion}">  
@@ -220,10 +220,19 @@
 
                         </div>
 
+                        <div class="copyAddressButton">
+                            <p:commandLink action="#{consultantSettingsMB.copyAddress()}" update="formularz" >
+                                <h:graphicImage name="icons/copyAddress.png"/>
+                            </p:commandLink>
 
-                        <div class="invoiceSection invoiceSectionContent">
-                            
-                             <div class="invoiceSection"> <h4> DANE DO FAKTURY </h4> </div>
+
+                        </div>
+
+
+
+                        <div class="invoiceSection" id="invoiceData">
+
+                            <h4> DANE DO FAKTURY </h4> 
 
                             <div class="field"> 
                                 <h:outputText class="label" value="Nazwa"/> 
@@ -271,7 +280,7 @@
                                 <h:outputText class="label" value="REGON"/>  
                                 <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceData.regon}"/> 
                             </div>
-                        
+
                         </div>
 
                         <div style="min-height: 40px; margin-bottom: 30px;"> 
