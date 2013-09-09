@@ -42,14 +42,6 @@ public class Alghorithm extends Thread{
         this.clientId=clientId;
     }
 
-//    public void doOCRandSave(String file, String password) throws Exception {
-//        PDFWithImages pdf = new PDFWithImages();
-//        String text = pdf.getTextFromPDF("C:/bik/" + file, password);
-//        PrintWriter out = new PrintWriter("C:/bik/" + file + ".txt");
-//        out.print(text);
-//        out.close();
-//    }
-
     
     @Override
     public void run(){
@@ -133,7 +125,10 @@ public class Alghorithm extends Thread{
         //remove page footer
         //remove empty lines or lines with semicolon only
         return text.replaceAll("Strona([^\\n]*\\n+)+?Data i czas wydruku([^\\n]*)", "")
-                   .replaceAll("(?m)^[ \\t;]*\\r?\\n", "");
+                   .replaceAll("(?m)^[ \\t;]*\\r?\\n", "")
+                   .replaceAll("Informacje przetwarzane w BIK S.A. po wygaśnięciu zobowiązania wynikającego z umowy z bankiem lub instytucją upoważnioną do udzielania\n" +
+                                "kredytów - zgodnie z art. 105a ust. 4 i 5 dla celów stosowania metod statystycznych,\n" +
+                                "o których mowa w art. 128 ust. 3 Prawa Bankowego.", "");
     }
 
 
@@ -183,6 +178,7 @@ public class Alghorithm extends Thread{
              rachunek.setTypTransakcji(((ArrayList<String>) result.get(RegexBase.R_TYP_TRANSAKCJI.getName())).get(i));
              rachunek.setRelacjaKlienta(((ArrayList<String>) result.get(RegexBase.R_RELACJA.getName())).get(i));
              rachunek.setKwotaZKosztemOds1(((ArrayList<String>) result.get(RegexBase.R_KWOTA.getName())).get(i));
+             rachunek.setBank(((ArrayList<String>) result.get(RegexBase.R_BANK.getName())).get(i));
              rachunek.setBik(bik);
              dao2.save(rachunek);
              
@@ -249,6 +245,7 @@ public class Alghorithm extends Thread{
         
 
         //Rachunki
+        rules.add(RegexBase.R_BANK);
         rules.add(RegexBase.R_DATA_RELACJI);
         rules.add(RegexBase.R_KWOTA);
         rules.add(RegexBase.R_RELACJA);

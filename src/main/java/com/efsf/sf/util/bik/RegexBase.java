@@ -40,7 +40,7 @@ public static final RuleBase R_DATA_RELACJI=new RuleBase("Relacja Klienta Do Rac
 public static final RuleBase R_TYP_TRANSAKCJI=new RuleBase("Data Ustania Relacji([^\\n]*)(\\n{1})Typ Transakcji;(?<val>[^;]*)", "R_TYP_TRANSAKCJI", RuleBase.T_MANY);
 public static final RuleBase R_KWOTA=new RuleBase("Kwota Kredytu Z Kosztem(.*?\\n){1}Odsetkowym(.*?\\n){1}(;?)(?<val>[^;\\n]*?);Cel", "R_KWOTA", RuleBase.T_MANY);
 public static final RuleBase R_WALUTA=new RuleBase("Udział Własny Kredytobiorcy(.*?\\n){1}Waluta(;?)(?<val>[^;\\n]*?);Okres", "R_WALUTA", RuleBase.T_MANY);
-
+public static final RuleBase R_BANK=new RuleBase("RACHUNEK ([0-9]{1,})(.*?\\n){1}?, (?<val>[^,\\n]*)", "R_BANK", RuleBase.T_MANY);
 
 public static final RuleBase HISTORIA_RACHUNKU=new RuleBase("HISTORIA RACHUNKU(.*?);Waluta(?<val>.*?)INFORMACJE", "HISTORIA_RACHUNKU", RuleBase.T_ONE_TABLE);
 

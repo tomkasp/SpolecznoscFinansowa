@@ -40,6 +40,9 @@ public class BikRachunek implements Serializable{
     @Column(length = 255)
     private String kwotaZKosztemOds2;  
     
+    @Column(length = 255)
+    private String bank;
+    
     @ManyToOne
     @JoinColumn(name="bik_id")
     private Bik bik;
@@ -119,5 +122,12 @@ public class BikRachunek implements Serializable{
         this.historia = historia;
     }
 
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
 
 }
