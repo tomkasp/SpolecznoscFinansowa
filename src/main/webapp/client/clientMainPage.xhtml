@@ -40,8 +40,8 @@
 
 
                 <div> 
-                    <h:form>
-                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
+                    <h:form id="newAppForm">
+                        <p:commandButton id="newAppButton" styleClass="topMenuButton greyButton wideButton" value="Nowy wniosek" action="#{clientMainPageMB.redirectNewApplication()}" oncomplete="if (#{!clientMainPageMB.requirementsFulfilled}) {fillData.show();}" />
 
                         <p:dialog id="informDialog" header="Uzupełnij dane" widgetVar="fillData" modal="true"  resizable="false" showEffect="fade" hideEffect="fade" >  
 
@@ -66,7 +66,7 @@
                                 <p:ajax event="rowDblselect" listener="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
 
                                 <p:column headerText="Data dodania">    
-                                    <h:outputText  value="#{row.beginDate}">
+                                    <h:outputText id="beginDateEdt" value="#{row.beginDate}">
                                         <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
                                     </h:outputText>  
                                 </p:column>  
@@ -131,7 +131,7 @@
                                 <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}"  class="topMenuButton  redX greyButton" value="Wycofaj">
                                     <f:ajax event="click" onevent="backOffClientCaseList.show()" />
                                 </h:commandButton>
-                                <h:commandButton disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
+                                <h:commandButton id="viewLastCaseBtn" disabled="#{empty clientMainPageMB.lastSelectedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.lastSelectedCase)}" />
                                 <button class="topMenuButton greyButton wideButton" type="reset" id="hide">Pokaż wszystkie</button>  
                             </h:panelGroup>
 
@@ -600,7 +600,7 @@
 
                         <h:panelGroup id="finishedCasesButtonBar">
                             <h:commandButton  disabled="#{empty clientMainPageMB.finishedSelectedCase}"  class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{clientMainPageMB.rowDoubleClick(clientMainPageMB.finishedSelectedCase)}" />
-                            <h:button disabled="#{empty clientMainPageMB.finishedSelectedCase}"  class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
+                            <h:button disabled="#{empty clientMainPageMB.finishedSelectedCase}" class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
                         </h:panelGroup>
 
                     </h:form>  

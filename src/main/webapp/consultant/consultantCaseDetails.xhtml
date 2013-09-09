@@ -21,7 +21,7 @@
                 </h:form>            
                     <div style="min-height: 160px">
                         <div class="leftInlineBox">
-                            <h:form id="leftColumn">
+                            <h:form id="leftForm">
                                 <h4> DANE KLIENTA </h4>
                                 <div class="marginLRT30">        
                                     <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.client.name}" /> </div>
@@ -60,14 +60,14 @@
                                         </h:inputText>
                                     </div>
 
-                                    <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> </div>
+                                    <div class="field"> <h:outputText class="label" value="Cel"/>  <h:inputText id="goal" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.goal}" /> </div>
                                     <div class="field">
                                          <h:outputText class="label" value="Notatka"/>  
                                          <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;" rows="3" cols="30" disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
                                     </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
+                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText id="freeResourcesValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
+                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText id="consolidationValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
+                                    <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText id="expectedInstalment" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
                                     <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> </div>
                                 </div>
 
@@ -83,7 +83,7 @@
                                             Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(caseViewMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
+                                        <p:commandButton id="apply" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(caseViewMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{clientCaseMB.doesAppliedToCase(loginMB.consultant, caseViewMB.selectedClientCase)}" >
                                         <h4> WYCOFAJ ZGŁOSZENIE </h4>
@@ -411,14 +411,14 @@
                     </div>
 
                     <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
-                    <h:form>
+                    <h:form id="confDialog">
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
                             <h:panelGroup class="fontGrey">
                                 Twoje zgłoszenie do sprawy zostało zatwierdzone.
                             </h:panelGroup>
 
                             <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
+                                <h:commandButton id="okBtn1" styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
                                     <f:ajax execute="@this" render=":rightColumn" />
                                 </h:commandButton>
                             </div>
@@ -476,7 +476,7 @@
 
                             <div> 
                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" value="Tak" action="#{clientCaseMB.consultantAcceptPremium(caseViewMB.selectedClientCase)}" onclick="acceptPremiumDialog.hide()" >
-                                    <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                    <f:ajax execute="@this" render=":rightColumn :leftForm" />
                                 </h:commandButton>
 
                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />
@@ -490,7 +490,7 @@
 
                             <div> 
                                 <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Tak" action="#{clientCaseMB.consultantRevokePremium(caseViewMB.selectedClientCase)}" onclick="revokePremiumDialog.hide()" >          
-                                    <f:ajax execute="@this" render=":rightColumn :leftColumn" />
+                                    <f:ajax execute="@this" render=":rightColumn :leftForm" />
                                 </h:commandButton>
 
                                 <h:commandButton styleClass="floatL wideButton" style="margin-top:30px;" type="button" value="Nie" onclick="acceptPremiumDialog.hide()"  />

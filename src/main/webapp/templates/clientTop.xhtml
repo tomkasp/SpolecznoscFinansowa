@@ -4,7 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:form>
+    <h:form id="navFormClient">
 
         <div class="topbarLogo">
             <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
@@ -24,16 +24,16 @@
         </div>
     </h:form>
 
-    <h:form>
+    <h:form id="menuFormClient">
 
         <div class="topbarMenuGreen">
 
             <h:panelGroup>
 
-                <h:commandButton class="topMenuButton greyButton " value="Wyloguj"  action="#{loginMB.logout()}"/>
-                <h:button class="topMenuButton greyButton" value="Najlepsi doradcy" outcome="/common/scoreBoard"/>
-                <h:button class="topMenuButton greyButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
-                <h:button class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
+                <h:commandButton id="logoutButton" class="topMenuButton greyButton " value="Wyloguj"  action="#{loginMB.logout()}"/>
+                <h:button id="scoreBoardButton" class="topMenuButton greyButton" value="Najlepsi doradcy" outcome="/common/scoreBoard"/>
+                <h:button id="messagesButton" class="topMenuButton greyButton" value="Wiadomości" outcome="/client/clientViewMessages"/>
+                <h:button id="deactivateAccountButton" class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
                 <h:commandButton class="topMenuButton greyButton" value="Doładuj konto" >
                     <f:ajax event="click" onevent="dodaj.show()" />
                 </h:commandButton>
