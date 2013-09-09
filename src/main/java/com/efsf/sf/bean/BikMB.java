@@ -1,8 +1,3 @@
-// Przycisk zobacz historię ma być nie aktywny
-// Zapis hasła w ustawieniach zaraz po wciśnięciu klawisza
-// Komunikat ma się odświeżać po kliknięciu na analizuj BIK
-// Ma się ładować ostatni BIK a nie pierwszy
-// BIK w wersji z obrazami
 
 package com.efsf.sf.bean;
 
@@ -16,7 +11,6 @@ import com.efsf.sf.sql.entity.BikZapytanie;
 import com.efsf.sf.sql.entity.RequiredDocuments;
 import com.efsf.sf.util.bik.Alghorithm;
 import com.efsf.sf.util.ftp.FtpDownloader;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -33,7 +27,7 @@ public class BikMB implements Serializable {
     private List<BikZapytanie> zapytania;
     private List<BikHistoriaRachunku> historia;
     
-    public void parseBik(Integer clientId) throws IOException, Exception {
+    public void parseBik(Integer clientId) throws Exception {
         
         RequiredDocumentsDAO requiredDocumentsDAO = new RequiredDocumentsDAO();
         RequiredDocuments doc=requiredDocumentsDAO.readForFkClient(clientId);
