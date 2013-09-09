@@ -15,12 +15,12 @@
 
             <ui:define name="content">
                 
-            <h3>Panel Administratora</h3>    
+            <h3>Panel administratora</h3>    
                 
-                <h:form>
+                <h:form id="adminPanel">
                 <p:panelGrid columns="4" styleClass="noBorder centerGrid">  
                     
-                    <p:commandLink action="#{productsMB.showProductPage()}"><h:graphicImage value="/resources/admin/produkty.png" width="128px" height="128px"/></p:commandLink> 
+                    <p:commandLink action="#{productsMB.showProductPage()}" id="prodLink"><h:graphicImage value="/resources/admin/produkty.png" width="128px" height="128px"/></p:commandLink> 
                     <p:commandLink action="#{dictionaryItemsMB.showDictionary(0)}"><h:graphicImage value="/resources/admin/kredyty.png" width="128px" height="128px"/></p:commandLink> 
                     <p:commandLink action="#{dictionaryItemsMB.showDictionary(1)}"><h:graphicImage value="/resources/admin/dzialalnosci.png" width="128px" height="128px"/></p:commandLink> 
                     <p:commandLink action="#{dictionaryItemsMB.showDictionary(2)}"><h:graphicImage value="/resources/admin/status.png" width="128px" height="128px"/></p:commandLink> 
