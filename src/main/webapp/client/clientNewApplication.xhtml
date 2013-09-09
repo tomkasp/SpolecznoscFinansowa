@@ -24,7 +24,7 @@
                         <div class="leftBox" style="width: 400px; padding-right: 70px;">
 
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
-                            <h:form>  
+                            <h:form id="newAppForm">  
                                 <h:panelGroup>
                                     <div class="field"> 
                                         <h:outputText class="label" value="Data rozpoczęcia"/>  
@@ -116,7 +116,7 @@
                                 </p:dialog>  
 
                                 <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points == 0}" value="Dodaj do giełdy" onclick="dlg1.show();" type="button" />
-                                <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points > 0}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                                <h:commandButton id="addToMarketBtn" class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points > 0}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
                             
                             </h:form>         
 

@@ -19,7 +19,7 @@
 
 
                     <h3>Lista otrzymanych komentarzy</h3>
-                    <h:form> 
+                    <h:form id="myRates"> 
                         <p:dataTable value="#{consultantRatesMB.consulantRates}" rowKey="#{row.idClientCase}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie masz żadnych komentarzy" selection="#{consultantRatesMB.clientCase}" selectionMode="single">
 
                         <p:ajax event="rowSelect" listener="#{consultantRatesMB.onRowSelect()}"/>
