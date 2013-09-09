@@ -16,14 +16,15 @@ import org.apache.pdfbox.exceptions.CryptographyException;
 public class PDFWithText extends PDFTextStripper
 {
 
-static StringWriter sw = new StringWriter();   
+private static StringWriter sw = new StringWriter();   
 
 private static ArrayList<Table> tables= new ArrayList<Table>();
-static double[] tableMin={0,   51, 102, 210, 262, 335, 380, 423, 486};
-static double[] tableMax={51, 102, 210, 262, 335, 380, 423, 486, 9999};
+private static double[] tableMin={0,   51, 102, 210, 262, 335, 380, 423, 486};
+private static double[] tableMax={51, 102, 210, 262, 335, 380, 423, 486, 9999};
         
-static String last="";
-static boolean isTable;
+private static String last="";
+private static boolean isTable;
+private float actual_y, actual_x;    
 
     /**
      * @return the tables
@@ -31,7 +32,7 @@ static boolean isTable;
     public static ArrayList<Table> getTables() {
         return tables;
     }
-float actual_y, actual_x;    
+
     
     public PDFWithText() throws IOException
     {
@@ -95,7 +96,9 @@ float actual_y, actual_x;
             isTable=true;
             getTables().add(new Table());
         }
-        if(last.endsWith("INFORMACJE")) isTable=false;        
+        if(last.endsWith("INFORMACJE")){
+            isTable=false;
+        }        
         
         //NORMAL MODE
         if(text.getYDirAdj()!=actual_y)
@@ -103,7 +106,9 @@ float actual_y, actual_x;
             sw.write('\n');
             actual_y=text.getYDirAdj();
             
-            if(isTable) getTables().get(getTables().size()-1).data.add(new String[9]);
+            if(isTable){
+                getTables().get(getTables().size()-1).data.add(new String[9]);
+            }
         }
         
         if(text.getXDirAdj()-actual_x>10)
@@ -117,12 +122,13 @@ float actual_y, actual_x;
         if(isTable){
             float x=text.getXDirAdj();
             for(int i=0; i<tableMin.length; i++){
-                if(x>tableMin[i] && x<tableMax[i])
+                if(x>tableMin[i] && x<tableMax[i]){
                     if(getTables().get(getTables().size()-1).getLastRow()[i]==null){
                        tables.get(tables.size()-1).getLastRow()[i]=String.valueOf(a); 
                     } else {
                        tables.get(tables.size()-1).getLastRow()[i]+=String.valueOf(a);
                     }        
+                }   
             }
         }
         
@@ -131,8 +137,9 @@ float actual_y, actual_x;
     }
     
     public void postProcessTables(){
-        for(Table t: getTables())
+        for(Table t: getTables()){
             t.postProcess();
+        }    
     }
     
 }
