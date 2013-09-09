@@ -36,8 +36,8 @@ public static final RuleBase Z_DATA=new RuleBase("INFORMACJE O ZAPISIE Z BAZY BI
 //DANE DO RACHUNKÓW
 //////////////////////////////////////
 public static final RuleBase R_RELACJA=new RuleBase("DANE Z UMOWY(.*?\\n){1}?Relacja Klienta Do Rachunku(;?)(?<val>.*?);Data", "R_RELACJA", RuleBase.T_MANY);
-public static final RuleBase R_DATA_RELACJI=new RuleBase("Relacja Klienta Do Rachunku([^\\n]*)(\\n{1})Data Powstania Relacji;(?<val>[^\\n]*)", "R_DATA_RELACJI", RuleBase.T_MANY); //Co gdy pusta wartość
-public static final RuleBase R_TYP_TRANSAKCJI=new RuleBase("Data Ustania Relacji([^\\n]*)(\\n{1})Typ Transakcji;(?<val>[^;]*)", "R_TYP_TRANSAKCJI", RuleBase.T_MANY); //co gdy pusta wartość
+public static final RuleBase R_DATA_RELACJI=new RuleBase("Relacja Klienta Do Rachunku([^\\n]*)(\\n{1})Data Powstania Relacji;(?<val>[^\\n]*)", "R_DATA_RELACJI", RuleBase.T_MANY);
+public static final RuleBase R_TYP_TRANSAKCJI=new RuleBase("Data Ustania Relacji([^\\n]*)(\\n{1})Typ Transakcji;(?<val>[^;]*)", "R_TYP_TRANSAKCJI", RuleBase.T_MANY);
 public static final RuleBase R_KWOTA=new RuleBase("Kwota Kredytu Z Kosztem(.*?\\n){1}Odsetkowym(.*?\\n){1}(;?)(?<val>[^;\\n]*?);Cel", "R_KWOTA", RuleBase.T_MANY);
 public static final RuleBase R_WALUTA=new RuleBase("Udział Własny Kredytobiorcy(.*?\\n){1}Waluta(;?)(?<val>[^;\\n]*?);Okres", "R_WALUTA", RuleBase.T_MANY);
 

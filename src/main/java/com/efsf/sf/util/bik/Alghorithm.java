@@ -233,7 +233,7 @@ public class Alghorithm extends Thread{
         //BIK
         rules.add(RegexBase.PESEL);
         rules.add(RegexBase.KLASYFIKACJA_BIK);
-        rules.add(RegexBase.OCENA_PUNKTOWA); //
+        rules.add(RegexBase.OCENA_PUNKTOWA);
 
         rules.add(RegexBase.RACH_ZAMK_ZALEG_0_30);
         rules.add(RegexBase.RACH_ZAMK_UMORZONY);
@@ -245,7 +245,8 @@ public class Alghorithm extends Thread{
 
         rules.add(RegexBase.RACH_OTW_WINDYKACJA);
         rules.add(RegexBase.RACH_OTW_EGZEKUCJA);
-        rules.add(RegexBase.RACHUNKI_KWESTIONOWANE); //
+        rules.add(RegexBase.RACHUNKI_KWESTIONOWANE);
+        
 
         //Rachunki
         rules.add(RegexBase.R_DATA_RELACJI);
