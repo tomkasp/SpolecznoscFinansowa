@@ -49,10 +49,14 @@ public class ClientCase implements java.io.Serializable {
     private CaseRating caseRating;
     private Set<Consultant> consultants = new HashSet<>(0);
     private Set<Consultant> consultants_1 = new HashSet<>(0);
+    private Double interestRate;
+    private Integer interestRateType;
+    private Date receiveCreditDate;
+    private Date beginPaymentDate;
+    private Integer numberOfPayments;
 
     public ClientCase() {
     }
-
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -247,12 +251,59 @@ public class ClientCase implements java.io.Serializable {
     @JoinTable(name = "clientCaseConsultantObserved", catalog = "SpolecznoscFinansowa", joinColumns = {
         @JoinColumn(name = "fk_clientCaseCCCO", nullable = false, updatable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "fk_consultantCCCO", nullable = false, updatable = false)})
-        @ForeignKey(name = "ClientCaseToConsultantObserved")
+    @ForeignKey(name = "ClientCaseToConsultantObserved")
     public Set<Consultant> getConsultants_1() {
         return this.consultants_1;
     }
 
     public void setConsultants_1(Set<Consultant> consultants_1) {
         this.consultants_1 = consultants_1;
+    }
+
+    @Column(name = "numberOfPayments")
+    public Integer getNumberOfPayments() {
+        return this.numberOfPayments;
+    }
+
+    public void setNumberOfPayments(Integer numberOfPayments) {
+        this.numberOfPayments = numberOfPayments;
+    }
+
+    @Column(name = "interestRateType")
+    public Integer getInterestRateType() {
+        return this.interestRateType;
+    }
+
+    public void setInterestRateType(Integer interestRateType) {
+        this.interestRateType = interestRateType;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "receiveCreditDate", length = 19)
+    public Date getReceiveCreditDate() {
+        return this.receiveCreditDate;
+    }
+
+    public void setReceiveCreditDate(Date receiveCreditDate) {
+        this.receiveCreditDate = receiveCreditDate;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "beginPaymentDate", length = 19)
+    public Date getBeginPaymentDate() {
+        return this.beginPaymentDate;
+    }
+
+    public void setBeginPaymentDate(Date beginPaymentDate) {
+        this.beginPaymentDate = beginPaymentDate;
+    }
+
+    @Column(name = "interestRate", precision = 22, scale = 0)
+    public Double getInterestRate() {
+        return this.interestRate;
+    }
+
+    public void setInterestRate(Double interestRate) {
+        this.interestRate = interestRate;
     }
 }
