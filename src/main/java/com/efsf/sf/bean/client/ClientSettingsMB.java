@@ -16,8 +16,6 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;

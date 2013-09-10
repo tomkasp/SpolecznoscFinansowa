@@ -14,10 +14,10 @@ private String rule;
 private String name;
 private int type;
     
-public static int T_ONE=0;
-public static int T_MANY=1;
-public static int T_ONE_TABLE=2;
-public static int T_MANY_TABLE=3;
+public static final int T_ONE=0;
+public static final int T_MANY=1;
+public static final int T_ONE_TABLE=2;
+public static final int T_MANY_TABLE=3;
 
     RuleBase(String rule, String name) {
         this.rule=rule;

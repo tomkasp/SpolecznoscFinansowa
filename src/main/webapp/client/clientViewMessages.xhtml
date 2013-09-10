@@ -16,7 +16,7 @@
                 <f:event listener="#{messagesMB.reloadMessageBox()}" type="preRenderView" />
                 
                 <div style="min-height: 50px">
-                <h3>Skrzynka odbiorcza</h3>                  
+                <h3 id="msgHeader">Skrzynka odbiorcza</h3>                  
                 </div>
                 <h:panelGroup rendered="#{!(empty messagesMB.unreadMessagesList)}" >
                     <h4> Nieprzeczytane </h4>    

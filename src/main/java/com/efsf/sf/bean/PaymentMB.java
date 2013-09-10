@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class PaymentMB implements Serializable {
     private String key1 = "56df4fe519063a46419f38e4de5bd4f6";
 
     //Send new Payment
-    public void consultantPayment() throws UnsupportedEncodingException, IOException {
+    public void consultantPayment() throws IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
 
         HttpClient client = new DefaultHttpClient();
@@ -81,7 +80,7 @@ public class PaymentMB implements Serializable {
     }
 
     //Read Payment status
-    public void readTransactionStatus(Integer session_id) throws UnsupportedEncodingException, IOException {
+    public void readTransactionStatus(Integer session_id) throws IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
