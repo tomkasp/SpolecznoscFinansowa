@@ -33,6 +33,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
+import java.math.*;
 
 
 @ManagedBean
@@ -95,6 +96,7 @@ public class CaseViewMB implements Serializable{
             selectedClientCase = cdao.getClientCaseWithConsultantDetails(clientCaseId);
             selectedProduct = selectedClientCase.getProductDetails();
                     
+            generateSchedule();
          }
     }
     
@@ -366,41 +368,20 @@ public class CaseViewMB implements Serializable{
     }
     
     
-    public List<ScheduleItem> getSchedule() {
-        Integer payementNumber = 0;
-        Double toPay = 0.0, total = 0.0;
-        Double instalment = 0.0;
-        schedule=new ArrayList();
-        
-        total = selectedClientCase.getConsolidationValue().doubleValue();
+    public void generateSchedule() {
 
-        if (selectedClientCase.getFreeResourcesValue() != null) {
-            total += selectedClientCase.getFreeResourcesValue().doubleValue();
+        schedule = new ArrayList();
+
+        if (selectedClientCase.getConsolidationValue() != null && selectedClientCase.getExpectedInstalment() != null
+                && selectedClientCase.getInterestRate() != null) {
+            
+            Double toPay = selectedClientCase.getConsolidationValue().doubleValue();
+            Double instalment = selectedClientCase.getExpectedInstalment().doubleValue();
+            Double intrestRate = selectedClientCase.getInterestRate().doubleValue();
+            calculatePayements(toPay, intrestRate, instalment);
         }
 
-        if (selectedClientCase.getExpectedInstalment() != null) {
-            instalment = selectedClientCase.getExpectedInstalment().doubleValue();
-            payementNumber = (int) (total / instalment);
-
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(selectedClientCase.getEndDate());
-            toPay = total;
-
-            for (int i = 0; i < payementNumber; i++) {
-                toPay -= instalment;
-                cal.add(Calendar.MONTH, 1);
-                schedule.add(new ScheduleItem(cal.getTime(), instalment, total - toPay, toPay));
-            }
-
-            if (toPay > 0) {
-                cal.add(Calendar.MONTH, 1);
-                schedule.add(new ScheduleItem(cal.getTime(), toPay, total, 0.0));
-            }
-        }
-
-        return schedule;
-    }
+    }   
 
     public void setSchedule(List<ScheduleItem> schedule) {
         this.schedule = schedule;
@@ -436,5 +417,61 @@ public class CaseViewMB implements Serializable{
 
     public void setProductTree(List<Product> productTree) {
         this.productTree = productTree;
+    }
+
+    public List<ScheduleItem> getSchedule() {
+        return schedule;
+    }
+
+    private void calculatePayements(Double toPay, Double intrestRate, Double instalment) {
+        Double alreadyPayed=0.0;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(selectedClientCase.getBeginPaymentDate());
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(selectedClientCase.getReceiveCreditDate());
+        
+        long diff = cal.getTimeInMillis() - cal2.getTimeInMillis();
+        double breakPediodInDays=diff / (24 * 60 * 60 * 1000);
+
+        
+        toPay*=(1+((0.01*intrestRate*breakPediodInDays)/365));
+        
+        //RATA STAŁA
+        if(selectedClientCase.getInterestRateType()==0){
+            
+            while(toPay>instalment){
+                toPay-=instalment;
+                alreadyPayed+=instalment;
+                getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
+                cal.add(Calendar.MONTH, 1);
+                toPay*=(1+((0.01*intrestRate)/12));
+            }
+            
+            //Ostatnia rata nierówna
+            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
+            
+            
+        } else {
+            double instalment2;
+            
+             while(toPay>instalment){
+                
+                instalment2=toPay*((0.01*intrestRate)/12);
+                toPay-=instalment;
+                toPay-=instalment2;
+                
+                alreadyPayed+=instalment;
+                alreadyPayed+=instalment2;
+                
+                getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
+                cal.add(Calendar.MONTH, 1);
+                toPay*=(1+((0.01*intrestRate)/12));
+            }
+            
+            //Ostatnia rata nierówna
+            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));           
+            
+        }
     }
 }
