@@ -250,7 +250,7 @@
 
                         <h4> HARMONOGRAM SPŁAT </h4>
 
-                        <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak klientów!" 
+                        <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak wymaganych danych do wygenerowania harmonogramu!" 
                                      rowKey="#{row.toPay}" paginator="true" rows="15">
                             <p:column headerText="Termin spłaty">  
                                 <h:outputText value="#{row.paymentDate}">
@@ -258,16 +258,22 @@
                                 </h:outputText>
                             </p:column>  
 
-                            <p:column headerText="Kwota">  
-                                <h:outputText value="#{row.amount}" /> 
+                            <p:column headerText="Rata">  
+                                <h:outputText value="#{row.amount}"> 
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </h:outputText>
                             </p:column>  
 
                             <p:column headerText="Pozostało">    
-                                <h:outputText value="#{row.toPay}" /> 
+                                <h:outputText value="#{row.toPay}"> 
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </h:outputText>
                             </p:column>  
 
                             <p:column headerText="Spłacono">  
-                                <h:outputText value="#{row.alreadyPayed}" /> 
+                                <h:outputText value="#{row.alreadyPayed}">
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </h:outputText>
                             </p:column>    
                         </p:dataTable>
 
