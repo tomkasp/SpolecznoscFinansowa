@@ -107,8 +107,6 @@ public class AnalyserAlgorithm {
             System.out.println("został zapisany konsultant");
         }
         
-        
-        
         Iterator i = pd.iterator();
 
         while (i.hasNext()) {
@@ -124,7 +122,6 @@ public class AnalyserAlgorithm {
     private String analizuj(Integer idSprawaKlienta) {
         setClient(idSprawaKlienta);
         setProducts();
-//        Arrays.fill(off, 0);
 
         //etap 1
         //dla pierwszego kryterium, znajdz wszystkie idProduktu ktory spelnia kryterium dochodow 
@@ -158,9 +155,7 @@ public class AnalyserAlgorithm {
                 // off[pd.getProductId()]++;
                 testtab.put(pd.getProductId(), testtab.get(pd.getProductId()) == null ? 1 : testtab.get(pd.getProductId()) + 1);
             }
-
         }
-
 
         best5products(testtab);
         return "szczegolySprawy";
@@ -194,20 +189,11 @@ public class AnalyserAlgorithm {
             max--;
         }
 
-
         for (Map.Entry ent : getBestOfferts().entrySet()) {
             System.out.println("oto co mam: " + ent.getKey() + " " + ent.getValue());
         }
 
-
-       
-
     }
-    //================================== pola ==================================
-
-
-    //================================== /pola =================================
-    //========================== gettery i settery =============================
     
     public List<Consultant> getBestConsultants() {
         return bestConsultants;
