@@ -198,14 +198,29 @@ public class CaseViewMB implements Serializable{
 
     public void changeCaseStatus()
     {
-        CaseStatus cs = new CaseStatusDAO().read(caseStatusID);
-        String before = selectedClientCase.getCaseStatus().getName();
         
-        selectedClientCase.setCaseStatus(cs);
-        new ClientCaseDAO().updateClientCase(selectedClientCase);
-        String after = selectedClientCase.getCaseStatus().getName();
+        RequestContext context = RequestContext.getCurrentInstance();
         
-        messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {clientCaseId, before, after});
+        if (caseStatusID == 9)
+        {
+            context.execute("fillFinishedData.show();");
+        }
+        else
+        {
+            changeCaseStatus(caseStatusID);
+            context.execute("statusChange.show();");
+        }
+    }
+    
+    public void changeCaseStatus(int id)
+    {
+           CaseStatus cs = new CaseStatusDAO().read(id);
+            String before = selectedClientCase.getCaseStatus().getName();
+            selectedClientCase.setCaseStatus(cs);
+            new ClientCaseDAO().updateClientCase(selectedClientCase);
+            String after = selectedClientCase.getCaseStatus().getName();           
+            messagesMB.generateSystemMessage(bundle.getString("STATUS_CHANGED"), selectedClientCase.getClient().getUser().getIdUser(), new Object[] {clientCaseId, before, after});
+            
     }
     
     public void fillSelectedCaseIncomeTable() {

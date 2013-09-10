@@ -209,7 +209,7 @@
                                    <p:selectOneMenu styleClass="floatR marginTB20" style="width: 250px; " value="#{caseViewMB.caseStatusID}" >
                                        <f:selectItems value="#{clientCaseMB.statusModel}" var="entry" itemLabel="#{entry.name}" itemValue="#{entry.idCaseStatus}" /> 
                                    </p:selectOneMenu>
-                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{caseViewMB.changeCaseStatus()}" oncomplete="statusChange.show();" />
+                                   <p:commandButton styleClass="floatR greyButton wideButton" style="clear:both" value="Zmień" action="#{caseViewMB.changeCaseStatus()}"  />
                                    <div style="min-height: 80px;"> </div>
                                    <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
                                        <div class="fontGrey"> Status sprawy został zaktualizowany </div>
@@ -219,6 +219,10 @@
                                        </h:commandButton>
                                    
                                    </p:dialog>
+                                   
+
+
+                                   
                                    <h:panelGroup id="currentOffer" rendered="#{(caseViewMB.selectedClientCase.caseStatus.idCaseStatus >= 3) and !(caseViewMB.selectedClientCase.productDetails == null)}" >   
                                        <h4> AKTUALNIE PRZYPISANA OFERTA </h4>
                                        <div class="solidText">
@@ -409,6 +413,66 @@
                             </h:form>
                         </div>
                     </div>
+                        
+                        
+                    <p:dialog header="Sprawa zakończona" id="finishedCase" widgetVar="fillFinishedData" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
+                        <h:form>
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Przyznana kwota"/>
+                                <h:inputText required="true" id="consolidation" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.consolidationValue}" >
+                                    <f:convertNumber maxFractionDigits="2" />>
+                                    <p:ajax  event="keyup" update="consolidationMessage" />
+                                </h:inputText>
+                                <h:message for="consolidation" errorClass="invalid" id="consolidationMessage" />
+                            </div>    
+
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Data otrzymania kredytu:"/>
+                                <p:calendar required="true" id="receiveDate" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{caseViewMB.selectedClientCase.receiveCreditDate}"> 
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                    <p:ajax  event="keyup" update="receiveDateMessage" />
+                                </p:calendar>
+                                <h:message for="receiveDate" errorClass="invalid" id="receiveDateMessage" />
+                            </div>
+
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Data pierwszej raty:"/>
+                                <p:calendar required="true" id="beginDate" pattern="dd-MM-yyyy" navigator="true" styleClass="floatR marginT10"  value="#{caseViewMB.selectedClientCase.beginPaymentDate}"> 
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                    <p:ajax  event="keyup" update="beginDateMessage" />
+                                </p:calendar>
+                                <h:message for="beginDate" errorClass="invalid" id="beginDateMessage" />
+                            </div>
+
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Oprocentowanie"/>
+                                <h:inputText required="true" id="interestRate" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.interestRate}" >
+                                    <f:convertNumber maxFractionDigits="2" />
+                                    <p:ajax  event="keyup" update="interestRateMessage" />
+                                </h:inputText>
+                                <h:message for="interestRate" errorClass="invalid" id="interestRateMessage" />
+                            </div>
+                            <div class="marginT10"> 
+                                <h:outputText class="dialogLabel" value="Typ oprocentowania"/> 
+                                <p:selectOneMenu  required="true" styleClass="marginT10" style="width: 213px; margin-left: 31px; float:right;" value="#{caseViewMB.selectedClientCase.interestRateType}">
+                                    <f:selectItem itemLabel="Stałe" itemValue="#{0}" />
+                                    <f:selectItem itemLabel="Malejące" itemValue="#{1}" />
+                                </p:selectOneMenu>         
+                            </div>
+                            <div class="marginT10" > 
+                                <h:outputText class="dialogLabel" value="Okres spłaty (w miesiącach)"/>
+                                <h:inputText required="true" id="paymentsNumber" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.numberOfPayments}" >
+                                    <f:convertNumber integerOnly="true" />
+                                    <p:ajax  event="keyup" update="paymentsNumberMessage" />
+                                </h:inputText>
+                                <h:message for="paymentsNumber" errorClass="invalid" id="paymentsNumberMessage" />
+                            </div>
+                            <div>
+                                <p:commandButton update="@form" styleClass="floatL wideButton" style="margin-top: 20px !important" type="button" value="Anuluj" onclick="fillFinishedData.hide();"  />
+                                <p:commandButton update="@form" styleClass="floatR wideButton" style="margin-top: 20px !important" value="Zakończ sprawę" action="#{caseViewMB.changeCaseStatus(9)}" oncomplete="if (!args.validationFailed){ fillFinishedData.hide(); statusChange.show(); } "   />
+                            </div>    
+                        </h:form>
+                    </p:dialog>
 
                     <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
                     <h:form id="confDialog">
