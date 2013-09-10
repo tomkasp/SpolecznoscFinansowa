@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class TableHelper {
 
-public static int MIN_TABLE_CELLS=2;    
+public static final int MIN_TABLE_CELLS=2;    
     
     public static ArrayList<String[]> getAsTable(String text){
         String[] rows=text.split("\\n");
@@ -13,7 +13,9 @@ public static int MIN_TABLE_CELLS=2;
         
         for(String r: rows){
            String[] delimited_row=r.split(";");
-           if(delimited_row.length>=MIN_TABLE_CELLS) table.add(delimited_row);
+           if(delimited_row.length>=MIN_TABLE_CELLS){
+               table.add(delimited_row);
+           }
         }
         
         return table;

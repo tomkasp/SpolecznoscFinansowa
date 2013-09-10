@@ -1,7 +1,6 @@
 package com.efsf.sf.util.bik;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Table {

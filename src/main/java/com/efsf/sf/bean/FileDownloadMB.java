@@ -56,7 +56,7 @@ public class FileDownloadMB implements Serializable {
         
     }
     
-    public void parseBik(Integer clientId) throws IOException, Exception{
+    public void parseBik(Integer clientId) throws Exception{
         requiredDocuments.setBikStatus(1);
         bikMB.parseBik(clientId);
     }

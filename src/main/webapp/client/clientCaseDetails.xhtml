@@ -74,9 +74,9 @@
 
                     <h:panelGroup rendered="#{!(caseViewMB.selectedClientCase.consultant eq null) and caseViewMB.selectedClientCase.caseStatus.idCaseStatus > 1}" >
                         <h4>DANE DORADCY</h4>
-                        <div class="marginLRT30">   
-                            <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
-                            <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
+                        <div class="marginLRT30" id="consultantDataDiv">   
+                            <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText id="consultantName" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
+                            <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText id="consultantLastName" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
                             <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].phone : caseViewMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
                         </div>    
                     </h:panelGroup>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="rightInlineBox">
-                <h:form>
+                <h:form id="rightForm">
                     <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 1}" >
                         <h:panelGroup  rendered="#{caseViewMB.selectedClientCase.premium and caseViewMB.selectedClientCase.consultant eq null }" >
                             <h4> PREMIUM: WYTYPOWANI DORADCY</h4>
@@ -150,7 +150,7 @@
                             </p:column>  
 
                         </p:dataTable>
-                        <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Wybierz" action="#{caseViewMB.assignConsultant()}"/>
+                        <p:commandButton id="selectConsultant" disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Wybierz" action="#{caseViewMB.assignConsultant()}"/>
                         <p:commandButton disabled="#{empty caseViewMB.selectedConsultant}" styleClass="wideButton greyButton floatR" ajax="false" value="Szczegóły" action="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}"/>
 
                     </h:panelGroup>
