@@ -1,12 +1,12 @@
 package com.efsf.sf.util.analyser;
 
 import java.util.HashSet;
-
 /**
  *
  * @author admin
  */
-public class ClientData {
+
+public class ClientData{
     private String name;
     private String lastName;
     private HashSet<Integer> employmentType;
@@ -15,7 +15,6 @@ public class ClientData {
     private Double totalValue;
     private int clientAge;
 
-    
     public ClientData(){}
     
     public ClientData(String name, String lastName, HashSet<Integer> employmentType,Double consolidationValue,Double expectedInstallment, int clientAge){
@@ -26,11 +25,7 @@ public class ClientData {
         this.expectedInstallment = expectedInstallment;
         this.totalValue = consolidationValue + expectedInstallment;
         this.clientAge = clientAge;
-        
     }
-    
-    
-    
     
     public String getName() {
         return name;
@@ -87,7 +82,5 @@ public class ClientData {
     public void setTotalValue(Double totalValue) {
         this.totalValue = totalValue;
     }
-    
-    
     
 }
