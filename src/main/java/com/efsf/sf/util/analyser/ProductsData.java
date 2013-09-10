@@ -4,6 +4,7 @@ package com.efsf.sf.util.analyser;
  *
  * @author admin
  */
+
 public class ProductsData {
     private int productId;
     private int employmentType;
@@ -13,7 +14,6 @@ public class ProductsData {
     private int loanTimeMax;
     private int clientAgeMin;
     private int clientAgeMax;
-
     
     public ProductsData(){}
     
@@ -91,8 +91,5 @@ public class ProductsData {
     public void setClientAgeMax(int clientAgeMax) {
         this.clientAgeMax = clientAgeMax;
     }
-    
-    
-    
     
 }
