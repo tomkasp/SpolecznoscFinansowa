@@ -447,7 +447,8 @@
                             <div class="marginT10"> 
                                 <h:outputText class="dialogLabel" value="Oprocentowanie"/>
                                 <h:inputText required="true" id="interestRate" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.interestRate}" >
-                                    <f:convertNumber maxFractionDigits="2" />
+                                    <f:convertNumber maxFractionDigits="2"  />
+                                    <f:validateDoubleRange minimum="0.00" maximum="100.0" />
                                     <p:ajax  event="keyup" update="interestRateMessage" />
                                 </h:inputText>
                                 <h:message for="interestRate" errorClass="invalid" id="interestRateMessage" />
@@ -463,6 +464,7 @@
                                 <h:outputText class="dialogLabel" value="Okres spłaty (w miesiącach)"/>
                                 <h:inputText required="true" id="paymentsNumber" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.numberOfPayments}" >
                                     <f:convertNumber integerOnly="true" />
+                                    <f:validateLongRange minimum="1" maximum="999" />
                                     <p:ajax  event="keyup" update="paymentsNumberMessage" />
                                 </h:inputText>
                                 <h:message for="paymentsNumber" errorClass="invalid" id="paymentsNumberMessage" />
