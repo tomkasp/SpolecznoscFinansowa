@@ -53,6 +53,10 @@
                         <p:dataTable value="#{bikMB.rachunki}" rowKey="#{row.idRachunek}" var="row" emptyMessage="Brak rachunków" selection="#{bikMB.selectedAccount}" selectionMode="single" paginator="true" rows="10">
                             <p:ajax event="rowSelect" update=":rachunki" />
                             <p:ajax event="rowUnselect" update=":rachunki" /> 
+
+                            <p:column headerText="Bank"> 
+                                <h:outputText value="#{row.bank}" />  
+                            </p:column>                            
                             
                             <p:column headerText="Relacja z klientem"> 
                                 <h:outputText value="#{row.relacjaKlienta}" />  
