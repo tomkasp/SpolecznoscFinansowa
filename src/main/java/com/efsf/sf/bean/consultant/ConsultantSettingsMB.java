@@ -103,7 +103,6 @@ public class ConsultantSettingsMB implements Serializable {
                 mainAddress=a;
                 idMainRegion=mainAddress.getRegion().getIdRegion();
                 
-
             }
             if(a.getType()==2)
             {      
@@ -116,7 +115,6 @@ public class ConsultantSettingsMB implements Serializable {
            
         }
        
-        
         Iterator<Subscription> it4=consultant.getSubscriptions().iterator();
         while(it4.hasNext())
         {
