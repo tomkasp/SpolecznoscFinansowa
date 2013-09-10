@@ -21,6 +21,7 @@ import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.analyser.AnalyserAlgorithm;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -203,6 +204,7 @@ public class CaseViewMB implements Serializable{
         
         if (caseStatusID == 9)
         {
+            selectedClientCase.setFreeResourcesValue(BigDecimal.ZERO);
             context.execute("fillFinishedData.show();");
         }
         else
