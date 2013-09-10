@@ -20,11 +20,9 @@ import java.util.regex.Pattern;
 
 public class Alghorithm extends Thread{
 
-
     List<RuleBase> rules = new ArrayList<RuleBase>();
     private String file;
     private String password;
-    
     
     private ArrayList<Table> tables= new ArrayList<Table>();
     private Map<String, Object> result = new HashMap<String, Object>();
@@ -41,7 +39,6 @@ public class Alghorithm extends Thread{
         this.password=password;
         this.clientId=clientId;
     }
-
     
     @Override
     public void run(){
