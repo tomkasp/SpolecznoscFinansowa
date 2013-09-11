@@ -315,3 +315,7 @@ input
 td.start, td.cancel, td.preview{
     display: none;
 }
+
+div.ui-fileupload{
+    clear: both !important;
+}
