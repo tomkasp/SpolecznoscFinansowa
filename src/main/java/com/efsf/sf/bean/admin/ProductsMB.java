@@ -15,8 +15,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultUploadedFile;
-import org.primefaces.model.UploadedFile;
+import org.apache.commons.io.FilenameUtils;
 
 @ManagedBean
 @SessionScoped
@@ -41,6 +40,7 @@ public class ProductsMB implements Serializable {
     //Files upload
      private List<InstitutionDocuments> documents;
      private String fileDescription;
+     private InstitutionDocuments selectedDocument;
     
     public String showProductPage(){
         GenericDao<Institution> dao = new GenericDao(Institution.class);
@@ -215,12 +215,23 @@ public class ProductsMB implements Serializable {
 
     public void uploadFile(FileUploadEvent event){
             FileUploaderFTP fileUploadFTP=new FileUploaderFTP();
-            String fileName = fileUploadFTP.upload(event.getFile(), "inst"+selectedInstitution.getIdInstitution().toString(), event.getFile().getFileName()); 
+            String fileName = fileUploadFTP.upload(event.getFile(), "inst"+selectedInstitution.getIdInstitution().toString(), 
+                    FilenameUtils.removeExtension(event.getFile().getFileName())); 
 
             GenericDao<InstitutionDocuments> dao=new GenericDao(InstitutionDocuments.class);
             dao.save(new InstitutionDocuments(getFileDescription(), fileName, selectedInstitution));
             
             setFileDescription(null);
+            loadProductsAndDocuments();
+    }
+    
+    public void removeFile(){
+            GenericDao<InstitutionDocuments> dao=new GenericDao(InstitutionDocuments.class);
+            dao.delete(getSelectedDocument());
+            
+//            FileUploaderFTP ftp=new FileUploaderFTP();
+//            ftp.deleteFile("inst"+selectedInstitution.getIdInstitution().toString()+"/"+);
+            
             loadProductsAndDocuments();
     }
 
@@ -238,6 +249,14 @@ public class ProductsMB implements Serializable {
 
     public void setDocuments(List<InstitutionDocuments> documents) {
         this.documents = documents;
+    }
+
+    public InstitutionDocuments getSelectedDocument() {
+        return selectedDocument;
+    }
+
+    public void setSelectedDocument(InstitutionDocuments selectedDocument) {
+        this.selectedDocument = selectedDocument;
     }
 
 }
