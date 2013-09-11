@@ -19,7 +19,7 @@
                     <h3>Instytucje</h3>
                     <h:form id="instList"> 
                         <p:dataTable value="#{productsMB.institutions}" rowKey="#{row.idInstitution}" var="row" emptyMessage="Brak doradców" selection="#{productsMB.selectedInstitution}" selectionMode="single" paginator="true" rows="10">
-                            <p:ajax event="rowSelect" listener="#{productsMB.loadProducts}"  update=":prodList"/>    
+                            <p:ajax event="rowSelect" listener="#{productsMB.loadProductsAndDocuments()}"  update=":prodList"/>    
 
                             <p:column headerText="Instytucja"> 
                                 <h:outputText value="#{row.name}" />  
@@ -36,7 +36,7 @@
 
                     </h:form>
 
-                    <p:dialog widgetVar="dlg" width="400px" height="300px">
+                    <p:dialog widgetVar="dlg" width="400px" height="300px" resizable="false">
 
                         <h:form>
                             <h3>Dodaj nową instytucję</h3>   
@@ -59,9 +59,9 @@
 
                     </p:dialog>
 
-                    <p:dialog widgetVar="dlgEditInst" width="400px" height="300px">
+                    <p:dialog widgetVar="dlgEditInst" width="1050px" height="400px" resizable="false">
 
-                        <h:form id="edtInstForm">
+                        <h:form id="edtInstForm" styleClass="leftInlineBox">
                             <h3>Edytuj instytucję</h3>   
                             <div class="field"> <h:outputText class="label" value="Nazwa Instytucji"/><p:inputText value="#{productsMB.selectedInstitution.name}"/></div>
                             <div class="field"> <h:outputText class="label" value="Typ Instytucji"/>
@@ -78,11 +78,41 @@
                             </div>                                 
                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="dlgEditInst.hide()"/>
                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="OK" update=":instList" onclick="dlgEditInst.hide()" action="#{productsMB.updateInstitution()}"/>
-                        </h:form> 
+                        </h:form>
+                        
+                        
+                         <h:form id="documentsForm" styleClass="rightInlineBox" enctype="multipart/form-data">
+                             
+                             <p:dataTable value="#{productsMB.documents}" rowKey="#{row.idDocument}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak dokumentów" selectionMode="single" paginator="true" rows="4">
+
+                                <p:column headerText="Opis"> 
+                                    <h:outputText  value="#{row.description}"/>
+                                </p:column>  
+
+                               <p:column headerText="Plik"> 
+                                   <h:outputText  value="#{row.fileName}"/>
+                                </p:column>   
+
+                            </p:dataTable>
+                             
+                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Usuń" onclick="dlgEditInst.hide()"/>
+                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pobierz" update=":instList" onclick="dlgEditInst.hide()" action="#{productsMB.updateInstitution()}"/>
+                        
+                                   <div class="field"> 
+                                       <h:outputText value="Opis pliku:"/>
+                                       <h:inputText value="#{productsMB.fileDescription}"/>
+                                   </div>    
+                                    <h:outputLabel class="uploaderLabel" id="idCardLabel">Wybierz plik:</h:outputLabel>     
+                                    <span id="upload1">
+                                        <p:fileUpload  styleClass="greyButton" value="#{productsMB.uploadedFile}" mode="simple" > 
+                                        </p:fileUpload>
+                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Wgraj" update=":documentsForm" action="#{productsMB.uploadFile()}"/>
+                                    </span>
+                         </h:form>                       
 
                     </p:dialog>
 
-                    <p:dialog widgetVar="prodcutDlg" width="500px" height="300px">
+                    <p:dialog widgetVar="prodcutDlg" width="500px" height="300px" resizable="false">
                         <h:form id="prodDial">
                             <h3><h:outputText rendered="#{productsMB.selectedProduct.idProduct==null}" value="Dodaj nowy "/>
                                 <h:outputText rendered="#{productsMB.selectedProduct.idProduct!=null}" value="Edytuj "/>
@@ -103,7 +133,7 @@
                             </div>   
                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Anuluj" onclick="prodcutDlg.hide()"/>
                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Zapisz" update=":prodList" onclick="prodcutDlg.hide()" action="#{productsMB.saveProduct()}"/>
-                        </h:form> 
+                        </h:form>            
                     </p:dialog>
 
                     
