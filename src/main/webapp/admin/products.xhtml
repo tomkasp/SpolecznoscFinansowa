@@ -100,13 +100,14 @@
                         
                                    <div class="field"> 
                                        <h:outputText value="Opis pliku:"/>
-                                       <h:inputText value="#{productsMB.fileDescription}"/>
+                                       <h:inputText value="#{productsMB.fileDescription}">
+                                            <p:ajax event="keyup" process="@this"/>
+                                       </h:inputText>
                                    </div>    
                                     <h:outputLabel class="uploaderLabel" id="idCardLabel">Wybierz plik:</h:outputLabel>     
                                     <span id="upload1">
-                                        <p:fileUpload  styleClass="greyButton" value="#{productsMB.uploadedFile}" mode="simple" > 
+                                        <p:fileUpload fileUploadListener="#{productsMB.uploadFile}" mode="advanced" value="#{productsMB.uploadedFile}" update=":documentsForm"> 
                                         </p:fileUpload>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Wgraj" update=":documentsForm" action="#{productsMB.uploadFile()}"/>
                                     </span>
                          </h:form>                       
 
