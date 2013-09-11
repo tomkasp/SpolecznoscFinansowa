@@ -220,7 +220,7 @@ public class CaseViewMB implements Serializable{
         if (caseStatusID == 9)
         {
             selectedClientCase.setFreeResourcesValue(BigDecimal.ZERO);
-            context.execute("fillFinishedData.show();");
+            context.execute("fillFinishedData.show(); changeLabel();");
         }
         else
         {
