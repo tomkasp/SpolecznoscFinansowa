@@ -34,14 +34,16 @@ public class FileUploadMB implements Serializable {
             
             FileUploaderFTP fileUploadFTP=new FileUploaderFTP();
             
-            filename[0] = fileUploadFTP.upload(uploadedFiles[0] , loginMB.getIdUser() , "idCard");    
-            filename[1] = fileUploadFTP.upload(uploadedFiles[1] , loginMB.getIdUser() , "incomeStatement");    
-            filename[2] = fileUploadFTP.upload(uploadedFiles[2] , loginMB.getIdUser() , "deathCertificate");    
-            filename[3] = fileUploadFTP.upload(uploadedFiles[3] , loginMB.getIdUser() , "mariageSettlement");    
-            filename[4] = fileUploadFTP.upload(uploadedFiles[4] , loginMB.getIdUser() , "divorceAct");    
-            filename[5] = fileUploadFTP.upload(uploadedFiles[5] , loginMB.getIdUser() , "separationAct");    
-            filename[6] = fileUploadFTP.upload(uploadedFiles[6] , loginMB.getIdUser() , "titleDeed");    
-            filename[7] = fileUploadFTP.upload(uploadedFiles[7] , loginMB.getIdUser() , "bik");    
+            String id=String.valueOf(loginMB.getIdUser());
+            
+            filename[0] = fileUploadFTP.upload(uploadedFiles[0] , id, "idCard");    
+            filename[1] = fileUploadFTP.upload(uploadedFiles[1] , id, "incomeStatement");    
+            filename[2] = fileUploadFTP.upload(uploadedFiles[2] , id, "deathCertificate");    
+            filename[3] = fileUploadFTP.upload(uploadedFiles[3] , id, "mariageSettlement");    
+            filename[4] = fileUploadFTP.upload(uploadedFiles[4] , id, "divorceAct");    
+            filename[5] = fileUploadFTP.upload(uploadedFiles[5] , id, "separationAct");    
+            filename[6] = fileUploadFTP.upload(uploadedFiles[6] , id, "titleDeed");    
+            filename[7] = fileUploadFTP.upload(uploadedFiles[7] , id, "bik");    
              
              RequiredDocumentsDAO rddao=new RequiredDocumentsDAO(); 
              

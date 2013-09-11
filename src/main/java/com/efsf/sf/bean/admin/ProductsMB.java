@@ -3,20 +3,29 @@ package com.efsf.sf.bean.admin;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Institution;
+import com.efsf.sf.sql.entity.InstitutionDocuments;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.sql.entity.ProductType;
+import com.efsf.sf.util.ftp.FileUploaderFTP;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.model.DefaultUploadedFile;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @SessionScoped
 public class ProductsMB implements Serializable {
     
+    private List<Institution> institutions;
+
+    public List<Institution> getInstitutions() {
+        return institutions;
+    }
     private List<Product> products;
     private Institution newInstitution=new Institution();
     private Product newProduct=new Product();
@@ -28,27 +37,33 @@ public class ProductsMB implements Serializable {
     private Integer productTypeId;
     private Integer employementTypeId;
     
+    //Files upload
+     private List<InstitutionDocuments> documents;
+     private UploadedFile uploadedFile = new DefaultUploadedFile();
+     private String fileDescription;
+    
     public String showProductPage(){
+        GenericDao<Institution> dao = new GenericDao(Institution.class);
+        institutions=dao.getAllInOrder("name", "asc");
+        
         return "/admin/products?faces-redirect=true";  
     }
     
      public String adminMainPage(){
         return "/admin/adminMainPage?faces-redirect=true";
     }   
-
-    public List<Institution> getInstitutions() {
-        GenericDao<Institution> dao = new GenericDao(Institution.class);
-        return dao.getAllInOrder("name", "asc");
-    }
     
     public List<ProductDetails> getProductDetails() {
         GenericDao<ProductDetails> dao = new GenericDao(ProductDetails.class);
         return dao.getWhere("fk_product", String.valueOf(selectedProduct.getIdProduct()));
     }    
     
-    public void loadProducts() {
+    public void loadProductsAndDocuments() {
         GenericDao<Product> dao = new GenericDao(Product.class);
-        setProducts((List<Product>) dao.getWhere("fk_institution", String.valueOf(selectedInstitution.getIdInstitution())));
+        setProducts(dao.getWhere("fk_institution", String.valueOf(selectedInstitution.getIdInstitution())));
+        
+        GenericDao<InstitutionDocuments> dao2 = new GenericDao(InstitutionDocuments.class);
+        setDocuments(dao2.getWhere("fk_institution", String.valueOf(selectedInstitution.getIdInstitution())));
     }
     
     public Map<String, String> getProductsAsHashMap() {
@@ -129,7 +144,7 @@ public class ProductsMB implements Serializable {
     public void saveProduct(){
        GenericDao<Product> dao = new GenericDao(Product.class);
        dao.saveOrUpdate(selectedProduct); 
-       loadProducts();
+       loadProductsAndDocuments();
     }    
 
     public List<Product> getProducts() {
@@ -197,4 +212,40 @@ public class ProductsMB implements Serializable {
     public void setEmployementTypeId(Integer employementTypeId) {
         this.employementTypeId = employementTypeId;
     }
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
+
+    public void uploadFile(){
+            FileUploaderFTP fileUploadFTP=new FileUploaderFTP();
+            String fileName = fileUploadFTP.upload(uploadedFile, "inst"+selectedInstitution.getIdInstitution().toString(), "idCard.jpg"); 
+            
+            GenericDao<InstitutionDocuments> dao=new GenericDao(InstitutionDocuments.class);
+            dao.save(new InstitutionDocuments(getFileDescription(), fileName, selectedInstitution));
+            
+            setFileDescription(null);
+            loadProductsAndDocuments();
+    }
+
+    public String getFileDescription() {
+        return fileDescription;
+    }
+
+    public void setFileDescription(String fileDescription) {
+        this.fileDescription = fileDescription;
+    }
+
+    public List<InstitutionDocuments> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<InstitutionDocuments> documents) {
+        this.documents = documents;
+    }
+
 }
