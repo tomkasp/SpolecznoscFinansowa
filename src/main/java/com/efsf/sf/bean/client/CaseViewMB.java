@@ -9,6 +9,7 @@ import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ProductDAO;
+import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
@@ -25,14 +26,21 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
 
 
@@ -197,6 +205,11 @@ public class CaseViewMB implements Serializable{
         cdao.updateClientCase(selectedClientCase);
     }
 
+    public void haha()
+    {
+        System.out.println(selectedClientCase.getInterestRateType());
+    }
+    
     public void changeCaseStatus()
     {
         
@@ -212,6 +225,31 @@ public class CaseViewMB implements Serializable{
             changeCaseStatus(caseStatusID);
             context.execute("statusChange.show();");
         }
+    }
+    
+    public void validateFinishedDates(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+    
+            
+            LocalDate ld = new LocalDate((Date) value);
+            Boolean notValid = false;
+            
+            if (component.getId().equals("beginDate"))
+            {
+                 org.primefaces.component.calendar.Calendar componentValue = (org.primefaces.component.calendar.Calendar) component.getAttributes().get("receiveDateValue");
+                 Date date = (Date) componentValue.getValue();
+                 if (ld.isBefore(new LocalDate(date)))
+                 {
+                     notValid = true;
+                 }
+           }           
+           if(notValid)
+           {
+               
+               
+                FacesMessage msg = new FacesMessage(bundle.getString("wrongDate"), bundle.getString("wrongDate"));
+                msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                throw new ValidatorException(msg);
+            }
     }
     
     public void changeCaseStatus(int id)
