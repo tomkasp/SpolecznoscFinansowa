@@ -79,10 +79,21 @@
                                          <h:outputText class="label" value="Notatka"/>  
                                          <h:inputTextarea class="inputWidth fontBlack"  style="resize: none; height: 45px;" rows="3" cols="30" disabled="true" value="#{caseViewMB.selectedClientCase.note}" />
                                     </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText id="freeResourcesValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText id="consolidationValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
-                                    <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText id="expectedInstalment" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
                                     <div class="field"> <h:outputText class="label" value="Rodzaj kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.productType.name}" /> </div>
+                                    <h:panelGroup rendered ="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus lt 8}" >
+                                        <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText id="freeResourcesValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText id="consolidationValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText id="expectedInstalment" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered ="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
+                                        <div class="field"> <h:outputText class="label" value="Otrzymana kwota"/>  <h:inputText  class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Wielkość raty"/>  <h:inputText  class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Typ oprocentowania"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.interestRateType == 0) ? 'stałe' : 'malejące'}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Oprocentowanie"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.interestRate} %" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Data otrzymania kredytu"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.receiveCreditDate}" /> </div>
+                                    </h:panelGroup>
+                                 
+                                
                                 </div>
 
                             </h:form>
