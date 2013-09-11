@@ -8,6 +8,7 @@ import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.ProductDAO;
 import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
@@ -16,6 +17,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.InstitutionDocuments;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.util.Settings;
@@ -72,6 +74,9 @@ public class CaseViewMB implements Serializable{
     private Consultant selectedConsultant;
     private Consultant selectedPremiumConsultant;
     private ProductDetails selectedProduct;
+    private InstitutionDocuments selectedDocument;
+    
+    private List<InstitutionDocuments> documents;
     
     private List<Product> productTree;
     
@@ -192,6 +197,9 @@ public class CaseViewMB implements Serializable{
         }        
         
         Collections.reverse(productTree);
+        
+        GenericDao<InstitutionDocuments> dao2 = new GenericDao(InstitutionDocuments.class);
+        setDocuments(dao2.getWhere("fk_institution", String.valueOf(p.getInstitution().getIdInstitution())));
     }
     
     public void assignProduct(ProductDetails pd)
@@ -528,5 +536,21 @@ public class CaseViewMB implements Serializable{
             getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));           
             
         }
+    }
+
+    public List<InstitutionDocuments> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<InstitutionDocuments> documents) {
+        this.documents = documents;
+    }
+
+    public InstitutionDocuments getSelectedDocument() {
+        return selectedDocument;
+    }
+
+    public void setSelectedDocument(InstitutionDocuments selectedDocument) {
+        this.selectedDocument = selectedDocument;
     }
 }

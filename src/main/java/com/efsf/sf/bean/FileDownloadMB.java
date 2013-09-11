@@ -92,6 +92,11 @@ public class FileDownloadMB implements Serializable {
     public void load8() throws IOException{
         ftpd.download(PATH+idUser+"/", requiredDocuments.getBik() ); 
     }
+    
+    public void loadInstitutionFile(Integer idInstitution, String file) throws IOException
+    {
+        ftpd.download(PATH+"inst" + idInstitution + "/", file); 
+    }
      
     public LoginMB getLoginMB() {
         return loginMB;
