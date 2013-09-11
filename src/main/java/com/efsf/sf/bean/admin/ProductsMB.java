@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultUploadedFile;
 import org.primefaces.model.UploadedFile;
 
@@ -39,7 +40,6 @@ public class ProductsMB implements Serializable {
     
     //Files upload
      private List<InstitutionDocuments> documents;
-     private UploadedFile uploadedFile = new DefaultUploadedFile();
      private String fileDescription;
     
     public String showProductPage(){
@@ -213,18 +213,10 @@ public class ProductsMB implements Serializable {
         this.employementTypeId = employementTypeId;
     }
 
-    public UploadedFile getUploadedFile() {
-        return uploadedFile;
-    }
-
-    public void setUploadedFile(UploadedFile uploadedFile) {
-        this.uploadedFile = uploadedFile;
-    }
-
-    public void uploadFile(){
+    public void uploadFile(FileUploadEvent event){
             FileUploaderFTP fileUploadFTP=new FileUploaderFTP();
-            String fileName = fileUploadFTP.upload(uploadedFile, "inst"+selectedInstitution.getIdInstitution().toString(), "idCard.jpg"); 
-            
+            String fileName = fileUploadFTP.upload(event.getFile(), "inst"+selectedInstitution.getIdInstitution().toString(), event.getFile().getFileName()); 
+
             GenericDao<InstitutionDocuments> dao=new GenericDao(InstitutionDocuments.class);
             dao.save(new InstitutionDocuments(getFileDescription(), fileName, selectedInstitution));
             

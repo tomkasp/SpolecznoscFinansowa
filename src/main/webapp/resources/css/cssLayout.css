@@ -311,3 +311,7 @@ input
     background: #0793F0;
 }
 
+
+td.start, td.cancel, td.preview{
+    display: none;
+}
