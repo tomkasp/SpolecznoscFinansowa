@@ -8,13 +8,16 @@ import com.efsf.sf.sql.dao.CaseRatingDAO;
 import com.efsf.sf.sql.dao.CaseStatusDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
+import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.ProductDAO;
+import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.InstitutionDocuments;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.util.Settings;
@@ -25,14 +28,21 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
 import java.math.*;
 
@@ -64,6 +74,9 @@ public class CaseViewMB implements Serializable{
     private Consultant selectedConsultant;
     private Consultant selectedPremiumConsultant;
     private ProductDetails selectedProduct;
+    private InstitutionDocuments selectedDocument;
+    
+    private List<InstitutionDocuments> documents;
     
     private List<Product> productTree;
     
@@ -184,6 +197,9 @@ public class CaseViewMB implements Serializable{
         }        
         
         Collections.reverse(productTree);
+        
+        GenericDao<InstitutionDocuments> dao2 = new GenericDao(InstitutionDocuments.class);
+        setDocuments(dao2.getWhere("fk_institution", String.valueOf(p.getInstitution().getIdInstitution())));
     }
     
     public void assignProduct(ProductDetails pd)
@@ -199,6 +215,11 @@ public class CaseViewMB implements Serializable{
         cdao.updateClientCase(selectedClientCase);
     }
 
+    public void haha()
+    {
+        System.out.println(selectedClientCase.getInterestRateType());
+    }
+    
     public void changeCaseStatus()
     {
         
@@ -207,13 +228,38 @@ public class CaseViewMB implements Serializable{
         if (caseStatusID == 9)
         {
             selectedClientCase.setFreeResourcesValue(BigDecimal.ZERO);
-            context.execute("fillFinishedData.show();");
+            context.execute("fillFinishedData.show(); changeLabel();");
         }
         else
         {
             changeCaseStatus(caseStatusID);
             context.execute("statusChange.show();");
         }
+    }
+    
+    public void validateFinishedDates(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+    
+            
+            LocalDate ld = new LocalDate((Date) value);
+            Boolean notValid = false;
+            
+            if (component.getId().equals("beginDate"))
+            {
+                 org.primefaces.component.calendar.Calendar componentValue = (org.primefaces.component.calendar.Calendar) component.getAttributes().get("receiveDateValue");
+                 Date date = (Date) componentValue.getValue();
+                 if (ld.isBefore(new LocalDate(date)))
+                 {
+                     notValid = true;
+                 }
+           }           
+           if(notValid)
+           {
+               
+               
+                FacesMessage msg = new FacesMessage(bundle.getString("wrongDate"), bundle.getString("wrongDate"));
+                msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                throw new ValidatorException(msg);
+            }
     }
     
     public void changeCaseStatus(int id)
@@ -490,5 +536,21 @@ public class CaseViewMB implements Serializable{
             getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));           
             
         }
+    }
+
+    public List<InstitutionDocuments> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<InstitutionDocuments> documents) {
+        this.documents = documents;
+    }
+
+    public InstitutionDocuments getSelectedDocument() {
+        return selectedDocument;
+    }
+
+    public void setSelectedDocument(InstitutionDocuments selectedDocument) {
+        this.selectedDocument = selectedDocument;
     }
 }
