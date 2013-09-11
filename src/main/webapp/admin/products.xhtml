@@ -19,9 +19,9 @@
                     <h3>Instytucje</h3>
                     <h:form id="instList"> 
                         <p:dataTable value="#{productsMB.institutions}" rowKey="#{row.idInstitution}" var="row" emptyMessage="Brak doradców" selection="#{productsMB.selectedInstitution}" selectionMode="single" paginator="true" rows="10">
-                            <p:ajax event="rowSelect" listener="#{productsMB.loadProductsAndDocuments()}"  update=":prodList"/>    
+                            <p:ajax event="rowSelect" listener="#{productsMB.loadProductsAndDocuments()}"  update=":prodList :documentsForm"/>    
 
-                            <p:column headerText="Instytucja"> 
+                            <p:column width="70%" headerText="Instytucja"> 
                                 <h:outputText value="#{row.name}" />  
                             </p:column>
 
@@ -83,10 +83,10 @@
                         
                          <h:form id="documentsForm" styleClass="rightInlineBox" enctype="multipart/form-data">
                              
-                             <p:dataTable value="#{productsMB.documents}" rowKey="#{row.idDocument}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak dokumentów" selectionMode="single" paginator="true" rows="4">
+                             <p:dataTable value="#{productsMB.documents}" rowKey="#{row.idDocument}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak dokumentów" selection="#{productsMB.selectedDocument}" selectionMode="single" paginator="true" rows="4">
 
-                                <p:column headerText="Opis"> 
-                                    <h:outputText  value="#{row.description}"/>
+                                 <p:column width="70%" headerText="Opis"> 
+                                    <h:outputText value="#{row.description}"/>
                                 </p:column>  
 
                                <p:column headerText="Plik"> 
@@ -95,20 +95,20 @@
 
                             </p:dataTable>
                              
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Usuń" onclick="dlgEditInst.hide()"/>
-                            <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pobierz" update=":instList" onclick="dlgEditInst.hide()" action="#{productsMB.updateInstitution()}"/>
-                        
-                                   <div class="field"> 
-                                       <h:outputText value="Opis pliku:"/>
-                                       <h:inputText value="#{productsMB.fileDescription}">
-                                            <p:ajax event="keyup" process="@this"/>
-                                       </h:inputText>
-                                   </div>    
+                             <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Usuń" update=":documentsForm" action="#{productsMB.removeFile}"/>
+                            
                                     <h:outputLabel class="uploaderLabel" id="idCardLabel">Wybierz plik:</h:outputLabel>     
                                     <span id="upload1">
                                         <p:fileUpload fileUploadListener="#{productsMB.uploadFile}" mode="advanced" value="#{productsMB.uploadedFile}" update=":documentsForm"> 
                                         </p:fileUpload>
                                     </span>
+                                    
+                                   <div class="field "> 
+                                       <h:outputText class="label" value="Opis pliku:"/>
+                                       <h:inputText value="#{productsMB.fileDescription}">
+                                            <p:ajax event="keyup" process="@this"/>
+                                       </h:inputText>
+                                   </div>    
                          </h:form>                       
 
                     </p:dialog>
@@ -144,7 +144,7 @@
                     <h:form id="prodList"> 
                         <p:dataTable value="#{productsMB.products}" rowKey="#{row.idProduct}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak produktów" selection="#{productsMB.selectedProduct}" selectionMode="single" paginator="true" rows="10">
 
-                            <p:column headerText="Nazwa produktu"> 
+                            <p:column width="70%" headerText="Nazwa produktu"> 
                                 <h:outputText  value="#{row.productName}"/>
                             </p:column>  
 

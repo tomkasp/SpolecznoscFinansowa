@@ -43,6 +43,27 @@ public class FileUploaderFTP {
         }
 
     }
+    
+    public void deleteFile(String path) {
+        FTPClient ftpClient = new FTPClient();
+
+        try {
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.deleteFile(path);
+        } catch (IOException ex) {
+            Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload exception", ex);
+        } finally {
+                try {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }
 
     private void uploadFTP(InputStream inputStream, String ftpPath) {
 
@@ -58,7 +79,7 @@ public class FileUploaderFTP {
             String firstRemoteFile = ftpPath;
 
             ftpClient.setBufferSize(0);
-
+            
             boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
 
             inputStream.close();

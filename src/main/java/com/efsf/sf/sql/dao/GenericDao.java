@@ -129,4 +129,17 @@ public class GenericDao<T> {
         }
 
     }
+    
+    public void delete(T obj) {
+
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
+            session.beginTransaction().begin();
+            session.delete(obj);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+    }    
 }
