@@ -20,7 +20,7 @@ public class FileUploaderFTP {
     private String user = "rice";
     private String pass = "rice123";
 
-    public String upload(UploadedFile file, Integer folderId, String fileName) {
+    public String upload(UploadedFile file, String folderId, String fileName) {
 
         if (file != null) {
 
