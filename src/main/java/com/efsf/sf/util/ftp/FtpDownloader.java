@@ -28,7 +28,7 @@ public class FtpDownloader implements Serializable {
             client.connect("192.168.0.5", 89);
             client.login("rice", "rice123");
             
-             Logger.getLogger( FtpDownloader.class.getName() ).log(Level.INFO, "FTP succes logged");
+            Logger.getLogger( FtpDownloader.class.getName() ).log(Level.INFO, "FTP succes logged");
             
             remoteFile = filePath+fileName;
             
@@ -84,7 +84,7 @@ public class FtpDownloader implements Serializable {
             client.login("rice", "rice123");
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);
-            is = client.retrieveFileStream("rice/SF/USERS/" + userId + "/" + fileName);
+            is = client.retrieveFileStream("SF/USERS/" + userId + "/" + fileName);
 
             name = String.format("%s.%s", RandomStringUtils.randomAlphanumeric(8), "pdf");     
             File file=new File(Alghorithm.getPath(), name);
