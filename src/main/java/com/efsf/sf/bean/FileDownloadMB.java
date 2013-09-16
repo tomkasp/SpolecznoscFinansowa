@@ -3,6 +3,7 @@ package com.efsf.sf.bean;
 import com.efsf.sf.bean.client.CaseViewMB;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.RequiredDocuments;
+import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.ftp.FtpDownloader;
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,8 +23,6 @@ public class FileDownloadMB implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private static final String PATH =  "SF/USERS/";
-    
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
@@ -35,6 +34,8 @@ public class FileDownloadMB implements Serializable {
     private FtpDownloader ftpd=new FtpDownloader();
     
     private Integer idUser;
+    
+    private static final String PATH = Settings.FTP_PATH;
     
     @PostConstruct
     private void loadRequiredDocuments() {
@@ -139,5 +140,11 @@ public class FileDownloadMB implements Serializable {
     public void setBikMB(BikMB bikMB) {
         this.bikMB = bikMB;
     }
+
+    public static String getPATH() {
+        return PATH;
+    }
+    
+    
 
 }
