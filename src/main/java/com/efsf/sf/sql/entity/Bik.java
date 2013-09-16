@@ -26,55 +26,55 @@ public class Bik implements java.io.Serializable{
     private String pesel;
     
     @Column(length = 255)
-    private String ocenaPunktowa;
+    private String bikRank;
     
     @Column(length = 255)
-    private String klasa;
+    private String bikClass;
     
     @Column(length = 255)
-    private String rachunkiKwestionowane;
+    private String impeachedAccounts;
     
     @Column(length = 255)
-    private String zablokowanerekordyBIORK;
+    private String blockedBiorkRecords;
     
     @Column(length = 255)
-    private String rzZaleglosc030dni;
+    private String closedAccountsArrear030days;
     
     @Column(length = 255)
-    private String rzUmorzone;
+    private String closedAccountsExtinguished;
     
     @Column(length = 255)
-    private String rzOdzyskane;
+    private String closedAccountsRegained;
    
     @Column(length = 255)
-    private String roZaleglosc030dni;
+    private String openAccountsArrear030days;
     
     @Column(length = 255)
-    private String roZaleglosc3190dni;
+    private String openAccountsArrear3190days;
     
     @Column(length = 255)
-    private String roZaleglosc91180dni;
+    private String openAccountsArrear91180days;
     
     @Column(length = 255)
-    private String roZaleglosc180dni;   
+    private String openAccountsArrear180days;   
     
     @Column(length = 255)
-    private String roWindykacja;
+    private String openAccountsCollection;
     
     @Column(length = 255)
-    private String roEgzekucja;    
+    private String openAccountsExecution;    
 
     @OneToMany(mappedBy="bik", fetch = FetchType.EAGER)
-    private Set<BikZapytanie> zapytania;
+    private Set<BikQuestion> questions;
     
     @OneToMany(mappedBy="bik", fetch = FetchType.EAGER)
-    private Set<BikRachunek> rachunki;
+    private Set<BikAccount> accounts;
     
     @ManyToOne
     @JoinColumn(name="clientId")
     @ForeignKey(name="bikToClient")
     private Client client;
-    
+
     public Integer getIdBik() {
         return idBik;
     }
@@ -91,125 +91,108 @@ public class Bik implements java.io.Serializable{
         this.pesel = pesel;
     }
 
-    public String getOcenaPunktowa() {
-        return ocenaPunktowa;
+    public String getBikRank() {
+        return bikRank;
     }
 
-    public void setOcenaPunktowa(String ocenaPunktowa) {
-        this.ocenaPunktowa = ocenaPunktowa;
+    public void setBikRank(String bikRank) {
+        this.bikRank = bikRank;
     }
 
-    public String getKlasa() {
-        return klasa;
+    public String getBikClass() {
+        return bikClass;
     }
 
-    public void setKlasa(String klasa) {
-        this.klasa = klasa;
+    public void setBikClass(String bikClass) {
+        this.bikClass = bikClass;
     }
 
-    public String getRachunkiKwestionowane() {
-        return rachunkiKwestionowane;
+    public String getImpeachedAccounts() {
+        return impeachedAccounts;
     }
 
-    public void setRachunkiKwestionowane(String rachunkiKwestionowane) {
-        this.rachunkiKwestionowane = rachunkiKwestionowane;
+    public void setImpeachedAccounts(String impeachedAccounts) {
+        this.impeachedAccounts = impeachedAccounts;
     }
 
-    public String getZablokowanerekordyBIORK() {
-        return zablokowanerekordyBIORK;
+    public String getBlockedBiorkRecords() {
+        return blockedBiorkRecords;
     }
 
-    public void setZablokowanerekordyBIORK(String zablokowanerekordyBIORK) {
-        this.zablokowanerekordyBIORK = zablokowanerekordyBIORK;
+    public void setBlockedBiorkRecords(String blockedBiorkRecords) {
+        this.blockedBiorkRecords = blockedBiorkRecords;
     }
 
-    public String getRzZaleglosc030dni() {
-        return rzZaleglosc030dni;
+    public String getClosedAccountsArrear030days() {
+        return closedAccountsArrear030days;
     }
 
-    public void setRzZaleglosc030dni(String rzZaleglosc030dni) {
-        this.rzZaleglosc030dni = rzZaleglosc030dni;
+    public void setClosedAccountsArrear030days(String closedAccountsArrear030days) {
+        this.closedAccountsArrear030days = closedAccountsArrear030days;
     }
 
-    public String getRzUmorzone() {
-        return rzUmorzone;
+    public String getClosedAccountsExtinguished() {
+        return closedAccountsExtinguished;
     }
 
-    public void setRzUmorzone(String rzUmorzone) {
-        this.rzUmorzone = rzUmorzone;
+    public void setClosedAccountsExtinguished(String closedAccountsExtinguished) {
+        this.closedAccountsExtinguished = closedAccountsExtinguished;
     }
 
-    public String getRzOdzyskane() {
-        return rzOdzyskane;
+    public String getClosedAccountsRegained() {
+        return closedAccountsRegained;
     }
 
-    public void setRzOdzyskane(String rzOdzyskane) {
-        this.rzOdzyskane = rzOdzyskane;
+    public void setClosedAccountsRegained(String closedAccountsRegained) {
+        this.closedAccountsRegained = closedAccountsRegained;
     }
 
-    public String getRoZaleglosc030dni() {
-        return roZaleglosc030dni;
+    public String getOpenAccountsArrear030days() {
+        return openAccountsArrear030days;
     }
 
-    public void setRoZaleglosc030dni(String roZaleglosc030dni) {
-        this.roZaleglosc030dni = roZaleglosc030dni;
+    public void setOpenAccountsArrear030days(String openAccountsArrear030days) {
+        this.openAccountsArrear030days = openAccountsArrear030days;
     }
 
-    public String getRoZaleglosc3190dni() {
-        return roZaleglosc3190dni;
+    public String getOpenAccountsArrear3190days() {
+        return openAccountsArrear3190days;
     }
 
-    public void setRoZaleglosc3190dni(String roZaleglosc3190dni) {
-        this.roZaleglosc3190dni = roZaleglosc3190dni;
+    public void setOpenAccountsArrear3190days(String openAccountsArrear3190days) {
+        this.openAccountsArrear3190days = openAccountsArrear3190days;
     }
 
-
-    public String getRoZaleglosc91180dni() {
-        return roZaleglosc91180dni;
+    public String getOpenAccountsArrear91180days() {
+        return openAccountsArrear91180days;
     }
 
-    public void setRoZaleglosc91180dni(String roZaleglosc91180dni) {
-        this.roZaleglosc91180dni = roZaleglosc91180dni;
+    public void setOpenAccountsArrear91180days(String openAccountsArrear91180days) {
+        this.openAccountsArrear91180days = openAccountsArrear91180days;
     }
 
-    public String getRoZaleglosc180dni() {
-        return roZaleglosc180dni;
+    public String getOpenAccountsArrear180days() {
+        return openAccountsArrear180days;
     }
 
-    public void setRoZaleglosc180dni(String roZaleglosc180dni) {
-        this.roZaleglosc180dni = roZaleglosc180dni;
+    public void setOpenAccountsArrear180days(String openAccountsArrear180days) {
+        this.openAccountsArrear180days = openAccountsArrear180days;
     }
 
-    public String getRoWindykacja() {
-        return roWindykacja;
+    public String getOpenAccountsCollection() {
+        return openAccountsCollection;
     }
 
-    public void setRoWindykacja(String roWindykacja) {
-        this.roWindykacja = roWindykacja;
+    public void setOpenAccountsCollection(String openAccountsCollection) {
+        this.openAccountsCollection = openAccountsCollection;
     }
 
-    public String getRoEgzekucja() {
-        return roEgzekucja;
+    public String getOpenAccountsExecution() {
+        return openAccountsExecution;
     }
 
-    public void setRoEgzekucja(String roEgzekucja) {
-        this.roEgzekucja = roEgzekucja;
-    }
-
-    public Set<BikZapytanie> getZapytania() {
-        return zapytania;
-    }
-
-    public void setZapytania(Set<BikZapytanie> zapytania) {
-        this.zapytania = zapytania;
-    }
-
-    public Set<BikRachunek> getRachunki() {
-        return rachunki;
-    }
-
-    public void setRachunki(Set<BikRachunek> rachunki) {
-        this.rachunki = rachunki;
+    public void setOpenAccountsExecution(String openAccountsExecution) {
+        this.openAccountsExecution = openAccountsExecution;
     }
 
     public Client getClient() {
@@ -219,4 +202,22 @@ public class Bik implements java.io.Serializable{
     public void setClient(Client client) {
         this.client = client;
     }
+
+    public Set<BikQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<BikQuestion> questions) {
+        this.questions = questions;
+    }
+
+    public Set<BikAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<BikAccount> accounts) {
+        this.accounts = accounts;
+    }
+    
+
 }

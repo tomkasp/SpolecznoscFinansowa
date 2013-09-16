@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -22,27 +21,27 @@
                         <h4>Dane podstawowe</h4>
 
                         <div class="field"> <h:outputText class="label" value="PESEL"/><p:inputText value="#{bikMB.bik.pesel}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Ocena punktowa"/><p:inputText value="#{bikMB.bik.ocenaPunktowa}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Klasa"/><p:inputText value="#{bikMB.bik.klasa}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Rachunki kwestionowane"/><p:inputText value="#{bikMB.bik.rachunkiKwestionowane}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zablokowane rekordy BIORK"/><p:inputText value="#{bikMB.bik.zablokowanerekordyBIORK}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Ocena punktowa"/><p:inputText value="#{bikMB.bik.bikRank}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Klasa"/><p:inputText value="#{bikMB.bik.bikClass}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Rachunki kwestionowane"/><p:inputText value="#{bikMB.bik.impeachedAccounts}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zablokowane rekordy BIORK"/><p:inputText value="#{bikMB.bik.blockedBiorkRecords}"/></div>
 
                         <h4>Rachunki zamknięte</h4>
 
-                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.rzZaleglosc030dni}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Umorzone"/><p:inputText value="#{bikMB.bik.rzUmorzone}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Odzyskane"/><p:inputText value="#{bikMB.bik.rzOdzyskane}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.closedAccountsArrear030days}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Umorzone"/><p:inputText value="#{bikMB.bik.closedAccountsExtinguished}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Odzyskane"/><p:inputText value="#{bikMB.bik.closedAccountsRegained}"/></div>
 
                     </div>
                     <div class="rightInlineBox">  
                         <h4>Rachunki otwarte</h4>
 
-                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc030dni}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość 31-90 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc3190dni}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość 91-180 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc91180dni}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość powyżej 180 dni"/><p:inputText value="#{bikMB.bik.roZaleglosc180dni}"/></div>   
-                        <div class="field"> <h:outputText class="label" value="Windykacja"/><p:inputText value="#{bikMB.bik.roWindykacja}"/></div>   
-                        <div class="field"> <h:outputText class="label" value="Egzekucja"/><p:inputText value="#{bikMB.bik.roEgzekucja}"/></div>   
+                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear030days}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość 31-90 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear3190days}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość 91-180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear91180days}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Zaległość powyżej 180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear180days}"/></div>   
+                        <div class="field"> <h:outputText class="label" value="Windykacja"/><p:inputText value="#{bikMB.bik.openAccountsCollection}"/></div>   
+                        <div class="field"> <h:outputText class="label" value="Egzekucja"/><p:inputText value="#{bikMB.bik.openAccountsExecution}"/></div>   
                     </div>
                   </h:form>   
                 </div>
@@ -50,7 +49,7 @@
                 <div>
                     <h3>Rachunki</h3>    
                     <h:form id="rachunki"> 
-                        <p:dataTable value="#{bikMB.rachunki}" rowKey="#{row.idRachunek}" var="row" emptyMessage="Brak rachunków" selection="#{bikMB.selectedAccount}" selectionMode="single" paginator="true" rows="10">
+                        <p:dataTable value="#{bikMB.rachunki}" rowKey="#{row.idAccount}" var="row" emptyMessage="Brak rachunków" selection="#{bikMB.selectedAccount}" selectionMode="single" paginator="true" rows="10">
                             <p:ajax event="rowSelect" update=":rachunki" />
                             <p:ajax event="rowUnselect" update=":rachunki" /> 
 
@@ -59,23 +58,23 @@
                             </p:column>                            
                             
                             <p:column headerText="Relacja z klientem"> 
-                                <h:outputText value="#{row.relacjaKlienta}" />  
+                                <h:outputText value="#{row.clientRelation}" />  
                             </p:column>
 
                             <p:column headerText="Data pows. relacji">
-                                <h:outputText value="#{row.dataPowstaniaRelacji}" />  
+                                <h:outputText value="#{row.createRelationDate}" />  
                             </p:column>
                                
                             <p:column headerText="Typ Transakcji">
-                                <h:outputText value="#{row.typTransakcji}" />  
+                                <h:outputText value="#{row.transactionType}" />  
                             </p:column>
                             
                             <p:column headerText="Kwota z odsetkami">
-                                <h:outputText value="#{row.kwotaZKosztemOds1}" />  
+                                <h:outputText value="#{row.amountWithInterestExpense1}" />  
                             </p:column>
 
                             <p:column headerText="Waluta">
-                                <h:outputText value="#{row.waluta}" />  
+                                <h:outputText value="#{row.currency}" />  
                             </p:column>                            
 
                         </p:dataTable>
@@ -86,22 +85,22 @@
                <div>
                     <h3>Zapytania</h3>    
                     <h:form id="zapytania"> 
-                        <p:dataTable value="#{bikMB.zapytania}" rowKey="#{row.idZapytania}" var="row" emptyMessage="Brak zapytań" selectionMode="single" paginator="true" rows="10">
+                        <p:dataTable value="#{bikMB.zapytania}" rowKey="#{row.id}" var="row" emptyMessage="Brak zapytań" selectionMode="single" paginator="true" rows="10">
 
                             <p:column headerText="Powód zapytania"> 
-                                <h:outputText value="#{row.powod}" />  
+                                <h:outputText value="#{row.reason}" />  
                             </p:column>
 
                             <p:column headerText="Data">
-                                <h:outputText value="#{row.data}" />  
+                                <h:outputText value="#{row.questionDate}" />  
                             </p:column>
                             
                             <p:column headerText="Typ">
-                                <h:outputText value="#{row.typ}" />  
+                                <h:outputText value="#{row.type}" />  
                             </p:column>
                             
                             <p:column headerText="Kwota">
-                                <h:outputText value="#{row.kwota}" />  
+                                <h:outputText value="#{row.amount}" />  
                             </p:column>
                           
 
