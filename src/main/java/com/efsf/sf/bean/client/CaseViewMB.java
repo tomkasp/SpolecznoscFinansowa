@@ -10,7 +10,6 @@ import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.ProductDAO;
-import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
@@ -38,13 +37,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
-import java.math.*;
 
 
 @ManagedBean

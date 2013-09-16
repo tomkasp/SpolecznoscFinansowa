@@ -1,5 +1,6 @@
 package com.efsf.sf.bean.admin;
 
+import com.efsf.sf.bean.FileDownloadMB;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.entity.Institution;
@@ -8,6 +9,8 @@ import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
 import com.efsf.sf.sql.entity.ProductType;
 import com.efsf.sf.util.ftp.FileUploaderFTP;
+import com.efsf.sf.util.ftp.FtpDownloader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -257,6 +260,12 @@ public class ProductsMB implements Serializable {
 
     public void setSelectedDocument(InstitutionDocuments selectedDocument) {
         this.selectedDocument = selectedDocument;
+    }
+    
+    public void loadInstitutionFile(String file) throws IOException
+    {
+        FtpDownloader ftpd=new FtpDownloader();
+        ftpd.download(FileDownloadMB.PATH+"inst" + selectedInstitution.getIdInstitution() + "/", file); 
     }
 
 }
