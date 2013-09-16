@@ -85,13 +85,13 @@
                              
                              <p:dataTable value="#{productsMB.documents}" rowKey="#{row.idDocument}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak dokumentów" selection="#{productsMB.selectedDocument}" selectionMode="single" paginator="true" rows="4">
 
-                                 <p:column width="70%" headerText="Opis"> 
+                                <p:column width="70%" headerText="Opis"> 
                                     <h:outputText value="#{row.description}"/>
                                 </p:column>  
-
-                               <p:column headerText="Plik"> 
-                                   <h:outputText  value="#{row.fileName}"/>
-                                </p:column>   
+ 
+                              <p:column headerText="Plik"> 
+                                   <h:commandLink target="_blank" value="#{row.fileName}" action="#{productsMB.loadInstitutionFile(row.fileName) }" />
+                              </p:column>
 
                             </p:dataTable>
                              
