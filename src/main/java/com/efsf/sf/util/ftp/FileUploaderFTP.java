@@ -1,5 +1,6 @@
 package com.efsf.sf.util.ftp;
 
+import com.efsf.sf.util.Settings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,11 +16,11 @@ import org.primefaces.model.UploadedFile;
  */
 public class FileUploaderFTP {
 
-    private String server = "192.168.0.5";
-    private int port = 89;
-    private static final String USER = "sf_ftp";
-    private static final String PASS = "sf_ftp123";
-    public static final String PATH="SF/USERS/";
+    private static final String SERVER = Settings.FTP_SERVER;
+    private static final int PORT = Settings.FTP_PORT;
+    private static final String USER = Settings.FTP_USER;
+    private static final String PASS = Settings.FTP_PASS;
+    private static final String PATH = Settings.FTP_PATH;
 
     public String upload(UploadedFile file, String folderId, String fileName) {
 
@@ -49,7 +50,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -71,7 +72,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -108,7 +109,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -150,7 +151,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
         try {
 
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -171,20 +172,12 @@ public class FileUploaderFTP {
         return done;
     }
 
-    public String getServer() {
-        return server;
+    public static String getSERVER() {
+        return SERVER;
     }
 
-    public void setServer(String server) {
-        this.server = server;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
+    public static int getPORT() {
+        return PORT;
     }
 
     public static String getUSER() {
@@ -199,5 +192,6 @@ public class FileUploaderFTP {
         return PATH;
     }
 
+    
     
 }

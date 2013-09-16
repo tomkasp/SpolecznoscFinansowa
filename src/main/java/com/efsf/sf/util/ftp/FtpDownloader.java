@@ -1,6 +1,8 @@
 package com.efsf.sf.util.ftp;
 
+import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.bik.Alghorithm;
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,17 +20,20 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class FtpDownloader implements Serializable {
 
-    public static final int DEFAULT_BUFFER_SIZE = 10240;
-    private static final String USER = "sf_ftp";
-    private static final String PASS = "sf_ftp123";
-    public static final String PATH="SF/USERS/";
+    private static final int DEFAULT_BUFFER_SIZE = 10240;
+    
+    private static final String SERVER = Settings.FTP_SERVER;
+    private static final int PORT = Settings.FTP_PORT;
+    private static final String USER = Settings.FTP_USER;
+    private static final String PASS = Settings.FTP_PASS;
+    private static final String PATH = Settings.FTP_PATH;
     
     public void download(String filePath,String fileName) throws IOException {
 
         FTPClient client = new FTPClient();
         String remoteFile = null;
         try {
-            client.connect("192.168.0.5", 89);
+            client.connect(SERVER, PORT);
             client.login(USER, PASS);
             
             Logger.getLogger( FtpDownloader.class.getName() ).log(Level.INFO, "FTP succes logged");
@@ -83,7 +88,7 @@ public class FtpDownloader implements Serializable {
         String name = null;
 
         try {
-            client.connect("192.168.0.5", 89);
+            client.connect(SERVER, PORT);
             client.login(USER, PASS);
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);
@@ -107,6 +112,31 @@ public class FtpDownloader implements Serializable {
 
         return name;
     }
-    
+
+    public static int getDEFAULT_BUFFER_SIZE() {
+        return DEFAULT_BUFFER_SIZE;
+    }
+
+    public static String getSERVER() {
+        return SERVER;
+    }
+
+    public static int getPORT() {
+        return PORT;
+    }
+
+    public static String getUSER() {
+        return USER;
+    }
+
+    public static String getPASS() {
+        return PASS;
+    }
+
+    public static String getPATH() {
+        return PATH;
+    }
+
+   
     
 }
