@@ -266,7 +266,7 @@ public class ConsultantSettingsMB implements Serializable {
         
         String sourceLocalPath = "/home/sf/agreement.pdf";
         String destinationLocalPath = "\\";
-        String ftpPath = "rice/SF/USERS/" + idUser + "/";
+        String ftpPath = "SF/USERS/" + idUser + "/";
         String fileName = "agreement_consultant_"+idConsultant+".pdf";
         //CREATE NEW AGREEMENT:
         AgreementPDFItext itext = new AgreementPDFItext();
