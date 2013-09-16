@@ -265,7 +265,7 @@ public class ProductsMB implements Serializable {
     public void loadInstitutionFile(String file) throws IOException
     {
         FtpDownloader ftpd=new FtpDownloader();
-        ftpd.download(FileDownloadMB.PATH+"inst" + selectedInstitution.getIdInstitution() + "/", file); 
+        ftpd.download(FileDownloadMB.getPATH()+"inst" + selectedInstitution.getIdInstitution() + "/", file); 
     }
 
 }
