@@ -62,6 +62,7 @@ public class ConsultantSettingsMB implements Serializable {
     private String newPassword;
     private String confirmNewPassword;
     
+    private static final String PATH="SF/USERS/";
 
     @PostConstruct
     private void loadConsultant() {
@@ -266,7 +267,7 @@ public class ConsultantSettingsMB implements Serializable {
         
         String sourceLocalPath = "/home/sf/agreement.pdf";
         String destinationLocalPath = "\\";
-        String ftpPath = "SF/USERS/" + idUser + "/";
+        String ftpPath = PATH + idUser + "/";
         String fileName = "agreement_consultant_"+idConsultant+".pdf";
         //CREATE NEW AGREEMENT:
         AgreementPDFItext itext = new AgreementPDFItext();
@@ -451,5 +452,11 @@ public class ConsultantSettingsMB implements Serializable {
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
+
+    public static String getPATH() {
+        return PATH;
+    }
+    
+    
     
 }
