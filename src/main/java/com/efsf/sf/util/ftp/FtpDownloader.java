@@ -2,7 +2,6 @@ package com.efsf.sf.util.ftp;
 
 import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.bik.Alghorithm;
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
