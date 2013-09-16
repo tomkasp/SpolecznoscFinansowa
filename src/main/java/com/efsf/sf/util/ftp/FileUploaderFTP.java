@@ -1,5 +1,6 @@
 package com.efsf.sf.util.ftp;
 
+import com.efsf.sf.util.Settings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,11 +16,11 @@ import org.primefaces.model.UploadedFile;
  */
 public class FileUploaderFTP {
 
-    private static final String SERVER = "192.168.0.5";
-    private static final int PORT = 89;
-    private static final String USER = "sf_ftp";
-    private static final String PASS = "sf_ftp123";
-    private static final String PATH="SF/USERS/";
+    private static final String SERVER = Settings.FTP_SERVER;
+    private static final int PORT = Settings.FTP_PORT;
+    private static final String USER = Settings.FTP_USER;
+    private static final String PASS = Settings.FTP_PASS;
+    private static final String PATH = Settings.FTP_PATH;
 
     public String upload(UploadedFile file, String folderId, String fileName) {
 

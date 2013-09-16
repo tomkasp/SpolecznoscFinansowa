@@ -1,6 +1,8 @@
 package com.efsf.sf.util.ftp;
 
+import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.bik.Alghorithm;
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -19,11 +21,12 @@ import org.apache.commons.net.ftp.FTPClient;
 public class FtpDownloader implements Serializable {
 
     private static final int DEFAULT_BUFFER_SIZE = 10240;
-    private static final String SERVER = "192.168.0.5";
-    private static final int PORT = 89;
-    private static final String USER = "sf_ftp";
-    private static final String PASS = "sf_ftp123";
-    private static final String PATH="SF/USERS/";
+    
+    private static final String SERVER = Settings.FTP_SERVER;
+    private static final int PORT = Settings.FTP_PORT;
+    private static final String USER = Settings.FTP_USER;
+    private static final String PASS = Settings.FTP_PASS;
+    private static final String PATH = Settings.FTP_PATH;
     
     public void download(String filePath,String fileName) throws IOException {
 
