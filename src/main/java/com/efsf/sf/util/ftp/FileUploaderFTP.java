@@ -17,8 +17,8 @@ public class FileUploaderFTP {
 
     private String server = "192.168.0.5";
     private int port = 89;
-    private String user = "rice";
-    private String pass = "rice123";
+    private static final String USER = "sf_ftp";
+    private static final String PASS = "sf_ftp123";
     public static final String PATH="SF/USERS/";
 
     public String upload(UploadedFile file, String folderId, String fileName) {
@@ -50,7 +50,7 @@ public class FileUploaderFTP {
 
         try {
             ftpClient.connect(server, port);
-            ftpClient.login(user, pass);
+            ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
             ftpClient.deleteFile(PATH+path);
@@ -72,7 +72,7 @@ public class FileUploaderFTP {
 
         try {
             ftpClient.connect(server, port);
-            ftpClient.login(user, pass);
+            ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -109,7 +109,7 @@ public class FileUploaderFTP {
 
         try {
             ftpClient.connect(server, port);
-            ftpClient.login(user, pass);
+            ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -151,7 +151,7 @@ public class FileUploaderFTP {
         try {
 
             ftpClient.connect(server, port);
-            ftpClient.login(user, pass);
+            ftpClient.login(USER, PASS);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             done = ftpClient.makeDirectory(pathname);
@@ -187,19 +187,17 @@ public class FileUploaderFTP {
         this.port = port;
     }
 
-    public String getUser() {
-        return user;
+    public static String getUSER() {
+        return USER;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public static String getPASS() {
+        return PASS;
     }
 
-    public String getPass() {
-        return pass;
+    public static String getPATH() {
+        return PATH;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
+    
 }
