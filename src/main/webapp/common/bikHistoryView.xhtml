@@ -18,10 +18,10 @@
 
                 <div> 
                     <h:form id="rachunki"> 
-                        <p:dataTable value="#{bikMB.historia}" rowKey="#{row.idWpisu}" var="row" emptyMessage="Brak historii rachunku" selectionMode="single" paginator="true" rows="10">
+                        <p:dataTable value="#{bikMB.historia}" rowKey="#{row.id}" var="row" emptyMessage="Brak historii rachunku" selectionMode="single" paginator="true" rows="10">
 
                             <p:column headerText="Numer"> 
-                                <h:outputText value="#{row.numer}" />  
+                                <h:outputText value="#{row.number}" />  
                             </p:column>
 
                             <p:column headerText="Status płatności">
@@ -29,27 +29,27 @@
                             </p:column>
                                
                             <p:column headerText="Kwota do spłaty">
-                                <h:outputText value="#{row.kwotaDoSplaty}" />  
+                                <h:outputText value="#{row.amount}" />  
                             </p:column>
                             
                             <p:column headerText="Saldo wymagalnych należności">
-                                <h:outputText value="#{row.saldoNaleznosci}" />  
+                                <h:outputText value="#{row.paymentDueLimit}" />  
                             </p:column>
 
                             <p:column headerText="Liczba dni opóźnienia">
-                                <h:outputText value="#{row.opoznienie}" />  
+                                <h:outputText value="#{row.paymentDelay}" />  
                             </p:column>                            
 
                             <p:column headerText="Liczba zaległych płatności">
-                                <h:outputText value="#{row.zaleglePlatnosci}" />  
+                                <h:outputText value="#{row.overduePayments}" />  
                             </p:column>
                             
                             <p:column headerText="Średnie saldo wykorzystania limitu">
-                                <h:outputText value="#{row.saldoLimitu}" />  
+                                <h:outputText value="#{row.limitBalance}" />  
                             </p:column>  
                             
                             <p:column headerText="Waluta">
-                                <h:outputText value="#{row.waluta}" />  
+                                <h:outputText value="#{row.currency}" />  
                             </p:column>                              
                             
                         </p:dataTable>
