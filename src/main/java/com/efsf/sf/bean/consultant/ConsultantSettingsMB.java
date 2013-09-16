@@ -5,6 +5,7 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
+import com.efsf.sf.util.Settings;
 import com.efsf.sf.util.ftp.FileUploaderFTP;
 import com.efsf.sf.util.ftp.FtpDownloader;
 import com.efsf.sf.util.pdf.AgreementPDFItext;
@@ -62,7 +63,7 @@ public class ConsultantSettingsMB implements Serializable {
     private String newPassword;
     private String confirmNewPassword;
     
-    private static final String PATH="SF/USERS/";
+    private static final String PATH = Settings.FTP_PATH;
 
     @PostConstruct
     private void loadConsultant() {

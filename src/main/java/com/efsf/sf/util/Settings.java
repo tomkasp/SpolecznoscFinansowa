@@ -23,6 +23,14 @@ public class Settings
     public static final Integer CLIENT_INACTIVE = 32;  
     public static final Integer LOGGED_OUT = -1;
     
+    // FTP PROPERTY
+    public static final String FTP_SERVER = "192.168.0.5";
+    public static final int FTP_PORT = 89;
+    public static final String FTP_USER = "sf_ftp";
+    public static final String FTP_PASS = "sf_ftp123";
+    public static final String FTP_PATH="SF/USERS/";
+    
+    
     // PRODUCT TYPES 
     public static final Integer CHWILOWKA = 2;
        
