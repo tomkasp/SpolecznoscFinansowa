@@ -22,7 +22,7 @@ public class FileDownloadMB implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private static final String PATH =  "rice/SF/USERS/";
+    private static final String PATH =  "SF/USERS/";
     
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;

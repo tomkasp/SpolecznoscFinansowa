@@ -25,7 +25,7 @@ public class FileUploaderFTP {
         if (file != null) {
 
             String finalFileName;
-            String ftpPath = "rice/SF/USERS/" + folderId + "/";
+            String ftpPath = "SF/USERS/" + folderId + "/";
             makeDirectory(ftpPath);
 
             String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));
