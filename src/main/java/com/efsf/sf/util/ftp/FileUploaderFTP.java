@@ -19,14 +19,14 @@ public class FileUploaderFTP {
     private int port = 89;
     private String user = "rice";
     private String pass = "rice123";
-    public static final String PATH="rice/SF/USERS/";
+    public static final String PATH="SF/USERS/";
 
     public String upload(UploadedFile file, String folderId, String fileName) {
 
         if (file != null) {
 
             String finalFileName;
-            String ftpPath = "SF/USERS/" + folderId + "/";
+            String ftpPath = PATH + folderId + "/";
             makeDirectory(ftpPath);
 
             String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));
