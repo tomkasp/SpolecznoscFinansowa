@@ -15,11 +15,11 @@ import org.primefaces.model.UploadedFile;
  */
 public class FileUploaderFTP {
 
-    private String server = "192.168.0.5";
-    private int port = 89;
+    private static final String SERVER = "192.168.0.5";
+    private static final int PORT = 89;
     private static final String USER = "sf_ftp";
     private static final String PASS = "sf_ftp123";
-    public static final String PATH="SF/USERS/";
+    private static final String PATH="SF/USERS/";
 
     public String upload(UploadedFile file, String folderId, String fileName) {
 
@@ -49,7 +49,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -71,7 +71,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -108,7 +108,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
 
         try {
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
 
             ftpClient.enterLocalPassiveMode();
@@ -150,7 +150,7 @@ public class FileUploaderFTP {
         FTPClient ftpClient = new FTPClient();
         try {
 
-            ftpClient.connect(server, port);
+            ftpClient.connect(SERVER, PORT);
             ftpClient.login(USER, PASS);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
@@ -171,20 +171,12 @@ public class FileUploaderFTP {
         return done;
     }
 
-    public String getServer() {
-        return server;
+    public static String getSERVER() {
+        return SERVER;
     }
 
-    public void setServer(String server) {
-        this.server = server;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
+    public static int getPORT() {
+        return PORT;
     }
 
     public static String getUSER() {
@@ -199,5 +191,6 @@ public class FileUploaderFTP {
         return PATH;
     }
 
+    
     
 }
