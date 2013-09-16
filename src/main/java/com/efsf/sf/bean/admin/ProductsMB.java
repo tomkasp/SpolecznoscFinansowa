@@ -229,8 +229,8 @@ public class ProductsMB implements Serializable {
             GenericDao<InstitutionDocuments> dao=new GenericDao(InstitutionDocuments.class);
             dao.delete(getSelectedDocument());
             
-//            FileUploaderFTP ftp=new FileUploaderFTP();
-//            ftp.deleteFile("inst"+selectedInstitution.getIdInstitution().toString()+"/"+);
+            FileUploaderFTP ftp=new FileUploaderFTP();
+            ftp.deleteFile("inst"+selectedInstitution.getIdInstitution().toString()+"/"+selectedDocument.getFileName());
             
             loadProductsAndDocuments();
     }
