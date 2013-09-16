@@ -22,8 +22,6 @@ public class FileDownloadMB implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    public static final String PATH =  "SF/USERS/";
-    
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     
@@ -35,6 +33,8 @@ public class FileDownloadMB implements Serializable {
     private FtpDownloader ftpd=new FtpDownloader();
     
     private Integer idUser;
+    
+    private static final String PATH =  "SF/USERS/";
     
     @PostConstruct
     private void loadRequiredDocuments() {
@@ -139,5 +139,11 @@ public class FileDownloadMB implements Serializable {
     public void setBikMB(BikMB bikMB) {
         this.bikMB = bikMB;
     }
+
+    public static String getPATH() {
+        return PATH;
+    }
+    
+    
 
 }
