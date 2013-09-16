@@ -19,13 +19,14 @@ public class FileUploaderFTP {
     private int port = 89;
     private String user = "rice";
     private String pass = "rice123";
+    public static final String PATH="rice/SF/USERS/";
 
     public String upload(UploadedFile file, String folderId, String fileName) {
 
         if (file != null) {
 
             String finalFileName;
-            String ftpPath = "rice/SF/USERS/" + folderId + "/";
+            String ftpPath = PATH + folderId + "/";
             makeDirectory(ftpPath);
 
             String fileFormat = file.getFileName().substring(file.getFileName().indexOf(".", file.getFileName().length() - 5));
@@ -52,7 +53,7 @@ public class FileUploaderFTP {
             ftpClient.login(user, pass);
 
             ftpClient.enterLocalPassiveMode();
-            ftpClient.deleteFile(path);
+            ftpClient.deleteFile(PATH+path);
         } catch (IOException ex) {
             Logger.getLogger(FileUploaderFTP.class.getName()).log(Level.SEVERE, "FTP upload exception", ex);
         } finally {
