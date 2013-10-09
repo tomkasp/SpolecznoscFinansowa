@@ -30,8 +30,7 @@
 
                     <div class="leftThinerBox">
                         <h:form id="createClientAccountForm">
-                            <div class="marginLRT30">
-
+                            
                                 <div class="field"> 
                                     <h:outputText class="label" value="Imię"/>  
                                     <h:inputText id="name" class="inputWidth" required="true" value="#{createClientMB.name}" >
@@ -79,7 +78,7 @@
                                 <div class="field">
                                     <div class="label">
                                         <h:outputText value="Akceptuję"/>
-                                        <h:link class="redUnderlineLink" value="Politykę Prywatności" />
+                                        <h:commandButton class="redUnderlineLink" value="Politykę prywatności"  onclick="privacyPolicy.show();" type="button" />
                                     </div>
                                     <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
                                         <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
@@ -95,7 +94,7 @@
                                     </h:commandButton>              
                                 </div>
 
-                            </div>
+                            
 
                         </h:form>
 
@@ -131,10 +130,14 @@
 
 
                 <p:dialog id="userAgreementDialog" header="Regulamin" widgetVar="userAgreement" width="800" height="490" resizable="false" >  
-                    <ui:include src="/WEB-INF/userAgreement.xhtml" />
+                    <ui:include src="/resources/other/userAgreement.xhtml" />
                         
                 </p:dialog> 
                 
+                <p:dialog id="userPrivacyPolicy" header="Regulamin" widgetVar="privacyPolicy" width="800" height="490" resizable="false" >  
+                    <ui:include src="/resources/other/privacyPolicy.xhtml" />
+                        
+                </p:dialog> 
                 
             </ui:define>
 
