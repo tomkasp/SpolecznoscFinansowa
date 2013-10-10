@@ -160,4 +160,8 @@ public class Address implements java.io.Serializable {
     public void setInvoiceDatas(Set<InvoiceData> invoiceDatas) {
         this.invoiceDatas = invoiceDatas;
     }
+    
+    public String toString(){
+        return zipCode+" "+city+" "+street+" "+houseNumber;
+    }
 }

@@ -2,9 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="10"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
 	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
+	<parameter name="address" class="com.efsf.sf.sql.entity.Address"/>
+	<parameter name="reportsDirPath" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -58,16 +60,25 @@
 				<textElement/>
 				<text><![CDATA[Wrocław, data wystawienia: 2013-10-01]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="023a4e87-a845-4fa1-8757-9f1fbf5fe6a2" x="4" y="131" width="350" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$P{consultant}.getName()+" "+$P{consultant}.getLastName()]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement uuid="b67cc0ff-204e-4273-bcb6-8b4995850674" x="4" y="161" width="350" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$P{consultant}.getPesel()]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ea078fa1-861b-4078-ad66-d3adfe333abf" x="4" y="146" width="350" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{address}.toString()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="f5f5d3e3-961d-4d96-bb13-0a3cf3019685" x="317" y="27" width="223" height="77"/>
+				<imageExpression><![CDATA[new File($P{reportsDirPath}, "sf.png")]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<columnHeader>
@@ -213,7 +224,7 @@
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Wartości obliczon z cen bez podatku [zł, gr]]]></text>
+				<text><![CDATA[Wartości obliczoną z cen bez podatku [zł, gr]]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="5a98db5c-1587-4e9c-90b3-9be6bb18937b" x="554" y="13" width="1" height="67"/>

@@ -1,6 +1,9 @@
 package com.efsf.sf.bean.consultant;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.sql.dao.AddressDAO;
+import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.entity.Address;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -36,9 +39,23 @@ public class ReportsMB implements Serializable{
     }
 
     public void generateInvoice() throws JRException, IOException{
+        
         Map<String, Object> params=new HashMap<String, Object>();
         params.put("consultant", loginMB.getConsultant());
+        params.put("address", getInvoiceAddress());
         export("invoice.jrxml", params, new JREmptyDataSource());
+    }
+    
+    
+    private Address getInvoiceAddress(){
+        AddressDAO dao=new AddressDAO();
+        Address address=dao.loadInvoiceAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
+        
+        if(address==null){
+            return dao.loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
+        } else {
+            return address;
+        }
     }
     
     private void export(String template, Map<String, Object> params, JRDataSource dataSource) throws IOException, JRException {
