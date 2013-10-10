@@ -63,6 +63,8 @@ public class ConsultantSettingsMB implements Serializable {
     private String newPassword;
     private String confirmNewPassword;
     
+    private boolean invoiceFlag = false;
+    
     private static final String PATH = Settings.FTP_PATH;
 
     @PostConstruct
@@ -128,6 +130,8 @@ public class ConsultantSettingsMB implements Serializable {
                 subscription=s;
             }
         }   
+        
+        invoiceFlag = consultant.isInvoice();
     }
     
     public String updateSettings() {
@@ -179,6 +183,8 @@ public class ConsultantSettingsMB implements Serializable {
         //ADD CONSULTANT REGION
         Region r=rdao.getRegion(idRegion);
         consultant.setRegion(r);
+        
+        consultant.setInvoice(invoiceFlag);
         
         
         Set<Address> addressSet = new HashSet<>();
@@ -456,6 +462,14 @@ public class ConsultantSettingsMB implements Serializable {
 
     public static String getPATH() {
         return PATH;
+    }
+
+    public boolean getInvoiceFlag() {
+        return invoiceFlag;
+    }
+
+    public void setInvoiceFlag(boolean isInvoice) {
+        this.invoiceFlag = isInvoice;
     }
     
     
