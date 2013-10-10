@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="10"/>
+	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
+	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="238" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="480e107e-499a-430c-b6fa-ad791afa50f6" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sprzedawca:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f20585f5-c9f1-4f76-8bdf-232657589032" x="0" y="20" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="50f205cb-db7a-4310-a936-1e20ea0c12ce" x="0" y="118" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b4a2033c-0f72-44cc-bd22-e645bf6f0e24" x="0" y="98" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nabywca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="368fa2f1-4008-4ba3-8b6c-c734d1b3ce85" x="0" y="21" width="290" height="16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Społeczność Finansowa Sp. z o.o.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5616988c-64f8-42d1-9792-687b84634ba7" x="16" y="37" width="274" height="16"/>
+				<textElement/>
+				<text><![CDATA[Adres: 53-661 Wrocław Pl.Solidarności 1/3/5 Lok. 215]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b2fda0fb-6bb8-4426-b052-fe6b48825da5" x="16" y="53" width="274" height="16"/>
+				<textElement/>
+				<text><![CDATA[NIP: 8971773134 Regon: 021722777]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="81949be6-79c8-4fe1-ad95-5069d5ac25a3" x="0" y="205" width="555" height="29" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ecbf620f-5e49-408d-92dd-14e1dffff8d4" x="16" y="205" width="519" height="29"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Faktura 1/10/13]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a4eb20b9-5594-4151-8e4e-e129710da6b3" x="374" y="0" width="180" height="20"/>
+				<textElement/>
+				<text><![CDATA[Wrocław, data wystawienia: 2013-10-01]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="023a4e87-a845-4fa1-8757-9f1fbf5fe6a2" x="4" y="131" width="350" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{consultant}.getName()+" "+$P{consultant}.getLastName()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b67cc0ff-204e-4273-bcb6-8b4995850674" x="4" y="161" width="350" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{consultant}.getPesel()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<line>
+				<reportElement uuid="b69948e4-2c5d-42a8-acbf-c6db8755c942" x="0" y="10" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="410277e5-6a45-4e6c-ba49-e6f553db9912" x="0" y="11" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement uuid="1b5e5967-70fc-4172-bacc-7e83086a24b4" x="47" y="11" width="1" height="33"/>
+			</line>
+			<line>
+				<reportElement uuid="1cad57c9-5534-4c21-b610-facaab14592b" x="271" y="11" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement uuid="3013a169-2448-43e4-94a6-bacdcbbaf3a6" x="509" y="11" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement uuid="64635cc4-f5cb-459e-b822-638c1dc2076a" x="354" y="11" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement uuid="4cf7c114-e5b0-4782-bf4a-4a4885a2f93b" x="312" y="10" width="1" height="35"/>
+			</line>
+			<staticText>
+				<reportElement uuid="fc825e5c-95bd-4a67-9de9-ead8e7904366" x="16" y="11" width="18" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Lp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f4772b1a-870d-4aaa-97f2-194cb3587a1b" x="68" y="10" width="193" height="35"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nazwa towaru/usługi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="36a5149f-fe48-4051-92db-b00d987cb04d" x="272" y="11" width="40" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Ilość]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5746a246-a3cd-454b-9ec6-515699a72a1a" x="317" y="11" width="37" height="35"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[J.m.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a0e6dd96-dd4b-481e-a3d3-4629f667cf3e" x="513" y="11" width="42" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Stawka VAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d050ef73-b13b-4623-9811-eb5f119e6888" x="449" y="11" width="60" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Wartość bez podatku [zł, gr]]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="8d71d586-ecef-40ee-b1ef-97fe97168412" x="444" y="11" width="1" height="35"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a313901a-8cc7-417d-8b7a-bd337f87da61" x="360" y="11" width="83" height="34"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Cena jednostkowa bez podatku [zł, gr]]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="54625b8a-1ed4-428e-88a0-33b6fae5aeec" x="554" y="11" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement uuid="97ed5aba-9f91-4ec6-93e6-c34f7d519869" x="1" y="44" width="553" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12"/>
+	</detail>
+	<columnFooter>
+		<band height="218" splitType="Immediate">
+			<line>
+				<reportElement uuid="a6f380e2-3823-46e8-9792-8bb1e62410c4" x="17" y="194" width="245" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="33fba0a9-e51d-43cb-9c9d-91fb7a75a118" x="314" y="195" width="242" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="944550f2-2200-4c15-ae56-f61472f3f99a" x="32" y="196" width="212" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[podpis osoby uprawnionej do odbioru faktury]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="82be02ff-f06c-48ba-bb7d-0de47544dc17" x="324" y="195" width="232" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[podpis osoby uprawnionej do wystawienia faktury]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9d583bce-a6aa-441e-a474-e678bf265a75" x="1" y="95" width="555" height="29" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ff1d1f4c-6c21-4b35-a505-63c085c8f46a" x="4" y="104" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Należność ogółem:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="710d1a9c-de11-4243-8219-12d94b1bc14e" x="1" y="124" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Zapłacono gotówką:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5a1cddbc-63dc-4bc4-b87d-ab32766a599e" x="229" y="13" width="325" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="7993eb68-b90e-4dba-bd54-002554824450" x="230" y="31" width="324" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9f6851b7-9c83-4d4b-959c-f91a467d3224" x="230" y="47" width="324" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="06b582ea-e3f4-472e-8e39-9f6eddf385f3" x="230" y="62" width="324" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="5cf7ae0a-62b3-4885-a50a-bd57b3dfc284" x="230" y="80" width="325" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="456528df-637c-498b-aaea-5001cbcdf222" x="290" y="17" width="245" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Wartości obliczon z cen bez podatku [zł, gr]]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5a98db5c-1587-4e9c-90b3-9be6bb18937b" x="554" y="13" width="1" height="67"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1fdb13c6-4b9d-4d98-bed5-ae013907b05f" x="290" y="34" width="52" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[bez podatku]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="555213b0-e6ac-4267-9014-7e24505edb7d" x="386" y="33" width="76" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="43b35cbc-179a-401e-b603-14274aadfbd2" x="483" y="34" width="52" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[z podatkiem]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="185d3e89-9db3-4f81-85e4-ed194c32a634" x="472" y="32" width="1" height="48"/>
+			</line>
+			<line>
+				<reportElement uuid="86b075a7-e2a3-40f9-a3f3-181a25bc2821" x="374" y="32" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="b2ca0bde-6126-48bf-98fe-3617ccc04d96" x="272" y="31" width="1" height="49"/>
+			</line>
+			<line>
+				<reportElement uuid="9dc6b818-aa28-4392-975e-098c90777979" x="229" y="13" width="1" height="67"/>
+			</line>
+			<staticText>
+				<reportElement uuid="eaa788a4-1204-44c5-84f8-5f22eb0cde0b" x="230" y="47" width="41" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Razem:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b1d2dd0-1583-406d-8327-6b1170805fa4" x="230" y="63" width="41" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[W tym:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="34" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
+</jasperReport>
