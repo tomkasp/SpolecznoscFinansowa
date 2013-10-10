@@ -10,6 +10,8 @@ import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -18,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.RandomStringUtils;
 
 @ManagedBean
 @SessionScoped
@@ -197,6 +200,15 @@ public class LoginMB implements Serializable {
                 }
             }
         } else {}
+    }
+    
+    public String generateErrorCode()
+    {
+        String random = RandomStringUtils.randomAlphanumeric(8);
+        
+        Logger.getLogger("").log(Level.SEVERE, "Error ID: " + random);
+        
+        return random;
     }
 
     public void setCookie() {
