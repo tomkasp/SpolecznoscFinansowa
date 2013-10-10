@@ -118,7 +118,7 @@ p:column {
     /*    float: left;*/   
     min-height: 15px;
     margin: 24px 3px; 
-        color: #868686;
+    color: #868686;
     font-family: Arial;
     font-weight:bold;
 }
@@ -749,7 +749,7 @@ p:column {
 
 .inputWidth
 {
-    width: 50%;
+    width: 56%;
 }
 
 .inputWidth2
