@@ -27,7 +27,7 @@ public class SubscriptionType implements java.io.Serializable {
     private Integer length;
     private Set<Subscription> subscriptions = new HashSet<Subscription>(0);
     private boolean active;
-    
+    private String description;
     
     
     public SubscriptionType() {
@@ -88,5 +88,14 @@ public class SubscriptionType implements java.io.Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
