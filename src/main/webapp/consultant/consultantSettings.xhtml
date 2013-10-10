@@ -206,14 +206,16 @@
                             </div>
 
                             <div class="field"> 
-                                <p:selectBooleanCheckbox styleClass="label" />
+                                <p:selectBooleanCheckbox styleClass="label" value="#{consultantSettingsMB.invoiceFlag}" >
+                                    <f:ajax event="change" execute="@this" render="copyButton invoiceName invoiceRegion invoiceCity invoiceZipCode invoicePhone invoiceStreet invoiceNumber invoiceNip invoiceRegon" />
+                                </p:selectBooleanCheckbox>
                                 <h:outputText styleClass="fontGrey"  value="chcę otrzymywać fakturę VAT" /> 
                             </div>
 
                         </div>
 
                         <div class="copyAddressButton">
-                            <p:commandLink action="#{consultantSettingsMB.copyAddress()}" update="formularz" >
+                            <p:commandLink id="copyButton" disabled="#{!consultantSettingsMB.invoiceFlag}" action="#{consultantSettingsMB.copyAddress()}" update="formularz" >
                                 <h:graphicImage name="icons/copyAddress.png"/>
                             </p:commandLink>
 
@@ -225,50 +227,66 @@
 
                             <div class="field"> 
                                 <h:outputText class="label" value="Nazwa"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceData.name}"/>
+                                <h:inputText id="invoiceName" disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" class="inputWidth3" value="#{consultantSettingsMB.invoiceData.name}"/>
+                                <h:message for="invoiceName" errorClass="invalid" id="invoiceNameMessage" />
                             </div>
-
+                            
                             <div class="field"> 
                                 <h:outputText class="label" value="Województwo"/> 
-                                <p:selectOneMenu style="width: 39% " value="#{consultantSettingsMB.idInvoiceRegion}" >  
+                                <p:selectOneMenu disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceRegion" style="width: 39% " value="#{consultantSettingsMB.idInvoiceRegion}" >  
                                     <f:selectItems value="#{dictionaryMB.region}" var="woj" itemLabel="#{woj.region}" itemValue="#{woj.idRegion}"/>
                                 </p:selectOneMenu>
+                                <h:message for="invoiceRegion" errorClass="invalid" id="invoiceRegionMessage" />
                             </div>
-
+                            
                             <div class="field">
                                 <h:outputText class="label" value="Miasto"/>
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.city}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceCity" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.city}"/> 
+                                <h:message for="invoiceCity" errorClass="invalid" id="invoiceCityMessage" />
                             </div>
-
+                            
+                            
                             <div class="field"> 
                                 <h:outputText class="label" value="Kod pocztowy"/>  
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.zipCode}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceZipCode" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.zipCode}"/> 
+                                <h:message for="invoiceZipCode" errorClass="invalid" id="invoiceZipCodeMessage" />
                             </div>
+                            
 
                             <div class="field">
                                 <h:outputText class="label" value="Telefon"/>
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.phone}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoicePhone" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.phone}"/> 
+                                <h:message for="invoicePhone" errorClass="invalid" id="invoicePhoneMessage" />
                             </div>
-
+                            
+                            
                             <div class="field"> 
                                 <h:outputText class="label" value="Ulica"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.street}"/>  
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceStreet" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.street}"/>  
+                                <h:message for="invoiceStreet" errorClass="invalid" id="invoiceStreetMessage" />
                             </div>
-
+                            
+                             
                             <div class="field"> 
                                 <h:outputText class="label" value="Numer"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.houseNumber}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceNumber" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.houseNumber}"/> 
+                                <h:message for="invoiceNumber" errorClass="invalid" id="invoiceNumberMessage" />
                             </div>
+                            
 
                             <div class="field"> 
                                 <h:outputText class="label" value="NIP"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceData.nip}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceNip" class="inputWidth3" value="#{consultantSettingsMB.invoiceData.nip}"/> 
+                                <h:message for="invoiceNip" errorClass="invalid" id="invoiceNipMessage" />
                             </div>
+                            
 
                             <div class="field"> 
                                 <h:outputText class="label" value="REGON"/>  
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.invoiceData.regon}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceRegon" class="inputWidth3" value="#{consultantSettingsMB.invoiceData.regon}"/> 
+                                <h:message for="invoiceRegon" errorClass="invalid" id="invoiceRegonMessage" />
                             </div>
+                            
 
                         </div>
 
