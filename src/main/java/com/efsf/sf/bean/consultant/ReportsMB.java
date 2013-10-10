@@ -46,6 +46,15 @@ public class ReportsMB implements Serializable{
         export("invoice.jrxml", params, new JREmptyDataSource());
     }
     
+   public void generateReceipt() throws JRException, IOException
+   {
+        Map<String, Object> params=new HashMap<String, Object>();
+        params.put("Consultant", loginMB.getConsultant());
+        params.put("Address", getInvoiceAddress());
+        export("receipt.jrxml", params, new JREmptyDataSource());
+    }
+    
+    
     
     private Address getInvoiceAddress(){
         AddressDAO dao=new AddressDAO();
