@@ -140,7 +140,7 @@ p:column {
 
 .label{
     float: left;
-    width: 40%;
+    width: 140px;
     min-height: 15px;
     clear: both;
     letter-spacing: 1pt;
@@ -749,7 +749,7 @@ p:column {
 
 .inputWidth
 {
-    width: 55%;
+    width: 50%;
 }
 
 .inputWidth2
