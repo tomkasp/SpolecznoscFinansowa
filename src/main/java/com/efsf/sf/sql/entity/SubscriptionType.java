@@ -90,7 +90,7 @@ public class SubscriptionType implements java.io.Serializable {
         this.active = active;
     }
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1000)
     public String getDescription() {
         return description;
     }
