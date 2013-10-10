@@ -26,7 +26,10 @@ public class SubscriptionType implements java.io.Serializable {
     private BigDecimal price;
     private Integer length;
     private Set<Subscription> subscriptions = new HashSet<Subscription>(0);
-
+    private boolean active;
+    
+    
+    
     public SubscriptionType() {
     }
 
@@ -76,5 +79,14 @@ public class SubscriptionType implements java.io.Serializable {
 
     public void setSubscriptions(Set<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
+    }
+
+    @Column(name = "active", nullable = false )
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
