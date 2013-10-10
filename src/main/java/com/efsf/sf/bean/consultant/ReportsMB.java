@@ -1,0 +1,62 @@
+package com.efsf.sf.bean.consultant;
+
+import com.efsf.sf.bean.LoginMB;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+
+@ManagedBean
+@RequestScoped
+public class ReportsMB implements Serializable{
+
+    
+    @ManagedProperty(value = "#{loginMB}")
+    private LoginMB loginMB;
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
+    }
+
+    public void generateInvoice() throws JRException, IOException{
+        Map<String, Object> params=new HashMap<String, Object>();
+        params.put("consultant", loginMB.getConsultant());
+        export("invoice.jrxml", params, new JREmptyDataSource());
+    }
+    
+    private void export(String template, Map<String, Object> params, JRDataSource dataSource) throws IOException, JRException {
+        JasperReport report;
+
+        ExternalContext ctx=FacesContext.getCurrentInstance().getExternalContext();
+        ctx.setResponseContentType("application/pdf");
+        try {
+            report = JasperCompileManager.compileReport(ctx.getRealPath("/reports/"+template));        
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, dataSource);
+            JasperExportManager.exportReportToPdfStream(jasperPrint, ctx.getResponseOutputStream());
+            
+        } catch (JRException | IOException e) {
+            e.printStackTrace();
+        }
+
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+    
+    
+}
