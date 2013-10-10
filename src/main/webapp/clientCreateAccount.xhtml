@@ -27,11 +27,10 @@
                 </div>
 
                 <div style="min-height: 400px">
-                    
+
                     <div class="leftThinerBox">
                         <h:form id="createClientAccountForm">
-                            <div class="marginLRT30">
-                                
+                            
                                 <div class="field"> 
                                     <h:outputText class="label" value="Imię"/>  
                                     <h:inputText id="name" class="inputWidth" required="true" value="#{createClientMB.name}" >
@@ -67,39 +66,41 @@
                                 </div>
 
                                 <div class="field">
-                                <div class="label">
-                                    <h:outputText value="Akceptuję"/>
-                                    <h:link class="redUnderlineLink" value="Regulamin" />
+                                    <div class="label">
+                                        <h:outputText value="Akceptuję"/>
+                                        <h:commandButton class="redUnderlineLink" value="Regulamin"  onclick="userAgreement.show();" type="button" />
+                                   </div>
+                                    <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
+                                        <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                    </p:selectBooleanCheckbox>
+                                    <h:message for="rules" class="invalid" id="rulesMessage" />
+                                </div> 
+                                <div class="field">
+                                    <div class="label">
+                                        <h:outputText value="Akceptuję"/>
+                                        <h:commandButton class="redUnderlineLink" value="Politykę prywatności"  onclick="privacyPolicy.show();" type="button" />
+                                    </div>
+                                    <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
+                                        <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                                    </p:selectBooleanCheckbox>
+                                    <h:message for="policy" class="invalid" id="policyMessage" />
                                 </div>
-                                <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
-                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
-                                </p:selectBooleanCheckbox>
-                                <h:message for="rules" class="invalid" id="rulesMessage" />
-                            </div> 
-                            <div class="field">
-                                <div class="label">
-                                    <h:outputText value="Akceptuję"/>
-                                    <h:link class="redUnderlineLink" value="Politykę Prywatności" />
-                                </div>
-                                <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
-                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
-                                </p:selectBooleanCheckbox>
-                                <h:message for="policy" class="invalid" id="policyMessage" />
-                            </div>
 
-                            <div style="float: right; margin: 20px 0;" >
-                                <h:button class="blueButton floatL" value="Zarejestruj się jako doradca" outcome="/consultantCreateAccount" />
+                                <div style="float: right; margin: 20px 0;" >
+                                    <h:button class="blueButton floatL" value="Zarejestruj się jako doradca" outcome="/consultantCreateAccount" />
+
+                                    <h:commandButton id="createAccountBtn" class ="greenButton wideButton floatL marginL20" value="Załóż konto" action="#{createClientMB.createClientAccount()}" >
+                                        <f:ajax execute="@form" render="@form"/>
+                                    </h:commandButton>              
+                                </div>
+
                             
-                            <h:commandButton id="createAccountBtn" class ="greenButton wideButton floatL marginL20" value="Załóż konto" action="#{createClientMB.createClientAccount()}" >
-                                <f:ajax execute="@form" render="@form"/>
-                            </h:commandButton>              
-                            </div>
-
-                       </div>
 
                         </h:form>
-                        
+
                     </div>
+
+
 
                     <div class="rightWiderBox">
                         <h4 class="greenLeftBorder"> CO ZYSKUJESZ JAKO KLIENT </h4>
@@ -127,6 +128,17 @@
                     </div>
                 </div>
 
+
+                <p:dialog id="userAgreementDialog" header="Regulamin" widgetVar="userAgreement" width="800" height="490" resizable="false" >  
+                    <ui:include src="/resources/other/userAgreement.xhtml" />
+                        
+                </p:dialog> 
+                
+                <p:dialog id="userPrivacyPolicy" header="Regulamin" widgetVar="privacyPolicy" width="800" height="490" resizable="false" >  
+                    <ui:include src="/resources/other/privacyPolicy.xhtml" />
+                        
+                </p:dialog> 
+                
             </ui:define>
 
         </ui:composition>
