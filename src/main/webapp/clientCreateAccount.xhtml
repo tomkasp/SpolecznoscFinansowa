@@ -30,6 +30,7 @@
 
                     <div class="leftThinerBox">
                         <h:form id="createClientAccountForm">
+                            <div class="marginLRT30">
                             
                                 <div class="field"> 
                                     <h:outputText class="label" value="Imię"/>  
@@ -66,24 +67,26 @@
                                 </div>
 
                                 <div class="field">
-                                    <div class="label">
+                                    
                                         <h:outputText value="Akceptuję"/>
                                         <h:commandButton class="redUnderlineLink" value="Regulamin"  onclick="userAgreement.show();" type="button" />
-                                   </div>
-                                    <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
+                                        <p:selectBooleanCheckbox id="rules" binding="#{rules}" style="margin-left: 3px">
                                         <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
                                     </p:selectBooleanCheckbox>
                                     <h:message for="rules" class="invalid" id="rulesMessage" />
+                                   
+                                    
                                 </div> 
                                 <div class="field">
-                                    <div class="label">
+                                    
                                         <h:outputText value="Akceptuję"/>
                                         <h:commandButton class="redUnderlineLink" value="Politykę prywatności"  onclick="privacyPolicy.show();" type="button" />
-                                    </div>
                                     <p:selectBooleanCheckbox id="policy" binding="#{policy}" style="margin-left: 3px" >
                                         <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
                                     </p:selectBooleanCheckbox>
                                     <h:message for="policy" class="invalid" id="policyMessage" />
+                                   
+                                    
                                 </div>
 
                                 <div style="float: right; margin: 20px 0;" >
@@ -94,6 +97,7 @@
                                     </h:commandButton>              
                                 </div>
 
+                            </div>
                             
 
                         </h:form>
