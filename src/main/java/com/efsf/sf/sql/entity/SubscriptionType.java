@@ -3,6 +3,7 @@ package com.efsf.sf.sql.entity;
 
 import com.efsf.sf.util.NumberSpeaker;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -82,12 +83,21 @@ public class SubscriptionType implements java.io.Serializable {
         this.subscriptions = subscriptions;
     }
     
-    public BigDecimal priceWithTax() {
-        return price.multiply(new BigDecimal(1.23));
+    public String priceSpeak() {
+        return NumberSpeaker.speakNumber(price.multiply(new BigDecimal(1.23))
+                .setScale(2, RoundingMode.UP).doubleValue());
     }
     
-    public BigDecimal tax() {
-        return price.multiply(new BigDecimal(0.23));
+   public String priceWithoutTax() {
+        return price.setScale(2, RoundingMode.UP).toPlainString();
+    }
+    
+    public String priceWithTax() {
+        return price.multiply(new BigDecimal(1.23)).setScale(2, RoundingMode.UP).toPlainString();
+    }
+    
+    public String tax() {
+        return price.multiply(new BigDecimal(0.23)).setScale(2, RoundingMode.UP).toPlainString();
     }
     
 

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="391"/>
+	<property name="ireport.y" value="343"/>
 	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
 	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
 	<parameter name="address" class="com.efsf.sf.sql.entity.Address">
@@ -279,14 +279,14 @@
 			<staticText>
 				<reportElement uuid="ff1d1f4c-6c21-4b35-a505-63c085c8f46a" x="3" y="221" width="116" height="20"/>
 				<textElement>
-					<font fontName="DejaVu Sans" isBold="true" pdfEncoding="Cp1250"/>
+					<font fontName="SansSerif" isBold="true" pdfEncoding="Cp1250"/>
 				</textElement>
 				<text><![CDATA[Należność ogółem:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="710d1a9c-de11-4243-8219-12d94b1bc14e" x="4" y="241" width="104" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
+					<font fontName="SansSerif" pdfEncoding="Cp1250"/>
 				</textElement>
 				<text><![CDATA[Zapłacono gotówką:]]></text>
 			</staticText>
@@ -321,22 +321,22 @@
 			<textField>
 				<reportElement uuid="9ab316f6-a1ee-4ced-8d5e-9b716e638cdf" x="360" y="45" width="73" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{sub}.getPrice()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceWithoutTax()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="f0a1e3e5-b69b-4c6d-bf8f-3743765dcc8e" x="449" y="44" width="60" height="20"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{sub}.getPrice()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceWithoutTax()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="74108875-69c1-491c-8262-bada2d4c03d8" x="272" y="163" width="82" height="13"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{sub}.getPrice()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceWithoutTax()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="27699be6-de58-497b-95b5-f307c447fbd9" x="272" y="178" width="82" height="13"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$P{sub}.getPrice()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceWithoutTax()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="7fc50028-5bcb-4a82-a6bc-87828de54e6d" x="242" y="221" width="58" height="20"/>
@@ -378,6 +378,13 @@
 					<font pdfEncoding="Cp1250"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sub}.priceWithTax()+" zł"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="41beefb0-0270-4b48-ac85-0addcfa50e14" x="284" y="221" width="264" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sub}.priceSpeak()]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
