@@ -1,6 +1,7 @@
 package com.efsf.sf.sql.entity;
 // Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
+import com.efsf.sf.util.NumberSpeaker;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -77,4 +78,13 @@ public class SubscriptionType implements java.io.Serializable {
     public void setSubscriptions(Set<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
     }
+    
+    public BigDecimal priceWithTax() {
+        return price.multiply(new BigDecimal(1.23));
+    }
+    
+    public BigDecimal tax() {
+        return price.multiply(new BigDecimal(0.23));
+    }
+    
 }

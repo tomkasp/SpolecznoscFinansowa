@@ -1,5 +1,8 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.sql.dao.GenericDao;
+import com.efsf.sf.sql.entity.Subscription;
+import com.efsf.sf.sql.entity.SubscriptionType;
 import com.efsf.sf.util.Security;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,6 +35,19 @@ public class PaymentMB implements Serializable {
     private String pos_auth_key = "BKnQU9G";
     private String key1 = "56df4fe519063a46419f38e4de5bd4f6";
 
+    
+    public void createPayement(){
+        GenericDao<Subscription> dao=new GenericDao(Subscription.class);
+        GenericDao<SubscriptionType> subTypeDao=new GenericDao(SubscriptionType.class);
+        
+        Subscription subs=new Subscription();
+        subs.setSubscriptionType(subTypeDao.getById(1));
+        subs.setDateFrom(new Date());
+        subs.setDateTo(null);
+        
+        dao.save(subs);
+    }
+    
     //Send new Payment
     public void consultantPayment() throws IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
