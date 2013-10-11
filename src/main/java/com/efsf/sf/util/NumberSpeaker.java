@@ -49,29 +49,34 @@ public class NumberSpeaker {
      * @return słowna reprezentacja
      */
     public static String speakNumber(long value, int currency) {
-        StringBuffer buffer = new StringBuffer();
-        String stringValue = String.valueOf(value);
-        int length = stringValue.length();
-        int steps = length / secSize;
-        int remain = length % secSize;
-        if (length < secSize) {
-            steps = 0;
-        }
-        if (remain != 0) {
-            steps++;
-        }
-        // Bierzemy poszczególne sekcje po 3 cyfry
-        for (int i = 1; i <= steps; i++) {
-            int begin = length - (i * secSize);
-            if (begin < 0) {
-                begin = 0;
+        if(value==0){
+            return "zero "+getCurrency((int)value, currency);
+        } else {
+            StringBuffer buffer = new StringBuffer();
+            String stringValue = String.valueOf(value);
+            int length = stringValue.length();
+            int steps = length / secSize;
+            int remain = length % secSize;
+            if (length < secSize) {
+                steps = 0;
             }
-            int end = length - ((i-1) * secSize);
-            String subValue = stringValue.substring(begin, end);
-            // tworzymy sekcje wraz z sufiksami
-            buffer.insert(0, decode(subValue) + " " + determineSuffix(subValue, i) + " ");
+            if (remain != 0) {
+                steps++;
+            }
+            // Bierzemy poszczególne sekcje po 3 cyfry
+            for (int i = 1; i <= steps; i++) {
+                int begin = length - (i * secSize);
+                if (begin < 0) {
+                    begin = 0;
+                }
+                int end = length - ((i-1) * secSize);
+                String subValue = stringValue.substring(begin, end);
+                // tworzymy sekcje wraz z sufiksami
+                buffer.insert(0, decode(subValue) + " " + determineSuffix(subValue, i) + " ");
+            }
+            
+            return new String(buffer).trim()+" "+getCurrency((int)value, currency);
         }
-        return new String(buffer).trim()+" "+getCurrency((int)value, currency);
     }
     
     public static String speakNumber(int value, int currency) {
