@@ -45,7 +45,10 @@ public class Consultant implements java.io.Serializable {
     private Set<Address> addresses = new HashSet<Address>(0);
     private Set<Subscription> subscriptions = new HashSet<Subscription>(0);
     private Set<ClientCase> clientCases_2 = new HashSet<ClientCase>(0);
-
+    private boolean invoice;
+    
+    
+    
     public Consultant() {
     }
 
@@ -234,5 +237,14 @@ public class Consultant implements java.io.Serializable {
 
     public void setClientCases_2(Set<ClientCase> clientCases_2) {
         this.clientCases_2 = clientCases_2;
+    }
+
+    @Column(name = "invoice", nullable = false)
+    public boolean isInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(boolean invoice) {
+        this.invoice = invoice;
     }
 }

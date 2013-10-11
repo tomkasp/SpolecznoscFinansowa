@@ -555,11 +555,11 @@ p:column {
 
 .invoiceSection
 {  
-    width:390px;
-    margin-left: 0px; 
+    width:360px;
+    margin:0 100px 0 0px; 
     display: inline-block;
     border-left: 3px solid #5297cb;
-    padding:0 0 0 30px;
+    padding:0 00px 0 30px;
 }
 
 
@@ -759,7 +759,7 @@ p:column {
 
 .inputWidth3
 {
-    width: 37%
+    width: 55%
 }
 
 .rateSection{
@@ -777,9 +777,9 @@ p:column {
     color: red;
     font-weight: bold;
     float:right;
-    margin-top: 2px;
-    margin-bottom: 0px;
+    margin:2px 0 0 0;
     clear: both;
+    padding: 0 45px 0 0;
 }
 
 .invalid2{
