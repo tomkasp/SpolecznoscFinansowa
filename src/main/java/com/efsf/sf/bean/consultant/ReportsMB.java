@@ -109,11 +109,4 @@ public class ReportsMB implements Serializable{
         FacesContext.getCurrentInstance().responseComplete();
     }
     
-    public void test(){
-        
-          System.out.println(125.45+" | "+NumberSpeaker.speakNumber(125.45));
-
-    }
-    
-    
 }
