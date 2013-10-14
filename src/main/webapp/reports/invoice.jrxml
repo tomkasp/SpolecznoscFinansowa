@@ -2,13 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="343"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
 	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
 	<parameter name="address" class="com.efsf.sf.sql.entity.Address">
 		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
 	</parameter>
-	<parameter name="reportsDirPath" class="java.lang.String"/>
 	<parameter name="sub" class="com.efsf.sf.sql.entity.SubscriptionType" isForPrompting="false"/>
 	<background>
 		<band splitType="Stretch"/>
