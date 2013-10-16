@@ -41,6 +41,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.chart.CartesianChartModel;  
+import org.primefaces.model.chart.ChartSeries;  
+import org.primefaces.model.chart.LineChartSeries;  
 
 
 @ManagedBean
@@ -71,6 +74,8 @@ public class CaseViewMB implements Serializable{
     private Consultant selectedPremiumConsultant;
     private ProductDetails selectedProduct;
     private InstitutionDocuments selectedDocument;
+    private CartesianChartModel linearModel = new CartesianChartModel();  
+    private LineChartSeries series1 = new LineChartSeries();  
     
     private List<InstitutionDocuments> documents;
     
@@ -89,6 +94,7 @@ public class CaseViewMB implements Serializable{
     private List<ScheduleItem> schedule = new ArrayList();
     
     public CaseViewMB() {
+        
     }
     
     
@@ -307,6 +313,26 @@ public class CaseViewMB implements Serializable{
         caseDao.updateClientCase(selectedClientCase);  
     }
     
+    
+    
+    private void createLinearModel() {  
+  
+        series1.setLabel("Pozostało");  
+  
+//        series1.set(1, 2);  
+//        series1.set(2, 1);  
+//        series1.set(3, 3);  
+//        series1.set(4, 6);  
+//        series1.set(5, 8);  
+  
+        
+  
+        linearModel.addSeries(series1);  
+        
+    }
+    
+    
+    
     public void assignConsultant()
     {
         ClientCaseDAO caseDao = new ClientCaseDAO();
@@ -428,13 +454,14 @@ public class CaseViewMB implements Serializable{
     
     
     public void generateSchedule() {
-
+createLinearModel();
         schedule = new ArrayList();
 
         if (selectedClientCase.getConsolidationValue() != null && selectedClientCase.getExpectedInstalment() != null
                 && selectedClientCase.getInterestRate() != null) {
             
             Double toPay = selectedClientCase.getConsolidationValue().doubleValue();
+            System.out.println("to pay: " +toPay);
             Double instalment = selectedClientCase.getExpectedInstalment().doubleValue();
             Double intrestRate = selectedClientCase.getInterestRate().doubleValue();
             calculatePayements(toPay, intrestRate, instalment);
@@ -498,11 +525,17 @@ public class CaseViewMB implements Serializable{
         
         //RATA STAŁA
         if(selectedClientCase.getInterestRateType()==0){
-            
+            int i=0;
             while(toPay>instalment){
+                
                 toPay-=instalment;
                 alreadyPayed+=instalment;
                 getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
+                //System.out.println("inst: "+toPay);
+                series1.set(i, toPay);
+                System.out.println("to pay:" + toPay);
+                i++;
+                //tutaj
                 cal.add(Calendar.MONTH, 1);
                 toPay*=(1+((0.01*intrestRate)/12));
             }
@@ -513,7 +546,7 @@ public class CaseViewMB implements Serializable{
             
         } else {
             double instalment2;
-            
+                int i=0;
              while(toPay>instalment){
                 
                 instalment2=toPay*((0.01*intrestRate)/12);
@@ -524,6 +557,8 @@ public class CaseViewMB implements Serializable{
                 alreadyPayed+=instalment2;
                 
                 getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
+                series1.set(i, toPay);
+                i++;
                 cal.add(Calendar.MONTH, 1);
                 toPay*=(1+((0.01*intrestRate)/12));
             }
@@ -549,4 +584,7 @@ public class CaseViewMB implements Serializable{
     public void setSelectedDocument(InstitutionDocuments selectedDocument) {
         this.selectedDocument = selectedDocument;
     }
+    public CartesianChartModel getLinearModel() {  
+        return linearModel;  
+    } 
 }
