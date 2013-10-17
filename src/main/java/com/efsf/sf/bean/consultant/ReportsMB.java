@@ -5,7 +5,6 @@ import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.SubscriptionType;
-import com.efsf.sf.util.NumberSpeaker;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -65,9 +64,11 @@ public class ReportsMB implements Serializable{
     
    public void generateReceipt() throws JRException, IOException
    {
-        Map<String, Object> params=new HashMap<String, Object>();
+        GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
+        Map<String, Object> params=new HashMap<>();
         params.put("Consultant", loginMB.getConsultant());
-        params.put("Address", getInvoiceAddress());
+        params.put("Address", new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant()));
+        params.put("Sub", dao.getById(1));
         export("receipt.jrxml", params, new JREmptyDataSource());
     }
     
