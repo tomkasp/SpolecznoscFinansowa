@@ -25,8 +25,10 @@ public class Subscription implements java.io.Serializable {
     private Integer idSubscription;
     private Consultant consultant;
     private SubscriptionType subscriptionType;
-    private Date dateFrom;
-    private Date dateTo;
+    private String sessionId; 
+    private Date expire;
+    private Date transactionDate;
+    private String errorCode; 
 
     public Subscription() {
     }
@@ -36,12 +38,6 @@ public class Subscription implements java.io.Serializable {
         this.subscriptionType = subscriptionType;
     }
 
-    public Subscription(Consultant consultant, SubscriptionType subscriptionType, Date dateFrom, Date dateTo) {
-        this.consultant = consultant;
-        this.subscriptionType = subscriptionType;
-        this.dateFrom = dateFrom;
-        this.dateTo = dateTo;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -77,22 +73,45 @@ public class Subscription implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "dateFrom", length = 10)
-    public Date getDateFrom() {
-        return this.dateFrom;
+    @Column(name = "expire", length = 10)
+    public Date getExpire() {
+        return expire;
     }
 
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
+    public void setExpire(Date expire) {
+        this.expire = expire;
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "dateTo", length = 10)
-    public Date getDateTo() {
-        return this.dateTo;
+    @Column(name = "transactionDate", length = 10)
+    public Date getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
     }
+
+    @Column(name = "sessionID", length = 45, unique=true, nullable = false)
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    @Column(name = "errorCode", length = 45)
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+
+
+
+
 }

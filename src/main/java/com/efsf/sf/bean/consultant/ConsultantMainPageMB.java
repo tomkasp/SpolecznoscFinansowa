@@ -295,7 +295,7 @@ public class ConsultantMainPageMB implements Serializable {
         SubscriptionDAO sdao = new SubscriptionDAO();
         Subscription s = sdao.loadFkConsultant(loginMB.getConsultant().getIdConsultant());
 
-        Date d1 = s.getDateTo();
+        Date d1 = s.getExpire();
         DateTime dataTime = new DateTime();
         DateTime dataTime2 = new DateTime(d1);
 

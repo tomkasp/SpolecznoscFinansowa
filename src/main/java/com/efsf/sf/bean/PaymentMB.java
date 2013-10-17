@@ -14,7 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -34,22 +36,36 @@ public class PaymentMB implements Serializable {
     private String pos_id = "145366";
     private String pos_auth_key = "BKnQU9G";
     private String key1 = "56df4fe519063a46419f38e4de5bd4f6";
-
     
-    public void createPayement(int subscriptionType) throws IOException{
-        GenericDao<Subscription> dao=new GenericDao(Subscription.class);
-        GenericDao<SubscriptionType> subTypeDao=new GenericDao(SubscriptionType.class);
-        
-        Subscription subs=new Subscription();
+    @ManagedProperty(value = "#{loginMB}")
+    private LoginMB loginMB;
+
+    public void createPayement(int subscriptionType) throws IOException {
+        GenericDao<Subscription> dao = new GenericDao(Subscription.class);
+        GenericDao<SubscriptionType> subTypeDao = new GenericDao(SubscriptionType.class);
+
+        Subscription subs = new Subscription();
         subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
-        subs.setDateFrom(new Date());
-        subs.setDateTo(null);
-        
+        subs.setSessionId("54354");
+        subs.setConsultant(loginMB.getConsultant());
         dao.save(subs);
         
-        FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+        
+        Map<String, Object> params = ctx.getRequestMap();
+        params.put("first_name", loginMB.getConsultant().getName());
+        params.put("last_name", loginMB.getConsultant().getLastName());
+        params.put("email", loginMB.getUser().getEmail());
+        params.put("pos_id", pos_id);
+        params.put("pos_auth_key", pos_auth_key);
+        params.put("session_id", String.valueOf(loginMB.getIdUser()));
+        params.put("amount", "10000");
+        params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
+        params.put("client_ip", "79.110.203.149");
+        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
+        
     }
-    
+
     //Send new Payment
     public void consultantPayment() throws IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
@@ -79,13 +95,13 @@ public class PaymentMB implements Serializable {
         System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
 
 
-        String content=getContentFromResponse(response.getEntity().getContent());
+        String content = getContentFromResponse(response.getEntity().getContent());
 
         HttpServletResponse myResponse =
                 (HttpServletResponse) FacesContext.getCurrentInstance()
                 .getExternalContext().getResponse();
 
-        ExternalContext context=(ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext context = (ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
         context.setResponseContentType("text/html");
         context.setRequestCharacterEncoding("UTF-8");
         context.getResponseOutputWriter().write(content);
@@ -133,5 +149,13 @@ public class PaymentMB implements Serializable {
         }
 
         return result.toString();
+    }
+
+    public LoginMB getLoginMB() {
+        return loginMB;
+    }
+
+    public void setLoginMB(LoginMB loginMB) {
+        this.loginMB = loginMB;
     }
 }
