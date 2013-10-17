@@ -531,11 +531,10 @@ createLinearModel();
                 toPay-=instalment;
                 alreadyPayed+=instalment;
                 getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
-                //System.out.println("inst: "+toPay);
-                series1.set(i, toPay);
-                System.out.println("to pay:" + toPay);
+                
+                series1.set(i, toPay);  
                 i++;
-                //tutaj
+                
                 cal.add(Calendar.MONTH, 1);
                 toPay*=(1+((0.01*intrestRate)/12));
             }
@@ -557,8 +556,10 @@ createLinearModel();
                 alreadyPayed+=instalment2;
                 
                 getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
+                
                 series1.set(i, toPay);
                 i++;
+                
                 cal.add(Calendar.MONTH, 1);
                 toPay*=(1+((0.01*intrestRate)/12));
             }
