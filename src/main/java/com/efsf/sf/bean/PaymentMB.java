@@ -36,16 +36,18 @@ public class PaymentMB implements Serializable {
     private String key1 = "56df4fe519063a46419f38e4de5bd4f6";
 
     
-    public void createPayement(){
+    public void createPayement(int subscriptionType) throws IOException{
         GenericDao<Subscription> dao=new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> subTypeDao=new GenericDao(SubscriptionType.class);
         
         Subscription subs=new Subscription();
-        subs.setSubscriptionType(subTypeDao.getById(1));
+        subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
         subs.setDateFrom(new Date());
         subs.setDateTo(null);
         
         dao.save(subs);
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
     }
     
     //Send new Payment

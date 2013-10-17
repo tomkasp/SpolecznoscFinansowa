@@ -15,34 +15,17 @@
 
             <ui:define name="content">
                 
-            <script>    
-                $("#payForm").submit(function(e) {
-                     var self = this;
-                     e.preventDefault();
-
-                       $.ajax({
-                            type: self.attr('method'),
-                            url: 'http://localhost:8084/SpolecznoscFinansowa/payment_new',
-                            data: self.serialize(),
-                            success: function (data) {
-                                self.submit();
-                            }
-                        });
-
-                     return false; 
-                });            
-                </script> 
                 <div class="contentBox">
 
                     <h4>Wybierz rozdzaj abonamentu</h4>    
-
+                    <p:commandButton action="#{paymentMB.createPayement(1)}" value="Test"/>
                     <form id="payForm" action="https://www.platnosci.pl/paygw/UTF/NewPayment">
-                        <input type="hidden" name="first_name" value="Adam"></input>
-                        <input type="hidden" name="last_name" value="Nowak"></input>
-                        <input type="hidden" name="email" value="adam.nowak7@o2.pl"></input>
+                        <input type="hidden" name="first_name" value="#{loginMB.consultant.name}"></input>
+                        <input type="hidden" name="last_name" value="#{loginMB.consultant.lastName}"></input>
+                        <input type="hidden" name="email" value="#{loginMB.user.email}"></input>
                         <input type="hidden" name="pos_id" value="145366"></input>
                         <input type="hidden" name="pos_auth_key" value="BKnQU9G"></input>
-                        <input type="hidden" name="session_id" value="6076347"></input>
+                        <input type="hidden" name="session_id" value="#{loginMB.user.idUser}"></input>
                         <input type="hidden" name="amount" value="10000"></input>
                         <input type="hidden" name="desc" value="Opłata za abonament SpolecznoscFinansowa.pl"></input>
                         <input type="hidden" name="client_ip" value="79.110.203.159"></input>                       
@@ -50,11 +33,7 @@
                     </form>
                 </div>
                 
-                <h:form>
-                    <p:commandButton value="Odczytaj status transakcji" action="#{paymentMB.consultantPayment()}"/>
-                    
-                    <p:commandButton value="Kup testowy abonament" action="#{paymentMB.consultantPayment()}"/>
-                </h:form>
+
             </ui:define>
 
 
