@@ -37,7 +37,7 @@ public class Api{
     return "<html> " + "<title>" + "Hello Jersey" + "</title>"
         + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
   }  
->>>>>>> branch 'master' of https://github.com/madejson/SpolecznoscFinansowa.git
+
     
     @GET
     @Path("/odp")
