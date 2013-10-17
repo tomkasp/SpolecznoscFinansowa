@@ -15,23 +15,7 @@
 
             <ui:define name="content">
                 
-            <script>    
-                $("#payForm").submit(function(e) {
-                     var self = this;
-                     e.preventDefault();
-
-                       $.ajax({
-                            type: self.attr('method'),
-                            url: 'http://localhost:8084/SpolecznoscFinansowa/payment_new',
-                            data: self.serialize(),
-                            success: function (data) {
-                                self.submit();
-                            }
-                        });
-
-                     return false; 
-                });            
-                </script> 
+ 
                 <div class="contentBox">
 
                     <h4>Wybierz rozdzaj abonamentu</h4>    
