@@ -42,8 +42,7 @@ public class PaymentMB implements Serializable {
         
         Subscription subs=new Subscription();
         subs.setSubscriptionType(subTypeDao.getById(1));
-        subs.setDateFrom(new Date());
-        subs.setDateTo(null);
+       
         
         dao.save(subs);
     }
