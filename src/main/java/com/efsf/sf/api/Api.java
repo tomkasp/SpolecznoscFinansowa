@@ -41,4 +41,7 @@ public class Api {
     public Response getOdpo() {
         return Response.status(200).entity("jakas tam informacja").build();
     }
+    
+    
+    
 }

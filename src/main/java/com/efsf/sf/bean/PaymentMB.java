@@ -1,5 +1,6 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.api.Api;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
@@ -68,7 +69,9 @@ public class PaymentMB implements Serializable {
         params.put("amount", "10000");
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
         params.put("client_ip", "79.110.203.149");
-        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
+        //ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
+        Api ap = new Api();
+        ap.getUsers();
         
     }
 
