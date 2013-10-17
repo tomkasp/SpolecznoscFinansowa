@@ -52,7 +52,7 @@ public class PaymentMB implements Serializable {
 
         Subscription subs = new Subscription();
         subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
-        subs.setSessionId("54354");
+        subs.setSessionId("5fddtre4354");
         subs.setConsultant(loginMB.getConsultant());
 
         dao.save(subs);
