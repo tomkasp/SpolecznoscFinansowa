@@ -6,9 +6,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/api")
+@Path("")
 public class Api{
     
+
+    @GET
+    @Path("/users")
+    public Response getUsers() {
+        return Response.status(200).entity("jest :D").build();
+        
+    }   
+
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello() {
@@ -29,5 +37,12 @@ public class Api{
     return "<html> " + "<title>" + "Hello Jersey" + "</title>"
         + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
   }  
+
     
+    @GET
+    @Path("/odp")
+    public Response getOdpo() {
+        return Response.status(200).entity("jakas tam informacja").build();
+        
+    }  
 }
