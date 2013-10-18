@@ -8,17 +8,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.glassfish.jersey.server.ResourceConfig;
 
 @Path("")
 public class Api {
 
-public class Api extends ResourceConfig {
-
-    public Api(){
-        packages("com.efsf.sf.api.Api");
-    }
-    
     private String key2 = "2580e6b83829012355145f2ce86b940c";
 
     @POST
@@ -42,6 +35,7 @@ public class Api extends ResourceConfig {
     @Path("/test")
     @Produces(MediaType.TEXT_PLAIN)
     public Response test() {
+        System.out.println("TEST");
         return Response.ok("TEST").build();
     }
 }
