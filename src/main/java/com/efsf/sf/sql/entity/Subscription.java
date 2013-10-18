@@ -26,10 +26,11 @@ public class Subscription implements java.io.Serializable {
     private Consultant consultant;
     private SubscriptionType subscriptionType;
     private String sessionId; 
+    private Integer status; 
     private Date expire;
     private Date transactionDate;
-    private String errorCode; 
-
+    private String errorCode;
+    
     public Subscription() {
     }
 
@@ -108,6 +109,15 @@ public class Subscription implements java.io.Serializable {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
+    }
+
+    @Column(name = "status")
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 
