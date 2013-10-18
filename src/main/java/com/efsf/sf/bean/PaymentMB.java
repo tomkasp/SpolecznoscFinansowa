@@ -85,52 +85,7 @@ public class PaymentMB implements Serializable {
         
     }
 
-    //Send new Payment
-//    public void consultantPayment() throws IOException {
-//        String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
-//
-//        HttpClient client = new DefaultHttpClient();
-//        HttpPost post = new HttpPost(url);
-//
-//        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-//        urlParameters.add(new BasicNameValuePair("first_name", "Adam"));
-//        urlParameters.add(new BasicNameValuePair("last_name", "Nowak"));
-//        urlParameters.add(new BasicNameValuePair("email", "adam.nowak7@o2.pl"));
-//        urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
-//        urlParameters.add(new BasicNameValuePair("pos_auth_key", pos_auth_key));
-//        urlParameters.add(new BasicNameValuePair("session_id", "12345"));
-//        urlParameters.add(new BasicNameValuePair("amount", "1000"));
-//        urlParameters.add(new BasicNameValuePair("desc", "Jakis opis"));
-//        urlParameters.add(new BasicNameValuePair("client_ip", "79.110.203.149"));
-//
-//
-//        post.setEntity(new UrlEncodedFormEntity(urlParameters));
-//
-//        HttpResponse response = client.execute(post);
-//        //printResponse(response.getEntity().getContent());
-//
-//        System.out.println("\nSending 'POST' request to URL : " + url);
-//        System.out.println("Post parameters : " + post.getEntity());
-//        System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
-//
-//
-//        String content = getContentFromResponse(response.getEntity().getContent());
-//
-//        HttpServletResponse myResponse =
-//                (HttpServletResponse) FacesContext.getCurrentInstance()
-//                .getExternalContext().getResponse();
-//
-//        ExternalContext context = (ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
-//        context.setResponseContentType("text/html");
-//        context.setRequestCharacterEncoding("UTF-8");
-//        context.getResponseOutputWriter().write(content);
-////        myResponse.setContentType("text/html");
-////        myResponse.setCharacterEncoding("UTF-8");
-////        myResponse.write(content);
-////        myResponse.getWriter().flush();
-//        FacesContext.getCurrentInstance().responseComplete();
-//
-//    }
+
 
     //Read Payment status
     public void readTransactionStatus(String session_id) throws IOException {
