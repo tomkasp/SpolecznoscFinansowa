@@ -17,8 +17,9 @@
 
                 <div class="contentBox">
 
-                    <h4>Wybierz rozdzaj abonamentu</h4>    
-                    <p:commandButton action="#{paymentMB.createPayement(1)}" value="Test"/>
+                    <h4>Wybierz rozdzaj abonamentu</h4>   
+                    <p:commandButton action="#{paymentMB.createPayement(1)}" value="Nowa płatność"/>
+                    <p:commandButton action="#{paymentMB.readTransactionStatus('6786347')}" value="Odczytaj status"/>
                     <form id="payForm" action="https://www.platnosci.pl/paygw/UTF/NewPayment">
                         <input type="hidden" name="first_name" value="#{loginMB.consultant.name}"></input>
                         <input type="hidden" name="last_name" value="#{loginMB.consultant.lastName}"></input>
