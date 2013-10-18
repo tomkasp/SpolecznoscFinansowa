@@ -27,7 +27,7 @@ public class Api {
             return Response.ok("OK").build();
         } else {
             System.out.println("========================> ERROR");
-            return Response.ok("ERROR").build();
+            return Response.ok("ERROR-kon").build();
         }
     }
 
