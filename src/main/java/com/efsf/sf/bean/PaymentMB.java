@@ -80,7 +80,7 @@ public class PaymentMB implements Serializable {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
-        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
         urlParameters.add(new BasicNameValuePair("session_id", session_id));
 
