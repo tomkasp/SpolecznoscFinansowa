@@ -35,6 +35,7 @@ public class Api {
     @Path("/test")
     @Produces(MediaType.TEXT_PLAIN)
     public Response test() {
+        System.out.println("TEST");
         return Response.ok("TEST").build();
     }
 }
