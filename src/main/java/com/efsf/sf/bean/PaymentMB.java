@@ -1,6 +1,5 @@
 package com.efsf.sf.bean;
 
-import com.efsf.sf.api.Api;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
@@ -22,7 +21,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -50,7 +48,6 @@ public class PaymentMB implements Serializable {
         subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
         subs.setSessionId(String.valueOf(System.currentTimeMillis()/1000));
         subs.setConsultant(loginMB.getConsultant());
-
         dao.save(subs);
         
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
@@ -66,9 +63,6 @@ public class PaymentMB implements Serializable {
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
         params.put("client_ip", "79.110.203.149");
 
-        //ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
-
-
         String paramStr="?";
         for (Map.Entry<String, String> entry : params.entrySet())
         {
@@ -76,12 +70,10 @@ public class PaymentMB implements Serializable {
         }
         
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
-
         
     }
 
-
-
+ 
     //Read Payment status
     public void readTransactionStatus(String session_id) throws IOException {
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
@@ -102,23 +94,27 @@ public class PaymentMB implements Serializable {
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
         HttpResponse response = client.execute(post);
-        System.out.println(getContentFromResponse(response.getEntity().getContent()));
+        System.out.println(getContentFromResponseAsMap(response.getEntity().getContent()));
     }
 
-    public String getContentFromResponse(InputStream is) throws IOException {
+    private Map<String, String> getContentFromResponseAsMap(InputStream is) throws IOException {
 
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(is));
 
+        Map<String, String> map=new HashMap<>();
+        
         StringBuffer result = new StringBuffer();
         String line = "";
         while ((line = rd.readLine()) != null) {
-            result.append(line);
+            int pos=line.indexOf(":");
+            map.put(line.substring(0, pos), line.substring(pos+1, line.length()));
         }
-
-        return result.toString();
+        
+        return map;
     }
 
+    
     public LoginMB getLoginMB() {
         return loginMB;
     }
