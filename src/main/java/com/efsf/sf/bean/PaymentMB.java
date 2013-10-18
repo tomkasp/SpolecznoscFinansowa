@@ -50,18 +50,30 @@ public class PaymentMB implements Serializable {
         subs.setConsultant(loginMB.getConsultant());
         dao.save(subs);
         
-        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+        String first_name=loginMB.getConsultant().getName();
+        String last_name=loginMB.getConsultant().getLastName();
+        String email=loginMB.getUser().getEmail();
+        String session_id=String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000));
+        String amount="10000";
+        String desc="Opłata za abonament SpolecznoscFinansowa.pl";
+        String client_ip="79.110.203.149";
+        String ts="tadasdas";
         
         Map<String, String> params = new HashMap<String, String>();
-        params.put("first_name", loginMB.getConsultant().getName());
-        params.put("last_name", loginMB.getConsultant().getLastName());
-        params.put("email", loginMB.getUser().getEmail());
         params.put("pos_id", pos_id);
+        params.put("session_id", session_id);        
         params.put("pos_auth_key", pos_auth_key);
-        params.put("session_id", String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000)));
-        params.put("amount", "10000");
-        params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
-        params.put("client_ip", "79.110.203.149");
+        params.put("amount", amount);
+        params.put("desc", desc);
+        params.put("first_name", first_name);
+        params.put("last_name", last_name);
+        params.put("email", email);
+        params.put("client_ip", client_ip);
+        params.put("ts", ts);
+        
+        String sig=Security.md5(pos_id + session_id + pos_auth_key + amount
+                +desc+first_name+last_name+email+client_ip+ts+key1);
+        params.put("sig", sig);
 
         String paramStr="?";
         for (Map.Entry<String, String> entry : params.entrySet())
@@ -69,6 +81,7 @@ public class PaymentMB implements Serializable {
             paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
         }
         
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
         
     }
