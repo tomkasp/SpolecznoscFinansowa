@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -46,95 +47,101 @@ public class PaymentMB implements Serializable {
 
         Subscription subs = new Subscription();
         subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
-        subs.setSessionId("54354");
+        subs.setSessionId(String.valueOf(System.currentTimeMillis()/1000));
         subs.setConsultant(loginMB.getConsultant());
         dao.save(subs);
         
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         
-        Map<String, Object> params = ctx.getRequestMap();
+        Map<String, String> params = new HashMap<String, String>();
         params.put("first_name", loginMB.getConsultant().getName());
         params.put("last_name", loginMB.getConsultant().getLastName());
         params.put("email", loginMB.getUser().getEmail());
         params.put("pos_id", pos_id);
         params.put("pos_auth_key", pos_auth_key);
-        params.put("session_id", String.valueOf(loginMB.getIdUser()));
+        params.put("session_id", String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000)));
         params.put("amount", "10000");
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
         params.put("client_ip", "79.110.203.149");
-        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment");
+
+        String paramStr="?";
+        for (Map.Entry<String, String> entry : params.entrySet())
+        {
+            paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
+        }
+        
+        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
         
     }
 
     //Send new Payment
-    public void consultantPayment() throws IOException {
-        String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
-
-        HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(url);
-
-        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("first_name", "Adam"));
-        urlParameters.add(new BasicNameValuePair("last_name", "Nowak"));
-        urlParameters.add(new BasicNameValuePair("email", "adam.nowak7@o2.pl"));
-        urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
-        urlParameters.add(new BasicNameValuePair("pos_auth_key", pos_auth_key));
-        urlParameters.add(new BasicNameValuePair("session_id", "12345"));
-        urlParameters.add(new BasicNameValuePair("amount", "1000"));
-        urlParameters.add(new BasicNameValuePair("desc", "Jakis opis"));
-        urlParameters.add(new BasicNameValuePair("client_ip", "79.110.203.149"));
-
-
-        post.setEntity(new UrlEncodedFormEntity(urlParameters));
-
-        HttpResponse response = client.execute(post);
-        //printResponse(response.getEntity().getContent());
-
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + post.getEntity());
-        System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
-
-
-        String content = getContentFromResponse(response.getEntity().getContent());
-
-        HttpServletResponse myResponse =
-                (HttpServletResponse) FacesContext.getCurrentInstance()
-                .getExternalContext().getResponse();
-
-        ExternalContext context = (ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
-        context.setResponseContentType("text/html");
-        context.setRequestCharacterEncoding("UTF-8");
-        context.getResponseOutputWriter().write(content);
-//        myResponse.setContentType("text/html");
-//        myResponse.setCharacterEncoding("UTF-8");
-//        myResponse.write(content);
-//        myResponse.getWriter().flush();
-        FacesContext.getCurrentInstance().responseComplete();
-
-    }
+//    public void consultantPayment() throws IOException {
+//        String url = "https://www.platnosci.pl/paygw/UTF/NewPayment";
+//
+//        HttpClient client = new DefaultHttpClient();
+//        HttpPost post = new HttpPost(url);
+//
+//        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+//        urlParameters.add(new BasicNameValuePair("first_name", "Adam"));
+//        urlParameters.add(new BasicNameValuePair("last_name", "Nowak"));
+//        urlParameters.add(new BasicNameValuePair("email", "adam.nowak7@o2.pl"));
+//        urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
+//        urlParameters.add(new BasicNameValuePair("pos_auth_key", pos_auth_key));
+//        urlParameters.add(new BasicNameValuePair("session_id", "12345"));
+//        urlParameters.add(new BasicNameValuePair("amount", "1000"));
+//        urlParameters.add(new BasicNameValuePair("desc", "Jakis opis"));
+//        urlParameters.add(new BasicNameValuePair("client_ip", "79.110.203.149"));
+//
+//
+//        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+//
+//        HttpResponse response = client.execute(post);
+//        //printResponse(response.getEntity().getContent());
+//
+//        System.out.println("\nSending 'POST' request to URL : " + url);
+//        System.out.println("Post parameters : " + post.getEntity());
+//        System.out.println("Response Code : " + response.getStatusLine().getStatusCode());
+//
+//
+//        String content = getContentFromResponse(response.getEntity().getContent());
+//
+//        HttpServletResponse myResponse =
+//                (HttpServletResponse) FacesContext.getCurrentInstance()
+//                .getExternalContext().getResponse();
+//
+//        ExternalContext context = (ExternalContext) FacesContext.getCurrentInstance().getExternalContext();
+//        context.setResponseContentType("text/html");
+//        context.setRequestCharacterEncoding("UTF-8");
+//        context.getResponseOutputWriter().write(content);
+////        myResponse.setContentType("text/html");
+////        myResponse.setCharacterEncoding("UTF-8");
+////        myResponse.write(content);
+////        myResponse.getWriter().flush();
+//        FacesContext.getCurrentInstance().responseComplete();
+//
+//    }
 
     //Read Payment status
-    public void readTransactionStatus(Integer session_id) throws IOException {
-        String url = "https://www.platnosci.pl/paygw/UTF/Payment/get";
+    public void readTransactionStatus(String session_id) throws IOException {
+        String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
         urlParameters.add(new BasicNameValuePair("pos_id", pos_id));
-        urlParameters.add(new BasicNameValuePair("session_id", session_id.toString()));
+        urlParameters.add(new BasicNameValuePair("session_id", session_id));
 
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String ts = dateFormat.format(new Date());
 
         urlParameters.add(new BasicNameValuePair("ts", ts));
 
-
         String sig = Security.md5(pos_id + session_id + ts + key1);
         urlParameters.add(new BasicNameValuePair("sig", sig));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
         HttpResponse response = client.execute(post);
-        //printResponse(response.getEntity().getContent());
+        System.out.println(getContentFromResponse(response.getEntity().getContent()));
     }
 
     public String getContentFromResponse(InputStream is) throws IOException {
