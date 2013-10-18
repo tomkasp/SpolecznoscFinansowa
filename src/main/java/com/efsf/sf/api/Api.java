@@ -2,14 +2,22 @@ package com.efsf.sf.api;
 
 import com.efsf.sf.util.Security;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.glassfish.jersey.server.ResourceConfig;
 
-public class Api {
+@Path("/api")
 
+public class Api extends ResourceConfig {
+
+    public Api(){
+        packages("com.efsf.sf.api.Api");
+    }
+    
     private String key2 = "2580e6b83829012355145f2ce86b940c";
 
     @POST
@@ -27,5 +35,13 @@ public class Api {
             System.out.println("========================> ERROR");
             return Response.ok("ERROR").build();
         }
+    }
+    
+    @GET
+    @Path("/paymentStatusChanged2")
+    @Produces(MediaType.TEXT_PLAIN)
+    public void sendEmail2()
+    {
+        System.out.println("TEST");
     }
 }
