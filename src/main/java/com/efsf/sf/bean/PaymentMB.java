@@ -42,11 +42,6 @@ public class PaymentMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
 
-    
-
-       
-        
-
     public void createPayement(int subscriptionType) throws IOException {
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> subTypeDao = new GenericDao(SubscriptionType.class);
