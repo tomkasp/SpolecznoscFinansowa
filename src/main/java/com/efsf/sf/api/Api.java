@@ -10,7 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.glassfish.jersey.server.ResourceConfig;
 
-@Path("/api")
+@Path("")
+public class Api {
 
 public class Api extends ResourceConfig {
 
@@ -26,8 +27,8 @@ public class Api extends ResourceConfig {
     public Response sendEmail(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) {
 
-        System.out.println(pos_id+" | "+session_id);
-        
+        System.out.println(pos_id + " | " + session_id);
+
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
             System.out.println("========================> OK");
             return Response.ok("OK").build();
@@ -36,12 +37,11 @@ public class Api extends ResourceConfig {
             return Response.ok("ERROR").build();
         }
     }
-    
+
     @GET
-    @Path("/paymentStatusChanged2")
+    @Path("/test")
     @Produces(MediaType.TEXT_PLAIN)
-    public void sendEmail2()
-    {
-        System.out.println("TEST");
+    public Response test() {
+        return Response.ok("TEST").build();
     }
 }
