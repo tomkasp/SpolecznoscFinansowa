@@ -7,6 +7,7 @@ import com.efsf.sf.sql.entity.SubscriptionType;
 import com.efsf.sf.util.Security;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,12 +31,16 @@ public class PaymentMB implements Serializable {
 
         String session_id=String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000));
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                
+        
+        GenericDao<SubscriptionType> typeDao=new GenericDao(SubscriptionType.class);
+        String amount = String.valueOf(typeDao.getById(subscriptionType).getPrice().multiply(new BigDecimal(100)).setScale(0));        
+        
+        
         Map<String, String> params = new HashMap<String, String>();
         params.put("pos_id", Api.pos_id);
         params.put("session_id", session_id);        
         params.put("pos_auth_key", Api.pos_auth_key);
-        params.put("amount", "10000");
+        params.put("amount", amount);
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
         params.put("first_name", loginMB.getConsultant().getName());
         params.put("last_name", loginMB.getConsultant().getLastName());
