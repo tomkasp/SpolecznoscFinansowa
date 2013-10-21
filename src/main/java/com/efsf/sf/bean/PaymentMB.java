@@ -26,7 +26,7 @@ public class PaymentMB implements Serializable {
 
     public void createPayement(int subscriptionType) throws IOException {
         
-        System.out.println("payment mb begin");
+        
         
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> subTypeDao = new GenericDao(SubscriptionType.class);
@@ -72,10 +72,9 @@ public class PaymentMB implements Serializable {
             paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
         }
         
-        System.out.println("payment mb end");
+       
         
         
-      //  savePayment(subscriptionType, session_id);
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
         
