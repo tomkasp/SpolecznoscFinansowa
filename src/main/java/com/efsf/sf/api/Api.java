@@ -90,8 +90,7 @@ public class Api {
 
     private Map<String, String> getContentFromResponseAsMap(InputStream is) throws IOException {
 
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(is));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
 
         Map<String, String> map = new HashMap<>();
 
