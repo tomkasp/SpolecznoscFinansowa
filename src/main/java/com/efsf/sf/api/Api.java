@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -39,12 +40,20 @@ public class Api {
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
 
+    @GET
+    @Path("/test")
+    public Response test(){
+        System.out.println("test");
+        
+        return Response.ok("test").build();
+    }
+    
     @POST
     @Path("/paymentStatusChanged")
     @Produces(MediaType.TEXT_PLAIN)
     public Response paymentStatusChanged(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) throws IOException {
-
+        System.out.println("payment status changed ");
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
@@ -60,6 +69,7 @@ public class Api {
     }
 
     private void readTransactionStatus(String session_id) throws IOException {
+        System.out.println("read transaction status");
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -82,7 +92,7 @@ public class Api {
         
         Map<String, String> receivedData = getContentFromResponseAsMap(response.getEntity().getContent());
         if (checkSigInTransactionStatusMessage(receivedData)) {
-            updatePayment(receivedData);
+           // updatePayment(receivedData);
         }
     }
 
