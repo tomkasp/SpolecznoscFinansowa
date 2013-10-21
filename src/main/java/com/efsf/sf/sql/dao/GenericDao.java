@@ -1,6 +1,7 @@
 package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.classic.Session;
 
@@ -20,7 +21,7 @@ public class GenericDao<T> {
         return this.type.getName();
     }
 
-    public T getById(int id) {
+    public T getById(Serializable id) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         T obj;
         try {

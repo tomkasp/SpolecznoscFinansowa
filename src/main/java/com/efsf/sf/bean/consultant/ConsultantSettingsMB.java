@@ -56,7 +56,7 @@ public class ConsultantSettingsMB implements Serializable {
     private Address invoiceAddress = new Address();
     private InvoiceData invoiceData = new InvoiceData();
     
-    private Integer idSubscriptionType;
+    private String idSubscriptionType;
     private Subscription subscription;
     
     private String currentPassword;
@@ -126,7 +126,7 @@ public class ConsultantSettingsMB implements Serializable {
             //ZAWSZE ZWRACA OSTATNI ABONAMENT
             if(!it4.hasNext())
             {
-                idSubscriptionType=s.getIdSubscription();
+                idSubscriptionType=s.getSessionId();
                 subscription=s;
             }
         }   
@@ -388,11 +388,11 @@ public class ConsultantSettingsMB implements Serializable {
         this.invoiceData = invoiceData;
     }
 
-    public Integer getIdSubscriptionType() {
+    public String getIdSubscriptionType() {
         return idSubscriptionType;
     }
 
-    public void setIdSubscriptionType(Integer idSubscriptionType) {
+    public void setIdSubscriptionType(String idSubscriptionType) {
         this.idSubscriptionType = idSubscriptionType;
     }
 
