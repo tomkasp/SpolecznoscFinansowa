@@ -5,8 +5,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +20,6 @@ import org.hibernate.annotations.ForeignKey;
 @Table(name = "subscription")
 public class Subscription implements java.io.Serializable {
 
-    private Integer idSubscription;
     private Consultant consultant;
     private SubscriptionType subscriptionType;
     private String sessionId; 
@@ -37,18 +34,6 @@ public class Subscription implements java.io.Serializable {
     public Subscription(Consultant consultant, SubscriptionType subscriptionType) {
         this.consultant = consultant;
         this.subscriptionType = subscriptionType;
-    }
-
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_subscription", unique = true, nullable = false)
-    public Integer getIdSubscription() {
-        return this.idSubscription;
-    }
-
-    public void setIdSubscription(Integer idSubscription) {
-        this.idSubscription = idSubscription;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -93,6 +78,7 @@ public class Subscription implements java.io.Serializable {
         this.transactionDate = transactionDate;
     }
 
+    @Id
     @Column(name = "sessionID", length = 45, unique=true, nullable = false)
     public String getSessionId() {
         return sessionId;
@@ -119,9 +105,6 @@ public class Subscription implements java.io.Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-
-
 
 
 }
