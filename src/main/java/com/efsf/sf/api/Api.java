@@ -120,8 +120,7 @@ public class Api {
                 + key2);
 
         log.log(Level.INFO, "Received Message from PAYU with trans data: " + receivedData.get("trans_session_id") + " SIG "
-                +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR")
-                );
+                +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR"));
         
         return sig2.equals(receivedData.get("trans_sig"));
     }
