@@ -40,20 +40,12 @@ public class Api {
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
 
-    @GET
-    @Path("/test")
-    public Response test(){
-        System.out.println("test");
-        
-        return Response.ok("test").build();
-    }
     
     @POST
     @Path("/paymentStatusChanged")
     @Produces(MediaType.TEXT_PLAIN)
     public Response paymentStatusChanged(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) throws IOException {
-        System.out.println("payment status changed ");
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
@@ -69,7 +61,7 @@ public class Api {
     }
 
     private void readTransactionStatus(String session_id) throws IOException {
-        System.out.println("read transaction status");
+        
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -92,7 +84,7 @@ public class Api {
         
         Map<String, String> receivedData = getContentFromResponseAsMap(response.getEntity().getContent());
         if (checkSigInTransactionStatusMessage(receivedData)) {
-           // updatePayment(receivedData);
+            updatePayment(receivedData);
         }
     }
 
@@ -107,7 +99,7 @@ public class Api {
         String line = "";
         while ((line = rd.readLine()) != null) {
             int pos = line.indexOf(":");
-            map.put(line.substring(0, pos), line.substring(pos + 1, line.length()));
+            map.put(line.substring(0, pos), line.substring(pos + 1, line.length()).trim());
         }
 
         return map;
@@ -124,14 +116,20 @@ public class Api {
     }
 
     private boolean checkSigInTransactionStatusMessage(Map<String, String> receivedData) {
-        String sig2 = Security.md5(receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
+        
+        for (Map.Entry entry : receivedData.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue() );
+        }
+        
+        String value=receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
                 + receivedData.get("trans_order_id") + receivedData.get("trans_status")
                 + receivedData.get("trans_amount") + receivedData.get("trans_desc") + receivedData.get("trans_ts")
-                + key2);
-
+                + key2;
+        
+        String sig2 = Security.md5(value);
+        System.out.println("SIG2: "+ value);
         log.log(Level.INFO, "Received Message from PAYU with trans data: " + receivedData.get("trans_session_id") + " SIG "
-                +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR")
-                );
+                +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR"));
         
         return sig2.equals(receivedData.get("trans_sig"));
     }
