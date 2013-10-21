@@ -7,6 +7,7 @@ import com.efsf.sf.sql.entity.SubscriptionType;
 import com.efsf.sf.util.Security;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,31 +26,25 @@ public class PaymentMB implements Serializable {
     private LoginMB loginMB;
 
     public void createPayement(int subscriptionType) throws IOException {
-        
-        
-        
+                
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> subTypeDao = new GenericDao(SubscriptionType.class);
-
         
         String first_name=loginMB.getConsultant().getName();
         String last_name=loginMB.getConsultant().getLastName();
         String email=loginMB.getUser().getEmail();
         String session_id=String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000));
-        String amount="10000";
+        String amount = String.valueOf(subTypeDao.getById(subscriptionType).getPrice().multiply(new BigDecimal(100)).setScale(0));
         String desc="Opłata za abonament SpolecznoscFinansowa.pl";
         String client_ip="79.110.203.149";
         String ts="tadasdas";
-        
-        
+                
         Subscription subs = new Subscription();
         subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
         subs.setSessionId(session_id);
         subs.setConsultant(loginMB.getConsultant());
         dao.save(subs);
-        
-        
-        
+           
         Map<String, String> params = new HashMap<String, String>();
         params.put("pos_id", Api.pos_id);
         params.put("session_id", session_id);        
@@ -71,10 +66,7 @@ public class PaymentMB implements Serializable {
         {
             paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
         }
-        
-       
-        
-        
+                   
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
         
