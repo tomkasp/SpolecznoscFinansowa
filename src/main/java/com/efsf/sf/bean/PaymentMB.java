@@ -25,14 +25,12 @@ public class PaymentMB implements Serializable {
     private LoginMB loginMB;
 
     public void createPayement(int subscriptionType) throws IOException {
+        
+        System.out.println("payment mb begin");
+        
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> subTypeDao = new GenericDao(SubscriptionType.class);
 
-        Subscription subs = new Subscription();
-        subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
-        subs.setSessionId(String.valueOf(System.currentTimeMillis()/1000));
-        subs.setConsultant(loginMB.getConsultant());
-        dao.save(subs);
         
         String first_name=loginMB.getConsultant().getName();
         String last_name=loginMB.getConsultant().getLastName();
@@ -42,6 +40,15 @@ public class PaymentMB implements Serializable {
         String desc="Opłata za abonament SpolecznoscFinansowa.pl";
         String client_ip="79.110.203.149";
         String ts="tadasdas";
+        
+        
+        Subscription subs = new Subscription();
+        subs.setSubscriptionType(subTypeDao.getById(subscriptionType));
+        subs.setSessionId(session_id);
+        subs.setConsultant(loginMB.getConsultant());
+        dao.save(subs);
+        
+        
         
         Map<String, String> params = new HashMap<String, String>();
         params.put("pos_id", Api.pos_id);
@@ -65,7 +72,10 @@ public class PaymentMB implements Serializable {
             paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
         }
         
-        savePayment(subscriptionType, session_id);
+        System.out.println("payment mb end");
+        
+        
+      //  savePayment(subscriptionType, session_id);
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
         
