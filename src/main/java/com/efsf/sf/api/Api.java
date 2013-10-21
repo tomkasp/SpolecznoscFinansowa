@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -46,15 +45,15 @@ public class Api {
     @Produces(MediaType.TEXT_PLAIN)
     public Response paymentStatusChanged(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) throws IOException {
+        
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
-
+            
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
-
             readTransactionStatus(session_id);
             return Response.ok("OK").build();
-
+            
         } else {
-
+            
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG ERROR");
             return Response.ok("ERROR").build();
         }
@@ -89,9 +88,8 @@ public class Api {
     }
 
     private Map<String, String> getContentFromResponseAsMap(InputStream is) throws IOException {
-
+        
         BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
         Map<String, String> map = new HashMap<>();
 
         StringBuffer result = new StringBuffer();
@@ -109,24 +107,18 @@ public class Api {
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         Subscription subs = dao.getById(params.get("trans_session_id"));
         subs.setStatus(Integer.valueOf(params.get("trans_status")));
+        subs.setTransactionDate(new Date());
         dao.update(subs);
         
         log.log(Level.INFO, "Payement Status Updated in Database: " + params.get("trans_session_id"));
     }
 
+    
     private boolean checkSigInTransactionStatusMessage(Map<String, String> receivedData) {
-        
-        for (Map.Entry entry : receivedData.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() );
-        }
-        
-        String value=receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
-                + receivedData.get("trans_order_id") + receivedData.get("trans_status")
-                + receivedData.get("trans_amount") + receivedData.get("trans_desc") + receivedData.get("trans_ts")
-                + key2;
-        
-        String sig2 = Security.md5(value);
-        System.out.println("SIG2: "+ value);
+        String sig2=Security.md5(receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
+                + receivedData.get("trans_order_id") + receivedData.get("trans_status") + receivedData.get("trans_amount") 
+                + receivedData.get("trans_desc") + receivedData.get("trans_ts") + key2);
+
         log.log(Level.INFO, "Received Message from PAYU with trans data: " + receivedData.get("trans_session_id") + " SIG "
                 +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR"));
         
