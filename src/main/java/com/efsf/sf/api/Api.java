@@ -39,27 +39,28 @@ public class Api {
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
 
+    
     @POST
     @Path("/paymentStatusChanged")
     @Produces(MediaType.TEXT_PLAIN)
     public Response paymentStatusChanged(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) throws IOException {
-
+        
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
-
+            
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
-
             readTransactionStatus(session_id);
             return Response.ok("OK").build();
-
+            
         } else {
-
+            
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG ERROR");
             return Response.ok("ERROR").build();
         }
     }
 
     private void readTransactionStatus(String session_id) throws IOException {
+        
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -87,17 +88,15 @@ public class Api {
     }
 
     private Map<String, String> getContentFromResponseAsMap(InputStream is) throws IOException {
-
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(is));
-
+        
+        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
         Map<String, String> map = new HashMap<>();
 
         StringBuffer result = new StringBuffer();
         String line = "";
         while ((line = rd.readLine()) != null) {
             int pos = line.indexOf(":");
-            map.put(line.substring(0, pos), line.substring(pos + 1, line.length()));
+            map.put(line.substring(0, pos), line.substring(pos + 1, line.length()).trim());
         }
 
         return map;
@@ -108,16 +107,17 @@ public class Api {
         GenericDao<Subscription> dao = new GenericDao(Subscription.class);
         Subscription subs = dao.getById(params.get("trans_session_id"));
         subs.setStatus(Integer.valueOf(params.get("trans_status")));
+        subs.setTransactionDate(new Date());
         dao.update(subs);
         
         log.log(Level.INFO, "Payement Status Updated in Database: " + params.get("trans_session_id"));
     }
 
+    
     private boolean checkSigInTransactionStatusMessage(Map<String, String> receivedData) {
-        String sig2 = Security.md5(receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
-                + receivedData.get("trans_order_id") + receivedData.get("trans_status")
-                + receivedData.get("trans_amount") + receivedData.get("trans_desc") + receivedData.get("trans_ts")
-                + key2);
+        String sig2=Security.md5(receivedData.get("trans_pos_id") + receivedData.get("trans_session_id")
+                + receivedData.get("trans_order_id") + receivedData.get("trans_status") + receivedData.get("trans_amount") 
+                + receivedData.get("trans_desc") + receivedData.get("trans_ts") + key2);
 
         log.log(Level.INFO, "Received Message from PAYU with trans data: " + receivedData.get("trans_session_id") + " SIG "
                 +(sig2.equals(receivedData.get("trans_sig"))?"OK":"ERROR"));
