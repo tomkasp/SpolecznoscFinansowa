@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -39,6 +41,30 @@ public class Api {
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
 
+    
+    public static void createPayment(Map<String, String> params) throws IOException{
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        params.put("ts", dateFormat.format(new Date()));
+        params.put("client_ip", "79.110.203.149");
+        params.put("pos_id", pos_id);
+        params.put("pos_auth_key", pos_auth_key);
+        
+        String sig=Security.md5(pos_id + params.get("session_id") + pos_auth_key 
+            + params.get("amount") + params.get("desc")+ params.get("first_name") + params.get("last_name") 
+            + params.get("email")+ params.get("client_ip")+ params.get("ts")+ key1);
+        params.put("sig", sig);
+
+        String paramStr="?";
+        for (Map.Entry<String, String> entry : params.entrySet())
+        {
+            paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
+        }
+                
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
+    } 
+    
     
     @POST
     @Path("/paymentStatusChanged")
