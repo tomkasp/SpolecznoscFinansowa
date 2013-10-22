@@ -30,7 +30,7 @@ public class PaymentMB implements Serializable{
         GenericDao<SubscriptionType> typeDao=new GenericDao(SubscriptionType.class);
         String amount = String.valueOf(typeDao.getById(subscriptionType).getPrice().multiply(new BigDecimal(100)).setScale(0));        
                 
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("session_id", session_id);        
         params.put("amount", amount);
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
