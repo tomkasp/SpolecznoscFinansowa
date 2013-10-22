@@ -60,15 +60,12 @@ public class Api {
         for (Map.Entry<String, String> entry : params.entrySet())
         {
             paramStr+=entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8") +"&";
-            System.out.println(entry.getValue() + " ");
+            //System.out.println(entry.getValue() + " ");
         }
-        
-        
-        System.out.println("PARAMSTR: " + paramStr);       
-        
+ 
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
-        ctx.setResponseCharacterEncoding("utf-8");
-        ctx.setRequestCharacterEncoding("utf-8");
+//        ctx.setResponseCharacterEncoding("utf-8");
+//        ctx.setRequestCharacterEncoding("utf-8");
         ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment" + paramStr.substring(0, paramStr.length() - 1));
         //  ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+URLEncoder.encode(paramStr.substring(0, paramStr.length()-1),"utf-8"));
     } 
