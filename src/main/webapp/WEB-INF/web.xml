@@ -48,6 +48,11 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     
+    <servlet-name>PayU Initializer</servlet-name>
+       <servlet-class>org.jboss.seam.servlet.SeamResourceServlet</servlet-class>
+       <load-on-startup>1</load-on-startup>
+    </servlet>
+    
     
     <!-- Auto scan REST service -->
     <context-param>

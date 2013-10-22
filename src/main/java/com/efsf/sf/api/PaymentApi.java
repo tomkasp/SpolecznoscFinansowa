@@ -39,13 +39,9 @@ public class PaymentApi {
     public static String pos_auth_key = "BKnQU9G";
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
-    private final Class<? extends PaymentGateway> type;
+    private static PaymentListener listener;
 
-    public PaymentApi(Class<? extends PaymentGateway> type) {
-        this.type = type;
-    }
-
-    public void createPayment(Map<String, String> params) throws IOException {
+    public static void createPayment(Map<String, String> params) throws IOException {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         params.put("ts", dateFormat.format(new Date()));
@@ -88,7 +84,7 @@ public class PaymentApi {
         }
     }
 
-    private void readTransactionStatus(String session_id) throws IOException, InstantiationException, IllegalAccessException {
+    private void readTransactionStatus(String session_id) throws IOException{
 
         String url = "https://www.platnosci.pl/paygw/UTF/Payment/get/txt";
         HttpClient client = new DefaultHttpClient();
@@ -111,10 +107,8 @@ public class PaymentApi {
         log.log(Level.INFO, "Send Message to PAYU status question: " + session_id);
 
         Map<String, String> receivedData = getContentFromResponseAsMap(response.getEntity().getContent());
-        if (checkSigInTransactionStatusMessage(receivedData)) {
-
-            PaymentGateway gateway = (PaymentGateway) type.newInstance();
-            gateway.afterPayment(receivedData);
+        if (checkSigInTransactionStatusMessage(receivedData) && listener!=null) {
+                listener.afterPayment(receivedData); 
         }
     }
 
@@ -142,6 +136,10 @@ public class PaymentApi {
                 + (sig2.equals(receivedData.get("trans_sig")) ? "OK" : "ERROR"));
 
         return sig2.equals(receivedData.get("trans_sig"));
+    }
+    
+    public static void setListener(PaymentListener myListener){
+        listener=myListener;
     }
 
 }
