@@ -39,9 +39,9 @@ public class PaymentMB implements Serializable{
         params.put("email", loginMB.getUser().getEmail());
 
         
-        for(Map.Entry entry : params.entrySet()){
-            System.out.println("W MB:" + entry.getValue());
-        }
+//        for(Map.Entry entry : params.entrySet()){
+//            System.out.println("W MB:" + entry.getValue());
+//        }
         savePayment(subscriptionType, session_id);
         
         PaymentApi.createPayment(params);
