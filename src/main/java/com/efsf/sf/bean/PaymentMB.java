@@ -1,6 +1,5 @@
 package com.efsf.sf.bean;
 
-import com.efsf.sf.api.Api;
 import com.efsf.sf.api.PaymentApi;
 import com.efsf.sf.api.PaymentGateway;
 import com.efsf.sf.sql.dao.GenericDao;
