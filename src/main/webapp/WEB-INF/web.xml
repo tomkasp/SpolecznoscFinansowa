@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<!--    <security-constraint>
+    <!--    <security-constraint>
         <web-resource-collection>
             <web-resource-name>SUCTR</web-resource-name>
             <url-pattern>/*</url-pattern>      
@@ -47,10 +47,11 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-    
-    <servlet-name>PayU Initializer</servlet-name>
-       <servlet-class>org.jboss.seam.servlet.SeamResourceServlet</servlet-class>
-       <load-on-startup>1</load-on-startup>
+   
+    <servlet>
+        <servlet-name>PayU Initializer</servlet-name>
+        <servlet-class>com.efsf.sf.servlet.PayUInitializer</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     
     
@@ -89,7 +90,7 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-<!--    <error-page>
+    <!--    <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error.xhtml</location>
     </error-page>
