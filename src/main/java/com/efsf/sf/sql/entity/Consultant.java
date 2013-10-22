@@ -1,6 +1,7 @@
 package com.efsf.sf.sql.entity;
 // Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.ForeignKey;
 
@@ -37,6 +40,7 @@ public class Consultant implements java.io.Serializable {
     private String nip;
     private String regon;
     private String expirience;
+    private Date expireDate;
     private Set<ConsultantRating> consultantRatings = new HashSet<ConsultantRating>(0);
     private Set<Institution> institutions = new HashSet<Institution>(0);
     private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
@@ -246,5 +250,15 @@ public class Consultant implements java.io.Serializable {
 
     public void setInvoice(boolean invoice) {
         this.invoice = invoice;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "expireDate", length = 10)
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
     }
 }
