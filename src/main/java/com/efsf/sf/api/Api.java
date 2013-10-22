@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,11 +59,18 @@ public class Api {
         String paramStr="?";
         for (Map.Entry<String, String> entry : params.entrySet())
         {
-            paramStr+=entry.getKey() + "=" + entry.getValue()+"&";
+            paramStr+=entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), "UTF-8") +"&";
+            System.out.println(entry.getValue() + " ");
         }
-                
+        
+        
+        System.out.println("PARAMSTR: " + paramStr);       
+        
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
-        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+paramStr.substring(0, paramStr.length()-1));
+        ctx.setResponseCharacterEncoding("utf-8");
+        ctx.setRequestCharacterEncoding("utf-8");
+        ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment" + paramStr.substring(0, paramStr.length() - 1));
+        //  ctx.redirect("https://www.platnosci.pl/paygw/UTF/NewPayment"+URLEncoder.encode(paramStr.substring(0, paramStr.length()-1),"utf-8"));
     } 
     
     
