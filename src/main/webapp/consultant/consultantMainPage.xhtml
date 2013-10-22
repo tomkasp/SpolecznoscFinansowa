@@ -95,10 +95,10 @@
                     </div>
 
                     <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
-                    <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
+                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
+                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
@@ -258,7 +258,7 @@
                     <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
                     <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
 
-                    <p:commandButton  disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
 
@@ -336,7 +336,7 @@
                         </p:dataTable>
                     </div>
 
-                    <p:commandButton id="detailsOwnedButton" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
+                    <p:commandButton id="detailsOwnedButton" rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
 
 
                     <div class="marginT50">

@@ -8,6 +8,7 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -344,5 +345,9 @@ public class LoginMB implements Serializable {
 
     public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
+    }
+    
+    public boolean subscriptionActive(){
+        return getConsultant().getExpireDate().after(new Date());
     }
 }
