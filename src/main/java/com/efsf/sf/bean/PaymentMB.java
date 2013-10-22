@@ -1,5 +1,6 @@
 package com.efsf.sf.bean;
 
+import com.efsf.sf.api.Api;
 import com.efsf.sf.api.PaymentApi;
 import com.efsf.sf.api.PaymentGateway;
 import com.efsf.sf.sql.dao.GenericDao;
@@ -7,12 +8,14 @@ import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+
 
 @ManagedBean
 @ViewScoped
@@ -25,15 +28,22 @@ public class PaymentMB implements Serializable, PaymentGateway{
     public void createPayement(int subscriptionType) throws IOException {
 
         String session_id=String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000));
-                   
+
+        GenericDao<SubscriptionType> typeDao=new GenericDao(SubscriptionType.class);
+        String amount = String.valueOf(typeDao.getById(subscriptionType).getPrice().multiply(new BigDecimal(100)).setScale(0));        
+                
         Map<String, String> params = new HashMap<String, String>();
         params.put("session_id", session_id);        
-        params.put("amount", "10000");
+        params.put("amount", amount);
         params.put("desc", "Opłata za abonament SpolecznoscFinansowa.pl");
         params.put("first_name", loginMB.getConsultant().getName());
         params.put("last_name", loginMB.getConsultant().getLastName());
         params.put("email", loginMB.getUser().getEmail());
 
+        
+        for(Map.Entry entry : params.entrySet()){
+            System.out.println("W MB:" + entry.getValue());
+        }
         savePayment(subscriptionType, session_id);
         
         PaymentApi api=new PaymentApi(PaymentMB.class);
