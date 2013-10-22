@@ -1,7 +1,6 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.api.PaymentApi;
-import com.efsf.sf.api.PaymentGateway;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
@@ -18,7 +17,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class PaymentMB implements Serializable, PaymentGateway{
+public class PaymentMB implements Serializable{
 
 
     @ManagedProperty(value = "#{loginMB}")
@@ -45,8 +44,7 @@ public class PaymentMB implements Serializable, PaymentGateway{
         }
         savePayment(subscriptionType, session_id);
         
-        PaymentApi api=new PaymentApi(PaymentMB.class);
-        api.createPayment(params);
+        PaymentApi.createPayment(params);
     }
 
     private void savePayment(Integer subscriptionType, String sessionId){
@@ -61,18 +59,6 @@ public class PaymentMB implements Serializable, PaymentGateway{
         subs.setStatus(0);
         
         dao.save(subs);
-    }
-    
-     public void afterPayment(Map<String, String> params) {
-        
-        System.out.println("Wykonuje się :D" );   
-            
-        GenericDao<Subscription> dao = new GenericDao(Subscription.class);
-        Subscription subs = dao.getById(params.get("trans_session_id"));
-        subs.setStatus(Integer.valueOf(params.get("trans_status")));
-        subs.setTransactionDate(new Date());
-        dao.update(subs);
-
     }
     
     public LoginMB getLoginMB() {
