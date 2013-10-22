@@ -38,6 +38,10 @@ public class PaymentMB implements Serializable {
         params.put("last_name", loginMB.getConsultant().getLastName());
         params.put("email", loginMB.getUser().getEmail());
 
+        
+        for(Map.Entry entry : params.entrySet()){
+            System.out.println("W MB:" + entry.getValue());
+        }
         savePayment(subscriptionType, session_id);
         Api.createPayment(params);
     }
