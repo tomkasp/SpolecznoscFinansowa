@@ -39,14 +39,18 @@ public class PaymentApi {
     public static String pos_auth_key = "BKnQU9G";
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
-    private final Class<? extends PaymentGateway> type;
+    private Class<? extends PaymentGateway> type;
 
+    
+    public PaymentApi(){
+        type=null;
+    }
+    
     public PaymentApi(Class<? extends PaymentGateway> type) {
         this.type = type;
     }
 
     public void createPayment(Map<String, String> params) throws IOException {
-
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         params.put("ts", dateFormat.format(new Date()));
         params.put("client_ip", "79.110.203.149");
@@ -112,9 +116,13 @@ public class PaymentApi {
 
         Map<String, String> receivedData = getContentFromResponseAsMap(response.getEntity().getContent());
         if (checkSigInTransactionStatusMessage(receivedData)) {
-
+            System.out.println("costam 1 ");
+            if(type!=null){
             PaymentGateway gateway = (PaymentGateway) type.newInstance();
+            System.out.println("costam 2 ");
             gateway.afterPayment(receivedData);
+            System.out.println("costam 3 ");
+            }
         }
     }
 
