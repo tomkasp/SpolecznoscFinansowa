@@ -34,11 +34,12 @@ import org.apache.http.message.BasicNameValuePair;
 @Path("")
 public class PaymentApi {
 
-    private Logger log = Logger.getLogger("");
     public static String pos_id = "145366";
     public static String pos_auth_key = "BKnQU9G";
     public static String key1 = "56df4fe519063a46419f38e4de5bd4f6";
     public static String key2 = "2580e6b83829012355145f2ce86b940c";
+    
+    private Logger log = Logger.getLogger("");
     private static PaymentListener listener;
 
     public static void createPayment(Map<String, String> params) throws IOException {
