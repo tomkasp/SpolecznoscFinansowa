@@ -97,7 +97,7 @@ public class PaymentMB implements Serializable{
         c.add(Calendar.DATE, sub.getSubscriptionType().getLength());
         Consultant con = (Consultant)sub.getConsultant();
         con.setExpireDate(c.getTime());
-        
+        con.setAccountType(sub.getSubscriptionType().getIdSubscriptionType());
         ConsultantDAO conDao = new ConsultantDAO();
         conDao.update(con);
     }
