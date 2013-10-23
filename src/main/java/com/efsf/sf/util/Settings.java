@@ -29,14 +29,22 @@ public class Settings
     public static final String FTP_USER = "sf_ftp";
     public static final String FTP_PASS = "sf_ftp123";
     public static final String FTP_PATH="SF/USERS/";
-    
-    
+   
     // PRODUCT TYPES 
     public static final Integer CHWILOWKA = 2;
-       
-        
-    // CASE STATUSES 
     
+    // SUBSCRIPTION TYPE
+    public static final Integer FREE = 0;
+    public static final Integer STANDARD = 1;
+    public static final Integer STANDARD_PLUS = 2;
+    public static final Integer PREMIUM = 3; 
+    
+    // SUBSCRIPTION LIMITS 
+    public static final Integer MAX_CASES_DISPLAYED = 100;
+    public static final Integer MAX_APPLIES_STANDARD = 10;
+    public static final Integer MAX_APPLIES_STANDARD_PLUS = 25;
+    
+    // CASE STATUSES  
     public static final Integer PRODUCT_ASSIGNED = 3; 
     
     //EL FIELDS 
@@ -50,23 +58,23 @@ public class Settings
     private Integer clientActive = CLIENT_ACTIVE;
     private Integer clientInactive = CLIENT_INACTIVE;
     private Integer loggedOut = LOGGED_OUT;
+    private Integer standard = STANDARD;
+    private Integer standardPlus = STANDARD_PLUS;
+    private Integer premium = PREMIUM;
+    private Integer free = FREE;
 
 
     public Integer getAdminUnverified() {
         return adminUnverified;
     }
 
-
-
     public Integer getAdminActive() {
         return adminActive;
     }
 
-
     public Integer getAdminInactive() {
         return adminInactive;
     }
-
 
     public Integer getConsultantUnverified() {
         return consultantUnverified;
@@ -100,6 +108,22 @@ public class Settings
 
     public Integer getLoggedOut() {
         return loggedOut;
+    }
+
+    public Integer getStandard() {
+        return standard;
+    }
+
+    public Integer getStandardPlus() {
+        return standardPlus;
+    }
+
+    public Integer getPremium() {
+        return premium;
+    }
+
+    public Integer getFree() {
+        return free;
     }
 
             
