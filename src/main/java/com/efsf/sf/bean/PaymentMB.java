@@ -77,10 +77,7 @@ public class PaymentMB implements Serializable{
     public void extendSubscription(String sessionId){
        //run dao, wez 
         SubscriptionDAO subDao = new SubscriptionDAO();
-        Subscription sub = subDao.getSubscriptionDetails(sessionId);
-        System.out.println("imieeeeeeeeeeeeeeee"+ sub.getConsultant().getName());
-        
-        System.out.println("expire Date consultant:" + sub.getConsultant().getExpireDate());
+        Subscription sub = subDao.getSubscriptionDetails(sessionId);  
         
         Calendar c = Calendar.getInstance();
         if(sub.getConsultant().getExpireDate() == null){
@@ -90,11 +87,9 @@ public class PaymentMB implements Serializable{
         else{
             //jesli ma date
             if(sub.getConsultant().getExpireDate().after(new Date())){
-                
                 c.setTime(sub.getConsultant().getExpireDate());
             }
             else{
-                
                 c.setTime(new Date());
             }
         }
@@ -106,7 +101,6 @@ public class PaymentMB implements Serializable{
         
         ConsultantDAO conDao = new ConsultantDAO();
         conDao.update(con);
-        
     }
     
     public LoginMB getLoginMB() {
