@@ -26,8 +26,7 @@ public class PayUInitializer extends HttpServlet {
 
                 if(params.get("trans_status").equals("99")){
                     PaymentMB payment = new PaymentMB();
-                    payment.extendSubscription(params.get("trans_session_id"));
-                    System.out.println("wykonuje zwiekszenie abonamentu.");
+                    payment.extendSubscription(params.get("trans_session_id"));       
                 }
                 
             }
