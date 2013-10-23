@@ -1,18 +1,25 @@
 package com.efsf.sf.bean;
 
 import com.efsf.sf.api.PaymentApi;
+import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.GenericDao;
+import com.efsf.sf.sql.dao.SubscriptionDAO;
+import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
+import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import org.hibernate.Session;
 
 
 @ManagedBean
@@ -59,6 +66,47 @@ public class PaymentMB implements Serializable{
         subs.setStatus(0);
         
         dao.save(subs);
+    }
+    
+    
+    public static void main(String[] args){
+        PaymentMB p = new PaymentMB();
+        p.extendSubscription("1382435805");
+    }
+    
+    public void extendSubscription(String sessionId){
+       //run dao, wez 
+        SubscriptionDAO subDao = new SubscriptionDAO();
+        Subscription sub = subDao.getSubscriptionDetails(sessionId);
+        System.out.println("imieeeeeeeeeeeeeeee"+ sub.getConsultant().getName());
+        
+        System.out.println("expire Date consultant:" + sub.getConsultant().getExpireDate());
+        
+        Calendar c = Calendar.getInstance();
+        if(sub.getConsultant().getExpireDate() == null){
+            //jesli nie ma daty ustaw setTime now
+            c.setTime(new Date());
+        }
+        else{
+            //jesli ma date
+            if(sub.getConsultant().getExpireDate().after(new Date())){
+                System.out.println("ma ważny abonament");
+                c.setTime(sub.getConsultant().getExpireDate());
+            }
+            else{
+                System.out.println("Wygasł mu. wez obecna i do niego dodaj");
+                c.setTime(new Date());
+            }
+        }
+            
+        c.add(Calendar.DATE, sub.getSubscriptionType().getLength());
+            
+        Consultant con = (Consultant)sub.getConsultant();
+        con.setExpireDate(c.getTime());
+        
+        ConsultantDAO conDao = new ConsultantDAO();
+        conDao.update(con);
+        
     }
     
     public LoginMB getLoginMB() {
