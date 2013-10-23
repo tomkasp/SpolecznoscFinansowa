@@ -2,6 +2,7 @@ package com.efsf.sf.servlet;
 
 import com.efsf.sf.api.PaymentApi;
 import com.efsf.sf.api.PaymentListener;
+import com.efsf.sf.bean.PaymentMB;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Subscription;
 import java.util.Date;
@@ -23,6 +24,12 @@ public class PayUInitializer extends HttpServlet {
                 subs.setTransactionDate(new Date());
                 dao.update(subs);
 
+                if(params.get("trans_status").equals("99")){
+                    PaymentMB payment = new PaymentMB();
+                    payment.extendSubscription(params.get("trans_session_id"));
+                    System.out.println("wykonuje zwiekszenie abonamentu.");
+                }
+                
             }
         }
         

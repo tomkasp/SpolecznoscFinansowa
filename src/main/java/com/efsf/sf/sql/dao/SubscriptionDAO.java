@@ -55,4 +55,23 @@ public class SubscriptionDAO {
         
         return subscription;
     }
+    
+    
+    public Subscription getSubscriptionDetails(String idSession){
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        Subscription subscription = null;
+        try{
+            session.beginTransaction();
+            
+            Query q = session.createQuery("FROM Subscription sub left join fetch sub.consultant as con left join fetch sub.subscriptionType where sub.sessionId = :idSession");
+            q.setParameter("idSession", idSession);
+            
+            subscription = (Subscription) q.list().get(0);
+            session.getTransaction().commit();
+        } finally{
+            session.close();
+        }
+        
+        return subscription;
+    }
 }
