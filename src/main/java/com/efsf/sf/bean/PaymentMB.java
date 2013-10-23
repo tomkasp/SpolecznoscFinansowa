@@ -69,10 +69,10 @@ public class PaymentMB implements Serializable{
     }
     
     
-    public static void main(String[] args){
-        PaymentMB p = new PaymentMB();
-        p.extendSubscription("1382435805");
-    }
+//    public static void main(String[] args){
+//        PaymentMB p = new PaymentMB();
+//        p.extendSubscription("1382435805");
+//    }
     
     public void extendSubscription(String sessionId){
        //run dao, wez 
@@ -90,11 +90,11 @@ public class PaymentMB implements Serializable{
         else{
             //jesli ma date
             if(sub.getConsultant().getExpireDate().after(new Date())){
-                System.out.println("ma ważny abonament");
+                
                 c.setTime(sub.getConsultant().getExpireDate());
             }
             else{
-                System.out.println("Wygasł mu. wez obecna i do niego dodaj");
+                
                 c.setTime(new Date());
             }
         }
