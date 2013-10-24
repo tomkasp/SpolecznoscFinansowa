@@ -5,17 +5,19 @@
     
     <composite:interface> 
         <composite:attribute name="returnOnCancel" type="java.lang.Boolean" required="true" />
+        <composite:attribute name="widgetName" type="java.lang.String" required="true" />
     </composite:interface>
     
     <composite:implementation> 
         <h:form>
             
-            <p:dialog id="subscriptionDialog" modal="true"  header="Funkcjonalność niedostępna" width="430px" widgetVar="subsDialog" closable="false" >
+            <p:dialog id="subscriptionDialog" modal="true"  header="Funkcjonalność niedostępna" width="430px" widgetVar="#{cc.attrs.widgetName}" closable="false" >
                 <div> Ta funkcjonalność jest dostępna jedynie dla kont z abonamentem. 
                 Czy chcesz kupić abonament teraz? 
                 </div>
                 <h:commandButton class="greyButton wideButton floatR marginT10" value="Tak" action="/consultant/consultantChoosePayment.xhtml"/>
-                <h:commandButton class="greyButton wideButton floatL marginT10" value="Anuluj" action="#{cc.attrs.returnOnCancel}" /> 
+                <h:commandButton rendered="#{!cc.attrs.returnOnCancel}" class="greyButton wideButton floatL marginT10" value="Anuluj"  type="button" onclick="#{cc.attrs.widgetName}.hide()"  />
+                <h:commandButton rendered="#{cc.attrs.returnOnCancel}" class="greyButton wideButton floatL marginT10" value="Anuluj"   action="/consultant/consultantMainPage.xhtml" /> 
             </p:dialog>
         </h:form>
     </composite:implementation>

@@ -5,7 +5,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core" >
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://java.sun.com/jsf/composite/components">
 
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
@@ -14,7 +15,7 @@
 
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
-
+                <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
                 <h:form id="lastForm">
 
                     <div>
@@ -95,16 +96,15 @@
                     </div>
 
                     <p:commandButton id="detailsLastButton" disabled="#{empty consultantMainPageMB.selectedLastCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedLastCase)}" />
-                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() >= settings.standard}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
-                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() >= settings.standard}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
                     <h:commandLink styleClass="topMenuButton greyButton wideButton" value="Generuj Fakturę" action="#{reportsMB.generateInvoice()}"/>
-                    
-                    <div class="marginT50">
+                   <div class="marginT50">
 
                         <h4>ZGŁOSZENIA</h4>
 
@@ -258,7 +258,7 @@
                     <p:commandButton id="detailsObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedObservedCase)}" />
                     <p:commandButton id="deleteObservedButton" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton redX wideButton" value="Usuń" oncomplete="revokeObs.show();" />
 
-                    <p:commandButton rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() > 0}" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
 
@@ -336,7 +336,7 @@
                         </p:dataTable>
                     </div>
 
-                    <p:commandButton id="detailsOwnedButton" rendered="#{loginMB.subscriptionActive}" disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
+                    <p:commandButton id="detailsOwnedButton"  disabled="#{empty consultantMainPageMB.selectedOwnedCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedOwnedCase)}" />
 
 
                     <div class="marginT50">
@@ -453,13 +453,18 @@
                     <!-- DIALOGS -->
 
                     <p:dialog id="confirmDialog" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                        <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
+                        <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied and !clientCaseMB.notEnoughApplications}" class="fontGrey">
                             Twoje zgłoszenie do sprawy zostało zatwierdzone.
                         </h:panelGroup>
 
                         <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
                             Do tego zlecenia zgłosiłeś się już wcześniej. 
                         </h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{clientCaseMB.notEnoughApplications}" class="fontGrey">
+                            Limit zgłoszeń został wyczerpany! Wykup nowy abonament. 
+                        </h:panelGroup>
+                        
 
                         <div> 
                             <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
