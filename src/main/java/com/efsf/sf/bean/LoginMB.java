@@ -22,6 +22,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.LocalDate;
 
 @ManagedBean
 @SessionScoped
@@ -131,6 +132,26 @@ public class LoginMB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/login?faces-redirect=true";
     }
+    
+    public Integer returnConsultantAccessRights()
+    {
+        if (consultant == null)
+        {
+            Logger.getLogger("").log(Level.SEVERE, "There is no consultant in the session. Maybe you are logged as client?");
+            return Settings.FREE;
+        }
+        
+        Integer type = consultant.getAccountType();
+        
+        if (consultant.getExpireDate() != null && !(consultant.getExpireDate().before(new Date())) && type != null )
+        {
+            return type;
+        }
+        else
+        {
+            return Settings.FREE;
+        }
+    }
 
     public String deactivateUser() {
         if (user.getType() == Settings.ADMIN_ACTIVE) {
@@ -177,6 +198,8 @@ public class LoginMB implements Serializable {
         setActualMessage(bundle.getString("newPasswordMessage"));
 
     }
+    
+
 
     public void checkCookie() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -347,7 +370,5 @@ public class LoginMB implements Serializable {
         this.rememberMe = rememberMe;
     }
     
-    public boolean subscriptionActive(){
-        return getConsultant().getExpireDate().after(new Date());
-    }
+
 }

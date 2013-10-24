@@ -41,8 +41,8 @@ public class Settings
     
     // SUBSCRIPTION LIMITS 
     public static final Integer MAX_CASES_DISPLAYED = 100;
-    public static final Integer MAX_APPLIES_STANDARD = 10;
-    public static final Integer MAX_APPLIES_STANDARD_PLUS = 25;
+    public static final Integer MAX_CASES_APPLIED_STANDARD = 10;
+    public static final Integer MAX_CASES_APPLIED_STANDARD_PLUS = 25;
     
     // CASE STATUSES  
     public static final Integer PRODUCT_ASSIGNED = 3; 
