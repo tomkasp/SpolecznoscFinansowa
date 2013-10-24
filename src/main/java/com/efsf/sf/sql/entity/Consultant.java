@@ -41,6 +41,7 @@ public class Consultant implements java.io.Serializable {
     private String regon;
     private String expirience;
     private Date expireDate;
+    private Integer accountType;
     private Set<ConsultantRating> consultantRatings = new HashSet<ConsultantRating>(0);
     private Set<Institution> institutions = new HashSet<Institution>(0);
     private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
@@ -260,5 +261,15 @@ public class Consultant implements java.io.Serializable {
 
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
+    }
+
+    
+    @Column(name = "accountType")
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 }
