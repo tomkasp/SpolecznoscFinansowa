@@ -129,6 +129,7 @@ public class ConsultantDAO {
 
         return result;
     }
+    
 
     public Consultant readConsultantForSettings(int id) {
 

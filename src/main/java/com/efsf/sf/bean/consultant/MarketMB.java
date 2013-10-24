@@ -6,6 +6,7 @@ import com.efsf.sf.bean.client.ClientCaseMB;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.EmploymentType;
+import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,19 +60,34 @@ public class MarketMB implements Serializable
     
     private ClientCase selectedMarketCase;
 
-    
     public void loadMarket()
     {
         selectedMarketCase = null;
         marketModelsEmploymentType = new ArrayList();
-        marketModelsBranch= new ArrayList(); 
-        allMarket = caseDao.getCasesWithMarketFilter(phaseMin,phaseMax,ageMin,ageMax,difficultyMin,difficultyMax,branchId,regionId,incomeIds,businessIds);
+        marketModelsBranch= new ArrayList();
+        
+        //WE DO NOT ASSUME THAT ALL THE SUBSCRIPTION TYPES HIGHER THEN 'PREMIUM (3)' HAVE AT LEAST PREMIUM ACCESS RIGHTS 
+        if (loginMB.returnConsultantAccessRights().equals(Settings.PREMIUM))
+        {
+            allMarket = caseDao.getCasesWithMarketFilter(phaseMin,phaseMax,ageMin,ageMax,difficultyMin,difficultyMax,branchId,regionId,incomeIds,businessIds);
+        }
+        else if(loginMB.returnConsultantAccessRights().equals(Settings.FREE))
+        {
+            allMarket = new ArrayList();
+        }
+        // WE ASSUME THAT IF ACCOUNT IS NOT FREE THEN IT HAVE ATLEASE STANDARD RIGHTS 
+        else
+        {
+            allMarket = caseDao.lastCases(Settings.MAX_CASES_DISPLAYED);
+        }
         for (int i = 0; i<allMarket.size(); i++)
         {
             marketModelsEmploymentType.add(consultantMainPageMB.showAllClientsEmploymentTypes(allMarket.get(i).getClient()));
             marketModelsBranch.add(consultantMainPageMB.showAllClientsBranches(allMarket.get(i).getClient()));
         }
     }
+    
+    
     
     @PostConstruct
     public void resetMarket()
