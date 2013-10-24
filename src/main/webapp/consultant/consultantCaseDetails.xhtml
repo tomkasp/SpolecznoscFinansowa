@@ -535,8 +535,12 @@
                     <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->  
                     <h:form id="confDialog">
                         <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:panelGroup class="fontGrey">
+                            <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied and !clientCaseMB.notEnoughApplications}" class="fontGrey">
                                 Twoje zgłoszenie do sprawy zostało zatwierdzone.
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{clientCaseMB.notEnoughApplications}" class="fontGrey">
+                                Limit zgłoszeń został wyczerpany! Wykup nowy abonament. 
                             </h:panelGroup>
 
                             <div> 
