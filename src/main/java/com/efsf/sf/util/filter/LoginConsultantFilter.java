@@ -21,7 +21,9 @@ public class LoginConsultantFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
-
+        
+        if (loginBean != null) loginBean.updateAccountSubscriptionData();
+        
         if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
