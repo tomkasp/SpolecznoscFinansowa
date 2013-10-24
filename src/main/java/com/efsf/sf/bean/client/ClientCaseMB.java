@@ -243,7 +243,7 @@ public class ClientCaseMB implements Serializable {
             ConsultantDAO consultantDao = new ConsultantDAO();
             
             
-            if (consultant.getApplayedCaseCounter() > 0)
+            if (login.returnConsultantAccessRights() > 0 && login.returnConsultantAccessRights() < 3 )
             {
                 consultant.setApplayedCaseCounter(consultant.getApplayedCaseCounter()-1);
             }
