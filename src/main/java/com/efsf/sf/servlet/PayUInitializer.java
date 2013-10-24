@@ -21,7 +21,9 @@ public class PayUInitializer extends HttpServlet {
                 GenericDao<Subscription> dao = new GenericDao(Subscription.class);
                 Subscription subs = dao.getById(params.get("trans_session_id"));
                 
-                if(subs==null) subs=new Subscription();
+                if(subs==null) {
+                    subs=new Subscription();
+                }
                 
                 subs.setStatus(Integer.valueOf(params.get("trans_status")));
                 subs.setTransactionDate(new Date());
