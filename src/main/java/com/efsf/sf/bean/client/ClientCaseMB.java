@@ -236,14 +236,14 @@ public class ClientCaseMB implements Serializable {
     public void applyToCase(ClientCase cs) {
         Consultant consultant = login.getConsultant();
 
-        if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), cs.getIdClientCase()) && consultant.getApplayedCaseCounter() != 0) {
+        if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), cs.getIdClientCase()) && consultant.getApplayedCaseCounter() != 0 && login.returnConsultantAccessRights() > 0) {
             alreadyApplied = false;
             notEnoughApplications = false;
             consultant.getClientCases().add(cs);
             ConsultantDAO consultantDao = new ConsultantDAO();
             
             
-            if (consultant.getApplayedCaseCounter() > 0)
+            if (login.returnConsultantAccessRights() > 0 && login.returnConsultantAccessRights() < 3 )
             {
                 consultant.setApplayedCaseCounter(consultant.getApplayedCaseCounter()-1);
             }
