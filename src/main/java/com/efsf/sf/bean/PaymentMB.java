@@ -75,7 +75,6 @@ public class PaymentMB implements Serializable{
 //    }
     
     public void extendSubscription(String sessionId){
-       //run dao, wez 
         SubscriptionDAO subDao = new SubscriptionDAO();
         Subscription sub = subDao.getSubscriptionDetails(sessionId);  
         
