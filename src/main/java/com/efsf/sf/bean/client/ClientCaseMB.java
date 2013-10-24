@@ -238,21 +238,23 @@ public class ClientCaseMB implements Serializable {
 
         if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), cs.getIdClientCase()) && consultant.getApplayedCaseCounter() != 0) {
             alreadyApplied = false;
+            notEnoughApplications = false;
             consultant.getClientCases().add(cs);
             ConsultantDAO consultantDao = new ConsultantDAO();
-            consultantDao.merge(consultant);
+            
             
             if (consultant.getApplayedCaseCounter() > 0)
             {
                 consultant.setApplayedCaseCounter(consultant.getApplayedCaseCounter()-1);
             }
+            consultantDao.merge(consultant);
             login.setConsultant(consultantDao.getCounsultantConnectedToUser(login.getIdUser()));
 
             messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[]{login.getConsultant().getIdConsultant(), cs.getIdClientCase()});
         } 
-        if (consultant.getApplayedCaseCounter() == 0)
+        else if (consultant.getApplayedCaseCounter() == 0)
         {
-            
+            notEnoughApplications = true;
         }
         else 
         {
