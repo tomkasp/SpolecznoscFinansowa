@@ -43,7 +43,8 @@ public class ClientCaseDAO implements Serializable {
         return cs;
     }
 
-    public List last5Cases() {
+    public List lastCases(int limit)
+    {
         List<ClientCase> list;
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
@@ -69,7 +70,7 @@ public class ClientCaseDAO implements Serializable {
                     + "order by cs.beginDate desc, cs.idClientCase desc");
 
             q.setParameter("dateNow", new DateTime().toDate());
-            q.setMaxResults(5);
+            q.setMaxResults(limit);
 
             list = q.list();
             session.getTransaction().commit();
@@ -79,6 +80,10 @@ public class ClientCaseDAO implements Serializable {
         }
 
         return list;
+    }
+    
+    public List last5Cases() {
+        return lastCases(5);
     }
 
     public boolean doesConsultantObserveCase(int consultantID, int caseID) {

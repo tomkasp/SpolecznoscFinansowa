@@ -39,7 +39,7 @@ public class Consultant implements java.io.Serializable {
     private String pesel;
     private String nip;
     private String regon;
-    private String expirience;
+    private String expirience; //experience 
     private Date expireDate;
     private Integer accountType;
     private Set<ConsultantRating> consultantRatings = new HashSet<ConsultantRating>(0);

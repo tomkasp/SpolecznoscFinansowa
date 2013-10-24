@@ -7,146 +7,143 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-      
-   
-    
     <body>
-
         <ui:composition  template="/templates/mainTemplate.xhtml">
-                  <ui:define name="title"> Doradca - giełda </ui:define> 
-                 
-                   <ui:define name="content">
-                      
-                       <h:form id="marketForm">
-                       <div id="marketLogoBar" style="min-height: 190px;">
-                           <h:graphicImage class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
-                           <div id="spaceFiller" > </div>
-                           <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
-                       </div>
-                           
-                       <div>
-                           <h4> PARAMETRY </h4>
-                       </div>
-                      
-                       <div>
-                           <h:panelGroup class="marketLeft">    
-                               <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
-                               <h:inputText id="phaseMin" class="fontBlack smallCenterInput"  value="#{marketMB.phaseMin}"  >
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
-                                   <f:validateLongRange maximum="100" />
-                               </h:inputText>
-                               <h:inputText id="phaseMax" class="fontBlack smallCenterInput" value="#{marketMB.phaseMax}" >
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
-                                   <f:validateLongRange maximum="100" />
-                               </h:inputText> 
-                           </h:panelGroup>     
-                           <h:panelGroup class="marginLR30">
-                               <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
-                               <h:inputText id="ageMin" class="fontBlack smallCenterInput"  value="#{marketMB.ageMin}" >
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
-                                   <f:validateLongRange maximum="100" />
-                               </h:inputText>
-                               <h:inputText id="ageMax" class="fontBlack smallCenterInput" value="#{marketMB.ageMax}" >
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
-                                   <f:validateLongRange maximum="100" />
-                               </h:inputText>
-                               <h:outputText class="fontGrey marginLR30" value="lat" /> 
-                           </h:panelGroup> 
-                           <h:panelGroup>
-                               <h:outputText class="fontGrey marginLR30" value="Trudność" /> 
-                               <h:inputText id="diffMin" class="fontBlack smallCenterInput"  value="#{marketMB.difficultyMin}" > 
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
-                                   <f:validateLongRange maximum="100" />
-                               </h:inputText>
-                               <h:inputText id="diffMax" class="fontBlack smallCenterInput" value="#{marketMB.difficultyMax}" >
-                                   <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
-                                   <f:convertNumber integerOnly="true" maxIntegerDigits="2" />
-                                   <f:validateLongRange maximum="10" />
-                               </h:inputText>
-                           </h:panelGroup> 
-                       </div>    
-                       <h:message for="phaseMin" id="phaseMinMessage" errorClass="invalid2" errorStyle="left: 110px" />
-                       <h:message for="phaseMax" id="phaseMaxMessage" errorClass="invalid2" errorStyle="left: 180px" />
-                       <h:message for="ageMin" id="ageMinMessage" errorClass="invalid2" errorStyle="left: 450px" />
-                       <h:message for="ageMax" id="ageMaxMessage" errorClass="invalid2" errorStyle="left: 520px" />
-                       <h:message for="diffMin" id="diffMinMessage" errorClass="invalid2" errorStyle="left: 820px" />
-                       <h:message for="diffMax" id="diffMaxMessage" errorClass="invalid2" errorStyle="left: 885px" />
-                       
-                       <div style="min-height: 50px; margin-top: 20px;">
-                           <h:panelGroup style="margin-right: 10px">
-                               <h:outputText class="floatL fontGrey marginLR30" value="Branża" /> 
-                               <p:selectOneMenu styleClass="floatL" value="#{marketMB.branchId}">
-                                     <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
-                                     <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
-                               </p:selectOneMenu> 
-                           </h:panelGroup>  
-                           <h:panelGroup style="margin-right: 10px">
-                               <h:outputText class="fontGrey floatL" style="margin-left: 24px; margin-right: 18px" value="Region" /> 
-                               <p:selectOneMenu id="region" styleClass="floatL"  value="#{marketMB.regionId}">
+            <ui:define name="title"> Doradca - giełda </ui:define> 
+
+            <ui:define name="content">
+
+                <h:form id="marketForm">
+                    <div id="marketLogoBar" style="min-height: 190px;">
+                        <h:graphicImage class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
+                        <div id="spaceFiller" > </div>
+                        <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
+                    </div>
+                    <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() >= Settings.premium}"  > 
+                        <div>
+                            <h4> PARAMETRY </h4>
+                        </div>
+
+                        <div>
+                            <h:panelGroup class="marketLeft">    
+                                <h:outputText class="fontGrey marginLR30" value="Postęp" /> 
+                                <h:inputText id="phaseMin" class="fontBlack smallCenterInput"  value="#{marketMB.phaseMin}"  >
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                    <f:validateLongRange maximum="100" />
+                                </h:inputText>
+                                <h:inputText id="phaseMax" class="fontBlack smallCenterInput" value="#{marketMB.phaseMax}" >
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                    <f:validateLongRange maximum="100" />
+                                </h:inputText> 
+                            </h:panelGroup>     
+                            <h:panelGroup class="marginLR30">
+                                <h:outputText class="fontGrey marginLR30" value="Wiek" /> 
+                                <h:inputText id="ageMin" class="fontBlack smallCenterInput"  value="#{marketMB.ageMin}" >
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                    <f:validateLongRange maximum="100" />
+                                </h:inputText>
+                                <h:inputText id="ageMax" class="fontBlack smallCenterInput" value="#{marketMB.ageMax}" >
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                    <f:validateLongRange maximum="100" />
+                                </h:inputText>
+                                <h:outputText class="fontGrey marginLR30" value="lat" /> 
+                            </h:panelGroup> 
+                            <h:panelGroup>
+                                <h:outputText class="fontGrey marginLR30" value="Trudność" /> 
+                                <h:inputText id="diffMin" class="fontBlack smallCenterInput"  value="#{marketMB.difficultyMin}" > 
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="3" />
+                                    <f:validateLongRange maximum="100" />
+                                </h:inputText>
+                                <h:inputText id="diffMax" class="fontBlack smallCenterInput" value="#{marketMB.difficultyMax}" >
+                                    <p:ajax update="@form" listener="#{marketMB.loadMarket()}"/>
+                                    <f:convertNumber integerOnly="true" maxIntegerDigits="2" />
+                                    <f:validateLongRange maximum="10" />
+                                </h:inputText>
+                            </h:panelGroup> 
+                        </div>    
+                        <h:message for="phaseMin" id="phaseMinMessage" errorClass="invalid2" errorStyle="left: 110px" />
+                        <h:message for="phaseMax" id="phaseMaxMessage" errorClass="invalid2" errorStyle="left: 180px" />
+                        <h:message for="ageMin" id="ageMinMessage" errorClass="invalid2" errorStyle="left: 450px" />
+                        <h:message for="ageMax" id="ageMaxMessage" errorClass="invalid2" errorStyle="left: 520px" />
+                        <h:message for="diffMin" id="diffMinMessage" errorClass="invalid2" errorStyle="left: 820px" />
+                        <h:message for="diffMax" id="diffMaxMessage" errorClass="invalid2" errorStyle="left: 885px" />
+
+                        <div style="min-height: 50px; margin-top: 20px;">
+                            <h:panelGroup style="margin-right: 10px">
+                                <h:outputText class="floatL fontGrey marginLR30" value="Branża" /> 
+                                <p:selectOneMenu styleClass="floatL" value="#{marketMB.branchId}">
+                                    <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
+                                    <f:selectItems value="#{dictionaryMB.branch}" var="dict" itemLabel="#{dict.name}" itemValue="#{dict.idBranch}" />
+                                </p:selectOneMenu> 
+                            </h:panelGroup>  
+                            <h:panelGroup style="margin-right: 10px">
+                                <h:outputText class="fontGrey floatL" style="margin-left: 24px; margin-right: 18px" value="Region" /> 
+                                <p:selectOneMenu id="region" styleClass="floatL"  value="#{marketMB.regionId}">
                                     <f:ajax execute="@form" render="marketTable" listener="#{marketMB.loadMarket()}" />
                                     <f:selectItems value="#{dictionaryMB.region}" var="reg" itemLabel="#{reg.region}" itemValue="#{reg.idRegion}"   />  
-                               </p:selectOneMenu>
-                           </h:panelGroup>  
-                           
-                           <h:panelGroup>
-                               <h:outputText class="fontGrey floatL" style="margin-left: 102px; margin-right: 30px" value="Zatrudnienie" /> 
-                               <p:selectOneMenu styleClass="floatL" id="employmentButton" style="width: 145px">           
-                                         <f:selectItem itemLabel="Wybierz..." itemValue="Wybierz..." />
-                               </p:selectOneMenu>
-                           </h:panelGroup>    
-                       </div>
-                       
-                       
-                           
-                       <p:overlayPanel id="employmentPanel" widgetVar="overlay" style="width:330px;" for="employmentButton" hideEffect="fade" >
-                           <p:tabView id="tabView">
-                               <p:tab id="tabIncome" title="Umowy">
-                                   <p:panel>
+                                </p:selectOneMenu>
+                            </h:panelGroup>  
+
+                            <h:panelGroup>
+                                <h:outputText class="fontGrey floatL" style="margin-left: 102px; margin-right: 30px" value="Zatrudnienie" /> 
+                                <p:selectOneMenu styleClass="floatL" id="employmentButton" style="width: 145px">           
+                                    <f:selectItem itemLabel="Wybierz..." itemValue="Wybierz..." />
+                                </p:selectOneMenu>
+                            </h:panelGroup>    
+                        </div>
+
+
+
+                        <p:overlayPanel id="employmentPanel" widgetVar="overlay" style="width:330px;" for="employmentButton" hideEffect="fade" >
+                            <p:tabView id="tabView">
+                                <p:tab id="tabIncome" title="Umowy">
+                                    <p:panel>
                                         <p:selectManyCheckbox styleClass="fontGrey" value="#{marketMB.incomeIds}" layout="pageDirection">
-                                           
+
                                             <f:selectItems value="#{dictionaryMB.income}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
-                                            
+
                                         </p:selectManyCheckbox>
-                                   </p:panel>
+                                    </p:panel>
                                 </p:tab>
                                 <p:tab id="tabBusiness" title="Działalność gosp.">
-                                        <p:selectManyCheckbox styleClass="fontGrey"  value="#{marketMB.businessIds}" layout="pageDirection">  
-                                            <f:selectItems value="#{dictionaryMB.businessActivity}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
-                                        </p:selectManyCheckbox>
+                                    <p:selectManyCheckbox styleClass="fontGrey"  value="#{marketMB.businessIds}" layout="pageDirection">  
+                                        <f:selectItems value="#{dictionaryMB.businessActivity}" var="w" itemLabel="#{w.name}" itemValue="#{w.shortcut}"/>
+                                    </p:selectManyCheckbox>
                                 </p:tab>
-                           
-                           </p:tabView>
-                           <h:panelGroup>
-                               <p:commandButton styleClass="redX floatL" style="color: red" update="employmentPanel" value="Wyczyść" action="#{marketMB.unselectEmployment()}" oncomplete="overlay.show();" >
-                                  
-                               </p:commandButton>
-                               
-                               <p:commandButton id="chooseEmpl" styleClass="greyButton floatR" update="@form" value="Wybierz" action="#{marketMB.loadMarket()}"/>  
-                           </h:panelGroup>
-                           <p:defaultCommand target="chooseEmpl" />
-                       </p:overlayPanel> 
-                       <div style="min-height: 20px;"><p:commandButton styleClass="floatR greyButton" update="@form" value="Resetuj filtr" action="#{marketMB.resetMarket()}" /> </div>
-                       <div class="marginT10">
-                           <p:dataTable id="marketTable" value="#{marketMB.allMarket}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedMarketCase}" selectionMode="single" >
-          
+
+                            </p:tabView>
+                            <h:panelGroup>
+                                <p:commandButton styleClass="redX floatL" style="color: red" update="employmentPanel" value="Wyczyść" action="#{marketMB.unselectEmployment()}" oncomplete="overlay.show();" >
+
+                                </p:commandButton>
+
+                                <p:commandButton id="chooseEmpl" styleClass="greyButton floatR" update="@form" value="Wybierz" action="#{marketMB.loadMarket()}"/>  
+                            </h:panelGroup>
+                            <p:defaultCommand target="chooseEmpl" />
+                        </p:overlayPanel> 
+                        <div style="min-height: 20px;"><p:commandButton styleClass="floatR greyButton" update="@form" value="Resetuj filtr" action="#{marketMB.resetMarket()}" /> </div>
+                    </h:panelGroup>
+                    <div class="marginT10">
+                        <p:dataTable id="marketTable" value="#{marketMB.allMarket}" rowKey="#{row}" rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" selection="#{marketMB.selectedMarketCase}" selectionMode="single" >
+
                             <p:ajax event="rowSelect" update="@form"  /> 
                             <p:ajax event="rowDblselect" update="@form" listener="#{consultantMainPageMB.rowDoubleClick(marketMB.selectedMarketCase)}"/>
-                            
+
                             <p:column headerText="Numer sprawy">  
                                 <h:outputText  value="#{row.idClientCase}"/>
                             </p:column>  
-                            
+
                             <p:column headerText="Data dodania">    
                                 <h:outputText  value="#{row.beginDate}">
                                     <f:convertDateTime pattern="dd-MM-yy" timeZone="GMT+3"/>
                                 </h:outputText>  
                             </p:column>  
-                            
+
                             <p:column headerText="Numer klienta"> 
                                 <h:outputText  value="#{row.client.idClient}"/>
                             </p:column>
@@ -166,9 +163,9 @@
                             <p:column headerText="Kod pocztowy">  
                                 <h:outputText  value="#{row.client.addresses.toArray()[0].zipCode}"/>
                             </p:column>
-                           
+
                             <p:column headerText="Wiek">  
-                                     <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
+                                <h:outputText  value="#{consultantMainPageMB.converters.ageFromBirthDate(row.client.birthDate)}"/>
                             </p:column>
 
                             <p:column headerText="Typ zatrudnienia">
@@ -201,56 +198,56 @@
                                 <h:outputText  value=" "/>
                             </p:column> -->
 
-                            </p:dataTable>
-                      
-                           </div>  
-                           <div style="min-height: 50px;">
-                               <p:commandButton disabled="#{empty marketMB.selectedMarketCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(marketMB.selectedMarketCase)}" oncomplete="confirmed.show();" >
+                        </p:dataTable>
 
-                                </p:commandButton>
-                               <p:commandButton disabled="#{empty marketMB.selectedMarketCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(marketMB.selectedMarketCase)}" oncomplete="confirmedObserved.show();" >
+                    </div>  
+                    <div style="min-height: 50px;">
+                        <p:commandButton disabled="#{empty marketMB.selectedMarketCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(marketMB.selectedMarketCase)}" oncomplete="confirmed.show();" >
 
-                                </p:commandButton> 
-                               <p:commandButton id="detailsMarketButton" disabled="#{empty marketMB.selectedMarketCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(marketMB.selectedMarketCase)}" />
+                        </p:commandButton>
+                        <p:commandButton disabled="#{empty marketMB.selectedMarketCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(marketMB.selectedMarketCase)}" oncomplete="confirmedObserved.show();" >
 
-                           </div>
-                           
-                        <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->   
-                        <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
-                                Twoje zgłoszenie do sprawy #{marketMB.selectedMarketCase.idClientCase} zostało zatwierdzone.
-                            </h:panelGroup>
+                        </p:commandButton> 
+                        <p:commandButton id="detailsMarketButton" disabled="#{empty marketMB.selectedMarketCase}" ajax="false" styleClass="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(marketMB.selectedMarketCase)}" />
 
-                            <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
-                                Do tego zlecenia zgłosiłeś się już wcześniej. 
-                            </h:panelGroup>
+                    </div>
 
-                            <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
-                                    
-                                </h:commandButton>
-                            </div>
-                         </p:dialog>
+                    <!--COPIED DIALOGS FROM CONSULTANT MAIN PAGE-->   
+                    <p:dialog id="confirmApplied" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmed" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                        <h:panelGroup rendered="#{!clientCaseMB.alreadyApplied}" class="fontGrey">
+                            Twoje zgłoszenie do sprawy #{marketMB.selectedMarketCase.idClientCase} zostało zatwierdzone.
+                        </h:panelGroup>
 
-                         <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
-                            <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
-                                Od teraz śledzisz sprawę numer:  #{marketMB.selectedMarketCase.idClientCase}.
-                            </h:panelGroup>
+                        <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
+                            Do tego zlecenia zgłosiłeś się już wcześniej. 
+                        </h:panelGroup>
 
-                            <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
-                                Już obserwujesz tą sprawę! 
-                            </h:panelGroup>
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
 
-                            <div> 
-                                <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
-                                   
-                                </h:commandButton>
-                            </div>
-                         </p:dialog>
-                           
-                           
-                    </h:form>
-               </ui:define>
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
+
+                    <p:dialog id="confirmObserved" dynamic="true" closable="false" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0); overflow: hidden; border-radius: 0px;" header="Informacja"  widgetVar="confirmedObserved" resizable="false" height="80" width="440" showEffect="clip" hideEffect="explode" modal="true" >  
+                        <h:panelGroup rendered="#{!clientCaseMB.alreadyObserved}" class="fontGrey">
+                            Od teraz śledzisz sprawę numer:  #{marketMB.selectedMarketCase.idClientCase}.
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{clientCaseMB.alreadyObserved}" class="fontGrey">
+                            Już obserwujesz tą sprawę! 
+                        </h:panelGroup>
+
+                        <div> 
+                            <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmedObserved.hide()"  >
+
+                            </h:commandButton>
+                        </div>
+                    </p:dialog>
+
+
+                </h:form>
+            </ui:define>
         </ui:composition>
     </body>
 </html>
