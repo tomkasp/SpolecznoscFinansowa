@@ -74,8 +74,8 @@ public class MarketMB implements Serializable
         else if(loginMB.returnConsultantAccessRights().equals(Settings.FREE))
         {
             allMarket = new ArrayList();
-        }
-        // WE ASSUME THAT IF ACCOUNT IS NOT FREE THEN IT HAVE ATLEASE STANDARD RIGHTS 
+        } 
+       // WE ASSUME THAT IF ACCOUNT IS NOT FREE THEN IT HAVE ATLEASE STANDARD RIGHTS 
         else
         {
             allMarket = caseDao.lastCases(Settings.MAX_CASES_DISPLAYED);
