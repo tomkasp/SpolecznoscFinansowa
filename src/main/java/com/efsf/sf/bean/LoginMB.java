@@ -45,9 +45,22 @@ public class LoginMB implements Serializable {
     private String actualMessage;
     @ManagedProperty(value = "#{mailerMB}")
     private MailerMB mailerMB;
+    
+    
 
     public LoginMB() {
         checkCookie();
+    }
+    
+    public void updateAccountSubscriptionData(){
+        
+        if(consultant.getIdConsultant()!=null){
+            GenericDao<Consultant> dao=new GenericDao(Consultant.class);
+            Consultant cons=dao.getById(consultant.getIdConsultant());
+            consultant.setAccountType(cons.getAccountType());
+            consultant.setExpireDate(cons.getExpireDate());
+            consultant.setApplayedCaseCounter(cons.getApplayedCaseCounter());
+        }
     }
 
     public String login() {
