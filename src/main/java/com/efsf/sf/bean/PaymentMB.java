@@ -96,10 +96,10 @@ public class PaymentMB implements Serializable{
             
         Consultant con = (Consultant)sub.getConsultant();
         if(sub.getSubscriptionType().getIdSubscriptionType()==1){
-            con.setApplayedCaseCounter(Settings.MAX_CASES_APPLIED_STANDARD);
+            con.setApplayedCaseCounter(con.getApplayedCaseCounter() + Settings.MAX_CASES_APPLIED_STANDARD);
         }
         if(sub.getSubscriptionType().getIdSubscriptionType()==2){
-            con.setApplayedCaseCounter(Settings.MAX_CASES_APPLIED_STANDARD_PLUS);
+            con.setApplayedCaseCounter(con.getApplayedCaseCounter() + Settings.MAX_CASES_APPLIED_STANDARD_PLUS);
         }
         if(sub.getSubscriptionType().getIdSubscriptionType()==3){
             con.setApplayedCaseCounter(-1);
