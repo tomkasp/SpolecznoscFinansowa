@@ -42,6 +42,7 @@ public class ClientCaseMB implements Serializable {
     private List<Obligation> obligationList = new ArrayList<>();
     private ObligationDAO obdao = new ObligationDAO();
     private boolean alreadyApplied = false;
+    private boolean notEnoughApplications = false;
     private boolean alreadyObserved = false;
     private int premium = 6;
     // VIEW CASE DETAILS FIELDS     
@@ -235,16 +236,26 @@ public class ClientCaseMB implements Serializable {
     public void applyToCase(ClientCase cs) {
         Consultant consultant = login.getConsultant();
 
-        if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), cs.getIdClientCase())) {
+        if (!new ClientCaseDAO().doesConsultantAppliedToCase(consultant.getIdConsultant(), cs.getIdClientCase()) && consultant.getApplayedCaseCounter() != 0) {
             alreadyApplied = false;
             consultant.getClientCases().add(cs);
             ConsultantDAO consultantDao = new ConsultantDAO();
             consultantDao.merge(consultant);
-
+            
+            if (consultant.getApplayedCaseCounter() > 0)
+            {
+                consultant.setApplayedCaseCounter(consultant.getApplayedCaseCounter()-1);
+            }
             login.setConsultant(consultantDao.getCounsultantConnectedToUser(login.getIdUser()));
 
             messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[]{login.getConsultant().getIdConsultant(), cs.getIdClientCase()});
-        } else {
+        } 
+        if (consultant.getApplayedCaseCounter() == 0)
+        {
+            
+        }
+        else 
+        {
             alreadyApplied = true;
         }
     }
@@ -371,6 +382,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setCaseDuration(Integer caseDuration) {
         this.caseDuration = caseDuration;
+    }
+
+    public boolean isNotEnoughApplications() {
+        return notEnoughApplications;
+    }
+
+    public void setNotEnoughApplications(boolean notEnoughApplications) {
+        this.notEnoughApplications = notEnoughApplications;
     }
 
     

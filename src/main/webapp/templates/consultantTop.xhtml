@@ -37,7 +37,7 @@
                 <h:button id="messagesButton" class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
                 <h:button id="deactivateAccountButton" class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
                 <h:button class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                <h:button class="topMenuButton greyButton wideButton" value="Przedłuż abonament" outcome="/consultant/consultantChoosePayment"/>
+                <h:button class="topMenuButton greyButton wideButton" value="#{loginMB.returnConsultantAccessRights() == 0 ? 'Kup Abonament' : 'Przedłuż abonament'}" outcome="/consultant/consultantChoosePayment"/>
             </h:panelGroup>
         </div>
     </h:form>
