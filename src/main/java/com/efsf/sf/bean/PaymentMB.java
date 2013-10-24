@@ -9,6 +9,7 @@ import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
 import com.efsf.sf.sql.util.HibernateUtil;
+import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -93,8 +94,19 @@ public class PaymentMB implements Serializable{
             }
         }
             
-        c.add(Calendar.DATE, sub.getSubscriptionType().getLength());
         Consultant con = (Consultant)sub.getConsultant();
+        if(sub.getSubscriptionType().getIdSubscriptionType()==1){
+            con.setApplayedCaseCounter(Settings.MAX_CASES_APPLIED_STANDARD);
+        }
+        if(sub.getSubscriptionType().getIdSubscriptionType()==2){
+            con.setApplayedCaseCounter(Settings.MAX_CASES_APPLIED_STANDARD_PLUS);
+        }
+        if(sub.getSubscriptionType().getIdSubscriptionType()==3){
+            con.setApplayedCaseCounter(-1);
+        }
+        
+        c.add(Calendar.DATE, sub.getSubscriptionType().getLength());
+        
         con.setExpireDate(c.getTime());
         con.setAccountType(sub.getSubscriptionType().getIdSubscriptionType());
         ConsultantDAO conDao = new ConsultantDAO();
