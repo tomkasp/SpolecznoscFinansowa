@@ -88,7 +88,31 @@
                                 </h:form>
                             </h:panelGroup> 
 
+                            <div>
+                                <div style="margin-top: 10px;">  
+                                    <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights()>0}">  
+                                        <h:outputText class="profileText" value="Twój abonament:" />
+                                        <h5> 
+                                            <h:outputText value="STANDARD" rendered="#{loginMB.returnConsultantAccessRights()==1}"/>
+                                            <h:outputText value="STANDARD+" rendered="#{loginMB.returnConsultantAccessRights()==2}"/>
+                                            <h:outputText value="PREMIUM" rendered="#{loginMB.returnConsultantAccessRights()==3}"/>
+                                        </h5>
+                                        <h:outputText class="profileText" value="wygasa:" /> 
+                                        <h5> #{loginMB.consultant.expireDate} </h5>
+                                        <h:outputText class="profileText" value="Pozostało zgłoszeń:" /> 
+                                        <h5> #{loginMB.consultant.applayedCaseCounter} </h5>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights()==0}">
+                                        <h:outputText class="profileText" value="Nie posiadasz aktualnie żadnego abonamentu. Wykup abonament już dziś." />
+                                    </h:panelGroup>
+                                </div>
+                                
+                                <div>
+                                    
+                                </div>
 
+                            </div>
 
                         </div>
                     </h:panelGroup>  
