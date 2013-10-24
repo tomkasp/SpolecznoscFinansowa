@@ -54,7 +54,7 @@ public class LoginMB implements Serializable {
     
     public void updateAccountSubscriptionData(){
         
-        if(consultant.getIdConsultant()!=null){
+        if(consultant!=null && consultant.getIdConsultant()!=null){
             GenericDao<Consultant> dao=new GenericDao(Consultant.class);
             Consultant cons=dao.getById(consultant.getIdConsultant());
             consultant.setAccountType(cons.getAccountType());
