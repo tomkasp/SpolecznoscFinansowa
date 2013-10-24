@@ -20,9 +20,12 @@ public class PayUInitializer extends HttpServlet {
             public void afterPayment(Map<String, String> params) {
                 GenericDao<Subscription> dao = new GenericDao(Subscription.class);
                 Subscription subs = dao.getById(params.get("trans_session_id"));
+                
+                if(subs==null) subs=new Subscription();
+                
                 subs.setStatus(Integer.valueOf(params.get("trans_status")));
                 subs.setTransactionDate(new Date());
-                dao.update(subs);
+                dao.saveOrUpdate(subs);
 
                 if(params.get("trans_status").equals("99")){
                     PaymentMB payment = new PaymentMB();
