@@ -42,6 +42,7 @@ public class Consultant implements java.io.Serializable {
     private String expirience; //experience 
     private Date expireDate;
     private Integer accountType;
+    private Integer applayedCaseCounter;
     private Set<ConsultantRating> consultantRatings = new HashSet<ConsultantRating>(0);
     private Set<Institution> institutions = new HashSet<Institution>(0);
     private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
@@ -271,5 +272,14 @@ public class Consultant implements java.io.Serializable {
 
     public void setAccountType(Integer accountType) {
         this.accountType = accountType;
+    }
+
+    @Column(name = "applayedCaseCounter")
+    public Integer getApplayedCaseCounter() {
+        return applayedCaseCounter;
+    }
+
+    public void setApplayedCaseCounter(Integer applayedCaseCounter) {
+        this.applayedCaseCounter = applayedCaseCounter;
     }
 }
