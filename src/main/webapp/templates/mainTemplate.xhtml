@@ -99,8 +99,8 @@
                                         </h5>
                                         <h:outputText class="profileText" value="wygasa:" /> 
                                         <h5> #{loginMB.consultant.expireDate} </h5>
-                                        <h:outputText class="profileText" value="Pozostało zgłoszeń:" /> 
-                                        <h5> #{loginMB.consultant.applayedCaseCounter >= 0 ? loginMB.consultant.applayedCaseCounter : '∞'} </h5>
+                                        <h:outputText  rendered="#{loginMB.consultant.accountType le 2}" class="profileText" value="Pozostało zgłoszeń:" /> 
+                                        <h5>  <h:outputText value="#{loginMB.consultant.applayedCaseCounter}" rendered="#{loginMB.consultant.accountType le 2 }" />  </h5>
                                     </h:panelGroup>
                                     
                                     <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights()==0}">
