@@ -1,11 +1,17 @@
 package com.efsf.sf.sql.dao;
 
+import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class SubscriptionDAO {
+public class SubscriptionDAO implements Serializable{
+    
+
 
     public void save(Subscription subscription) {
 
@@ -74,4 +80,29 @@ public class SubscriptionDAO {
         
         return subscription;
     }
+    
+    
+    
+    public List<Subscription> getAllSubscriptionForConsultant(Consultant cons){
+        List<Subscription> lista = new ArrayList();
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try{
+            session.beginTransaction();
+            
+            Query q = session.createQuery("FROM Subscription sub left join fetch sub.consultant con left join fetch sub.subscriptionType st where con.idConsultant = :idConsultant AND sub.status=99");
+            q.setParameter("idConsultant", cons.getIdConsultant());
+            
+            lista = q.list();
+            session.getTransaction().commit();
+            
+        }finally{
+            session.close();
+        }
+        
+        
+        
+        return lista;
+    }
+
+    
 }
