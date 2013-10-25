@@ -130,7 +130,7 @@
 				<text><![CDATA[Lp.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="f4772b1a-870d-4aaa-97f2-194cb3587a1b" x="51" y="10" width="193" height="35"/>
+				<reportElement uuid="f4772b1a-870d-4aaa-97f2-194cb3587a1b" x="51" y="10" width="300" height="35"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="9" pdfEncoding="Cp1250"/>
 				</textElement>

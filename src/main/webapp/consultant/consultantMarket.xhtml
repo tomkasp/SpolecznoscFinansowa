@@ -5,18 +5,24 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://java.sun.com/jsf/composite/components">
 
     <body>
         <ui:composition  template="/templates/mainTemplate.xhtml">
+
+            
             <ui:define name="title"> Doradca - giełda </ui:define> 
 
             <ui:define name="content">
-
+            
+            <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" >
+                <comp:buySubscriptionDialog returnOnCancel="true" visibility="true" widgetName="subsDialog"  />
+            </h:panelGroup>
                 <h:form id="marketForm">
                     <div id="marketLogoBar" style="min-height: 190px;">
                         <h:graphicImage class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
-                        <div id="spaceFiller" > </div>
+                        <div id="spaceFiller"> </div>
                         <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
                     </div>
                     <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() >= Settings.premium}"  > 

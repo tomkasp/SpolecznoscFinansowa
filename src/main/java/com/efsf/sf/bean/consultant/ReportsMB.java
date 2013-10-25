@@ -53,12 +53,12 @@ public class ReportsMB implements Serializable{
                 +"/reports/";
     }
 
-    public void generateInvoice() throws JRException, IOException{
+    public void generateInvoice(Integer idSubscription) throws JRException, IOException{
         GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
         Map<String, Object> params=new HashMap<String, Object>();
         params.put("consultant", loginMB.getConsultant());
         params.put("address", getInvoiceAddress());
-        params.put("sub", dao.getById(1));
+        params.put("sub", dao.getById(idSubscription));
         export("invoice.jrxml", params, new JREmptyDataSource());
     }
     
