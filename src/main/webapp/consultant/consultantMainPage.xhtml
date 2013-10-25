@@ -99,9 +99,14 @@
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() >= settings.standard}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmed.show();" >
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" type="button" onclick="subsDialog.show();" />
+                   
+                    
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() >= settings.standard}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" type="button" onclick="subsDialog.show();" />
+                   
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
                     <h:commandLink styleClass="topMenuButton greyButton wideButton" value="Generuj Fakturę" action="#{reportsMB.generateInvoice()}"/>
                    <div class="marginT50">
@@ -261,6 +266,8 @@
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() > 0}" disabled="#{empty consultantMainPageMB.selectedObservedCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{consultantMainPageMB.applyToCase(consultantMainPageMB.selectedObservedCase)}" oncomplete="confirmed.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
+                    <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" type="button" onclick="subsDialog.show();" />
+                  
 
 
                     

@@ -5,7 +5,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://java.sun.com/jsf/composite/components">
 
     <body>
 
@@ -32,7 +33,8 @@
                 <f:event type="preRenderView" listener="#{caseViewMB.loadCaseClientsDetails()}" />
                 <h:form id="titleForm">
                     <h3> Sprawa numer: #{caseViewMB.selectedClientCase.idClientCase} (#{caseViewMB.selectedClientCase.caseStatus.name}) </h3>
-                </h:form>            
+                </h:form>
+                <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />              
                     <div style="min-height: 160px">
                         <div class="leftInlineBox">
                             <h:form id="leftForm">
@@ -108,7 +110,9 @@
                                             Sprawa wydaje Ci się interesująca? Myślisz, że jesteś w stanie ją wygrać? <br /> Zgłoś się teraz!
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton id="apply" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(caseViewMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
+                                        <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() > settings.free}" id="apply" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" action="#{clientCaseMB.applyToCase(caseViewMB.selectedClientCase)}" oncomplete="confirmed.show();" /> 
+                                        <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" type="button" onclick="subsDialog.show();" />
+                   
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{clientCaseMB.doesAppliedToCase(loginMB.consultant, caseViewMB.selectedClientCase)}" >
                                         <h4> WYCOFAJ ZGŁOSZENIE </h4>
@@ -127,7 +131,9 @@
                                             Jeszcze się zastanawiasz? <br /> Dodaj sprawę do obserwowanych spraw, dzięki temu szybko będziesz mógł ją znaleźć jeśli zdecydujesz się zgłosić. 
                                         </div>
                                         <div style="min-height: 50px"></div>
-                                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(caseViewMB.selectedClientCase)}" oncomplete="confirmedObserved.show();" />
+                                        <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() > settings.free}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{clientCaseMB.traceCase(caseViewMB.selectedClientCase)}" oncomplete="confirmedObserved.show();" />
+                                        <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" type="button" onclick="subsDialog.show();" />
+                   
                                     </h:panelGroup>
 
                                     <h:panelGroup rendered="#{clientCaseMB.doesConsultantObserveCase(loginMB.consultant, caseViewMB.selectedClientCase)}" >
