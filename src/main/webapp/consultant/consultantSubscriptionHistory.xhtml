@@ -1,14 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-    </head>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
     <body>
-        <div>TODO write content</div>
+        <ui:composition  template="/templates/mainTemplate.xhtml">
+            <ui:define name="title"> Doradca - giełda </ui:define> 
+
+            <ui:define name="content">
+
+
+                <h:form>
+                    <p:dataTable id="subscriptionHistory" value="#{consultantSubscriptionMB.consultantSubscription}" rowKey="#{row}" 
+                                 rowIndexVar="rowNumber"  var="row" emptyMessage="Nie ma żadnych spraw" 
+                                 selection="#{marketMB.selectedMarketCase}" selectionMode="single" >
+
+                        <p:column headerText="Id transakcji">  
+                            <h:outputText  value="#{row.sessionId}"/>
+                        </p:column> 
+
+                        <p:column headerText="Data Transakcji">  
+                            <h:outputText  value="#{row.transactionDate}"/>
+                        </p:column> 
+
+                        <p:column headerText="Typ abonamentu">  
+                            <h:outputText  value="#{row.subscriptionType.name}"/>
+                        </p:column> 
+
+                        <p:column headerText="Generuj fakture">  
+
+                            <h:commandLink action="#{reportsMB.generateInvoice(row.subscriptionType.idSubscriptionType)}" value="generuj" />
+                        </p:column> 
+
+                    </p:dataTable>   
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>
+
