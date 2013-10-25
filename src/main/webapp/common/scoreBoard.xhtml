@@ -5,23 +5,28 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://java.sun.com/jsf/composite/components">
 
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Doradca - komentarze </ui:define> 
-
+            <ui:define name="title"> Doradca - ranking </ui:define> 
 
             <ui:define name="content">
-
-
+        
                 <div>
-
-
                     <h3>Ranking najlepszych doradców</h3>
+
+                    <h:panelGroup rendered="#{loginMB.consultant != null and loginMB.returnConsultantAccessRights() == settings.free}" >
+                          <comp:buySubscriptionDialog id="ssss" returnOnCancel="true" visibility="true" widgetName="subsDialog"  />
+                    </h:panelGroup>
+                    
+
+                    
+                    
                     <h:form id="scoreBoardForm"> 
-                        <p:dataTable style="width: auto;" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" selection="#{scoreBoardMB.consultantRating}" emptyMessage="Brak doradców" selectionMode="single">
+                        <p:dataTable rendered="#{!(loginMB.consultant != null and loginMB.returnConsultantAccessRights() == settings.free)}"  style="width: auto" value="#{scoreBoardMB.board}" rowKey="#{row.idConsultantRating}" rowIndexVar="rowNumber"  var="row" selection="#{scoreBoardMB.consultantRating}" emptyMessage="Brak doradców" selectionMode="single">
 
                             <p:ajax update="@form" event="rowSelect" />
 
