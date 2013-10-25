@@ -36,7 +36,6 @@ public class ConsultantProfileMB implements Serializable{
     }
 
     
-    
     public List<Institution> castInstitutionSetToArray(Set<Institution> csSet)
     {
         return new ArrayList(csSet);
