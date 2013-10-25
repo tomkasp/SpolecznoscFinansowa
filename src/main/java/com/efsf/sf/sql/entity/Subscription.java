@@ -47,7 +47,7 @@ public class Subscription implements java.io.Serializable {
         this.consultant = consultant;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_type", nullable = false)
     @ForeignKey(name="subscriptionToSubscriptionType")
     public SubscriptionType getSubscriptionType() {
