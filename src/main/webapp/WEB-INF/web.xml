@@ -56,7 +56,7 @@
     
     
     <!-- Auto scan REST service -->
-    <context-param>
+<!--    <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -82,7 +82,7 @@
     <servlet-mapping>
         <servlet-name>ApiServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     
     <session-config>
         <session-timeout>30</session-timeout>
