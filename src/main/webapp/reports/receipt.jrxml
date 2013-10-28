@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2bfa924-4d06-4673-88e1-23cba84f827e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="38"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -24,11 +24,13 @@
 		</box>
 	</style>
 	<subDataset name="Table Dataset 1" uuid="dd5900d3-5328-4c5a-babd-e9ea7fe55495">
-		<parameter name="Sub" class="com.efsf.sf.sql.entity.SubscriptionType"/>
+		<parameter name="sub" class="com.efsf.sf.sql.entity.SubscriptionType"/>
 	</subDataset>
-	<parameter name="Consultant" class="com.efsf.sf.sql.entity.Consultant" isForPrompting="false"/>
-	<parameter name="Address" class="com.efsf.sf.sql.entity.Address"/>
-	<parameter name="Sub" class="com.efsf.sf.sql.entity.SubscriptionType"/>
+	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant" isForPrompting="false"/>
+	<parameter name="address" class="com.efsf.sf.sql.entity.Address"/>
+	<parameter name="sub" class="com.efsf.sf.sql.entity.SubscriptionType"/>
+	<parameter name="number" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
 	<field name="field1" class="java.lang.Object"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -74,7 +76,7 @@
 				<textElement textAlignment="Right">
 					<font pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement uuid="d11932e8-631d-4255-95cb-720caad59b54" x="432" y="31" width="92" height="20"/>
@@ -83,13 +85,13 @@
 				</textElement>
 				<text><![CDATA[Wrocław]]></text>
 			</staticText>
-			<staticText>
-				<reportElement uuid="5141ccfd-184b-404c-b43e-bc520a247927" x="289" y="75" width="129" height="30"/>
-				<textElement textAlignment="Left" verticalAlignment="Bottom">
-					<font fontName="SansSerif" size="16" isBold="true" pdfEncoding="Cp1250"/>
+			<textField>
+				<reportElement uuid="a59b5e47-cae6-4ce8-bfb2-1948251d1406" x="294" y="75" width="100" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[1/10/2013]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{number}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -161,28 +163,28 @@
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Consultant}.getName() + " " + $P{Consultant}.getLastName()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{consultant}.getName() + " " + $P{consultant}.getLastName()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="f4c447c9-784a-45e0-bc5e-5052b5c0062e" x="289" y="53" width="235" height="15"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ul. "+ $P{Address}.getStreet() + " " + $P{Address}.getHouseNumber()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ul. "+ $P{address}.getStreet() + " " + $P{address}.getHouseNumber()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="7f10fa32-9ac2-46e6-862b-2fb9dcb08ddc" x="289" y="68" width="235" height="15"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Address}.getZipCode() + " " + $P{Address}.getCity()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{address}.getZipCode() + " " + $P{address}.getCity()]]></textFieldExpression>
 			</textField>
 			<componentElement>
 				<reportElement uuid="512078b0-a091-4856-aea5-cb1098528cd0" key="table" style="table" mode="Transparent" x="0" y="196" width="555" height="90" backcolor="#FFFFFF"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Table Dataset 1" uuid="ca2d353b-0137-464d-b3fb-cd567d1212dc">
-						<datasetParameter name="Sub">
-							<datasetParameterExpression><![CDATA[$P{Sub}]]></datasetParameterExpression>
+					<datasetRun subDataset="Table Dataset 1" uuid="ff8ffb24-7be2-4d2e-adcd-9df3925bd14b">
+						<datasetParameter name="sub">
+							<datasetParameterExpression><![CDATA[$P{sub}]]></datasetParameterExpression>
 						</datasetParameter>
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource(1)]]></dataSourceExpression>
 					</datasetRun>
@@ -214,7 +216,7 @@
 							<textField>
 								<reportElement uuid="d80dd776-83e7-47ae-a4b6-adefa096686a" x="0" y="0" width="219" height="59"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$P{Sub}.getName()]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{sub}.getName()]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -250,7 +252,7 @@
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font pdfEncoding="Cp1250"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$P{Sub}.priceWithTax()+" zł"]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{sub}.priceWithTax()+" zł"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -266,7 +268,7 @@
 				<textElement>
 					<font pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -298,14 +300,14 @@
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font pdfEncoding="Cp1250"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Sub}.priceWithTax()+" zł"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceWithTax()+" zł"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="cbe6f698-22da-44f3-8e06-3d7e907f7962" x="154" y="33" width="278" height="20"/>
 				<textElement>
 					<font pdfEncoding="Cp1250" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{Sub}.priceSpeak()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{sub}.priceSpeak()]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
