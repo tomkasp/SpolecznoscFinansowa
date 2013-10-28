@@ -33,11 +33,11 @@
     <h:form id="menuFormConsultant">
         <div class="topbarMenuBlue">
             <h:panelGroup>
-                <h:commandButton id="logoutButton" class="topMenuButton greyButton wideButton" value="Wyloguj" action="#{loginMB.logout()}"/>
-                <h:button id="messagesButton" class="topMenuButton greyButton wideButton" value="Wiadomości" outcome="/consultant/consultantViewMessages"/>
-                <h:button id="deactivateAccountButton" class="topMenuButton greyButton" value="Dezaktywuj konto" outcome="/common/deactivateAccount"/>
-                <h:button class="topMenuButton greyButton wideButton" value="Zgłoś naruszenie zasad" outcome="/policy_violation"/>
-                <h:button class="topMenuButton greyButton wideButton" value="#{loginMB.returnConsultantAccessRights() == 0 ? 'Kup Abonament' : 'Przedłuż abonament'}" outcome="/consultant/consultantChoosePayment"/>
+                <h:commandButton id="logoutButton" class="topMenuButton greyButton wideButton" value="wyloguj" action="#{loginMB.logout()}"/>
+                <h:button id="messagesButton" class="topMenuButton greyButton wideButton" value="wiadomości" outcome="/consultant/consultantViewMessages"/>
+                <h:button id="deactivateAccountButton" class="topMenuButton greyButton" value="dezaktywuj konto" outcome="/common/deactivateAccount"/>
+                <h:button class="topMenuButton greyButton wideButton" value="transakcje" outcome="/consultant/consultantSubscriptionHistory"/>
+                <h:button class="topMenuButton greyButton wideButton" value="#{loginMB.returnConsultantAccessRights() == 0 ? 'kup abonament' : 'przedłuż abonament'}" outcome="/consultant/consultantChoosePayment"/>
             </h:panelGroup>
         </div>
     </h:form>
