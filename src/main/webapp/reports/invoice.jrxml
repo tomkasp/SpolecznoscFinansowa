@@ -9,6 +9,8 @@
 		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
 	</parameter>
 	<parameter name="sub" class="com.efsf.sf.sql.entity.SubscriptionType" isForPrompting="false"/>
+	<parameter name="number" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -58,20 +60,6 @@
 			<rectangle>
 				<reportElement uuid="81949be6-79c8-4fe1-ad95-5069d5ac25a3" x="0" y="205" width="555" height="29" backcolor="#CCCCCC"/>
 			</rectangle>
-			<staticText>
-				<reportElement uuid="ecbf620f-5e49-408d-92dd-14e1dffff8d4" x="16" y="205" width="519" height="29"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="18" isBold="false" pdfEncoding="Cp1250"/>
-				</textElement>
-				<text><![CDATA[Faktura 1/10/13]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="a4eb20b9-5594-4151-8e4e-e129710da6b3" x="350" y="0" width="205" height="20"/>
-				<textElement>
-					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
-				</textElement>
-				<text><![CDATA[Wrocław, data wystawienia: 2013-10-01]]></text>
-			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="023a4e87-a845-4fa1-8757-9f1fbf5fe6a2" x="10" y="131" width="350" height="15"/>
 				<textElement>
@@ -97,6 +85,18 @@
 				<reportElement uuid="f5f5d3e3-961d-4d96-bb13-0a3cf3019685" x="317" y="27" width="223" height="77"/>
 				<imageExpression><![CDATA["sf.png"]]></imageExpression>
 			</image>
+			<textField>
+				<reportElement uuid="bab9fecc-1b20-4277-af7b-c477ed5c43bf" x="19" y="205" width="527" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="16" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Faktura "+$P{number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="84c5c6ab-066f-44a7-a8c5-b9208c9f596f" x="336" y="1" width="218" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Wrocław, data wystawienia: "+$P{date}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
@@ -293,7 +293,7 @@
 				<reportElement uuid="25fcc49f-c801-4bb7-8952-3d4e596e6620" x="1" y="70" width="553" height="1"/>
 			</line>
 			<textField>
-				<reportElement uuid="25063389-cf0b-4186-a641-8efb25d40e49" x="60" y="44" width="100" height="20"/>
+				<reportElement uuid="25063389-cf0b-4186-a641-8efb25d40e49" x="60" y="44" width="205" height="20"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{sub}.getName()]]></textFieldExpression>
 			</textField>
