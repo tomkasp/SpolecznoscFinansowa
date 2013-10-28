@@ -33,7 +33,7 @@
 
                         <p:column headerText="Generuj fakture">  
 
-                            <h:commandLink action="#{reportsMB.generateInvoice(row.subscriptionType.idSubscriptionType)}" value="generuj" />
+                            <h:commandLink action="#{reportsMB.generateInvoice(row.subscriptionType.idSubscriptionType, row.sessionId)}" value="generuj" />
                         </p:column> 
 
                     </p:dataTable>   

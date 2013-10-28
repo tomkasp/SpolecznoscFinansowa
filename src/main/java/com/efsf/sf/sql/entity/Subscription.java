@@ -109,7 +109,6 @@ public class Subscription implements java.io.Serializable {
         this.status = status;
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transactionNumber")
     public Integer getTransactionNumber() {
         return transactionNumber;

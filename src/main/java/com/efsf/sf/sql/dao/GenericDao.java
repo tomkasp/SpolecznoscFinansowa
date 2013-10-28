@@ -3,7 +3,9 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Projections;
 
 public class GenericDao<T> {
 
@@ -30,6 +32,21 @@ public class GenericDao<T> {
             session.close();
         }
         return obj;
+    }
+    
+    public Integer getMaxInt(String field){
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        Integer result;
+        try {
+            
+            Criteria criteria = session
+                    .createCriteria(getMyType())
+                    .setProjection(Projections.max(field));
+            result = (Integer) criteria.uniqueResult();
+        } finally {
+            session.close();
+        }
+        return result; 
     }
 
     public List<T> getAll() {

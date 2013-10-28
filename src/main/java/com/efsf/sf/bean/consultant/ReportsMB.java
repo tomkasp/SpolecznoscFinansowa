@@ -4,12 +4,16 @@ import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.AddressDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.Address;
+import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.faces.bean.ManagedBean;
@@ -53,12 +57,21 @@ public class ReportsMB implements Serializable{
                 +"/reports/";
     }
 
-    public void generateInvoice(Integer idSubscription) throws JRException, IOException{
+    public void generateInvoice(Integer idSubscription, String sessionId) throws JRException, IOException{
         GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
+        GenericDao<Subscription> dao2=new GenericDao(Subscription.class);
+        
         Map<String, Object> params=new HashMap<String, Object>();
         params.put("consultant", loginMB.getConsultant());
         params.put("address", getInvoiceAddress());
         params.put("sub", dao.getById(idSubscription));
+        
+        Date date=dao2.getById(sessionId).getTransactionDate();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(date);
+        
+        params.put("number", dao2.getById(sessionId).getTransactionNumber()+"/"+cal.get(Calendar.YEAR));
+        params.put("date", date.toString());
         export("invoice.jrxml", params, new JREmptyDataSource());
     }
     
