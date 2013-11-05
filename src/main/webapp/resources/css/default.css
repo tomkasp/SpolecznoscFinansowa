@@ -263,10 +263,15 @@ p:column {
 
 
 .redUnderlineLink{
-
+    background: none;
     color: crimson;
-    margin-left: 5px;
     text-decoration: underline;
+}
+
+.registerCheckbox
+{
+    float: right;
+    margin-right: 100px;
 }
 
 .greyBackground {
@@ -780,6 +785,13 @@ p:column {
     margin:2px 0 0 0;
     clear: both;
     padding: 0 45px 0 0;
+}
+
+.niceInvalid {
+    color: red;
+    float:right;
+    margin:2px 0 0 0;
+    clear: both;
 }
 
 .invalid2{

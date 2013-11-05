@@ -1,157 +1,133 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/mainTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title"> Doradca - rejestracja </ui:define>     
+    <ui:define name="top">            
+        <div class="topbarLogo">
+            <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+        </div>
+    </ui:define>
 
+    <ui:define name="content">
+        <h3> Zarejestruj się jako doradca </h3>
 
+        <div class="redMessage">
+            Rejestracja jest DARMOWA. Możesz wykupić wersję PRO w dowolnej chwilii.  
+        </div>
 
-    <body>
-        <ui:composition template="/templates/mainTemplate.xhtml">
+        <div class="leftInlineBox">
 
-            <ui:define name="title"> Doradca - rejestracja </ui:define>     
-            <ui:define name="top">            
-                <div class="topbarLogo">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                </div>
+            <h:form>
 
-            </ui:define>
-            <ui:define name="content">
+                <div class="marginLRT30">
 
-                
-                <div id="profileBar" style="min-height: 50px">
-                    <h3> Zarejestruj się jako doradca </h3>
-                </div>
-                <div class="redMessage">
-                    <h5> Rejestracja jest DARMOWA. Możesz wykupić wersję PRO w dowolnej chwilii.</h5>    
-                </div>
-                <div style="min-height: 400px;" class="marginB30">
-                    
-                    <div class="leftThinerBox">
+                    <div class="field"> 
+                        <h:outputText class="label" value="Imię"/>  
+                        <h:inputText id="name" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.name}" >
+                            <f:validateLength minimum="3" maximum="20" />
+                            <p:ajax event="keyup" update="nameMessage" />
+                        </h:inputText>
+                        <h:message for="name" errorClass="niceInvalid" id="nameMessage" />
+                    </div> 
 
-                        <h:form>
+                    <div class="field"> 
+                        <h:outputText class="label" value="Nazwisko"/>  
+                        <h:inputText id="lastName" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.lastName}" >
+                            <f:validateLength minimum="3" maximum="20" />
+                            <p:ajax event="keyup" update="nameMessage" />
+                        </h:inputText>
+                        <h:message for="lastName" errorClass="niceInvalid" id="lastNameMessage" />
+                    </div> 
 
-                            <div class="marginLRT30">
-
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Imię"/>  
-                                    <h:inputText id="name" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.name}" >
-                                        <f:validateLength minimum="3" maximum="20" />
-                                        <p:ajax event="keyup" update="nameMessage" />
-                                    </h:inputText>
-                                    <h:message for="name" errorClass="invalid" id="nameMessage" />
-                                </div> 
-
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Nazwisko"/>  
-                                    <h:inputText id="lastName" class="inputWidth" required="true" value="#{consultantCreateMB.consultant.lastName}" >
-                                        <f:validateLength minimum="3" maximum="20" />
-                                        <p:ajax event="keyup" update="nameMessage" />
-                                    </h:inputText>
-                                    <h:message for="lastName" errorClass="invalid" id="lastNameMessage" />
-                                </div> 
-
-                                <div id="dupa" class="field"> 
-                                    <h:outputText  class="label" value="Hasło"/> 
-                                    <h:inputSecret id="confirmPassword" class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" >
-                                        <f:validateLength minimum="8" maximum="20" />
-                                        <f:ajax event="keyup" render="passwordCheck"/> 
-                                    </h:inputSecret>
-                                    <h:message for="confirmPassword" errorClass="invalid" id="passwordMessage" />
-                                </div>
-
-                                <div class="field">
-                                    <h:outputText id="confirmPassword2" class="label" value="Potwierdź hasło"/> 
-                                    <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" > 
-                                        <f:validateLength minimum="8" maximum="20" />
-                                        <f:validator validatorId="SamePasswordValidator"/>
-                                        <p:ajax event="keyup" update="passwordCheckMessage"/> 
-                                    </h:inputSecret>
-                                    <h:message for="passwordCheck" errorClass="invalid" id="passwordCheckMessage" />
-                                </div>
-
-
-                                <div class="field"> 
-                                    <h:outputText class="label" value="Adres email"/> 
-                                    <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
-                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                        <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
-                                        <p:ajax event="keyup" update="emailMessage"/>
-                                    </h:inputText>
-                                    <h:message for="email" errorClass="invalid" id="emailMessage" />
-                                </div>
-
-                                <div class="field" > 
-                                    <p:selectBooleanCheckbox id="policy1" value="#{consultantCreateMB.policy}" > 
-                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
-                                    </p:selectBooleanCheckbox>
-                                    <h:outputText class="label"  value="akceptuje"/><h:link class="label" value="regulamin"/>
-                                    <h:message for="policy1" errorClass="invalid" id="policy1CheckMessage" />
-                                </div>
-
-                                <div class="field" style="margin-top: 50px;"> 
-                                    <p:selectBooleanCheckbox id="policy2" value="#{consultantCreateMB.policy2}"  >
-                                    <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
-                                    </p:selectBooleanCheckbox>
-                                    <h:outputText class="label" value="wyrażam zgodę na przetwarzanie danych" />
-                                    <h:message for="policy2" errorClass="invalid" id="policy2CheckMessage" />
-                                </div>
-
-                             <div style="float: right; margin: 20px 0; ">
-                                <h:button class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
-                            
-                                <h:commandButton class ="blueButton wideButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
-                             </div>    
-                                
-                            </div>
-                           
-
-
-                        </h:form>
-
+                    <div id="dupa" class="field"> 
+                        <h:outputText  class="label" value="Hasło"/> 
+                        <h:inputSecret id="confirmPassword" class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" >
+                            <f:validateLength minimum="8" maximum="20" />
+                            <f:ajax event="keyup" render="passwordCheck"/> 
+                        </h:inputSecret>
+                        <h:message for="confirmPassword" errorClass="niceInvalid" id="passwordMessage" />
                     </div>
 
-                    <div class="rightWiderBox">
-                        
-                        <h4> Co zyskujesz jako doradca </h4>
-
-                        <div class="solidText"> 
-
-                            <p>Wygoda:</p>
-                            <p> 
-                                Jako doradca w naszym portalu zyskujesz całą gamę nowych możliwości o których wcześniej konsultanci mogli tylko marzyć.
-                                Przede wszystkim masz dostęp do ogólnopolskiej bazy klientów którzy czekają na Twoją pomoc.
-                                Nigdy wcześniej rynek kredytów nie był tak blisko klienta jak teraz! 
-                            </p>
-
-                            <p>Prestiż:</p>
-                            <p>
-                                Nasz portal jest pierwszym tego typu w Polsce.
-                                Zarejestruj się i bądź pierwszym który podbije ogólnopolski rynek kredytów.
-                                Masz możliwość wyrobienia renomy dzięki której klienci sami będą się do Ciebie zgłaszać.
-                            </p>
-
-                            <p>Wiedza:</p>   
-                            <p>
-                                Pełny dostęp do bazy wszystkim banków i instytucji które zajmują się świadczeniem usług kredytowych oraz przegląd bogatej bazy produktów które te instytucje świadczą. 
-                                Teraz możesz wymieniać opinie i informacje dzięki stałemu kontaktowi z innym doradcami.                            
-                            </p>  
-
-                        </div>   
-                        
+                    <div class="field">
+                        <h:outputText id="confirmPassword2" class="label" value="Potwierdź hasło"/> 
+                        <h:inputSecret id="passwordCheck" class="inputWidth" required="true" value="#{consultantCreateMB.user.password}" > 
+                            <f:validateLength minimum="8" maximum="20" />
+                            <f:validator validatorId="SamePasswordValidator"/>
+                            <p:ajax event="keyup" update="passwordCheckMessage"/> 
+                        </h:inputSecret>
+                        <h:message for="passwordCheck" errorClass="niceInvalid" id="passwordCheckMessage" />
                     </div>
+
+
+                    <div class="field"> 
+                        <h:outputText class="label" value="Adres email"/> 
+                        <h:inputText id ="email" class="inputWidth" required="true" value="#{consultantCreateMB.user.email}" >
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            <f:validator validatorId="com.efsf.sf.util.DuplicateEmailValidator" />
+                            <p:ajax event="keyup" update="emailMessage"/>
+                        </h:inputText>
+                        <h:message for="email" errorClass="niceInvalid" id="emailMessage" />
+                    </div>
+
+                    <div class="field">
+                        <h:outputText value="Akceptuję"/>
+                        <h:commandButton class="redUnderlineLink" value="Regulamin"  onclick="userAgreement.show();" type="button" />
+                        <p:selectBooleanCheckbox id="rules" binding="#{rules}" styleClass="floatR">
+                            <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                        </p:selectBooleanCheckbox>
+                        <h:message for="rules" class="niceInvalid" id="rulesMessage" />
+                    </div> 
+
+
+                    <div class="field">
+                        <h:outputText value="Wyrażam zgodę na przetwarzanie danych"/>              
+                        <p:selectBooleanCheckbox id="agree" binding="#{agree}" styleClass="floatR">
+                            <f:validator validatorId="com.efsf.sf.validator.RequiredCheckboxValidator" />
+                        </p:selectBooleanCheckbox>
+                        <h:message for="agree" class="niceInvalid" id="agreeMessage" />
+                    </div> 
+
+                    <div style="float: right; margin: 20px 0; ">
+                        <h:button class="greenButton floatL" value="Zarejestruj się jako klient" outcome="/clientCreateAccount" />
+                        <h:commandButton class ="blueButton wideButton floatL marginL20" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
+                    </div>    
                 </div>
-                
+            </h:form>
+        </div>
+        <div class="rightInlineBox">
+            <h4> Co zyskujesz jako doradca </h4>
+            <div class="solidText"> 
+                <p>Wygoda:</p>
+                <p> 
+                    Jako doradca w naszym portalu zyskujesz całą gamę nowych możliwości o których wcześniej konsultanci mogli tylko marzyć.
+                    Przede wszystkim masz dostęp do ogólnopolskiej bazy klientów którzy czekają na Twoją pomoc.
+                    Nigdy wcześniej rynek kredytów nie był tak blisko klienta jak teraz! 
+                </p>
 
-            </ui:define>
+                <p>Prestiż:</p>
+                <p>
+                    Nasz portal jest pierwszym tego typu w Polsce.
+                    Zarejestruj się i bądź pierwszym który podbije ogólnopolski rynek kredytów.
+                    Masz możliwość wyrobienia renomy dzięki której klienci sami będą się do Ciebie zgłaszać.
+                </p>
+
+                <p>Wiedza:</p>   
+                <p>
+                    Pełny dostęp do bazy wszystkim banków i instytucji które zajmują się świadczeniem usług kredytowych oraz przegląd bogatej bazy produktów które te instytucje świadczą. 
+                    Teraz możesz wymieniać opinie i informacje dzięki stałemu kontaktowi z innym doradcami.                            
+                </p>  
+
+            </div>   
+        </div>     
+        <p:dialog id="userAgreementDialog" header="Regulamin" widgetVar="userAgreement" width="800" height="490" resizable="false" >  
+            <ui:include src="/resources/other/userAgreement.xhtml" />
+        </p:dialog> 
+    </ui:define>
 
 
+</ui:composition>
 
-
-        </ui:composition>
-
-    </body>
-</html>
