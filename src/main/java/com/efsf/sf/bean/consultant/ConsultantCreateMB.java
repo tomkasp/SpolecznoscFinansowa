@@ -76,6 +76,7 @@ public class ConsultantCreateMB implements Serializable {
             subscription.setSubscriptionType(st);
             //PAMIETAJ O DODANIU DATY W PRZYSZŁOŚCI
             SubscriptionDAO sdao = new SubscriptionDAO();
+            subscription.setSessionId("0" + String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000)));
             sdao.save(subscription);
         }
         
