@@ -18,18 +18,16 @@ public class CharacterEncodingFilter implements Filter {
         req.setCharacterEncoding("UTF-8");
         
         HttpServletRequest request = (HttpServletRequest) req;
-        String requestURI = request.getServerName()+"; "+request.getProtocol()+"; "+request.getRemoteHost()+"; "+request.getContextPath()+"; "+request.getLocalName()+"; "+request.getRequestURL();
+        String requestURI = request.getRequestURL().toString();
         
         System.out.println("=====================> "+requestURI);
         
-     //   if (requestURI.contains("://localhost:8084")) {
-        //    String toReplace = requestURI.substring(requestURI.indexOf("/Dir_My_App"), requestURI.lastIndexOf("/") + 1);
-        //    String newURI = requestURI.replace(toReplace, "?Contact_Id=");
-       //     req.getRequestDispatcher(newURI).forward(req, resp);
-             chain.doFilter(req, resp);
-       // } else {
+        if (requestURI.contains("://spolecznoscfinansowa.pl")) {
+            String newURI = requestURI.replace("://spolecznoscfinansowa.pl", "://www.spolecznoscfinansowa.pl");
+            req.getRequestDispatcher(newURI).forward(req, resp);
+        } else {
             chain.doFilter(req, resp);
-      //  }
+        }
 
     }
 
