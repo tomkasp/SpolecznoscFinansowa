@@ -10,9 +10,7 @@
 
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Doradca - ekran główny </ui:define> 
-
-
+            <ui:define name="title"> Doradca - ekran główny </ui:define>          
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
                 <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
@@ -418,8 +416,7 @@
                     </div>
 
                     <h:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
-                    <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
-
+                   
                     
 
 
