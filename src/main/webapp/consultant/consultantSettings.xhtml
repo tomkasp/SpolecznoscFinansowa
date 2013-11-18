@@ -215,9 +215,10 @@
                         </div>
 
                         <div class="copyAddressButton">
-                            <p:commandLink id="copyButton" disabled="#{!consultantSettingsMB.invoiceFlag}" action="#{consultantSettingsMB.copyAddress()}" update="formularz" >
+                            <h:commandLink id="copyButton" disabled="#{!consultantSettingsMB.invoiceFlag}" action="#{consultantSettingsMB.copyAddress()}" >
+                                <f:ajax render="formularz" />
                                 <h:graphicImage name="icons/copyAddress.png"/>
-                            </p:commandLink>
+                            </h:commandLink>
 
                         </div>
 

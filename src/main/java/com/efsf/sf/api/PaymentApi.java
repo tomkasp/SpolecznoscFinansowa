@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -71,18 +72,36 @@ public class PaymentApi {
     @Produces(MediaType.TEXT_PLAIN)
     public Response paymentStatusChanged(@FormParam("pos_id") String pos_id, @FormParam("session_id") String session_id,
             @FormParam("ts") String ts, @FormParam("sig") String sig) throws IOException, InstantiationException, IllegalAccessException {
-
+        
         if (Security.md5(pos_id + session_id + ts + key2).equals(sig)) {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
             readTransactionStatus(session_id);
-            return Response.ok("OK").build();
+            return Response.ok("ERROR" + sig + " " + pos_id + " " + session_id).build();
 
         } else {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG ERROR");
-            return Response.ok("ERROR").build();
+            return Response.ok("ERROR" + sig + " " + pos_id + " " + session_id).build();
         }
+    }
+    
+    @POST
+    @Path("/testPost")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response testPost() throws IOException, InstantiationException, IllegalAccessException {
+
+        System.out.println("POST TEST OK !   !   !   =============================================================");
+            return Response.ok("POST OK ").build();
+    }
+    
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response paymentStatusChanged() throws IOException, InstantiationException, IllegalAccessException {
+
+        System.out.println("cos tam test=================================================================");
+            return Response.ok("ERROR").build();
     }
 
     private void readTransactionStatus(String session_id) throws IOException{
