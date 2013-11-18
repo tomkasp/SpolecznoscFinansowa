@@ -77,12 +77,12 @@ public class PaymentApi {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG OK");
             readTransactionStatus(session_id);
-            return Response.ok("ERROR" + sig + " " + pos_id + " " + session_id).build();
+            return Response.ok("OK").build();
 
         } else {
 
             log.log(Level.INFO, "Received Message from PAYU changed status: " + session_id + " SIG ERROR");
-            return Response.ok("ERROR" + sig + " " + pos_id + " " + session_id).build();
+            return Response.ok("ERROR").build();
         }
     }
     

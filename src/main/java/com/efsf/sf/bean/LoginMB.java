@@ -7,7 +7,6 @@ import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
 import com.efsf.sf.util.Settings;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
@@ -18,7 +17,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -65,19 +63,14 @@ public class LoginMB implements Serializable {
         }
     }
 
-    public String login() throws IOException {
+    public String login() {
 
-        String urlTemp = "https://www.spolecznoscfinansowa.pl";
-        
         UserDAO userDao = new UserDAO();
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
         user = userDao.login(this.email, this.password);
-        ExternalContext eCtx = FacesContext.getCurrentInstance().getExternalContext();
-        
         
         setCookie();
-
         
         if (user != null) {
             type = user.getType();
@@ -91,14 +84,13 @@ public class LoginMB implements Serializable {
                 client = null;
                 consultant = null;
 
-                eCtx.redirect(urlTemp + "/admin/adminMainPage.xhtml");
+                return "/admin/adminMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CONSULTANT_ACTIVE)) {
                 consultant = consultantDao.getCounsultantConnectedToUser(idUser);
                 client = null;
 
-                eCtx.redirect(urlTemp + "/consultant/consultantMainPage.xhtml");
-                //return urlTemp + "/consultant/consultantMainPage.xhtml";
+                return "/consultant/consultantMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CLIENT_ACTIVE)) {
                 client = userDao.getClientConnectedToUser(idUser);
@@ -107,20 +99,20 @@ public class LoginMB implements Serializable {
                 this.activeAddingApp = this.checkNewAppActivity();
                 consultant = null;
 
-                eCtx.redirect(urlTemp + "/client/clientMainPage.xhtml");
+                return "/client/clientMainPage?faces-redirect=true";
             }
 
             if (type.equals(Settings.ADMIN_INACTIVE) || type.equals(Settings.CLIENT_INACTIVE) || type.equals(Settings.CONSULTANT_INACTIVE)) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(urlTemp + "/activateAccount.xhtml");
+                return "/activateAccount?faces-redirect=true";
             } else if (type.equals(Settings.CLIENT_UNVERIFIED) || type.equals(Settings.CONSULTANT_UNVERIFIED)) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, getBundle().getString("activateAccountTitle"), ""));
 
-                eCtx.redirect(urlTemp + "/login.xhtml");
+                return "/login";
             }
 
         }
 
-        return  urlTemp + "/login?faces-redirect=true";
+        return "/login?faces-redirect=true";
     }
 
     private Boolean checkNewAppActivity() {
@@ -187,7 +179,7 @@ public class LoginMB implements Serializable {
         return logout();
     }
 
-    public String activateUser() throws IOException {
+    public String activateUser() {
         if (user.getType() == Settings.ADMIN_INACTIVE) {
             user.setType(Settings.ADMIN_ACTIVE);
         }
