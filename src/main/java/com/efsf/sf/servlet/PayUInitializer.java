@@ -27,7 +27,11 @@ public class PayUInitializer extends HttpServlet {
                 
                 subs.setStatus(Integer.valueOf(params.get("trans_status")));
                 subs.setTransactionDate(new Date());
-                subs.setTransactionNumber(dao.getMaxInt("transactionNumber")==null? 1 : dao.getMaxInt("transactionNumber")+1);
+                
+                if(params.get("trans_status").equals("99")){
+                    subs.setTransactionNumber(dao.getMaxInt("transactionNumber")==null? 1 : dao.getMaxInt("transactionNumber")+1);
+                }
+                
                 dao.saveOrUpdate(subs);
 
                 if(params.get("trans_status").equals("99")){
