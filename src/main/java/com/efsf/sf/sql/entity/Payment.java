@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table
+@Table(name="payment")
 public class Payment implements Serializable {
     @Id
     private Integer id;

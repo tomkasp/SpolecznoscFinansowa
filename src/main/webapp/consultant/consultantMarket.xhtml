@@ -25,7 +25,8 @@
                         <div id="spaceFiller"> </div>
                         <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
                     </div>
-                    <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() >= Settings.premium}"  > 
+
+                    <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() >= settings.premium}"  > 
                         <div>
                             <h4> PARAMETRY </h4>
                         </div>
