@@ -20,14 +20,14 @@ public class CharacterEncodingFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         String requestURI = request.getRequestURL().toString();
         
-        System.out.println("=====================> "+requestURI);
+        //System.out.println("=====================> "+requestURI);
         
-        if (requestURI.contains("://spolecznoscfinansowa.pl")) {
-            String newURI = requestURI.replace("://spolecznoscfinansowa.pl", "://www.spolecznoscfinansowa.pl");
-            req.getRequestDispatcher(newURI).forward(req, resp);
-        } else {
+       // if (requestURI.contains("://spolecznoscfinansowa.pl")) {
+         //   String newURI = requestURI.replace("://spolecznoscfinansowa.pl", "://www.spolecznoscfinansowa.pl");
+       //     req.getRequestDispatcher(newURI).forward(req, resp);
+       // } else {
             chain.doFilter(req, resp);
-        }
+       // }
 
     }
 
