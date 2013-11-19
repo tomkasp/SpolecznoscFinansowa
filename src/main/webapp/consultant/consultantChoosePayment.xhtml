@@ -34,14 +34,19 @@
                                 </h:commandLink>
                             </h:form>
                         </h:panelGrid>
-
-
+                        
+                        
+                        <h:form>
+                            <h:commandButton value="Regulamin"  onclick="userAgreement.show();" type="button" />
+                        </h:form>
 
                     </div>
 
                 </div>
 
-
+                <p:dialog id="userAgreementDialog" header="Regulamin" widgetVar="userAgreement" width="800" height="490" resizable="false" >  
+                    <ui:include src="/resources/other/userAgreement.xhtml" />
+                </p:dialog> 
 
             </ui:define>
 
