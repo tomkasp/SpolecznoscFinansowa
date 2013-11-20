@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/templates/mainTemplate.xhtml">
+
+
+            <ui:define name="title"> SF - Jak to działa </ui:define> 
+
+            <ui:define name="top">
+
+                <div class="topbarLogo">
+                    <h:graphicImage alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                
+            <f:metadata>         
+                <f:viewParam name="videoId" value="#{tutorialMB.videoId}" />
+            </f:metadata>
+            <f:event type="preRenderView" listener="#{tutorialMB.loadMovie()}"/>  
+            <h2> #{tutorialMB.videoTitle} </h2> 
+                <video width="100%" controls="true" >
+                    <source src="#{tutorialMB.videoPath}" type="video/mp4"/>
+
+                    Your browser does not support the video tag.
+                </video>
+            
+            
+            <div>
+                <h:link value="Filmik 0" outcome="/how_it_works.xhtml?videoId=0"/>
+                <h:link value="Filmik 1" outcome="/how_it_works.xhtml?videoId=1"/>
+                <h:link value="Filmik 2" outcome="/how_it_works.xhtml?videoId=2"/>    
+                <h:link value="Filmik 3" outcome="/how_it_works.xhtml?videoId=3"/>
+                <h:link value="Filmik 4" outcome="/how_it_works.xhtml?videoId=4"/>      
+            </div>
+            
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
