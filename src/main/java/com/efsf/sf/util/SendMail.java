@@ -8,19 +8,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import javax.mail.*;
-import javax.mail.internet.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class SendMail extends Thread{
 
-    private static final String SMTP_HOST_NAME = "spolecznoscfinansowa.pl";
-    private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.pl";
-    private static final String SMTP_AUTH_PWD = "mndiIRHF07HJdoado38247dmsOIDhj83P";
+    private static final String SMTP_HOST_NAME = "serwer1317070.home.pl";
+    private static final String SMTP_AUTH_USER = "rejestracja@spolecznoscfinansowa.net.pl";
+    private static final String SMTP_AUTH_PWD = "test[123]";
     private static final String ENCODING="UTF-8";
-    private String emailFromAddress = "rejestracja@spolecznoscfinansowa.pl";
+    private String emailFromAddress = "rejestracja@spolecznoscfinansowa.net.pl";
     
     private String email;
     private String subject;    
