@@ -16,32 +16,33 @@ public class PayUInitializer extends HttpServlet {
     public synchronized void init() throws ServletException {
 
         class PayU implements PaymentListener {
+
             @Override
             public void afterPayment(Map<String, String> params) {
                 GenericDao<Subscription> dao = new GenericDao(Subscription.class);
                 Subscription subs = dao.getById(params.get("trans_session_id"));
-                
-                if(subs==null) {
-                    subs=new Subscription();
+
+                if (subs == null) {
+                    subs = new Subscription();
                 }
-                
+
                 subs.setStatus(Integer.valueOf(params.get("trans_status")));
                 subs.setTransactionDate(new Date());
-                
-                if(params.get("trans_status").equals("99")){
-                    subs.setTransactionNumber(dao.getMaxInt("transactionNumber")==null? 1 : dao.getMaxInt("transactionNumber")+1);
+
+                if (params.get("trans_status").equals("99")) {
+                    subs.setTransactionNumber(dao.getMaxInt("transactionNumber") == null ? 1 : dao.getMaxInt("transactionNumber") + 1);
                 }
-                
+
                 dao.saveOrUpdate(subs);
 
-                if(params.get("trans_status").equals("99")){
+                if (params.get("trans_status").equals("99")) {
                     PaymentMB payment = new PaymentMB();
-                    payment.extendSubscription(params.get("trans_session_id"));       
+                    payment.extendSubscription(params.get("trans_session_id"));
                 }
-                
+
             }
         }
-        
+
         PaymentApi.setListener(new PayU());
 
     }
