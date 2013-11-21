@@ -30,6 +30,8 @@ public class Subscription implements java.io.Serializable {
     private Date transactionDate;
     private String errorCode;
     private Integer transactionNumber;
+    private Boolean paymentType;
+    
     
     public Subscription() {
     }
@@ -116,6 +118,14 @@ public class Subscription implements java.io.Serializable {
 
     public void setTransactionNumber(Integer transactionNumber) {
         this.transactionNumber = transactionNumber;
+    }
+
+    public Boolean isPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(Boolean paymentType) {
+        this.paymentType = paymentType;
     }
 
 
