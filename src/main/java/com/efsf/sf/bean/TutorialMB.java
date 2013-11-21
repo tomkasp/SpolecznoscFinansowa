@@ -27,7 +27,7 @@ public class TutorialMB
 
     static String rootPath = "/resources/movies/";
     
-    private List<String> titles = new ArrayList<String>(Arrays.asList("Rejestracja użytkownika","Uzupełnienie profilu", "Założenie nowej sprawy", "Poruszanie się po stronie", "Jak stąd najszybciej uciec"));
+    private List<String> titles = new ArrayList<String>(Arrays.asList("Rejestracja użytkownika","Uzupełnienie profilu", "Dołączanie plików", "Poruszanie się po stronie", "Jak stąd najszybciej uciec"));
     
     private List<String> paths = new ArrayList<String>(Arrays.asList("01.mp4","02.mp4","03.mp4","04.mp4","05.mp4"));
     
