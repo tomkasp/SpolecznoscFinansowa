@@ -86,23 +86,6 @@ public class PaymentApi {
         }
     }
     
-    @POST
-    @Path("/testPost")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response testPost() throws IOException, InstantiationException, IllegalAccessException {
-
-        System.out.println("POST TEST OK !   !   !   =============================================================");
-            return Response.ok("POST OK ").build();
-    }
-    
-    @GET
-    @Path("/test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response paymentStatusChanged() throws IOException, InstantiationException, IllegalAccessException {
-
-        System.out.println("cos tam test=================================================================");
-            return Response.ok("ERROR").build();
-    }
 
     private void readTransactionStatus(String session_id) throws IOException{
 
