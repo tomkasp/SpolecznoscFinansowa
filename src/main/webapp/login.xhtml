@@ -63,9 +63,9 @@
 
                                 <div class="field"> 
                                     <h:outputText class="label" value="Hasło:"/> 
-                                    <h:inputSecret id="password" style="width: 207px;" onkeypress="if (event.keyCode == 13) { document.getElementById('logowanie:subbmit').click(); return false; }" value="#{loginMB.password}" required="true"  
-                                                   binding="#{password}">
-                                    </h:inputSecret>
+                                    <h:inputSecret redisplay="true" id="password" style="width: 207px;" onkeypress="if (event.keyCode == 13) { document.getElementById('logowanie:subbmit').click(); return false; }" value="#{loginMB.password}" required="true"  
+                                                   binding="#{password}"/>
+                                    
                                     <h:message style=" float: left; margin-left: 160px;" class="label" for="password" errorClass="invalid" id="passwordMessage" />
                   
                                 </div>

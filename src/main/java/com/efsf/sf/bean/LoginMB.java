@@ -87,7 +87,8 @@ public class LoginMB implements Serializable {
                 return "/admin/adminMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CONSULTANT_ACTIVE)) {
-                consultant = consultantDao.getCounsultantConnectedToUser(idUser);
+                consultant = consultantDao.getCounsultantConnectedToUser(idUser);     
+                
                 client = null;
 
                 return "/consultant/consultantMainPage?faces-redirect=true";

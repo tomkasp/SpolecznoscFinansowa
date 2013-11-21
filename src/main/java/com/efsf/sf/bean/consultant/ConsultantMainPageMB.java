@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -71,8 +72,23 @@ public class ConsultantMainPageMB implements Serializable {
     private List<Set<String>> finishedModelsEmploymentType = new ArrayList();
     private List<Set<String>> finishedModelsBranch = new ArrayList();
     private ClientCase selectedPremiumCase;
+    
+    private Boolean paymentAlert = false; 
+    
+    private Integer firstPaymentType = 0;
 
 
+    @PostConstruct
+    public void checkPayments()
+    {
+        SubscriptionDAO subDao = new SubscriptionDAO();
+        List lista = subDao.getAllSubscriptionForConsultant(loginMB.getConsultant());
+        if (lista.isEmpty())
+        {
+            paymentAlert = true;
+        }
+    }
+    
     public void reload() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isValidationFailed() && !facesContext.isPostback()) {
@@ -537,5 +553,21 @@ public class ConsultantMainPageMB implements Serializable {
 
     public void setObservedList(List<ClientCase> observedList) {
         this.observedList = observedList;
+    }
+
+    public Boolean isPaymentAlert() {
+        return paymentAlert;
+    }
+
+    public void setPaymentAlert(Boolean paymentAlert) {
+        this.paymentAlert = paymentAlert;
+    }
+
+    public Integer getFirstPaymentType() {
+        return firstPaymentType;
+    }
+
+    public void setFirstPaymentType(Integer firstPaymentType) {
+        this.firstPaymentType = firstPaymentType;
     }
 }
