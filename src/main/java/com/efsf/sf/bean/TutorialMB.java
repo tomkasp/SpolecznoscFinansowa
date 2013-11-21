@@ -25,7 +25,7 @@ public class TutorialMB
     private String videoPath; 
     private String videoTitle; 
 
-    static String rootPath = "/resources/movies/";
+    static String rootPath = "/SpolecznoscFinansowa/resources/movies/";
     
     private List<String> titles = new ArrayList<String>(Arrays.asList("Rejestracja użytkownika","Uzupełnienie profilu", "Dołączanie plików", "Poruszanie się po stronie", "Tworzenie nowego wniosku"));
     

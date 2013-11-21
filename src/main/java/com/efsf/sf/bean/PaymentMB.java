@@ -31,7 +31,7 @@ public class PaymentMB implements Serializable{
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
 
-    public void createPayement(int subscriptionType) throws IOException {
+    public void createPayement(int subscriptionType, boolean paymentTypeFlag) throws IOException {
 
         String session_id=String.valueOf(loginMB.getIdUser()+(System.currentTimeMillis()/1000));
 
@@ -50,12 +50,22 @@ public class PaymentMB implements Serializable{
 //        for(Map.Entry entry : params.entrySet()){
 //            System.out.println("W MB:" + entry.getValue());
 //        }
-        savePayment(subscriptionType, session_id);
         
-        PaymentApi.createPayment(params);
+        
+        
+        if(!paymentTypeFlag)
+        {
+            savePayment(subscriptionType, session_id, paymentTypeFlag, 0);
+            PaymentApi.createPayment(params);
+        }
+        else
+        {
+            savePayment(subscriptionType, session_id, paymentTypeFlag, 99);
+            extendSubscription(session_id);  
+        }
     }
 
-    private void savePayment(Integer subscriptionType, String sessionId){
+    private void savePayment(Integer subscriptionType, String sessionId, boolean paymentTypeFlag, int status) {
         GenericDao<Subscription> dao=new GenericDao(Subscription.class);
         GenericDao<SubscriptionType> typeDao=new GenericDao(SubscriptionType.class);
         
@@ -64,7 +74,8 @@ public class PaymentMB implements Serializable{
         subs.setSubscriptionType(typeDao.getById(subscriptionType));
         subs.setConsultant(loginMB.getConsultant());
         subs.setTransactionDate(new Date());
-        subs.setStatus(0);
+        subs.setPaymentType(paymentTypeFlag);
+        subs.setStatus(status);
         
         dao.save(subs);
     }
