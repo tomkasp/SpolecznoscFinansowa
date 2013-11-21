@@ -1,8 +1,10 @@
 package com.efsf.sf.util.filter;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.sql.dao.SubscriptionDAO;
 import com.efsf.sf.util.Settings;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -22,7 +24,17 @@ public class LoginConsultantFilter implements Filter {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
         
-        if (loginBean != null) loginBean.updateAccountSubscriptionData();
+        if (loginBean != null)
+        {
+            loginBean.updateAccountSubscriptionData();
+           
+            List lista = new SubscriptionDAO().getAllSubscriptionForConsultant(loginBean.getConsultant());
+            if (lista.isEmpty())
+            {
+                            String contextPath = ((HttpServletRequest) request).getContextPath();
+                            ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
+            }
+        }
         
         if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
         {

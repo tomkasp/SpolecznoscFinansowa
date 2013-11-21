@@ -98,11 +98,10 @@ public class SubscriptionDAO implements Serializable{
         }finally{
             session.close();
         }
-        
-        
-        
         return lista;
     }
+    
+    
 
     
 }

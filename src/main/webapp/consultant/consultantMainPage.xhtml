@@ -16,10 +16,30 @@
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
                 <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
+
+                <h:panelGroup rendered="#{!consultantMainPageMB.isPaymentAlert()}" >
+                    <p:dialog closable="false" id="subscriptionDialog" resizable="false" visible="true" closeOnEscape="true" widgetVar="paymentDialog" >
+                        <h:panelGrid columns="3" >
+                            <h:form>
+                                <h:commandLink action="#{paymentMB.createPayement(1)}">
+                                    <h:graphicImage library="images" name="standard.png" />
+                                </h:commandLink>
+
+                                <h:commandLink action="#{paymentMB.createPayement(2)}" >
+                                    <h:graphicImage library="images" name="standard_plus.png" />
+                                </h:commandLink>
+
+                                <h:commandLink action="#{paymentMB.createPayement(3)}" >
+                                    <h:graphicImage library="images" name="premium.png" />
+                                </h:commandLink>
+                            </h:form>
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:panelGroup>
+
                 <h:form id="lastForm">
 
                     <div>
-
                         <h4> OSTATNIA AKTYWNOŚĆ NA GIEŁDZIE </h4>
 
 
@@ -100,15 +120,15 @@
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" type="button" onclick="subsDialog.show();" />
-                   
-                    
+
+
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() >= settings.standard}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" action="#{consultantMainPageMB.observeCase(consultantMainPageMB.selectedLastCase)}" oncomplete="confirmedObserved.show();">
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Obserwuj" type="button" onclick="subsDialog.show();" />
-                   
+
                     <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Pokaż wszystkie" action="#{consultantMainPageMB.toMarket()}"/>
-                   <div class="marginT50">
+                    <div class="marginT50">
 
                         <h4>ZGŁOSZENIA</h4>
 
@@ -266,10 +286,10 @@
                         <p:ajax update="applied lastCases traced" />
                     </p:commandButton>
                     <p:commandButton rendered="#{loginMB.returnConsultantAccessRights() == settings.free}" disabled="#{empty consultantMainPageMB.selectedLastCase}" styleClass="topMenuButton greyButton wideButton" value="Zgłoś się!" type="button" onclick="subsDialog.show();" />
-                  
 
 
-                    
+
+
 
                     <div class="marginT50">
 
@@ -419,7 +439,7 @@
                     <h:commandButton id="detailsFinishedButton" disabled="#{empty consultantMainPageMB.selectedFinishedCase}" class="topMenuButton greyButton wideButton" value="Szczegóły" action="#{consultantMainPageMB.rowDoubleClick(consultantMainPageMB.selectedFinishedCase)}" />
                     <h:link class="topMenuButton greyButton wideButton" value="Generuj raport" outcome="/index"/>
 
-                    
+
 
 
                     <div class="marginT50 marginB30">
@@ -466,11 +486,11 @@
                         <h:panelGroup rendered="#{clientCaseMB.alreadyApplied}" class="fontGrey">
                             Do tego zlecenia zgłosiłeś się już wcześniej. 
                         </h:panelGroup>
-                        
+
                         <h:panelGroup rendered="#{clientCaseMB.notEnoughApplications}" class="fontGrey">
                             Limit zgłoszeń został wyczerpany!
                         </h:panelGroup>
-                        
+
 
                         <div> 
                             <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="confirmed.hide()"  >
