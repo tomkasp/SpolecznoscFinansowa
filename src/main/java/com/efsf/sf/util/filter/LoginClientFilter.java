@@ -22,7 +22,7 @@ public class LoginClientFilter implements Filter {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
-        if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CLIENT_ACTIVE))
+        if (loginBean == null || !loginBean.isLogged() || !loginBean.getType().equals(Settings.CLIENT_ACTIVE))
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
             ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
