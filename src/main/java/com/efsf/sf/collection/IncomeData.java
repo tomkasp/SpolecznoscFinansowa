@@ -9,7 +9,7 @@ public class IncomeData implements Serializable
     private String branch;
     private double incomeNetto;
     private int idIncome;
-    private boolean isIncome;
+    private boolean income;
     
     
     public IncomeData(String employmentType, String branch, double incomeNetto) {
@@ -18,12 +18,12 @@ public class IncomeData implements Serializable
         this.incomeNetto = incomeNetto;
     }
 
-    public IncomeData(String employmentType, String branch, double incomeNetto, int idIncome, boolean isIncome) {
+    public IncomeData(String employmentType, String branch, double incomeNetto, int idIncome, boolean income) {
         this.employmentType = employmentType;
         this.branch = branch;
         this.incomeNetto = incomeNetto;
         this.idIncome = idIncome;
-        this.isIncome = isIncome;
+        this.income = income;
     }
     
     public double getIncomeNetto() {
@@ -58,12 +58,12 @@ public class IncomeData implements Serializable
         this.idIncome = idIncome;
     }
 
-    public boolean isIsIncome() {
-        return isIncome;
+    public boolean isIncome() {
+        return income;
     }
 
-    public void setIsIncome(boolean isIncome) {
-        this.isIncome = isIncome;
+    public void setIsIncome(boolean income) {
+        this.income = income;
     }
 
     

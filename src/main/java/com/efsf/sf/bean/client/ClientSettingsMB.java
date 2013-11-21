@@ -313,7 +313,7 @@ public class ClientSettingsMB implements Serializable {
         Iterator<IncomeData> it = incomeTable.iterator();
         while (it.hasNext()) {
             IncomeData incomeData = it.next();
-            if (incomeData.isIsIncome() == isIncome) {
+            if (incomeData.isIncome() == isIncome) {
 
                 if (incomeData.getIdIncome() == idIncome) {
                     it.remove();

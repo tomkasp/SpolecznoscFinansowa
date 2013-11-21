@@ -60,12 +60,9 @@ public class CaseViewMB implements Serializable{
     
     @ManagedProperty(value = "#{messagesMB}")
     private MessagesMB messagesMB;
-    
-    
-    
+
     @ManagedProperty("#{msg}")
     private transient ResourceBundle bundle;
-    
     
      
     private ClientCase selectedClientCase;
