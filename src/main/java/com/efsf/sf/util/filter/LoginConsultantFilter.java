@@ -24,27 +24,31 @@ public class LoginConsultantFilter implements Filter {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
         
-        if (loginBean != null)
-        {
-            loginBean.updateAccountSubscriptionData();
-           
-            List lista = new SubscriptionDAO().getAllSubscriptionForConsultant(loginBean.getConsultant());
-            if (lista.isEmpty())
-            {
-                            String contextPath = ((HttpServletRequest) request).getContextPath();
-                            ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
-            }
-        }
+
         
         if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
             ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
         }
-        else
+        else if (loginBean != null )
         {
-             chain.doFilter(request, response);
+            loginBean.updateAccountSubscriptionData();
+           
+            HttpServletRequest req = ((HttpServletRequest) request);
+            
+            List lista = new SubscriptionDAO().getAllSubscriptionForConsultant(loginBean.getConsultant());
+            if (lista.isEmpty() && !req.getRequestURL().toString().contains("consultantMainPage"))
+            {
+                            String contextPath = req.getContextPath();
+                            ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
+            }
+            else
+            {
+                 chain.doFilter(request, response);
+            }
         }
+
     }
 
     @Override

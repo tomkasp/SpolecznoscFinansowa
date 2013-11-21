@@ -74,6 +74,8 @@ public class ConsultantMainPageMB implements Serializable {
     private ClientCase selectedPremiumCase;
     
     private Boolean paymentAlert = false; 
+    
+    private Integer firstPaymentType = 0;
 
 
     @PostConstruct
@@ -559,5 +561,13 @@ public class ConsultantMainPageMB implements Serializable {
 
     public void setPaymentAlert(Boolean paymentAlert) {
         this.paymentAlert = paymentAlert;
+    }
+
+    public Integer getFirstPaymentType() {
+        return firstPaymentType;
+    }
+
+    public void setFirstPaymentType(Integer firstPaymentType) {
+        this.firstPaymentType = firstPaymentType;
     }
 }
