@@ -33,13 +33,14 @@
                     Twoja przeglądarka nie obsługije video.
                 </video>
             
-            
+            <h2> Wszystkie tutoriale:  </h2>
             <div>
-                <h:link value="Filmik 0" outcome="/how_it_works.xhtml?videoId=0"/>
-                <h:link value="Filmik 1" outcome="/how_it_works.xhtml?videoId=1"/>
-                <h:link value="Filmik 2" outcome="/how_it_works.xhtml?videoId=2"/>    
-                <h:link value="Filmik 3" outcome="/how_it_works.xhtml?videoId=3"/>
-                <h:link value="Filmik 4" outcome="/how_it_works.xhtml?videoId=4"/>      
+                
+                <h:link style="margin-right: 20px  " value="#{tutorialMB.titles.get(0)}" outcome="/how_it_works.xhtml?videoId=0"/>
+                <h:link style="margin-right: 20px" value="#{tutorialMB.titles.get(1)}" outcome="/how_it_works.xhtml?videoId=1"/>
+                <h:link style="margin-right: 20px" value="#{tutorialMB.titles.get(2)}" outcome="/how_it_works.xhtml?videoId=2"/>    
+                <h:link style="margin-right: 20px" value="#{tutorialMB.titles.get(3)}" outcome="/how_it_works.xhtml?videoId=3"/>
+                <h:link style="margin-right: 20px" value="#{tutorialMB.titles.get(4)}" outcome="/how_it_works.xhtml?videoId=4"/>      
             </div>
             
             </ui:define>
