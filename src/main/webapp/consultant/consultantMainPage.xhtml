@@ -17,24 +17,54 @@
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
                 <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
 
-                <h:panelGroup rendered="#{!consultantMainPageMB.isPaymentAlert()}" >
-                    <p:dialog closable="false" id="subscriptionDialog" resizable="false" visible="true" closeOnEscape="true" widgetVar="paymentDialog" >
+                <h:panelGroup rendered="#{consultantMainPageMB.isPaymentAlert()}" >
+                    <p:dialog modal="true" closable="false" id="subscriptionDialog" resizable="false" visible="true" widgetVar="paymentDialog" >
+                        
+                        <h2> Wybierz rodzaj płatności: </h2>
+                        
+                        <h:form>
+                            
                         <h:panelGrid columns="3" >
-                            <h:form>
-                                <h:commandLink action="#{paymentMB.createPayement(1)}">
+                            
+                            <h:commandLink action="#{consultantMainPageMB.setFirstPaymentType(1)}" onclick="paymentDelayDialog.show();"  >
                                     <h:graphicImage library="images" name="standard.png" />
                                 </h:commandLink>
 
-                                <h:commandLink action="#{paymentMB.createPayement(2)}" >
+                                <h:commandLink action="#{consultantMainPageMB.setFirstPaymentType(2)}" onclick="paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="standard_plus.png" />
                                 </h:commandLink>
 
-                                <h:commandLink action="#{paymentMB.createPayement(3)}" >
+                                <h:commandLink action="#{consultantMainPageMB.setFirstPaymentType(3)}" onclick=" paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="premium.png" />
                                 </h:commandLink>
-                            </h:form>
+                            
                         </h:panelGrid>
+                            
+                        <h:commandButton id="logoutButton" style="margin-right: 283px;" class="topMenuButton greyButton wideButton" value="wyloguj" action="#{loginMB.logout()}"/>
+               
+                        </h:form>      
                     </p:dialog>
+                    
+                    <p:dialog modal="true" closable="false" id="delayDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="paymentDelayDialog" > 
+                        <h:form>
+                                <h:commandLink value="Płatność PayU" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,false)}" />
+                                
+                                <h:commandLink value="Zapłacę później" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}"  onclick="paymentDelayDialog.hide(); paymentDialog.hide(); delayInvoiceDialog.show(); " />
+                                    
+                                <h:commandLink value="Anuluj" class="blueButton wideButton" action="#{consultantMainPageMB.setFirstPaymentType(0)}" onclick="paymentDelayDialog.hide();" />
+                        </h:form>     
+                    </p:dialog>
+                    
+                    <p:dialog modal="true" closable="false" id="invoiceDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="delayInvoiceDialog" > 
+                       
+                            Abonament aktywowany! Fakturę znajdziesz w zakładce 'transakcje'. 
+                            
+                           <h:form>
+                               <p:commandButton styleClass="floatR wideButton" style="margin-top:30px;" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}" value="Kontynuuj" oncomplete="invoiceDialog.hide();"  />
+                           </h:form>
+                                 
+                    </p:dialog>
+                    
                 </h:panelGroup>
 
                 <h:form id="lastForm">
