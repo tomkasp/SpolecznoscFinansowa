@@ -23,7 +23,7 @@ public class NoLoginFilter implements Filter {
 
         LoginMB loginBean = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
-        if (loginBean != null && loginBean.isIsLogged() && loginBean.getType() != null)
+        if (loginBean != null && loginBean.isLogged() && loginBean.getType() != null)
         {
                 if (loginBean.getType().equals(Settings.CLIENT_ACTIVE)) {
                     String contextPath = ((HttpServletRequest) request).getContextPath();

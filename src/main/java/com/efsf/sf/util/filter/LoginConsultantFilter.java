@@ -24,7 +24,7 @@ public class LoginConsultantFilter implements Filter {
         
         if (loginBean != null) loginBean.updateAccountSubscriptionData();
         
-        if (loginBean == null || !loginBean.isIsLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
+        if (loginBean == null || !loginBean.isLogged() || !loginBean.getType().equals(Settings.CONSULTANT_ACTIVE))
         {
             String contextPath = ((HttpServletRequest) request).getContextPath();
             ((HttpServletResponse) response).sendRedirect(contextPath + "/login.xhtml");
