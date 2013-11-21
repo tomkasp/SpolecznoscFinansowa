@@ -120,6 +120,9 @@ public class Subscription implements java.io.Serializable {
         this.transactionNumber = transactionNumber;
     }
 
+    
+    //0 - payU, 1- odroczona
+    
     @Column(name = "paymentType")
     public Boolean isPaymentType() {
         return paymentType;
