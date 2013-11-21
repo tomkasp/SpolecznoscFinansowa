@@ -60,7 +60,7 @@
                             Abonament aktywowany! Fakturę znajdziesz w zakładce 'transakcje'. 
                             
                            <h:form>
-                               <p:commandButton styleClass="floatR wideButton" style="margin-top:30px;" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}" value="Kontynuuj" oncomplete="invoiceDialog.hide();"  />
+                               <p:commandButton styleClass="floatR wideButton" ajax="false" style="margin-top:30px;" action="#{consultantMainPageMB.setPaymentAlert(false)}" value="Kontynuuj" oncomplete="invoiceDialog.hide();"  />
                            </h:form>
                                  
                     </p:dialog>
