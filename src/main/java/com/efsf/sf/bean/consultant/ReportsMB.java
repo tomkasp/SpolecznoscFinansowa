@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,21 +60,33 @@ public class ReportsMB implements Serializable{
     
 
 
-    public void generateInvoice(Integer idSubscription, String sessionId) throws JRException, IOException{
+    public void generateInvoice(Integer idSubscriptionType, String sessionId) throws JRException, IOException{
         GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
         GenericDao<Subscription> dao2=new GenericDao(Subscription.class);
         
         Map<String, Object> params=new HashMap<String, Object>();
         params.put("consultant", loginMB.getConsultant());
 
-        params.put("sub", dao.getById(idSubscription));
+        params.put("sub", dao.getById(idSubscriptionType));
         
-        Date date=dao2.getById(sessionId).getTransactionDate();
+        Subscription subs=dao2.getById(sessionId);
+        Date date=subs.getTransactionDate();
         Calendar cal = new GregorianCalendar();
         cal.setTime(date);
         
-        params.put("number", dao2.getById(sessionId).getTransactionNumber()+"/"+cal.get(Calendar.YEAR));
+        params.put("number", subs.getTransactionNumber()+"/"+cal.get(Calendar.YEAR));
         params.put("date", date.toString());
+        
+        if(subs.isPaymentType()){
+            params.put("paymentType", "Zapłacono gotówką:");
+            params.put("dateToText", "");
+        } else {
+            cal.add(Calendar.DATE, 30);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            params.put("paymentType", "Płatność przelewem:");
+            params.put("dateToText", "Termin płatności: 30 dni (upływa dnia "+sdf.format(cal.getTime())+")");
+        }
+        
         if(loginMB.getConsultant().isInvoice())
         {
             params.put("address", getInvoiceAddress());
