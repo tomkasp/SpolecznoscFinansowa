@@ -34,7 +34,7 @@ public class LoginMB implements Serializable {
     private String email;
     private String password;
     private boolean rememberMe;
-    private boolean isLogged = false;
+    private boolean logged = false;
     private Integer type;
     private int idUser;
     private int points;
@@ -75,7 +75,7 @@ public class LoginMB implements Serializable {
         if (user != null) {
             type = user.getType();
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
-                isLogged = true;
+                logged = true;
 
                 idUser = user.getIdUser();
             }
@@ -134,7 +134,7 @@ public class LoginMB implements Serializable {
     }
 
     public String logout() {
-        isLogged = false;
+        logged = false;
         type = Settings.LOGGED_OUT;
         client = null;
         consultant = null;
@@ -288,12 +288,12 @@ public class LoginMB implements Serializable {
         this.password = password;
     }
 
-    public boolean isIsLogged() {
-        return isLogged;
+    public boolean isLogged() {
+        return logged;
     }
 
-    public void setIsLogged(boolean isLogged) {
-        this.isLogged = isLogged;
+    public void setLogged(boolean logged) {
+        this.logged = logged;
     }
 
     public Integer getType() {

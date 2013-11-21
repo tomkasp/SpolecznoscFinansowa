@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="230"/>
 	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
 	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
 	<parameter name="address" class="com.efsf.sf.sql.entity.Address">
@@ -11,6 +11,8 @@
 	<parameter name="sub" class="com.efsf.sf.sql.entity.SubscriptionType" isForPrompting="false"/>
 	<parameter name="number" class="java.lang.String"/>
 	<parameter name="date" class="java.lang.String"/>
+	<parameter name="dateToText" class="java.lang.String"/>
+	<parameter name="paymentType" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -253,20 +255,20 @@
 				<text><![CDATA[W tym:]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="a6f380e2-3823-46e8-9792-8bb1e62410c4" x="2" y="310" width="245" height="1"/>
+				<reportElement uuid="a6f380e2-3823-46e8-9792-8bb1e62410c4" x="2" y="319" width="245" height="1"/>
 			</line>
 			<line>
-				<reportElement uuid="33fba0a9-e51d-43cb-9c9d-91fb7a75a118" x="307" y="311" width="242" height="1"/>
+				<reportElement uuid="33fba0a9-e51d-43cb-9c9d-91fb7a75a118" x="307" y="320" width="242" height="1"/>
 			</line>
 			<staticText>
-				<reportElement uuid="944550f2-2200-4c15-ae56-f61472f3f99a" x="17" y="312" width="212" height="20"/>
+				<reportElement uuid="944550f2-2200-4c15-ae56-f61472f3f99a" x="17" y="321" width="212" height="20"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="9" pdfEncoding="Cp1250"/>
 				</textElement>
 				<text><![CDATA[podpis osoby uprawnionej do odbioru faktury]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="82be02ff-f06c-48ba-bb7d-0de47544dc17" x="317" y="311" width="232" height="20"/>
+				<reportElement uuid="82be02ff-f06c-48ba-bb7d-0de47544dc17" x="317" y="320" width="232" height="20"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="9" pdfEncoding="Cp1250"/>
 				</textElement>
@@ -281,13 +283,6 @@
 					<font fontName="SansSerif" isBold="true" pdfEncoding="Cp1250"/>
 				</textElement>
 				<text><![CDATA[Należność ogółem:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="710d1a9c-de11-4243-8219-12d94b1bc14e" x="4" y="241" width="104" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" pdfEncoding="Cp1250"/>
-				</textElement>
-				<text><![CDATA[Zapłacono gotówką:]]></text>
 			</staticText>
 			<line>
 				<reportElement uuid="25fcc49f-c801-4bb7-8952-3d4e596e6620" x="1" y="70" width="553" height="1"/>
@@ -384,6 +379,20 @@
 					<font size="8" pdfEncoding="Cp1250"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sub}.priceSpeak()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cfd43f8e-1665-4900-a89c-284694366da5" x="4" y="261" width="332" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateToText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6ec5b9b-fbd5-4fdc-b7a0-4b7e963efd24" x="4" y="241" width="115" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentType}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
