@@ -51,7 +51,7 @@ public class AddressDAO {
             q = session.createQuery("FROM Address WHERE fk_consultant = :id AND type = :type");
             q.setParameter("id", fkConsuntant);
             q.setParameter("type", type);
-            address = (Address) q.list().get(0);
+            address = q.list().isEmpty() ? null : (Address) q.list().get(0);
 
             session.getTransaction().commit();
         } finally {
