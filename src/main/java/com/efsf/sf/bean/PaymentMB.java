@@ -66,6 +66,7 @@ public class PaymentMB implements Serializable{
         subs.setConsultant(loginMB.getConsultant());
         subs.setTransactionDate(new Date());
         subs.setPaymentType(paymentTypeFlag);
+        subs.setTransactionNumber(dao.getMaxInt("transactionNumber") == null ? 1 : dao.getMaxInt("transactionNumber") + 1);
         subs.setStatus(status);
         
         dao.save(subs);

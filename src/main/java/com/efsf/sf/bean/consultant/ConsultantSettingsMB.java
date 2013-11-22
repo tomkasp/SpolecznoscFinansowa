@@ -193,6 +193,7 @@ public class ConsultantSettingsMB implements Serializable {
         mainAddress.setRegion(mr);
         addressSet.add(mainAddress);
         
+        if(idInvoiceRegion==null) idInvoiceRegion=0;
         Region ir=rdao.getRegion(idInvoiceRegion);
         invoiceAddress.setRegion(ir);
         addressSet.add(invoiceAddress);

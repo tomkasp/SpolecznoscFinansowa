@@ -47,7 +47,7 @@ public class Address implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_address", unique = true, nullable = false)
+    @Column(name = "id_address", unique = true)
     public Integer getIdAddress() {
         return this.idAddress;
     }
@@ -57,7 +57,7 @@ public class Address implements java.io.Serializable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_region", nullable = false)
+    @JoinColumn(name = "fk_region")
     @ForeignKey(name = "adressToRegion")
     public Region getRegion() {
         return this.region;
@@ -98,7 +98,7 @@ public class Address implements java.io.Serializable {
         this.street = street;
     }
 
-    @Column(name = "houseNumber", nullable = false, length = 12)
+    @Column(name = "houseNumber", length = 12)
     public String getHouseNumber() {
         return this.houseNumber;
     }
