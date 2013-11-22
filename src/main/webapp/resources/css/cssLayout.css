@@ -330,3 +330,15 @@ td.start, td.cancel, td.preview{
 div.ui-fileupload{
     clear: both !important;
 }
+
+p.videoLinks a:link{
+    text-decoration: none;
+    margin:0 0 0 16px;
+    color:#305d7b;
+    font-size:14px;
+    float:left;
+}
+
+p.videoLinks a:hover{
+    color:#04244F;
+}
