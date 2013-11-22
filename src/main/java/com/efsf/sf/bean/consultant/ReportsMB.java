@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -61,6 +62,14 @@ public class ReportsMB implements Serializable{
 
 
     public void generateInvoice(Integer idSubscriptionType, String sessionId) throws JRException, IOException{
+        
+        Address address=new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
+        
+        if(getInvoiceAddress()==null || address==null){
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij dane adresowe w swoim profilu celu wygenerowania rachunku bądź faktury."));
+            return;
+        }
+        
         GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
         GenericDao<Subscription> dao2=new GenericDao(Subscription.class);
         
@@ -94,7 +103,7 @@ public class ReportsMB implements Serializable{
         }
         else
         {
-             params.put("address", new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant()));
+             params.put("address", address);
              export("receipt.jrxml", params, new JREmptyDataSource());
         }
         

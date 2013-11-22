@@ -4,11 +4,9 @@ import com.efsf.sf.api.PaymentApi;
 import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.SubscriptionDAO;
-import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Subscription;
 import com.efsf.sf.sql.entity.SubscriptionType;
-import com.efsf.sf.sql.util.HibernateUtil;
 import com.efsf.sf.util.Settings;
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,7 +18,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
 
 
 @ManagedBean
@@ -46,12 +43,6 @@ public class PaymentMB implements Serializable{
         params.put("last_name", loginMB.getConsultant().getLastName());
         params.put("email", loginMB.getUser().getEmail());
 
-        
-//        for(Map.Entry entry : params.entrySet()){
-//            System.out.println("W MB:" + entry.getValue());
-//        }
-        
-        
         
         if(!paymentTypeFlag)
         {
@@ -81,11 +72,6 @@ public class PaymentMB implements Serializable{
     }
     
     
-//    public static void main(String[] args){
-//        PaymentMB p = new PaymentMB();
-//        p.extendSubscription("1382435805");
-//    }
-    
     public void extendSubscription(String sessionId){
         SubscriptionDAO subDao = new SubscriptionDAO();
         Subscription sub = subDao.getSubscriptionDetails(sessionId);  
@@ -107,6 +93,9 @@ public class PaymentMB implements Serializable{
             
         Consultant con = (Consultant)sub.getConsultant();
         
+        if(con.getApplayedCaseCounter()==null){
+            con.setApplayedCaseCounter(0);
+        }
         
         if(sub.getSubscriptionType().getIdSubscriptionType()==1){
             con.setApplayedCaseCounter(con.getApplayedCaseCounter() + Settings.MAX_CASES_APPLIED_STANDARD);
