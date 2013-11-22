@@ -57,7 +57,7 @@ public class ReportsMB implements Serializable{
         Address address=new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
         
         if(getInvoiceAddress()==null || address==null){
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij dane adresowe w swoim profilu celu wygenerowania rachunku bądź faktury."));
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij dane adresowe w swoim profilu w celu wygenerowania rachunku bądź faktury."));
             return;
         }
         
