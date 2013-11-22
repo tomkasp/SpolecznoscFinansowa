@@ -49,7 +49,6 @@
         <mapping class="com.efsf.sf.sql.entity.BikAccount"/>
         <mapping class="com.efsf.sf.sql.entity.BikAccountHistory"/>
         <mapping class="com.efsf.sf.sql.entity.BikQuestion"/>
-        <mapping class="com.efsf.sf.sql.entity.Payment"/>  
         <mapping class="com.efsf.sf.sql.entity.InstitutionDocuments"/>      
     </session-factory>
 </hibernate-configuration>

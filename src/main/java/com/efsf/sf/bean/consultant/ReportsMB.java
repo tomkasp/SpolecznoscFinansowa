@@ -51,15 +51,6 @@ public class ReportsMB implements Serializable{
         this.loginMB = loginMB;
     }
     
-    
-    private String getReportImagePath() throws MalformedURLException{
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            URL url = new URL(request.getRequestURL().toString());
-            return url.getProtocol()+"://"+url.getHost()+":"+url.getPort()+"/"+request.getContextPath()
-                +"/reports/";
-    }
-    
-
 
     public void generateInvoice(Integer idSubscriptionType, String sessionId) throws JRException, IOException{
         
