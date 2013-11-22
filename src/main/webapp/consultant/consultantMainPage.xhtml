@@ -37,7 +37,7 @@
                                 <h:commandLink action="#{consultantMainPageMB.setFirstPaymentType(3)}" onclick=" paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="premium.png" />
                                 </h:commandLink>
-                            
+  
                         </h:panelGrid>
                             
                         <h:commandButton id="logoutButton" style="margin-right: 283px;" class="topMenuButton greyButton wideButton" value="wyloguj" action="#{loginMB.logout()}"/>
@@ -45,22 +45,29 @@
                         </h:form>      
                     </p:dialog>
                     
-                    <p:dialog modal="true" closable="false" id="delayDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="paymentDelayDialog" > 
+                    <p:dialog modal="true" closable="false" showHeader="false" id="delayDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="paymentDelayDialog" > 
+                        
+                        <h2> Wybierz metodę płatności: </h2>
+                        
                         <h:form>
-                                <h:commandLink value="Płatność PayU" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,false)}" />
+                                <h:commandButton value="Płatność PayU" style="font: white;" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,false)}" />
                                 
-                                <h:commandLink value="Zapłacę później" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}"  onclick="paymentDelayDialog.hide(); paymentDialog.hide(); delayInvoiceDialog.show(); " />
+                                <h:commandButton value="Zapłacę później" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}"  onclick="paymentDelayDialog.hide(); paymentDialog.hide(); delayInvoiceDialog.show(); " />
                                     
-                                <h:commandLink value="Anuluj" class="blueButton wideButton" action="#{consultantMainPageMB.setFirstPaymentType(0)}" onclick="paymentDelayDialog.hide();" />
+                                <h:commandButton value="Anuluj" class="blueButton wideButton" action="#{consultantMainPageMB.setFirstPaymentType(0)}" onclick="paymentDelayDialog.hide();" />
                         </h:form>     
                     </p:dialog>
                     
-                    <p:dialog modal="true" closable="false" id="invoiceDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="delayInvoiceDialog" > 
-                       
-                            Abonament aktywowany! Fakturę znajdziesz w zakładce 'transakcje'. 
+                    <p:dialog modal="true" closable="false"  id="invoiceDialog" resizable="false" visible="false" closeOnEscape="true" widgetVar="delayInvoiceDialog" > 
+                           
+                          
+                           <h:outputText style="font-weight: bold" value="Abonament aktywowany! Fakturę znajdziesz w zakładce 'transakcje'. " /> 
+                           <h:outputText style="font-weight: bold" value="Życzymy przyjemnego korzystania z serwisu." /> 
                             
+                           <div style="height: 10px;" />
+                           
                            <h:form>
-                               <p:commandButton styleClass="floatR wideButton" ajax="false" style="margin-top:30px;" action="#{consultantMainPageMB.setPaymentAlert(false)}" value="Kontynuuj" oncomplete="invoiceDialog.hide();"  />
+                               <p:commandButton styleClass="floatR greyButton wideButton" ajax="false" action="#{consultantMainPageMB.setPaymentAlert(false)}" value="Kontynuuj" oncomplete="delayInvoiceDialog.hide();"  />
                            </h:form>
                                  
                     </p:dialog>
