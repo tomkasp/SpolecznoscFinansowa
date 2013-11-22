@@ -86,7 +86,7 @@ public class ReportsMB implements Serializable{
         params.put("number", subs.getTransactionNumber()+"/"+cal.get(Calendar.YEAR));
         params.put("date", date.toString());
         
-        if(subs.isPaymentType()){
+        if(!subs.isPaymentType()){
             params.put("paymentType", "Zapłacono gotówką:");
             params.put("dateToText", "");
         } else {
