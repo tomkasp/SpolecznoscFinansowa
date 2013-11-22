@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -50,17 +51,16 @@ public class ReportsMB implements Serializable{
         this.loginMB = loginMB;
     }
     
-    
-    private String getReportImagePath() throws MalformedURLException{
-            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            URL url = new URL(request.getRequestURL().toString());
-            return url.getProtocol()+"://"+url.getHost()+":"+url.getPort()+"/"+request.getContextPath()
-                +"/reports/";
-    }
-    
-
 
     public void generateInvoice(Integer idSubscriptionType, String sessionId) throws JRException, IOException{
+        
+        Address address=new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
+        
+        if(getInvoiceAddress()==null || address==null){
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij dane adresowe w swoim profilu celu wygenerowania rachunku bądź faktury."));
+            return;
+        }
+        
         GenericDao<SubscriptionType> dao=new GenericDao(SubscriptionType.class);
         GenericDao<Subscription> dao2=new GenericDao(Subscription.class);
         
@@ -77,7 +77,7 @@ public class ReportsMB implements Serializable{
         params.put("number", subs.getTransactionNumber()+"/"+cal.get(Calendar.YEAR));
         params.put("date", date.toString());
         
-        if(subs.isPaymentType()){
+        if(!subs.isPaymentType()){
             params.put("paymentType", "Zapłacono gotówką:");
             params.put("dateToText", "");
         } else {
@@ -94,7 +94,7 @@ public class ReportsMB implements Serializable{
         }
         else
         {
-             params.put("address", new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant()));
+             params.put("address", address);
              export("receipt.jrxml", params, new JREmptyDataSource());
         }
         

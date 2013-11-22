@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SUCTR</web-resource-name>
+            <url-pattern>/*</url-pattern>      
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+       
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>API</web-resource-name>
+            <url-pattern>/api/*</url-pattern>      
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
+    
+    
+    <context-param>
+        <param-name> javax.faces.PROJECT_STAGE </param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name> primefaces.THEME </param-name>
+        <param-value>cruze</param-value>
+    </context-param>
+    <context-param>
+        <param-name> com.sun.faces.enableViewStateIdRendering </param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.autoCompleteOffOnViewState</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    
+                  
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+   
+    <servlet>
+        <servlet-name>PayU Initializer</servlet-name>
+        <servlet-class>com.efsf.sf.servlet.PayUInitializer</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    
+    <!-- Auto scan REST service -->
+<!--    <context-param>
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/api</param-value>
+    </context-param>
+ 
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+ 
+    <servlet>
+        <servlet-name>ApiServlet</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>ApiServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>-->
+    
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    <!--    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.xhtml</location>
+    </error-page>-->
+    <filter>
+        <filter-name>Character Encoding Filter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>LoginClientFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.LoginClientFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginClientFilter</filter-name>
+        <url-pattern>/client/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>LoginConsultantFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.LoginConsultantFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginConsultantFilter</filter-name>
+        <url-pattern>/consultant/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>LoginAdminFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.LoginAdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginAdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>LoginCommonFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.LoginCommonFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginCommonFilter</filter-name>
+        <url-pattern>/common/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>NoLoginFilter</filter-name>
+        <filter-class>com.efsf.sf.util.filter.NoLoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NoLoginFilter</filter-name>
+        <url-pattern>/login.xhtml</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>NoLoginFilter</filter-name>
+        <url-pattern>/index.xhtml</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>512000</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+</web-app>

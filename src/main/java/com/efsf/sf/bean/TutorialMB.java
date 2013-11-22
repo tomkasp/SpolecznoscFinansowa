@@ -20,7 +20,8 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class TutorialMB implements Serializable{
+public class TutorialMB implements Serializable
+{
     private Integer videoId; 
     private String videoPath; 
     private String videoTitle; 

@@ -32,7 +32,6 @@ public class User implements java.io.Serializable {
     private Set<Message> messagesForFkFromUser = new HashSet<>(0);
     private Set<Message> messagesForFkToUser = new HashSet<>(0);
     private Set<Consultant> consultants = new HashSet<>(0);
-    private Set<Payment> payments = new HashSet<>(0);
     
     public User() {
     }
@@ -126,16 +125,6 @@ public class User implements java.io.Serializable {
 
     public void setConsultants(Set<Consultant> consultants) {
         this.consultants = consultants;
-    }
-
-    
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    public Set<Payment> getPayments() {
-        return payments;
-    }    
-    
-    public void setPayments(Set<Payment> payments) {
-        this.payments = payments;
     }
 
 }

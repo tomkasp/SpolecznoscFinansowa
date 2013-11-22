@@ -12,7 +12,7 @@
             <ui:define name="title"> Doradca - giełda </ui:define> 
 
             <ui:define name="content">
-
+                <p:messages id="messages" autoUpdate="true"></p:messages>
 
                 <h:form>
                     <p:dataTable id="subscriptionHistory" value="#{consultantSubscriptionMB.consultantSubscription}" rowKey="#{row}" 
@@ -32,8 +32,7 @@
                         </p:column> 
 
                         <p:column headerText="Generuj fakture">  
-
-                            <h:commandLink action="#{reportsMB.generateInvoice(row.subscriptionType.idSubscriptionType, row.sessionId)}" value="generuj" />
+                            <h:commandLink action="#{reportsMB.generateInvoice(row.subscriptionType.idSubscriptionType, row.sessionId)}" value="generuj"/>
                         </p:column> 
 
                     </p:dataTable>   
@@ -42,4 +41,3 @@
         </ui:composition>
     </body>
 </html>
-
