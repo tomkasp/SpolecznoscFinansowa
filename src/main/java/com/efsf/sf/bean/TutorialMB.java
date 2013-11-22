@@ -6,6 +6,7 @@
 
 package com.efsf.sf.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,8 +20,7 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class TutorialMB 
-{
+public class TutorialMB implements Serializable{
     private Integer videoId; 
     private String videoPath; 
     private String videoTitle; 
