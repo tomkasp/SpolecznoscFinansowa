@@ -26,7 +26,7 @@ public class TutorialMB implements Serializable
     private String videoPath; 
     private String videoTitle; 
 
-    static String rootPath = "/SpolecznoscFinansowa/resources/movies/";
+    static String rootPath = "/resources/movies/";
     
     private List<String> titles = new ArrayList<String>(Arrays.asList("Rejestracja użytkownika","Uzupełnienie profilu", "Dołączanie plików", "Poruszanie się po stronie", "Tworzenie nowego wniosku"));
     
