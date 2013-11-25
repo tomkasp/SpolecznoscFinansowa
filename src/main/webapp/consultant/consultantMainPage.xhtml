@@ -20,13 +20,13 @@
                 <h:panelGroup rendered="#{consultantMainPageMB.isPaymentAlert()}" >
                     <p:dialog modal="true" closable="false" id="subscriptionDialog" resizable="false" visible="true" widgetVar="paymentDialog" >
                         
-                        <h2> Wybierz rodzaj płatności: </h2>
+                        <h2> Wybierz typ abonamentu: </h2>
                         
                         <h:form>
                             
                         <h:panelGrid columns="3" >
                             
-                               <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(1)}" onclick="paymentDelayDialog.show();"  >
+                            <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(1)}" onclick="paymentDelayDialog.show();"  >
                                     <h:graphicImage library="images" name="standard.png" />
                                 </p:commandLink>
 
@@ -50,11 +50,11 @@
                         <h2> Wybierz metodę płatności: </h2>
                         
                         <h:form>
-                                <h:commandButton value="Płatność PayU" style="font: white;" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,false)}" />
+                                <p:commandButton value="Płatność PayU" style="font: white;" styleClass="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,false)}" />
                                 
-                                <h:commandButton value="Zapłacę później" class="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}"  onclick="paymentDelayDialog.hide(); paymentDialog.hide(); delayInvoiceDialog.show(); " />
+                                <p:commandButton value="Zapłacę później" styleClass="blueButton wideButton" action="#{paymentMB.createPayement(consultantMainPageMB.firstPaymentType,true)}"  onclick="paymentDelayDialog.hide(); paymentDialog.hide(); delayInvoiceDialog.show(); " />
                                     
-                                <h:commandButton value="Anuluj" class="blueButton wideButton" action="#{consultantMainPageMB.setFirstPaymentType(0)}" onclick="paymentDelayDialog.hide();" />
+                                <p:commandButton value="Anuluj" styleClass="blueButton wideButton" action="#{consultantMainPageMB.setFirstPaymentType(0)}" onclick="paymentDelayDialog.hide();" />
                         </h:form>     
                     </p:dialog>
                     
