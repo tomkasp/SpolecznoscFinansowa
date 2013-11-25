@@ -304,7 +304,7 @@ public class ClientMainPageMB implements Serializable {
         ClientDAO clientDao = new ClientDAO();
         Client client = clientDao.checkClientForNewApplication(loginMB.getClient().getIdClient());
 
-        if (client == null || client.getAddresses() == null || client.getAddresses().isEmpty() || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode().equals("") || ((Address) client.getAddresses().toArray()[0]).getRegion().getIdRegion().equals(0) || (client.getIncomeBusinessActivities() == null && client.getIncomes() == null)) {
+        if (client == null || client.getAddresses() == null || client.getAddresses().isEmpty() || client.getBirthDate() == null || ((Address) client.getAddresses().toArray()[0]).getZipCode().equals("") || ((Address) client.getAddresses().toArray()[0]).getRegion().getIdRegion().equals(0) || (client.getIncomeBusinessActivities().isEmpty() && client.getIncomes().isEmpty())) {
             requirementsFulfilled = false;
         } else {
             requirementsFulfilled = true;
