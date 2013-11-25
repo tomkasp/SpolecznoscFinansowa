@@ -16,6 +16,11 @@
                 <div style="min-height: 50px">
                 <h3 id="msgHeader">Skrzynka odbiorcza</h3>                  
                 </div>
+                
+               <h:panelGroup rendered="#{(empty consultantMainPageMB.premiumList) and (empty messagesMB.unreadMessagesList)}">
+                    Aktualnie nie posiadasz żadnych wiadomości.
+               </h:panelGroup> 
+                
                 <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList) or !(empty messagesMB.unreadMessagesList)}" >
                     <h4> Nieprzeczytane </h4>
                     <h:panelGroup rendered="#{!(empty consultantMainPageMB.premiumList)}" >   

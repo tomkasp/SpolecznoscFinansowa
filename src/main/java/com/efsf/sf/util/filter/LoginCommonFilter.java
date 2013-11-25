@@ -38,10 +38,9 @@ public class LoginCommonFilter implements Filter {
                                     ((HttpServletResponse) response).sendRedirect(contextPath + "/consultant/consultantMainPage.xhtml");
                     }
         }
-        else
-        {
-             chain.doFilter(request, response);
-        }
+
+        chain.doFilter(request, response);
+
     }
 
     @Override

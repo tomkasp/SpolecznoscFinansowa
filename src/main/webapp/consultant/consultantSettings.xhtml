@@ -12,6 +12,20 @@
 
             <ui:define name="content">
 
+                <script>
+                    $(document).ready(function(){
+                        $(".copyAddressButton").click(function(){
+                             $('#formularz\\:invoiceCity').val( $('#formularz\\:city').val() );
+                             $('#formularz\\:invoiceStreet').val( $('#formularz\\:street').val() ); 
+                             $('#formularz\\:invoiceZipCode').val( $('#formularz\\:postCode').val() ); 
+                             $('#formularz\\:invoicePhone').val( $('#formularz\\:phone').val() ); 
+                             $('#formularz\\:invoiceNumber').val( $('#formularz\\:number').val() ); 
+                        });
+                    });
+                    
+                </script>
+                
+                
                 <div style="margin:80px 0 0 0; width: 370px; float: right;">
 
                     <h:form id="form1"> 
@@ -192,17 +206,17 @@
 
                             <div class="field"> 
                                 <h:outputText class="label" value="Telefon"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.phone}"/>  
+                                <h:inputText id="phone" class="inputWidth3" value="#{consultantSettingsMB.mainAddress.phone}"/>  
                             </div>
 
                             <div class="field"> 
                                 <h:outputText class="label" value="Ulica"/>  
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.street}"/>
+                                <h:inputText class="inputWidth3" id="street" value="#{consultantSettingsMB.mainAddress.street}"/>
                             </div>
 
                             <div class="field">
                                 <h:outputText class="label" value="Numer"/> 
-                                <h:inputText class="inputWidth3" value="#{consultantSettingsMB.mainAddress.houseNumber}"/> 
+                                <h:inputText class="inputWidth3" id="number" value="#{consultantSettingsMB.mainAddress.houseNumber}"/> 
                             </div>
 
                             <div class="field"> 
@@ -215,8 +229,8 @@
                         </div>
 
                         <div class="copyAddressButton">
-                            <h:commandLink id="copyButton" disabled="#{!consultantSettingsMB.invoiceFlag}" action="#{consultantSettingsMB.copyAddress()}" >
-                                <f:ajax render="formularz" />
+                            <h:commandLink id="copyButton" disabled="#{!consultantSettingsMB.invoiceFlag}">
+
                                 <h:graphicImage name="icons/copyAddress.png"/>
                             </h:commandLink>
 
