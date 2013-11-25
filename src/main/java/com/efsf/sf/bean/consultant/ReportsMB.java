@@ -9,8 +9,6 @@ import com.efsf.sf.sql.entity.SubscriptionType;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +21,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -56,8 +53,8 @@ public class ReportsMB implements Serializable{
         
         Address address=new AddressDAO().loadMainAddressFromFkConsultant(loginMB.getConsultant().getIdConsultant());
         
-        if(getInvoiceAddress()==null || address==null){
-            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij dane adresowe w swoim profilu celu wygenerowania rachunku bądź faktury."));
+        if(getInvoiceAddress()==null){
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Uzupełnij adres dla faktury w swoim profilu celu wygenerowania dokumentu."));
             return;
         }
         
@@ -87,16 +84,16 @@ public class ReportsMB implements Serializable{
             params.put("dateToText", "Termin płatności: 30 dni (upływa dnia "+sdf.format(cal.getTime())+")");
         }
         
-        if(loginMB.getConsultant().isInvoice())
-        {
+//        if(loginMB.getConsultant().isInvoice())
+//        {
             params.put("address", getInvoiceAddress());
             export("invoice.jrxml", params, new JREmptyDataSource());
-        }
-        else
-        {
-             params.put("address", address);
-             export("receipt.jrxml", params, new JREmptyDataSource());
-        }
+//        }
+//        else
+//        {
+//             params.put("address", address);
+//             export("receipt.jrxml", params, new JREmptyDataSource());
+//        }
         
     }
     
