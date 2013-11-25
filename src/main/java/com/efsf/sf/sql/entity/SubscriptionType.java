@@ -89,15 +89,18 @@ public class SubscriptionType implements java.io.Serializable {
     }
     
    public String priceWithoutTax() {
-        return price.setScale(2, RoundingMode.UP).toPlainString();
+        return price.divide(new BigDecimal(1.23), 2, RoundingMode.HALF_UP)
+                .setScale(2, RoundingMode.UP).toPlainString();
+        
     }
     
     public String priceWithTax() {
-        return price.multiply(new BigDecimal(1.23)).setScale(2, RoundingMode.UP).toPlainString();
+        return price.setScale(2, RoundingMode.UP).toPlainString();
     }
     
     public String tax() {
-        return price.multiply(new BigDecimal(0.23)).setScale(2, RoundingMode.UP).toPlainString();
+        return price.subtract(price.divide(new BigDecimal(1.23), 2, RoundingMode.HALF_UP))
+                .setScale(2, RoundingMode.UP).toPlainString();
     }
     
 
