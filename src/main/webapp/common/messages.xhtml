@@ -10,13 +10,13 @@
     <body>
 
         <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Doradca - wiadomości </ui:define> 
+            <ui:define name="title">Wiadomości - skrzynka odbiorcza</ui:define> 
             <ui:define name="content">
                     <h2 class="messagesTitle">Wiadomości - skrzynka odbiorcza</h2> 
                         
                     <div class="contentBox">
                         
-                        <h:form>                       
+                        <h:form>   
                         <ui:repeat var="o" value="#{conversationMB.messages}">   
                         <div class="messagesBox"> 
 
