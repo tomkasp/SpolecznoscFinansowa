@@ -273,29 +273,29 @@ public class ConsultantSettingsMB implements Serializable {
 
     public void showAgreementPDF() throws IOException{
         
-        String sourceLocalPath = "/home/sf/agreement.pdf";
-        String destinationLocalPath = "\\";
-        String ftpPath = PATH + idUser + "/";
-        String fileName = "agreement_consultant_"+idConsultant+".pdf";
-        //CREATE NEW AGREEMENT:
-        AgreementPDFItext itext = new AgreementPDFItext();
-        
-        itext.fillPDF( idConsultant,sourceLocalPath , destinationLocalPath + fileName );
-        
-        //UPLOAD ON FTP:
-       
-        FileUploaderFTP fuftp=new FileUploaderFTP();
-        fuftp.makeDirectory(ftpPath);
-        fuftp.copyFileOnFTP( destinationLocalPath + fileName , ftpPath + fileName );
-        
-        
-        //DOWNLOAD FROM FTP:
-        FtpDownloader ftpd=new FtpDownloader();
-        ftpd.download(ftpPath, fileName ); 
-        
-        //DELETE LOCAL FILE
-        File f = new File(destinationLocalPath+fileName);
-        f.delete();
+//        String sourceLocalPath = "/home/sf/agreement.pdf";
+//        String destinationLocalPath = "\\";
+//        String ftpPath = PATH + idUser + "/";
+//        String fileName = "agreement_consultant_"+idConsultant+".pdf";
+//        //CREATE NEW AGREEMENT:
+//        AgreementPDFItext itext = new AgreementPDFItext();
+//        
+//        itext.fillPDF( idConsultant, sourceLocalPath , destinationLocalPath + fileName );
+//        
+//        //UPLOAD ON FTP:
+//       
+//        FileUploaderFTP fuftp=new FileUploaderFTP();
+//        fuftp.makeDirectory(ftpPath);
+//        fuftp.copyFileOnFTP( destinationLocalPath + fileName , ftpPath + fileName );
+//        
+//        
+//        //DOWNLOAD FROM FTP:
+//        FtpDownloader ftpd=new FtpDownloader();
+//        ftpd.download(ftpPath, fileName ); 
+//        
+//        //DELETE LOCAL FILE
+//        File f = new File(destinationLocalPath+fileName);
+//        f.delete();
         
     }
     
