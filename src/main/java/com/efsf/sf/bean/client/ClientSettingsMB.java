@@ -280,6 +280,7 @@ public class ClientSettingsMB implements Serializable {
         String pesel = value.toString();
         if (pesel.length() > 5 && client.getBirthDate() != null)
         {
+            System.out.println(client.getBirthDate());    
             LocalDate date = new LocalDate(client.getBirthDate());
             String year = Integer.toString(date.getYear()).substring(2);
             
@@ -347,7 +348,7 @@ public class ClientSettingsMB implements Serializable {
         }
 
     }
-
+    
     public void toIncome() {
         setIsIncome(true);
 
@@ -418,6 +419,8 @@ public class ClientSettingsMB implements Serializable {
             businessSet.add(business);
             business = new IncomeBusinessActivity();
         }
+        
+        cleanDialog();
     }
 
     
