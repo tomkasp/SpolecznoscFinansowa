@@ -2,12 +2,13 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.ConsultantRating;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 
-public class ConsultantRatingDAO {
+public class ConsultantRatingDAO implements Serializable{
 
     public ConsultantRating getConsultantRatings(Integer consultantId) {
         ConsultantRating cr = null;

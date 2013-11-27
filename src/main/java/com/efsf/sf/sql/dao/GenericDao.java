@@ -7,7 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Projections;
 
-public class GenericDao<T> {
+public class GenericDao<T> implements Serializable{
 
     private final Class<T> type;
 

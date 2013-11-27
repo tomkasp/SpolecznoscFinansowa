@@ -3,11 +3,12 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Branch;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
 
 
-public class BranchDAO
+public class BranchDAO implements Serializable
 {
         public List branchList(){
         List<Branch> list;

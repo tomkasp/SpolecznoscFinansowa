@@ -2,11 +2,12 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class ConsultantDAO {
+public class ConsultantDAO implements Serializable{
 
     public Consultant read(int id) {
 
