@@ -103,7 +103,7 @@ public class ClientSettingsMB implements Serializable {
 
             IncomeData incomeData = new IncomeData(i.getEmploymentType().getName(), i.getBranch().getName(), i.getMonthlyNetto().longValue());
             incomeData.setIdIncome(i.getIdIncome());
-            incomeData.setIsIncome(true);
+            incomeData.setIncome(true);
 
             incomeTable.add(incomeData);
             incomeSet.add(i);
@@ -117,7 +117,7 @@ public class ClientSettingsMB implements Serializable {
 
             IncomeData incomeData = new IncomeData(iba.getEmploymentType().getName(), iba.getBranch().getName(), iba.getIncomeLastYearNetto().longValue());
             incomeData.setIdIncome(iba.getIdIncomeBusinessActivity());
-            incomeData.setIsIncome(false);
+            incomeData.setIncome(false);
 
             incomeTable.add(incomeData);
             businessSet.add(iba);
@@ -392,7 +392,7 @@ public class ClientSettingsMB implements Serializable {
             tableEmpty = false;
             IncomeData incomeData = new IncomeData(et.getName(), b.getName(), income.getMonthlyNetto().doubleValue());
             incomeData.setIdIncome(income.getIdIncome());
-            incomeData.setIsIncome(true);
+            incomeData.setIncome(true);
             incomeTable.add(incomeData);
             incomeSet.add(income);
             income = new Income();
@@ -413,7 +413,7 @@ public class ClientSettingsMB implements Serializable {
 
             IncomeData incomeData = new IncomeData(et.getName(), b.getName(), business.getIncomeCurrentYearNetto().doubleValue());
             incomeData.setIdIncome(business.getIdIncomeBusinessActivity());
-            incomeData.setIsIncome(false);
+            incomeData.setIncome(false);
             incomeTable.add(incomeData);
             businessSet.add(business);
             business = new IncomeBusinessActivity();
