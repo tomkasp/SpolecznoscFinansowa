@@ -180,6 +180,8 @@ public class ClientSettingsMB implements Serializable {
             }
 
         }
+        
+       
 
         Iterator<Income> incomeSetIT = incomeSet.iterator();
         while (incomeSetIT.hasNext()) {
@@ -279,8 +281,7 @@ public class ClientSettingsMB implements Serializable {
     public void validatePesel(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
         String pesel = value.toString();
         if (pesel.length() > 5 && client.getBirthDate() != null)
-        {
-            System.out.println(client.getBirthDate());    
+        {   
             LocalDate date = new LocalDate(client.getBirthDate());
             String year = Integer.toString(date.getYear()).substring(2);
             
