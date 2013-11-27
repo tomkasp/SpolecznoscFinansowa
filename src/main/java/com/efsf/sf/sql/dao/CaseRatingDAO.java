@@ -3,11 +3,12 @@ package com.efsf.sf.sql.dao;
 import com.efsf.sf.sql.entity.CaseRating;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class CaseRatingDAO {
+public class CaseRatingDAO implements Serializable{
 
     public void save(CaseRating rating) {
 

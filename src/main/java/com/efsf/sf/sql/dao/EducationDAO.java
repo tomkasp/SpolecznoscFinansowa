@@ -2,10 +2,11 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Education;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.classic.Session;
 
-public class EducationDAO {
+public class EducationDAO implements Serializable{
 
     public Education getEducation(int id) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();

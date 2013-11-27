@@ -2,10 +2,11 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.EmploymentType;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
 
-public class EmploymentTypeDAO {
+public class EmploymentTypeDAO implements Serializable{
 
     public List incomeList() {
         List<EmploymentType> list;

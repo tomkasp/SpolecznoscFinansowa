@@ -2,11 +2,12 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class ClientDAO {
+public class ClientDAO implements Serializable{
 
     public Client read(int id) {
         Client client;

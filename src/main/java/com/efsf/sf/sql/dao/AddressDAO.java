@@ -2,10 +2,11 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-public class AddressDAO {
+public class AddressDAO implements Serializable{
 
     public void save(Address address) {
 
