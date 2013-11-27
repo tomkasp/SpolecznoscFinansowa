@@ -2,9 +2,10 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.util.HibernateUtil;
+import java.io.Serializable;
 import org.hibernate.Session;
 
-public class IncomeDAO {
+public class IncomeDAO implements Serializable{
 
     public void update(Income income) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
