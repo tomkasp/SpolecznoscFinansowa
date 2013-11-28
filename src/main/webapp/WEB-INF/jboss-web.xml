@@ -2,7 +2,7 @@
 <jboss-web>
     <context-root></context-root>
             
-<!--    <valve>   
+    <valve>   
         <class-name>org.jboss.web.rewrite.RewriteValve</class-name>   
-    </valve>  -->
+    </valve>  
 </jboss-web>
