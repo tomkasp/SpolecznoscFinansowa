@@ -31,13 +31,29 @@
         s.parentNode.insertBefore(wf, s);
         })(); 
     </script>
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-45996867-1', 'spolecznoscfinansowa.pl');
+            ga('send', 'pageview');
+
+        </script>
 </head>
 
 <body>
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-
 
 <div id="container">
     
@@ -70,8 +86,9 @@
         <div class="slogan"><h2>Witamy w miejscu spotkań kredytobiorców i doradców</h2></div>
         <article>
         <h3>Dla klienta</h3>
-            <p>Po zarejestrowaniu dostaniesz dostęp do pełnej funkcjonalności systemu całkowicie za darmo. Z pomocą doradcy który zostanie wybrany specjalnie dla Ciebie będziesz miał możliwość nowe źródła finansowania.<br>
-            Nie musisz od razu rejestrować swojego wniosku. Nasz system umożliwi Ci kontakt z jednymi z najlepszych doradców w kraju, którzy pomogą Ci określić Twoje potrzeby. </p>
+            <p>Po zarejestrowaniu dostaniesz dostęp do pełnej funkcjonalności systemu całkowicie za darmo. Z pomocą doradcy który zostanie wybrany specjalnie dla Ciebie będziesz miał możliwość nowe źródła finansowania.
+            Nie musisz od razu rejestrować swojego wniosku. Nasz system umożliwi Ci kontakt z jednymi z najlepszych doradców w kraju, którzy pomogą Ci określić Twoje potrzeby. 
+            Nigdy wcześniej rynek kredytów nie był tak blisko klienta jak teraz! Oprócz dostępu do bazy doradców, masz możliwość stałego kontaktu z doradcami, możesz swobodnie konsultować się oraz radzić. </p>
         </article>
 
         <nav class="side-menu">
@@ -100,8 +117,6 @@
 </footer>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-
     <script src="js/main.js"></script>
 </body>
 </html>
