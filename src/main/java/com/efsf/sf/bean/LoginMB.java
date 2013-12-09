@@ -198,7 +198,6 @@ public class LoginMB implements Serializable {
     }
 
     public void sendNewPasswordMail() {
-
         UserDAO udao = new UserDAO();
         User u = udao.read(email);
         String password = u.getPassword();

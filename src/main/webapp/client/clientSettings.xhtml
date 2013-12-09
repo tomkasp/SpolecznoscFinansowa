@@ -110,7 +110,7 @@
                                 <div class="field"> 
                                     <h:outputText  class="label" value="Data urodzenia"/> 
                                     <p:calendar required="#{clientSettingsMB.areRequired}" pattern="dd-MM-yyyy" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{clientSettingsMB.client.birthDate}" >
-                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+2" />
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
                                         <p:ajax  event="dateSelect" update="birthDateMessage birthDate" />
                                     </p:calendar>
                                     <h:message for="birthDate" errorClass="invalid" id="birthDateMessage" />
