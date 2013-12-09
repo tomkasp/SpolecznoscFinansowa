@@ -301,7 +301,7 @@ public class ConsultantMainPageMB implements Serializable {
             return false;
         } else {
             RequiredDocuments rds = client.getRequiredDocumentses().iterator().next();
-            return rds.getBik() == null;
+            return rds.getBik() != null;
         }
     }
 
