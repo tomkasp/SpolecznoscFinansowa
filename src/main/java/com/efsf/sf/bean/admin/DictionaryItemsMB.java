@@ -11,36 +11,35 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class DictionaryItemsMB implements Serializable{
+public class DictionaryItemsMB implements Serializable {
     
     private List<DictionaryItem> items;
-    private int type=0;
-    
-    private DictionaryItem item=new DictionaryItem(1, "test", 1);
-    
-     public String showDictionary(int type){
-        this.type=type;
-        return "/admin/dictionary?faces-redirect=true";
-    }   
+    private int type = 0;
+    private DictionaryItem item = new DictionaryItem(1, "test", 1);
 
-    public void addItem(){
-        item=new DictionaryItem(-1, "", 1);     
+    public String showDictionary(int type) {
+        this.type = type;
+        return "/admin/dictionary?faces-redirect=true";
     }
-     
-    public void saveItem() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException{
-        
-       Class<?> cls = Class.forName("com.efsf.sf.sql.entity."+getClassByType());
-       GenericDao<?> dao = new GenericDao(cls);
-       Object o=cls.newInstance();
-       
-       Field name=cls.getDeclaredField("name");
-       name.setAccessible(true);
-       name.set(o, item.getName());
-       
-       Field active=cls.getDeclaredField("isActive");
-       active.setAccessible(true);
-       active.set(o, item.getIsActive());
-       
+
+    public void addItem() {
+        item = new DictionaryItem(-1, "", 1);
+    }
+
+    public void saveItem() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException {
+
+        Class<?> cls = Class.forName("com.efsf.sf.sql.entity." + getClassByType());
+        GenericDao<?> dao = new GenericDao(cls);
+        Object o = cls.newInstance();
+
+        Field name = cls.getDeclaredField("name");
+        name.setAccessible(true);
+        name.set(o, item.getName());
+
+        Field active = cls.getDeclaredField("isActive");
+        active.setAccessible(true);
+        active.set(o, item.getIsActive());
+
         if (item.getId() != -1) {
             Field[] fields = cls.getDeclaredFields();
             for (Field field : fields) {
@@ -50,19 +49,19 @@ public class DictionaryItemsMB implements Serializable{
                 }
             }
         }
-       
-       dao.saveOrUpdateObject(o);
-       item=new DictionaryItem(-1, "", 1);
-    } 
+
+        dao.saveOrUpdateObject(o);
+        item = new DictionaryItem(-1, "", 1);
+    }
 
     public List<DictionaryItem> getItems() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         String name = null;
-        Integer id = null; 
-        Integer isActive=1;
-        
-        items=new ArrayList<DictionaryItem>();
+        Integer id = null;
+        Integer isActive = 1;
 
-        Class<?> cls = Class.forName("com.efsf.sf.sql.entity."+getClassByType());
+        items = new ArrayList<DictionaryItem>();
+
+        Class<?> cls = Class.forName("com.efsf.sf.sql.entity." + getClassByType());
         GenericDao<?> dao = new GenericDao(cls);
         List<?> ls = dao.getAll();
 
@@ -75,7 +74,7 @@ public class DictionaryItemsMB implements Serializable{
                     name = (String) field.get(ls.get(i));
                 } else if (field.getName().startsWith("id")) {
                     id = (Integer) field.get(ls.get(i));
-                } else if (field.getName().equals("isActive")){
+                } else if (field.getName().equals("isActive")) {
                     isActive = (Integer) field.get(ls.get(i));
                 }
 
@@ -86,24 +85,28 @@ public class DictionaryItemsMB implements Serializable{
         return items;
     }
 
-
     public void setItems(List<DictionaryItem> items) {
         this.items = items;
     }
 
     private String getClassByType() {
-        switch(type){
-            case 0: return "ProductType";
-            case 1: return "Branch";
-            case 2: return "CaseStatus";
-            case 3: return "Education";
-            case 4: return "MaritalStatus";
-            case 5: return "WorkingPlace";                 
+        switch (type) {
+            case 0:
+                return "ProductType";
+            case 1:
+                return "Branch";
+            case 2:
+                return "CaseStatus";
+            case 3:
+                return "Education";
+            case 4:
+                return "MaritalStatus";
+            case 5:
+                return "WorkingPlace";
         }
-        
+
         return null;
     }
-
 
     public DictionaryItem getItem() {
         return item;
@@ -112,5 +115,6 @@ public class DictionaryItemsMB implements Serializable{
     public void setItem(DictionaryItem item) {
         this.item = item;
     }
-    
+
+   
 }

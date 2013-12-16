@@ -6,6 +6,8 @@ import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -77,6 +79,17 @@ public class SubscriptionDAO implements Serializable{
         }
         
         return subscription;
+    }
+    
+    public List<Subscription> getAllSubscriptionsForInvoices(){
+        List<Subscription> list;
+        Criteria criteria = HibernateUtil.SESSION_FACTORY.openSession().createCriteria(Subscription.class)
+                .setFetchMode("subscriptionType", FetchMode.JOIN)
+                .setFetchMode("consultant", FetchMode.JOIN)
+                .setFetchMode("consultant.addresses", FetchMode.JOIN)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        list = criteria.list();
+        return list;
     }
     
     
