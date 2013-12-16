@@ -110,7 +110,7 @@
                                 <div class="field"> 
                                     <h:outputText  class="label" value="Data urodzenia"/> 
                                     <p:calendar required="#{clientSettingsMB.areRequired}" pattern="dd-MM-yyyy" id="birthDate" yearRange="1900:2010" navigator="true" styleClass="calendar" value="#{clientSettingsMB.client.birthDate}" >
-                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="GMT+1" />
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
                                         <p:ajax  event="dateSelect" update="birthDateMessage birthDate" />
                                     </p:calendar>
                                     <h:message for="birthDate" errorClass="invalid" id="birthDateMessage" />
@@ -520,7 +520,7 @@
 
 
 
-                <p:dialog id="addBusiness" header="Dodaj informację o dochodach" widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
+                <p:dialog id="addBusiness" header="Dodaj informację o dochodach"  widgetVar="business" resizable="false" height="450" width="650" showEffect="clip" hideEffect="explode" modal="true" >    
                     
                     <h:form>  
                         
@@ -732,8 +732,8 @@
 
                         </h:panelGroup>
 
-                        <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px"  action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="business.hide()"  />
-                        <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" value="Dodaj" update=":form1:table :form1:tableValidator" oncomplete=" if (!args.validationFailed){ business.hide() } "   />
+                        <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px"  action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" update="@form"  oncomplete="business.hide()"  />
+                        <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" value="Dodaj" update=":form1:table :form1:tableValidator @form" oncomplete=" if (!args.validationFailed){ business.hide() } "   />
 
                     </h:form>
 
@@ -794,8 +794,8 @@
 
                         </h:panelGroup>
                         <div>
-                            <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px" action="#{clientSettingsMB.cleanDialog()}" value="Anuluj" oncomplete="income.hide()"  />
-                            <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" update=":form1:table :form1:tableValidator" value="Dodaj" oncomplete="if (!args.validationFailed){ income.hide() }"   />
+                            <p:commandButton styleClass="floatL wideButton" style="position: absolute; bottom: 10px; left: 10px" action="#{clientSettingsMB.cleanDialog()}" update="@form" value="Anuluj" oncomplete="income.hide()"  />
+                            <p:commandButton styleClass="floatR wideButton" style="position: absolute; bottom: 10px; right: 10px" action="#{clientSettingsMB.addIncome()}" update=":form1:table :form1:tableValidator @form" value="Dodaj" oncomplete="if (!args.validationFailed){ income.hide() }"   />
                         </div>
 
                     
