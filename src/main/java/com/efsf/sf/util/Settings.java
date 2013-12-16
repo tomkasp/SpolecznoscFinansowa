@@ -35,9 +35,9 @@ public class Settings
     
     // SUBSCRIPTION TYPE
     public static final Integer FREE = 0;
-    public static final Integer STANDARD = 1;
-    public static final Integer STANDARD_PLUS = 2;
-    public static final Integer PREMIUM = 3; 
+    public static final Integer STANDARD = 5;
+    public static final Integer STANDARD_PLUS = 6;
+    public static final Integer PREMIUM = 7; 
     
     // SUBSCRIPTION LIMITS 
     public static final Integer MAX_CASES_DISPLAYED = 100;
