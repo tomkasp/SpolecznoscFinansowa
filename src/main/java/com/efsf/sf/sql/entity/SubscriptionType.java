@@ -84,8 +84,7 @@ public class SubscriptionType implements java.io.Serializable {
     }
     
     public String priceSpeak() {
-        return NumberSpeaker.speakNumber(price.multiply(new BigDecimal(1.23))
-                .setScale(2, RoundingMode.UP).doubleValue());
+        return NumberSpeaker.speakNumber(price.doubleValue());
     }
     
    public String priceWithoutTax() {
