@@ -282,4 +282,11 @@ public class Consultant implements java.io.Serializable {
     public void setApplayedCaseCounter(Integer applayedCaseCounter) {
         this.applayedCaseCounter = applayedCaseCounter;
     }
+    
+    public Address invoiceAddress(){
+        for(Address a: addresses){
+            if(a.getType().equals(2)) return a;
+        }
+        return null;
+    }
 }
