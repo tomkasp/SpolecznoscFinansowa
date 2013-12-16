@@ -1,53 +1,176 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Społeczność Finansowa</title>
+    <meta name="description" content="Społeczność Finansowa. Miejsce spotkań doradców z klientami." />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+    
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Condensed&amp;subset=latin,latin-ext" rel='stylesheet' type='text/css' />    
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <script type="text/javascript">
+        WebFontConfig = {
+        google: { families: [ 'Ubuntu+Condensed::latin,latin-ext' ] }
+        };
+        (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+        })(); 
+    </script>
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-45996867-1', 'spolecznoscfinansowa.pl');
+            ga('send', 'pageview');
+
+        </script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
 
 
-    <body>
+<div id="container">
+    
+    <header>
+        <section id="top-header">
+            <h1 class="sf-logo">Społeczność Finansowa</h1>
+            <nav class="top-menu">
+                <ul>
+                    <li><a class="active" href="#">strona główna</a></li>
+                    <li><a href="regulamin.html">regulamin</a></li>
+                    <li><a href="polityka_prywatnosci.html">polityka prywatności</a></li>
+                    <li><a href="kontakt.html">kontakt</a></li>
+                </ul>
+            </nav><!-- top-menu -->
+        </section><!-- top-header -->
 
-        <ui:composition template="/templates/mainTemplate.xhtml">
-            <ui:define name="title"> Społeczność Finansowa </ui:define> 
-            <ui:define name="top">
-                <div class="topbarLogo floatL">
-                    <h:graphicImage id="sf_logo" alt="could not be found."  value="/resources/images/spolecznosc_logo2.png" title="SF Logo" ></h:graphicImage>
-                </div>
-                <div class="naglowekLogin">
+        <section id="bottom-header" class="clearfix">
+            <div class="slider">
+                <img src="img/slide01.jpg" alt="" />
+            </div>
+            <div class="cta">
+                <h2>Dołącz do Społeczności Finansowej</h2>
+                <p>Aby się zarejestrować lub zalogować do platformy Społeczności Finansowej  skorzystaj z panelu klikając w przycisk poniżej.</p>
+                <a href="index2.xhtml" class="gray-button" target="_blank">PRZEJDŹ DO PANELU</a>               
+            </div><!-- cta -->
+        </section><!-- bottom-header -->     
+    </header>
 
-                    <h1>Dołącz do <br/>społeczności finansowej</h1>
-                </div>
+    <section id="first-row" class="clearfix">
+        <div class="slogan"><h2>Witamy w miejscu spotkań kredytobiorców i doradców</h2></div>
+        <div class="promo-box"></div>
+        <article>
+        <h3>O portalu</h3>
+            <p>
+                Społeczność Finansowa Sp. z o.o. oferuje Państwu nowe możliwości pozyskania środków finansowych.
+                Za pomocą platformy internetowej łączącej doświadczenie tradycyjnych sprzedawców z możliwościami jakie niosą nowe technologie  otrzymujecie Państwo unikatowe rozwiązanie za pomocą którego możecie otrzymać środki finansowe.<br />
 
-            </ui:define>
+                Społeczność Finansowa ma za zadanie kojarzyć osoby i  firmy poszukujące nowego źródła finansowania z doradcami, w sposób zapewniający obu stronom maksymalne korzyści.<br />
 
-            <ui:define name="content">
+                Społeczność finansowa obsługuje zarówno klientów indywidualnych jak i biznesowych (także korporacyjnych) zapewniając Państwu bogaty wachlarz produktów i usług finansowych.<br />
 
-                <div class="loginContent">                    
+                W naszej ofercie znajdziecie Państwo szerokie spektrum możliwości, innowacyjne i nowoczesne produkty, rozwiązania dostosowane do indywidualnych potrzeb oraz wygodny dostęp do produktów poprzez internet.
+            </p>
+        </article>
+    </section><!-- first-row -->
 
-                    <div class="loginLeft">
-                        <p style="text-align: right;"><h:link class="loginLink" outcome="/clientCreateAccount.xhtml" ><h:graphicImage style="float: right;  margin-top: -35px;" id="sf_logo2" alt="could not be found."  value="/resources/images/button_green_1.png" title="SF Logo" ></h:graphicImage>Zostań<br/> naszym klientem</h:link></p>
-                    </div>
+    <section id="services" class="clearfix">
 
-                    <div align="center" class="loginCenter">
-                        <h:link outcome="/login.xhtml"><h:graphicImage alt="could not be found."  value="/resources/images/zaloguj_1.png" title="SF Logo" ></h:graphicImage></h:link>
-                    </div>
+        <article>
+            <header>
+                <h3>Dla klienta</h3>
+                <div class="circle item01"></div>
+            </header>
+            <p>Zupełnie darmowy dostęp do pełnej funkcjonalności systemu. Z pomocą doradcy znajdź nowe źródła i sposoby finansowania.</p>
+            <a href="dla_klienta.html" class="gray-button">WIĘCEJ</a>
+        </article>
 
-                    <div class="loginRight">
-                        <p><h:link class="loginLink" outcome="/consultantCreateAccount.xhtml" ><h:graphicImage style="float: left; margin-top: -35px;" alt="could not be found."  value="/resources/images/button_blue_1.png" title="SF Logo" ></h:graphicImage>Dołącz do <br/> naszych doradców</h:link></p>
-                    </div>
+        <article>
+            <header>
+                <h3>Dla doradcy</h3>
+                <div class="circle item02"></div>
+            </header>
+            <p>Jako doradca w naszym portalu zyskujesz całą gamę nowych możliwości, o których wcześniej konsultanci mogli tylko marzyć.</p>
+            <a href="dla_doradcy.html" class="gray-button">WIĘCEJ</a>            
+        </article>
 
-                    <div id="checkIt" class="loginBottom">
-                        <p style="text-align: right; "><h:link  class="loginLink" outcome="/how_it_works.xhtml?videoId=0"><h:graphicImage style="float: right;  margin-top: -8px;" alt="could not be found."  value="/resources/images/kropka_1.png" title="SF Logo" ></h:graphicImage>Sprawdź jak <br/>to działa  </h:link></p>
-                    </div>
+        <article>
+            <header>
+                <h3>Korzyści</h3>
+                <div class="circle item03"></div>
+            </header>
+            <p>Zapoznaj się z korzyściami oraz profitami jakie niesie ze sobą korzystanie z platformy Społeczności Finansowej</p>
+            <a href="korzysci.html" class="gray-button">WIĘCEJ</a>            
+        </article>
 
-                </div>    
+        <article>
+            <header>
+                <h3>Bezpieczeństwo</h3>
+                <div class="circle item04"></div>
+            </header>
+            <p>Nasz system zapewnia całkowitą ochronę Twoich danych osobowych, dzięki temu możesz czuć się bezpiecznie.</p>
+            <a href="bezpieczenstwo.html" class="gray-button">WIĘCEJ</a>            
+        </article>
+       
+    </section><!-- services -->
 
+    <section id="last-row" class="clearfix">
+        
+        <article></article>
+        <article>
+            <h3>Jak to działa?</h3>
+            <p>Zapraszamy do zapoznania się z filmami wyjaśniającymi cały proces rejestracji, edycji profilu oraz podstawowe zasady korzystania z portalu Społeczność Finansowa.</p>
+            <a href="how_it_works.xhtml?videoId=0" class="gray-button" target="_blank">PRZEJDŹ DO WIDEO</a>
+        </article>
 
+        <article>
+            <h3>Dołącz do nas!</h3>
+            <p>Nie zwlekaj i dołącz do Nas już dziś!<br />
+            Zarejestruj się za darmo i uzyskaj możliwość nowego i korzystnego źródła finansowania idealnie dopasowanego do Twoich potrzeb.</p>
+            <a href="index2.xhtml" class="gray-button" target="_blank">ZAREJESTRUJ SIĘ</a>                     
+        </article>
 
+    </section>
 
-            </ui:define>
+    <section class="eu-info">
+        <p>Projekt współfinansowany ze środków Europejskiego Funduszu Rozwoju Regionalnego w ramach Programu Operacyjnego Innowacyjna Gospodarka</p>
+    </section>
 
-        </ui:composition>
+</div><!-- container -->
 
-    </body>
+<footer>  
+    <p>Copyright © 2013 SPOŁECZNOŚĆ FINANSOWA</p>
+</footer>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
 </html>

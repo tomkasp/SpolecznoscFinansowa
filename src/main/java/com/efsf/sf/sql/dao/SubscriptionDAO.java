@@ -13,8 +13,6 @@ import org.hibernate.Session;
 
 public class SubscriptionDAO implements Serializable{
     
-
-
     public void save(Subscription subscription) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();

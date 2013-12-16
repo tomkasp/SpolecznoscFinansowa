@@ -62,7 +62,7 @@ public class IncomeData implements Serializable
         return income;
     }
 
-    public void setIsIncome(boolean income) {
+    public void setIncome(boolean income) {
         this.income = income;
     }
 

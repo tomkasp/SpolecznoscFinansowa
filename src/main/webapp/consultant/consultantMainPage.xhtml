@@ -6,7 +6,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:comp="http://java.sun.com/jsf/composite/components">
+      xmlns:cmp="http://java.sun.com/jsf/composite/components">
 
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
@@ -15,7 +15,7 @@
 
             <ui:define name="content">
                 <f:event type="preRenderView" listener="#{consultantMainPageMB.reload()}" />
-                <comp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
+                <cmp:buySubscriptionDialog returnOnCancel="false" widgetName="subsDialog" />
 
                 <h:panelGroup rendered="#{consultantMainPageMB.isPaymentAlert()}" >
                     <p:dialog modal="true" closable="false" id="subscriptionDialog" resizable="false" visible="true" widgetVar="paymentDialog" >
@@ -26,15 +26,15 @@
                             
                         <h:panelGrid columns="3" >
                             
-                            <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(1)}" onclick="paymentDelayDialog.show();"  >
+                            <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.standard)}" onclick="paymentDelayDialog.show();"  >
                                     <h:graphicImage library="images" name="standard.png" />
                                 </p:commandLink>
 
-                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(2)}" onclick="paymentDelayDialog.show();" >
+                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.standardPlus)}" onclick="paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="standard_plus.png" />
                                 </p:commandLink>
 
-                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(3)}" onclick=" paymentDelayDialog.show();" >
+                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.premium)}" onclick=" paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="premium.png" />
                                 </p:commandLink>
   
