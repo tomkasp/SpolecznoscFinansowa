@@ -26,15 +26,15 @@
                             
                         <h:panelGrid columns="3" >
                             
-                            <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(1)}" onclick="paymentDelayDialog.show();"  >
+                            <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.standard)}" onclick="paymentDelayDialog.show();"  >
                                     <h:graphicImage library="images" name="standard.png" />
                                 </p:commandLink>
 
-                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(2)}" onclick="paymentDelayDialog.show();" >
+                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.standardPlus)}" onclick="paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="standard_plus.png" />
                                 </p:commandLink>
 
-                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(3)}" onclick=" paymentDelayDialog.show();" >
+                                <p:commandLink action="#{consultantMainPageMB.setFirstPaymentType(settings.premium)}" onclick=" paymentDelayDialog.show();" >
                                     <h:graphicImage library="images" name="premium.png" />
                                 </p:commandLink>
   
