@@ -100,18 +100,18 @@ public class AnalyserAlgorithm {
         //jesli nie, wyswietl dla klienta najlepszych konsultantow
         if(this.idConsultant==null){
             pd = pDao.getAllProducts();
-            System.out.println("nie został zapisany idConsultant");
+            //System.out.println("nie został zapisany idConsultant");
         }
         else{
             pd = pDao.getAllProductsForConsultant(this.idConsultant);
-            System.out.println("został zapisany konsultant");
+            //System.out.println("został zapisany konsultant");
         }
         
         Iterator i = pd.iterator();
 
         while (i.hasNext()) {
             ProductDetails ite = (ProductDetails) i.next();
-            System.out.println(" cosik:" + ite.getAmountBruttoMax());
+            //System.out.println(" cosik:" + ite.getAmountBruttoMax());
 
             prodata.add(new ProductsData(ite.getIdProductDetail(), ite.getEmploymentType().getIdEmploymentType(), 
                     ite.getAmountBruttoMin().doubleValue(), ite.getAmountBruttoMax().doubleValue(), 
@@ -181,7 +181,7 @@ public class AnalyserAlgorithm {
 
                     getBestOfferts().put((int) entry.getKey(), (int) entry.getValue());
 
-                    System.out.println("WYKONUJE zapytanie dla sprawy o id= " + entry.getKey());
+                    //System.out.println("WYKONUJE zapytanie dla sprawy o id= " + entry.getKey());
                     setBestConsultants(cdao.getConsultantsForProductDetail((int) entry.getKey()));
                     tmp++;
                 }
@@ -189,9 +189,9 @@ public class AnalyserAlgorithm {
             max--;
         }
 
-        for (Map.Entry ent : getBestOfferts().entrySet()) {
-            System.out.println("oto co mam: " + ent.getKey() + " " + ent.getValue());
-        }
+//        for (Map.Entry ent : getBestOfferts().entrySet()) {
+//           System.out.println("oto co mam: " + ent.getKey() + " " + ent.getValue());
+//        }
 
     }
     
