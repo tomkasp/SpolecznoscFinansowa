@@ -285,6 +285,8 @@ public class ClientSettingsMB implements Serializable {
             LocalDate date = new LocalDate(client.getBirthDate());
             String year = Integer.toString(date.getYear()).substring(2);
             
+            //System.out.println(date);
+            
             FacesContext context = FacesContext.getCurrentInstance();
             ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
             FacesMessage msg = new FacesMessage(bundle.getString("peselNotMatch"), bundle.getString("peselNotMatch"));
