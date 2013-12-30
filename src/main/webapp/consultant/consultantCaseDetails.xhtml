@@ -85,7 +85,7 @@
                                     <h:panelGroup rendered ="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus lt 8}" >
                                         <div class="field"> <h:outputText class="label" value="Kwota wolne środki"/>  <h:inputText id="freeResourcesValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.freeResourcesValue}" /> </div>
                                         <div class="field"> <h:outputText class="label" value="Kwota konsolidacji"/>  <h:inputText id="consolidationValue" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
-                                        <div class="field"> <h:outputText class="label" value="Porządana rata"/>  <h:inputText id="expectedInstalment" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
+                                        <div class="field"> <h:outputText class="label" value="Pożądana rata"/>  <h:inputText id="expectedInstalment" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.expectedInstalment}" /> </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered ="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
                                         <div class="field"> <h:outputText class="label" value="Otrzymana kwota"/>  <h:inputText  class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consolidationValue}" /> </div>
