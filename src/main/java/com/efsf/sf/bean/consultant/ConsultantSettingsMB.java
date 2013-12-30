@@ -234,7 +234,8 @@ public class ConsultantSettingsMB implements Serializable {
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        cdao.update(consultant);
+        //cdao.update(consultant);
+        cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 
