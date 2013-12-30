@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b58eeb3-5896-4eca-b5f7-1e9f32f1d7a8">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="230"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="Table Dataset 1" uuid="707e62bd-d0cf-4813-9245-8b171a8dd9e1"/>
 	<parameter name="consultant" class="com.efsf.sf.sql.entity.Consultant"/>
 	<parameter name="address" class="com.efsf.sf.sql.entity.Address">
@@ -100,6 +100,13 @@
 					<font pdfEncoding="Cp1250"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Wrocław, data wystawienia: "+$P{date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6bd1f091-fcce-43b7-97fd-f1de72df8e67" x="10" y="176" width="350" height="15"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{consultant}.getNip()!=null ? "NIP: "+$P{consultant}.getNip() : "")+" "+($P{consultant}.getRegon()!=null ? "REGON: "+$P{consultant}.getRegon() : "")]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
