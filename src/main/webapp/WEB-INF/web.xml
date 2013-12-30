@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
             <web-resource-name>SUCTR</web-resource-name>
             <url-pattern>/*</url-pattern>      
@@ -19,7 +21,7 @@
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>-->
+    </security-constraint>
     
     
     <context-param>
@@ -46,6 +48,10 @@
         <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
         <param-value>false</param-value>
     </context-param>
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
     
                   
     <servlet>
@@ -66,7 +72,7 @@
     
     
     <!--     Auto scan REST service -->
-<!--    <context-param>
+    <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -92,7 +98,7 @@
     <servlet-mapping>
         <servlet-name>ApiServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>30</session-timeout>
@@ -100,14 +106,14 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-    <!--    <error-page>
+    <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error.xhtml</location>
     </error-page>
     <error-page>
         <error-code>404</error-code>
         <location>/error.xhtml</location>
-    </error-page>-->
+    </error-page>
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
