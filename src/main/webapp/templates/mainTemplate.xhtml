@@ -13,7 +13,7 @@
         <h:outputStylesheet library="css" name="cssLayout.css" />
         <h:outputStylesheet library="css" name="primefacesTheme.css" />
         <h:outputScript     library="js"   name="cookies.js" />
-        <title><ui:insert name="title">Facelets Template</ui:insert></title>
+        <title><ui:insert name="title">Społeczność Finansowa S.p. z o.o.</ui:insert></title>
         <link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/icons/favicon.png" />
         
     </h:head>
@@ -56,7 +56,7 @@
                                 <h5> #{loginMB.consultant.name} #{loginMB.consultant.lastName} </h5> 
 
                                 <div class="right">                                  
-                                    <h:outputText class="profileText" value="nr. użytkownika:" />
+                                    <h:outputText class="profileText" value="nr użytkownika:" />
                                     <h5> #{loginMB.consultant.user.login} </h5>
                                     <h:outputText class="profileText" value="Twóje miejsce w rankingu:" /> 
                                     <h5> #{scoreBoardMB.fetchRankingPlace(loginMB.consultant) eq -1 ? 'Poza rankingiem' : scoreBoardMB.fetchRankingPlace(loginMB.consultant)} </h5>
