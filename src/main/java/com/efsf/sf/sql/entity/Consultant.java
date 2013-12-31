@@ -41,14 +41,14 @@ public class Consultant implements java.io.Serializable {
     private Date expireDate;
     private Integer accountType;
     private Integer applayedCaseCounter;
-    private Set<ConsultantRating> consultantRatings = new HashSet<ConsultantRating>(0);
-    private Set<Institution> institutions = new HashSet<Institution>(0);
-    private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
-    private Set<ProductType> productTypes = new HashSet<ProductType>(0);
-    private Set<ClientCase> clientCases_1 = new HashSet<ClientCase>(0);
-    private Set<Address> addresses = new HashSet<Address>(0);
-    private Set<Subscription> subscriptions = new HashSet<Subscription>(0);
-    private Set<ClientCase> clientCases_2 = new HashSet<ClientCase>(0);
+    private Set<ConsultantRating> consultantRatings = new HashSet<>(0);
+    private Set<Institution> institutions = new HashSet<>(0);
+    private Set<ClientCase> clientCases = new HashSet<>(0);
+    private Set<ProductType> productTypes = new HashSet<>(0);
+    private Set<ClientCase> clientCases_1 = new HashSet<>(0);
+    private Set<Address> addresses = new HashSet<>(0);
+    private Set<Subscription> subscriptions = new HashSet<>(0);
+    private Set<ClientCase> clientCases_2 = new HashSet<>(0);
     private boolean invoice;
     
     
