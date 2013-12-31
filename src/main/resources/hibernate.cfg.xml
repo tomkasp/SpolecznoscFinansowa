@@ -4,17 +4,17 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.url">jdbc:mysql://79.110.203.149:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">SFuser</property>
         <property name="hibernate.connection.password">SFuser123</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
     
-        <property name="hibernate.c3p0.min_size">1</property>
+<!--        <property name="hibernate.c3p0.min_size">1</property>
         <property name="hibernate.c3p0.max_size">10</property>
         <property name="hibernate.c3p0.timeout">100</property>
         <property name="hibernate.c3p0.max_statements">50</property>
-        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>-->
     
     
         <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
