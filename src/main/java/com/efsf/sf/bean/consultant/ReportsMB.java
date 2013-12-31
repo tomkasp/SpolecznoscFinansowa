@@ -174,11 +174,19 @@ public class ReportsMB implements Serializable {
         
         for(Subscription s: sub){
             
-            Address address=addressDao.loadInvoiceAddressFromFkConsultant(s.getConsultant().getIdConsultant());
+            Address invoiceAddress=addressDao.loadInvoiceAddressFromFkConsultant(s.getConsultant().getIdConsultant());
+            Address address=addressDao.loadMainAddressFromFkConsultant(s.getConsultant().getIdConsultant());
             
-            if(s.getSubscriptionType()!=null && s.getConsultant()!=null && address!=null && address.complete() && s.getTransactionDate()!=null)
-            list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
-                  address, s.getConsultant(), true));
+            if(s.getSubscriptionType()!=null && s.getConsultant()!=null && s.getTransactionDate()!=null){
+                if(address!=null && address.complete()){
+                     list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
+                        address, s.getConsultant(), true));
+                } else if(invoiceAddress!=null && invoiceAddress.complete()){
+                     list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
+                        invoiceAddress, s.getConsultant(), true));
+                }
+            }
+           
         }
 
         getAsZip(list);
