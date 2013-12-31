@@ -6,9 +6,6 @@ import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
 import com.efsf.sf.util.Settings;
-import com.efsf.sf.util.ftp.FileUploaderFTP;
-import com.efsf.sf.util.ftp.FtpDownloader;
-import com.efsf.sf.util.pdf.AgreementPDFItext;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -222,7 +219,7 @@ public class ConsultantSettingsMB implements Serializable {
         
 
         invoiceData.setAddress(invoiceAddress);
-        InvoiceDataDAO iddao=new InvoiceDataDAO();
+        InvoiceDataDAO iddao = new InvoiceDataDAO();
         if (invoiceData.getIdInvoieData() == null) { 
             iddao.save(invoiceData);           
         }
@@ -234,8 +231,8 @@ public class ConsultantSettingsMB implements Serializable {
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        //cdao.update(consultant);
-        cdao.merge(consultant);
+        cdao.update(consultant);
+        //cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 
