@@ -2,6 +2,7 @@ package com.efsf.sf.sql.entity;
 // Generated 2013-08-01 09:42:02 by Hibernate Tools 3.2.1.GA
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -152,7 +153,7 @@ public class Address implements java.io.Serializable {
         this.type = type;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "address")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "address")
     public Set<InvoiceData> getInvoiceDatas() {
         return this.invoiceDatas;
     }
@@ -163,5 +164,20 @@ public class Address implements java.io.Serializable {
     
     public String toString(){
         return zipCode+" "+city+" "+street+" "+houseNumber;
+    }
+    
+    public String nipAndRegon(){ 
+        if(invoiceDatas!=null && !invoiceDatas.isEmpty()){
+            Iterator<InvoiceData> it = invoiceDatas.iterator();
+            return it.next().nipAndRegon();
+        } else {
+            return "";
+        }
+       
+    }
+    
+    public boolean complete(){
+        return getCity()!=null && !getCity().equals("") && getHouseNumber()!=null &&
+                !getHouseNumber().equals("");
     }
 }

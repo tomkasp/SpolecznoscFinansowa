@@ -37,8 +37,6 @@ public class Consultant implements java.io.Serializable {
     private String name;
     private String lastName;
     private String pesel;
-    private String nip;
-    private String regon;
     private String expirience; //experience 
     private Date expireDate;
     private Integer accountType;
@@ -128,24 +126,6 @@ public class Consultant implements java.io.Serializable {
 
     public void setPesel(String pesel) {
         this.pesel = pesel;
-    }
-
-    @Column(name = "nip", length = 14)
-    public String getNip() {
-        return this.nip;
-    }
-
-    public void setNip(String nip) {
-        this.nip = nip;
-    }
-
-    @Column(name = "regon", length = 14)
-    public String getRegon() {
-        return this.regon;
-    }
-
-    public void setRegon(String regon) {
-        this.regon = regon;
     }
 
     @Column(name = "expirience", length = 45)
