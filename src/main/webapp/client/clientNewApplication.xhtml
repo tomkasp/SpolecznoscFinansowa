@@ -70,8 +70,8 @@
 
                                     <div class="field"> 
                                         <h:outputText class="label" value="Cel"/>
-                                        <h:inputText id="goal" maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}">
-                                            <f:validateLength maximum="255"/>
+                                        <h:inputText id="goal" maxlength="40" required="true" value="#{clientCaseMB.clientCase.goal}">
+                                            <f:validateLength maximum="40"/>
                                             <p:ajax event="keyup" update="goalMessage" />
                                         </h:inputText>
                                         <h:message for="goal" errorClass="invalid" id="goalMessage" />
