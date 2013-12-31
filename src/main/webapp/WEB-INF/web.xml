@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
             <web-resource-name>SUCTR</web-resource-name>
             <url-pattern>/*</url-pattern>      
@@ -11,9 +11,9 @@
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>-->
+    </security-constraint>
     
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
             <web-resource-name>API</web-resource-name>
             <url-pattern>/api/*</url-pattern>      
@@ -21,7 +21,7 @@
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>-->
+    </security-constraint>
     
     
     <context-param>
@@ -72,7 +72,7 @@
     
     
     <!--     Auto scan REST service -->
-<!--    <context-param>
+    <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -99,7 +99,7 @@
         <servlet-name>ApiServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-    -->
+    
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
