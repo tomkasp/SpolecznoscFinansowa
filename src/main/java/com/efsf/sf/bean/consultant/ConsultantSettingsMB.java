@@ -134,9 +134,9 @@ public class ConsultantSettingsMB implements Serializable {
     public String updateSettings() {
 
         DictionaryMB dictionaryMB = new DictionaryMB();
-        InstitutionDAO idao=new InstitutionDAO();
-        ProductTypeDAO ptdao=new ProductTypeDAO();
-        RegionDAO rdao=new RegionDAO();
+        InstitutionDAO idao       = new InstitutionDAO();
+        ProductTypeDAO ptdao      = new ProductTypeDAO();
+        RegionDAO rdao            = new RegionDAO();
         
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
@@ -221,11 +221,14 @@ public class ConsultantSettingsMB implements Serializable {
         invoiceData.setAddress(invoiceAddress);
         InvoiceDataDAO iddao = new InvoiceDataDAO();
         if (invoiceData.getIdInvoieData() == null) { 
-            //System.out.println("jestem w true, nip: +"+invoiceData.getNip());
+            //System.out.println("jestem w true, nip: "+invoiceData.getNip());
+            
             iddao.save(invoiceData);           
         }
         else {
-            //System.out.println("jestem w false, nip: +"+invoiceData.getNip());
+            System.out.println("jestem w false, nip: "+invoiceData.getNip());
+            System.out.println("jestem w false, id: "+invoiceData.getIdInvoieData());
+            
             iddao.update(invoiceData);
         }
         
@@ -233,8 +236,8 @@ public class ConsultantSettingsMB implements Serializable {
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        //cdao.update(consultant);
-        cdao.merge(consultant);
+        cdao.update(consultant);
+        //cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 

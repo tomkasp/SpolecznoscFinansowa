@@ -46,7 +46,7 @@ public class ConsultantDAO implements Serializable{
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
-            session.update(consultant);
+            session.saveOrUpdate(consultant);
             session.getTransaction().commit();
         } finally {
             session.close();
