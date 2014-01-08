@@ -95,9 +95,9 @@
                                     <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights()>0}">  
                                         <h:outputText class="profileText" value="Twój abonament:" />
                                         <h5> 
-                                            <h:outputText value="STANDARD" rendered="#{loginMB.returnConsultantAccessRights()==settings.standard || loginMB.returnConsultantAccessRights()==1}"/>
-                                            <h:outputText value="STANDARD+" rendered="#{loginMB.returnConsultantAccessRights()==settings.standardPlus || loginMB.returnConsultantAccessRights()==2}"/>
-                                            <h:outputText value="PREMIUM" rendered="#{loginMB.returnConsultantAccessRights()==settings.premium || loginMB.returnConsultantAccessRights()==3}"/>
+                                            <h:outputText value="STANDARD" rendered="#{loginMB.returnConsultantAccessRights()  == settings.standard      || loginMB.returnConsultantAccessRights()  ==  5}"/>
+                                            <h:outputText value="STANDARD+" rendered="#{loginMB.returnConsultantAccessRights() == settings.standardPlus  || loginMB.returnConsultantAccessRights()  ==  6}"/>
+                                            <h:outputText value="PREMIUM" rendered="#{loginMB.returnConsultantAccessRights()   == settings.premium       || loginMB.returnConsultantAccessRights()  ==  7}"/>
                                         </h5>
                                         <h:outputText class="profileText" value="wygasa:" /> 
                                         <h5> #{loginMB.consultant.expireDate} </h5>
