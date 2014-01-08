@@ -25,8 +25,10 @@ public class InvoiceDataDAO {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
-            session.update(invoiceData);
+            session.saveOrUpdate(invoiceData);
+            System.out.println("gleboko:" + invoiceData.getNip()+ " id: " + invoiceData.getIdInvoieData());
             session.getTransaction().commit();
+            session.flush();
         } finally {
             session.close();
         }
