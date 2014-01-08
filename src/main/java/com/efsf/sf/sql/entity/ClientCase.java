@@ -171,7 +171,7 @@ public class ClientCase implements java.io.Serializable {
         this.freeResourcesValue = freeResourcesValue;
     }
 
-    @Column(name = "goal")
+    @Column(name = "goal", length = 40)
     public String getGoal() {
         return this.goal;
     }
