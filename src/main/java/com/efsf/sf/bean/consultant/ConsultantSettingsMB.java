@@ -186,18 +186,18 @@ public class ConsultantSettingsMB implements Serializable {
         
         Set<Address> addressSet = new HashSet<>();
         
-        Region mr=rdao.getRegion(idMainRegion);
+        Region mr = rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mr);
         addressSet.add(mainAddress);
         
-        if(idInvoiceRegion==null) idInvoiceRegion=0;
-        Region ir=rdao.getRegion(idInvoiceRegion);
+        if(idInvoiceRegion == null) idInvoiceRegion=0;
+        Region ir = rdao.getRegion(idInvoiceRegion);
         invoiceAddress.setRegion(ir);
         addressSet.add(invoiceAddress);
         
         consultant.setAddresses(addressSet);
         
-        AddressDAO adao=new AddressDAO();
+        AddressDAO adao = new AddressDAO();
         if (mainAddress.getIdAddress() == null) { 
             mainAddress.setConsultant(consultant);
             mainAddress.setType(1);
@@ -221,9 +221,11 @@ public class ConsultantSettingsMB implements Serializable {
         invoiceData.setAddress(invoiceAddress);
         InvoiceDataDAO iddao = new InvoiceDataDAO();
         if (invoiceData.getIdInvoieData() == null) { 
+            //System.out.println("jestem w true, nip: +"+invoiceData.getNip());
             iddao.save(invoiceData);           
         }
         else {
+            //System.out.println("jestem w false, nip: +"+invoiceData.getNip());
             iddao.update(invoiceData);
         }
         
@@ -231,8 +233,8 @@ public class ConsultantSettingsMB implements Serializable {
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        cdao.update(consultant);
-        //cdao.merge(consultant);
+        //cdao.update(consultant);
+        cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 

@@ -17,20 +17,19 @@
 
                     <h4>Wybierz rodzaj abonamentu</h4>   
 
-
                     <div style="margin:0 149px;">
                         <h:panelGrid columns="3" >
                             <h:form>
                                 <h:commandLink action="#{paymentMB.createPayement(settings.standard,false)}">
-                                    <h:graphicImage library="images" name="standard_1.png" />
+                                    <h:graphicImage library="images" name="standard.png" />
                                 </h:commandLink>
 
                                 <h:commandLink action="#{paymentMB.createPayement(settings.standardPlus,false)}" >
-                                    <h:graphicImage library="images" name="standard_plus_1.png" />
+                                    <h:graphicImage library="images" name="standard_plus.png" />
                                 </h:commandLink>
 
                                 <h:commandLink action="#{paymentMB.createPayement(settings.premium,false)}" >
-                                    <h:graphicImage library="images" name="premium_1.png" />
+                                    <h:graphicImage library="images" name="premium.png" />
                                 </h:commandLink>
                             </h:form>
                         </h:panelGrid>

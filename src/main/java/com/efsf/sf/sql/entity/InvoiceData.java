@@ -89,7 +89,7 @@ public class InvoiceData implements java.io.Serializable {
     }
     
     public String nipAndRegon(){
-        String result = getNip()==null || getNip().equals("") ? "" : "NIP: "+getNip()+" ";
-        return result += getRegon()==null || getRegon().equals("") ? "" : "REGON: "+getRegon();
+        String result = getNip()    == null || getNip().equals("")   ? "" : "NIP: "   + getNip() + " ";
+        return result += getRegon() == null || getRegon().equals("") ? "" : "REGON: " + getRegon();
     }
 }
