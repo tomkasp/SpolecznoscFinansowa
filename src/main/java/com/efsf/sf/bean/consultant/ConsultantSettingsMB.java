@@ -134,9 +134,9 @@ public class ConsultantSettingsMB implements Serializable {
     public String updateSettings() {
 
         DictionaryMB dictionaryMB = new DictionaryMB();
-        InstitutionDAO idao       = new InstitutionDAO();
-        ProductTypeDAO ptdao      = new ProductTypeDAO();
-        RegionDAO rdao            = new RegionDAO();
+        InstitutionDAO idao=new InstitutionDAO();
+        ProductTypeDAO ptdao=new ProductTypeDAO();
+        RegionDAO rdao=new RegionDAO();
         
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
@@ -186,18 +186,18 @@ public class ConsultantSettingsMB implements Serializable {
         
         Set<Address> addressSet = new HashSet<>();
         
-        Region mr = rdao.getRegion(idMainRegion);
+        Region mr=rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mr);
         addressSet.add(mainAddress);
         
-        if(idInvoiceRegion == null) idInvoiceRegion=0;
-        Region ir = rdao.getRegion(idInvoiceRegion);
+        if(idInvoiceRegion==null) idInvoiceRegion=0;
+        Region ir=rdao.getRegion(idInvoiceRegion);
         invoiceAddress.setRegion(ir);
         addressSet.add(invoiceAddress);
         
         consultant.setAddresses(addressSet);
         
-        AddressDAO adao = new AddressDAO();
+        AddressDAO adao=new AddressDAO();
         if (mainAddress.getIdAddress() == null) { 
             mainAddress.setConsultant(consultant);
             mainAddress.setType(1);
@@ -208,6 +208,17 @@ public class ConsultantSettingsMB implements Serializable {
         }
         
         
+        invoiceAddress.setInvoiceDatas(new HashSet<InvoiceData>());
+        invoiceAddress.getInvoiceDatas().add(invoiceData);
+        InvoiceDataDAO iddao = new InvoiceDataDAO();
+        
+        if (invoiceData.getIdInvoieData() == null) { 
+            iddao.save(invoiceData);           
+        }
+        else {
+            iddao.update(invoiceData);   
+        }
+        
         if (invoiceAddress.getIdAddress() == null) { 
             invoiceAddress.setConsultant(consultant);
             invoiceAddress.setType(2);
@@ -217,27 +228,11 @@ public class ConsultantSettingsMB implements Serializable {
             adao.update(invoiceAddress);
         }
         
-
-        invoiceData.setAddress(invoiceAddress);
-        InvoiceDataDAO iddao = new InvoiceDataDAO();
-        if (invoiceData.getIdInvoieData() == null) { 
-            //System.out.println("jestem w true, nip: "+invoiceData.getNip());
-            
-            iddao.save(invoiceData);           
-        }
-        else {
-            System.out.println("jestem w false, nip: "+invoiceData.getNip());
-            System.out.println("jestem w false, id: "+invoiceData.getIdInvoieData());
-            
-            iddao.update(invoiceData);
-        }
-        
-        
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        cdao.update(consultant);
-        //cdao.merge(consultant);
+        //cdao.update(consultant);
+        cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 
