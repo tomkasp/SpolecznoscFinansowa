@@ -6,19 +6,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-
-
-
     <body>
-
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - nowy wniosek </ui:define> 
-
-
             <ui:define name="content">
-
                 <div>
-
                     <div class="contentBox" style="margin-bottom: 30px; margin-top: 30px;">
 
                         <div class="leftBox" style="width: 400px; padding-right: 70px;">
@@ -78,8 +70,8 @@
 
                                     <div class="field"> 
                                         <h:outputText class="label" value="Cel"/>
-                                        <h:inputText id="goal" maxlength="255" required="true" value="#{clientCaseMB.clientCase.goal}">
-                                            <f:validateLength maximum="255"/>
+                                        <h:inputText id="goal" maxlength="40" required="true" value="#{clientCaseMB.clientCase.goal}">
+                                            <f:validateLength maximum="40"/>
                                             <p:ajax event="keyup" update="goalMessage" />
                                         </h:inputText>
                                         <h:message for="goal" errorClass="invalid" id="goalMessage" />
@@ -196,20 +188,9 @@
                                     <p:commandButton value="TAK" style="width:100px;margin:0 100px 0 0;" oncomplete="confirmation.hide()"  
                                                      update="@form" action="#{clientCaseMB.delObligation}" />  
                                     <p:commandButton value="NIE" style="width:100px;" onclick="confirmation.hide()" type="button" />   
-
-
-
-
                                 </p:confirmDialog>  
-
-
                             </h:form>
-
-
                             <div id="buttonsBox2" style="margin-top: 30px; height: 50px;"></div>
-
-
-
                         </div>
 
                     </div>
@@ -266,17 +247,11 @@
                             <p:commandButton style="float:right;" value="Anuluj" type="reset" onclick="zobDial2.hide();"/>
                             <p:commandButton update=":obligationForm:obligationTable costam23 " oncomplete="if (!args.validationFailed){ zobDial2.hide(); }" style="float:right;" value="Dodaj" action="#{clientCaseMB.addObligation()}" />
 
-
                         </h:panelGrid>
-
 
                     </h:form>  
                 </p:dialog>
             </ui:define>           
-
-
-
-
 
         </ui:composition>
     </body>

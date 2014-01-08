@@ -102,6 +102,7 @@ public class ReportsMB implements Serializable {
 
         params.put("address", address);
 
+
         if (asOutputStream) {
             return exportAsStream("invoice.jrxml", params, new JREmptyDataSource());
         } else {
@@ -169,11 +170,23 @@ public class ReportsMB implements Serializable {
         ArrayList<OutputStream> list = new ArrayList<>();
         SubscriptionDAO dao=new SubscriptionDAO();
         List<Subscription> sub=dao.getAllSubscriptionsForInvoices();
+        AddressDAO addressDao=new AddressDAO();
         
         for(Subscription s: sub){
-            if(s.getSubscriptionType()!=null && s.getConsultant()!=null && s.getConsultant().invoiceAddress()!=null)
-            list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
-                    s.getConsultant().invoiceAddress(), s.getConsultant(), true));
+            
+            Address invoiceAddress=addressDao.loadInvoiceAddressFromFkConsultant(s.getConsultant().getIdConsultant());
+            Address address=addressDao.loadMainAddressFromFkConsultant(s.getConsultant().getIdConsultant());
+            
+            if(s.getSubscriptionType()!=null && s.getConsultant()!=null && s.getTransactionDate()!=null){
+                if(address!=null && address.complete()){
+                     list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
+                        address, s.getConsultant(), true));
+                } else if(invoiceAddress!=null && invoiceAddress.complete()){
+                     list.add(createInvoice(s.getSubscriptionType().getIdSubscriptionType(), s.getSessionId(), 
+                        invoiceAddress, s.getConsultant(), true));
+                }
+            }
+           
         }
 
         getAsZip(list);

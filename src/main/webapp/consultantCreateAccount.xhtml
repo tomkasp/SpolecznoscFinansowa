@@ -43,7 +43,7 @@
                         <h:message for="lastName" errorClass="niceInvalid" id="lastNameMessage" />
                     </div> 
 
-                    <div id="dupa" class="field"> 
+                    <div class="field"> 
                         <h:outputText  class="label" value="Hasło"/> 
                         <h:inputSecret id="confirmPassword" class="inputWidth" required="true" value="#{consultantCreateMB.confirmPassword}" >
                             <f:validateLength minimum="8" maximum="20" />
@@ -92,7 +92,7 @@
                     </div> 
 
                     <div style="float: right; margin: 20px 0; ">
-                        <h:button class="greenButton floatL" value="Rejestruj jako doradca" outcome="/clientCreateAccount" />
+                        <h:button class="greenButton floatL" value="Rejestruj jako klient" outcome="/clientCreateAccount" />
                         <h:commandButton class ="blueButton wideButton floatL" style="margin-left: 10px;" value="Załóż konto" action="#{consultantCreateMB.savePart1()}" />
                     </div>    
                 </div>
