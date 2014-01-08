@@ -6,7 +6,6 @@ import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Security;
 import com.efsf.sf.util.Settings;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -470,7 +469,6 @@ public class ConsultantSettingsMB implements Serializable {
     public void setInvoiceFlag(boolean isInvoice) {
         this.invoiceFlag = isInvoice;
     }
-    
-    
+  
     
 }
