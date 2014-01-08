@@ -208,6 +208,17 @@ public class ConsultantSettingsMB implements Serializable {
         }
         
         
+        invoiceAddress.setInvoiceDatas(new HashSet<InvoiceData>());
+        invoiceAddress.getInvoiceDatas().add(invoiceData);
+        InvoiceDataDAO iddao = new InvoiceDataDAO();
+        
+        if (invoiceData.getIdInvoieData() == null) { 
+            iddao.save(invoiceData);           
+        }
+        else {
+            iddao.update(invoiceData);   
+        }
+        
         if (invoiceAddress.getIdAddress() == null) { 
             invoiceAddress.setConsultant(consultant);
             invoiceAddress.setType(2);
@@ -217,22 +228,11 @@ public class ConsultantSettingsMB implements Serializable {
             adao.update(invoiceAddress);
         }
         
-
-        invoiceData.setAddress(invoiceAddress);
-        InvoiceDataDAO iddao = new InvoiceDataDAO();
-        if (invoiceData.getIdInvoieData() == null) { 
-            iddao.save(invoiceData);           
-        }
-        else {
-            iddao.update(invoiceData);
-        }
-        
-        
         
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
-        cdao.update(consultant);
-        //cdao.merge(consultant);
+        //cdao.update(consultant);
+        cdao.merge(consultant);
         //UPDATE USER
         loginMB.setConsultant(consultant);
 
