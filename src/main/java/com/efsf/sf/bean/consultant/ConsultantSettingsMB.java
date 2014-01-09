@@ -22,212 +22,204 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-
 @ManagedBean
 @ViewScoped
 public class ConsultantSettingsMB implements Serializable {
+
     private static final long serialVersionUID = 1L;
     //Update Settings
-    
-    @ManagedProperty(value="#{loginMB.consultant.idConsultant}")
+
+    @ManagedProperty(value = "#{loginMB.consultant.idConsultant}")
     private Integer idConsultant;
-    
+
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
-    
-    @ManagedProperty(value="#{loginMB.user.idUser}")
+
+    @ManagedProperty(value = "#{loginMB.user.idUser}")
     private Integer idUser;
-   
-    private Consultant consultant; 
-    
+
+    private Consultant consultant;
+
     private Integer idWorkingPlace;
     private List<Integer> idSelectedBankList = new ArrayList<>();
     private List<Integer> idSelectedInstitutionList = new ArrayList<>();
     private List<Integer> idProductTypes = new ArrayList<>();
-    
+
     private Integer idRegion;
     private Integer idMainRegion;
     private Integer idInvoiceRegion;
     private Address mainAddress = new Address();
     private Address invoiceAddress = new Address();
     private InvoiceData invoiceData = new InvoiceData();
-    
+
     private String idSubscriptionType;
     private Subscription subscription;
-    
+
     private String currentPassword;
     private String newPassword;
     private String confirmNewPassword;
-    
+
     private boolean invoiceFlag = false;
-    
+
     private static final String PATH = Settings.FTP_PATH;
 
     @PostConstruct
     private void loadConsultant() {
-        ConsultantDAO cdao=new ConsultantDAO();
-        consultant=cdao.readConsultantForSettings( idConsultant );
-        idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
-               
-        Iterator<Institution> it=consultant.getInstitutions().iterator();
-        while(it.hasNext())
-        {
-            Institution i=it.next();
-            if(i.getType()==0)
-            { idSelectedBankList.add( i.getIdInstitution() ); }
-            if(i.getType()==1)
-            { idSelectedInstitutionList.add( i.getIdInstitution() ); }       
-        }
-        
-        Iterator<ProductType> it2=consultant.getProductTypes().iterator();
-        while(it2.hasNext())
-        {
-            ProductType pt=it2.next();
-            idProductTypes.add( pt.getIdProductType() );          
-        }
-        
-        idWorkingPlace=consultant.getWorkingPlace().getIdWorkingPlace();
-        
-        idRegion=consultant.getRegion().getIdRegion();
-        
-        InvoiceDataDAO iddao=new InvoiceDataDAO();
-        
-        Iterator<Address> it3=consultant.getAddresses().iterator();
-        
-        while(it3.hasNext())
-        {
-            Address a=it3.next();
-            
-            if(a.getType()==1)
-            {   
-                mainAddress=a;
-                idMainRegion=mainAddress.getRegion().getIdRegion();
-                
+        ConsultantDAO cdao = new ConsultantDAO();
+        consultant = cdao.readConsultantForSettings(idConsultant);
+        idWorkingPlace = consultant.getWorkingPlace().getIdWorkingPlace();
+
+        Iterator<Institution> it = consultant.getInstitutions().iterator();
+        while (it.hasNext()) {
+            Institution i = it.next();
+            if (i.getType() == 0) {
+                idSelectedBankList.add(i.getIdInstitution());
             }
-            if(a.getType()==2)
-            {      
-                invoiceAddress=a;
-                idInvoiceRegion=invoiceAddress.getRegion().getIdRegion();
+            if (i.getType() == 1) {
+                idSelectedInstitutionList.add(i.getIdInstitution());
+            }
+        }
+
+        Iterator<ProductType> it2 = consultant.getProductTypes().iterator();
+        while (it2.hasNext()) {
+            ProductType pt = it2.next();
+            idProductTypes.add(pt.getIdProductType());
+        }
+
+        idWorkingPlace = consultant.getWorkingPlace().getIdWorkingPlace();
+
+        idRegion = consultant.getRegion().getIdRegion();
+
+        InvoiceDataDAO iddao = new InvoiceDataDAO();
+
+        Iterator<Address> it3 = consultant.getAddresses().iterator();
+
+        while (it3.hasNext()) {
+            Address a = it3.next();
+
+            if (a.getType() == 1) {
+                mainAddress = a;
+                idMainRegion = mainAddress.getRegion().getIdRegion();
+
+            }
+            if (a.getType() == 2) {
+                invoiceAddress = a;
+                idInvoiceRegion = invoiceAddress.getRegion().getIdRegion();
 
                 //I PRZY OKAZJI:
-                invoiceData=iddao.loadFromFkAddress(a.getIdAddress());
-            } 
-           
-        }
-       
-        Iterator<Subscription> it4=consultant.getSubscriptions().iterator();
-        while(it4.hasNext())
-        {
-            Subscription s=it4.next();
-            //ZAWSZE ZWRACA OSTATNI ABONAMENT
-            if(!it4.hasNext())
-            {
-                idSubscriptionType=s.getSessionId();
-                subscription=s;
+                invoiceData = iddao.loadFromFkAddress(a.getIdAddress());
             }
-        }   
-        
+
+        }
+
+        Iterator<Subscription> it4 = consultant.getSubscriptions().iterator();
+        while (it4.hasNext()) {
+            Subscription s = it4.next();
+            //ZAWSZE ZWRACA OSTATNI ABONAMENT
+            if (!it4.hasNext()) {
+                idSubscriptionType = s.getSessionId();
+                subscription = s;
+            }
+        }
+
         invoiceFlag = consultant.isInvoice();
     }
-    
+
     public String updateSettings() {
 
         DictionaryMB dictionaryMB = new DictionaryMB();
-        InstitutionDAO idao=new InstitutionDAO();
-        ProductTypeDAO ptdao=new ProductTypeDAO();
-        RegionDAO rdao=new RegionDAO();
-        
+        InstitutionDAO idao = new InstitutionDAO();
+        ProductTypeDAO ptdao = new ProductTypeDAO();
+        RegionDAO rdao = new RegionDAO();
+
         WorkingPlace wp = dictionaryMB.getWorkingPlace().get(idWorkingPlace - 1);
         consultant.setWorkingPlace(wp);
         //HERE:
-        
-        
+
         //ADD BANKS
         Set<Institution> institutionSet = new HashSet<>();
-        Iterator it=idSelectedBankList.iterator();
-        while ( it.hasNext() ) {  
-            Integer id = Integer.valueOf( it.next().toString() );
-            Institution inst = idao.getInstitution( id );
-            institutionSet.add( inst );
-        } 
-        
-        
-        //ADD INSTITUTIONS
-        it=idSelectedInstitutionList.iterator();
-        while ( it.hasNext() ) {  
-            Integer id = Integer.valueOf( it.next().toString() );
-            Institution inst = idao.getInstitution( id );
-            institutionSet.add( inst );
+        Iterator it = idSelectedBankList.iterator();
+        while (it.hasNext()) {
+            Integer id = Integer.valueOf(it.next().toString());
+            Institution inst = idao.getInstitution(id);
+            institutionSet.add(inst);
         }
-        
-        
+
+        //ADD INSTITUTIONS
+        it = idSelectedInstitutionList.iterator();
+        while (it.hasNext()) {
+            Integer id = Integer.valueOf(it.next().toString());
+            Institution inst = idao.getInstitution(id);
+            institutionSet.add(inst);
+        }
+
         //ADD ALL INSTITUTIONS IN CONSULTANT
         consultant.setInstitutions(institutionSet);
-        
-        
+
         //ADD PRODUCT TYPES
         Set<ProductType> productTypeSet = new HashSet<>();
-        it=idProductTypes.iterator();
-        while ( it.hasNext() ) {  
-            Integer id = Integer.valueOf( it.next().toString() );
+        it = idProductTypes.iterator();
+        while (it.hasNext()) {
+            Integer id = Integer.valueOf(it.next().toString());
             ProductType pt = ptdao.getProductType(id);
             productTypeSet.add(pt);
         }
         consultant.setProductTypes(productTypeSet);
-        
-        
+
         //ADD CONSULTANT REGION
-        Region r=rdao.getRegion(idRegion);
+        Region r = rdao.getRegion(idRegion);
         consultant.setRegion(r);
-        
+
         consultant.setInvoice(invoiceFlag);
-        
-        
+
         Set<Address> addressSet = new HashSet<>();
-        
-        Region mr=rdao.getRegion(idMainRegion);
+
+        Region mr = rdao.getRegion(idMainRegion);
         mainAddress.setRegion(mr);
         addressSet.add(mainAddress);
-        
-        if(idInvoiceRegion==null) idInvoiceRegion=0;
-        Region ir=rdao.getRegion(idInvoiceRegion);
+
+        if (idInvoiceRegion == null) {
+            idInvoiceRegion = 0;
+        }
+        Region ir = rdao.getRegion(idInvoiceRegion);
         invoiceAddress.setRegion(ir);
         addressSet.add(invoiceAddress);
-        
+
         consultant.setAddresses(addressSet);
-        
-        AddressDAO adao=new AddressDAO();
-        if (mainAddress.getIdAddress() == null) { 
+
+        AddressDAO adao = new AddressDAO();
+        if (mainAddress.getIdAddress() == null) {
             mainAddress.setConsultant(consultant);
             mainAddress.setType(1);
-            adao.save(mainAddress);           
-        }
-        else {
+            adao.save(mainAddress);
+        } else {
             adao.update(mainAddress);
         }
-        
-        
+
         invoiceAddress.setInvoiceDatas(new HashSet<InvoiceData>());
         invoiceAddress.getInvoiceDatas().add(invoiceData);
+        //invoiceData.setAddress(invoiceAddress);
+        
         InvoiceDataDAO iddao = new InvoiceDataDAO();
-        
-        if (invoiceData.getIdInvoieData() == null) { 
-            iddao.save(invoiceData);           
-        }
-        else {
-            iddao.update(invoiceData);   
-        }
-        
-        if (invoiceAddress.getIdAddress() == null) { 
+
+        if (invoiceAddress.getIdAddress() == null) {
             invoiceAddress.setConsultant(consultant);
             invoiceAddress.setType(2);
-            adao.save(invoiceAddress);           
-        }
-        else {
+            System.out.println("addresss invoice: ============== " + invoiceAddress.getInvoiceDatas());
+            adao.save(invoiceAddress);
+        } else {
             adao.update(invoiceAddress);
         }
+        System.out.println("================================" + invoiceAddress.getIdAddress() +"; ");
         
-        
+        if (invoiceData.getIdInvoieData() == null) {
+            invoiceData.setAddress(invoiceAddress);
+            iddao.save(invoiceData);
+        } else {
+            invoiceData.setAddress(invoiceAddress);
+            iddao.update(invoiceData);
+        }
+
         //UPDATE CONSULTANT
         ConsultantDAO cdao = new ConsultantDAO();
         //cdao.update(consultant);
@@ -235,41 +227,38 @@ public class ConsultantSettingsMB implements Serializable {
         //UPDATE USER
         loginMB.setConsultant(consultant);
 
-        
         return "/consultant/consultantSettings?faces-redirect=true";
     }
-    
-    
-      public String updatePassword() {
-         
-         UserDAO udao=new UserDAO();
-         User user=consultant.getUser();
-         user.setPassword(Security.sha1(newPassword));
-         udao.update(user);
-         
-         return "/consultant/consultantMainPage?faces-redirect=true";
-     }
+
+    public String updatePassword() {
+
+        UserDAO udao = new UserDAO();
+        User user = consultant.getUser();
+        user.setPassword(Security.sha1(newPassword));
+        udao.update(user);
+
+        return "/consultant/consultantMainPage?faces-redirect=true";
+    }
 
     public void validateCurrentPassword(FacesContext context, UIComponent toValidate, Object value) {
         String password = (String) value;
-        password=Security.sha1(password);
-        if ( !password.equals( consultant.getUser().getPassword() ) ) {
+        password = Security.sha1(password);
+        if (!password.equals(consultant.getUser().getPassword())) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Obecne hasło jest niewłaściwe!", "Obecne hasło jest niewłaściwe!");
             throw new ValidatorException(message);
         }
     }
-     
+
     public void validateSamePassword(FacesContext context, UIComponent toValidate, Object value) {
-        String password = (String) value;     
+        String password = (String) value;
         if (!password.equals(newPassword)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hasła nie pasują!", "Hasła nie pasują!");
             throw new ValidatorException(message);
         }
     }
-    
 
-    public void showAgreementPDF() throws IOException{
-        
+    public void showAgreementPDF() throws IOException {
+
 //        String sourceLocalPath = "/home/sf/agreement.pdf";
 //        String destinationLocalPath = "\\";
 //        String ftpPath = PATH + idUser + "/";
@@ -293,19 +282,17 @@ public class ConsultantSettingsMB implements Serializable {
 //        //DELETE LOCAL FILE
 //        File f = new File(destinationLocalPath+fileName);
 //        f.delete();
-        
     }
-    
-    
-    public void copyAddress(){
+
+    public void copyAddress() {
         idInvoiceRegion = idMainRegion;
         invoiceAddress.setCity(mainAddress.getCity());
         invoiceAddress.setZipCode(mainAddress.getZipCode());
         invoiceAddress.setPhone(mainAddress.getPhone());
         invoiceAddress.setStreet(mainAddress.getStreet());
-        invoiceAddress.setHouseNumber(mainAddress.getHouseNumber()); 
+        invoiceAddress.setHouseNumber(mainAddress.getHouseNumber());
     }
-    
+
     public Integer getIdConsultant() {
         return idConsultant;
     }
@@ -313,7 +300,7 @@ public class ConsultantSettingsMB implements Serializable {
     public void setIdConsultant(Integer idConsultant) {
         this.idConsultant = idConsultant;
     }
-    
+
     public Consultant getConsultant() {
         return consultant;
     }
@@ -469,6 +456,5 @@ public class ConsultantSettingsMB implements Serializable {
     public void setInvoiceFlag(boolean isInvoice) {
         this.invoiceFlag = isInvoice;
     }
-  
-    
+
 }

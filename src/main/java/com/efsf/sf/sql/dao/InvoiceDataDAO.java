@@ -26,9 +26,7 @@ public class InvoiceDataDAO {
         try {
             session.beginTransaction();
             session.saveOrUpdate(invoiceData);
-            System.out.println("gleboko:" + invoiceData.getNip()+ " id: " + invoiceData.getIdInvoieData());
             session.getTransaction().commit();
-            session.flush();
         } finally {
             session.close();
         }
