@@ -214,10 +214,6 @@ public class CaseViewMB implements Serializable{
         cdao.updateClientCase(selectedClientCase);
     }
 
-    public void haha()
-    {
-        System.out.println(selectedClientCase.getInterestRateType());
-    }
     
     public void changeCaseStatus()
     {
@@ -310,22 +306,9 @@ public class CaseViewMB implements Serializable{
         caseDao.updateClientCase(selectedClientCase);  
     }
     
-    
-    
     private void createLinearModel() {  
-  
-        series1.setLabel("Pozostało");  
-  
-//        series1.set(1, 2);  
-//        series1.set(2, 1);  
-//        series1.set(3, 3);  
-//        series1.set(4, 6);  
-//        series1.set(5, 8);  
-  
-        
-  
+        series1.setLabel("Pozostało");    
         linearModel.addSeries(series1);  
-        
     }
     
     

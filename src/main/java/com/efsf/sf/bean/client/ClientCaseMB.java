@@ -6,6 +6,7 @@ import com.efsf.sf.bean.MessagesMB;
 import com.efsf.sf.sql.dao.*;
 import com.efsf.sf.sql.entity.*;
 import com.efsf.sf.util.Algorithms;
+import com.efsf.sf.util.SMSApi;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -250,6 +251,14 @@ public class ClientCaseMB implements Serializable {
             consultantDao.merge(consultant);
             login.setConsultant(consultantDao.getCounsultantConnectedToUser(login.getIdUser()));
 
+            
+            GenericDao<Address> addressDao=new GenericDao(Address.class);
+            Address address=addressDao.getWhere("fk_client", cs.getClient().getIdClient().toString()).get(0);
+            if(address!=null && address.getPhone()!=null && address.getPhone().length()>8){
+                SMSApi.sendSms(address.getPhone(), "Do obsługi Twojej sprawy na portalu SpolecznoscFinansowa.pl zgłosił się nowy doradca.");
+                System.out.println("Telefon ================================="+address.getPhone());
+            }
+            
             messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[]{login.getConsultant().getIdConsultant(), cs.getIdClientCase()});
         } 
         else if (consultant.getApplayedCaseCounter() == 0)
