@@ -268,7 +268,7 @@
 
                             <div class="field">
                                 <h:outputText class="label" value="Telefon"/>
-                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoicePhone" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.phone}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}"  id="invoicePhone" class="inputWidth3" value="#{consultantSettingsMB.invoiceAddress.phone}"/> 
                                 <h:message for="invoicePhone" errorClass="invalid" id="invoicePhoneMessage" />
                             </div>
                             
@@ -296,7 +296,7 @@
 
                             <div class="field"> 
                                 <h:outputText class="label" value="REGON"/>  
-                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}" required="#{consultantSettingsMB.invoiceFlag}" id="invoiceRegon" class="inputWidth3" value="#{consultantSettingsMB.invoiceData.regon}"/> 
+                                <h:inputText disabled="#{!consultantSettingsMB.invoiceFlag}"  id="invoiceRegon" class="inputWidth3" value="#{consultantSettingsMB.invoiceData.regon}"/> 
                                 <h:message for="invoiceRegon" errorClass="invalid" id="invoiceRegonMessage" />
                             </div>
                             
