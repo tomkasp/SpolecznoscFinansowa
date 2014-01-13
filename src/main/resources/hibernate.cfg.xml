@@ -4,7 +4,7 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
+        <property name="hibernate.connection.url">jdbc:mysql://91.90.164.46:3306/SpolecznoscFinansowa?characterEncoding=UTF-8</property>
         <property name="hibernate.connection.username">SFuser</property>
         <property name="hibernate.connection.password">SFuser123</property>
         <property name="hibernate.show_sql">false</property>

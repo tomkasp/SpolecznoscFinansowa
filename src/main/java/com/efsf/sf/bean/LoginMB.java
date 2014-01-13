@@ -6,6 +6,7 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.util.SMSApi;
 import com.efsf.sf.util.Settings;
 import java.io.Serializable;
 import java.util.Date;
@@ -379,5 +380,9 @@ public class LoginMB implements Serializable {
         this.rememberMe = rememberMe;
     }
     
-
+    public void sendTestSms(){
+        int result=SMSApi.sendSms("607044111", "Hej Co tam");
+        System.out.println("================================ SMS: "+result);
+    }
+    
 }
