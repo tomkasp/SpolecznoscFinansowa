@@ -6,10 +6,13 @@ import com.efsf.sf.sql.dao.UserDAO;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.User;
+import com.efsf.sf.util.CurrencyApi;
 import com.efsf.sf.util.SMSApi;
 import com.efsf.sf.util.Settings;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.xpath.XPathExpressionException;
 import org.apache.commons.lang3.RandomStringUtils;
 
 @ManagedBean
@@ -45,18 +49,32 @@ public class LoginMB implements Serializable {
     private String actualMessage;
     @ManagedProperty(value = "#{mailerMB}")
     private MailerMB mailerMB;
-    
-    
+    private String currencyString="";
 
     public LoginMB() {
         checkCookie();
+        downloadCurrencies();
+    }
+
+    public void downloadCurrencies(){
+       currencyString="";
+        try {
+            List<Map<String, String>> currencies= CurrencyApi.getCurrencies();
+            for(Map<String, String> c: currencies){
+                currencyString+="<B>"+c.get("kod")+"</B> "+c.get("kurs")+"  ";
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (XPathExpressionException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void updateAccountSubscriptionData(){
-        
-        if(consultant!=null && consultant.getIdConsultant()!=null){
-            GenericDao<Consultant> dao=new GenericDao(Consultant.class);
-            Consultant cons=dao.getById(consultant.getIdConsultant());
+    public void updateAccountSubscriptionData() {
+
+        if (consultant != null && consultant.getIdConsultant() != null) {
+            GenericDao<Consultant> dao = new GenericDao(Consultant.class);
+            Consultant cons = dao.getById(consultant.getIdConsultant());
             consultant.setAccountType(cons.getAccountType());
             consultant.setExpireDate(cons.getExpireDate());
             consultant.setApplayedCaseCounter(cons.getApplayedCaseCounter());
@@ -69,9 +87,9 @@ public class LoginMB implements Serializable {
         ConsultantDAO consultantDao = new ConsultantDAO();
         user = null;
         user = userDao.login(this.email, this.password);
-        
+
         setCookie();
-        
+
         if (user != null) {
             type = user.getType();
             if (type.equals(Settings.ADMIN_ACTIVE) || type.equals(Settings.CLIENT_ACTIVE) || type.equals(Settings.CONSULTANT_ACTIVE)) {
@@ -87,8 +105,8 @@ public class LoginMB implements Serializable {
                 return "/admin/adminMainPage?faces-redirect=true";
             }
             if (type.equals(Settings.CONSULTANT_ACTIVE)) {
-                consultant = consultantDao.getCounsultantConnectedToUser(idUser);     
-                
+                consultant = consultantDao.getCounsultantConnectedToUser(idUser);
+
                 client = null;
 
                 return "/consultant/consultantMainPage?faces-redirect=true";
@@ -142,23 +160,18 @@ public class LoginMB implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/login?faces-redirect=true";
     }
-    
-    public Integer returnConsultantAccessRights()
-    {
-        if (consultant == null)
-        {
+
+    public Integer returnConsultantAccessRights() {
+        if (consultant == null) {
             Logger.getLogger("").log(Level.SEVERE, "There is no consultant in the session. Maybe you are logged as client?");
             return Settings.FREE;
         }
-        
+
         Integer type = consultant.getAccountType();
-        
-        if (consultant.getExpireDate() != null && !(consultant.getExpireDate().before(new Date())) && type != null )
-        {
+
+        if (consultant.getExpireDate() != null && !(consultant.getExpireDate().before(new Date())) && type != null) {
             return type;
-        }
-        else
-        {
+        } else {
             return Settings.FREE;
         }
     }
@@ -207,8 +220,6 @@ public class LoginMB implements Serializable {
         setActualMessage(bundle.getString("newPasswordMessage"));
 
     }
-    
-
 
     public void checkCookie() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -232,20 +243,20 @@ public class LoginMB implements Serializable {
                     }
                 }
             }
-        } else {}
+        } else {
+        }
     }
-    
-    public String generateErrorCode()
-    {
+
+    public String generateErrorCode() {
         String random = RandomStringUtils.randomAlphanumeric(8);
-        
+
         Logger.getLogger("").log(Level.SEVERE, "Error ID: " + random);
-        
+
         return random;
     }
 
     public void setCookie() {
-        int COOKIE_TIMEOUT=2678400;//31 days
+        int COOKIE_TIMEOUT = 2678400;//31 days
         Cookie cemail;
         Cookie cpass;
         Cookie cremember;
@@ -263,7 +274,7 @@ public class LoginMB implements Serializable {
         cemail.setMaxAge(COOKIE_TIMEOUT);
         cpass.setMaxAge(COOKIE_TIMEOUT);
         cremember.setMaxAge(COOKIE_TIMEOUT);
-        
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cemail);
         ((HttpServletResponse) facesContext.getExternalContext().getResponse()).addCookie(cpass);
@@ -378,10 +389,20 @@ public class LoginMB implements Serializable {
     public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
     }
-    
-    public void sendTestSms(){
-        int result=SMSApi.sendSms("607044111", "Hej Co tam");
-        System.out.println("================================ SMS: "+result);
+
+    public void sendTestSms() throws XPathExpressionException {
+        try {
+            CurrencyApi.getCurrencies();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getTest() {
+        return "<B>Waluta: </B> Kwota assa";
     }
     
+    public String getCurrencies(){
+         return currencyString;
+    }
 }
