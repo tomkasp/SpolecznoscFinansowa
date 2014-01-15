@@ -31,9 +31,6 @@ public class AmountHistory implements Serializable {
     @JoinColumn(name="fkOperationType", nullable=false)
     private OperationType operationType;
     
-    @Column(name="operationMonth")
-    private int operationMonth;
-    
     @Temporal(TemporalType.DATE)
     @Column(name="operationDate")
     private Date operationDate;
@@ -49,6 +46,9 @@ public class AmountHistory implements Serializable {
     
     @Column(name = "receiver")
     private String receiver;
+    
+    @Column(name = "hashCode", length = 40)
+    private String HashCode;
     
     public AmountHistory(){}
 
@@ -92,5 +92,13 @@ public class AmountHistory implements Serializable {
     }
     public void setReceiver(String receiver) {
         this.receiver = receiver;
+    }
+
+    public String getHashCode() {
+        return HashCode;
+    }
+
+    public void setHashCode(String HashCode) {
+        this.HashCode = HashCode;
     }
 }
