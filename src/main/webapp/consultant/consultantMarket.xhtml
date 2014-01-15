@@ -20,10 +20,11 @@
                 <comp:buySubscriptionDialog returnOnCancel="true" visibility="true" widgetName="subsDialog"  />
             </h:panelGroup>
                 <h:form id="marketForm">
-                    <div id="marketLogoBar" style="min-height: 190px;">
-                        <h:graphicImage class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
-                        <div id="spaceFiller"> </div>
+                    <div id="marketLogoBar">
+                        <h:graphicImage height="90" class="contentLogo" id="marketLogo" alt="could not be found."  value="/resources/images/gielda_grey.png" title="MarketLogo" ></h:graphicImage>
+                        
                         <div> <h:outputText class="blackTitle" value="Witaj na giełdzie!" /> </div>
+                        <f:verbatim><marquee>#{loginMB.currencies}</marquee></f:verbatim>
                     </div>
 
                     <h:panelGroup rendered="#{loginMB.returnConsultantAccessRights() >= settings.premium}"  > 
