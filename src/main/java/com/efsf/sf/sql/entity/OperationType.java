@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name ="operationType")
 public class OperationType implements Serializable {
@@ -29,7 +28,6 @@ public class OperationType implements Serializable {
     
     public OperationType(){}
 
-    
     public int getIdOperationType() {
         return idOperationType;
     }
@@ -38,7 +36,6 @@ public class OperationType implements Serializable {
         this.idOperationType = idOperationType;
     }
     
-    
     public String getOperationName() {
         return operationName;
     }
@@ -46,8 +43,6 @@ public class OperationType implements Serializable {
     public void setOperationName(String operationName) {
         this.operationName = operationName;
     }
-    
-    
     
     public Set<AmountHistory> getAmmountHistory() {
         return ammountHistory;
