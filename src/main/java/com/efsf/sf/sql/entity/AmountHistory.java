@@ -15,8 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-
-//cos
 @Table(name="amountHistory")
 
 public class AmountHistory implements Serializable {

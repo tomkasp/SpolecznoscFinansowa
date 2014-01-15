@@ -41,13 +41,13 @@ public class Client implements java.io.Serializable {
     private String familyName;
     private String birthPlace;
     private Integer points;
-    private Set<Income> incomes = new HashSet<Income>(0);
-    private Set<RequiredDocuments> requiredDocumentses = new HashSet<RequiredDocuments>(0);
-    private Set<Obligation> obligations = new HashSet<Obligation>(0);
-    private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
-    private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<IncomeBusinessActivity>(0);
-    private Set<IdentyficationDocument> identyficationDocuments = new HashSet<IdentyficationDocument>(0);
-    private Set<Address> addresses = new HashSet<Address>(0);
+    private Set<Income> incomes = new HashSet<>(0);
+    private Set<RequiredDocuments> requiredDocumentses = new HashSet<>(0);
+    private Set<Obligation> obligations = new HashSet<>(0);
+    private Set<ClientCase> clientCases = new HashSet<>(0);
+    private Set<IncomeBusinessActivity> incomeBusinessActivities = new HashSet<>(0);
+    private Set<IdentyficationDocument> identyficationDocuments = new HashSet<>(0);
+    private Set<Address> addresses = new HashSet<>(0);
     private Set<Bik> biki;
     private Set<AmountHistory> ammountHistorys = new HashSet<>(0);
     
