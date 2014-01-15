@@ -23,8 +23,8 @@ public class OperationType implements Serializable {
     @Column(name = "operationName")
     private String operationName;
     
-    @OneToMany(mappedBy = "ammountHistory")
-    private Set<AmountHistory> ammountHistory = new HashSet<>(0);
+    @OneToMany(mappedBy = "amountHistory")
+    private Set<AmountHistory> amountHistory = new HashSet<>(0);
     
     public OperationType(){}
 
@@ -44,12 +44,12 @@ public class OperationType implements Serializable {
         this.operationName = operationName;
     }
     
-    public Set<AmountHistory> getAmmountHistory() {
-        return ammountHistory;
+    public Set<AmountHistory> getAmountHistory() {
+        return amountHistory;
     }
 
-    public void setAmmountHistory(Set<AmountHistory> ammountHistory) {
-        this.ammountHistory = ammountHistory;
+    public void setAmmountHistory(Set<AmountHistory> amountHistory) {
+        this.amountHistory = amountHistory;
     }
     
 }

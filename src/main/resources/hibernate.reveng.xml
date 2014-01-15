@@ -34,4 +34,6 @@
   <table-filter match-name="invoiceData"/>
   <table-filter match-name="maritalStatus"/>
   <table-filter match-name="clientCase"/>
+  <table-filter match-name="amountHistory"/>
+  <table-filter match-name="operationType"/>
 </hibernate-reverse-engineering>
