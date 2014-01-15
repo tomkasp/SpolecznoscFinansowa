@@ -24,7 +24,6 @@ public class AmountHistory implements Serializable {
     @Column(name="id_amountHistory", unique = true)
     private int id;
     
-    
     @ManyToOne
     private Client client;
     @ManyToOne
@@ -42,7 +41,6 @@ public class AmountHistory implements Serializable {
     private String accountNumber;
     @Column(name = "receiver")
     private String receiver;
-    
     
     public AmountHistory(){}
 
