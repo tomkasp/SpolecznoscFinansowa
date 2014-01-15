@@ -23,7 +23,7 @@ public class OperationType implements Serializable {
     @Column(name = "operationName")
     private String operationName;
     
-    @OneToMany(mappedBy = "amountHistory")
+    @OneToMany(mappedBy = "operationType")
     private Set<AmountHistory> amountHistory = new HashSet<>(0);
     
     public OperationType(){}
