@@ -18,6 +18,8 @@
     
         <mapping class="com.efsf.sf.sql.entity.WorkingPlace"/>
         <mapping class="com.efsf.sf.sql.entity.Address"/>
+        <mapping class="com.efsf.sf.sql.entity.AmountHistory" />
+        <mapping class="com.efsf.sf.sql.entity.OperationType" />
         <mapping class="com.efsf.sf.sql.entity.Subscription"/>
         <mapping class="com.efsf.sf.sql.entity.Education"/>
         <mapping class="com.efsf.sf.sql.entity.Income"/>
