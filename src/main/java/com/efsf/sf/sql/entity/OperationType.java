@@ -18,12 +18,14 @@ public class OperationType implements Serializable {
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_operationType")
+    @Column(name = "id_operationType",nullable = false)
     private int idOperationType;
     
     @Column(name = "operationName")
     private String operationName;
-    private Set<AmmountHistory> ammountHistory = new HashSet<>(0);
+    
+    @OneToMany(mappedBy = "ammountHistory")
+    private Set<AmountHistory> ammountHistory = new HashSet<>(0);
     
     public OperationType(){}
 
@@ -46,12 +48,12 @@ public class OperationType implements Serializable {
     }
     
     
-    @OneToMany(mappedBy = "ammountHistory")
-    public Set<AmmountHistory> getAmmountHistory() {
+    
+    public Set<AmountHistory> getAmmountHistory() {
         return ammountHistory;
     }
 
-    public void setAmmountHistory(Set<AmmountHistory> ammountHistory) {
+    public void setAmmountHistory(Set<AmountHistory> ammountHistory) {
         this.ammountHistory = ammountHistory;
     }
     

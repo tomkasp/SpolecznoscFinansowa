@@ -3,6 +3,7 @@ package com.efsf.sf.sql.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,6 +49,7 @@ public class Client implements java.io.Serializable {
     private Set<IdentyficationDocument> identyficationDocuments = new HashSet<IdentyficationDocument>(0);
     private Set<Address> addresses = new HashSet<Address>(0);
     private Set<Bik> biki;
+    private Set<AmountHistory> ammountHistorys = new HashSet<>(0);
     
     public Client() {
     }
@@ -248,5 +250,14 @@ public class Client implements java.io.Serializable {
 
     public void setBiki(Set<Bik> biki) {
         this.biki = biki;
+    }
+
+    @OneToMany(mappedBy = "client")
+    public Set<AmountHistory> getAmmountHistorys() {
+        return ammountHistorys;
+}
+
+    public void setAmmountHistorys(Set<AmountHistory> ammountHistorys) {
+        this.ammountHistorys = ammountHistorys;
     }
 }

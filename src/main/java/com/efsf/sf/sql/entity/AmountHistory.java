@@ -15,13 +15,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="ammountHistory")
+@Table(name="amountHistory")
 
-public class AmmountHistory implements Serializable {
+public class AmountHistory implements Serializable {
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name="id_ammountHistory", unique = true)
+    @Column(name="id_amountHistory", unique = true)
     private int id;
     
     
@@ -34,8 +34,8 @@ public class AmmountHistory implements Serializable {
     private int operationMonth;
     @Temporal(TemporalType.DATE)
     private Date operationDate;
-    @Column(name = "ammount")
-    private BigDecimal ammount;
+    @Column(name = "amount")
+    private BigDecimal amount;
     @Column(name = "afterOperation")
     private BigDecimal afterOperation;
     @Column(name = "accountNumber")
@@ -44,7 +44,7 @@ public class AmmountHistory implements Serializable {
     private String receiver;
     
     
-    public AmmountHistory(){}
+    public AmountHistory(){}
 
     public int getId() {
         return id;
@@ -58,8 +58,8 @@ public class AmmountHistory implements Serializable {
         return operationDate;
     }
 
-    public BigDecimal getAmmount() {
-        return ammount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     public BigDecimal getAfterOperation() {
@@ -78,8 +78,8 @@ public class AmmountHistory implements Serializable {
         this.operationDate = operationDate;
     }
 
-    public void setAmmount(BigDecimal ammount) {
-        this.ammount = ammount;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public void setAfterOperation(BigDecimal afterOperation) {
