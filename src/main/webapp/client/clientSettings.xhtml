@@ -260,10 +260,18 @@
                         </h:form>
 
 
-                        <h:form> 
+                        
 
                             <div class="marginLRT30">
+                            <h:form>
+                                <h4 class="greenLeftBorder">DEZAKTYWACJA KONTA</h4>
 
+                                <div style="min-height: 40px"> 
+                                    <h:commandLink class="floatR greyButton wideButton" value="Dezaktywuj" action="/common/deactivateAccount.xhtml" />
+                                </div>
+                            </h:form>
+                          <h:form>       
+                                
                                 <h4 class="greenLeftBorder">ZMIANA HASŁA</h4>
 
                                 <div class="field">
@@ -294,10 +302,10 @@
                                 <div style="min-height: 40px"> 
                                     <h:commandLink class="floatR greyButton wideButton" type="submit" value="Zmień" action="#{clientSettingsMB.updatePassword()}"/>
                                 </div>
-
+                                </h:form>
                             </div>
 
-                        </h:form>
+                        
 
                         <h:form id="uploadForm" enctype="multipart/form-data" >
 
@@ -477,7 +485,7 @@
                                 </div>
                                 
                                 <div style="min-height: 40px"> 
-                             <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatR marginTB20"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
+                             <p:commandLink ajax="false" style="margin-top: 3px;" id="przycisk1" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
                             </div>
                                
                             </div>
