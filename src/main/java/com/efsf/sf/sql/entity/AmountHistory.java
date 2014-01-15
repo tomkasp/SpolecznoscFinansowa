@@ -16,29 +16,37 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="amountHistory")
-
 public class AmountHistory implements Serializable {
     
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name="id_amountHistory", unique = true)
+    @Column(name="idAmountHistory", unique = true)
     private int id;
     
     @ManyToOne
+    @JoinColumn(name="fkClient", nullable=false)
     private Client client;
+    
     @ManyToOne
     @JoinColumn(name="fkOperationType", nullable=false)
     private OperationType operationType;
     
+    @Column(name="operationMonth")
     private int operationMonth;
+    
     @Temporal(TemporalType.DATE)
+    @Column(name="operationDate")
     private Date operationDate;
+    
     @Column(name = "amount")
     private BigDecimal amount;
+    
     @Column(name = "afterOperation")
     private BigDecimal afterOperation;
+    
     @Column(name = "accountNumber")
     private String accountNumber;
+    
     @Column(name = "receiver")
     private String receiver;
     
@@ -47,7 +55,6 @@ public class AmountHistory implements Serializable {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -55,39 +62,34 @@ public class AmountHistory implements Serializable {
     public Date getOperationDate() {
         return operationDate;
     }
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
+    }
 
     public BigDecimal getAmount() {
         return amount;
+    }
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public BigDecimal getAfterOperation() {
         return afterOperation;
     }
+    public void setAfterOperation(BigDecimal afterOperation) {
+        this.afterOperation = afterOperation;
+    }
 
     public String getAccountNumber() {
         return accountNumber;
+    }    
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String getReceiver() {
         return receiver;
     }
-
-    public void setOperationDate(Date operationDate) {
-        this.operationDate = operationDate;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public void setAfterOperation(BigDecimal afterOperation) {
-        this.afterOperation = afterOperation;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
