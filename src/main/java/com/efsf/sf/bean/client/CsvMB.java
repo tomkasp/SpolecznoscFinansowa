@@ -25,8 +25,8 @@ public class CsvMB implements Serializable {
      
      private Integer selectedBank = -1; 
      
-     //asdfasdf
-    
+     //asdfasdfas
+    // i fajnie
      private InputStream csvInput;
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     
