@@ -18,6 +18,10 @@ import org.primefaces.model.UploadedFile;
 public class CsvMB implements Serializable {
 
      private UploadedFile csvFile;  
+     
+     private Integer selectedBank = -1; 
+     
+     
     
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     
@@ -62,6 +66,14 @@ public class CsvMB implements Serializable {
 
     public void setCsvFile(UploadedFile csvFile) {
         this.csvFile = csvFile;
+    }
+
+    public Integer getSelectedBank() {
+        return selectedBank;
+    }
+
+    public void setSelectedBank(Integer selectedBank) {
+        this.selectedBank = selectedBank;
     }
     
 }
