@@ -13,9 +13,7 @@ public class AmountHistoryDAO implements Serializable{
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try{
             session.beginTransaction();
-            Client cl = (Client)session.get(Client.class, 203);
             
-            amhist.setClient(cl);
             session.save(amhist);
             
             session.getTransaction().commit();

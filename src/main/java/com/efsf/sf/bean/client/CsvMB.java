@@ -34,7 +34,7 @@ public class CsvMB implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
             ParserCSV csv = new ParserCSV();
             
-            csv.run(csvFile.getInputstream());
+            csv.run(csvFile.getInputstream(), loginMB.getClient());
         }
     }
 

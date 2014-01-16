@@ -3,6 +3,7 @@ package com.efsf.sf.util.parsers;
 import au.com.bytecode.opencsv.CSVReader;
 import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.entity.AmountHistory;
+import com.efsf.sf.sql.entity.Client;
 import static com.efsf.sf.util.Security.md5;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class ParserCSV {
 //        //pko.run(stream);
 //    }
 
-    public void run(InputStream stream) throws ParseException {
+    public void run(InputStream stream, Client client) throws ParseException {
       int i = 0;
         
         AmountHistory amhist = null;
@@ -48,6 +49,8 @@ public class ParserCSV {
                     String data = nextLine[tab[0][0]];
                     DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
                     
+                    
+                    
                     //System.out.println(reader.readNext().length);
                     System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
                     amhist.setOperationDate(formatter.parse(data));
@@ -57,8 +60,9 @@ public class ParserCSV {
                     amhist.setReceiver(nextLine[tab[0][4]]);
                     amhist.setTitle(nextLine[tab[0][5]]);
                     
-                    amhist.setHashCode(md5(nextLine[tab[0][0]]+nextLine[tab[0][1]]+nextLine[tab[0][2]]+nextLine[tab[0][3]]+nextLine[tab[0][4]]));
+                    amhist.setHashCode(md5(nextLine[tab[0][0]]+nextLine[tab[0][1]]+nextLine[tab[0][2]]+nextLine[tab[0][3]]+nextLine[tab[0][4]]+nextLine[tab[0][5]]));
                     
+                    amhist.setClient(client);
                     
                     amDAO.save(amhist);
                     amhist = null;
