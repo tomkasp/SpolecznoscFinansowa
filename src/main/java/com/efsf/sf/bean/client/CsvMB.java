@@ -6,6 +6,7 @@ import com.efsf.sf.sql.entity.AmountHistory;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -16,6 +17,8 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class CsvMB implements Serializable {
 
+     private UploadedFile csvFile;  
+    
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     
     private List<AmountHistory> history;
@@ -23,6 +26,13 @@ public class CsvMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
 
+    public void upload() {  
+        if(csvFile != null) {  
+            FacesMessage msg = new FacesMessage("Sukces!","Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");  
+            FacesContext.getCurrentInstance().addMessage(null, msg);  
+        }     
+    }  
+    
     @PostConstruct
     public void init() {
         history=dao.getWhere("fkClient", loginMB.getClient().getIdClient());
@@ -44,12 +54,7 @@ public class CsvMB implements Serializable {
         this.loginMB = loginMB;
     }
     
-    public void upload() {  
-        if(csvFile != null) {  
-            FacesMessage msg = new FacesMessage("Sukces!","Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");  
-            FacesContext.getCurrentInstance().addMessage(null, msg);  
-        }     
-    }  
+
 
     public UploadedFile getCsvFile() {
         return csvFile;
