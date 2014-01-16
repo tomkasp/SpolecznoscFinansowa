@@ -16,18 +16,28 @@
         
         <p:messages showDetail="true"/>     
             
-        <p:fileUpload style="width: 700px; margin-left: 130px;"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
+        <p:fileUpload style="width: 250px; float: left"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
                
         </p:fileUpload>
+        
+        <p:selectOneMenu style="margin: 5px 0px 0px 20px; float: left;" value="#{csvMB.selectedBank}"  >
+            <f:selectItem itemLabel="Wybierz..." itemValue="-1" />
+            <f:selectItem itemLabel="PKO Bank Polski" itemValue="1" />  
+            <f:selectItem itemLabel="BZ WBK" itemValue="2" />  
+        </p:selectOneMenu>
+        
             
-        <p:commandLink ajax="false" id="przycisk1" style="margin-right: 118px;" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
+        <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatL" style="margin: 5px 20px 20px 20px;"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
                          
         </h:form>    
         
-        <h4> Wyciąg:  </h4>
-        
+        <div style="clear: both;" >
+             <h4> Wyciąg:  </h4>
+        </div>
         <h:form> 
             <div style="min-height: 50px; margin-top: 50px">
+                
+                
                 <p:dataTable id="csvTable" value="#{csvMB.history}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" emptyMessage="Brak rekordów wgraj plik z wyciągiem konta." selectionMode="single" >
 
                                 <p:column headerText="Nr.">  
