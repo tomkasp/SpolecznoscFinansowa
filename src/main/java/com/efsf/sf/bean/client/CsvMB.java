@@ -3,7 +3,11 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
+import com.efsf.sf.util.parsers.ParserCSV;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,6 +27,7 @@ public class CsvMB implements Serializable {
      
      
     
+     private InputStream csvInput;
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     
     private List<AmountHistory> history;
@@ -30,10 +35,13 @@ public class CsvMB implements Serializable {
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
 
-    public void upload() {  
+    public void upload() throws ParseException, IOException {  
         if(csvFile != null) {  
             FacesMessage msg = new FacesMessage("Sukces!","Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");  
             FacesContext.getCurrentInstance().addMessage(null, msg);  
+            ParserCSV csv = new ParserCSV();
+            csvInput = csvFile.getInputstream();
+            csv.run(csvInput);
         }     
     }  
     

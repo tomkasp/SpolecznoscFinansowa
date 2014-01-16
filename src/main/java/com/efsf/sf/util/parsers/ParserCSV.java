@@ -6,6 +6,8 @@ import com.efsf.sf.sql.entity.AmountHistory;
 import static com.efsf.sf.util.Security.md5;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,23 +19,26 @@ import java.util.logging.Logger;
 public class ParserCSV {
 
     private final int[][] tab = { 
-        {1,11,12,5,4},//pko
+        {1,11,12,5,4,3},//wbk-> data, kwotaMA,saldo,konto,opis,tytul
         {1,2,3,4,5} //nie uzywane
 };
 
-    public static void main(String[] args) throws ParseException {
-        ParserCSV pko = new ParserCSV();
-        pko.run();
-    }
+//    public static void main(String[] args) throws ParseException {
+//        ParserCSV pko = new ParserCSV();
+//        //pko.run(stream);
+//    }
 
-    public void run() throws ParseException {
+    public void run(InputStream stream) throws ParseException {
       int i = 0;
         
         AmountHistory amhist = null;
         AmountHistoryDAO amDAO = new AmountHistoryDAO();
         try {
-            CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
-
+            
+            CSVReader reader = new CSVReader(new InputStreamReader(stream) , ',','"',3);
+            //CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
+            //input stream;
+            
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null) {
                 if (i < 1) {
@@ -50,6 +55,7 @@ public class ParserCSV {
                     amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
                     amhist.setAccountNumber(nextLine[tab[0][3]]);
                     amhist.setReceiver(nextLine[tab[0][4]]);
+                    amhist.setTitle(nextLine[tab[0][5]]);
                     
                     amhist.setHashCode(md5(nextLine[tab[0][0]]+nextLine[tab[0][1]]+nextLine[tab[0][2]]+nextLine[tab[0][3]]+nextLine[tab[0][4]]));
                     
