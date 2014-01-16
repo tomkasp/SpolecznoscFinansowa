@@ -24,7 +24,6 @@ public class CsvMB implements Serializable {
 
     private UploadedFile csvFile;
     private Integer selectedBank = -1;
-    private InputStream csvInput;
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     private List<AmountHistory> history;
     @ManagedProperty(value = "#{loginMB}")
@@ -36,8 +35,8 @@ public class CsvMB implements Serializable {
             FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             ParserCSV csv = new ParserCSV();
-            csvInput = csvFile.getInputstream();
-            csv.run(csvInput);
+            
+            csv.run(csvFile.getInputstream(), loginMB.getClient());
         }
     }
 
