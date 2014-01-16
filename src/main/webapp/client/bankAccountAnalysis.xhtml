@@ -12,13 +12,15 @@
         
         <h4> Załaduj nowy plik .csv:  </h4>
 
-        <h:form>
+        <h:form enctype="multipart/form-data">
         
-        <p:fileUpload style="width: 700px; margin-left: 130px;"  styleClass="greyButton" id="idCardUpload" value=" " mode="simple" > 
-               <f:validator validatorId="fileUploadValidator" />
+        <p:messages showDetail="true"/>     
+            
+        <p:fileUpload style="width: 700px; margin-left: 130px;"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
+               
         </p:fileUpload>
             
-        <p:commandLink ajax="false" id="przycisk1" style="margin-right: 118px;" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" action="#{fileUploadMB.save()}" />      
+        <p:commandLink ajax="false" id="przycisk1" style="margin-right: 118px;" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
                          
         </h:form>    
         
@@ -26,33 +28,7 @@
         
         <h:form> 
             <div style="min-height: 50px; margin-top: 50px">
-                <p:dataTable id="csvTable" value="#{csvMB.history}" var="row" rowKey="#{row}" emptyMessage="Brak rekordów wgraj plik z wyciągiem konta." selectionMode="single" >
 
-                                <p:column headerText="Nr.">  
-                                    <h:outputText  value=""/>
-                                </p:column>  
-                 
-                                <p:column headerText="Data"> 
-                                    <h:outputText value="#{row.operationDate.toGMTString}" />
-                                </p:column>                 
-
-                                <p:column headerText="Tytuł">  
-                                    <h:outputText  value=""/>
-                                </p:column> 
-
-                                <p:column headerText="Kwota"> 
-                                    <h:outputText  value=""/>
-                                </p:column>
-
-                                <p:column headerText="Saldo po"> 
-                                    <h:outputText  value=""/>        
-                                </p:column> 
-
-                                <p:column headerText="Typ">  
-                                    <h:outputText value="" />
-                                </p:column>    
-
-                            </p:dataTable>
             </div>
         </h:form>    
             
