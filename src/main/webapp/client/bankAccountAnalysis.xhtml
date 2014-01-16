@@ -18,7 +18,7 @@
                <f:validator validatorId="fileUploadValidator" />
         </p:fileUpload>
             
-        <p:commandLink ajax="false" id="przycisk1" style="margin-right: 118px;" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
+        <p:commandLink ajax="false" id="przycisk1" style="margin-right: 118px;" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" action="#{fileUploadMB.save()}" />      
                          
         </h:form>    
         
@@ -26,7 +26,33 @@
         
         <h:form> 
             <div style="min-height: 50px; margin-top: 50px">
-            Tutaj tabelka + 2 inputy na filtr daty - od do
+                <p:dataTable id="csvTable" value="#{csvMB.history}" var="row" rowKey="#{row}" emptyMessage="Brak rekordów wgraj plik z wyciągiem konta." selectionMode="single" >
+
+                                <p:column headerText="Nr.">  
+                                    <h:outputText  value=""/>
+                                </p:column>  
+                 
+                                <p:column headerText="Data"> 
+                                    <h:outputText value="#{row.operationDate.toGMTString}" />
+                                </p:column>                 
+
+                                <p:column headerText="Tytuł">  
+                                    <h:outputText  value=""/>
+                                </p:column> 
+
+                                <p:column headerText="Kwota"> 
+                                    <h:outputText  value=""/>
+                                </p:column>
+
+                                <p:column headerText="Saldo po"> 
+                                    <h:outputText  value=""/>        
+                                </p:column> 
+
+                                <p:column headerText="Typ">  
+                                    <h:outputText value="" />
+                                </p:column>    
+
+                            </p:dataTable>
             </div>
         </h:form>    
             
