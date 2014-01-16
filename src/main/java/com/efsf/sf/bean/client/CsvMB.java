@@ -21,33 +21,27 @@ import org.primefaces.model.UploadedFile;
 @ViewScoped
 public class CsvMB implements Serializable {
 
-     private UploadedFile csvFile;  
-     
-     private Integer selectedBank = -1; 
-     
-     //asdfasdfas
-    // i fajnie
-     private InputStream csvInput;
+    private UploadedFile csvFile;
+    private Integer selectedBank = -1;
+    private InputStream csvInput;
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
-    
     private List<AmountHistory> history;
-    
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
 
-    public void upload() throws ParseException, IOException {  
-        if(csvFile != null) {  
-            FacesMessage msg = new FacesMessage("Sukces!","Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");  
-            FacesContext.getCurrentInstance().addMessage(null, msg);  
+    public void upload() throws ParseException, IOException {
+        if (csvFile != null) {
+            FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
             ParserCSV csv = new ParserCSV();
             csvInput = csvFile.getInputstream();
             csv.run(csvInput);
-        }     
-    }  
-    
+        }
+    }
+
     @PostConstruct
     public void init() {
-        history=dao.getWhere("fkClient", loginMB.getClient().getIdClient());
+        history = dao.getWhere("fkClient", loginMB.getClient().getIdClient());
     }
 
     public List<AmountHistory> getHistory() {
@@ -65,8 +59,6 @@ public class CsvMB implements Serializable {
     public void setLoginMB(LoginMB loginMB) {
         this.loginMB = loginMB;
     }
-    
-
 
     public UploadedFile getCsvFile() {
         return csvFile;
@@ -83,5 +75,4 @@ public class CsvMB implements Serializable {
     public void setSelectedBank(Integer selectedBank) {
         this.selectedBank = selectedBank;
     }
-    
 }
