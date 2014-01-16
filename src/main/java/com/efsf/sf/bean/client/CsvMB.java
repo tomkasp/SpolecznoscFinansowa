@@ -3,6 +3,7 @@ package com.efsf.sf.bean.client;
 import com.efsf.sf.bean.LoginMB;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
+import com.efsf.sf.sql.entity.OperationType;
 import com.efsf.sf.util.parsers.ParserCSV;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,7 @@ public class CsvMB implements Serializable {
     private List<AmountHistory> history;
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
+    private List<OperationType> operationTypes;
 
     public void upload() throws ParseException, IOException {
         if (csvFile != null) {
@@ -42,6 +44,14 @@ public class CsvMB implements Serializable {
     @PostConstruct
     public void init() {
         history = dao.getWhere("fkClient", loginMB.getClient().getIdClient());
+        GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
+        operationTypes=typeDao.getAll();
+    }
+    
+    public void save(){
+        System.out.println("Tak :D");
+        for(AmountHistory h: history)
+        dao.update(h);
     }
 
     public List<AmountHistory> getHistory() {
@@ -74,5 +84,13 @@ public class CsvMB implements Serializable {
 
     public void setSelectedBank(Integer selectedBank) {
         this.selectedBank = selectedBank;
+    }
+
+    public List<OperationType> getOperationTypes() {
+        return operationTypes;
+    }
+
+    public void setOperationTypes(List<OperationType> operationTypes) {
+        this.operationTypes = operationTypes;
     }
 }
