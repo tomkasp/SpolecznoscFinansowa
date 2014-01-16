@@ -28,7 +28,7 @@ public class AmountHistory implements Serializable {
     private Client client;
     
     @ManyToOne
-    @JoinColumn(name="fkOperationType", nullable=false)
+    @JoinColumn(name="fkOperationType", nullable=true)
     private OperationType operationType;
     
     @Temporal(TemporalType.DATE)
@@ -100,5 +100,21 @@ public class AmountHistory implements Serializable {
 
     public void setHashCode(String HashCode) {
         this.HashCode = HashCode;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
     }
 }
