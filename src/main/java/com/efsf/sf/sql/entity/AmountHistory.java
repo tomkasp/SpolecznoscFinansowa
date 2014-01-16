@@ -15,46 +15,51 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="amountHistory")
+@Table(name = "amountHistory")
 public class AmountHistory implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name="idAmountHistory", unique = true)
+    @Column(name = "idAmountHistory", unique = true)
     private int id;
     
     @ManyToOne
-    @JoinColumn(name="fkClient", nullable=false)
+    @JoinColumn(name = "fkClient", nullable = false)
     private Client client;
     
     @ManyToOne
-    @JoinColumn(name="fkOperationType", nullable=true)
+    @JoinColumn(name = "fkOperationType", nullable = true)
     private OperationType operationType;
     
     @Temporal(TemporalType.DATE)
-    @Column(name="operationDate")
+    @Column
     private Date operationDate;
     
-    @Column(name = "amount")
+    @Column
+    private String title;
+    
+    @Column
     private BigDecimal amount;
     
-    @Column(name = "afterOperation")
+    @Column
     private BigDecimal afterOperation;
     
-    @Column(name = "accountNumber")
+    @Column
     private String accountNumber;
     
-    @Column(name = "receiver")
+    @Column
     private String receiver;
     
-    @Column(name = "hashCode", length = 40)
-    private String HashCode;
-    
-    public AmountHistory(){}
+    @Column(length = 40)
+    private String hashCode;
+
+    public AmountHistory() {
+    }
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -62,6 +67,7 @@ public class AmountHistory implements Serializable {
     public Date getOperationDate() {
         return operationDate;
     }
+
     public void setOperationDate(Date operationDate) {
         this.operationDate = operationDate;
     }
@@ -69,6 +75,7 @@ public class AmountHistory implements Serializable {
     public BigDecimal getAmount() {
         return amount;
     }
+
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
@@ -76,13 +83,15 @@ public class AmountHistory implements Serializable {
     public BigDecimal getAfterOperation() {
         return afterOperation;
     }
+
     public void setAfterOperation(BigDecimal afterOperation) {
         this.afterOperation = afterOperation;
     }
 
     public String getAccountNumber() {
         return accountNumber;
-    }    
+    }
+
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
@@ -90,16 +99,17 @@ public class AmountHistory implements Serializable {
     public String getReceiver() {
         return receiver;
     }
+
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
 
     public String getHashCode() {
-        return HashCode;
+        return hashCode;
     }
 
     public void setHashCode(String HashCode) {
-        this.HashCode = HashCode;
+        this.hashCode = HashCode;
     }
 
     public Client getClient() {
@@ -116,5 +126,13 @@ public class AmountHistory implements Serializable {
 
     public void setOperationType(OperationType operationType) {
         this.operationType = operationType;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

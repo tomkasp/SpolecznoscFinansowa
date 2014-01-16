@@ -85,7 +85,7 @@ public class GenericDao<T> implements Serializable{
         return obj;
     }
 
-    public List<T> getWhere(String field, String value) {
+    public List<T> getWhere(String field, Object value) {
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {

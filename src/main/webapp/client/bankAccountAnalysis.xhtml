@@ -26,26 +26,26 @@
         
         <h:form> 
             <div style="min-height: 50px; margin-top: 50px">
-                <p:dataTable id="csvTable" value="#{csvMB.history}" var="row" rowKey="#{row}" emptyMessage="Brak rekordów wgraj plik z wyciągiem konta." selectionMode="single" >
+                <p:dataTable id="csvTable" value="#{csvMB.history}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" emptyMessage="Brak rekordów wgraj plik z wyciągiem konta." selectionMode="single" >
 
                                 <p:column headerText="Nr.">  
-                                    <h:outputText  value=""/>
+                                    <h:outputText  value="#{rowIndex+1}"/>
                                 </p:column>  
                  
                                 <p:column headerText="Data"> 
-                                    <h:outputText value="#{row.operationDate.toGMTString}" />
+                                    <h:outputText value="#{row.operationDate}" />
                                 </p:column>                 
 
                                 <p:column headerText="Tytuł">  
-                                    <h:outputText  value=""/>
+                                    <h:outputText  value="#{row.title}"/>
                                 </p:column> 
 
                                 <p:column headerText="Kwota"> 
-                                    <h:outputText  value=""/>
+                                    <h:outputText  value="#{row.amount}"/>
                                 </p:column>
 
                                 <p:column headerText="Saldo po"> 
-                                    <h:outputText  value=""/>        
+                                    <h:outputText  value="#{row.afterOperation}"/>        
                                 </p:column> 
 
                                 <p:column headerText="Typ">  
