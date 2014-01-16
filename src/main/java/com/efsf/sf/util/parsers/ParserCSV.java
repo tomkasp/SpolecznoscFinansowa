@@ -14,15 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
-public class ParserPKO {
+public class ParserCSV {
 
     private final int[][] tab = { 
         {1,11,12,5,4},//pko
-        {1,2,3,4,5}
+        {1,2,3,4,5} //nie uzywane
 };
 
     public static void main(String[] args) throws ParseException {
-        ParserPKO pko = new ParserPKO();
+        ParserCSV pko = new ParserCSV();
         pko.run();
     }
 
@@ -60,7 +60,7 @@ public class ParserPKO {
                 i++;
             }
         } catch (IOException ex) {
-            Logger.getLogger(ParserPKO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
