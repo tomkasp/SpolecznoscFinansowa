@@ -1,35 +1,63 @@
 package com.efsf.sf.util.parsers;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.efsf.sf.sql.dao.AmountHistoryDAO;
+import com.efsf.sf.sql.entity.AmountHistory;
+import static com.efsf.sf.util.Security.md5;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
 public class ParserPKO {
 
-    public static void main(String[] args) {
-        ParserPKO obj = new ParserPKO();
-        obj.run();
+    private final int[][] tab = { 
+        {1,11,12,5,4},//pko
+        {1,2,3,4,5}
+};
 
+    public static void main(String[] args) throws ParseException {
+        ParserPKO pko = new ParserPKO();
+        pko.run();
     }
 
-    public void run() {
-       // int i = 0;
+    public void run() throws ParseException {
+      int i = 0;
+        
+        AmountHistory amhist = null;
+        AmountHistoryDAO amDAO = new AmountHistoryDAO();
         try {
-            CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',2);
+            CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
 
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null) {
-              //  if (i >= 31) {
+                if (i < 1) {
                     // nextLine[] is an array of values from the line
+                    amhist = new AmountHistory();
 
-                    //System.out.println(reader.readNext().length);
-                    System.out.println(nextLine[0]+ " | " + nextLine[1]+ " | " + nextLine[2]+ " | " + nextLine[3]+ " | " + nextLine[4]+ " | " + nextLine[5] + " | " + nextLine[6]+ " | " + nextLine[7]+ " | " + nextLine[8]+ " | " + nextLine[9]+ " | " + nextLine[10]+ " | " + nextLine[11]+ " | " + nextLine[12]+ " | " + nextLine[13]+ " | " + nextLine[14]);
+                    String data = nextLine[tab[0][0]];
+                    DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
                     
-              //  }
-              //  i++;
+                    //System.out.println(reader.readNext().length);
+                    System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
+                    amhist.setOperationDate(formatter.parse(data));
+                    amhist.setAmount(new BigDecimal(nextLine[tab[0][1]].replace(",", ".")));
+                    amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
+                    amhist.setAccountNumber(nextLine[tab[0][3]]);
+                    amhist.setReceiver(nextLine[tab[0][4]]);
+                    
+                    amhist.setHashCode(md5(nextLine[tab[0][0]]+nextLine[tab[0][1]]+nextLine[tab[0][2]]+nextLine[tab[0][3]]+nextLine[tab[0][4]]));
+                    
+                    
+                    amDAO.save(amhist);
+                    amhist = null;
+            }
+                i++;
             }
         } catch (IOException ex) {
             Logger.getLogger(ParserPKO.class.getName()).log(Level.SEVERE, null, ex);
