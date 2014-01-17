@@ -1,7 +1,6 @@
 package com.efsf.sf.util.parsers;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
 public class ParserCSV {
 
     private final int[][] tab = { 
-        {1,11,12,5,4,3}//wbk-> data, kwotaMA,saldo,konto,opis,tytul
+        {1,10,11,12,5,4,3}//wbk-> data, KwotaWN, kwotaMA,saldo,konto,opis,tytul
          //nie uzywane
 };
 
@@ -43,7 +42,6 @@ public class ParserCSV {
             
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null) {
-                if (i < 1) {
                     // nextLine[] is an array of values from the line
                     amhist = new AmountHistory();
 
@@ -51,24 +49,33 @@ public class ParserCSV {
                     DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
                     
                     //System.out.println(reader.readNext().length);
+                    
+                    if(!nextLine[tab[0][1]].equals("") && nextLine[tab[0][2]].equals("")){
+                        amhist.setAmount(new BigDecimal("-"+nextLine[tab[0][1]].replace(",", ".")));
+                    }
+                    if(nextLine[tab[0][1]].equals("") && !nextLine[tab[0][2]].equals("")){
+                        amhist.setAmount(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
+                    }
+                    
                     System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
                     amhist.setOperationDate(formatter.parse(data));
-                    amhist.setAmount(new BigDecimal(nextLine[tab[0][1]].replace(",", ".")));
-                    amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
-                    amhist.setAccountNumber(nextLine[tab[0][3]]);
-                    amhist.setReceiver(nextLine[tab[0][4]]);
-                    amhist.setTitle(nextLine[tab[0][5]]);
                     
-                    amhist.setHashCode(md5(nextLine[tab[0][0]]+nextLine[tab[0][1]]+nextLine[tab[0][2]]+nextLine[tab[0][3]]+nextLine[tab[0][4]]+nextLine[tab[0][5]]));
+                    amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][3]].replace(",", ".")));
+                    amhist.setAccountNumber(nextLine[tab[0][4]]);
+                    amhist.setReceiver(nextLine[tab[0][5]]);
+                    amhist.setTitle(nextLine[tab[0][6]]);
+                    
+                    amhist.setHashCode(md5(nextLine[tab[0][0]]+
+                            nextLine[tab[0][1]]+nextLine[tab[0][2]]+
+                            nextLine[tab[0][3]]+nextLine[tab[0][4]]+
+                            nextLine[tab[0][5]]+nextLine[tab[0][6]]));
                     
                     amhist.setClient(client);
-                    
                     
                     genDao.save(amhist);
                     //amDAO.save(amhist);
                     amhist = null;
-            }
-                i++;
+            
             }
         } catch (IOException ex) {
             Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
