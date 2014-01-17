@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class ParserCSV {
 
     private final int[][] tab = { 
-        {1,11,12,5,4,3},//wbk-> data, kwotaMA,saldo,konto,opis,tytul
+        {1,11,12,5,4,3}//wbk-> data, kwotaMA,saldo,konto,opis,tytul
          //nie uzywane
 };
 
