@@ -36,7 +36,7 @@ public class ParserCSV {
 
     public void run(InputStream stream, Client client) throws ParseException {
       int i = 0;
-        
+        List<AmountHistory> list=new ArrayList<>();
         AmountHistory amhist = null;
         //AmountHistoryDAO amDAO = new AmountHistoryDAO();
         GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
@@ -77,12 +77,18 @@ public class ParserCSV {
                             nextLine[tab[0][5]]+nextLine[tab[0][6]]));
                     
                     amhist.setClient(client);
+                    list.add(amhist);
                     
-                    genDao.save(amhist);
                     //amDAO.save(amhist);
-                    amhist = null;
             
             }
+            
+            list=autoAnalise(list);
+            
+            for(AmountHistory a: list){
+                genDao.save(a);
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
