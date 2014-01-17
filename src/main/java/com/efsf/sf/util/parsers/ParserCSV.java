@@ -37,7 +37,7 @@ public class ParserCSV {
         GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
         try {
             
-            CSVReader reader = new CSVReader(new InputStreamReader(stream) , ',','"',3);
+            CSVReader reader = new CSVReader(new InputStreamReader(stream,"UTF-8") , ',','"',3);
             //CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
             //input stream;
             
