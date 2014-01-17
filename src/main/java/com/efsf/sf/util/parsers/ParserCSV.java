@@ -77,7 +77,7 @@ public class ParserCSV {
 
                 amhist.setClient(client);
                 list.add(amhist);
-                amDAO.checkMD5(amhist.getHashCode(), client);
+                amDAO.checkMD5(amhist.getHashCode(), client.getIdClient());
 
                     //amDAO.save(amhist);
             }
