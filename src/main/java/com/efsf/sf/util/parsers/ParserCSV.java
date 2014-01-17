@@ -5,7 +5,6 @@ import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
 import static com.efsf.sf.util.Security.md5;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
