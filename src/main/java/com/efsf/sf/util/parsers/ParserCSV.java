@@ -49,8 +49,6 @@ public class ParserCSV {
                     String data = nextLine[tab[0][0]];
                     DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
                     
-                    
-                    
                     //System.out.println(reader.readNext().length);
                     System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
                     amhist.setOperationDate(formatter.parse(data));
