@@ -4,6 +4,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.OperationType;
 import static com.efsf.sf.util.Security.md5;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,11 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,7 +86,63 @@ public class ParserCSV {
         } catch (IOException ex) {
             Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
+        
+       public Map<String, List<AmountHistory>> splitByDate(List<AmountHistory> list){
+           Map<String, List<AmountHistory>> splitByDate=new HashMap<>();           
+           for(AmountHistory h: list){
+               String date=h.getOperationDate().getMonth()+" "+h.getOperationDate().getYear();
+               if(splitByDate.get(date)!=null){
+                   splitByDate.get(date).add(h);
+               } else {
+                   List<AmountHistory> innerList=new ArrayList<>();
+                   innerList.add(h);
+                   splitByDate.put(date, innerList);
+               }
+           }
+           
+           
+           return splitByDate;
+      } 
+
+ 
+       public List<AmountHistory> autoAnalise(List<AmountHistory> list){
+           List<AmountHistory> result=new ArrayList<>();
+           
+           GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
+           Map<String, List<AmountHistory>> splitByDate=splitByDate(list);
+           
+           for(Entry<String, List<AmountHistory>> entry: splitByDate.entrySet()){
+               AmountHistory max=entry.getValue().get(0);
+               AmountHistory min=entry.getValue().get(0);
+                       
+               for(AmountHistory a: entry.getValue()){
+                   Double amount=a.getAmount().doubleValue();
+                   
+                   if(amount>=-10 && amount<0){
+                       a.setOperationType(typeDao.getById(1));
+                   } else if(amount<-10){
+                       a.setOperationType(typeDao.getById(5));
+                   } else if(amount>0){
+                       a.setOperationType(typeDao.getById(7));
+                   }
+                   
+                   if(a.getAmount().doubleValue()>max.getAmount().doubleValue()){
+                       max=a;
+                   } else if(a.getAmount().doubleValue()<min.getAmount().doubleValue()){
+                       min=a;
+                   }
+               }
+               
+               if(max.getAmount().doubleValue()>1000){
+                   max.setOperationType(typeDao.getById(6));               }
+               
+               if(min.getAmount().doubleValue()<-200){
+                   min.setOperationType(typeDao.getById(2));
+               }
+               result.addAll(entry.getValue());
+           }
+           return result;
+       }
+       
 }
