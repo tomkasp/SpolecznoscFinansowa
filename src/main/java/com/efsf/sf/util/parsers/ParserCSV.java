@@ -21,7 +21,7 @@ public class ParserCSV {
 
     private final int[][] tab = { 
         {1,11,12,5,4,3},//wbk-> data, kwotaMA,saldo,konto,opis,tytul
-        {1,2,3,4,5} //nie uzywane
+         //nie uzywane
 };
 
 //    public static void main(String[] args) throws ParseException {
