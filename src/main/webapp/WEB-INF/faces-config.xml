@@ -21,4 +21,9 @@
         </resource-bundle>
     </application>
     
+    <converter>
+        <converter-for-class>com.efsf.sf.sql.entity.OperationType</converter-for-class>
+        <converter-class>com.efsf.sf.util.OperationTypeConverter</converter-class>
+    </converter>
+
 </faces-config>
