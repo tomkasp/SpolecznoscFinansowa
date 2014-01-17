@@ -37,6 +37,8 @@ public class CsvMB implements Serializable {
             ParserCSV csv = new ParserCSV();
             
             csv.run(csvFile.getInputstream(), loginMB.getClient());
+            
+            init();
         }
     }
 
