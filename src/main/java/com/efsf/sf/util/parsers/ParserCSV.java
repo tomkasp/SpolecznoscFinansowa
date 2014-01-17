@@ -63,7 +63,7 @@ public class ParserCSV {
                         amhist.setAmount(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
                     }
                     
-                    System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
+                    //System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
                     amhist.setOperationDate(formatter.parse(data));
                     
                     amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][3]].replace(",", ".")));
