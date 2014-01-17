@@ -34,7 +34,7 @@ public class ParserCSV {
         
         AmountHistory amhist = null;
         //AmountHistoryDAO amDAO = new AmountHistoryDAO();
-        GenericDao genDao = new GenericDao(AmountHistory.class);
+        GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
         try {
             
             CSVReader reader = new CSVReader(new InputStreamReader(stream) , ',','"',3);
