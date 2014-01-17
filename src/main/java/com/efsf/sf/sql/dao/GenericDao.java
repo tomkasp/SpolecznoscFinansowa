@@ -7,7 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Projections;
 
-public class GenericDao<T> implements Serializable{
+public class GenericDao<T> implements Serializable {
 
     private final Class<T> type;
 
@@ -33,12 +33,12 @@ public class GenericDao<T> implements Serializable{
         }
         return obj;
     }
-    
-    public Integer getMaxInt(String field){
+
+    public Integer getMaxInt(String field) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         Integer result;
         try {
-            
+
             Criteria criteria = session
                     .createCriteria(getMyType())
                     .setProjection(Projections.max(field));
@@ -46,7 +46,7 @@ public class GenericDao<T> implements Serializable{
         } finally {
             session.close();
         }
-        return result; 
+        return result;
     }
 
     public List<T> getAll() {
@@ -71,14 +71,14 @@ public class GenericDao<T> implements Serializable{
         }
         return lista;
     }
-    
+
     public T getLastWhere(String whereField, String whereValue, String field, String orderType) {
         T obj;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             obj = (T) session.createQuery("from " + getMyTypeAsString()
                     + " where " + whereField + "=" + whereValue
-                    +" order by " + field + " " + orderType + " LIMIT 1").list().get(0);
+                    + " order by " + field + " " + orderType + " LIMIT 1").list().get(0);
         } finally {
             session.close();
         }
@@ -89,7 +89,7 @@ public class GenericDao<T> implements Serializable{
         List<T> lista;
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
-            lista = session.createQuery("from " + getMyTypeAsString() + " where " + field + "=" + value).list();
+            lista = session.createQuery("from " + getMyTypeAsString() + " where " + field + "='"  + value.toString() + "'").list();
         } finally {
             session.close();
         }
@@ -147,7 +147,7 @@ public class GenericDao<T> implements Serializable{
         }
 
     }
-    
+
     public void delete(T obj) {
 
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
@@ -159,5 +159,5 @@ public class GenericDao<T> implements Serializable{
             session.close();
         }
 
-    }    
+    }
 }

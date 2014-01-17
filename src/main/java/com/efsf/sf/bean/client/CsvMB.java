@@ -53,6 +53,10 @@ public class CsvMB implements Serializable {
         System.out.println("Tak :D");
         for(AmountHistory h: history)
         dao.update(h);
+        
+        FacesMessage msg = new FacesMessage("Sukces!", "Dane zostały zaktualizowane.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
     }
 
     public List<AmountHistory> getHistory() {
