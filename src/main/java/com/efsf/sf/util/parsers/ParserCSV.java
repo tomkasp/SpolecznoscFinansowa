@@ -1,6 +1,7 @@
 package com.efsf.sf.util.parsers;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
@@ -24,71 +25,69 @@ import java.util.logging.Logger;
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
 public class ParserCSV {
 
-    private final int[][] tab = { 
-        {1,10,11,12,5,4,3}//wbk-> data, KwotaWN, kwotaMA,saldo,konto,opis,tytul
-         //nie uzywane
-};
+    private final int[][] tab = {
+        {1, 10, 11, 12, 5, 4, 3}//wbk-> data, KwotaWN, kwotaMA,saldo,konto,opis,tytul
+    //nie uzywane
+    };
 
 //    public static void main(String[] args) throws ParseException {
 //        ParserCSV pko = new ParserCSV();
 //        //pko.run(stream);
 //    }
-
     public void run(InputStream stream, Client client) throws ParseException {
-      int i = 0;
-        List<AmountHistory> list=new ArrayList<>();
+        int i = 0;
+        List<AmountHistory> list = new ArrayList<>();
         AmountHistory amhist = null;
-        //AmountHistoryDAO amDAO = new AmountHistoryDAO();
+        AmountHistoryDAO amDAO = new AmountHistoryDAO();
         GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
         try {
-            
-            CSVReader reader = new CSVReader(new InputStreamReader(stream,"UTF-8") , ',','"',3);
+
+            CSVReader reader = new CSVReader(new InputStreamReader(stream, "UTF-8"), ',', '"', 3);
             //CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
             //input stream;
-            
+
             String[] nextLine;
             while ((nextLine = reader.readNext()) != null) {
-                    // nextLine[] is an array of values from the line
-                    amhist = new AmountHistory();
+                // nextLine[] is an array of values from the line
+                amhist = new AmountHistory();
 
-                    String data = nextLine[tab[0][0]];
-                    DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
-                    
+                String data = nextLine[tab[0][0]];
+                DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+
                     //System.out.println(reader.readNext().length);
-                    
-                    if(!nextLine[tab[0][1]].equals("") && nextLine[tab[0][2]].equals("")){
-                        amhist.setAmount(new BigDecimal("-"+nextLine[tab[0][1]].replace(",", ".")));
-                    }
-                    if(nextLine[tab[0][1]].equals("") && !nextLine[tab[0][2]].equals("")){
-                        amhist.setAmount(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
-                    }
-                    
-                    //System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
-                    amhist.setOperationDate(formatter.parse(data));
-                    
-                    amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][3]].replace(",", ".")));
-                    amhist.setAccountNumber(nextLine[tab[0][4]]);
-                    amhist.setReceiver(nextLine[tab[0][5]]);
-                    amhist.setTitle(nextLine[tab[0][6]]);
-                    
-                    amhist.setHashCode(md5(nextLine[tab[0][0]]+
-                            nextLine[tab[0][1]]+nextLine[tab[0][2]]+
-                            nextLine[tab[0][3]]+nextLine[tab[0][4]]+
-                            nextLine[tab[0][5]]+nextLine[tab[0][6]]));
-                    
-                    amhist.setClient(client);
-                    list.add(amhist);
-                    
+                if (!nextLine[tab[0][1]].equals("") && nextLine[tab[0][2]].equals("")) {
+                    amhist.setAmount(new BigDecimal("-" + nextLine[tab[0][1]].replace(",", ".")));
+                }
+                if (nextLine[tab[0][1]].equals("") && !nextLine[tab[0][2]].equals("")) {
+                    amhist.setAmount(new BigDecimal(nextLine[tab[0][2]].replace(",", ".")));
+                }
+
+                //System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
+                amhist.setOperationDate(formatter.parse(data));
+
+                amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][3]].replace(",", ".")));
+                amhist.setAccountNumber(nextLine[tab[0][4]]);
+                amhist.setReceiver(nextLine[tab[0][5]]);
+                amhist.setTitle(nextLine[tab[0][6]]);
+
+                amhist.setHashCode(md5(nextLine[tab[0][0]]
+                        + nextLine[tab[0][1]] + nextLine[tab[0][2]]
+                        + nextLine[tab[0][3]] + nextLine[tab[0][4]]
+                        + nextLine[tab[0][5]] + nextLine[tab[0][6]]));
+
+                amhist.setClient(client);
+                list.add(amhist);
+                amDAO.checkMD5(amhist.getHashCode(), client);
+
                     //amDAO.save(amhist);
-            
             }
-            
-            list=autoAnalise(list);
-            
-            for(AmountHistory a: list){
+
+            list = autoAnalise(list);
+
+            for (AmountHistory a : list) {
                 genDao.save(a);
             }
-            
+
         } catch (IOException ex) {
             Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,7 +130,7 @@ public class ParserCSV {
                    //wydatek
                    } else if(amount<-10){    
                        a.setOperationType(typeDao.getById(5));
-                   //przychód jednorazowy    
+                   //przych�d jednorazowy    
                    } else if(amount>0){
                        a.setOperationType(typeDao.getById(7));
                    }
