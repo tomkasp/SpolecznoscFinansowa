@@ -94,6 +94,7 @@ public class ParserCSV {
         }
     }
         
+       //podziel według miesiąca i roku 
        public Map<String, List<AmountHistory>> splitByDate(List<AmountHistory> list){
            Map<String, List<AmountHistory>> splitByDate=new HashMap<>();           
            for(AmountHistory h: list){
@@ -124,11 +125,13 @@ public class ParserCSV {
                        
                for(AmountHistory a: entry.getValue()){
                    Double amount=a.getAmount().doubleValue();
-                   
+                   //drobny wydatek
                    if(amount>=-10 && amount<0){
                        a.setOperationType(typeDao.getById(1));
-                   } else if(amount<-10){
+                   //wydatek
+                   } else if(amount<-10){    
                        a.setOperationType(typeDao.getById(5));
+                   //przychód jednorazowy    
                    } else if(amount>0){
                        a.setOperationType(typeDao.getById(7));
                    }
@@ -139,10 +142,10 @@ public class ParserCSV {
                        min=a;
                    }
                }
-               
+               //pensja
                if(max.getAmount().doubleValue()>1000){
                    max.setOperationType(typeDao.getById(6));               }
-               
+               //kredyt
                if(min.getAmount().doubleValue()<-200){
                    min.setOperationType(typeDao.getById(2));
                }
