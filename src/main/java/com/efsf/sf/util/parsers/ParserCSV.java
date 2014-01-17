@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+//zaraz kurwa nei wytrzymie!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
 public class ParserCSV {
 
