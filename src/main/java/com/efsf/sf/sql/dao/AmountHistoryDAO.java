@@ -28,7 +28,7 @@ public class AmountHistoryDAO implements Serializable {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
-            Query query = session.createQuery("FROM amountHistory where HashCode= :md5 and client= :client");
+            Query query = session.createQuery("FROM AmountHistory where HashCode= :md5 and client= :client");
             query.setParameter("md5", md5);
             query.setParameter("client", client.getIdClient());
 
