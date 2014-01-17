@@ -76,8 +76,11 @@ public class ParserCSV {
                         + nextLine[tab[0][5]] + nextLine[tab[0][6]]));
 
                 amhist.setClient(client);
-                list.add(amhist);
-                amDAO.checkMD5(amhist.getHashCode(), client.getIdClient());
+                if(!amDAO.checkMD5(amhist.getHashCode(), client.getIdClient())){
+                    list.add(amhist);
+                }
+                
+                
 
                     //amDAO.save(amhist);
             }
