@@ -1,6 +1,7 @@
 package com.efsf.sf.util.parsers;
 
 import au.com.bytecode.opencsv.CSVReader;
+import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
@@ -38,7 +39,7 @@ public class ParserCSV {
       int i = 0;
         List<AmountHistory> list=new ArrayList<>();
         AmountHistory amhist = null;
-        //AmountHistoryDAO amDAO = new AmountHistoryDAO();
+        AmountHistoryDAO amDAO = new AmountHistoryDAO();
         GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
         try {
             
@@ -78,6 +79,7 @@ public class ParserCSV {
                     
                     amhist.setClient(client);
                     list.add(amhist);
+                    amDAO.checkMD5(amhist.getHashCode(), client);
                     
                     //amDAO.save(amhist);
             
