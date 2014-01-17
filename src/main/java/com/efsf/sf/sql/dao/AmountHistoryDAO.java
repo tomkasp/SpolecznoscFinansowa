@@ -33,9 +33,8 @@ public class AmountHistoryDAO implements Serializable {
             query.setParameter("client", client);
 
             List lista = query.list();
-            System.out.println();
             if (lista.isEmpty()) {
-                System.out.println("lista jest pusta!");
+                return false;
             }
 
             session.getTransaction().commit();
