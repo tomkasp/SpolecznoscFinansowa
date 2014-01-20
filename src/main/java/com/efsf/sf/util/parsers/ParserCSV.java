@@ -11,20 +11,31 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
 public class ParserCSV {
 
+    public static final List<String> DICTIONARY_PATTERNS = Arrays.asList( 
+        "(mcdonalds|zabka)" , //Drobne wydatki
+        "(kredyt|spłata|splata|rata|odsetki)", //Spłata kredytu mieszkaniowego   
+        "(czynsz|najmu|najem)", // Mieszkanie    
+        "(abonament|oplata|opłata|energ,czesn)", // Opłaty stałe
+        "(rossman|tesco|real|carrefour,doładowani,doladowani,zasileni, orlen, paliw)", //Wydatki niezbędne
+        "(umow|wynagrodzeni|zleceni|prac)", //Przychód stały
+        "(spadek|zaliczka|haracz)" //Przychód jednorazowy
+    );
+    
     private final int[][] tab = {
         {1, 10, 11, 12, 5, 4, 3}//wbk-> data, KwotaWN, kwotaMA,saldo,konto,opis,tytul
     //nie uzywane
@@ -34,6 +45,7 @@ public class ParserCSV {
 //        ParserCSV pko = new ParserCSV();
 //        //pko.run(stream);
 //    }
+    
     public void run(InputStream stream, Client client) throws ParseException {
         int i = 0;
         List<AmountHistory> list = new ArrayList<>();
@@ -52,9 +64,8 @@ public class ParserCSV {
                 amhist = new AmountHistory();
 
                 String data = nextLine[tab[0][0]];
-                DateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
 
-                    //System.out.println(reader.readNext().length);
+                //System.out.println(reader.readNext().length);
                 if (!nextLine[tab[0][1]].equals("") && nextLine[tab[0][2]].equals("")) {
                     amhist.setAmount(new BigDecimal("-" + nextLine[tab[0][1]].replace(",", ".")));
                 }
@@ -63,8 +74,7 @@ public class ParserCSV {
                 }
 
                 //System.out.println(nextLine[tab[0][0]] + " | " + nextLine[tab[0][1]] + " | " + nextLine[tab[0][2]] + " | " + nextLine[tab[0][3]] + " | " + nextLine[tab[0][4]]);
-                amhist.setOperationDate(formatter.parse(data));
-
+                amhist.setOperationDate(new SimpleDateFormat("dd-MM-yyyy").parse(data));
                 amhist.setAfterOperation(new BigDecimal(nextLine[tab[0][3]].replace(",", ".")));
                 amhist.setAccountNumber(nextLine[tab[0][4]]);
                 amhist.setReceiver(nextLine[tab[0][5]]);
@@ -85,7 +95,9 @@ public class ParserCSV {
                     //amDAO.save(amhist);
             }
 
-            list = autoAnalise(list);
+            list=autoAnalise(list);
+            
+            list=analizeWithDictionary(list);
 
             for (AmountHistory a : list) {
                 genDao.save(a);
@@ -113,6 +125,41 @@ public class ParserCSV {
            
            return splitByDate;
       } 
+
+ 
+      public List<AmountHistory> analizeWithDictionary(List<AmountHistory> list) 
+      { 
+           GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
+
+           int counter = 1;  
+           
+           for (String pattern : DICTIONARY_PATTERNS)
+           {
+                Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+                for(AmountHistory ah : list)
+                {
+                    if(p.matcher(ah.getTitle()+ah.getReceiver()).find())
+                    {
+                          ah.setOperationType(typeDao.getById(counter));
+                    }
+                }
+                counter++;
+           }
+           
+           // FIX FOR SOME NON NEGATIVE VALUES
+           for (AmountHistory ah : list)
+           {
+               if (ah.getAmount().compareTo(BigDecimal.ZERO) > 0 && ah.getOperationType() != null && (ah.getOperationType().getIdOperationType() != 6 && ah.getOperationType().getIdOperationType() != 7 ))
+               {
+                   ah.setOperationType(typeDao.getById(7));
+               }
+           }
+           
+           return list;         
+      }
+      
+    
+      
 
  
        public List<AmountHistory> autoAnalise(List<AmountHistory> list){
@@ -155,5 +202,7 @@ public class ParserCSV {
            }
            return result;
        }
+       
+
        
 }
