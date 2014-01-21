@@ -82,9 +82,9 @@ public class BikMB implements Serializable {
             }
 
             if (account.getAmountWithInterestExpense1().equals("") || amount == 0) {
-                messages.add("Znaleziono rachunki dla których nie jest zdefiniowana kwota kredytu. Takie wpisy utrudniają weryfikacje raportu i tym samym ograniczają zdolnośc kredytową. ");
+                messages.add("Rachunek kredytowy o tytule '"+account.getTransactionType()+"' otworzony w banku '"+account.getBank()+"' nie posiada zdefiniowanej kwoty kredytu. Takie wpisy utrudniają weryfikację raportu i tym samym ograniczają zdolnośc kredytową. ");
             } else if (amount > 0 && amount < 100) {
-                messages.add("Znaleziono rachunki kredytowe o bardzo małych kwotach (mniejszych niż 100 zł). Istnieje duże prawdopodobieństwo że dane te są błędne.");
+                messages.add("Rachunek kredytowy o tytule '"+account.getTransactionType()+"' otworzony w banku '"+account.getBank()+"' posiada bardzo małą kwotę (mniejszych niż 100 zł). Istnieje duże prawdopodobieństwo że dane te są błędne.");
             }
         }
     }
