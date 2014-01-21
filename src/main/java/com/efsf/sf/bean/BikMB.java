@@ -67,7 +67,7 @@ public class BikMB implements Serializable {
     
     public String viewAccountHistory(){
         GenericDao<BikAccountHistory> dao=new GenericDao(BikAccountHistory.class);
-        setHistoria(dao.getWhere("id_rachunek", String.valueOf(getSelectedAccount().getIdAccount())));
+        setHistoria(dao.getWhere("id_account", String.valueOf(getSelectedAccount().getIdAccount())));
         
         return "/common/bikHistoryView?faces-redirect=true";
     }
