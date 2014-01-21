@@ -1,8 +1,12 @@
 package com.efsf.sf.bean.client;
 
 import com.efsf.sf.bean.LoginMB;
+import com.efsf.sf.sql.dao.AmountHistoryDAO;
+import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.entity.AmountHistory;
+import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.OperationType;
 import com.efsf.sf.util.parsers.ParserCSV;
 import java.io.IOException;
@@ -30,7 +34,15 @@ public class CsvMB implements Serializable {
     private List<AmountHistory> history;
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
+    
+    private Integer clientCaseId; 
+    
+    private Client client; 
     private List<OperationType> operationTypes;
+    
+    
+    
+    ParserCSV csv = new ParserCSV();
     
     private int month = new LocalDate().getMonthOfYear();
     
@@ -41,29 +53,71 @@ public class CsvMB implements Serializable {
         if (csvFile != null) {
             FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            ParserCSV csv = new ParserCSV();
-            
-            csv.run(csvFile.getInputstream(), loginMB.getClient());
-            
+
+            csv.run(csvFile.getInputstream(), client);       
             init();
         }
     }
 
-    @PostConstruct
     public void init() {
-        history = dao.getWhere("fkClient", loginMB.getClient().getIdClient());
+        AmountHistoryDAO amDao = new AmountHistoryDAO();
+        history = amDao.getWithMonthAndYear(month, year, client);
         GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
-        operationTypes=typeDao.getAllInOrder("operationDate", "asc");
+        operationTypes=typeDao.getAll();
     }
     
+    public boolean ifHistoryAdded()
+    {
+        List<AmountHistory> list = dao.getWhere("fkClient", client);
+        if (list == null || list.isEmpty())
+            return false;
+        else
+            return true;
+    }
+    
+    public void loadData() throws IOException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isValidationFailed())
+        {
+            ClientCaseDAO cdao = new ClientCaseDAO();   
+            if (loginMB.getClient() == null)
+            {          
+                     
+                ClientCase clientCase =  cdao.getClientCaseWithClientDetails(clientCaseId);
+                client = clientCase.getClient();
+                if (!cdao.checkConsultantAccess(clientCaseId, loginMB.getConsultant().getIdConsultant())) 
+                {
+                       facesContext.getExternalContext().redirect("./../error.xhtml");
+                }
+            }
+            else
+            {
+                client = loginMB.getClient();
+            }
+            if (ifHistoryAdded())
+            {
+                init();
+            }
+        }
+        
+    }
     public void save(){
         System.out.println("Tak :D");
         for(AmountHistory h: history)
         dao.update(h);
         
         FacesMessage msg = new FacesMessage("Sukces!", "Dane zostały zaktualizowane.");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
+    
+    public String showClientQualityOfLife()
+    {
+        return csv.calculateClientQualityOfLife(client);
+    }
+    
+    public String showClientCreditChance()
+    {
+        return csv.calculateClientCreditChance(client);
     }
 
     public List<AmountHistory> getHistory() {
@@ -120,5 +174,21 @@ public class CsvMB implements Serializable {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Integer getClientCaseId() {
+        return clientCaseId;
+    }
+
+    public void setClientCaseId(Integer clientCaseId) {
+        this.clientCaseId = clientCaseId;
     }
 }

@@ -740,6 +740,24 @@ p:column {
     font-size: 20px;
 }
 
+.centeredLabelBlack{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 250px;
+    float:left; 
+    clear:left;
+}
+
+.centeredLabelRed{
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 350px;
+    float:right; 
+    clear:right;
+}
+
+
 .search{
     position: absolute;
     top: 165px;
