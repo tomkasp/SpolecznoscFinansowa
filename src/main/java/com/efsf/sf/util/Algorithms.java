@@ -1,17 +1,21 @@
 package com.efsf.sf.util;
 
+import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.Address;
+import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
 import com.efsf.sf.sql.entity.RequiredDocuments;
+import com.efsf.sf.util.parsers.ParserCSV;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -27,7 +31,7 @@ public class Algorithms
         
         int difficulty = 1;
         
-        // BIK is really usful in getting credits 
+        // BIK is really useful in getting credits 
         if (requiredDocuments == null ||  requiredDocuments.getBik() == null  )
         {
             difficulty++;
@@ -77,8 +81,66 @@ public class Algorithms
         {
             difficulty++;
         }
+        
+        difficulty += calculateDifficultyFromBankAccountAnalysis(client);
       
-        return difficulty;
+        return difficulty/2;
+    }
+    
+    
+    public static double calculateDifficultyFromBankAccountAnalysis(Client client)
+    {
+         int difficulty = 0;
+         AmountHistoryDAO dao = new AmountHistoryDAO();
+         ParserCSV parser = new ParserCSV();
+         
+         List<AmountHistory> list = dao.getWhere("fkClient", client);
+         if (list == null || list.isEmpty())
+         {
+             difficulty += 10;
+         }
+         else
+         {
+             String creditChance = parser.calculateClientCreditChance(client);
+             
+             switch (creditChance)
+             {
+                 case ("Bardzo małe"): 
+                     difficulty += 4;
+                     break;
+                 case ("Małe"):
+                     difficulty += 3;
+                     break;
+                 case ("Średnie"):
+                     difficulty += 2; 
+                     break;
+                 case ("Duże"):
+                     difficulty += 0;
+                     break;
+             }
+             
+             String qualityOfLife = parser.calculateClientQualityOfLife(client);
+             
+             switch (qualityOfLife)
+             {
+                 case ("Niski"): 
+                     difficulty += 3;
+                     break;
+                 case ("Średni"):
+                     difficulty += 2;
+                     break;
+                 case ("Wysoki"):
+                     difficulty += 1; 
+                 case ("Bardzo wysoki"):
+                     difficulty += 0;
+             }
+         }
+         return difficulty;
+    }
+    
+    public static int calculateDifficultyFromBIKAnalysis()
+    {
+        return 0;
     }
     
     public static double calculateClientIncome(Client client)

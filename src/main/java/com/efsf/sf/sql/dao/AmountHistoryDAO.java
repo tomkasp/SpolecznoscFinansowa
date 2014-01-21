@@ -2,6 +2,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,7 +18,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
 
-public class AmountHistoryDAO implements Serializable {
+public class AmountHistoryDAO extends GenericDao<AmountHistory> implements Serializable {
+
+    public AmountHistoryDAO() {
+        super(AmountHistory.class);
+    }
 
     public void save(AmountHistory amhist) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();

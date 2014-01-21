@@ -204,6 +204,10 @@ public class ParserCSV {
            return result;
        }
        
+       
+       //VALUES RETURNED BY THIS METHODS ARE DIRECTLY CONNECTED TO ALGORITHMS IN ULTIL/ALGORITHMS.java 
+       //CHANGING THEM WILL DIRECTLY AFFECT THE RESULT OF ALGORITHMS 
+       
        public String calculateClientQualityOfLife(Client client)
        {
            AmountHistoryDAO ah = new AmountHistoryDAO();
