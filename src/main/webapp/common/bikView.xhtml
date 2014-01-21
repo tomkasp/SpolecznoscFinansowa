@@ -79,6 +79,7 @@
 
                         </p:dataTable>
                         <p:commandButton disabled="#{bikMB.selectedAccount==null}" styleClass="topMenuButton greyButton wideButton" value="Zobacz historię" action="#{bikMB.viewAccountHistory()}"/>
+                        <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Analizuj poprawność" action="#{bikMB.showBikMessages()}" update=":bikMessages"/>
                     </h:form>
                 </div>
                 
@@ -109,6 +110,12 @@
                     </h:form>
                 </div> 
 
+                <h:form id="bikMessages">
+                <ui:repeat value="#{bikMB.messages}" var="msg">
+                    <div class="isa_warning"><h:outputText value="#{msg}" escape="false"/></div>
+                </ui:repeat>
+                </h:form>    
+                
             </ui:define>           
         </ui:composition>
 
