@@ -338,6 +338,12 @@ public class CaseViewMB implements Serializable{
         return dao.isNotRated(getSelectedClientCase().getIdClientCase());
     }
     
+    public String toAccountAnalysis()
+    {
+        return "/common/bankAccountAnalysis.xhtml?faces-redirect=true&clientCaseId=" + clientCaseId;
+    }
+    
+    
     public String toRateCase()
     {
         clientCaseMB.setCurrentlyRatedCase(selectedClientCase);

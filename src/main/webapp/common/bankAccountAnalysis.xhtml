@@ -1,0 +1,134 @@
+<ui:composition template="/templates/mainTemplate.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title"> Klient - Analiza wyciągów bankowych </ui:define> 
+    <ui:define name="content">
+        
+        <f:metadata>         
+            <f:viewParam name="clientCaseId" value="#{csvMB.clientCaseId}" />
+        </f:metadata>
+        <f:event  type="preRenderView" listener="#{csvMB.loadData()}" />
+        <h3> Analiza wyciągów bankowych </h3> 
+        
+        <h:form id="form1">
+               <p:messages showDetail="true"/>   
+        </h:form>     
+
+        <h:panelGroup rendered="#{loginMB.type == settings.clientActive}" >
+        
+        <h4> Załaduj nowy plik .csv:  </h4>
+
+        <h:form  enctype="multipart/form-data">
+  
+
+            <p:fileUpload style="width: 250px; float: left"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
+
+            </p:fileUpload>
+
+            <p:selectOneMenu style="margin: 5px 0px 0px 20px; float: left; width: 200px;" value="#{csvMB.selectedBank}"  >              
+                <f:selectItem itemLabel="PKO Bank Polski" itemValue="1" />  
+                <f:selectItem itemLabel="BZ WBK" itemValue="2" />  
+            </p:selectOneMenu>
+
+
+            <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatL" style="margin: 5px 20px 20px 20px;"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
+
+        </h:form>    
+        
+        </h:panelGroup>
+
+        <div style="clear: both;" >
+            <h4> Wyciąg: </h4>
+        </div>
+        
+        
+        <div style="min-height: 50px; margin-top: 50px">
+            <h:form>
+                
+         <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 50px;" value="#{csvMB.month}"  >              
+            <f:selectItem itemLabel="1" itemValue="1"  />  
+            <f:selectItem itemLabel="2" itemValue="2" />
+            <f:selectItem itemLabel="3"  itemValue="3" />
+            <f:selectItem itemLabel="4" itemValue="4" />
+            <f:selectItem itemLabel="5" itemValue="5" />  
+            <f:selectItem itemLabel="6" itemValue="6" />
+            <f:selectItem itemLabel="7" itemValue="7" />
+            <f:selectItem itemLabel="8" itemValue="8" />
+            <f:selectItem itemLabel="9" itemValue="9" />  
+            <f:selectItem itemLabel="10" itemValue="10" />
+            <f:selectItem itemLabel="11" itemValue="11" />
+            <f:selectItem itemLabel="12" itemValue="12" />
+            <p:ajax update="@form" listener="#{csvMB.init()}" />  
+         </p:selectOneMenu>
+        
+         <p:selectOneMenu style="margin: 5px 0px 10px 20px; float: left; width: 80px;" value="#{csvMB.year}"  >              
+            <f:selectItem itemLabel="2012" itemValue="2012" />  
+            <f:selectItem itemLabel="2013" itemValue="2013" />
+            <f:selectItem itemLabel="2014" itemValue="2014" />
+            <p:ajax update="@form" listener="#{csvMB.init()}" />  
+         </p:selectOneMenu>
+
+         <p:dataTable id="csvTable" style="clear:both" value="#{csvMB.history}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" emptyMessage="Brak rekordów z tego miesiąca. Wgraj plik z wyciągiem konta." selectionMode="single" 
+                              editable="true" editMode="cell">
+
+                    <p:column headerText="Nr.">  
+                        <h:outputText  value="#{rowIndex+1}"/>
+                    </p:column>  
+
+                    <p:column headerText="Data"> 
+                        <h:outputText value="#{row.operationDate}" />
+                    </p:column>                 
+
+                    <p:column headerText="Tytuł">  
+                        <h:outputText  value="#{row.title}"/>
+                    </p:column> 
+                    
+                    <p:column headerText="Nadawca/Odiorca"> 
+                        <h:outputText  value="#{row.receiver}"/>
+                    </p:column>
+
+                    <p:column headerText="Kwota"> 
+                        <h:outputText  value="#{row.amount}"/>
+                    </p:column>
+                    
+
+
+                    <p:column headerText="Saldo po"> 
+                        <h:outputText  value="#{row.afterOperation}"/>        
+                    </p:column> 
+
+                    <p:column headerText="Typ">  
+                                <p:selectOneMenu value="#{row.operationType}" style="width: 200px">  
+                                    <f:selectItems value="#{csvMB.operationTypes}" />
+                                </p:selectOneMenu>  
+                    </p:column>    
+
+                </p:dataTable>
+                <h:commandButton rendered="#{loginMB.type == settings.clientActive}" action="#{csvMB.save()}" class="greenButton wideButton floatR" value="Zapisz"/>
+            </h:form> 
+        </div>
+        
+        <div>
+            
+            <h:panelGroup rendered="#{loginMB.type == settings.clientActive}" > <h4> Twoja aktualna sytuacja: </h4> </h:panelGroup>
+            
+            <h:panelGroup rendered="#{loginMB.type == settings.consultantActive}" > <h4> Aktualna sytuacja klienta: </h4> </h:panelGroup>
+            
+            <h:panelGroup rendered="#{csvMB.ifHistoryAdded()}" >
+                <div><h:outputText class="centeredLabelBlack " value="Standard życia: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientQualityOfLife()}"/></div>
+            
+                <div><h:outputText class="centeredLabelBlack " value="Możliwości kredytowe: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientCreditChance()}" /> </div>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{!csvMB.ifHistoryAdded()}" >
+                       Nie można określić aktualnej sytuacji ponieważ nie dodano żadnych wyciągów bankowych. Dodaj wyciągi.         
+            </h:panelGroup>    
+            <div style="clear:both" /> 
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

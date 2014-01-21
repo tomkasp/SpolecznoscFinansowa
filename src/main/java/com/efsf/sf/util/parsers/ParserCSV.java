@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -202,6 +203,49 @@ public class ParserCSV {
            }
            return result;
        }
+       
+       public String calculateClientQualityOfLife(Client client)
+       {
+           AmountHistoryDAO ah = new AmountHistoryDAO();
+           
+           BigDecimal amount = ah.getClientsSumOfContinousIncome(client);
+           int months = ah.getClientCountForDifferentMonthHistories(client);
+           
+           Double avarage = amount.divide(new BigDecimal(months),  2, RoundingMode.HALF_UP).doubleValue();
+           
+           if (avarage < 1700)
+               return "Niski";
+           else if (avarage >= 1700 && avarage < 3500)
+               return "Średni"; 
+           else if (avarage >= 3500 && avarage < 6000 )
+               return "Wysoki";
+           else 
+               return "Bardzo Wysoki";
+       }
+       
+       public String calculateClientCreditChance(Client client)
+       {
+           AmountHistoryDAO ah = new AmountHistoryDAO();
+           
+           BigDecimal amount = ah.getClientsSumOfContinousIncome(client);
+           BigDecimal expanses = ah.getClientsSumOfExpenses(client);
+           int months = ah.getClientCountForDifferentMonthHistories(client);
+           
+           Double avarageIncome = amount.divide(new BigDecimal(months),  2, RoundingMode.HALF_UP).doubleValue();
+           Double avarageExpanses = expanses.divide(new BigDecimal(months),  2, RoundingMode.HALF_UP).doubleValue();
+           
+           Double avarage = avarageIncome - avarageExpanses;
+           
+           if (avarage < 500)
+               return "Bardzo małe";
+           else if (avarage >= 500 && avarage < 1000)
+               return "Małe"; 
+           else if (avarage >= 1000 && avarage < 2000 )
+               return "Średnie";
+           else 
+               return "Duże";
+       }
+
        
 
        
