@@ -24,17 +24,17 @@ public class AmountHistoryDAO implements Serializable {
 
     }
 
-    public boolean checkMD5(String md5, Client client) {
+    public boolean checkMD5(String md5, int client) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
         try {
             session.beginTransaction();
-            Query query = session.createQuery("FROM AmountHistory where HashCode= :md5 and client= :client");
+            Query query = session.createQuery("FROM AmountHistory as ah, Client as cl left join fetch ah.client where cl.idClient=:client AND ah.hashCode=:md5");
             query.setParameter("md5", md5);
-            query.setParameter("client", client.getIdClient());
+            query.setParameter("client", client);
 
             List lista = query.list();
             if (lista.isEmpty()) {
-                System.out.println("lista jest pusta!");
+                return false;
             }
 
             session.getTransaction().commit();

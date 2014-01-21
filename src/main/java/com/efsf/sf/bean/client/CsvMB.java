@@ -16,19 +16,26 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import org.joda.time.LocalDate;
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean
 @ViewScoped
 public class CsvMB implements Serializable {
 
+    
     private UploadedFile csvFile;
-    private Integer selectedBank = -1;
+    private Integer selectedBank = 1;
     GenericDao<AmountHistory> dao = new GenericDao(AmountHistory.class);
     private List<AmountHistory> history;
     @ManagedProperty(value = "#{loginMB}")
     private LoginMB loginMB;
     private List<OperationType> operationTypes;
+    
+    private int month = new LocalDate().getMonthOfYear();
+    
+    private int year = new LocalDate().getYear();
+  
 
     public void upload() throws ParseException, IOException {
         if (csvFile != null) {
@@ -46,7 +53,7 @@ public class CsvMB implements Serializable {
     public void init() {
         history = dao.getWhere("fkClient", loginMB.getClient().getIdClient());
         GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
-        operationTypes=typeDao.getAll();
+        operationTypes=typeDao.getAllInOrder("operationDate", "asc");
     }
     
     public void save(){
@@ -97,5 +104,21 @@ public class CsvMB implements Serializable {
 
     public void setOperationTypes(List<OperationType> operationTypes) {
         this.operationTypes = operationTypes;
+    }
+    
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }
