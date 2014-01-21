@@ -213,6 +213,11 @@
                                        </h:panelGrid> 
                                    </div>
                                    
+                                   <div>
+                                       <h4> ANALIZA WYCIĄGÓW BANKOWYCH </h4>
+                                         <h:commandButton class="floatR wideButton" value="Analiza" action="#{caseViewMB.toAccountAnalysis()}" />
+                                   </div>
+                                   
                                   <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
                                        <h4> Analiza raportu BIK </h4>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
