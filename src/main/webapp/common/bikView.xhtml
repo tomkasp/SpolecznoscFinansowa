@@ -15,35 +15,35 @@
 
                 <h3>Odczytany BIK</h3>
                 <div style="display: flex;">
-                  <h:form>  
-                    <div class="leftInlineBox">  
+                    <h:form>  
+                        <div class="leftInlineBox">  
 
-                        <h4>Dane podstawowe</h4>
+                            <h4>Dane podstawowe</h4>
 
-                        <div class="field"> <h:outputText class="label" value="PESEL"/><p:inputText value="#{bikMB.bik.pesel}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Ocena punktowa"/><p:inputText value="#{bikMB.bik.bikRank}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Klasa"/><p:inputText value="#{bikMB.bik.bikClass}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Rachunki kwestionowane"/><p:inputText value="#{bikMB.bik.impeachedAccounts}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zablokowane rekordy BIORK"/><p:inputText value="#{bikMB.bik.blockedBiorkRecords}"/></div>
+                            <div class="field"> <h:outputText class="label" value="PESEL"/><p:inputText value="#{bikMB.bik.pesel}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Ocena punktowa"/><p:inputText value="#{bikMB.bik.bikRank}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Klasa"/><p:inputText value="#{bikMB.bik.bikClass}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Rachunki kwestionowane"/><p:inputText value="#{bikMB.bik.impeachedAccounts}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Zablokowane rekordy BIORK"/><p:inputText value="#{bikMB.bik.blockedBiorkRecords}"/></div>
 
-                        <h4>Rachunki zamknięte</h4>
+                            <h4>Rachunki zamknięte</h4>
 
-                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.closedAccountsArrear030days}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Umorzone"/><p:inputText value="#{bikMB.bik.closedAccountsExtinguished}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Odzyskane"/><p:inputText value="#{bikMB.bik.closedAccountsRegained}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.closedAccountsArrear030days}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Umorzone"/><p:inputText value="#{bikMB.bik.closedAccountsExtinguished}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Odzyskane"/><p:inputText value="#{bikMB.bik.closedAccountsRegained}"/></div>
 
-                    </div>
-                    <div class="rightInlineBox">  
-                        <h4>Rachunki otwarte</h4>
+                        </div>
+                        <div class="rightInlineBox">  
+                            <h4>Rachunki otwarte</h4>
 
-                        <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear030days}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość 31-90 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear3190days}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość 91-180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear91180days}"/></div>
-                        <div class="field"> <h:outputText class="label" value="Zaległość powyżej 180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear180days}"/></div>   
-                        <div class="field"> <h:outputText class="label" value="Windykacja"/><p:inputText value="#{bikMB.bik.openAccountsCollection}"/></div>   
-                        <div class="field"> <h:outputText class="label" value="Egzekucja"/><p:inputText value="#{bikMB.bik.openAccountsExecution}"/></div>   
-                    </div>
-                  </h:form>   
+                            <div class="field"> <h:outputText class="label" value="Zaległość 0-30 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear030days}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Zaległość 31-90 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear3190days}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Zaległość 91-180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear91180days}"/></div>
+                            <div class="field"> <h:outputText class="label" value="Zaległość powyżej 180 dni"/><p:inputText value="#{bikMB.bik.openAccountsArrear180days}"/></div>   
+                            <div class="field"> <h:outputText class="label" value="Windykacja"/><p:inputText value="#{bikMB.bik.openAccountsCollection}"/></div>   
+                            <div class="field"> <h:outputText class="label" value="Egzekucja"/><p:inputText value="#{bikMB.bik.openAccountsExecution}"/></div>   
+                        </div>
+                    </h:form>   
                 </div>
 
                 <div>
@@ -56,7 +56,7 @@
                             <p:column headerText="Bank"> 
                                 <h:outputText value="#{row.bank}" />  
                             </p:column>                            
-                            
+
                             <p:column headerText="Relacja z klientem"> 
                                 <h:outputText value="#{row.clientRelation}" />  
                             </p:column>
@@ -64,11 +64,11 @@
                             <p:column headerText="Data pows. relacji">
                                 <h:outputText value="#{row.createRelationDate}" />  
                             </p:column>
-                               
+
                             <p:column headerText="Typ Transakcji">
                                 <h:outputText value="#{row.transactionType}" />  
                             </p:column>
-                            
+
                             <p:column headerText="Kwota z odsetkami">
                                 <h:outputText value="#{row.amountWithInterestExpense1}" />  
                             </p:column>
@@ -82,8 +82,14 @@
                         <p:commandButton styleClass="topMenuButton greyButton wideButton" value="Analizuj poprawność" action="#{bikMB.showBikMessages()}" update=":bikMessages"/>
                     </h:form>
                 </div>
-                
-               <div>
+                <h:form id="bikMessages" style="clear: both; padding-top: 20px; padding-bottom: 20px;">
+                    <ui:repeat value="#{bikMB.messages}" var="item">
+                        <div class="isa_warning"><h:outputText value="#{item}" escape="false"/></div>
+                    </ui:repeat>
+                </h:form>    
+
+
+                <div>
                     <h3>Zapytania</h3>    
                     <h:form id="zapytania"> 
                         <p:dataTable value="#{bikMB.zapytania}" rowKey="#{row.id}" var="row" emptyMessage="Brak zapytań" selectionMode="single" paginator="true" rows="10">
@@ -95,27 +101,20 @@
                             <p:column headerText="Data">
                                 <h:outputText value="#{row.questionDate}" />  
                             </p:column>
-                            
+
                             <p:column headerText="Typ">
                                 <h:outputText value="#{row.type}" />  
                             </p:column>
-                            
+
                             <p:column headerText="Kwota">
                                 <h:outputText value="#{row.amount}" />  
                             </p:column>
-                          
+
 
                         </p:dataTable>
 
                     </h:form>
-                </div> 
-
-                <h:form id="bikMessages">
-                <ui:repeat value="#{bikMB.messages}" var="msg">
-                    <div class="isa_warning"><h:outputText value="#{msg}" escape="false"/></div>
-                </ui:repeat>
-                </h:form>    
-                
+                </div>                 
             </ui:define>           
         </ui:composition>
 

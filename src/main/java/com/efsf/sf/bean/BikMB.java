@@ -25,7 +25,7 @@ public class BikMB implements Serializable {
     private List<BikAccount> rachunki;
     private List<BikQuestion> zapytania;
     private List<BikAccountHistory> historia;
-    private List<String> messages = new ArrayList<>();
+    private List<String> messages;
 
     public void parseBik(Integer clientId) throws Exception {
 
@@ -74,17 +74,18 @@ public class BikMB implements Serializable {
     }
 
     public void showBikMessages() {
+        messages = new ArrayList<>();
         for (BikAccount account : rachunki) {
             Integer amount = 0;
             try {
-                amount = Integer.valueOf(account.getAmountWithInterestExpense1().replaceAll(".", ""));
+                amount = Integer.valueOf(account.getAmountWithInterestExpense1().replace(".", ""));
             } catch (Exception e) {
             }
 
             if (account.getAmountWithInterestExpense1().equals("") || amount == 0) {
-                messages.add("Znaleziono rachunki dla których nie jest zdefiniowana kwota kredytu. Takie wpisy utrudniają weryfikacje raportu i tym samym ograniczają zdolnośc kredytową. ");
+                messages.add("Rachunek kredytowy o tytule '"+account.getTransactionType()+"' otworzony w banku '"+account.getBank()+"' nie posiada zdefiniowanej kwoty kredytu. Takie wpisy utrudniają weryfikację raportu i tym samym ograniczają zdolnośc kredytową. ");
             } else if (amount > 0 && amount < 100) {
-                messages.add("Znaleziono rachunki kredytowe o bardzo małych kwotach (mniejszych niż 100 zł). Istnieje duże prawdopodobieństwo że dane te są błędne.");
+                messages.add("Rachunek kredytowy o tytule '"+account.getTransactionType()+"' otworzony w banku '"+account.getBank()+"' posiada bardzo małą kwotę (mniejszych niż 100 zł). Istnieje duże prawdopodobieństwo że dane te są błędne.");
             }
         }
     }
