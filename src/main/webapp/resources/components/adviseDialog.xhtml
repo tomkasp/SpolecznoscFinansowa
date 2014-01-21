@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:composite="http://java.sun.com/jsf/composite" >
+    
+    <composite:interface> 
+        <composite:attribute name="difficulty" type="java.lang.Integer" required="true" />
+        <composite:attribute name="widgetName" type="java.lang.String" required="true" />
+    </composite:interface>
+    
+    <composite:implementation> 
+        <h:form>
+            <p:dialog id="adviseDialog" modal="true" visible="true"  header="Pomocny dialog" width="430px" widgetVar="#{cc.attrs.widgetName}" closable="true" >
+                <h:panelGroup rendered="#{cc.attrs.difficulty} <= 3" >
+                 
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{cc.attrs.difficulty} <= 6" >
+                 
+                </h:panelGroup>
+                                
+                <h:panelGroup rendered="#{cc.attrs.difficulty} <= 10" >
+                 
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+    </composite:implementation>
+</ui:composition>
+
