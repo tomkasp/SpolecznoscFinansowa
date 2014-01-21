@@ -25,7 +25,7 @@ public class BikMB implements Serializable {
     private List<BikAccount> rachunki;
     private List<BikQuestion> zapytania;
     private List<BikAccountHistory> historia;
-    private List<String> messages = new ArrayList<>();
+    private List<String> messages;
 
     public void parseBik(Integer clientId) throws Exception {
 
@@ -74,10 +74,11 @@ public class BikMB implements Serializable {
     }
 
     public void showBikMessages() {
+        messages = new ArrayList<>();
         for (BikAccount account : rachunki) {
             Integer amount = 0;
             try {
-                amount = Integer.valueOf(account.getAmountWithInterestExpense1().replaceAll(".", ""));
+                amount = Integer.valueOf(account.getAmountWithInterestExpense1().replace(".", ""));
             } catch (Exception e) {
             }
 
