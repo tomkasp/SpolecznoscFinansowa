@@ -52,7 +52,7 @@
                         <div class="field"> <h:outputText class="label" value="Rekomendacja"/><p:selectBooleanButton value="#{productsMB.selectedProductDetails.recomendation}" onLabel="Tak" offLabel="Nie" />  </div>
                         <div class="field"> <h:outputText class="label" value="Szczegóły rekomendacji"/><p:inputTextarea value="#{productsMB.selectedProductDetails.recomendationDetails}"/></div>
                         <div class="field"> <h:outputText class="label" value="Wymagane dokumenty"/><p:inputTextarea value="#{productsMB.selectedProductDetails.requiredDocuments}"/></div>
-                        <div class="przyciskiDol marginT10">     
+                        <div class="przyciskiDol marginT10" style="clear: both;">     
                             <p:commandLink styleClass="wideButton greyButton floatR" style="color: black;" value="Anuluj" action="#{productsMB.showDetails()}" type="submit"/>
                             <p:commandLink styleClass="wideButton greenButton floatR" style="color: black;" value="Zatwierdź" action="#{productsMB.saveDetails()}" type="submit"/>
                         </div>
