@@ -1,5 +1,6 @@
 package com.efsf.sf.collection;
 
+
 import com.efsf.sf.sql.entity.Installment;
 import java.io.Serializable;
 import java.util.Date;
@@ -80,7 +81,6 @@ public class ScheduleItem implements Serializable{
      */
     public Installment getInstallment() {
         return installment;
-    }
-    
+    } 
     
 }

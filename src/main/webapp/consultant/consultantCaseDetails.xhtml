@@ -215,11 +215,11 @@
                                    
                                    <div>
                                        <h4> ANALIZA WYCIĄGÓW BANKOWYCH </h4>
-                                         <h:commandButton class="floatR wideButton" value="Analiza" action="#{caseViewMB.toAccountAnalysis()}" />
+                                       <p:commandButton styleClass="floatR greyButton" value="Analiza" action="#{caseViewMB.toAccountAnalysis()}" />
                                    </div>
                                    
                                   <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
-                                       <h4> Analiza raportu BIK </h4>
+                                       <h4 style="clear: both"> Analiza raportu BIK </h4>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
                                            <h:outputText value="Bik nie był jeszcze analizowany."/>
                                            <p:commandButton styleClass="floatR greyButton" value="Analizuj BIK" ajax="true" update=":rightColumn" action="#{fileDownloadMB.parseBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandButton>    

@@ -256,7 +256,6 @@ public class ClientCaseMB implements Serializable {
             Address address=addressDao.getWhere("fk_client", cs.getClient().getIdClient().toString()).get(0);
             if(address!=null && address.getPhone()!=null && address.getPhone().length()>8){
                 SMSApi.sendSms(address.getPhone(), "Do obsługi Twojej sprawy na portalu SpolecznoscFinansowa.pl zgłosił się nowy doradca.");
-                System.out.println("Telefon ================================="+address.getPhone());
             }
             
             messagesMB.generateSystemMessage(bundle.getString("CONSULTANT_APPLIED"), cs.getClient().getUser().getIdUser(), new Object[]{login.getConsultant().getIdConsultant(), cs.getIdClientCase()});

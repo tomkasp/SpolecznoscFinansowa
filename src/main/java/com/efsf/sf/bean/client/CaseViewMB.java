@@ -44,7 +44,6 @@ import javax.faces.validator.ValidatorException;
 import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.chart.CartesianChartModel;  
-import org.primefaces.model.chart.ChartSeries;  
 import org.primefaces.model.chart.LineChartSeries;  
 
 
@@ -587,7 +586,7 @@ createLinearModel();
     GenericDao<Installment> dao=new GenericDao(Installment.class);
     dao.update(installment);
 }
-     
+
 
     public List<InstitutionDocuments> getDocuments() {
         return documents;

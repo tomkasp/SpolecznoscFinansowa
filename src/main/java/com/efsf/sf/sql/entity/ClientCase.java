@@ -309,7 +309,6 @@ public class ClientCase implements java.io.Serializable {
     public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
     }
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientCase")
     public List<Installment> getInstallments() {
         return installments;

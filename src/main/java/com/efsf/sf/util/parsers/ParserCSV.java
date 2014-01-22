@@ -244,9 +244,5 @@ public class ParserCSV {
                return "Średnie";
            else 
                return "Duże";
-       }
-
-       
-
-       
+       }   
 }
