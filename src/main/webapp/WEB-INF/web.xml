@@ -70,7 +70,11 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
-    
+    <servlet>
+        <servlet-name>Installment Notifier</servlet-name>
+        <servlet-class>com.efsf.sf.bean.InstallmentNotifierMB</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <!--     Auto scan REST service -->
 <!--    <context-param>
         <param-name>resteasy.scan</param-name>
@@ -114,6 +118,8 @@
         <error-code>404</error-code>
         <location>/error.xhtml</location>
     </error-page>
+
+    
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>

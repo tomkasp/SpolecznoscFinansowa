@@ -1,21 +1,24 @@
 package com.efsf.sf.collection;
 
+import com.efsf.sf.sql.entity.Installment;
 import java.io.Serializable;
 import java.util.Date;
 
 public class ScheduleItem implements Serializable{
- 
+    private boolean payed;
     private Date paymentDate;
     private Double amount;
     private Double alreadyPayed;
     private Double toPay;
-
+    private Installment installment;
     
-    public ScheduleItem(Date paymentDate, Double amount, Double alreadyPayed, Double toPay){
-        this.paymentDate=paymentDate;
-        this.amount=amount;
-        this.alreadyPayed=alreadyPayed;
-        this.toPay=toPay;
+    public ScheduleItem(Installment installment){
+        this.payed=installment.isIsRepaided();
+        this.paymentDate=installment.getRepaymentDate();
+        this.amount=installment.getAmountOfInstallment();
+        this.alreadyPayed=installment.getRemainedPayment();
+        this.toPay=installment.getRepaid();
+        this.installment=installment; //wiem ze redundancja nie ma czasu na refactor
     }
 
     public Date getPaymentDate() {
@@ -55,6 +58,28 @@ public class ScheduleItem implements Serializable{
 
     public void setToPay(Double toPay) {
         this.toPay = toPay;
+    }
+
+    /**
+     * @return the payed
+     */
+    public boolean isPayed() {
+        return payed;
+    }
+
+    /**
+     * @param payed the payed to set
+     */
+    public void setPayed(boolean payed) {
+        installment.setIsRepaided(payed);
+        this.payed = payed;
+    }
+
+    /**
+     * @return the installment
+     */
+    public Installment getInstallment() {
+        return installment;
     }
     
     

@@ -2,6 +2,7 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.CaseStatus;
 import com.efsf.sf.sql.entity.ClientCase;
+import com.efsf.sf.sql.entity.Installment;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -549,6 +550,7 @@ public class ClientCaseDAO implements Serializable {
         }
         return cs;
     }
+    
 
     public ClientCase getClientCaseWithClientDetails(int idClientCase) {
         ClientCase cs;
