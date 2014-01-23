@@ -61,6 +61,8 @@ public class CsvMB implements Serializable {
 
     public void init() {
         AmountHistoryDAO amDao = new AmountHistoryDAO();
+        year = amDao.getLastOperationDate(client).getYear();
+        month = amDao.getLastOperationDate(client).getMonth();
         history = amDao.getWithMonthAndYear(month, year, client);
         GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
         operationTypes=typeDao.getAll();
