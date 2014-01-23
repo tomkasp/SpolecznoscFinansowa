@@ -249,6 +249,13 @@
                     <h:panelGroup rendered="#{caseViewMB.selectedClientCase.caseStatus.idCaseStatus == 9}">
 
                         <h4> HARMONOGRAM SPŁAT </h4>
+                        
+                        <div style="margin-bottom: 20px">
+                            <b>Aktualne stopy procentowe (pobrane z NBP)</b><br></br> 
+                            <ui:repeat value="#{loginMB.intrestRates.entrySet().toArray()}" var="item">
+                                <h:outputText styleClass="block" value="#{item.key}: #{item.value}" escape="false"/>
+                            </ui:repeat>
+                        </div>    
 
                         <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak wymaganych danych do wygenerowania harmonogramu!" 
                                      rowKey="#{row.toPay}" paginator="true" rows="15">
@@ -278,9 +285,6 @@
                         </p:dataTable>
 
                         <h:outputLabel rendered="#{caseViewMB.isNotRated()}" ><h4 style="margin-top: 80px;" >Ocena doradcy</h4></h:outputLabel>  
-
-
-
                         <p:commandLink styleClass="wideButton greyButton floatR" value="Oceń doradcę" rendered="#{caseViewMB.isNotRated()}" action="#{caseViewMB.toRateCase()}"> 
 
                         </p:commandLink> 

@@ -23,6 +23,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -41,10 +42,10 @@ public class CurrencyApi {
         return document;
     }
 
-    public static String getXmlContent() {
+    public static String getXmlContent(String url, boolean utf) {
         StringBuilder response = new StringBuilder();
         try {
-            URL address = new URL("http://www.nbp.pl/kursy/xml/LastA.xml");
+            URL address = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) address.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -57,7 +58,7 @@ public class CurrencyApi {
             }
 
             if (is != null) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(is));
+                BufferedReader in = new BufferedReader(utf ? new InputStreamReader(is, "UTF-8") : new InputStreamReader(is));
                 String inputLine;
                 
 
@@ -67,20 +68,20 @@ public class CurrencyApi {
                 in.close();
             }
 
-        
+            System.out.println(response.toString());
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(CurrencyApi.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(CurrencyApi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return response.toString();
+        return response.substring(response.indexOf("<"));
     }
 
     public static List<Map<String, String>> getCurrencies() throws IOException, XPathExpressionException {
         List<Map<String, String>> currencies=new ArrayList<>();
         
-        Document doc = getDocument(getXmlContent());
+        Document doc = getDocument(getXmlContent("http://www.nbp.pl/kursy/xml/LastA.xml", false));
         XPathFactory xFactory = XPathFactory.newInstance();
         XPath xpath = xFactory.newXPath();
 
@@ -103,5 +104,25 @@ public class CurrencyApi {
         
         return currencies;
     }
+    
+    public static Map<String, String> getIntrestRates() throws IOException, XPathExpressionException {
+        Map<String, String> rates=new HashMap<>();
+        
+        Document doc = getDocument(getXmlContent("http://www.nbp.pl/xml/stopy_procentowe.xml", true));
+        XPathFactory xFactory = XPathFactory.newInstance();
+        XPath xpath = xFactory.newXPath();
+
+        // compile the XPath expression
+        XPathExpression expr = xpath.compile("//tabela[@id = 'stoproc']/pozycja");
+        Object result = expr.evaluate(doc, XPathConstants.NODESET);
+        NodeList nodes = (NodeList) result;
+        for (int i = 0; i < nodes.getLength(); i++) {
+            
+            Element e = (Element) nodes.item(i);
+            rates.put(e.getAttribute("nazwa"), e.getAttribute("oprocentowanie"));
+        }
+               
+        return rates;
+    }    
 
 }

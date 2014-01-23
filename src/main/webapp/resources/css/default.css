@@ -3,6 +3,10 @@ body {
 
 }
 
+.block{
+    display: block;
+}
+
 .page {
     background-color: #ffffff;
     font-size: 12px;

@@ -16,7 +16,7 @@ body {
     font-size: 1em;
     line-height: 1.4;
     background: url(../img/bottom_bg.jpg) repeat-x center bottom, url(../img/bg-page.png);
-;
+    ;
 }
 
 ::-moz-selection {
@@ -440,8 +440,6 @@ footer p {
 }
 
 
-
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -451,9 +449,9 @@ footer p {
 }
 
 @media print,
-       (-o-min-device-pixel-ratio: 5/4),
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 120dpi) {
+(-o-min-device-pixel-ratio: 5/4),
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 120dpi) {
 
 }
 
@@ -588,4 +586,6 @@ footer p {
     h3 {
         page-break-after: avoid;
     }
+
+
 }

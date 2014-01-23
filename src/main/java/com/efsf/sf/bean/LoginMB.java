@@ -50,13 +50,22 @@ public class LoginMB implements Serializable {
     @ManagedProperty(value = "#{mailerMB}")
     private MailerMB mailerMB;
     private String currencyString="";
+    
+    private Map<String, String> intrestRates;
 
     public LoginMB() {
         checkCookie();
         downloadCurrencies();
+        try {
+            intrestRates= CurrencyApi.getIntrestRates();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (XPathExpressionException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void downloadCurrencies(){
+    private void downloadCurrencies(){
        currencyString="";
         try {
             List<Map<String, String>> currencies= CurrencyApi.getCurrencies();
@@ -397,12 +406,28 @@ public class LoginMB implements Serializable {
             Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public String getTest() {
-        return "<B>Waluta: </B> Kwota assa";
-    }
     
     public String getCurrencies(){
          return currencyString;
     }
+    
+    public void test(){
+        try {
+            CurrencyApi.getIntrestRates();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (XPathExpressionException ex) {
+            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Map<String, String> getIntrestRates() {
+        return intrestRates;
+    }
+
+    public void setIntrestRates(Map<String, String> intrestRates) {
+        this.intrestRates = intrestRates;
+    }
+    
+    
 }
