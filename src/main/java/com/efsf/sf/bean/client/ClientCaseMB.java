@@ -45,6 +45,7 @@ public class ClientCaseMB implements Serializable {
     private boolean alreadyApplied = false;
     private boolean notEnoughApplications = false;
     private boolean alreadyObserved = false;
+    private int caseDifficulty = -1;
     private int premium = 6;
     // VIEW CASE DETAILS FIELDS     
     private Obligation selectedObligation;
@@ -100,8 +101,14 @@ public class ClientCaseMB implements Serializable {
     public Boolean premiumPointsChecking() {
         return login.getClient().getPoints() < premium;
     }
+    
+    public String showAdvise()
+    {
+       caseDifficulty = -1;
+       return "/client/clientMainPage.xhtml?faces-redirect=true";
+    }
 
-    public String addCase() {
+    public void addCase() {
         if (login.getClient().getPoints() > 0) {
             ClientCaseDAO ccd = new ClientCaseDAO();
 
@@ -138,7 +145,8 @@ public class ClientCaseMB implements Serializable {
             clientCase.setViewCounter(0);
 
             login.getClient().setObligations(new HashSet(obligationList));
-            clientCase.setDifficulty(Algorithms.calculateCaseDifficulty(login.getClient(), clientCase));
+            caseDifficulty = Algorithms.calculateCaseDifficulty(login.getClient(), clientCase);
+            clientCase.setDifficulty(caseDifficulty);
             clientCase.setPhase(Algorithms.calculateProgress(login.getClient().getIdClient()));
             ccd.saveClientCase(clientCase);
             if (login.getClient().getPoints() == 0) {
@@ -147,7 +155,7 @@ public class ClientCaseMB implements Serializable {
             clientCase = new ClientCase();
             caseDuration=null;
         }
-        return "/client/clientMainPage.xhtml?faces-redirect=true";
+     
     }
 
     // VIEW CASE METHODS 
@@ -401,6 +409,14 @@ public class ClientCaseMB implements Serializable {
 
     public void setNotEnoughApplications(boolean notEnoughApplications) {
         this.notEnoughApplications = notEnoughApplications;
+    }
+
+    public int getCaseDifficulty() {
+        return caseDifficulty;
+    }
+
+    public void setCaseDifficulty(int caseDifficulty) {
+        this.caseDifficulty = caseDifficulty;
     }
 
     

@@ -4,9 +4,11 @@ import com.efsf.sf.sql.dao.AmountHistoryDAO;
 import com.efsf.sf.sql.dao.ClientCaseDAO;
 import com.efsf.sf.sql.dao.ClientDAO;
 import com.efsf.sf.sql.dao.ConsultantDAO;
+import com.efsf.sf.sql.dao.GenericDao;
 import com.efsf.sf.sql.dao.RequiredDocumentsDAO;
 import com.efsf.sf.sql.entity.Address;
 import com.efsf.sf.sql.entity.AmountHistory;
+import com.efsf.sf.sql.entity.Bik;
 import com.efsf.sf.sql.entity.Client;
 import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
@@ -82,9 +84,17 @@ public class Algorithms
             difficulty++;
         }
         
+        System.out.println("Difficulty from data: " +  difficulty);
+        
         difficulty += calculateDifficultyFromBankAccountAnalysis(client);
+        
+        System.out.println("Difficulty with CSV: " +  difficulty);
+        
+        difficulty += calculateDifficultyFromBIKAnalysis(client);
+        
+        System.out.println("Difficulty with BIK: " +  difficulty);
       
-        return difficulty/2;
+        return difficulty/3;
     }
     
     
@@ -94,7 +104,7 @@ public class Algorithms
          AmountHistoryDAO dao = new AmountHistoryDAO();
          ParserCSV parser = new ParserCSV();
          
-         List<AmountHistory> list = dao.getWhere("fkClient", client);
+         List<AmountHistory> list = dao.getWhere("fkClient", client.getIdClient());
          if (list == null || list.isEmpty())
          {
              difficulty += 10;
@@ -138,9 +148,52 @@ public class Algorithms
          return difficulty;
     }
     
-    public static int calculateDifficultyFromBIKAnalysis()
+    public static int calculateDifficultyFromBIKAnalysis(Client client)
     {
-        return 0;
+        int difficulty = 0;
+        
+        GenericDao<Bik> dao = new GenericDao(Bik.class);
+        
+        List<Bik> list = dao.getWhere("clientId", client.getIdClient());
+        
+        if (list.isEmpty())
+        {
+            difficulty += 10;
+        }
+        else
+        {
+             Bik b = list.get(0);
+             
+             String rankAsString = b.getBikRank();
+             String bikClass = b.getBikClass();
+             
+             if (rankAsString != null)
+             {
+                 Integer rank = Integer.parseInt(rankAsString);
+                 difficulty +=  7 - (int) (rank/100.0);           
+                 return difficulty < 0 ? 0 : difficulty;
+             }
+             else if ((bikClass != null))
+             {
+                 char letter = bikClass.toUpperCase().charAt(0);
+                 
+                 switch(letter)
+                 {
+                     case 'A':
+                         difficulty += 2;
+                     case 'B': 
+                         difficulty += 4;
+                     case 'C': 
+                         difficulty += 6;
+                     case 'D': 
+                         difficulty += 8;   
+                 }
+                     
+             }   
+        }   
+        
+        return difficulty;
+      
     }
     
     public static double calculateClientIncome(Client client)

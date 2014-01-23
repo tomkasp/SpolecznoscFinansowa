@@ -746,6 +746,7 @@ p:column {
     margin-left: 250px;
     float:left; 
     clear:left;
+    margin-bottom: 10px;
 }
 
 .centeredLabelRed{
