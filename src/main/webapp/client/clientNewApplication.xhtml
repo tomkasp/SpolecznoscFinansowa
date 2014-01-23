@@ -5,7 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cmp="http://java.sun.com/jsf/composite/components">
+
     <body>
         <ui:composition template="/templates/mainTemplate.xhtml">
             <ui:define name="title"> Klient - nowy wniosek </ui:define> 
@@ -16,6 +18,9 @@
                         <div class="leftBox" style="width: 400px; padding-right: 70px;">
 
                             <h3 class="greenLeftBorder"> Nowy wniosek </h3>
+                            
+                            <cmp:adviseDialog difficulty="#{clientCaseMB.caseDifficulty}" widgetName="adviseDialog" />
+                            
                             <h:form id="newAppForm">  
                                 <h:panelGroup>
                                     <div class="field"> 
@@ -106,9 +111,9 @@
                                         <h:commandButton type="reset" value="OK" onclick="dlg1.hide();"/>
                                     </h:panelGrid>
                                 </p:dialog>  
-
+                               
                                 <h:commandButton class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points == 0}" value="Dodaj do giełdy" onclick="dlg1.show();" type="button" />
-                                <h:commandButton id="addToMarketBtn" class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points > 0}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
+                                <h:commandButton  id="addToMarketBtn" class="greenButton wideButton marginLR30" style="float: right;"  rendered="#{loginMB.client.points > 0}" value="Dodaj do giełdy" action="#{clientCaseMB.addCase()}" />
                             
                             </h:form>         
 
