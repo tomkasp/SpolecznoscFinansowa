@@ -5,6 +5,8 @@ import com.efsf.sf.util.SendMail;
 import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -61,6 +63,26 @@ public class MailerMB implements Serializable {
 
         try {
             sm = new SendMail(email, "Nowe hasło użytkownika w portalu Społeczność Finansowa", absolutePath, "newPassword.html", input);
+            sm.start();
+        } catch (IOException | TemplateException ex) {
+            Logger.getLogger(MailerMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void sendInstallmentNotify(String email, String name, String amount, Date date) {
+        String relativePath = "../../resources/mails/";
+        URL path = getClass().getClassLoader().getResource(relativePath);
+        String absolutePath = path.getPath().toString();  
+        Map<String, Object> input = new HashMap<>();
+        input.put("name", name);
+        input.put("amount", amount);
+        input.put("date", date.toString());
+
+        SendMail sm;
+
+        try {
+            sm = new SendMail(email, "Przypomnienie o spłacie kredytu", absolutePath, "installmentNotify.html", input);
             sm.start();
         } catch (IOException | TemplateException ex) {
             Logger.getLogger(MailerMB.class.getName()).log(Level.SEVERE, null, ex);

@@ -213,13 +213,13 @@
                                        </h:panelGrid> 
                                    </div>
                                    
-                                   <div>
+                                   <div style="height: 60px">
                                        <h4> ANALIZA WYCIĄGÓW BANKOWYCH </h4>
-                                       <p:commandButton styleClass="floatR greyButton" value="Analiza" action="#{caseViewMB.toAccountAnalysis()}" />
+                                         <h:commandButton class="floatR greyButton" value="Analiza" action="#{caseViewMB.toAccountAnalysis()}" />
                                    </div>
                                    
-                                  <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
-                                       <h4 style="clear: both"> Analiza raportu BIK </h4>
+                                  <h:panelGroup style="clear:both;" rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
+                                       <h4> ANALIZA RAPORTU BIK </h4>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
                                            <h:outputText value="Bik nie był jeszcze analizowany."/>
                                            <p:commandButton styleClass="floatR greyButton" value="Analizuj BIK" ajax="true" update=":rightColumn" action="#{fileDownloadMB.parseBik(caseViewMB.selectedClientCase.client.idClient)}"></p:commandButton>    
@@ -250,8 +250,7 @@
                                    <p:dialog header="Informacja" id="statusChanged" widgetVar="statusChange" resizable="false" closable="false" hideEffect="fade" showEffect="fade" >
                                        <div class="fontGrey"> Status sprawy został zaktualizowany </div>
                                    
-                                       <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="button" value="Kontynuuj" onclick="statusChange.hide()"  >
-                                           <f:ajax  execute="@this" render="@all" /> 
+                                       <h:commandButton styleClass="floatR wideButton" style="margin-top:30px;" type="submit" value="Kontynuuj" onclick="statusChange.hide()"  >                         
                                        </h:commandButton>
                                    
                                    </p:dialog>
@@ -316,7 +315,7 @@
                                        </h:commandButton>
                                    </p:dialog>
                                    
-                                   <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="750" height="500" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
+                                   <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="850" height="500" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
                                        <h4>#{caseViewMB.fetchTopProductForProductDetails(caseViewMB.selectedProduct).institution.name} </h4>
                                        
                                        <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
@@ -513,7 +512,7 @@
                                 <h:outputText id="interestRateLabel" class="dialogLabel" value="Wysokość raty"/>
                                  
                                 <h:inputText required="true" id="instalment" class="floatR marginT10"  style="width: 205px" value="#{caseViewMB.selectedClientCase.expectedInstalment}" >
-                                    <f:convertNumber maxFractionDigits="2" />>
+                                    <f:convertNumber maxFractionDigits="2" />
                                 </h:inputText>
                                 <h:message for="instalment" errorClass="invalid" id="instalmentMessage" />
                             </div>  

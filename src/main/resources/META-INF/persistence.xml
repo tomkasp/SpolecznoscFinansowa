@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.efsf.sf.sql.test.Payment</class>
     <class>com.efsf.sf.sql.test.InstitutionDocuments</class>
-    <class>com.efsf.sf.sql.entity.Installment</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.8:3306/SpolecznoscFinansowa?zeroDateTimeBehavior=convertToNull"/>

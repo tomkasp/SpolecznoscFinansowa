@@ -28,7 +28,9 @@ public class InstallmentDao extends GenericDao<Installment>{
         try {
             lista = (List<Installment>)session.createQuery("from Installment as ins left join fetch ins.clientCase as clc"
                     + " left join fetch clc.client as cl"
-                    + " left join fetch cl.addresses WHERE DATEDIFF(repayment_date,CURRENT_DATE()) <=5").list();
+                    + " left join fetch cl.addresses "
+                    + " left join fetch cl.user "
+                    + "WHERE DATEDIFF(repayment_date,CURRENT_DATE()) <=5").list();
         } finally {
             session.close();
         }

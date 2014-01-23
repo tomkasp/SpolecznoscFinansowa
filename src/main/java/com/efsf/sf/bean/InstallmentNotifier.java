@@ -17,35 +17,44 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import javax.ejb.Singleton;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
 /**
  *
  * @author s.biernacki
  * Syf syf syf - klasa dostosowana poziomem do reszty projektu:) 
  */
-@Singleton
-public class InstallmentNotifierMB extends HttpServlet{
+@ManagedBean(eager=true)
+@ApplicationScoped
+public class InstallmentNotifier{
 
     private InstallmentDao installmentDao;
     private final ScheduledExecutorService scheduler =Executors.newScheduledThreadPool(1);
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        installmentDao = new InstallmentDao();  
+    
+    @ManagedProperty(value = "#{mailerMB}")
+    private MailerMB mailerMB;
+    
+    public InstallmentNotifier(){
+    }
+    
+    
+    @PostConstruct
+    public void init(){
+        installmentDao = new InstallmentDao();     
         start();
     }
     
-    @Override
+    @PreDestroy
     public void destroy() {
         scheduler.shutdown();
     }
     
     public void start() {
+        System.out.println("start");
         final Runnable beeper = new Runnable() {
             @Override
             public void run() {
@@ -61,7 +70,7 @@ public class InstallmentNotifierMB extends HttpServlet{
         List<Installment> installmens = installmentDao.getInstallmentsToNotify();
         for (Installment installment : installmens) {  
             if (!installment.isNotified()&& !installment.isIsRepaided()) {
-                sendNotifications(installment);          
+                sendNotifications(installment); 
                 installment.setNotified(true);
                 installmentDao.update(installment);
             }
@@ -70,19 +79,40 @@ public class InstallmentNotifierMB extends HttpServlet{
 
     private void sendNotifications(Installment installment) {
         ClientCase clientCase = installment.getClientCase();
-        Client client= clientCase.getClient();
+        Client client= clientCase.getClient();     
         Set<Address> addresses = client.getAddresses();
         for(Address address: addresses){
             if(address.getPhone()!= null){
                 sendSMS(address.getPhone(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());
+            }   
+            if(client.getUser().getEmail()!= null){
+                getMailerMB().sendInstallmentNotify(client.getUser().getEmail(), client.getName()+ client.getLastName(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());          
             }
+                
           
         }
     }
-    
-    private void sendSMS(String number, String amount, Date date){
-        String message = number+" "+"Przypomnienie o spłacie raty w wysokości "+amount+" . Termin płatności "+date;
-        //System.out.println(message);
+
+      private void sendSMS(String number, String amount, Date date){
+        String message = "Przypomnienie o spłacie raty w wysokości "+amount+" . Termin płatności "+date;
         SMSApi.sendSms(number, message);
     }
+      
+    /**
+     * @return the mailerMB
+     */
+    public MailerMB getMailerMB() {
+        return mailerMB;
+    }
+
+    /**
+     * @param mailerMB the mailerMB to set
+     */
+    public void setMailerMB(MailerMB mailerMB) {
+        this.mailerMB = mailerMB;
+    }
+    
+  
+    
+   
 }

@@ -2,9 +2,11 @@ package com.efsf.sf.sql.dao;
 
 import com.efsf.sf.sql.entity.AmountHistory;
 import com.efsf.sf.sql.entity.Client;
+import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -17,7 +19,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
 
-public class AmountHistoryDAO implements Serializable {
+public class AmountHistoryDAO extends GenericDao<AmountHistory> implements Serializable {
+
+    public AmountHistoryDAO() {
+        super(AmountHistory.class);
+    }
 
     public void save(AmountHistory amhist) {
         Session session = HibernateUtil.SESSION_FACTORY.openSession();
@@ -32,6 +38,28 @@ public class AmountHistoryDAO implements Serializable {
         }
 
     }
+    
+    public Date getLastOperationDate(Client client)
+    {
+        Date date;
+        
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(" Select max(ah.operationDate) FROM AmountHistory as ah left join ah.client as cl where cl.idClient=:client");
+            query.setParameter("client", client.getIdClient());
+            
+          
+            date = (Date) query.list().get(0);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        return date==null ? new Date() : date;
+    }
+    
     
     public List<AmountHistory> getWithMonthAndYear(int month, int year, Client client)
     {
@@ -76,7 +104,7 @@ public class AmountHistoryDAO implements Serializable {
             session.close();
         }
 
-        return result;
+        return result == null ? BigDecimal.ZERO : result;
     }
     
     public BigDecimal getClientsSumOfExpenses(Client client)

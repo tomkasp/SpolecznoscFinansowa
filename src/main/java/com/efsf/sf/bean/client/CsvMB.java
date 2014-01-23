@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -44,9 +45,9 @@ public class CsvMB implements Serializable {
     
     ParserCSV csv = new ParserCSV();
     
-    private int month = new LocalDate().getMonthOfYear();
+    private int month;
     
-    private int year = new LocalDate().getYear();
+    private int year;
   
 
     public void upload() throws ParseException, IOException {
@@ -54,13 +55,29 @@ public class CsvMB implements Serializable {
             FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
-            csv.run(csvFile.getInputstream(), client);       
+            csv.run(csvFile.getInputstream(), client);  
+            
+            AmountHistoryDAO amDao = new AmountHistoryDAO();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(amDao.getLastOperationDate(client));
+       
+            year = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH)+1;
+            
             init();
         }
     }
 
     public void init() {
         AmountHistoryDAO amDao = new AmountHistoryDAO();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(amDao.getLastOperationDate(client));
+        
+        if (year == 0)
+            year = cal.get(Calendar.YEAR);
+        if (month == 0)
+            month = cal.get(Calendar.MONTH)+1;
+        
         history = amDao.getWithMonthAndYear(month, year, client);
         GenericDao<OperationType> typeDao=new GenericDao(OperationType.class);
         operationTypes=typeDao.getAll();
@@ -68,7 +85,7 @@ public class CsvMB implements Serializable {
     
     public boolean ifHistoryAdded()
     {
-        List<AmountHistory> list = dao.getWhere("fkClient", client);
+        List<AmountHistory> list = dao.getWhere("fkClient", client.getIdClient());
         if (list == null || list.isEmpty())
             return false;
         else

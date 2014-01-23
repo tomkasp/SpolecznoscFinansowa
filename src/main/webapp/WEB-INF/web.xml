@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
-<!--    <security-constraint>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <!--    <security-constraint>
         <web-resource-collection>
             <web-resource-name>SUCTR</web-resource-name>
             <url-pattern>/*</url-pattern>      
@@ -12,18 +9,15 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>-->
-    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>API</web-resource-name>
-            <url-pattern>/api/*</url-pattern>      
+            <url-pattern>/api/*</url-pattern>
         </web-resource-collection>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
-    
     <context-param>
         <param-name> javax.faces.PROJECT_STAGE </param-name>
         <param-value>Development</param-value>
@@ -52,8 +46,6 @@
         <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
         <param-value>true</param-value>
     </context-param>
-    
-                  
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -63,22 +55,14 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
-   
     <servlet>
         <servlet-name>PayU Initializer</servlet-name>
         <servlet-class>com.efsf.sf.servlet.PayUInitializer</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-
-    <servlet>
-        <servlet-name>Installment Notifier</servlet-name>
-        <servlet-class>com.efsf.sf.bean.InstallmentNotifierMB</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 
     <!--     Auto scan REST service -->
-<!--    <context-param>
+    <!--    <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>
     </context-param>
@@ -105,7 +89,6 @@
         <servlet-name>ApiServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>-->
-    
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
@@ -120,7 +103,6 @@
         <error-code>404</error-code>
         <location>/error.xhtml</location>
     </error-page>
-
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>com.efsf.sf.util.filter.CharacterEncodingFilter</filter-class>
@@ -182,4 +164,3 @@
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
 </web-app>
-

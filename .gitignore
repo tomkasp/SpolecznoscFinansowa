@@ -1,6 +1,6 @@
 /target/
 /src\main\webapp\resources\images/Thumbs.db
 /src\main\webapp\WEB-INF/web.xml
+/src\main\webapp\WEB-INF/web.xml
 /faces-config.NavData
-/src/main/resources/hibernate.cfg.xml
-nb-configuration.xml
+/src\main\webapp\WEB-INF/web.xml

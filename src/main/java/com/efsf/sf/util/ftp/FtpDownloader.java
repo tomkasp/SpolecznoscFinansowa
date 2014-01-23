@@ -42,6 +42,10 @@ public class FtpDownloader implements Serializable {
             client.setFileType(FTP.BINARY_FILE_TYPE);
             client.setBufferSize(0);        
             InputStream is = client.retrieveFileStream(remoteFile);
+            
+            System.out.println("Reply CODE: => " + client.getReplyCode());
+            System.out.println("Reply STRING: => " + client.getReplyString());
+            System.out.println("Reply STRINGS: => " + client.getReplyStrings());
 
             FacesContext context = FacesContext.getCurrentInstance();
             HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();

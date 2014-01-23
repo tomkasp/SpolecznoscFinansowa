@@ -10,6 +10,7 @@ import static com.efsf.sf.util.Security.md5;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 // format pliku csv: "Data operacji","Data waluty","Typ transakcji","Kwota","Waluta","Saldo po transakcji","Opis transakcji"
-public class ParserCSV {
+public class ParserCSV implements Serializable {
 
     public static final List<String> DICTIONARY_PATTERNS = Arrays.asList( 
         "(mcdonalds|zabka)" , //Drobne wydatki
@@ -84,7 +85,7 @@ public class ParserCSV {
                 amhist.setHashCode(md5(nextLine[tab[0][0]]
                         + nextLine[tab[0][1]] + nextLine[tab[0][2]]
                         + nextLine[tab[0][3]] + nextLine[tab[0][4]]
-                        + nextLine[tab[0][5]] + nextLine[tab[0][6]]));
+                        + nextLine[tab[0][5]] + nextLine[tab[0][6]] + client.getIdClient()));
 
                 amhist.setClient(client);
                 if(!amDAO.checkMD5(amhist.getHashCode(), client.getIdClient())){
@@ -204,6 +205,10 @@ public class ParserCSV {
            return result;
        }
        
+       
+       //VALUES RETURNED BY THIS METHODS ARE DIRECTLY CONNECTED TO ALGORITHMS IN ULTIL/ALGORITHMS.java 
+       //CHANGING THEM WILL DIRECTLY AFFECT THE RESULT OF ALGORITHMS 
+       
        public String calculateClientQualityOfLife(Client client)
        {
            AmountHistoryDAO ah = new AmountHistoryDAO();
@@ -244,5 +249,9 @@ public class ParserCSV {
                return "Średnie";
            else 
                return "Duże";
-       }   
+       }
+
+       
+
+       
 }

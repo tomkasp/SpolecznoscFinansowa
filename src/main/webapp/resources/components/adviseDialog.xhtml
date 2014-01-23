@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:composite="http://java.sun.com/jsf/composite" >
+    
+    <composite:interface> 
+        <composite:attribute name="difficulty" type="java.lang.Integer" required="true" />
+        <composite:attribute name="widgetName" type="java.lang.String" required="true" />
+    </composite:interface>
+    
+    <composite:implementation> 
+        <h:form>
+            <p:dialog id="adviseDialog" modal="true" showHeader="false" dynamic="true" visible="#{cc.attrs.difficulty != -1}"  header="Pomocny dialog" width="660px" widgetVar="#{cc.attrs.widgetName}" closable="true" >
+                
+                <h3> Gratulacje! Założyłeś nowy wniosek. </h3> 
+                
+                <div style="padding-bottom: 20px; font-size: 15px;" >
+                    
+                <h:panelGroup  rendered="#{cc.attrs.difficulty le 3}" >
+                         
+                System ocenił twoją zdolność kredytową na wysoką. Bez problemu powinieneś otrzymać kredyt. 
+                    
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{cc.attrs.difficulty gt 3 and cc.attrs.difficulty le 6}" >
+                 
+                System ocenił twoją zdolność kredytową jako średnią. <br/> <br/> W celu poprawienia swojej zdolności kredytowej: <br/> <br/>  
+                               
+                <b>Dodaj swój BIK </b> - dzięki analizie raportu BIK system może dokładniej przeanalizować twoją sytuację. <br/>
+                <b>Aktualizuj historię konta </b> - bardziej szczegółowa historia konta bankowego pozwoli dokładniej określić twoje możliwości kredytowe. <br /> 
+                <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność.<br/>
+                <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą.<br/> 
+                <b>Dodaj inne źródła dochodu</b> - jeżeli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
+                <b>Rozważ pożyczkę poza bankami</b> - instytucje parabankowe mają zazwyczaj większe możliwości dotyczące zdolności.
+                    
+                </h:panelGroup>
+                                
+                <h:panelGroup rendered="#{cc.attrs.difficulty gt 6}" >
+                  
+                System ocenił twoją zdolność kredytową jako niedużą. <br/> <br/> Postaraj się zastosować do poniższych rad, dzięki nim Twoje szanse na wzięcie kredytu na pewno wzrosną:  <br/> <br/>
+                               
+                <b>Dodaj swój BIK </b> - dzięki analizie raportu BIK system może dokładniej przeanalizować twoją sytuację. <br/>
+                <b>Aktualizuj historię konta </b> - bardziej szczegółowa historia konta bankowego pozwoli dokładniej określić twoje możliwości kredytowe. <br /> 
+                <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność.<br/>
+                <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą.<br/> 
+                <b>Dodaj inne źródła dochodu</b> - jeżeli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
+                <b>Rozważ pożyczkę poza bankami</b> - instytucje parabankowe mają zazwyczaj większe możliwości dotyczące zdolności.    
+                    
+                </h:panelGroup>
+                
+                </div>
+                
+                <h:commandButton id="addToMarketBtn" class="greenButton wideButton" style="float: right;"  rendered="#{loginMB.client.points > 0}" value="OK" action="#{clientCaseMB.showAdvise()}" />
+                            
+            </p:dialog>
+        </h:form>
+    </composite:implementation>
+</ui:composition>
+
