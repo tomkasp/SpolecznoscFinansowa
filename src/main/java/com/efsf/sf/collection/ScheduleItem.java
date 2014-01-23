@@ -1,5 +1,6 @@
 package com.efsf.sf.collection;
 
+import com.efsf.sf.sql.entity.Installment;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -55,6 +56,28 @@ public class ScheduleItem implements Serializable{
 
     public void setToPay(Double toPay) {
         this.toPay = toPay;
+    }
+
+    /**
+* @return the payed
+*/
+    public boolean isPayed() {
+        return payed;
+    }
+
+    /**
+* @param payed the payed to set
+*/
+    public void setPayed(boolean payed) {
+        installment.setIsRepaided(payed);
+        this.payed = payed;
+    }
+
+    /**
+* @return the installment
+*/
+    public Installment getInstallment() {
+        return installment;
     }
     
     

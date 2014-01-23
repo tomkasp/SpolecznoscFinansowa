@@ -270,6 +270,15 @@
 
                         <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak wymaganych danych do wygenerowania harmonogramu!" 
                                      rowKey="#{row.toPay}" paginator="true" rows="15">
+
+                            
+                            <p:column headerText="Czy zapłacona">
+                                <h:selectBooleanCheckbox value="#{row.payed}">
+                                        <f:ajax event="click" listener="#{caseViewMB.processUserEvents}" />
+                                        <f:attribute name="item" value="#{row}" />
+                                  </h:selectBooleanCheckbox>
+                            </p:column> 
+                            
                             <p:column headerText="Termin spłaty">  
                                 <h:outputText value="#{row.paymentDate}">
                                     <f:convertDateTime pattern="dd.MM.yyyy" />
