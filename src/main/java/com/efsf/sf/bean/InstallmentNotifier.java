@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ApplicationScoped;
@@ -83,9 +84,11 @@ public class InstallmentNotifier{
         Set<Address> addresses = client.getAddresses();
         for(Address address: addresses){
             if(address.getPhone()!= null){
+                
                 sendSMS(address.getPhone(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());
             }   
             if(client.getUser().getEmail()!= null){
+                
                 getMailerMB().sendInstallmentNotify(client.getUser().getEmail(), client.getName()+ client.getLastName(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());          
             }
                 

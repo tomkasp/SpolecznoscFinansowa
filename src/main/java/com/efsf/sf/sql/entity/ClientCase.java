@@ -4,6 +4,7 @@ package com.efsf.sf.sql.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -54,7 +56,8 @@ public class ClientCase implements java.io.Serializable {
     private Date receiveCreditDate;
     private Date beginPaymentDate;
     private Integer numberOfPayments;
-
+    private List<Installment> installments;
+    
     public ClientCase() {
     }
 
@@ -305,5 +308,14 @@ public class ClientCase implements java.io.Serializable {
 
     public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
+    }
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientCase")
+    public List<Installment> getInstallments() {
+        return installments;
+    }
+
+    public void setInstallments(List<Installment> installments) {
+        this.installments = installments;
     }
 }
