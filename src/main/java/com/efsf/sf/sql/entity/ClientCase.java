@@ -54,7 +54,6 @@ public class ClientCase implements java.io.Serializable {
     private Date receiveCreditDate;
     private Date beginPaymentDate;
     private Integer numberOfPayments;
-
     public ClientCase() {
     }
 
@@ -306,4 +305,25 @@ public class ClientCase implements java.io.Serializable {
     public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
     }
+<<<<<<< .mine
+
+
+
+
+
+
+
+
+
+=======
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientCase")
+    public List<Installment> getInstallments() {
+        return installments;
+    }
+
+    public void setInstallments(List<Installment> installments) {
+        this.installments = installments;
+    }
+>>>>>>> .theirs
 }

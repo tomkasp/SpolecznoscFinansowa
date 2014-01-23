@@ -68,7 +68,6 @@ public class CurrencyApi {
                 in.close();
             }
 
-            System.out.println(response.toString());
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(CurrencyApi.class.getName()).log(Level.SEVERE, null, ex);

@@ -410,16 +410,6 @@ public class LoginMB implements Serializable {
     public String getCurrencies(){
          return currencyString;
     }
-    
-    public void test(){
-        try {
-            CurrencyApi.getIntrestRates();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (XPathExpressionException ex) {
-            Logger.getLogger(LoginMB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public Map<String, String> getIntrestRates() {
         return intrestRates;

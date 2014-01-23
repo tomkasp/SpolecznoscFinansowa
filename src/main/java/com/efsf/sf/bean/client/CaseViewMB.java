@@ -16,6 +16,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.Installment;
 import com.efsf.sf.sql.entity.InstitutionDocuments;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
@@ -38,6 +39,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
@@ -495,67 +497,96 @@ createLinearModel();
         return schedule;
     }
 
-    private void calculatePayements(Double toPay, Double intrestRate, Double instalment) {
-        Double alreadyPayed=0.0;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(selectedClientCase.getBeginPaymentDate());
-        
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(selectedClientCase.getReceiveCreditDate());
-        
-        long diff = cal.getTimeInMillis() - cal2.getTimeInMillis();
-        double breakPediodInDays=diff / (24 * 60 * 60 * 1000);
+private void calculatePayements(Double toPay, Double intrestRate, Double instalment) {
+       GenericDao<Installment> dao=new GenericDao(Installment.class);
+       GenericDao<ClientCase> daoClientCase=new GenericDao(ClientCase.class);
+       List<Installment> installments = dao.getWhere("id_clientCase", clientCaseId.toString());
+        if(installments==null || installments.isEmpty()){
 
-        
-        toPay*=(1+((0.01*intrestRate*breakPediodInDays)/365));
-        
-        //RATA STAŁA
-        if(selectedClientCase.getInterestRateType()==0){
-            int i=0;
-            while(toPay>instalment){
-                
-                toPay-=instalment;
-                alreadyPayed+=instalment;
-                getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
-                
-                series1.set(i, toPay);  
-                i++;
-                
-                cal.add(Calendar.MONTH, 1);
-                toPay*=(1+((0.01*intrestRate)/12));
-            }
-            
-            //Ostatnia rata nierówna
-            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
-            
-            
-        } else {
-            double instalment2;
+            Double alreadyPayed=0.0;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(selectedClientCase.getBeginPaymentDate());
+
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(selectedClientCase.getReceiveCreditDate());
+
+            long diff = cal.getTimeInMillis() - cal2.getTimeInMillis();
+            double breakPediodInDays=diff / (24 * 60 * 60 * 1000);
+
+
+            toPay*=(1+((0.01*intrestRate*breakPediodInDays)/365));
+
+            //RATA STAŁA
+            if(selectedClientCase.getInterestRateType()==0){
                 int i=0;
-             while(toPay>instalment){
+                while(toPay>instalment){
+
+                    toPay-=instalment;
+                    alreadyPayed+=instalment;
+                    //getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
+                    installments.add(new Installment(cal.getTime(), instalment, alreadyPayed, toPay,selectedClientCase));
+                    //series1.set(i, toPay);
+                    i++;
+
+                    cal.add(Calendar.MONTH, 1);
+                    toPay*=(1+((0.01*intrestRate)/12));
+                }
+
+                //Ostatnia rata nierówna
+                //getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
+                installments.add(new Installment(cal.getTime(), instalment, alreadyPayed+toPay, 0.0,selectedClientCase));
+
+            } else {
+                double instalment2;
+                    int i=0;
+                 while(toPay>instalment){
+
+                    instalment2=toPay*((0.01*intrestRate)/12);
+                    toPay-=instalment;
+                    toPay-=instalment2;
+
+                    alreadyPayed+=instalment;
+                    alreadyPayed+=instalment2;
+
+                    //getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
+                    installments.add(new Installment(cal.getTime(), instalment+instalment2, alreadyPayed, toPay,selectedClientCase));
+                    //series1.set(i, toPay);
+                    i++;
+
+                    cal.add(Calendar.MONTH, 1);
+                    toPay*=(1+((0.01*intrestRate)/12));
+                }
+
+                //Ostatnia rata nierówna
+                //getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
+                installments.add(new Installment(cal.getTime(), toPay, alreadyPayed+toPay, 0.0, selectedClientCase));
                 
-                instalment2=toPay*((0.01*intrestRate)/12);
-                toPay-=instalment;
-                toPay-=instalment2;
-                
-                alreadyPayed+=instalment;
-                alreadyPayed+=instalment2;
-                
-                getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
-                
-                series1.set(i, toPay);
-                i++;
-                
-                cal.add(Calendar.MONTH, 1);
-                toPay*=(1+((0.01*intrestRate)/12));
             }
-            
-            //Ostatnia rata nierówna
-            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));           
-            
+            selectedClientCase.setInstallments(installments);
+            daoClientCase.update(selectedClientCase);
+        }
+        setScheduleFromInstallments(installments);
+        setGraphFrominstallments(installments);
+    }
+    
+    private void setScheduleFromInstallments(List<Installment> installments){
+        for(Installment installment: installments){
+            getSchedule().add(new ScheduleItem(installment));
         }
     }
-
+    
+     private void setGraphFrominstallments(List<Installment> installments){
+        for(int i=0; i<installments.size();i++){
+             series1.set(i, installments.get(i).getRepaid());
+        }
+    }
+     
+     public void processUserEvents(AjaxBehaviorEvent e) {
+  ScheduleItem item = (ScheduleItem) e.getComponent().getAttributes().get("item");
+    Installment installment = item.getInstallment();
+    GenericDao<Installment> dao=new GenericDao(Installment.class);
+    dao.update(installment);
+}
     public List<InstitutionDocuments> getDocuments() {
         return documents;
     }

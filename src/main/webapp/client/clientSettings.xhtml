@@ -312,7 +312,25 @@
                             <div class="marginLRT30">  
 
                                  <h4 class="greenLeftBorder">AKTUALIZACJA RAPORTU BIK</h4>
-                                
+                                 <div class="marginTB20">
+                                 <h:panelGroup style="clear:both;" rendered="#{fileDownloadMB.requiredDocuments.bik!=null}" >
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==null}" >
+                                           <h:outputText value="Bik nie był jeszcze analizowany."/>
+                                           <p:commandButton styleClass="floatR greyButton" value="Analizuj BIK" ajax="true" update=":rightColumn" action="#{fileDownloadMB.parseBik(loginMB.client.idClient)}"></p:commandButton>    
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==1}" >
+                                           <h:outputText value="Bik w trakcie analizowania. Analiza może trwać do 5 minut."/>
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==3}" >
+                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne! Poproś klienta o wgranie nowego raportu BIK."/>
+                                       </h:panelGroup>
+                                       <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==4}" >
+                                           <h:outputText value="Bik pomyślnie przetworzony"/>
+                                           <p:commandButton styleClass="floatR greyButton" value="Zobacz wyniki" action="#{bikMB.showBik(loginMB.client.idClient)}"></p:commandButton>
+                                       </h:panelGroup>           
+                                   </h:panelGroup>  
+                                 </div>
+                                 
                                  <h:outputLabel class="uploaderLabel" id="bikLabel">Dodaj lub przeglądaj raport BIK</h:outputLabel>     
                                 
                                     <h:commandLink target="_blank" action="#{ fileDownloadMB.load8() }">
@@ -483,6 +501,8 @@
                                     <h:message for="idTitleDead"  errorClass="invalid"  /> 
 
                                 </div>
+                                
+                                   
                                 
                                 <div style="min-height: 40px"> 
                              <p:commandLink ajax="false" style="margin-top: 3px;" id="przycisk1" styleClass="greenButton wideButton floatR"  value="Wczytaj pliki" type="submit" onclick="statusDialog.show();" action="#{ fileUploadMB.save() }" />      
