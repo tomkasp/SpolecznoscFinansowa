@@ -270,6 +270,7 @@
 
                         <p:dataTable id="dataTable2" value="#{caseViewMB.schedule}" var="row" emptyMessage="brak wymaganych danych do wygenerowania harmonogramu!" 
                                      rowKey="#{row.toPay}" paginator="true" rows="15">
+
                             
                             <p:column headerText="Czy zapłacona">
                                 <h:selectBooleanCheckbox value="#{row.payed}">

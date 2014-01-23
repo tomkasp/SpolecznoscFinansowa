@@ -88,7 +88,6 @@ public class InstallmentNotifier{
                 sendSMS(address.getPhone(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());
             }   
             if(client.getUser().getEmail()!= null){
-                
                 getMailerMB().sendInstallmentNotify(client.getUser().getEmail(), client.getName()+ client.getLastName(), installment.getAmountOfInstallment().toString(), installment.getRepaymentDate());          
             }
                 

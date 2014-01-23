@@ -57,7 +57,6 @@ public class ClientCase implements java.io.Serializable {
     private Date beginPaymentDate;
     private Integer numberOfPayments;
     private List<Installment> installments;
-    
     public ClientCase() {
     }
 

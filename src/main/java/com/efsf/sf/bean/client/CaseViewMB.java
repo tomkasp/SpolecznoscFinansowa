@@ -497,7 +497,7 @@ createLinearModel();
         return schedule;
     }
 
-        private void calculatePayements(Double toPay, Double intrestRate, Double instalment) {
+private void calculatePayements(Double toPay, Double intrestRate, Double instalment) {
        GenericDao<Installment> dao=new GenericDao(Installment.class);
        GenericDao<ClientCase> daoClientCase=new GenericDao(ClientCase.class);
        List<Installment> installments = dao.getWhere("id_clientCase", clientCaseId.toString());
@@ -587,7 +587,6 @@ createLinearModel();
     GenericDao<Installment> dao=new GenericDao(Installment.class);
     dao.update(installment);
 }
-
     public List<InstitutionDocuments> getDocuments() {
         return documents;
     }
