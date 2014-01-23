@@ -68,7 +68,7 @@ public class CsvMB implements Serializable {
     
     public boolean ifHistoryAdded()
     {
-        List<AmountHistory> list = dao.getWhere("fkClient", client);
+        List<AmountHistory> list = dao.getWhere("fkClient", client.getIdClient());
         if (list == null || list.isEmpty())
             return false;
         else
