@@ -85,7 +85,7 @@ public class ParserCSV implements Serializable {
                 amhist.setHashCode(md5(nextLine[tab[0][0]]
                         + nextLine[tab[0][1]] + nextLine[tab[0][2]]
                         + nextLine[tab[0][3]] + nextLine[tab[0][4]]
-                        + nextLine[tab[0][5]] + nextLine[tab[0][6]]));
+                        + nextLine[tab[0][5]] + nextLine[tab[0][6]] + client.getIdClient()));
 
                 amhist.setClient(client);
                 if(!amDAO.checkMD5(amhist.getHashCode(), client.getIdClient())){

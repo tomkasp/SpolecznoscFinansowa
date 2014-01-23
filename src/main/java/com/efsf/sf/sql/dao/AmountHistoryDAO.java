@@ -81,7 +81,7 @@ public class AmountHistoryDAO extends GenericDao<AmountHistory> implements Seria
             session.close();
         }
 
-        return result;
+        return result == null ? BigDecimal.ZERO : result;
     }
     
     public BigDecimal getClientsSumOfExpenses(Client client)
