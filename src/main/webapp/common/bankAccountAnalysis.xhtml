@@ -6,73 +6,73 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title"> Klient - Analiza wyciągów bankowych </ui:define> 
     <ui:define name="content">
-        
+
         <f:metadata>         
             <f:viewParam name="clientCaseId" value="#{csvMB.clientCaseId}" />
         </f:metadata>
         <f:event  type="preRenderView" listener="#{csvMB.loadData()}" />
         <h3> Analiza wyciągów bankowych </h3> 
-        
+
         <h:form id="form1">
-               <p:messages showDetail="true"/>   
+            <p:messages showDetail="true"/>   
         </h:form>     
 
         <h:panelGroup rendered="#{loginMB.type == settings.clientActive}" >
-        
-        <h4> Załaduj nowy plik .csv:  </h4>
 
-        <h:form  enctype="multipart/form-data">
-  
+            <h4> Załaduj nowy plik .csv:  </h4>
 
-            <p:fileUpload style="width: 250px; float: left"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
-
-            </p:fileUpload>
-
-            <p:selectOneMenu style="margin: 5px 0px 0px 20px; float: left; width: 200px;" value="#{csvMB.selectedBank}"  >              
-                <f:selectItem itemLabel="PKO Bank Polski" itemValue="1" />  
-                <f:selectItem itemLabel="BZ WBK" itemValue="2" />  
-            </p:selectOneMenu>
+            <h:form  enctype="multipart/form-data">
 
 
-            <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatL" style="margin: 5px 20px 20px 20px;"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
+                <p:fileUpload style="width: 250px; float: left"  styleClass="greyButton" id="idCardUpload" value="#{csvMB.csvFile}" mode="simple" > 
 
-        </h:form>    
-        
+                </p:fileUpload>
+
+                <p:selectOneMenu style="margin: 5px 0px 0px 20px; float: left; width: 200px;" value="#{csvMB.selectedBank}"  >              
+                    <f:selectItem itemLabel="PKO Bank Polski" itemValue="1" />  
+                    <f:selectItem itemLabel="BZ WBK" itemValue="2" />  
+                </p:selectOneMenu>
+
+
+                <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatL" style="margin: 5px 20px 20px 20px;"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
+
+            </h:form>    
+
         </h:panelGroup>
 
         <div style="clear: both;" >
             <h4> Wyciąg: </h4>
         </div>
-        
-        
+
+
         <div style="min-height: 50px; margin-top: 50px">
             <h:form>
-                
-         <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 50px;" value="#{csvMB.month}"  >              
-            <f:selectItem itemLabel="1" itemValue="1"  />  
-            <f:selectItem itemLabel="2" itemValue="2" />
-            <f:selectItem itemLabel="3"  itemValue="3" />
-            <f:selectItem itemLabel="4" itemValue="4" />
-            <f:selectItem itemLabel="5" itemValue="5" />  
-            <f:selectItem itemLabel="6" itemValue="6" />
-            <f:selectItem itemLabel="7" itemValue="7" />
-            <f:selectItem itemLabel="8" itemValue="8" />
-            <f:selectItem itemLabel="9" itemValue="9" />  
-            <f:selectItem itemLabel="10" itemValue="10" />
-            <f:selectItem itemLabel="11" itemValue="11" />
-            <f:selectItem itemLabel="12" itemValue="12" />
-            <p:ajax update="@form" listener="#{csvMB.init()}" />  
-         </p:selectOneMenu>
-        
-         <p:selectOneMenu style="margin: 5px 0px 10px 20px; float: left; width: 80px;" value="#{csvMB.year}"  >              
-            <f:selectItem itemLabel="2012" itemValue="2012" />  
-            <f:selectItem itemLabel="2013" itemValue="2013" />
-            <f:selectItem itemLabel="2014" itemValue="2014" />
-            <p:ajax update="@form" listener="#{csvMB.init()}" />  
-         </p:selectOneMenu>
 
-         <p:dataTable id="csvTable" style="clear:both" value="#{csvMB.history}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" emptyMessage="Brak rekordów z tego miesiąca. Wgraj plik z wyciągiem konta." selectionMode="single" 
-                              editable="true" editMode="cell">
+                <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 50px;" value="#{csvMB.month}"  >              
+                    <f:selectItem itemLabel="1" itemValue="1"  />  
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                    <f:selectItem itemLabel="3"  itemValue="3" />
+                    <f:selectItem itemLabel="4" itemValue="4" />
+                    <f:selectItem itemLabel="5" itemValue="5" />  
+                    <f:selectItem itemLabel="6" itemValue="6" />
+                    <f:selectItem itemLabel="7" itemValue="7" />
+                    <f:selectItem itemLabel="8" itemValue="8" />
+                    <f:selectItem itemLabel="9" itemValue="9" />  
+                    <f:selectItem itemLabel="10" itemValue="10" />
+                    <f:selectItem itemLabel="11" itemValue="11" />
+                    <f:selectItem itemLabel="12" itemValue="12" />
+                    <p:ajax update="@form" listener="#{csvMB.init()}" />  
+                </p:selectOneMenu>
+
+                <p:selectOneMenu style="margin: 5px 0px 10px 20px; float: left; width: 80px;" value="#{csvMB.year}"  >              
+                    <f:selectItem itemLabel="2012" itemValue="2012" />  
+                    <f:selectItem itemLabel="2013" itemValue="2013" />
+                    <f:selectItem itemLabel="2014" itemValue="2014" />
+                    <p:ajax update="@form" listener="#{csvMB.init()}" />  
+                </p:selectOneMenu>
+
+                <p:dataTable id="csvTable" style="clear:both" value="#{csvMB.history}" var="row" rowIndexVar="rowIndex" rowKey="#{row}" emptyMessage="Brak rekordów z tego miesiąca. Wgraj plik z wyciągiem konta." selectionMode="single" 
+                             editable="true" editMode="cell">
 
                     <p:column headerText="Nr.">  
                         <h:outputText  value="#{rowIndex+1}"/>
@@ -85,7 +85,7 @@
                     <p:column headerText="Tytuł">  
                         <h:outputText  value="#{row.title}"/>
                     </p:column> 
-                    
+
                     <p:column headerText="Nadawca/Odiorca"> 
                         <h:outputText  value="#{row.receiver}"/>
                     </p:column>
@@ -93,7 +93,7 @@
                     <p:column headerText="Kwota"> 
                         <h:outputText  value="#{row.amount}"/>
                     </p:column>
-                    
+
 
 
                     <p:column headerText="Saldo po"> 
@@ -101,39 +101,38 @@
                     </p:column> 
 
                     <p:column headerText="Typ">  
-                                <p:selectOneMenu value="#{row.operationType}" style="width: 200px">  
-                                    <f:selectItems value="#{csvMB.operationTypes}" />
-                                </p:selectOneMenu>  
+                        <p:selectOneMenu value="#{row.operationType}" style="width: 200px">  
+                            <f:selectItems value="#{csvMB.operationTypes}" />
+                        </p:selectOneMenu>  
                     </p:column>    
 
                 </p:dataTable>
                 <h:commandButton rendered="#{loginMB.type == settings.clientActive}" action="#{csvMB.save()}" class="greenButton wideButton floatR" value="Zapisz"/>
             </h:form> 
         </div>
-        
+
         <div>
-            
+
             <h:panelGroup rendered="#{loginMB.type == settings.clientActive}" > <h4> Twoja aktualna sytuacja: </h4> </h:panelGroup>
-            
+
             <h:panelGroup rendered="#{loginMB.type == settings.consultantActive}" > <h4> Aktualna sytuacja klienta: </h4> </h:panelGroup>
-            
+
             <h:panelGroup rendered="#{csvMB.ifHistoryAdded()}" >
                 <div><h:outputText class="centeredLabelBlack " value="Standard życia: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientQualityOfLife()}"/></div>
-            
                 <div><h:outputText class="centeredLabelBlack " value="Możliwości kredytowe: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientCreditChance()}" /> </div>
-        
-                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('małe')}">
-                    <div class="isa_info">Twoja zdolność kredytowa jest dość mała. Zalecamy podjęcie odpowiednich działań w celu jej zwiększenia.<br/>
-                        <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność<br/>
-                        <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą<br/> 
-                        <b>Czy posiadasz inny dochód</b> - jeżli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
+
+                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('Małe')}">
+                    <div class="isa_info" style="clear:both">Twoja zdolność kredytowa jest dość mała. Zalecamy podjęcie odpowiednich działań w celu jej zwiększenia: <br/><br/>
+                        <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność.<br/>
+                        <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą.<br/> 
+                        <b>Czy posiadasz inny dochód</b> - jeżeli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
                         <b>Rozważ pożyczkę poza bankami</b> - instytucje parabankowe mają zazwyczaj większe możliwości dotyczące zdolności.
                     </div>
                 </h:panelGroup>
 
             </h:panelGroup>
             <h:panelGroup rendered="#{!csvMB.ifHistoryAdded()}" >
-                       Nie można określić aktualnej sytuacji ponieważ nie dodano żadnych wyciągów bankowych. Dodaj wyciągi.         
+                Nie można określić aktualnej sytuacji ponieważ nie dodano żadnych wyciągów bankowych. Dodaj wyciągi.         
             </h:panelGroup>    
             <div style="clear:both" /> 
         </div>

@@ -746,6 +746,7 @@ p:column {
     margin-left: 250px;
     float:left; 
     clear:left;
+    margin-bottom: 10px;
 }
 
 .centeredLabelRed{
@@ -1017,6 +1018,7 @@ p:column {
     font-family: Arial;
     font-weight:bold;
     resize: false;
+    margin-bottom: 20px;
 }
 
 .cookieBar {
