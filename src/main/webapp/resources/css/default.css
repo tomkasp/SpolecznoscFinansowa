@@ -753,7 +753,7 @@ p:column {
     color: red;
     font-weight: bold;
     font-size: 20px;
-    margin-right: 350px;
+    margin-right: 330px;
     float:right; 
     clear:right;
 }
@@ -1028,7 +1028,7 @@ p:column {
 
 .cookieBarText {
      color: #545454;
-     font-size:26px;    
+     font-size:20px;    
 }
 
 .cookiesButton {

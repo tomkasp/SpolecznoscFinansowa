@@ -181,12 +181,16 @@ public class Algorithms
                  {
                      case 'A':
                          difficulty += 2;
+                         break;
                      case 'B': 
                          difficulty += 4;
+                         break;
                      case 'C': 
                          difficulty += 6;
+                         break;
                      case 'D': 
-                         difficulty += 8;   
+                         difficulty += 8;
+                         break;
                  }
                      
              }   

@@ -49,18 +49,18 @@
             <h:form>
 
                 <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 50px;" value="#{csvMB.month}"  >              
-                    <f:selectItem itemLabel="1" itemValue="1"  />  
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                    <f:selectItem itemLabel="3"  itemValue="3" />
-                    <f:selectItem itemLabel="4" itemValue="4" />
-                    <f:selectItem itemLabel="5" itemValue="5" />  
-                    <f:selectItem itemLabel="6" itemValue="6" />
-                    <f:selectItem itemLabel="7" itemValue="7" />
-                    <f:selectItem itemLabel="8" itemValue="8" />
-                    <f:selectItem itemLabel="9" itemValue="9" />  
-                    <f:selectItem itemLabel="10" itemValue="10" />
-                    <f:selectItem itemLabel="11" itemValue="11" />
-                    <f:selectItem itemLabel="12" itemValue="12" />
+                    <f:selectItem itemLabel="Styczeń" itemValue="1"  />  
+                    <f:selectItem itemLabel="Luty" itemValue="2" />
+                    <f:selectItem itemLabel="Marzec"  itemValue="3" />
+                    <f:selectItem itemLabel="Kwiecień" itemValue="4" />
+                    <f:selectItem itemLabel="Maj" itemValue="5" />  
+                    <f:selectItem itemLabel="Czerwiec" itemValue="6" />
+                    <f:selectItem itemLabel="Lipiec" itemValue="7" />
+                    <f:selectItem itemLabel="Sierpień" itemValue="8" />
+                    <f:selectItem itemLabel="Wrzesień" itemValue="9" />  
+                    <f:selectItem itemLabel="Październik" itemValue="10" />
+                    <f:selectItem itemLabel="Listopad" itemValue="11" />
+                    <f:selectItem itemLabel="Grudzień" itemValue="12" />
                     <p:ajax update="@form" listener="#{csvMB.init()}" />  
                 </p:selectOneMenu>
 
@@ -121,7 +121,7 @@
                 <div><h:outputText class="centeredLabelBlack " value="Standard życia: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientQualityOfLife()}"/></div>
                 <div><h:outputText class="centeredLabelBlack " value="Możliwości kredytowe: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientCreditChance()}" /> </div>
 
-                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('Małe')}">
+                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('Małe') or csvMB.showClientCreditChance().contains('Bardzo małe')}">
                     <div class="isa_info" style="clear:both">Twoja zdolność kredytowa jest dość mała. Zalecamy podjęcie odpowiednich działań w celu jej zwiększenia: <br/><br/>
                         <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność.<br/>
                         <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą.<br/> 
