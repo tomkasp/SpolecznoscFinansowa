@@ -1018,6 +1018,7 @@ p:column {
     font-family: Arial;
     font-weight:bold;
     resize: false;
+    margin-bottom: 20px;
 }
 
 .cookieBar {
