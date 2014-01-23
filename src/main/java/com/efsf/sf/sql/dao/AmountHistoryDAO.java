@@ -6,6 +6,7 @@ import com.efsf.sf.sql.entity.Message;
 import com.efsf.sf.sql.util.HibernateUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -37,6 +38,28 @@ public class AmountHistoryDAO extends GenericDao<AmountHistory> implements Seria
         }
 
     }
+    
+    public Date getLastOperationDate(Client client)
+    {
+        Date date;
+        
+        Session session = HibernateUtil.SESSION_FACTORY.openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery(" Select max(ah.operationDate) FROM AmountHistory as ah left join ah.client as cl where cl.idClient=:client");
+            query.setParameter("client", client.getIdClient());
+            
+          
+            date = (Date) query.list().get(0);
+
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+
+        return date==null ? new Date() : date;
+    }
+    
     
     public List<AmountHistory> getWithMonthAndYear(int month, int year, Client client)
     {
