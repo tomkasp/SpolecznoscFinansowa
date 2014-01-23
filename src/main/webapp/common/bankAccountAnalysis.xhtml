@@ -121,11 +121,11 @@
                 <div><h:outputText class="centeredLabelBlack " value="Standard życia: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientQualityOfLife()}"/></div>
                 <div><h:outputText class="centeredLabelBlack " value="Możliwości kredytowe: " /><h:outputText class="centeredLabelRed" value="#{csvMB.showClientCreditChance()}" /> </div>
 
-                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('małe')}">
-                    <div class="isa_info">Twoja zdolność kredytowa jest dość mała. Zalecamy podjęcie odpowiednich działań w celu jej zwiększenia.<br/>
-                        <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność<br/>
-                        <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą<br/> 
-                        <b>Czy posiadasz inny dochód</b> - jeżli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
+                <h:panelGroup rendered="#{csvMB.showClientCreditChance().contains('Małe')}">
+                    <div class="isa_info" style="clear:both">Twoja zdolność kredytowa jest dość mała. Zalecamy podjęcie odpowiednich działań w celu jej zwiększenia: <br/><br/>
+                        <b>Spłać stare debety</b> - nawet niewielkie kwoty pozostałych debetów znacząco obnizają Twoją zdolność.<br/>
+                        <b>Znajdź współkredytobiorcę</b> - jeżeli możesz weź kredyt wraz z współkredytobiorcą.<br/> 
+                        <b>Czy posiadasz inny dochód</b> - jeżeli posiadasz inny stały dochód również uwzględnij go w przychodach.<br/>
                         <b>Rozważ pożyczkę poza bankami</b> - instytucje parabankowe mają zazwyczaj większe możliwości dotyczące zdolności.
                     </div>
                 </h:panelGroup>

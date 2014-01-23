@@ -166,7 +166,7 @@
 
 
 
-                        <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="750" height="520" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
+                        <p:dialog  showHeader="false" id="detailsDialog" widgetVar="productDetails" width="850" height="520" closable="true" resizable="false" dynamic="true" hideEffect="fade" showEffect="fade" >
                             <h4>#{caseViewMB.fetchTopProductForProductDetails(caseViewMB.selectedProduct).institution.name} </h4>
 
                             <ui:repeat varStatus="current" value="#{caseViewMB.productTree}" var="node" >       
@@ -227,7 +227,25 @@
                                 <h:outputText class="pdetailsLabel"  value="Wymagane dokumenty: " />
                                 <h:inputTextarea  class="pdetailsArea" rows="6" cols="80" disabled="true" value="#{caseViewMB.selectedProduct.requiredDocuments}" />
                             </div>
+                            
+                            <div style="clear:both; margin-top: 30px;">
+                            <p:dataTable value="#{caseViewMB.documents}" selection="#{caseViewMB.selectedDocument}"  rowKey="#{row.idDocument}" rowIndexVar="rowNumber"  var="row" emptyMessage="Brak dokumentów" selectionMode="single" >
+ 
+                                      
+                                           
+                                                <p:column headerText="Opis"> 
+                                                    <h:outputText  value="#{row.description}"/>
+                                                </p:column>  
 
+                                               <p:column headerText="Plik"> 
+                                                   <h:outputText  value="#{row.fileName}"/>
+                                                </p:column>   
+                                           
+                                                <p:column headerText="" >
+                                                    <h:commandLink target="_blank" value="Pobierz" action="#{ fileDownloadMB.loadInstitutionFile(row.institution.idInstitution, row.fileName) }" />
+                                                </p:column>          
+                            </p:dataTable>
+                            </div>
 
 
                             <h:commandButton  styleClass="floatR wideButton marginTB20" style="clear:both;" type="button" value="Kontynuuj" onclick="productDetails.hide()"  >
