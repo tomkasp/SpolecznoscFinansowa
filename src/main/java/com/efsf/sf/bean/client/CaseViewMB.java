@@ -16,6 +16,7 @@ import com.efsf.sf.sql.entity.ClientCase;
 import com.efsf.sf.sql.entity.Consultant;
 import com.efsf.sf.sql.entity.Income;
 import com.efsf.sf.sql.entity.IncomeBusinessActivity;
+import com.efsf.sf.sql.entity.Installment;
 import com.efsf.sf.sql.entity.InstitutionDocuments;
 import com.efsf.sf.sql.entity.Product;
 import com.efsf.sf.sql.entity.ProductDetails;
@@ -38,6 +39,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.validator.ValidatorException;
 import org.joda.time.LocalDate;
 import org.primefaces.context.RequestContext;
@@ -559,46 +561,12 @@ private void calculatePayements(Double toPay, Double intrestRate, Double instalm
                 //getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
                 installments.add(new Installment(cal.getTime(), toPay, alreadyPayed+toPay, 0.0, selectedClientCase));
                 
-                toPay-=instalment;
-                alreadyPayed+=instalment;
-                getSchedule().add(new ScheduleItem(cal.getTime(), instalment, alreadyPayed, toPay));
-                
-                series1.set(i, toPay);  
-                i++;
-                
-                cal.add(Calendar.MONTH, 1);
-                toPay*=(1+((0.01*intrestRate)/12));
             }
-            
-            //Ostatnia rata nierówna
-            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));
-            
-            
-        } else {
-            double instalment2;
-                int i=0;
-             while(toPay>instalment){
-                
-                instalment2=toPay*((0.01*intrestRate)/12);
-                toPay-=instalment;
-                toPay-=instalment2;
-                
-                alreadyPayed+=instalment;
-                alreadyPayed+=instalment2;
-                
-                getSchedule().add(new ScheduleItem(cal.getTime(), instalment+instalment2, alreadyPayed, toPay));
-                
-                series1.set(i, toPay);
-                i++;
-                
-                cal.add(Calendar.MONTH, 1);
-                toPay*=(1+((0.01*intrestRate)/12));
-            }
-            
-            //Ostatnia rata nierówna
-            getSchedule().add(new ScheduleItem(cal.getTime(), toPay, alreadyPayed+toPay, 0.0));           
-            
+            selectedClientCase.setInstallments(installments);
+            daoClientCase.update(selectedClientCase);
         }
+        setScheduleFromInstallments(installments);
+        setGraphFrominstallments(installments);
     }
     
     private void setScheduleFromInstallments(List<Installment> installments){
