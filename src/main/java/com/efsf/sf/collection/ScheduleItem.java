@@ -5,12 +5,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ScheduleItem implements Serializable{
- 
+    private boolean payed;
     private Date paymentDate;
     private Double amount;
     private Double alreadyPayed;
     private Double toPay;
-
+    private Installment installment;
     
     public ScheduleItem(Installment installment){
         this.payed=installment.isIsRepaided();
