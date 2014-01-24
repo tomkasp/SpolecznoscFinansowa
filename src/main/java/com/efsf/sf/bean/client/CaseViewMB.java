@@ -605,4 +605,8 @@ private void calculatePayements(Double toPay, Double intrestRate, Double instalm
     public CartesianChartModel getLinearModel() {  
         return linearModel;  
     } 
+    
+    public void consultantDetails() throws IOException{   
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./../client/clientConsultantProfileView.xhtml?idConsultant=" + selectedClientCase.getConsultant().getIdConsultant()); 
+    }
 }
