@@ -48,13 +48,15 @@ public class ParserCSV implements Serializable {
 //        //pko.run(stream);
 //    }
     
-    public void run(InputStream stream, Client client) throws ParseException {
+    public boolean run(InputStream stream, Client client) throws ParseException {
         int i = 0;
         List<AmountHistory> list = new ArrayList<>();
         AmountHistory amhist = null;
         AmountHistoryDAO amDAO = new AmountHistoryDAO();
         GenericDao<AmountHistory> genDao = new GenericDao(AmountHistory.class);
         try {
+            
+            
 
             CSVReader reader = new CSVReader(new InputStreamReader(stream, "UTF-8"), ',', '"', 3);
             //CSVReader reader = new CSVReader(new FileReader("C:\\WBK6.csv"), ',','"',3);
@@ -104,9 +106,18 @@ public class ParserCSV implements Serializable {
             for (AmountHistory a : list) {
                 genDao.save(a);
             }
+            
+            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        catch (Exception e)
+        {
+            Logger.getLogger(ParserCSV.class.getName()).log(Level.SEVERE, null, e);
+            
+            return false;
         }
     }
         

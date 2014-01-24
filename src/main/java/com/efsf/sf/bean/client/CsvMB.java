@@ -52,10 +52,20 @@ public class CsvMB implements Serializable {
 
     public void upload() throws ParseException, IOException {
         if (csvFile != null) {
-            FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+            
+            
 
-            csv.run(csvFile.getInputstream(), client);  
+            boolean success = csv.run(csvFile.getInputstream(), client);  
+            if (success)
+            {
+                FacesMessage msg = new FacesMessage("Sukces!", "Plik " + csvFile.getFileName() + " został pomyślnie przetworzony.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+            else
+            {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błąd!", "Plik " + csvFile.getFileName() + " posiada błędny format.");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
             
             AmountHistoryDAO amDao = new AmountHistoryDAO();
             Calendar cal = Calendar.getInstance();

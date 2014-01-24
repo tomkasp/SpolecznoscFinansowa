@@ -28,12 +28,6 @@
 
                 </p:fileUpload>
 
-                <p:selectOneMenu style="margin: 5px 0px 0px 20px; float: left; width: 200px;" value="#{csvMB.selectedBank}"  >              
-                    <f:selectItem itemLabel="PKO Bank Polski" itemValue="1" />  
-                    <f:selectItem itemLabel="BZ WBK" itemValue="2" />  
-                </p:selectOneMenu>
-
-
                 <p:commandLink ajax="false" id="przycisk1" styleClass="greenButton wideButton floatL" style="margin: 5px 20px 20px 20px;"  value="Wczytaj pliki" type="submit" action="#{csvMB.upload()}" />      
 
             </h:form>    
@@ -48,7 +42,7 @@
         <div style="min-height: 50px; margin-top: 50px">
             <h:form>
 
-                <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 50px;" value="#{csvMB.month}"  >              
+                <p:selectOneMenu style="margin: 5px 0px 10px 0px; float: left; width: 150px;" value="#{csvMB.month}"  >              
                     <f:selectItem itemLabel="Styczeń" itemValue="1"  />  
                     <f:selectItem itemLabel="Luty" itemValue="2" />
                     <f:selectItem itemLabel="Marzec"  itemValue="3" />

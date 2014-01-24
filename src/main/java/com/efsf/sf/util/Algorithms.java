@@ -140,9 +140,11 @@ public class Algorithms
                      difficulty += 2;
                      break;
                  case ("Wysoki"):
-                     difficulty += 1; 
+                     difficulty += 1;
+                     break;
                  case ("Bardzo wysoki"):
                      difficulty += 0;
+                     break;
              }
          }
          return difficulty;
