@@ -95,7 +95,7 @@ public class InstallmentNotifier{
     }
 
       private void sendSMS(String number, String amount, Date date){
-        String message = "Przypomnienie o spłacie raty w wysokości "+amount+" . Termin płatności "+date;
+        String message = "Przypomnienie o splacie raty w wysokosci "+amount+" . Termin platnosci "+date;
         SMSApi.sendSms(number, message);
     }
       

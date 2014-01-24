@@ -263,7 +263,7 @@ public class ClientCaseMB implements Serializable {
             GenericDao<Address> addressDao=new GenericDao(Address.class);
             Address address=addressDao.getWhere("fk_client", cs.getClient().getIdClient().toString()).get(0);
             if(address!=null && address.getPhone()!=null && address.getPhone().length()>8){
-                SMSApi.sendSms(address.getPhone(), "Do obsługi Twojej sprawy na portalu SpolecznoscFinansowa.pl zgłosił się nowy doradca.");
+                SMSApi.sendSms(address.getPhone(), "Do obslugi Twojej sprawy na portalu SpolecznoscFinansowa.pl zglosil sie nowy doradca.");
                 System.out.println("Telefon ================================="+address.getPhone());
             }
             
