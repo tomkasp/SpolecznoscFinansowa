@@ -27,6 +27,12 @@
                         <div class="field"> <h:outputText class="label" value="Min. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMin}"/></div>
                         <div class="field"> <h:outputText class="label" value="Max. liczba partnerów"/><p:inputText value="#{productsMB.selectedProductDetails.partnersNumberMax}"/></div>
 
+                        <div class="field"> <h:outputText class="label" value="Oprocentowanie(%)"/><p:inputText value="#{productsMB.selectedProductDetails.intrestRate}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Prowizja(%)"/><p:inputText value="#{productsMB.selectedProductDetails.commission}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Koszt ubezpieczenia"/><p:inputText value="#{productsMB.selectedProductDetails.costOfInsurance}"/></div>
+                        <div class="field"> <h:outputText class="label" value="Możliwość wcześniejszej spłaty"/><p:selectBooleanCheckbox value="#{productsMB.selectedProductDetails.earlyRepayment}"/></div>
+                        
+                        
                         <div class="field"> <h:outputText class="label" value="Aktualność"/>
                             <p:selectOneMenu value="#{productsMB.selectedProductDetails.isActive}">  
                                 <f:selectItem itemLabel="Aktywne" itemValue="1" />  

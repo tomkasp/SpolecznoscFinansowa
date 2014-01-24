@@ -108,6 +108,7 @@ public class ProductsMB implements Serializable {
     public String addDetails(){
         selectedProductDetails=new ProductDetails();
         selectedProductDetails.setRecomendation(true);
+        selectedProductDetails.setEarlyRepayment(true);
         return "/admin/editProductDetails";
     }
     

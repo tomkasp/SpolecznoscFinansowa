@@ -46,7 +46,7 @@ public class ProductDetails implements java.io.Serializable {
     private String intrestRate;
     private String commission;
     private String costOfInsurance;
-    private Boolean earlyRepatyment;
+    private Boolean earlyRepayment;
     
 
     public ProductDetails() {
@@ -283,17 +283,19 @@ public class ProductDetails implements java.io.Serializable {
     }
 
     /**
-     * @return the earlyRepatyment
+     * @return the earlyRepayment
      */
     @Column
-    public Boolean isEarlyRepatyment() {
-        return earlyRepatyment;
+    public Boolean getEarlyRepayment() {
+        return earlyRepayment;
     }
 
     /**
-     * @param earlyRepatyment the earlyRepatyment to set
+     * @param earlyRepayment the earlyRepayment to set
      */
-    public void setEarlyRepatyment(Boolean earlyRepatyment) {
-        this.earlyRepatyment = earlyRepatyment;
+    public void setEarlyRepayment(Boolean earlyRepayment) {
+        this.earlyRepayment = earlyRepayment;
     }
+
+
 }

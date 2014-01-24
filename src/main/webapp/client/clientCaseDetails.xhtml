@@ -183,6 +183,30 @@
                                 <h:outputText class="pdetailsLabel"  value="Kredyt dla: " />
                                 <h:inputText  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.employmentType.name}" />                                                                
                             </div>
+                            
+                            <div class="pdetailsItem">
+                                <h:outputText class="pdetailsLabel"  value="Oprocentowanie(%) " />
+                                <h:inputText  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.intrestRate}" />                                                                
+                            </div>
+                            
+                            <div class="pdetailsItem">
+                                <h:outputText class="pdetailsLabel"  value="Prowizja(%) " />
+                                <h:inputText  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.commission}" />                                                                
+                            </div>
+                            
+                            <div class="pdetailsItem">
+                                <h:outputText class="pdetailsLabel"  value="Koszt ubezpieczenia " />
+                                <h:inputText  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.costOfInsurance}" />                                                                
+                            </div>
+                            
+                            <div class="pdetailsItem">
+                                <h:outputText class="pdetailsLabel"  value="Możliwość wcześniejszej spłaty " />
+                                <p:selectBooleanCheckbox  style="width: 53.9%" disabled="true" value="#{caseViewMB.selectedProduct.earlyRepayment}" />                                                                
+                            </div>        
+
+
+                            
+                            
                             <div class="pdetailsItem">
                                 <h:outputText class="pdetailsLabel"  value="Kwota: " />
                                 <h:inputText disabled="true" value="#{caseViewMB.selectedProduct.amountBruttoMin}" />
