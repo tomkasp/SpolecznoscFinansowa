@@ -55,7 +55,6 @@ public class InstallmentNotifier{
     }
     
     public void start() {
-        System.out.println("start");
         final Runnable beeper = new Runnable() {
             @Override
             public void run() {
@@ -63,7 +62,7 @@ public class InstallmentNotifier{
                 notifyClient();
             }
         };
-       scheduler.scheduleAtFixedRate(beeper, 20, 5, MINUTES);
+       scheduler.scheduleAtFixedRate(beeper, 1, 5, MINUTES);
         
     }
 
@@ -113,8 +112,4 @@ public class InstallmentNotifier{
     public void setMailerMB(MailerMB mailerMB) {
         this.mailerMB = mailerMB;
     }
-    
-  
-    
-   
 }

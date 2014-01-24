@@ -43,6 +43,11 @@ public class ProductDetails implements java.io.Serializable {
     private String requiredDocuments;
     private Set<ClientCase> clientCases = new HashSet<ClientCase>(0);
     private Integer isActive = 1;
+    private String intrestRate;
+    private String commission;
+    private String costOfInsurance;
+    private Boolean earlyRepatyment;
+    
 
     public ProductDetails() {
     }
@@ -223,12 +228,72 @@ public class ProductDetails implements java.io.Serializable {
     public void setClientCases(Set<ClientCase> clientCases) {
         this.clientCases = clientCases;
     }
-
+    
     public Integer getIsActive() {
         return isActive;
     }
 
     public void setIsActive(Integer isActive) {
         this.isActive = isActive;
+    }
+
+    /**
+     * @return the intrestRate
+     */
+    @Column
+    public String getIntrestRate() {
+        return intrestRate;
+    }
+
+    /**
+     * @param intrestRate the intrestRate to set
+     */
+    public void setIntrestRate(String intrestRate) {
+        this.intrestRate = intrestRate;
+    }
+
+    /**
+     * @return the commission
+     */
+    @Column
+    public String getCommission() {
+        return commission;
+    }
+
+    /**
+     * @param commission the commission to set
+     */
+    public void setCommission(String commission) {
+        this.commission = commission;
+    }
+
+    /**
+     * @return the costOfInsurance
+     */
+    @Column
+    public String getCostOfInsurance() {
+        return costOfInsurance;
+    }
+
+    /**
+     * @param costOfInsurance the costOfInsurance to set
+     */
+    public void setCostOfInsurance(String costOfInsurance) {
+        this.costOfInsurance = costOfInsurance;
+    }
+
+    /**
+     * @return the earlyRepatyment
+     */
+    @Column
+    public Boolean isEarlyRepatyment() {
+        return earlyRepatyment;
+    }
+
+    /**
+     * @param earlyRepatyment the earlyRepatyment to set
+     */
+    public void setEarlyRepatyment(Boolean earlyRepatyment) {
+        this.earlyRepatyment = earlyRepatyment;
     }
 }
