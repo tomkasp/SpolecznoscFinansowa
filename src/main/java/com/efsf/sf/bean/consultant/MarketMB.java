@@ -65,9 +65,11 @@ public class MarketMB implements Serializable
         selectedMarketCase = null;
         marketModelsEmploymentType = new ArrayList();
         marketModelsBranch= new ArrayList();
+     
+        System.out.println("PRZEŁADOWANO!");
         
         //WE DO NOT ASSUME THAT ALL THE SUBSCRIPTION TYPES HIGHER THEN 'PREMIUM (3)' HAVE AT LEAST PREMIUM ACCESS RIGHTS 
-        if (loginMB.returnConsultantAccessRights().equals(Settings.PREMIUM))
+        if ((loginMB.returnConsultantAccessRights()%4) == (Settings.PREMIUM))
         {
             allMarket = caseDao.getCasesWithMarketFilter(phaseMin,phaseMax,ageMin,ageMax,difficultyMin,difficultyMax,branchId,regionId,incomeIds,businessIds);
         }
