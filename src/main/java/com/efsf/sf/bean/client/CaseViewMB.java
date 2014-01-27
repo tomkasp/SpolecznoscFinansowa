@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -296,8 +298,9 @@ public class CaseViewMB implements Serializable{
     
     
     public List<Consultant> castConsultantSetToArray(Set<Consultant> cSet)
-    {
-        return new ArrayList(cSet);
+    {   
+        SortedSet<Consultant> sortedSet = new TreeSet<>(cSet);
+        return new ArrayList(sortedSet);
     }
     
     public void assignPremiumConsultant()
@@ -425,6 +428,8 @@ public class CaseViewMB implements Serializable{
     }
 
     public List<Consultant> getPremiumConsultants() {
+        SortedSet<Consultant> sortedSet = new TreeSet<>(premiumConsultants);
+        premiumConsultants = new ArrayList(sortedSet);
         return premiumConsultants;
     }
 
@@ -605,4 +610,8 @@ private void calculatePayements(Double toPay, Double intrestRate, Double instalm
     public CartesianChartModel getLinearModel() {  
         return linearModel;  
     } 
+    
+    public void consultantDetails() throws IOException{   
+        FacesContext.getCurrentInstance().getExternalContext().redirect("./../client/clientConsultantProfileView.xhtml?idConsultant=" + selectedClientCase.getConsultant().getIdConsultant()); 
+    }
 }

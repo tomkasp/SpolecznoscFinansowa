@@ -78,6 +78,7 @@
                             <div class="field"> <h:outputText class="label" value="Imię"/>  <h:inputText id="consultantName" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.name}" /> </div>
                             <div class="field"> <h:outputText class="label" value="Nazwisko"/>  <h:inputText id="consultantLastName" class="inputWidth fontBlack" disabled="true" value="#{caseViewMB.selectedClientCase.consultant.lastName}" /> </div>
                             <div class="field"> <h:outputText class="label" value="Telefon"/>  <h:inputText class="inputWidth fontBlack" disabled="true" value="#{(caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].type == 1) ? caseViewMB.selectedClientCase.consultant.addresses.toArray()[0].phone : caseViewMB.selectedClientCase.consultant.addresses.toArray()[1].phone}" /> </div>                                         
+                             <p:commandButton styleClass="greyButton wideButton floatR" update="@form" action="#{caseViewMB.consultantDetails()}" value="Profil doradcy" />
                         </div>    
                     </h:panelGroup>
                 </h:form>
@@ -126,7 +127,7 @@
                             </div>
                         </h:panelGroup>    
                         <h4> DOSTĘPNI DORADCY </h4>
-                        <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single" >
+                        <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single">
 
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}" />     

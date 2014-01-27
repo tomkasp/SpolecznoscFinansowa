@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,7 +51,7 @@ public class ClientCase implements java.io.Serializable {
     private Integer difficulty;
     private Boolean premium;
     private CaseRating caseRating;
-    private Set<Consultant> consultants = new HashSet<>(0);
+    private Set<Consultant> consultants = new HashSet<>();
     private Set<Consultant> consultants_1 = new HashSet<>(0);
     private Double interestRate;
     private Integer interestRateType;
@@ -246,7 +248,7 @@ public class ClientCase implements java.io.Serializable {
     }
 
     public void setConsultants(Set<Consultant> consultants) {
-        this.consultants = consultants;
+        this.consultants=consultants;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
