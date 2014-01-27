@@ -144,7 +144,7 @@
 
                             <h:form id="obligationForm">
                                 <p:dataTable value="#{clientCaseMB.retrieveObligationListForCurrentClient()}" id="obligationTable" var="row" rowKey="#{row.idObligation}"
-                                             selection="#{clientCaseMB.selectedObligation}"  selectionMode="single" >
+                                             selection="#{clientCaseMB.selectedObligation}"  selectionMode="single" emptyMessage="Brak zobowiązań">
 
                                     <p:ajax event="rowSelect" update=":obligationForm:deleteBtn" />
                                     <p:ajax event="rowUnselect" update=":obligationForm:deleteBtn" />

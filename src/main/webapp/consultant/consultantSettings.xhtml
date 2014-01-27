@@ -157,7 +157,19 @@
                             <p:selectManyCheckbox styleClass="fontGrey" style="display:inline-table" value="#{consultantSettingsMB.idProductTypes}" layout="pageDirection">
                                 <f:selectItems value="#{ dictionaryMB.productType}" var="p" itemLabel="#{p.name}" itemValue="#{p.idProductType}"/>
                             </p:selectManyCheckbox>
-                        </div>    
+                        </div>
+                        
+                        <div>
+                            <h4> RZETELNA FIRMA </h4>
+                            <div>Jeżeli posiadasz certyfikat rzetelna firma prześlij go na adres serwisu. A po zweryfikowaniu przez naszych pracowników zostanie on dodany do twojego profilu.</div>
+                            <div> 
+                                <p:selectBooleanCheckbox styleClass="marginLRT30" disabled="true" value="#{consultantSettingsMB.consultant.rzetelnaFirma}"/>
+                                <h:outputText styleClass="fontGrey"  value="Certyfikat rzetelna firma" />
+                                <a href="mailto:rejestracja@spolecznoscfinansowa.pl" class="greyButton right">Wyślij certyfikat</a>
+                            </div>
+
+                        </div>                          
+                        
                         <div>
                             <h4> ZASIĘG/MOBILNOŚĆ </h4>
 

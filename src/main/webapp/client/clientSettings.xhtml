@@ -322,7 +322,7 @@
                                            <h:outputText value="Bik w trakcie analizowania. Analiza może trwać do 5 minut."/>
                                        </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==3}" >
-                                           <h:outputText value="Bik klienta jest niepoprawnym plikiem lub hasło do pliku jest błędne! Poproś klienta o wgranie nowego raportu BIK."/>
+                                           <h:outputText value="System OCR nie odczytał poprawnie pliku. Bik klienta jest niepoprawnym plikiem, hasło do pliku jest błędne lub jego jakość jest zbyt słaba! Poproś klienta o wgranie nowego raportu BIK."/>
                                        </h:panelGroup>
                                        <h:panelGroup rendered="#{fileDownloadMB.requiredDocuments.bikStatus==4}" >
                                            <h:outputText value="Bik pomyślnie przetworzony"/>
