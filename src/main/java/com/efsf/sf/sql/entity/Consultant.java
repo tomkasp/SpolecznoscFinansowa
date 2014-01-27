@@ -28,7 +28,7 @@ import org.hibernate.annotations.ForeignKey;
 @Entity
 @Table(name = "consultant", uniqueConstraints =
         @UniqueConstraint(columnNames = "fk_user"))
-public class Consultant implements java.io.Serializable {
+public class Consultant implements java.io.Serializable, Comparable {
 
     private Integer idConsultant;
     private Region region;
@@ -268,5 +268,18 @@ public class Consultant implements java.io.Serializable {
             if(a.getType().equals(2)) return a;
         }
         return null;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Consultant other= (Consultant)o;
+        //dla bezpieczenstwa, wyliczanie  srednich jest pochrzanione
+        if(this.consultantRatings==null || this.consultantRatings.toArray().length==0 || ((ConsultantRating)this.consultantRatings.toArray()[0]).getAverage() == null ){
+            return 1;
+        }
+        if(other.consultantRatings==null || other.consultantRatings.toArray().length==0 || ((ConsultantRating)other.consultantRatings.toArray()[0]).getAverage() == null ){
+            return -1;
+        }      
+        return -((ConsultantRating)this.consultantRatings.toArray()[0]).getAverage().compareTo(((ConsultantRating)other.consultantRatings.toArray()[0]).getAverage());
     }
 }

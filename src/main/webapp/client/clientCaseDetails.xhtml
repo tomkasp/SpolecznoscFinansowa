@@ -127,7 +127,7 @@
                             </div>
                         </h:panelGroup>    
                         <h4> DOSTĘPNI DORADCY </h4>
-                        <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single" >
+                        <p:dataTable id="consultantsTable" value="#{caseViewMB.castConsultantSetToArray(caseViewMB.selectedClientCase.consultants)}" rowKey="#{row}" var="row" emptyMessage="brak zgłoszeń!" selection="#{caseViewMB.selectedConsultant}" selectionMode="single">
 
                             <p:ajax event="rowSelect" update="@form" />
                             <p:ajax event="rowDblselect" update="@form" listener="#{caseViewMB.rowDoubleClick(caseViewMB.selectedConsultant)}" />     
